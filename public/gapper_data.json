@@ -1,354 +1,67 @@
 {
-  "scan_time": "2026-09-25 08:55 ET",
+  "scan_time": "2026-09-28 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "AESI",
-      "price": 12.5,
-      "gap_pct": 13.74,
-      "pm_volume": 60366,
-      "avg_vol_10d": 2996607,
-      "avg_dollar_vol": 37457588,
-      "mkt_cap": 1373787954,
-      "rvol": 1.56,
-      "adr_pct": 5.35,
-      "category": "New Contract/Partnership",
-      "theme": "AI Data Center Power Deal",
-      "reasoning": "AESI secured a new contract to provide **283 megawatts** of power to an **AI lab data center** project, enhancing its energy services portfolio.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
+      "ticker": "KOD",
+      "price": 54.82,
+      "gap_pct": 69.46,
+      "pm_volume": 1657880,
+      "avg_vol_10d": 1083654,
+      "avg_dollar_vol": 59405912,
+      "mkt_cap": 2033179831,
+      "rvol": 2.89,
+      "adr_pct": 5.52,
+      "category": "FDA",
+      "theme": "Positive Phase 3 Clinical Trial Results",
+      "reasoning": "KOD stock jumps on an 8-K filing confirming positive Phase 3 vision trial results, where **54% of patients went six months between eye treatments**.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 27,
       "grade": "C",
-      "finviz_theme": "AI Energy",
+      "finviz_theme": "Biotech - Ophthalmology",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Atlas Energy Solutions (AESI) announced a new **data center project** where an **AI lab** will serve as the intended power customer. The **AI lab** will also reimburse Atlas for **Caterpillar equipment** related to supplying **283 megawatts** of power.",
-        "impact": "This contract signifies AESI's strategic expansion into the high-growth AI infrastructure sector, potentially opening new revenue streams and diversifying its customer base beyond traditional energy."
+        "catalyst": "KOD filed an 8-K today, likely confirming positive clinical trial data, with news headlines highlighting a vision trial where **54% of patients went six months between eye treatments**. This data is considered a **Phase 3 data catalyst** impacting the stock.",
+        "impact": "The positive trial results de-risk the development of KOD's treatment, increasing the likelihood of future regulatory approval and market penetration, setting up a strong momentum play."
       },
-      "analysis_details": "• **Impact**\nAtlas Energy Solutions (AESI) has secured a significant engagement, with an **AI lab** becoming the power customer for a dedicated **data center project**. This agreement includes the provision of **283 megawatts** of power, and the **AI lab** will reimburse AESI for **Caterpillar equipment** involved in this setup. This marks a notable entry or expansion for AESI into the rapidly growing AI infrastructure market.\n\n• **Strategic Value**\nThis new partnership positions AESI as a key infrastructure provider for the demanding power needs of artificial intelligence operations. By supplying **283 megawatts** to an **AI lab data center**, AESI is directly capitalizing on the burgeoning AI compute sector, which requires massive, reliable energy. This diversification into supporting high-growth tech could drive long-term value and momentum for the company, attracting new investor interest aligned with AI thematic narratives.",
+      "analysis_details": "• **The Drug**\nKOD's stock is reacting to positive data from a **vision trial**, which is highlighted as a **Phase 3 data catalyst**. Specifically, the trial showed that **54% of patients went six months between eye treatments**, indicating significant efficacy for the therapy.\n\n• **The Significance**\nThis positive clinical trial data from a late-stage study significantly de-risks the drug's path towards potential regulatory approval. The ability for **54% of patients** to extend treatment intervals to **six months** is a compelling outcome that could provide a competitive advantage and strong market potential, aligning with analyst targets and fueling stock momentum.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Atlas Energy Solutions Inc. (AESI) Latest Stock News & Headlines - Yahoo Finance - Yahoo! Finance Canada",
+          "title": "KOD Stock Jumps As Phase 3 Data Catalyst Looms - timothysykes.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9jWUwzTXpudWlUcHBwTE1ZTVZScC1tMnVhNGRvZ21vUmJDdzdEUjlGRUxuX2MtazdTc2N6ckE2TDZ3eFExVHJMazh1NDQ5bnV0a0NUeVIxYVQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1iLUxLVmtjTHNxdzd4S2hib3Y2T2ZISTZqMzhOdnUxVVBJRlRqLWxvcG9lVVZRd3JaeFVWbDFDckpaMjhiT2FpZEFVZ282TXBvVzV1a2ZrakQyUS0yNDlkRlYzNk1qbmZHdmk2TUxNbE5GZUVHSDk5Vmo2ZzZpUnc?oc=5"
         },
         {
-          "title": "An AI lab is the intended power customer for a separate Atlas Energy Solutions (AESI) data center project. - stocktitan.net",
+          "title": "KOD Stock Jumps As Phase 3 Catalysts And Analyst Targets Align - stockstotrade.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQY2pveWZ1LUV0VFJyZWVmX1FBRy1TQnRObU1BWEs0c2RNY3ljeG1fbldQRGFPV0JwY1NDMHVEVVowV1FRcjdDWng4M2Y0MGtiZmFpX05MQ1hVWTZZNUotN0RBOG1vdmZ3WE5WZEhQcWdVUHJrWlJxbFZSREpiNW5ERWMyTFZCbjV0Q005T2FTbVJwUS1WWWFGanYyUi02ekptQW4tMHY5YWdaUFZoaDBobEtZQVVBUQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5ERGVsdXZ0QlVNc0l1VEhBLW9scVVHTWg5bGkzbnlpRXRvdUd6QmsxdkNBaVhEY2VCTE90X0hKR2Y5RTQwVjNoTmZxTUIyYWhOYVlnR3pJWlVLMUUybWNTMEoxWERWMC1FZWpDUkR2bHhIMUViNWhNZVRjaw?oc=5"
         },
         {
-          "title": "An AI lab will reimburse Atlas for Caterpillar equipment tied to 283 megawatts of power. - stocktitan.net",
+          "title": "In a vision trial, 54% of patients went six months between eye treatments - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUnQ0dkJxcFdSLWFIcG1wU2llVVdiWFVxRTdMTHF2VVpnNlJwTTgwdnhoQTdtS2lXN09tV0NIVnVCSkRoMDlfaTh0YkE0RGhPUFpzWktlZ0IxREdraWM2a3BOMXZtUDRqSHp3dXk3aG1NTGk1bS1EZWVJZ2N1ZVpSQXpzQkpfOUstSGZfNF8xVWZKYzZvemg4TDNhaW9zYWxJeHlFeG5oUTFBQnNUa0lLQnNUYjN2MllJ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPUDZ4YjhhTmJ4NEZ6NzJObWxDT3JobWRMQkNKRzB1QXN1LTMyYlYxcDRyalJwMFlDdTJRUHJlc3BmNDFlak9wNnFoV3ZkYndiZ0xSLWZtR2Y0QUFVUjF6bWRBNUZ4cEFMRzJQWFgxWmltN3pVaGxXcG5VMHJrT21KbmFsRUJtR0Z5aWM3SG5kUklIQ1Y1MzRLWnNkZnduR3ctRzR0U0RnMTV2aUg2WlhkSFZXR24?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-09-25",
+        "filing_date": "2026-09-28",
         "form": "8-K",
         "items": [
-          "7.01",
           "8.01",
           "9.01"
         ],
         "category": "Others",
         "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1984060/000119312526401582/aesi-20260925.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1468748/000119312526403481/d185059d8k.htm"
       },
-      "float_shares": "80.10M",
-      "short_float": "29.97%",
-      "daily_pct": 15.56,
-      "prev_close": 10.99,
-      "industry": "AI Energy",
-      "technical_status": "Fail (Avg $Vol $37M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "283 megawatts",
-        "discrepancy_note": "Source A (Finviz) has no information regarding 283 megawatts. Source B (Google News) entry [2] mentions '283 megawatts' explicitly, but not both primary sources confirm it."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AKAM",
-      "price": 123.87,
-      "gap_pct": 12.19,
-      "pm_volume": 918019,
-      "avg_vol_10d": 4164022,
-      "avg_dollar_vol": 515797405,
-      "mkt_cap": 15867751852,
-      "rvol": 1.12,
-      "adr_pct": 4.58,
-      "category": "New Contract/Partnership",
-      "theme": "Akamai signs major AI Cloud deal with Anthropic",
-      "reasoning": "Akamai secured an **$11.6B** **seven-year** AI Cloud deal with **Anthropic**, driving stock **+20% after-hours**.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "A+",
-      "finviz_theme": "AI Cloud",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Akamai Technologies (AKAM) and artificial intelligence model maker **Anthropic** announced an **$11.6 billion**, **seven-year** agreement for **computing infrastructure** and **Cloud services**. This agreement has options to expand by an additional **$9 billion**, potentially bringing the total commitment to **$20 billion**. Akamai issued Anthropic stock warrants for up to roughly **5%** of its common stock, tied to performance and expansion.",
-        "impact": "This landmark deal represents a structural change for Akamai, establishing it as a key infrastructure provider in the rapidly expanding AI sector. It signals a substantial, long-term revenue stream and validates Akamai's distributed cloud capabilities."
-      },
-      "analysis_details": "• **Impact**\nAkamai Technologies has secured an initial **seven-year agreement** with **Anthropic** for **$11.6 billion** for **Akamai Cloud services**. This landmark deal, which drove **AKAM stock +20% after-hours**, includes options to scale up to **$20 billion** and involves Akamai issuing **Anthropic stock warrants** for up to roughly **5%** of its common stock.\n\n• **Strategic Value**\nThis agreement positions Akamai as a critical infrastructure provider for a leading **artificial intelligence model maker**, validating its distributed cloud capabilities for **AI computing**. The significant revenue commitment, potentially reaching **$20 billion**, solidifies Akamai's long-term growth trajectory within the high-growth AI infrastructure market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "AKAM Stock Soars 20% After-Hours  Akamai Lands $11.6B AI Cloud Deal With Anthropic",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/akam-stock-soars-20-hours-220330880.html"
-        },
-        {
-          "title": "Akamai Stock Surges On Anthropic AI Computing Agreement",
-          "source": "Finviz",
-          "url": "https://www.investors.com/news/technology/akamai-stock-akam-surges-anthropic-artificial-intelligence-computing?mod=IBD_FV"
-        },
-        {
-          "title": "Anthropic to Pay Akamai Technologies $11.6 Billion Over Seven Years for Cloud Services",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/tech/anthropic-to-pay-akamai-technologies-11-6-billion-over-seven-years-for-cloud-services-7a55360b?mod=wsj_FV"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-24",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "3.02",
-          "5.03",
-          "7.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1086222/000119312526401048/d288154d8k.htm"
-      },
-      "float_shares": "140.50M",
-      "short_float": "13.38%",
-      "daily_pct": 14.44,
-      "prev_close": 110.41,
-      "industry": "AI Cloud",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$11.6B",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "PRME",
-      "price": 3.39,
-      "gap_pct": 10.42,
-      "pm_volume": 241280,
-      "avg_vol_10d": 3197941,
-      "avg_dollar_vol": 10841020,
-      "mkt_cap": 556826953,
-      "rvol": 1.01,
-      "adr_pct": 6.88,
-      "category": "FDA",
-      "theme": "FDA IND Clearance",
-      "reasoning": "Prime Medicine surged after the FDA cleared its Investigational New Drug (IND) application for PM647, a gene-editing therapy.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 22,
-      "grade": "C",
-      "finviz_theme": "Biotech - Gene Therapy",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Prime Medicine (PRME) announced the **U.S. FDA clearance** of its **Investigational New Drug (IND)** application for **PM647**. This therapy is an **in vivo gene editing therapy** specifically targeting **Alpha-1 Antitrypsin Deficiency**.",
-        "impact": "This clearance allows PRME to advance **PM647** into clinical trials, significantly de-risking the development pathway and opening a new potential market for its gene-editing platform."
-      },
-      "analysis_details": "• **The Drug**\nPrime Medicine announced the **U.S. FDA clearance** of its **Investigational New Drug (IND)** application for **PM647**. This drug is described as an **in vivo gene editing therapy** designed to treat **Alpha-1 Antitrypsin Deficiency**. Prime Medicine stock reacted by surging over **12%** in after-hours trading following this news.\n\n• **The Significance**\nThis **FDA IND clearance** is a critical regulatory milestone, enabling Prime Medicine to initiate human clinical trials for **PM647**. This development validates the company's gene-editing platform and provides a clear pathway for potential market entry in the **Alpha-1 Antitrypsin Deficiency** therapeutic area, which is a significant step in its pipeline progression.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Prime Medicine stock surges on FDA IND clearance",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/healthcare/articles/prime-medicine-stock-surges-fda-204747789.html"
-        },
-        {
-          "title": "Prime Medicine Announces U.S. FDA Clearance of Investigational New Drug Application for PM647 in Alpha-1 Antitrypsin Deficiency",
-          "source": "Finviz",
-          "url": "/news/395375/prime-medicine-announces-us-fda-clearance-of-investigational-new-drug-application-for-pm647-in-alpha-1-antitrypsin-deficiency"
-        },
-        {
-          "title": "Anthropic AI Discovery Gene-Editing Stocks Falling",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-ai-discovery-gene-editing-124644338.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "95.37M",
-      "short_float": "33.69%",
-      "daily_pct": 10.46,
-      "prev_close": 3.07,
-      "industry": "Biotech - Gene Therapy",
-      "technical_status": "Fail (Avg $Vol $11M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "FDA cleared its Investigational New Drug (IND) application for PM647",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "GENI",
-      "price": 6.16,
-      "gap_pct": 6.21,
-      "pm_volume": 53261,
-      "avg_vol_10d": 8004438,
-      "avg_dollar_vol": 49307338,
-      "mkt_cap": 1610236558,
-      "rvol": 1.44,
-      "adr_pct": 6.13,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "GENI's stock movement is driven by technical factors as traders gauge the next move and liquidity around price events.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Recent headlines indicate GENI's stock is experiencing a **pullback** as **traders gauge next moves**, alongside **liquidity mapping around price events**. This points to market mechanics and technical trading influencing price. High risk of Gap and Trap due to lack of fundamental news."
-      },
-      "analysis_details": "• **What Happened**\nNews headlines indicate **GENI Stock Pulls Back** as **traders gauge next move**, suggesting a period of price consolidation or decline. Furthermore, there is discussion around **Liquidity Mapping Around (GENI) Price Events**, highlighting the technical and market structure focus of recent activity.\n\n• **Key Consideration**\nWithout specific fundamental news, GENI's price action appears to be driven by technical analysis and market flow. The **pullback** and focus on **liquidity mapping** suggest traders are reassessing positions and looking for chart-based signals, increasing volatility and risk for momentum strategies.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "GENI Stock Pulls Back As Traders Gauge Next Move - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9jM1ViM2UwbUFtWG5aUVRfaFB2OTVsTnNlV1pZTkswN3BnbzlhYnNpbWhPYmNFOGc0N05sM0VvWUt0UlZuTDRuMFVBZUpMc2NvSnpsZ1dYZ0JRcGdYa3ljOFFGalBQczVYR1N2dkJWS0pmZE5tQkZUZDlVLWFDVlk?oc=5"
-        },
-        {
-          "title": "Liquidity Mapping Around (GENI) Price Events - news.stocktradersdaily.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNaWlXUk9ZLWpUZDBiR2s4aEJPVXlyTDFpTmI3NC1xUDM3N00wZlkzOUNJblc2bjBhMEIzQWM3OXRtaTJ2MWRwRTF2WGNuQ0tNdzdZVXJabGdGUVR0MnNVcjNwZVR0Qjdqa3MwemRGVEJwRmdUZ0VjQnZNX0pua2VtTUxFRDc2SVZZQXluUnp2SUVpYks1dkxyYlQtbDcxY0pRMi02U1Y0VEJWNHFrYmxzUFBpeVUxemJOSy0zRFNDSQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "244.04M",
-      "short_float": "15.63%",
-      "daily_pct": 7.59,
-      "prev_close": 5.8,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $49M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "GENI's stock movement is driven by technical factors as traders gauge the next move and liquidity around price events.",
-        "discrepancy_note": "The primary catalyst claim describes market behavior ('traders gauge next move', 'liquidity around price events') rather than a specific factual claim (e.g., dollar amount, percentage, date). While some Google News headlines allude to these aspects (e.g., '[3] Traders Gauge Next Move', '[5] Liquidity Mapping Around Price Events'), the catalyst summary itself does not contain a specific, quantifiable factual claim that can be 'Verified' or 'Discrepancy' against a number or concrete detail across sources."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ARM",
-      "price": 323.0,
-      "gap_pct": 5.44,
-      "pm_volume": 219387,
-      "avg_vol_10d": 6732889,
-      "avg_dollar_vol": 2174723147,
-      "mkt_cap": 327171116089,
-      "rvol": 1.72,
-      "adr_pct": 4.98,
-      "category": "Thematic Narratives",
-      "theme": "AI Royalty Economics Concern",
-      "reasoning": "Arm slipped as investors weighed how its royalty economics would capture the AI server boom amidst increasing AI core competition.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 59,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Arm Holdings **slipped 3.3%** to **$321.63** on Thursday, with the article stating **ARM -7.88%** (intraday price action based on article's context), as investors evaluated how its current 'royalty economics' model could capture the 'AI server boom' opportunity, particularly as 'More AI Cores Test Royalty Economics'.",
-        "impact": "This narrative indicates a developing skepticism regarding Arm's ability to fully monetize its intellectual property within the burgeoning AI server market, potentially capping upside momentum."
-      },
-      "analysis_details": "• **The Narrative**\nArm Holdings saw its stock **slip 3.3%** on Thursday, hitting **$321.63**, as market participants began to scrutinize the efficacy of its 'royalty economics' model within the rapidly expanding 'AI server boom'. The article highlighted growing concerns that 'More AI Cores Test Royalty Economics', implying potential pressure on Arm's traditional revenue streams in the high-growth AI compute sector.\n\n• **Explosiveness**\nThis evolving narrative suggests a significant headwind for Arm's stock momentum, as questions about its fundamental business model's fit for the AI era could introduce persistent investor uncertainty. The ability of Arm to capture the full 'payoff' from the AI opportunity remains 'an open ques', potentially leading to sustained volatility and limiting aggressive upward re-ratings until clarity emerges on its AI monetization strategy.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Arm Drops 3.3% as More AI Cores Test Royalty Economics",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/arm-drops-3-3-more-173604154.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "1.06B",
-      "short_float": "1.46%",
-      "daily_pct": 4.92,
-      "prev_close": 306.34,
-      "industry": "Semiconductors - Compute",
-      "technical_status": "Pass",
+      "float_shares": "58.16M",
+      "short_float": "18.35%",
+      "daily_pct": 94.95,
+      "prev_close": 32.35,
+      "industry": "Biotech - Ophthalmology",
+      "technical_status": "Fail (Avg $Vol $59M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -356,29 +69,177 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Arm dropped 3.3%",
-        "discrepancy_note": "Source A (Finviz) explicitly states 'Arm Drops 3.3%'. Source B (Google News) has headlines indicating 'Arm Stock Dips' and 'Arm Stock Stumbles' which align directionally but provide no specific percentage. Crucially, Source B also contains headlines stating 'Arm Stock Rises' and 'ARM ... Stocks Gain Today', directly conflicting with the stated drop."
+        "primary_claim": "54% of patients went six months between eye treatments",
+        "discrepancy_note": "Finviz News (Source A) has no mention of the specific claim. Google News (Source B) includes an article from Stock Titan that confirms the claim ('In a vision trial, 54% of patients went six months between eye treatments'), but other Google News articles do not provide this specific detail."
       },
-      "gates_passed": 5,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "AMPX",
+      "price": 10.8,
+      "gap_pct": 10.76,
+      "pm_volume": 1326730,
+      "avg_vol_10d": 4550052,
+      "avg_dollar_vol": 49140562,
+      "mkt_cap": 1424286118,
+      "rvol": 0.95,
+      "adr_pct": 4.54,
+      "category": "New Contract/Partnership",
+      "theme": "Defense Grant Award",
+      "reasoning": "Amprius Technologies secured a **$75 million defense grant** from the US Defense Department to **produce batteries for drones**, boosting investor confidence.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "C",
+      "finviz_theme": "EV Batteries",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Amprius Technologies stock jumped after securing a **$75 million defense grant** from the US Defense Department. This grant is specifically for the **production of batteries for drones**. The company plans to convert an existing **EV battery line** to achieve an expected capacity of **12 million drone battery cells a year**.",
+        "impact": "This grant provides non-dilutive funding for capacity expansion and validates Amprius's advanced battery technology within the critical defense sector, potentially accelerating market adoption for high-performance drone applications."
+      },
+      "analysis_details": "• **Impact**\nAmprius Technologies stock jumped following news of a **$75 million defense grant** from the US Defense Department. This significant funding is specifically allocated for the **production of batteries for drones**, underscoring a direct government endorsement of AMPX's battery technology for critical applications.\n\n• **Strategic Value**\nThe company intends to convert an existing **EV battery line** to fulfill this contract, aiming for an expected annual capacity of **12 million drone battery cells**. This move strategically leverages current infrastructure and positions Amprius as a key supplier in the expanding defense and drone sectors.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Amprius Technologies stock jumps on $75M defense grant - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPU29mZkg0WlhaTFYyclhrUDMyazRVVjhJR2RiU05tdFRLU0I1Q1lvaUxxdTFrcFZrV0R3NkVqWEdWOVg3dWJ4TVVpT1hZUElYMnZYcy1GU3BVckhzRVk2QVdZMTNvX0p4ODZrRHBoQU1iUkZBZGwzbUliSkladDV3YWVqaFR5Y1c0cGxZVzM2cy1GMjNBdjZ6VHNiN0FWM3dYeDI0ckJQMW9HcWwzTEY4?oc=5"
+        },
+        {
+          "title": "Amprius Technologies Stock Gains on $75 Million Defense Dept Grant to Produce Batteries for Drones - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNUDM5YkVJRjcxZFpIOHdXeXEwclRKWmtMRGNMZlVQYXFpQy1tU0V6QzlZbVB3NDVaUTBwRGZlZWJwRUxqWThlVWNNd1doQk5MaDRaRWM2U00tNWR6a05TbThucnZIOThkWUgzSWphY1VxUHVqYkR2MXBBQk9lajAtM2NJT0RUcUFzU3g3cTNvbjNoZnQ2ZUpjYUhfODZ4Sm81b1ZXN1cwQzkxYTlOZ3FDNlJMcHE0TmI3Y0d1TE01b0RtUm52Q3hxblFNSEs3UldmOGlkU0RPZ05RUGNlTTNlem10V2g?oc=5"
+        },
+        {
+          "title": "An EV battery line is planned for conversion to make drone battery cells, with expected capacity of 12 million a year. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOOFY4OGZQMGowbXlMVTJDbVNHdHRMUzkxQ21TZThNQmFmcDRIMjZ5Z3hrY2ZRY0FqX1c1VjFyTUlfNExMVkFmR1V4SUFnYXpVWFN0LWlWbUs3VU14ZkF2bl82LUV1cHlJTDR0TENCM1ZJZnVkVzBzeUF2aUZ4NDh1NllWaU5WMzNLVlRlb3owOFRDa2hrekc0bmxFeTU2dFA3czZCZVJkSWt2NXc1dkYzNTdHQ1gyd2hUeTRtTg?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-28",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1899287/000189928726000065/ampx-20260923.htm"
+      },
+      "float_shares": "136.20M",
+      "short_float": "16.66%",
+      "daily_pct": 9.16,
+      "prev_close": 9.75,
+      "industry": "EV Batteries",
+      "technical_status": "Fail (Avg $Vol $49M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$75 million defense grant",
+        "discrepancy_note": "Source A (Finviz News) provides no information regarding the $75 million defense grant. Source B (Google News) contains multiple headlines ([3], [4], [5]) confirming a $75 million defense grant or OTA (Other Transaction Authority)."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BUR",
+      "price": 3.87,
+      "gap_pct": 6.32,
+      "pm_volume": 96562,
+      "avg_vol_10d": 2203594,
+      "avg_dollar_vol": 8527909,
+      "mkt_cap": 799287615,
+      "rvol": 1.17,
+      "adr_pct": 4.39,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "BUR filed an 8-K (Item 7.01) without specific news headlines, suggesting a technical move or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no explicit fundamental news often points to technical breakout or institutional flow dynamics, carrying a high risk of being a Gap and Trap scenario."
+      },
+      "analysis_details": "• **What Happened**\nBUR filed an **8-K with the SEC today, 2026-09-28**, specifically citing **Item 7.01 (Regulation FD Disclosure)** and **Item 9.01 (Financial Statements and Exhibits)**. However, without accompanying news headlines or specific details from the filing's content, the precise nature of the disclosure remains unconfirmed.\n\n• **Key Consideration**\nThe absence of specific fundamental news accompanying the 8-K suggests that any significant price movement today would likely be driven by **technical factors** or **institutional flow**. Investors should exercise caution as such moves without a clear catalyst can be prone to volatility and reversals.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": {
+        "filing_date": "2026-09-28",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1714174/000171417426000106/bur-20260928.htm"
+      },
+      "float_shares": "198.47M",
+      "short_float": "7.14%",
+      "daily_pct": 4.95,
+      "prev_close": 3.64,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $9M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BUR filed an 8-K (Item 7.01) without specific news headlines, suggesting a technical move or institutional flow.",
+        "discrepancy_note": "The primary claim states 'without specific news headlines', but Google News (Source B) contains very specific headlines detailing a $5.7 billion jury award in an Apple patent case, with Burford potentially receiving $1.4 billion (Source B[1]), and describes a 'Massive Court Win' (Source B[2]). Finviz News (Source A) has no relevant headlines."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 5,
-    "large_gaps": 0,
-    "total_headlines": 12,
+    "small_gaps": 2,
+    "large_gaps": 1,
+    "total_headlines": 6,
     "monthly_cost_usd": 0.01
   }
 }
