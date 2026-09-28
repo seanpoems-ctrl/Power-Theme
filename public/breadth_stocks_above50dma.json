@@ -5,73 +5,73 @@
   "count": 5,
   "stocks": [
     {
+      "ticker": "KOD",
+      "company": "Kodiak Sciences Inc",
+      "industry": "Biotechnology",
+      "price": 89.92,
+      "change_pct": 177.96,
+      "adr_pct": 7.3,
+      "dollar_volume": "$438.8M",
+      "market_cap_b": 2.033,
+      "rs_ibd": 98,
+      "above50dma_pct": 128.2
+    },
+    {
       "ticker": "SECZ",
       "company": "Securitize Corp.",
       "industry": "Packaged Software",
-      "price": 15.96,
-      "change_pct": -3.45,
-      "adr_pct": 7.7,
-      "dollar_volume": "$115.2M",
-      "market_cap_b": 2.606,
-      "rs_ibd": 86,
-      "above50dma_pct": 102.2
+      "price": 16.63,
+      "change_pct": 4.2,
+      "adr_pct": 7.5,
+      "dollar_volume": "$125.0M",
+      "market_cap_b": 2.715,
+      "rs_ibd": 80,
+      "above50dma_pct": 105.7
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 198.88,
-      "change_pct": 2.08,
-      "adr_pct": 6.5,
-      "dollar_volume": "$3.20B",
-      "market_cap_b": 79.4,
-      "rs_ibd": 99,
-      "above50dma_pct": 80.6
+      "price": 197.28,
+      "change_pct": -0.8,
+      "adr_pct": 6.4,
+      "dollar_volume": "$3.22B",
+      "market_cap_b": 78.761,
+      "rs_ibd": 98,
+      "above50dma_pct": 74.9
     },
     {
       "ticker": "GRAL",
       "company": "GRAIL, Inc.",
       "industry": "Medical Specialties",
-      "price": 126.89,
-      "change_pct": 1.34,
-      "adr_pct": 6.2,
-      "dollar_volume": "$262.6M",
-      "market_cap_b": 5.668,
-      "rs_ibd": 96,
-      "above50dma_pct": 63.7
+      "price": 132.63,
+      "change_pct": 4.52,
+      "adr_pct": 6.0,
+      "dollar_volume": "$284.5M",
+      "market_cap_b": 5.924,
+      "rs_ibd": 95,
+      "above50dma_pct": 68.5
     },
     {
       "ticker": "QMCO",
       "company": "Quantum Corporation",
       "industry": "Computer Peripherals",
-      "price": 31.68,
-      "change_pct": 7.43,
-      "adr_pct": 7.8,
-      "dollar_volume": "$67.4M",
-      "market_cap_b": 1.249,
+      "price": 31.4,
+      "change_pct": -0.88,
+      "adr_pct": 7.7,
+      "dollar_volume": "$68.8M",
+      "market_cap_b": 1.237,
       "rs_ibd": 98,
-      "above50dma_pct": 61.0
-    },
-    {
-      "ticker": "ASST",
-      "company": "Strive, Inc.",
-      "industry": "Financial Conglomerates",
-      "price": 29.44,
-      "change_pct": -1.67,
-      "adr_pct": 6.4,
-      "dollar_volume": "$289.8M",
-      "market_cap_b": 2.873,
-      "rs_ibd": 94,
-      "above50dma_pct": 52.8
+      "above50dma_pct": 56.3
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.51,
-    "spx_1m": 0.16,
-    "spx_3m": 4.07,
-    "spx_34d": -0.13,
-    "spx_qtd": 3.48,
-    "spx_mtd": 1.47
+    "spx_1d": -0.77,
+    "spx_1m": -0.36,
+    "spx_3m": 2.46,
+    "spx_34d": -0.58,
+    "spx_qtd": 2.68,
+    "spx_mtd": 0.68
   },
-  "fetched_at_utc": "2026-09-28T01:45:44+00:00"
+  "fetched_at_utc": "2026-09-28T23:09:05+00:00"
 }

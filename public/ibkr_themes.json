@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-09-28T01:45:43.462496+00:00",
+  "generated_at": "2026-09-28T23:09:05.046207+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 98.0,
+      "perf_1d": 90.6,
+      "leaders": [
+        {
+          "ticker": "KOD",
+          "price": 89.92,
+          "rs_52w": 98,
+          "adr_pct": 7.28,
+          "vol_surge": 52.64,
+          "mkt_cap": 5651423058,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }

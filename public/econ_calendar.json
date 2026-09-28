@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T01:43:01.910609+00:00",
+  "generated_at": "2026-09-28T23:07:18.532837+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3027,7 +3027,7 @@
       "time_et": "10:30",
       "event": "Dallas Fed Manufacturing Index",
       "impact": "Low",
-      "actual": null,
+      "actual": "9.8",
       "forecast": null,
       "previous": "11.6",
       "currency": "USD"
@@ -3037,7 +3037,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.11",
       "forecast": null,
       "previous": "4.015",
       "currency": "USD"
@@ -3047,7 +3047,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.285",
       "forecast": null,
       "previous": "4.155",
       "currency": "USD"
@@ -3158,7 +3158,7 @@
       "event": "JOLTs Job Openings",
       "impact": "Low",
       "actual": null,
-      "forecast": "7.23",
+      "forecast": "7.24",
       "previous": "7.271",
       "currency": "USD"
     },
@@ -3298,7 +3298,7 @@
       "event": "ADP Employment Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "70",
+      "forecast": "72",
       "previous": "38",
       "currency": "USD"
     },
@@ -3398,7 +3398,7 @@
       "event": "PCE Price Index YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "3.7",
       "previous": "3.7",
       "currency": "USD"
     },
@@ -3418,7 +3418,7 @@
       "event": "Goods Trade Balance Adv",
       "impact": "Low",
       "actual": null,
-      "forecast": "-108.5",
+      "forecast": "-113.5",
       "previous": "-118.8",
       "currency": "USD"
     },
@@ -3438,7 +3438,7 @@
       "event": "GDP Growth Rate QoQ Final",
       "impact": "Low",
       "actual": null,
-      "forecast": "1.6",
+      "forecast": "1.5",
       "previous": "2.1",
       "currency": "USD"
     },
@@ -3478,7 +3478,7 @@
       "event": "Chicago PMI",
       "impact": "Low",
       "actual": null,
-      "forecast": "51.3",
+      "forecast": "51",
       "previous": "47.1",
       "currency": "USD"
     },
@@ -3668,7 +3668,7 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1720",
       "previous": "1719",
       "currency": "USD"
     },
@@ -3678,7 +3678,7 @@
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "199",
+      "forecast": "200",
       "previous": "197",
       "currency": "USD"
     },
@@ -3728,8 +3728,18 @@
       "event": "ISM Manufacturing Prices",
       "impact": "Low",
       "actual": null,
-      "forecast": "72",
+      "forecast": "72.5",
       "previous": "71.1",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-01",
+      "time_et": "10:00",
+      "event": "Construction Spending MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-0.5",
       "currency": "USD"
     },
     {
@@ -3740,16 +3750,6 @@
       "actual": null,
       "forecast": null,
       "previous": "53.7",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-01",
-      "time_et": "10:00",
-      "event": "Construction Spending MoM",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "0.1",
-      "previous": "-0.5",
       "currency": "USD"
     },
     {
@@ -3768,7 +3768,7 @@
       "event": "ISM Manufacturing PMI",
       "impact": "Low",
       "actual": null,
-      "forecast": "54.8",
+      "forecast": "54.9",
       "previous": "54.6",
       "currency": "USD"
     },
@@ -3868,7 +3868,7 @@
       "event": "Manufacturing Payrolls",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "10",
       "previous": "16",
       "currency": "USD"
     },
@@ -3938,7 +3938,7 @@
       "event": "Non Farm Payrolls",
       "impact": "Low",
       "actual": null,
-      "forecast": "100",
+      "forecast": "84",
       "previous": "162",
       "currency": "USD"
     },
@@ -3948,7 +3948,7 @@
       "event": "Unemployment Rate",
       "impact": "Low",
       "actual": null,
-      "forecast": "4.2",
+      "forecast": "4.1",
       "previous": "4.1",
       "currency": "USD"
     },
@@ -3968,7 +3968,7 @@
       "event": "Factory Orders MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "-0.1",
+      "forecast": "0.1",
       "previous": "0.9",
       "currency": "USD"
     },
@@ -4099,7 +4099,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.285",
       "currency": "USD"
     },
     {
@@ -4109,7 +4109,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.11",
       "currency": "USD"
     },
     {
@@ -4626,6 +4626,26 @@
       "date": "2026-10-09",
       "time_et": "13:00",
       "event": "Baker Hughes Total Rigs Count",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-11",
+      "time_et": "20:00",
+      "event": "Columbus Day",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-12",
+      "time_et": "14:00",
+      "event": "Monthly Budget Statement",
       "impact": "Low",
       "actual": null,
       "forecast": null,
