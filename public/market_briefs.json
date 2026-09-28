@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-28 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equity Weakness / Volatility Surge",
+    "spy_price": 765.61,
+    "spy_change_pct": -0.74,
+    "vix": 16.07,
+    "hy_oas": 2.93,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 27.6,
+    "mmth": 48.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Announced a strategic partnership with a major European government for cloud infrastructure, reinforcing its leadership in public sector digital transformation."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Management provided an optimistic mid-quarter update, highlighting robust net interest income growth and strong consumer banking performance despite broader market volatility."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Price action driven by continued speculative interest and options flow following recent AI-related product announcements, rather than fresh fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-28 14:34 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation (NVDA) is a C-Grade candidate primarily driven by technical momentum and sector-wide sentiment following recent market shifts, lacking a fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-08 11:02 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Divergence, Cautious Tone",
-    "spy_price": 767.54,
-    "spy_change_pct": -0.34,
-    "vix": 15.46,
-    "hy_oas": 2.65,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 49.1,
-    "mmth": 66.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RGTI",
-          "company": "Rigetti Computing, Inc.",
-          "reason": "The company has secured a significant Government Contract Award, providing a fresh and specific catalyst for pre-market outperformance."
-        },
-        {
-          "ticker": "IONQ",
-          "company": "IonQ, Inc.",
-          "reason": "IonQ's stock is reacting positively to a guidance raise and the announcement of a new contract, signifying strong operational momentum."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft is likely experiencing recycled speculative flow or technical movements today, without any fresh fundamental news driving conviction."
         }
       ]
     }
