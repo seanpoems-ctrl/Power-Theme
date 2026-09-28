@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-28 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Risk-On, Volatility Spike",
+    "spy_price": 771.35,
+    "spy_change_pct": 0.54,
+    "vix": 16.37,
+    "hy_oas": 2.8,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 31.9,
+    "mmth": 51.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced breakthrough advancements in its next-generation AI inference chip, setting new industry performance benchmarks."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly reported positive Phase 3 trial results for its novel obesity drug, showing superior efficacy compared to existing treatments."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil is seeing continued momentum from the significant overnight rally in crude oil prices, reflecting broader sector strength without a specific new company catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-25 19:32 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop is experiencing renewed social media interest and short-squeeze chatter, driving speculative trading volume despite no new fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-07 18:59 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Divergence / VIX Spike",
-    "spy_price": 770.19,
-    "spy_change_pct": -0.39,
-    "vix": 15.3,
-    "hy_oas": 2.65,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 51.9,
-    "mmth": 67.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a new strategic partnership with a major cloud provider, bolstering its AI infrastructure offerings and driving investor enthusiasm."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Presented positive Phase 3 trial results for its latest obesity drug candidate, exceeding analyst expectations and reigniting bullish sentiment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continues to face recycled headlines regarding intensifying competition in the EV market and ongoing production ramp-up challenges."
         }
       ]
     }
