@@ -2,76 +2,88 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 5,
+  "count": 6,
   "stocks": [
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 89.92,
-      "change_pct": 177.96,
-      "adr_pct": 7.3,
-      "dollar_volume": "$439.2M",
-      "market_cap_b": 2.033,
+      "price": 91.12,
+      "change_pct": 1.33,
+      "adr_pct": 7.4,
+      "dollar_volume": "$492.6M",
+      "market_cap_b": 5.727,
       "rs_ibd": 98,
-      "above50dma_pct": 128.2
+      "above50dma_pct": 125.5
     },
     {
       "ticker": "SECZ",
       "company": "Securitize Corp.",
       "industry": "Packaged Software",
-      "price": 16.63,
-      "change_pct": 4.2,
-      "adr_pct": 7.5,
-      "dollar_volume": "$125.0M",
-      "market_cap_b": 2.715,
-      "rs_ibd": 80,
-      "above50dma_pct": 105.7
+      "price": 15.84,
+      "change_pct": -4.75,
+      "adr_pct": 8.1,
+      "dollar_volume": "$123.0M",
+      "market_cap_b": 2.586,
+      "rs_ibd": 78,
+      "above50dma_pct": 91.6
+    },
+    {
+      "ticker": "IOVA",
+      "company": "Iovance Biotherapeutics, Inc.",
+      "industry": "Biotechnology",
+      "price": 14.45,
+      "change_pct": 31.48,
+      "adr_pct": 5.8,
+      "dollar_volume": "$327.7M",
+      "market_cap_b": 6.545,
+      "rs_ibd": 98,
+      "above50dma_pct": 87.1
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 197.28,
-      "change_pct": -0.8,
-      "adr_pct": 6.4,
-      "dollar_volume": "$3.22B",
-      "market_cap_b": 78.761,
+      "price": 203.46,
+      "change_pct": 3.13,
+      "adr_pct": 6.5,
+      "dollar_volume": "$3.42B",
+      "market_cap_b": 81.229,
       "rs_ibd": 98,
-      "above50dma_pct": 74.9
+      "above50dma_pct": 75.9
     },
     {
       "ticker": "GRAL",
       "company": "GRAIL, Inc.",
       "industry": "Medical Specialties",
-      "price": 132.63,
-      "change_pct": 4.52,
-      "adr_pct": 6.0,
-      "dollar_volume": "$284.5M",
-      "market_cap_b": 5.924,
-      "rs_ibd": 95,
-      "above50dma_pct": 68.5
+      "price": 136.57,
+      "change_pct": 2.97,
+      "adr_pct": 5.9,
+      "dollar_volume": "$289.9M",
+      "market_cap_b": 6.1,
+      "rs_ibd": 96,
+      "above50dma_pct": 70.7
     },
     {
       "ticker": "QMCO",
       "company": "Quantum Corporation",
       "industry": "Computer Peripherals",
-      "price": 31.4,
-      "change_pct": -0.88,
-      "adr_pct": 7.7,
-      "dollar_volume": "$68.9M",
-      "market_cap_b": 1.237,
+      "price": 32.86,
+      "change_pct": 4.65,
+      "adr_pct": 7.6,
+      "dollar_volume": "$75.7M",
+      "market_cap_b": 1.295,
       "rs_ibd": 98,
-      "above50dma_pct": 56.3
+      "above50dma_pct": 60.1
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.77,
-    "spx_1m": -0.36,
-    "spx_3m": 2.46,
-    "spx_34d": -0.58,
-    "spx_qtd": 2.68,
-    "spx_mtd": 0.68
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-09-29T02:42:06+00:00"
+  "fetched_at_utc": "2026-09-29T23:11:57+00:00"
 }

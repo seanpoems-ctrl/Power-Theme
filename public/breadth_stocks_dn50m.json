@@ -3,16 +3,33 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 0,
-  "stocks": [],
+  "count": 1,
+  "stocks": [
+    {
+      "ticker": "QURE",
+      "company": "uniQure N.V.",
+      "industry": "Biotechnology",
+      "market_cap_b": 1.7,
+      "price": 24.51,
+      "change_pct": -37.33,
+      "dollar_volume": "$109.2M",
+      "adr_pct": 13.4,
+      "perf_1m": -50.49,
+      "perf_3m": -46.95,
+      "perf_34d": null,
+      "perf_qtd": -46.95,
+      "perf_mtd": -50.49,
+      "rs_ibd": 20
+    }
+  ],
   "spx_benchmarks": {
-    "spx_1d": -0.77,
-    "spx_1m": -0.36,
-    "spx_3m": 2.46,
-    "spx_34d": -0.58,
-    "spx_qtd": 2.68,
-    "spx_mtd": 0.68
+    "spx_1d": -0.17,
+    "spx_1m": -0.2,
+    "spx_3m": 2.51,
+    "spx_34d": -1.0,
+    "spx_qtd": 2.51,
+    "spx_mtd": 0.52
   },
-  "fetched_at_utc": "2026-09-29T02:42:18+00:00",
+  "fetched_at_utc": "2026-09-29T23:12:09+00:00",
   "source": "tv_fallback"
 }
