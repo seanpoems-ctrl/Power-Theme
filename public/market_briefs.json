@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-29 12:51 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious / Mixed Flow",
+    "spy_price": 763.26,
+    "spy_change_pct": -0.31,
+    "vix": 16.19,
+    "hy_oas": 3.02,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 25.7,
+    "mmth": 46.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "SMMT",
+          "company": "Summit Therapeutics Inc.",
+          "reason": "SMMT gained strong conviction today following news of a significant strategic equity investment from AstraZeneca, signaling robust institutional confidence in its pipeline."
+        },
+        {
+          "ticker": "NVTS",
+          "company": "Navitas Semiconductor Corporation",
+          "reason": "NVTS is an A-Grade candidate after announcing a new U.S. Government Defense Contract, which is expected to drive substantial revenue growth and market share in critical applications."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation continues to see momentum-driven flows after recent AI developments, without a fresh fundamental catalyst today, making it a C-Grade candidate for continued technical trading."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-29 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop continues to see elevated retail interest driven by social media mentions and technical chart patterns, with no new fundamental catalysts reported."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-09 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Rising Volatility",
-    "spy_price": 765.96,
-    "spy_change_pct": -0.55,
-    "vix": 16.34,
-    "hy_oas": 2.68,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 47.9,
-    "mmth": 65.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced overwhelmingly positive Phase 3 trial results for its novel Alzheimer's treatment, significantly surpassing efficacy expectations."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a groundbreaking AI-powered enterprise suite, expected to drive substantial revenue growth in its cloud and productivity segments."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop continues to see elevated trading volume on social media-driven momentum, with no fresh fundamental catalysts to support the price action."
         }
       ]
     }
