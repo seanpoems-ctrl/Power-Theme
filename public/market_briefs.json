@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-29 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Sentiment / Risk-Off",
+    "spy_price": 765.61,
+    "spy_change_pct": -0.74,
+    "vix": 16.03,
+    "hy_oas": 2.93,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 27.6,
+    "mmth": 48.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is reportedly announcing a significant partnership with a major cloud provider to deploy its next-generation AI accelerators, suggesting continued leadership in the artificial intelligence sector."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly shares are active pre-market following an upgrade from a prominent investment bank, citing strong pipeline catalysts and robust sales forecasts for its new obesity drug."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft is seeing typical pre-market activity driven by broader tech sector movements and options flow, lacking any distinct fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-28 20:32 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop continues to see elevated trading volume on social media-driven momentum, with no fresh fundamental catalysts to support the price action."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-08 18:58 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Sentiment, Cautious Dip",
-    "spy_price": 765.96,
-    "spy_change_pct": -0.55,
-    "vix": 15.72,
-    "hy_oas": 2.68,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 47.9,
-    "mmth": 65.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RGTI",
-          "company": "Rigetti Computing Inc.",
-          "reason": "The company announced a significant government contract award, providing a strong fresh catalyst for today's price action."
-        },
-        {
-          "ticker": "IONQ",
-          "company": "IonQ Inc.",
-          "reason": "IonQ reported a guidance raise and secured a new contract, signaling improved business outlook and growth prospects."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft saw movement based on broader market sentiment and recycled headlines around ongoing AI initiatives, lacking a specific fresh catalyst today."
         }
       ]
     }
