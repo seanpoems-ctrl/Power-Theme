@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-28 20:32 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Fragile Gains, Rising Volatility",
+    "spy_price": 771.35,
+    "spy_change_pct": 0.54,
+    "vix": 16.07,
+    "hy_oas": 2.93,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 27.6,
+    "mmth": 48.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet Inc. (GOOGL) unveiled advancements in its next-gen AI models today, boosting investor confidence in its cloud division's competitive edge and future monetization."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "UnitedHealth Group Inc. (UNH) received a positive analyst upgrade today, citing robust Q4 guidance and strong enrollment trends ahead of its investor day, signaling continued growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) is experiencing continued bullish flow as investors maintain conviction in its long-term AI hardware dominance, a narrative carried over from previous sessions."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-28 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft saw movement based on broader market sentiment and recycled headlines around ongoing AI initiatives, lacking a specific fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-08 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Risk-Off",
-    "spy_price": 765.96,
-    "spy_change_pct": -0.55,
-    "vix": 15.72,
-    "hy_oas": 2.68,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 47.9,
-    "mmth": 65.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RGTI",
-          "company": "Rigetti Computing, Inc.",
-          "reason": "Rigetti Computing secured a new government contract award today, providing a strong fresh catalyst for potential upside."
-        },
-        {
-          "ticker": "IONQ",
-          "company": "IonQ, Inc.",
-          "reason": "IonQ announced a guidance raise and a new contract today, driving high-conviction pre-market interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation (NVDA) is a C-Grade candidate primarily driven by technical momentum and sector-wide sentiment following recent market shifts, lacking a fresh catalyst today."
         }
       ]
     }
