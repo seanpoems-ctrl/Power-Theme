@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29 16:45 ET",
+  "generated_at": "2026-09-29 19:56 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,19 +12,19 @@
       "close": 764.2,
       "prev_open": 768.35,
       "prev_close": 765.61,
-      "volume": 35427625,
+      "volume": 36577604,
       "change_pct": -0.18
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 737.93,
-      "open": 740.15,
+      "open": 740.17,
       "high": 740.58,
       "low": 735.34,
       "close": 737.93,
       "prev_open": 740.46,
       "prev_close": 736.53,
-      "volume": 25131342,
+      "volume": 26610972,
       "change_pct": 0.19
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 88.87,
-      "open": 93.53,
-      "high": 94.74,
-      "low": 88.81,
-      "close": 88.87,
+      "price": 89.21,
+      "open": 89.0,
+      "high": 89.57,
+      "low": 88.58,
+      "close": 89.21,
       "prev_open": 93.58,
       "prev_close": 92.6,
-      "volume": 312194,
-      "change_pct": -4.03
+      "volume": 6445,
+      "change_pct": -3.66
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25399.21,
-      "open": 25374.34,
-      "high": 25617.31,
-      "low": 25338.03,
-      "close": 25399.21,
-      "prev_open": 25443.98,
-      "prev_close": 25374.42,
-      "volume": 0,
-      "change_pct": 0.1
+      "price": 25374.42,
+      "open": 25443.98,
+      "high": 25575.66,
+      "low": 25360.32,
+      "close": 25374.42,
+      "prev_open": 25441.79,
+      "prev_close": 25408.64,
+      "volume": 45976300,
+      "change_pct": -0.13
     }
   },
   "fred": {
     "hy_oas": 3.02,
-    "yield_curve": 0.32,
+    "yield_curve": 0.37,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: September 29, 2026",
-    "mood_emoji": "🤔",
-    "mood": "Mixed Session, Oil Weakness",
-    "narrative": "Equities ended the day with mixed results as technology stocks gained slightly while the broader market dipped. A significant decline in crude oil prices was the standout move, influencing sentiment across energy and commodities.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 764.20 | -0.18% | ➡️ |\n| Nasdaq 100 ETF | 737.93 | +0.19% | ➡️ |\n| VIX | 16.04 | -0.19% | ➡️ |\n| Crude Oil | 88.87 | -4.03% | 📉 |\n| Nikkei 225 | 65877.62 | -0.73% | 📉 |\n| DAX | 25399.21 | +0.10% | ➡️ |",
-    "macro_section": "The BAMLH0A0HYM2 High-Yield Credit Spread currently stands at a Complacent 3.02%, indicating low perceived risk in the corporate bond market. Concurrently, the 10Y-2Y Yield Curve at +0.320 remains Normal and Steepening, further suggesting a healthy environment for institutional risk appetite, despite today's modest equity movements.",
-    "analysis_para1": "The global tape presented a mixed picture, with the Nikkei 225 declining by 0.73% and Crude Oil plummeting by 4.03%. Conversely, the DAX posted a modest gain of 0.10%. Despite the notable weakness in commodities and some international equities, US High-Yield credit spreads remain remarkably complacent at 3.02%. This implies that while specific sectors or regions face headwinds, broader systemic risk appetite in the US credit market is holding firm, with no immediate signs of contagion from global pockets of weakness.",
-    "analysis_para2": "The dominant mechanical catalyst for today's price action appears to be the substantial drop in Crude Oil, which fell by 4.03%. This significant move likely reflects updated concerns about global demand or a supply-side surprise, directly impacting energy sector valuations and broader inflation expectations. While beneficial for consumers, the decline created headwinds for energy-related stocks, fostering a mixed equity market where technology could find some relief from inflation fears, yet overall market strength was dampened.",
-    "analysis_para3": "For traders, today's mixed signals necessitate a cautious approach. Watch the S&P 500 ETF for immediate support at 760.00 and resistance at 768.00. A break below 760.00 could signal broader market weakness, while a push above 768.00 suggests renewed momentum. Key triggers for long entries would be a sustained rebound in oil prices or a definitive move above these resistance levels in major indices. Risk-off thresholds include any sharp widening of credit spreads from the current 3.02% or a breakdown below 735.00 for the Nasdaq 100 ETF. Traders should consolidate positions and prioritize risk management today, avoiding over-leveraging into uncertain cross-currents.",
-    "technical_signal": "No reversal pattern confirmed yet. With S&P 500 stocks above SMA50 at a low 27.3% and S&P stocks above SMA200 at 47.7%, the market lacks broad participation above key moving averages. Traders should monitor for a significant uptick in these breadth metrics, or a clear break of established support in the major indices, to confirm any directional shift.",
+    "mood_emoji": "⚠️",
+    "mood": "Global Caution / Oil Plunge",
+    "narrative": "US indices traded largely flat today, while international markets and crude oil saw significant declines. This divergence highlights underlying global caution despite relatively stable domestic sentiment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 764.20 | -0.18% | ➡️ |\n| Nasdaq 100 ETF | 737.93 | +0.19% | ➡️ |\n| VIX | 16.04 | -0.19% | ➡️ |\n| Crude Oil | 89.21 | -3.66% | 📉 |\n| Nikkei 225 | 65877.62 | -0.73% | 📉 |\n| DAX | 25374.42 | -0.13% | ➡️ |",
+    "macro_section": "The BAMLH0A0HYM2 (HY Credit Spread) is currently at 3.02%, indicating a Complacent credit regime in the market. Concurrently, the T10Y2Y (10Y-2Y Yield Curve) stands at +0.370, signifying a Normal / Steepening curve environment. This combination generally implies a supportive backdrop for risk assets, suggesting institutional risk appetite remains robust despite global headwinds.",
+    "analysis_para1": "Despite a significant -3.66% plunge in Crude Oil and declines across major global indices, with the Nikkei 225 down -0.73% and the DAX off -0.13%, US high-yield credit spreads remain remarkably complacent at 3.02%. This resilience in US credit, juxtaposed against international weakness, suggests that while a degree of global risk-off sentiment is present, it has not yet fully translated into broad-based credit stress domestically. US risk appetite appears relatively contained, but the global tape implies vigilance for potential contagion.",
+    "analysis_para2": "The dominant mechanical catalyst driving today's primary market flow was a sharp -3.66% decline in Crude Oil prices, settling at $89.21. This significant price action points to heightened concerns over global economic demand and potential oversupply, influencing broader sentiment. While US equity indices showed relative stability, the crude oil slump acted as a barometer for underlying caution, suggesting that investor focus is increasingly shifting towards macro-level demand dynamics rather than domestic micro trends.",
+    "analysis_para3": "Traders should establish a watch level for the S&P 500 ETF at its current price of 764.20, treating it as a near-term pivot; a sustained break below this could trigger further selling. Given the weak breadth, with only 27.3% of S&P 500 stocks above SMA50, opportunistic long entries should be highly selective, focusing on specific catalyst-driven names rather than broad index bets. Conversely, a failure to hold 764.20 could open opportunities for short positions in sectors sensitive to global demand or energy prices. Immediate action for today involves tightening risk parameters and maintaining a defensive posture, particularly given the divergence between complacent US credit and weakening global markets.",
+    "technical_signal": "No reversal pattern confirmed yet. The underlying technical context remains cautious, with only 27.3% of S&P 500 stocks above SMA50 and 47.7% of S&P stocks above SMA200, indicating broad market weakness beneath the surface. Traders should monitor for a decisive break above or below key index levels to confirm directional bias, alongside a significant improvement in breadth metrics as a prerequisite for sustained upside.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "SMMT",
           "company": "Summit Therapeutics",
-          "reason": "AstraZeneca's strategic equity investment provides a significant validation and capital infusion, boosting prospects for its clinical pipeline."
+          "reason": "Strategic equity investment from AstraZeneca provides significant validation and capital for their clinical pipeline."
         },
         {
           "ticker": "NVTS",
           "company": "Navitas Semiconductor",
-          "reason": "Securing a U.S. Government defense contract represents a strong endorsement of its advanced power semiconductor technology and opens new market opportunities."
+          "reason": "Securing a U.S. Government Defense Contract marks a substantial new revenue stream and strategic growth area."
         }
       ],
       "c_grade": [
         {
-          "ticker": "XOM",
-          "company": "Exxon Mobil",
-          "reason": "Positioning based on the significant crude oil price decline today, reflecting broader energy sector flow rather than a fresh company-specific catalyst."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Shares traded largely on technical flows today, with no new fundamental catalyst driving significant price action."
         }
       ]
     }
