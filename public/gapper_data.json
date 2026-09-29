@@ -1,52 +1,132 @@
 {
-  "scan_time": "2026-09-28 08:55 ET",
+  "scan_time": "2026-09-29 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "KOD",
-      "price": 54.82,
-      "gap_pct": 69.46,
-      "pm_volume": 1657880,
-      "avg_vol_10d": 1083654,
-      "avg_dollar_vol": 59405912,
-      "mkt_cap": 2033179831,
-      "rvol": 2.89,
-      "adr_pct": 5.52,
-      "category": "FDA",
-      "theme": "Positive Phase 3 Clinical Trial Results",
-      "reasoning": "KOD stock jumps on an 8-K filing confirming positive Phase 3 vision trial results, where **54% of patients went six months between eye treatments**.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 27,
-      "grade": "C",
-      "finviz_theme": "Biotech - Ophthalmology",
+      "ticker": "SMMT",
+      "price": 18.49,
+      "gap_pct": 19.44,
+      "pm_volume": 1356913,
+      "avg_vol_10d": 6036938,
+      "avg_dollar_vol": 111622984,
+      "mkt_cap": 12349163966,
+      "rvol": 0.7,
+      "adr_pct": 5.42,
+      "category": "New Contract/Partnership",
+      "theme": "AstraZeneca Strategic Equity Investment",
+      "reasoning": "Summit Therapeutics surged after AstraZeneca made a **$2 billion strategic equity investment**, signaling significant institutional conviction and capital infusion.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "A+",
+      "finviz_theme": "Biotech - Oncology",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "KOD filed an 8-K today, likely confirming positive clinical trial data, with news headlines highlighting a vision trial where **54% of patients went six months between eye treatments**. This data is considered a **Phase 3 data catalyst** impacting the stock.",
-        "impact": "The positive trial results de-risk the development of KOD's treatment, increasing the likelihood of future regulatory approval and market penetration, setting up a strong momentum play."
+        "catalyst": "**AstraZeneca** made a **$2 billion strategic equity investment** in Summit Therapeutics, an **equity deal** that sent Summit shares surging after-hours.",
+        "impact": "This substantial capital infusion from a major pharmaceutical player significantly strengthens Summit's financial position, de-risks its pipeline, and validates its therapeutic approach."
       },
-      "analysis_details": "• **The Drug**\nKOD's stock is reacting to positive data from a **vision trial**, which is highlighted as a **Phase 3 data catalyst**. Specifically, the trial showed that **54% of patients went six months between eye treatments**, indicating significant efficacy for the therapy.\n\n• **The Significance**\nThis positive clinical trial data from a late-stage study significantly de-risks the drug's path towards potential regulatory approval. The ability for **54% of patients** to extend treatment intervals to **six months** is a compelling outcome that could provide a competitive advantage and strong market potential, aligning with analyst targets and fueling stock momentum.",
+      "analysis_details": "• **Impact**\nSummit Therapeutics stock **surged after-hours** following the announcement that **AstraZeneca** made a **$2 billion strategic equity investment**. This **equity deal** involved **AstraZeneca** making a **$2 billion strategic equity investment** in Summit Therapeutics, causing shares to **surge**.\n\n• **Strategic Value**\nThis large-scale investment from a major pharmaceutical company like **AstraZeneca** represents a significant validation of Summit's pipeline and future potential. It provides substantial capital, which can accelerate drug development, expand clinical trials, and enhance market positioning, potentially opening doors for future collaborations or acquisition interest.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "KOD Stock Jumps As Phase 3 Data Catalyst Looms - timothysykes.com",
+          "title": "AstraZeneca Makes $2 Billion Strategic Equity Investment in Summit Therapeutics - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1iLUxLVmtjTHNxdzd4S2hib3Y2T2ZISTZqMzhOdnUxVVBJRlRqLWxvcG9lVVZRd3JaeFVWbDFDckpaMjhiT2FpZEFVZ282TXBvVzV1a2ZrakQyUS0yNDlkRlYzNk1qbmZHdmk2TUxNbE5GZUVHSDk5Vmo2ZzZpUnc?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOTzh4LUpYcl9KR3h2NndMX24tWXlMcUxadjNvbTVSclFmckc4RGc3bXN3Zko2R00tNXFESGpMazY5TGhkUHQwTnZBdElTaDgzcG1id1FKTHhGOTFxZFV0ckgxMVJoTXI2ZVJLalpGZUp2bzY5WUQ4N2JqU3hJSTBWeEdsMDhZRUkwYTh6dklvVHR6RTFPNUw0dGFaQ0ZUQTgxZHlxUXJTQm9VdnZOdFg3OEhBMnlqMG95eW1pQzZn?oc=5"
         },
         {
-          "title": "KOD Stock Jumps As Phase 3 Catalysts And Analyst Targets Align - stockstotrade.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5ERGVsdXZ0QlVNc0l1VEhBLW9scVVHTWg5bGkzbnlpRXRvdUd6QmsxdkNBaVhEY2VCTE90X0hKR2Y5RTQwVjNoTmZxTUIyYWhOYVlnR3pJWlVLMUUybWNTMEoxWERWMC1FZWpDUkR2bHhIMUViNWhNZVRjaw?oc=5"
+          "title": "Summit Shares Surge on $2 Billion AstraZeneca Investment",
+          "source": "Finviz",
+          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-09-28-2026/card/summit-shares-surge-on-2-billion-astrazeneca-investment-4qKRcwj8eVj74MC2Ewic?mod=wsj_FV"
         },
         {
-          "title": "In a vision trial, 54% of patients went six months between eye treatments - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPUDZ4YjhhTmJ4NEZ6NzJObWxDT3JobWRMQkNKRzB1QXN1LTMyYlYxcDRyalJwMFlDdTJRUHJlc3BmNDFlak9wNnFoV3ZkYndiZ0xSLWZtR2Y0QUFVUjF6bWRBNUZ4cEFMRzJQWFgxWmltN3pVaGxXcG5VMHJrT21KbmFsRUJtR0Z5aWM3SG5kUklIQ1Y1MzRLWnNkZnduR3ctRzR0U0RnMTV2aUg2WlhkSFZXR24?oc=5"
+          "title": "Summit Therapeutics Stock Surges After AstraZeneca Reveals $2 Billion Investment",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/summit-therapeutics-stock-astrazeneca-cancer-drug-d070fe4d?mod=bar_FV"
+        },
+        {
+          "title": "Summit shares surge after-hours on $2 billion AstraZeneca equity deal",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/healthcare/articles/summit-shares-surge-hours-2-220826363.html"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-09-28",
+        "filing_date": "2026-09-29",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "3.02",
+          "5.03",
+          "8.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1599298/000119312526405776/d178892d8k.htm"
+      },
+      "float_shares": "152.34M",
+      "short_float": "26.97%",
+      "daily_pct": 22.35,
+      "prev_close": 15.48,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$2 billion strategic equity investment",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "IOVA",
+      "price": 12.13,
+      "gap_pct": 10.37,
+      "pm_volume": 798081,
+      "avg_vol_10d": 15976816,
+      "avg_dollar_vol": 193798778,
+      "mkt_cap": 4978155973,
+      "rvol": 0.64,
+      "adr_pct": 5.5,
+      "category": "Others",
+      "theme": "Strong Revenue Forecast",
+      "reasoning": "Iovance filed an 8-K disclosing a 2026 forecast implying nearly 60% revenue growth, signaling strong future performance.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "B",
+      "finviz_theme": "Biotech - Oncology",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Iovance (IOVA) filed an **8-K** on **2026-09-29** under **Item 8.01** and **Item 9.01**. The news indicates that a **nearly 60% revenue growth** for **2026** is implied by the company's latest forecast.",
+        "impact": "This strong revenue forecast suggests positive forward momentum and an improved outlook for the company's financial performance."
+      },
+      "analysis_details": "• **What Happened**\nIovance Biotherapeutics (IOVA) released an **8-K** filing on **September 29, 2026**, which according to recent news, implies a **nearly 60% revenue growth** for the company's **2026 fiscal year**. This forecast serves as a significant update regarding the company's expected financial performance, aligning with disclosure via the SEC filing.\n\n• **Key Consideration**\nThe projected **nearly 60% revenue growth** for **2026** indicates strong underlying business momentum and could attract increased investor interest. This forward-looking guidance may lead to a re-evaluation of IOVA's valuation and potentially drive positive price action as the market digests the implications of such robust growth.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Nearly 60% revenue growth is implied by Iovance's 2026 forecast. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxORTdFb0pwcEE1VEVCa2VVQWJGQ1FtclF6NHZ3TDVlR0QtVFM2X0Yyb0JCc2lZbDVVV1hpSlRtU3NtSWZ1OVVscmZTTVZEZkhpQTZUVGdCM1U2Q2lfN2hxajJzLXRkMndUQkFVX0ZGUkxiNWlPMEphTmpJRU5zRV9LVlVtS3RNU2pOZk50bElodVBlVUxKd2RBWWphRWFtcVBxSEhsRWp3SGhTemhOQmhNVjY5d3ZGMHN2bUlsMw?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-29",
         "form": "8-K",
         "items": [
           "8.01",
@@ -54,14 +134,14 @@
         ],
         "category": "Others",
         "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1468748/000119312526403481/d185059d8k.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1425205/000110465926111583/tm2626507d1_8k.htm"
       },
-      "float_shares": "58.16M",
-      "short_float": "18.35%",
-      "daily_pct": 94.95,
-      "prev_close": 32.35,
-      "industry": "Biotech - Ophthalmology",
-      "technical_status": "Fail (Avg $Vol $59M < $100M)",
+      "float_shares": "393.41M",
+      "short_float": "22.15%",
+      "daily_pct": 14.36,
+      "prev_close": 10.99,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -69,81 +149,162 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "54% of patients went six months between eye treatments",
-        "discrepancy_note": "Finviz News (Source A) has no mention of the specific claim. Google News (Source B) includes an article from Stock Titan that confirms the claim ('In a vision trial, 54% of patients went six months between eye treatments'), but other Google News articles do not provide this specific detail."
+        "primary_claim": "nearly 60% revenue growth implied by Iovance's 2026 forecast",
+        "discrepancy_note": "Source A (Finviz) has no news. Source B (Google News) article [2] confirms the claim, but the requirement is for *both* sources to confirm."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": false,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "AMPX",
-      "price": 10.8,
-      "gap_pct": 10.76,
-      "pm_volume": 1326730,
-      "avg_vol_10d": 4550052,
-      "avg_dollar_vol": 49140562,
-      "mkt_cap": 1424286118,
-      "rvol": 0.95,
-      "adr_pct": 4.54,
+      "ticker": "NVTS",
+      "price": 12.77,
+      "gap_pct": 8.87,
+      "pm_volume": 2028136,
+      "avg_vol_10d": 12679869,
+      "avg_dollar_vol": 161921927,
+      "mkt_cap": 3062626345,
+      "rvol": 0.88,
+      "adr_pct": 4.84,
       "category": "New Contract/Partnership",
-      "theme": "Defense Grant Award",
-      "reasoning": "Amprius Technologies secured a **$75 million defense grant** from the US Defense Department to **produce batteries for drones**, boosting investor confidence.",
+      "theme": "U.S. Government Defense Contract",
+      "reasoning": "Navitas secured a U.S. Army contract to develop next-generation 10 kV SiC power semiconductors for military systems.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 76,
-      "grade": "C",
-      "finviz_theme": "EV Batteries",
-      "analysis_source": "gemini+edgar",
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Amprius Technologies stock jumped after securing a **$75 million defense grant** from the US Defense Department. This grant is specifically for the **production of batteries for drones**. The company plans to convert an existing **EV battery line** to achieve an expected capacity of **12 million drone battery cells a year**.",
-        "impact": "This grant provides non-dilutive funding for capacity expansion and validates Amprius's advanced battery technology within the critical defense sector, potentially accelerating market adoption for high-performance drone applications."
+        "catalyst": "Navitas Semiconductor stock surged **20%** after the **U.S. Army** chose the company to develop **10,000-volt (10 kV)** devices. This contract is for **military systems** and focuses on **next-generation SiC power semiconductors**.",
+        "impact": "This strategic win diversifies Navitas's revenue streams into the high-assurance defense sector, validating its advanced SiC technology and expanding its total addressable market."
       },
-      "analysis_details": "• **Impact**\nAmprius Technologies stock jumped following news of a **$75 million defense grant** from the US Defense Department. This significant funding is specifically allocated for the **production of batteries for drones**, underscoring a direct government endorsement of AMPX's battery technology for critical applications.\n\n• **Strategic Value**\nThe company intends to convert an existing **EV battery line** to fulfill this contract, aiming for an expected annual capacity of **12 million drone battery cells**. This move strategically leverages current infrastructure and positions Amprius as a key supplier in the expanding defense and drone sectors.",
+      "analysis_details": "• **Impact**\nNavitas Semiconductor's stock surged **20%** following the announcement that the **U.S. Army** selected the company. This contract involves developing **10,000-volt** (or **10 kV**) devices, specifically **next-generation SiC power semiconductors**. These specialized devices are designated for use in **military systems**.\n\n• **Strategic Value**\nThis U.S. government contract signifies a crucial strategic expansion for Navitas, penetrating the critical defense sector with its advanced SiC technology. The development of **10 kV SiC power semiconductors** for **military systems** not only validates Navitas's innovation but also opens doors to a new, high-value market segment, enhancing long-term revenue potential and competitive positioning.",
+      "peer_tickers": [
+        "ON",
+        "STM",
+        "WOLF"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Navitas Semiconductor stock surges 20% on U.S. defense contract - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQNEh0SWNBYm1CU01OYXNoTkU3aUl4RmN6X21XS1I4ejBTbnNCMXJKZXFHRWdhc3FUNm1BcFYxakdQMlNCSzg4a1J3UUo0RC1BMC1OeGVRUXVScmJnUkR5VGhBWjRqQkg1dUEzUmdRcFk2b1VBT1RoNWx0SjJ6T241ZkhyVndHR2w2YURDTm11N2x2WnVmWUgyVXRxYUxrdTdZTW90MC0zZ3ZBNlNyWWRHaHNueUQ3YTBa?oc=5"
+        },
+        {
+          "title": "The U.S. Army chose Navitas to develop 10,000-volt devices for military systems. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOSEt2cFBxZVVaQnlLTU1TbjBZbC1BNzY0OFo0aTVDMDBVOS1VdWFEdXFtdFJabldDVzdtcWVXSmpxSlcxcEdIVVRXeFFUX1hfZFNLWDMtX2VIdFNkSVp2bG9kcXYxNEp2eFhLM213blNfRWlPbEpMeWEzb1NSekVMRzFyY25SRHBpUlZhX3pBa0tjVnI3YXB2LXBMVDN5NnhENjlFS09sSmNJRTNTSWVXSTBLMlNTRzdqSm1NSTRmRQ?oc=5"
+        },
+        {
+          "title": "U.S. Government Selects Navitas to Develop Next-Generation 10 kV SiC Power Semiconductors",
+          "source": "Finviz",
+          "url": "/news/396147/us-government-selects-navitas-to-develop-next-generation-10-kv-sic-power-semiconductors"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "225.74M",
+      "short_float": "17.85%",
+      "daily_pct": 9.12,
+      "prev_close": 11.73,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "10 kV SiC power semiconductors",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "FCEL",
+      "price": 17.52,
+      "gap_pct": 8.55,
+      "pm_volume": 206041,
+      "avg_vol_10d": 5291337,
+      "avg_dollar_vol": 92704224,
+      "mkt_cap": 1290460628,
+      "rvol": 0.8,
+      "adr_pct": 7.04,
+      "category": "Upgrade",
+      "theme": "Oppenheimer Outperform Initiation",
+      "reasoning": "FuelCell Energy received a positive analyst initiation from Oppenheimer with an outperform rating today.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Oppenheimer initiated FuelCell Energy stock with an **outperform rating** today.",
+        "impact": "This initiation provides a new bullish thesis and could attract institutional interest, potentially offsetting recent negative sentiment from class action filings regarding **Fit Energy Disclosures**."
+      },
+      "analysis_details": "• **The Firm & Rating**\nOppenheimer initiated coverage on FuelCell Energy, Inc. (FCEL) today, assigning an **outperform rating** to the stock. This marks a significant endorsement from a reputable financial institution, providing a fresh perspective on the company's prospects.\n\n• **The Thesis**\nThis positive initiation from Oppenheimer comes amidst recent negative sentiment surrounding the company, including multiple securities class action alerts from firms like **Robbins LLP**, **Hagens Berman**, and **Levi & Korsinsky** related to **Fit Energy Disclosures** which previously drove the stock **down 15%**. The new outperform rating from Oppenheimer suggests a potential re-evaluation of FCEL's value proposition or future growth trajectory, possibly providing a counter-narrative to the legal scrutiny.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Amprius Technologies stock jumps on $75M defense grant - Investing.com",
+          "title": "Robbins LLP Urges FCEL Stockholders Who Lost Money Investing in FuelCell Energy, Inc. to Contact the Firm for Information About Leading the Class Action - Business Wire",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPU29mZkg0WlhaTFYyclhrUDMyazRVVjhJR2RiU05tdFRLU0I1Q1lvaUxxdTFrcFZrV0R3NkVqWEdWOVg3dWJ4TVVpT1hZUElYMnZYcy1GU3BVckhzRVk2QVdZMTNvX0p4ODZrRHBoQU1iUkZBZGwzbUliSkladDV3YWVqaFR5Y1c0cGxZVzM2cy1GMjNBdjZ6VHNiN0FWM3dYeDI0ckJQMW9HcWwzTEY4?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgJBVV95cUxQcEhUU2IxNnAxcVBnY2FkNW9uT3kxS1RabDEyRE1xcDdkemJqYXotdzMzWTlVZ3pWcVdvbTV4WGNIT1VQZkVJbF9jcEVfZVR2S1UyZm1fSktYWlA2TWlRaWswYjhYX0Z0X2h6WWNMU0ptcXBSOENiZTVFLXU4RVBGRGhIaDBLcUgyNGc5Q2lGWlYzYncyWENUajZTZHluNmZWVUpmQ2ljUVFXdjJJTFNXSVAtX0F3MGRGRzZUSEt2V3Z2X3E1TDF5QXJpTlk4bi12Vi1JVHFPWHl1enI0Zkx2alc1alB1bmVfemVXVWtJQngzNS1GMkVZbEFHa1hRTU1CX2pPVlZVVEU5amFPWjFwRU1pVURtTE1vS2ZCeXFZSm5tTzR2QkR3Q2d3dHdCbHNlRHc?oc=5"
         },
         {
-          "title": "Amprius Technologies Stock Gains on $75 Million Defense Dept Grant to Produce Batteries for Drones - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNUDM5YkVJRjcxZFpIOHdXeXEwclRKWmtMRGNMZlVQYXFpQy1tU0V6QzlZbVB3NDVaUTBwRGZlZWJwRUxqWThlVWNNd1doQk5MaDRaRWM2U00tNWR6a05TbThucnZIOThkWUgzSWphY1VxUHVqYkR2MXBBQk9lajAtM2NJT0RUcUFzU3g3cTNvbjNoZnQ2ZUpjYUhfODZ4Sm81b1ZXN1cwQzkxYTlOZ3FDNlJMcHE0TmI3Y0d1TE01b0RtUm52Q3hxblFNSEs3UldmOGlkU0RPZ05RUGNlTTNlem10V2g?oc=5"
+          "title": "FuelCell (FCEL) Scrutinized Over Fit Energy Disclosures Driving Stock Down 15% -- HBSS",
+          "source": "Finviz",
+          "url": "https://www.newsfilecorp.com/release/316404/FuelCell-FCEL-Scrutinized-Over-Fit-Energy-Disclosures-Driving-Stock-Down-15-HBSS"
         },
         {
-          "title": "An EV battery line is planned for conversion to make drone battery cells, with expected capacity of 12 million a year. - Stock Titan",
+          "title": "FCEL Deadline Alert: Levi & Korsinsky Reminds FuelCell - GlobeNewswire",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOOFY4OGZQMGowbXlMVTJDbVNHdHRMUzkxQ21TZThNQmFmcDRIMjZ5Z3hrY2ZRY0FqX1c1VjFyTUlfNExMVkFmR1V4SUFnYXpVWFN0LWlWbUs3VU14ZkF2bl82LUV1cHlJTDR0TENCM1ZJZnVkVzBzeUF2aUZ4NDh1NllWaU5WMzNLVlRlb3owOFRDa2hrekc0bmxFeTU2dFA3czZCZVJkSWt2NXc1dkYzNTdHQ1gyd2hUeTRtTg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirgJBVV95cUxOOUZvWU5LaGRzN01fQjh0M3otWUlBcm9lM2FiUHE1LVpkMktzY1NXelVhcEYycGRlcG0zcENkOFEyOXM4ZUQzRDJYSDRJbngyek9BcmtTMy13SVJ0cWZ4UlBmdnNra3RHdUU0N3lkMmhLOXZfYmp6VkVjRGlva1BtM2J1Vng3SkFfN0ZaQkoxTy1KTnVjdXNsRFlzd2JmT0pxUmg3bXBTNGhDUUl3ODBYdVpOZE9mQ2otZmtQSUVuMzNtclkzcHMtRHQ1VmlvcmZBUzQweVpVQzRodWcyNDNzRU5TY0pGRXJwSEZvVmdFMVkyekV1MXlzS0hFUm01ZWhVMTRSbzZBa3JTamdvVnFWU1NYbGxHWmRMUWJLVkhvcW4tRVZBaGpQNnR1UVN0QQ?oc=5"
+        },
+        {
+          "title": "Oppenheimer initiates FuelCell Energy stock with outperform rating By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQOVpvRWF1amRaRXYyeUJSN01jMjR3RGl1TGJuTmVYX0M3ZEZKdjNCWUdDUkNvY3dBRW84cjZZSFFIUFhzb01HRTJ3dExOeWE0Xzg0bGJ4NEx1T2tOYURXLTRwQ2VGZGZ5UlZZX184eHg5NUNwTS1RcTBtVkhfOS1kdzNGZDV6aFpId2FSRnFaRUdWbTEzdFhPUDd2cENoa3EwX2xjdFpZVnRnR1NTbXNidkswLXB6RE42azRQR0FFeDFyVFV4UUE?oc=5"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-09-28",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1899287/000189928726000065/ampx-20260923.htm"
-      },
-      "float_shares": "136.20M",
-      "short_float": "16.66%",
-      "daily_pct": 9.16,
-      "prev_close": 9.75,
-      "industry": "EV Batteries",
-      "technical_status": "Fail (Avg $Vol $49M < $100M)",
+      "edgar_filing": null,
+      "float_shares": "76.11M",
+      "short_float": "32.72%",
+      "daily_pct": 8.61,
+      "prev_close": 16.14,
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Fail (Avg $Vol $93M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -151,13 +312,13 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$75 million defense grant",
-        "discrepancy_note": "Source A (Finviz News) provides no information regarding the $75 million defense grant. Source B (Google News) contains multiple headlines ([3], [4], [5]) confirming a $75 million defense grant or OTA (Other Transaction Authority)."
+        "primary_claim": "FuelCell Energy received a positive analyst initiation from Oppenheimer with an outperform rating.",
+        "discrepancy_note": "Source A (Finviz News) does not contain any information about Oppenheimer's initiation or an outperform rating for FCEL. Source B (Google News), specifically articles [2] and [5], confirms Oppenheimer initiated coverage with an outperform rating. Since both primary sources do not confirm the claim, it is marked as a discrepancy."
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -167,65 +328,76 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "BUR",
-      "price": 3.87,
-      "gap_pct": 6.32,
-      "pm_volume": 96562,
-      "avg_vol_10d": 2203594,
-      "avg_dollar_vol": 8527909,
-      "mkt_cap": 799287615,
-      "rvol": 1.17,
-      "adr_pct": 4.39,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "BUR filed an 8-K (Item 7.01) without specific news headlines, suggesting a technical move or institutional flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
+      "ticker": "UEC",
+      "price": 9.84,
+      "gap_pct": 6.84,
+      "pm_volume": 328108,
+      "avg_vol_10d": 9208107,
+      "avg_dollar_vol": 90607773,
+      "mkt_cap": 4557774597,
+      "rvol": 1.04,
+      "adr_pct": 4.67,
+      "category": "Earnings",
+      "theme": "Revenue Beat",
+      "reasoning": "Uranium Energy (UEC) reported **Q4 revenue that beat estimates** despite a reported loss, per its **Form 8-K filing** today.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "Clean Energy - Nuclear",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no explicit fundamental news often points to technical breakout or institutional flow dynamics, carrying a high risk of being a Gap and Trap scenario."
+        "catalyst": "Uranium Energy (UEC) filed a **Form 8-K** on **2026-09-29** for **Earnings/Financial Results**, confirming it **reported Q4 earnings**. News headlines indicate the company reported a **Q4 Loss** but **beat revenue estimates**.",
+        "impact": "A revenue beat, even with a loss, can signal stronger underlying demand or operational efficiency, potentially attracting positive investor attention."
       },
-      "analysis_details": "• **What Happened**\nBUR filed an **8-K with the SEC today, 2026-09-28**, specifically citing **Item 7.01 (Regulation FD Disclosure)** and **Item 9.01 (Financial Statements and Exhibits)**. However, without accompanying news headlines or specific details from the filing's content, the precise nature of the disclosure remains unconfirmed.\n\n• **Key Consideration**\nThe absence of specific fundamental news accompanying the 8-K suggests that any significant price movement today would likely be driven by **technical factors** or **institutional flow**. Investors should exercise caution as such moves without a clear catalyst can be prone to volatility and reversals.",
-      "peer_tickers": [],
+      "analysis_details": "• **The Beats (Surprise Factor)**\nUranium Energy (UEC) officially reported its **Q4 results** today, as indicated by its **SEC 8-K filing** on **2026-09-29** under Item **2.02 Earnings/Financial Results**. While the company posted a **Q4 Loss**, it notably **beat revenue estimates**, suggesting stronger-than-expected top-line performance.\n\n• **The Growth (Momentum)**\nBeating revenue estimates indicates that the company's sales trajectory is exceeding analyst expectations, which can be a positive driver for momentum. This suggests an expanding market presence or effective sales strategies, providing a tailwind for future growth expectations despite the reported loss.",
+      "peer_tickers": [
+        "URG",
+        "DNN",
+        "NXE"
+      ],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Uranium Energy (UEC) Reports Q4 Loss, Beats Revenue Estimates - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNM3JtM1FSVDQzU3ZhdDJZYUVwbXhvbU9Xcm5LN0RQY1Z2QXIwNWdTd3RKaGZBMEJMMVB3UE9lV09RdU9OYVd5SnFHNUdNM1ZvVXJyNVhGNC12bHpXVFhJU2R5cEhWN180ZFR4eWM4T2d2b1dRdV9iSmhzX01NYUVNZmpIbWROWG5PTHpzLUNWZ3UtTlMyVnRseEJ3?oc=5"
+        }
+      ],
       "edgar_filing": {
-        "filing_date": "2026-09-28",
+        "filing_date": "2026-09-29",
         "form": "8-K",
         "items": [
+          "2.02",
           "7.01",
           "9.01"
         ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1714174/000171417426000106/bur-20260928.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1334933/000143774926031416/uec20260928_8k.htm"
       },
-      "float_shares": "198.47M",
-      "short_float": "7.14%",
-      "daily_pct": 4.95,
-      "prev_close": 3.64,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $9M < $100M)",
+      "float_shares": "485.72M",
+      "short_float": "12.35%",
+      "daily_pct": 6.41,
+      "prev_close": 9.21,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Fail (Avg $Vol $91M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "BUR filed an 8-K (Item 7.01) without specific news headlines, suggesting a technical move or institutional flow.",
-        "discrepancy_note": "The primary claim states 'without specific news headlines', but Google News (Source B) contains very specific headlines detailing a $5.7 billion jury award in an Apple patent case, with Burford potentially receiving $1.4 billion (Source B[1]), and describes a 'Massive Court Win' (Source B[2]). Finviz News (Source A) has no relevant headlines."
+        "primary_claim": "UEC filed a Form 8-K today regarding Q4 earnings.",
+        "discrepancy_note": "Source B [1] (Yahoo Finance) mentions UEC 'Reports Q4 Loss, Beats Revenue Estimates' but does not specify a Form 8-K filing or that it occurred 'today'. Source B [4] (Benzinga) explicitly states 'Earnings Scheduled For September 29, 2026', directly contradicting the claim that an earnings report was filed today. Finviz has no relevant information."
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
+        "gate_mkt_cap": true,
         "gate_adr": true
       },
       "meets_all_gates": false,
@@ -237,9 +409,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 2,
+    "small_gaps": 4,
     "large_gaps": 1,
-    "total_headlines": 6,
+    "total_headlines": 13,
     "monthly_cost_usd": 0.01
   }
 }
