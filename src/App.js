@@ -14945,7 +14945,7 @@ const TrendSparkline = ({ data = [] }) => {
 // + 5 operational/tightness scans, each already sorted by its defining metric,
 // grouped into Jeff Sun-style watchlist sections under a consolidated Scan Result.
 // ─────────────────────────────────────────────────────────────────────────────
-const FocusScanTable = ({ scan, scanLabels = {}, onMiniCharts = null }) => {
+const FocusScanTable = ({ scan, title = null, scanLabels = {}, onMiniCharts = null }) => {
   const fmtPct   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol  = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v/1e6).toFixed(0)}M` : `$${(v/1e3).toFixed(0)}K`;
   const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
@@ -14997,9 +14997,9 @@ const FocusScanTable = ({ scan, scanLabels = {}, onMiniCharts = null }) => {
   return (
     <div className="rounded-lg border border-zinc-800 overflow-hidden">
       <div className="flex items-baseline gap-2 px-3 py-2 bg-zinc-900/80 border-b border-zinc-800">
-        <h4 className="text-[12px] font-semibold text-zinc-100">{scan.label}</h4>
+        <h4 className="text-[12px] font-semibold text-zinc-100">{title || scan.label}</h4>
         <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{enriched.length}</span>
-        {scan.timeframe && <span className="text-[10px] text-zinc-600">{scan.mcap_group} · {scan.timeframe}</span>}
+        {scan.timeframe && !title && <span className="text-[10px] text-zinc-600">{scan.mcap_group} · {scan.timeframe}</span>}
         {onMiniCharts && enriched.length > 0 && (
           <button onClick={() => onMiniCharts(sorted.map(s => ({ ticker: s.ticker, category: s.industry })), scan.label)}
             className="ml-auto text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
@@ -15072,9 +15072,9 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
   const scanLabels = Object.fromEntries(scans.map(s => [s.key, s.label]));
   const bandPct = data.ema5_band_pct ?? 5;
 
-  // Sections mirror Jeff Sun's watchlists; each group is a labelled sub-header
-  // over one scan. Groups without a label render as a bare table.
-  const SMALL = "Small Cap (<$10B)", LARGE = "Large Cap (>$10B)";
+  // Sections mirror Jeff Sun's watchlists; a group's label replaces its table's
+  // title. Groups without a label keep the scan's own title.
+  const SMALL = "Small Cap < $10B", LARGE = "Large Cap > $10B";
   const SECTIONS = [
     { title: "1W Momentum", sub: "1-week lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_1W_Small" }] },
     { title: "1M Momentum", sub: "1-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_1M_Small" }] },
@@ -15112,10 +15112,7 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
             <FocusSec title={sec.title} sub={sec.sub} />
             <div className="space-y-4">
               {groups.map(g => (
-                <div key={g.key} className="space-y-2">
-                  {g.label && <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">{g.label}</div>}
-                  <FocusScanTable scan={byKey[g.key]} onMiniCharts={onMiniCharts} />
-                </div>
+                <FocusScanTable key={g.key} scan={byKey[g.key]} title={g.label} onMiniCharts={onMiniCharts} />
               ))}
             </div>
           </div>
