@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-30 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Performance / Global Caution",
+    "spy_price": 762.63,
+    "spy_change_pct": -0.21,
+    "vix": 16.34,
+    "hy_oas": 3.08,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 24.2,
+    "mmth": 45.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new partnership for its Azure AI services, bolstering confidence in its future cloud and artificial intelligence revenue streams."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly received accelerated FDA approval for a groundbreaking oncology treatment, expanding its leadership in high-demand therapeutic markets."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple continued to experience strong institutional buying on general tech flow, without specific fresh news, ahead of anticipated product launch cycles."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-30 12:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop experienced another day of technical-driven volatility and short-squeeze activity, without any fresh fundamental news catalyst to justify the price action."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-10 10:56 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk Aversion Building",
-    "spy_price": 759.22,
-    "spy_change_pct": -0.42,
-    "vix": 17.32,
-    "hy_oas": 2.71,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 42.2,
-    "mmth": 59.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) shares are reacting to reports of a significant advancement in its AI search capabilities, positioning the company for renewed market share growth."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase (JPM) is seeing pre-market strength after announcing a strategic acquisition in the fintech space, expected to expand its digital banking services and client base."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft (MSFT) is under pressure today purely on technicals, facing resistance at its 50-day moving average as investors rotate out of high-growth tech amidst rising uncertainty."
         }
       ]
     }
