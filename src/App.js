@@ -15070,20 +15070,23 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
   const scans = data.scans || [];
   const scanResult = data.scan_result;
   const scanLabels = Object.fromEntries(scans.map(s => [s.key, s.label]));
-  const bandPct = data.ema5_band_pct ?? 5;
+  const tightLabel = data.tightness?.label ?? "within ±5% of EMA5";
 
   // Sections mirror Jeff Sun's watchlists; a group's label replaces its table's
   // title. Groups without a label keep the scan's own title.
   const SMALL = "Small Cap < $10B", LARGE = "Large Cap > $10B";
   const SECTIONS = [
-    { title: "1W Momentum", sub: "1-week lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_1W_Small" }] },
-    { title: "1M Momentum", sub: "1-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_1M_Small" }] },
-    { title: "3M Momentum", sub: "3-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_3M_Small" }, { label: LARGE, key: "Mom_3M_Large" }] },
-    { title: "6M Momentum", sub: "6-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_6M_Small" }, { label: LARGE, key: "Mom_6M_Large" }] },
+    { title: "1W Momentum", sub: "1-week gain >20%, weekly volatility >4%", groups: [{ label: SMALL, key: "Mom_1W_Small" }] },
+    { title: "1M Momentum", sub: "1-month gain >30%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_1M_Small" }] },
+    { title: "3M Momentum", sub: "3-month gain >50%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_3M_Small" }, { label: LARGE, key: "Mom_3M_Large" }] },
+    { title: "6M Momentum", sub: "6-month gain >100%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_6M_Small" }, { label: LARGE, key: "Mom_6M_Large" }] },
     { title: "Strongest Stocks", sub: "EPS and revenue growth >25%, above SMA50", groups: [{ label: SMALL, key: "4_Strongest_Stock_JK" }, { label: LARGE, key: "5_Strongest_Stock_10B_Rev_30_JK" }] },
     { title: "Fundamental (CANSLIM)", sub: "EPS, revenue and FCF growth >25%", groups: [{ key: "1_Fundamental_Growth" }] },
     { title: "Post Earnings Continuation Base", sub: "Post-gap base above SMA20 on high RVOL", groups: [{ key: "3_Post_Earnings_Cont_Base" }] },
     { title: "Daily Tightness", sub: "High-volatility names tight against EMA5 / SMA10", groups: [{ key: "Daily_Tightness_Swing" }] },
+    { title: "Hottest Stock", sub: "13-week gain >30%, short float >20%, institutions buying (Finviz)", groups: [{ key: "Hottest_Stock" }] },
+    { title: "Highest Short Float", sub: "short float >30%, float <100M (Finviz)", groups: [{ key: "Highest_Short_Float" }] },
+    { title: "Bases at Beaten-Down Levels", sub: ">70% below all-time high, near SMA200, institutions buying (Finviz)", groups: [{ key: "Beaten_Down_Bases" }] },
   ];
   const byKey = Object.fromEntries(scans.map(s => [s.key, s]));
 
@@ -15092,7 +15095,7 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-semibold text-zinc-100">🎯 Focus List</h3>
-          <p className="text-[11px] text-zinc-600">Jeff Sun-style screener battery · 13 scans · every scan filtered to within ±{bandPct}% of EMA5</p>
+          <p className="text-[11px] text-zinc-600">Jeff Sun-style screener battery · {scans.length} scans · every scan filtered to {tightLabel}</p>
         </div>
         {scanTimeLabel && <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {scanTimeLabel}</span>}
       </div>

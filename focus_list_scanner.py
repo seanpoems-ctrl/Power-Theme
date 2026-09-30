@@ -30,9 +30,19 @@ import pandas as pd
 from tradingview_screener import Query, col
 
 ROOT = Path(__file__).parent
-# Jeff Sun's daily "Watchlist Scan" tightness filter: price within +/-5% of the
-# 5-day EMA (above OR below), applied on top of every scan below.
+# Tightness filter applied on top of every scan. Two Jeff Sun variants:
+#   ema5        - Mar 2024 daily "Watchlist Scan": price within +/-5% of the 5-day EMA
+#   compression - Oct 2025 "Compression" screen: price above EMA20, today's high below
+#                 the 1-month high, and within +/-3.5% of the open
+# Switch with --tightness on the command line or the FOCUS_TIGHTNESS env var.
 EMA5_BAND = 0.05
+COMPRESSION_OPEN_BAND = 3.5
+TIGHTNESS = os.environ.get("FOCUS_TIGHTNESS", "ema5")
+TIGHTNESS_LABELS = {
+    "ema5":        "within ±5% of EMA5",
+    "compression": "above EMA20, below 1M high, ±3.5% from open",
+}
+TIGHTNESS_COLS = ['EMA5', 'EMA20', 'high', 'High.1M', 'open']
 OUTPUT_JSON = ROOT / "public" / "focus_list.json"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -120,48 +130,70 @@ individual_scans = {
 # 2. All 8 momentum scans — small-cap ($300M-$10B) vs large-cap (>$10B),
 #    each across 1-week / 1-month / 3-month / 6-month lookback windows
 # ──────────────────────────────────────────────────────────────
-momentum_scans = {
-    "Mom_1W_Small": {
-        "mcap_group": "$300M - $10B", "timeframe": "1 Week", "is_large": False,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.W', 'Volatility.M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic').between(300_000_000, 10_000_000_000), col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 50_000_000, col('Volatility.M') > 3, col('Perf.W') > 20).order_by('change', ascending=False).limit(300)
+EXCHANGES = ['NASDAQ', 'NYSE', 'AMEX']
+MOM_COLS = ('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5',
+            'average_volume_10d_calc', 'price_52_week_low', 'SMA10')
+
+# Jeff Sun's 2023 Finviz mover scans (X post 1659786288067928064): 1W >20%, 1M >30%,
+# 3M >50%, 6M >100%; avg volume >300K, current volume >100K; weekly volatility >4%
+# for the 1W scan and monthly volatility >5% for the others. No float filter.
+# (label, TradingView perf column, min perf %, volatility column, min volatility %)
+MOMENTUM_RULES = {
+    "1W": ("1 Week",   "Perf.W",  20,  "Volatility.W", 4),
+    "1M": ("1 Month",  "Perf.1M", 30,  "Volatility.M", 5),
+    "3M": ("3 Months", "Perf.3M", 50,  "Volatility.M", 5),
+    "6M": ("6 Months", "Perf.6M", 100, "Volatility.M", 5),
+}
+
+
+def _momentum_query(perf_col: str, perf_min: float, vol_col: str, vol_min: float, is_large: bool):
+    mcap = col('market_cap_basic') > 10_000_000_000 if is_large else col('market_cap_basic').between(300_000_000, 10_000_000_000)
+    return (
+        Query().set_markets('america').select(*MOM_COLS, perf_col, vol_col)
+        .where(col('type') == 'stock', col('exchange').isin(EXCHANGES), mcap,
+               col('average_volume_60d_calc') > 300_000, col('volume') > 100_000,
+               col(vol_col) > vol_min, col(perf_col) > perf_min)
+        .order_by('change', ascending=False).limit(300)
+    )
+
+
+momentum_scans = {}
+for _win, (_tf, _perf, _pmin, _vol, _vmin) in MOMENTUM_RULES.items():
+    for _large in (False, True):
+        momentum_scans[f"Mom_{_win}_{'Large' if _large else 'Small'}"] = {
+            "mcap_group": "> $10B" if _large else "$300M - $10B",
+            "timeframe": _tf, "is_large": _large,
+            "query": _momentum_query(_perf, _pmin, _vol, _vmin, _large),
+        }
+
+# ──────────────────────────────────────────────────────────────
+# 3. Jeff Sun's 2025 post-market Finviz screens (X post 1982678925483684325).
+#    TradingView's screener has no short-interest or institutional-transaction
+#    data, so the ticker universe comes from Finviz using his filters, then each
+#    ticker is enriched through TradingView so it gets the same columns and the
+#    same tightness filter as every other scan. His multi-industry filter is a
+#    Finviz Elite feature (ignored on the free site), so it is left out.
+# ──────────────────────────────────────────────────────────────
+FINVIZ_SCANS = {
+    "Hottest_Stock": {
+        "label": "Hottest Stock",
+        "filters": "cap_0.15to,sh_avgvol_o2000,sh_curvol_o1000,sh_float_to500x,sh_insttrans_pos,sh_short_high,ta_perf_13w30o,ta_volatility_wo5",
     },
-    "Mom_1M_Small": {
-        "mcap_group": "$300M - $10B", "timeframe": "1 Month", "is_large": False,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.1M', 'Volatility.M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic').between(300_000_000, 10_000_000_000), col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 50_000_000, col('Volatility.M') > 3, col('Perf.1M') > 30).order_by('change', ascending=False).limit(300)
+    "Highest_Short_Float": {
+        "label": "Highest Short Float",
+        "filters": "cap_smallover,sh_avgvol_o1000,sh_float_u100,sh_short_o30",
     },
-    "Mom_3M_Small": {
-        "mcap_group": "$300M - $10B", "timeframe": "3 Months", "is_large": False,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.3M', 'Volatility.M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic').between(300_000_000, 10_000_000_000), col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 50_000_000, col('Volatility.M') > 3, col('Perf.3M') > 70).order_by('change', ascending=False).limit(300)
-    },
-    "Mom_6M_Small": {
-        "mcap_group": "$300M - $10B", "timeframe": "6 Months", "is_large": False,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.6M', 'Volatility.M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic').between(300_000_000, 10_000_000_000), col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 50_000_000, col('Volatility.M') > 3, col('Perf.6M') > 100).order_by('change', ascending=False).limit(300)
-    },
-    "Mom_1W_Large": {
-        "mcap_group": "> $10B", "timeframe": "1 Week", "is_large": True,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.W')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic') > 10_000_000_000, col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 150_000_000, col('Perf.W') > 20).order_by('change', ascending=False).limit(300)
-    },
-    "Mom_1M_Large": {
-        "mcap_group": "> $10B", "timeframe": "1 Month", "is_large": True,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.1M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic') > 10_000_000_000, col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 150_000_000, col('Perf.1M') > 30).order_by('change', ascending=False).limit(300)
-    },
-    "Mom_3M_Large": {
-        "mcap_group": "> $10B", "timeframe": "3 Months", "is_large": True,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.3M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic') > 10_000_000_000, col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 150_000_000, col('Perf.3M') > 70).order_by('change', ascending=False).limit(300)
-    },
-    "Mom_6M_Large": {
-        "mcap_group": "> $10B", "timeframe": "6 Months", "is_large": True,
-        "query": Query().set_markets('america').select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5', 'average_volume_10d_calc', 'price_52_week_low', 'SMA10', 'Perf.6M')
-        .where(col('type') == 'stock', col('exchange').isin(['NASDAQ', 'NYSE', 'AMEX']), col('market_cap_basic') > 10_000_000_000, col('average_volume_60d_calc') > 300_000, col('volume') > 100_000, col('float_shares_outstanding') < 150_000_000, col('Perf.6M') > 100).order_by('change', ascending=False).limit(300)
+    "Beaten_Down_Bases": {
+        "label": "Bases at Beaten-Down Levels",
+        "filters": "cap_smallover,sh_avgvol_o1000,sh_curvol_o1000,sh_insttrans_pos,sh_price_o1,ta_alltime_b70h,ta_highlow50d_a15h,ta_highlow52w_b30h,ta_perf_ytddown,ta_sma200_-20to20-a,ta_volatility_wo4",
     },
 }
+FINVIZ_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+FINVIZ_MAX_PAGES = 15
 
 # Explicit logical display order for the final printout / frontend tab
 LOGICAL_ORDER = [
@@ -171,6 +203,8 @@ LOGICAL_ORDER = [
     "Mom_1W_Large", "Mom_1M_Large", "Mom_3M_Large", "Mom_6M_Large", "5_Strongest_Stock_10B_Rev_30_JK",
     # Fundamental (CANSLIM), Post Earnings Continuation Base, Daily Tightness
     "1_Fundamental_Growth", "3_Post_Earnings_Cont_Base", "Daily_Tightness_Swing",
+    # Jeff Sun's 2025 Finviz screens
+    "Hottest_Stock", "Highest_Short_Float", "Beaten_Down_Bases",
 ]
 
 # Display label + the column holding this scan's defining performance metric
@@ -190,18 +224,30 @@ SCAN_META = {
     "4_Strongest_Stock_JK":           {"label": "Strongest Stock ($300M–$10B)",    "group": "operational", "perf_col": None},
     "5_Strongest_Stock_10B_Rev_30_JK":{"label": "Strongest Stock (>$10B)",         "group": "operational", "perf_col": None},
     "Daily_Tightness_Swing":          {"label": "Daily Tightness Swing",           "group": "operational", "perf_col": None},
+    "Hottest_Stock":                  {"label": "Hottest Stock",                   "group": "operational", "perf_col": None},
+    "Highest_Short_Float":            {"label": "Highest Short Float",             "group": "operational", "perf_col": None},
+    "Beaten_Down_Bases":              {"label": "Bases at Beaten-Down Levels",     "group": "operational", "perf_col": None},
 }
 
 
-def within_ema5_band(df: pd.DataFrame) -> pd.DataFrame:
-    """Keep rows whose close is within +/-EMA5_BAND of the 5-day EMA."""
+def within_tightness(df: pd.DataFrame) -> pd.DataFrame:
+    """Apply the selected tightness variant (see TIGHTNESS)."""
+    if TIGHTNESS == 'compression':
+        chg_open = (df['close'] / df['open'] - 1).abs() * 100
+        return df[(df['close'] > df['EMA20']) & (df['high'] < df['High.1M']) & (chg_open <= COMPRESSION_OPEN_BAND)].copy()
     ema = df['EMA5']
     return df[(ema > 0) & ((df['close'] / ema - 1).abs() <= EMA5_BAND)].copy()
 
 
+def _with_tightness_cols(query):
+    """Make sure every column the tightness filters need is selected."""
+    query.query['columns'] = list(dict.fromkeys([*query.query['columns'], *TIGHTNESS_COLS]))
+    return query
+
+
 def run_individual(name: str, query) -> tuple[str, pd.DataFrame]:
     try:
-        _, df = query.get_scanner_data()
+        _, df = _with_tightness_cols(query).get_scanner_data()
         if not df.empty:
             # Post-filter tightness bands TradingView's query language can't express directly
             # (ratios between two returned columns rather than a column vs. a constant).
@@ -216,7 +262,7 @@ def run_individual(name: str, query) -> tuple[str, pd.DataFrame]:
                     (df['EMA5'] >= df['close'] * 0.97) &
                     (df['SMA10'] > df['SMA20'])
                 ].copy()
-            df = within_ema5_band(df)
+            df = within_tightness(df)
             df.insert(0, 'Source_Scan', name)
         return name, df
     except Exception as e:
@@ -226,13 +272,13 @@ def run_individual(name: str, query) -> tuple[str, pd.DataFrame]:
 
 def run_momentum(key: str, info: dict) -> tuple[str, pd.DataFrame]:
     try:
-        _, df = info['query'].get_scanner_data()
+        _, df = _with_tightness_cols(info['query']).get_scanner_data()
         if not df.empty:
             # Small caps get a looser tightness band (0.80x SMA10) than large caps (0.90x)
             # since small caps are naturally more volatile day to day.
             low_mult = 0.80 if not info['is_large'] else 0.90
             df = df[(df['close'] >= df['price_52_week_low'] * 1.50) & (df['SMA10'] <= df['close']) & (df['SMA10'] >= df['close'] * low_mult)].copy()
-            df = within_ema5_band(df)
+            df = within_tightness(df)
             df.insert(0, 'Source_Scan', key)
             df.insert(1, 'Market_Cap_Group', info['mcap_group'])
             df.insert(2, 'Timeframe', info['timeframe'])
@@ -240,6 +286,63 @@ def run_momentum(key: str, info: dict) -> tuple[str, pd.DataFrame]:
     except Exception as e:
         logger.error("Error in momentum %s: %s", key, e)
     return key, pd.DataFrame()
+
+
+def fetch_finviz_tickers(filters: str) -> list[str]:
+    """Tickers matching a Finviz screener filter string (free site, 20 rows/page)."""
+    import re
+    import time
+    import requests
+    from bs4 import BeautifulSoup
+    tickers: list[str] = []
+    for page in range(FINVIZ_MAX_PAGES):
+        url = f"https://finviz.com/screener.ashx?v=111&ft=4&f={filters}&r={page * 20 + 1}"
+        r = requests.get(url, headers=FINVIZ_HEADERS, timeout=20)
+        r.raise_for_status()
+        found = []
+        for t in BeautifulSoup(r.text, "html.parser").find_all("table"):
+            rows = t.find_all("tr")
+            if len(rows) < 2:
+                continue
+            header = [c.get_text(strip=True) for c in rows[0].find_all(["td", "th"])]
+            if "No." not in header or "Ticker" not in header:
+                continue
+            for row in rows[1:]:
+                tds = row.find_all("td")
+                link = tds[1].find("a", href=True) if len(tds) > 1 else None
+                m = re.search(r"[?&]t=([A-Za-z0-9.\-]+)", link["href"]) if link else None
+                if m:
+                    found.append(m.group(1).upper())
+        found = [t for t in dict.fromkeys(found) if t not in tickers]  # Finviz repeats the table
+        tickers.extend(found)
+        if len(found) < 20:
+            break
+        time.sleep(1.0 if os.environ.get("CI") else 1.5)
+    return tickers
+
+
+def run_finviz(key: str, info: dict) -> tuple[str, pd.DataFrame]:
+    try:
+        finviz_tickers = fetch_finviz_tickers(info['filters'])
+        logger.info("%s: Finviz returned %d tickers.", key, len(finviz_tickers))
+        if not finviz_tickers:
+            return key, pd.DataFrame()
+        tv_names = [t.replace('-', '.') for t in finviz_tickers]  # BRK-B -> BRK.B
+        query = (
+            Query().set_markets('america')
+            .select('name', 'close', 'change', 'volume', 'market_cap_basic', 'industry', 'ATR', 'EMA5',
+                    'average_volume_10d_calc', 'price_52_week_low', 'SMA10')
+            .where(col('type') == 'stock', col('exchange').isin(EXCHANGES), col('name').isin(tv_names))
+            .order_by('change', ascending=False).limit(500)
+        )
+        _, df = _with_tightness_cols(query).get_scanner_data()
+        if not df.empty:
+            df = within_tightness(df)
+            df.insert(0, 'Source_Scan', key)
+        return key, df
+    except Exception as e:
+        logger.error("Error in Finviz scan %s: %s", key, e)
+        return key, pd.DataFrame()
 
 
 def build_scan_result(master_all_scans: pd.DataFrame) -> pd.DataFrame:
@@ -260,7 +363,12 @@ def build_scan_result(master_all_scans: pd.DataFrame) -> pd.DataFrame:
 
 
 def main() -> None:
-    logger.info("Executing all %d scans concurrently…", len(individual_scans) + len(momentum_scans))
+    global TIGHTNESS
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--tightness', choices=list(TIGHTNESS_LABELS), default=TIGHTNESS)
+    TIGHTNESS = ap.parse_args().tightness
+    logger.info("Executing all %d scans concurrently (tightness: %s)…", len(individual_scans) + len(momentum_scans) + len(FINVIZ_SCANS), TIGHTNESS)
     results_dict: dict[str, pd.DataFrame] = {}
     momentum_dfs: list[pd.DataFrame] = []
     all_collected_dfs: list[pd.DataFrame] = []
@@ -268,8 +376,16 @@ def main() -> None:
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as executor:
         ind_futures = {executor.submit(run_individual, name, q): name for name, q in individual_scans.items()}
         mom_futures = {executor.submit(run_momentum, key, info): key for key, info in momentum_scans.items()}
+        fv_futures  = {executor.submit(run_finviz, key, info): key for key, info in FINVIZ_SCANS.items()}
 
         for future in concurrent.futures.as_completed(ind_futures):
+            name, df = future.result()
+            results_dict[name] = df
+            if not df.empty:
+                all_collected_dfs.append(df)
+            logger.info("Finished %s: %d matches.", name, len(df))
+
+        for future in concurrent.futures.as_completed(fv_futures):
             name, df = future.result()
             results_dict[name] = df
             if not df.empty:
@@ -407,7 +523,7 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
     OUTPUT_JSON.write_text(
         json.dumps({
             "scan_time": datetime.now(tz=timezone.utc).isoformat(),
-            "ema5_band_pct": EMA5_BAND * 100,
+            "tightness": {"mode": TIGHTNESS, "label": TIGHTNESS_LABELS[TIGHTNESS]},
             "scan_result": scan_result_entry,
             "scans": scans,
         }, indent=2, ensure_ascii=False),
