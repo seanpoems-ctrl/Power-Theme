@@ -14942,30 +14942,34 @@ const TrendSparkline = ({ data = [] }) => {
 // ─────────────────────────────────────────────────────────────────────────────
 // Focus List — Jeff Sun-style screener battery (public/focus_list.json, built
 // by focus_list_scanner.py): 8 momentum scans (1W/1M/3M/6M x Small/Large cap)
-// + 5 operational/tightness scans, each already sorted by its defining metric.
+// + 5 operational/tightness scans, each already sorted by its defining metric,
+// grouped into Jeff Sun-style watchlist sections under a consolidated Scan Result.
 // ─────────────────────────────────────────────────────────────────────────────
-const FocusScanTable = ({ scan, onMiniCharts = null }) => {
+const FocusScanTable = ({ scan, scanLabels = {}, onMiniCharts = null }) => {
   const fmtPct   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol  = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v/1e6).toFixed(0)}M` : `$${(v/1e3).toFixed(0)}K`;
   const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
   const chgCls   = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-rose-400";
 
   const hasPerf = scan.group === "momentum";
+  const isResult = scan.group === "result";
   const enriched = scan.stocks || [];
 
   const COLS = [
     { key: "ticker",     label: "Ticker",     align: "left"  },
     { key: "industry",   label: "Industry",   align: "left"  },
+    ...(isResult ? [{ key: "hits", label: "Scans", align: "right" }] : []),
     { key: "adr_dvol",   label: "ADR×$Vol",   align: "right" },
     { key: "close",      label: "Price",      align: "right" },
     { key: "change",     label: "Day%",       align: "right" },
     ...(hasPerf ? [{ key: "perf", label: scan.timeframe, align: "right" }] : []),
+    { key: "ema5_pct",   label: "vs EMA5",    align: "right" },
     { key: "adr_pct",    label: "ADR%",       align: "right" },
     { key: "volume",     label: "Vol",        align: "right", hideSm: true },
     { key: "market_cap", label: "Mkt Cap",    align: "right", hideSm: true },
   ];
 
-  const [sortCol, setSortCol] = React.useState(hasPerf ? "perf" : "change");
+  const [sortCol, setSortCol] = React.useState(isResult ? "hits" : hasPerf ? "perf" : "change");
   const [sortDir, setSortDir] = React.useState("desc");
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
@@ -15029,10 +15033,17 @@ const FocusScanTable = ({ scan, onMiniCharts = null }) => {
                     </a>
                   </td>
                   <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[140px] truncate">{s.industry || "—"}</td>
+                  {isResult && (
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300"
+                        title={(s.scans || []).map(k => scanLabels[k] || k).join(", ")}>
+                      {s.hits ?? "—"}
+                    </td>
+                  )}
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtDvol(s.adr_dvol)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{s.close != null ? `$${s.close.toFixed(2)}` : "—"}</td>
                   <td className={`px-3 py-1.5 text-right font-mono font-semibold ${chgCls(s.change)}`}>{fmtPct(s.change)}</td>
                   {hasPerf && <td className={`px-3 py-1.5 text-right font-mono font-semibold ${chgCls(s.perf)}`}>{fmtPct(s.perf)}</td>}
+                  <td className={`px-3 py-1.5 text-right font-mono ${chgCls(s.ema5_pct)}`}>{fmtPct(s.ema5_pct)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtVol(s.volume)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.market_cap)}</td>
@@ -15057,45 +15068,59 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
   })();
 
   const scans = data.scans || [];
-  const momentum   = scans.filter(s => s.group === "momentum");
-  const operational = scans.filter(s => s.group === "operational");
-  const smallCap = momentum.filter(s => s.mcap_group?.startsWith("$"));
-  const largeCap = momentum.filter(s => s.mcap_group?.startsWith(">"));
+  const scanResult = data.scan_result;
+  const scanLabels = Object.fromEntries(scans.map(s => [s.key, s.label]));
+  const bandPct = data.ema5_band_pct ?? 5;
+
+  // Sections mirror Jeff Sun's watchlists; each group is a labelled sub-header
+  // over one scan. Groups without a label render as a bare table.
+  const SMALL = "Small Cap (<$10B)", LARGE = "Large Cap (>$10B)";
+  const SECTIONS = [
+    { title: "1W Momentum", sub: "1-week lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_1W_Small" }] },
+    { title: "1M Momentum", sub: "1-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_1M_Small" }] },
+    { title: "3M Momentum", sub: "3-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_3M_Small" }, { label: LARGE, key: "Mom_3M_Large" }] },
+    { title: "6M Momentum", sub: "6-month lookback, tight to EMA5", groups: [{ label: SMALL, key: "Mom_6M_Small" }, { label: LARGE, key: "Mom_6M_Large" }] },
+    { title: "Strongest Stocks", sub: "EPS and revenue growth >25%, above SMA50", groups: [{ label: SMALL, key: "4_Strongest_Stock_JK" }, { label: LARGE, key: "5_Strongest_Stock_10B_Rev_30_JK" }] },
+    { title: "Fundamental (CANSLIM)", sub: "EPS, revenue and FCF growth >25%", groups: [{ key: "1_Fundamental_Growth" }] },
+    { title: "Post Earnings Continuation Base", sub: "Post-gap base above SMA20 on high RVOL", groups: [{ key: "3_Post_Earnings_Cont_Base" }] },
+    { title: "Daily Tightness", sub: "High-volatility names tight against EMA5 / SMA10", groups: [{ key: "Daily_Tightness_Swing" }] },
+  ];
+  const byKey = Object.fromEntries(scans.map(s => [s.key, s]));
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-semibold text-zinc-100">🎯 Focus List</h3>
-          <p className="text-[11px] text-zinc-600">Jeff Sun-style screener battery · 13 scans · momentum + tightness filters</p>
+          <p className="text-[11px] text-zinc-600">Jeff Sun-style screener battery · 13 scans · every scan filtered to within ±{bandPct}% of EMA5</p>
         </div>
         {scanTimeLabel && <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {scanTimeLabel}</span>}
       </div>
 
-      {momentum.length > 0 && (
+      {scanResult && scanResult.stocks?.length > 0 && (
         <div>
-          <FocusSec title="Momentum Scans" sub="1W / 1M / 3M / 6M lookback, tight above SMA10 — not extended" />
-          <div className="space-y-4">
-            <div className="space-y-4">
-              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Small Cap ($300M–$10B)</div>
-              {smallCap.map(s => <FocusScanTable key={s.key} scan={s} onMiniCharts={onMiniCharts} />)}
-            </div>
-            <div className="space-y-4">
-              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Large Cap (&gt;$10B)</div>
-              {largeCap.map(s => <FocusScanTable key={s.key} scan={s} onMiniCharts={onMiniCharts} />)}
-            </div>
-          </div>
+          <FocusSec title="Scan Result" sub={`all scans consolidated · ${scanResult.stocks.length} unique tickers · ranked by # of scans hit`} />
+          <FocusScanTable scan={scanResult} scanLabels={scanLabels} onMiniCharts={onMiniCharts} />
         </div>
       )}
 
-      {operational.length > 0 && (
-        <div>
-          <FocusSec title="Operational & Tightness Scans" sub="Fundamental growth, post-earnings bases, and strongest-stock filters" />
-          <div className="space-y-4">
-            {operational.map(s => <FocusScanTable key={s.key} scan={s} onMiniCharts={onMiniCharts} />)}
+      {SECTIONS.map(sec => {
+        const groups = sec.groups.filter(g => byKey[g.key]);
+        if (groups.length === 0) return null;
+        return (
+          <div key={sec.title}>
+            <FocusSec title={sec.title} sub={sec.sub} />
+            <div className="space-y-4">
+              {groups.map(g => (
+                <div key={g.key} className="space-y-2">
+                  {g.label && <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">{g.label}</div>}
+                  <FocusScanTable scan={byKey[g.key]} onMiniCharts={onMiniCharts} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })}
 
       {scans.length === 0 && (
         <p className="text-sm text-zinc-500 italic py-8 text-center">
