@@ -1,92 +1,1603 @@
 {
-  "scan_time": "2026-09-29T00:57:02.739591+00:00",
+  "scan_time": "2026-09-30T06:43:12.574157+00:00",
+  "ema5_band_pct": 5.0,
+  "scan_result": {
+    "key": "Scan_Result",
+    "label": "Scan Result",
+    "group": "result",
+    "stocks": [
+      {
+        "ticker": "COHU",
+        "industry": "Semiconductors",
+        "close": 65.97,
+        "change": -0.15,
+        "volume": 660558,
+        "market_cap": 3122916437,
+        "perf": null,
+        "adr_pct": 5.48,
+        "adr_dvol": 357755259,
+        "ema5_pct": 1.61,
+        "scans": [
+          "Mom_6M_Small",
+          "4_Strongest_Stock_JK",
+          "1_Fundamental_Growth"
+        ],
+        "hits": 3
+      },
+      {
+        "ticker": "TWST",
+        "industry": "Biotechnology",
+        "close": 186.13,
+        "change": 3.64,
+        "volume": 3684722,
+        "market_cap": 12253388721,
+        "perf": null,
+        "adr_pct": 5.99,
+        "adr_dvol": 3084495388,
+        "ema5_pct": 4.24,
+        "scans": [
+          "Mom_3M_Large",
+          "Mom_6M_Large"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "FIX",
+        "industry": "Engineering & Construction",
+        "close": 1665.05,
+        "change": 0.41,
+        "volume": 275061,
+        "market_cap": 58600318068,
+        "perf": null,
+        "adr_pct": 4.31,
+        "adr_dvol": 2356346694,
+        "ema5_pct": 0.79,
+        "scans": [
+          "1_Fundamental_Growth",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "HUM",
+        "industry": "Managed Health Care",
+        "close": 386.87,
+        "change": -0.71,
+        "volume": 1892586,
+        "market_cap": 46455467785,
+        "perf": null,
+        "adr_pct": 3.55,
+        "adr_dvol": 1699380664,
+        "ema5_pct": -0.03,
+        "scans": [
+          "Mom_6M_Large",
+          "5_Strongest_Stock_10B_Rev_30_JK"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "USDE",
+        "industry": "Packaged Software",
+        "close": 15.32,
+        "change": -1.54,
+        "volume": 4182448,
+        "market_cap": 416506808,
+        "perf": null,
+        "adr_pct": 11.76,
+        "adr_dvol": 1285438092,
+        "ema5_pct": 3.46,
+        "scans": [
+          "Mom_1M_Small",
+          "Mom_3M_Small"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "INOD",
+        "industry": "Data Processing Services",
+        "close": 66.94,
+        "change": 0.22,
+        "volume": 963081,
+        "market_cap": 2301574827,
+        "perf": null,
+        "adr_pct": 6.21,
+        "adr_dvol": 865903171,
+        "ema5_pct": -0.66,
+        "scans": [
+          "4_Strongest_Stock_JK",
+          "1_Fundamental_Growth"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "SCCO",
+        "industry": "Other Metals/Minerals",
+        "close": 202.55,
+        "change": -0.04,
+        "volume": 829045,
+        "market_cap": 171021816777,
+        "perf": null,
+        "adr_pct": 3.79,
+        "adr_dvol": 738726389,
+        "ema5_pct": 0.18,
+        "scans": [
+          "5_Strongest_Stock_10B_Rev_30_JK",
+          "1_Fundamental_Growth"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "MANE",
+        "industry": "Pharmaceuticals: Major",
+        "close": 117.82,
+        "change": 2.45,
+        "volume": 481703,
+        "market_cap": 4922535624,
+        "perf": null,
+        "adr_pct": 5.17,
+        "adr_dvol": 565736910,
+        "ema5_pct": 1.76,
+        "scans": [
+          "Mom_6M_Small",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "PENG",
+        "industry": "Semiconductors",
+        "close": 55.79,
+        "change": 1.47,
+        "volume": 1196474,
+        "market_cap": 2858830206,
+        "perf": null,
+        "adr_pct": 5.7,
+        "adr_dvol": 484123601,
+        "ema5_pct": 1.42,
+        "scans": [
+          "Mom_6M_Small",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "UMAC",
+        "industry": "Electronic Equipment/Instruments",
+        "close": 24.94,
+        "change": 4.09,
+        "volume": 2559646,
+        "market_cap": 1245915257,
+        "perf": null,
+        "adr_pct": 7.43,
+        "adr_dvol": 438098914,
+        "ema5_pct": 3.14,
+        "scans": [
+          "Mom_6M_Small",
+          "4_Strongest_Stock_JK"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "CDNA",
+        "industry": "Medical Specialties",
+        "close": 64.02,
+        "change": -0.9,
+        "volume": 796308,
+        "market_cap": 3312024745,
+        "perf": null,
+        "adr_pct": 4.46,
+        "adr_dvol": 411415941,
+        "ema5_pct": 3.34,
+        "scans": [
+          "Mom_3M_Small",
+          "Mom_6M_Small"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "IESC",
+        "industry": "Engineering & Construction",
+        "close": 324.44,
+        "change": 0.73,
+        "volume": 160082,
+        "market_cap": 12928515280,
+        "perf": null,
+        "adr_pct": 5.09,
+        "adr_dvol": 376992730,
+        "ema5_pct": 0.52,
+        "scans": [
+          "1_Fundamental_Growth",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "ARW",
+        "industry": "Electronics Distributors",
+        "close": 230.23,
+        "change": -0.1,
+        "volume": 542489,
+        "market_cap": 11719955138,
+        "perf": null,
+        "adr_pct": 3.21,
+        "adr_dvol": 356991712,
+        "ema5_pct": 0.7,
+        "scans": [
+          "5_Strongest_Stock_10B_Rev_30_JK",
+          "1_Fundamental_Growth"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "INSW",
+        "industry": "Marine Shipping",
+        "close": 110.24,
+        "change": 1.78,
+        "volume": 469916,
+        "market_cap": 5460331623,
+        "perf": null,
+        "adr_pct": 3.77,
+        "adr_dvol": 340864178,
+        "ema5_pct": 2.39,
+        "scans": [
+          "4_Strongest_Stock_JK",
+          "1_Fundamental_Growth"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "EFOR",
+        "industry": "Information Technology Services",
+        "close": 32.9,
+        "change": 0.21,
+        "volume": 405997,
+        "market_cap": 1348900063,
+        "perf": null,
+        "adr_pct": 4.88,
+        "adr_dvol": 105612374,
+        "ema5_pct": 0.16,
+        "scans": [
+          "Mom_3M_Small",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "PNTG",
+        "industry": "Medical/Nursing Services",
+        "close": 40.5,
+        "change": -0.98,
+        "volume": 311262,
+        "market_cap": 1414627469,
+        "perf": null,
+        "adr_pct": 3.43,
+        "adr_dvol": 75195787,
+        "ema5_pct": 0.32,
+        "scans": [
+          "1_Fundamental_Growth",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "PUBM",
+        "industry": "Internet Software/Services",
+        "close": 18.8,
+        "change": 2.12,
+        "volume": 701772,
+        "market_cap": 856341167,
+        "perf": null,
+        "adr_pct": 3.77,
+        "adr_dvol": 61592662,
+        "ema5_pct": 2.18,
+        "scans": [
+          "Mom_6M_Small",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "PAYS",
+        "industry": "Miscellaneous Commercial Services",
+        "close": 12.85,
+        "change": 1.02,
+        "volume": 399472,
+        "market_cap": 725538705,
+        "perf": null,
+        "adr_pct": 4.74,
+        "adr_dvol": 44540157,
+        "ema5_pct": 0.68,
+        "scans": [
+          "Mom_6M_Small",
+          "4_Strongest_Stock_JK"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "SENS",
+        "industry": "Electronic Components",
+        "close": 10.05,
+        "change": 2.13,
+        "volume": 606989,
+        "market_cap": 531384251,
+        "perf": null,
+        "adr_pct": 4.84,
+        "adr_dvol": 41588993,
+        "ema5_pct": 0.84,
+        "scans": [
+          "Mom_3M_Small",
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "RCEL",
+        "industry": "Medical Specialties",
+        "close": 11.96,
+        "change": 2.49,
+        "volume": 253607,
+        "market_cap": 369885096,
+        "perf": null,
+        "adr_pct": 5.32,
+        "adr_dvol": 20526981,
+        "ema5_pct": 2.68,
+        "scans": [
+          "Mom_3M_Small",
+          "Mom_6M_Small"
+        ],
+        "hits": 2
+      },
+      {
+        "ticker": "ALAB",
+        "industry": "Semiconductors",
+        "close": 357.84,
+        "change": 1.86,
+        "volume": 2694772,
+        "market_cap": 62079910205,
+        "perf": null,
+        "adr_pct": 6.4,
+        "adr_dvol": 9855384689,
+        "ema5_pct": 1.26,
+        "scans": [
+          "Mom_6M_Large"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "SMTC",
+        "industry": "Semiconductors",
+        "close": 180.1,
+        "change": 3.04,
+        "volume": 2742645,
+        "market_cap": 16807945192,
+        "perf": null,
+        "adr_pct": 6.37,
+        "adr_dvol": 4421830101,
+        "ema5_pct": 1.67,
+        "scans": [
+          "Mom_6M_Large"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "NTRA",
+        "industry": "Biotechnology",
+        "close": 414.52,
+        "change": 0.67,
+        "volume": 2058203,
+        "market_cap": 59750637708,
+        "perf": null,
+        "adr_pct": 3.12,
+        "adr_dvol": 2615416344,
+        "ema5_pct": 2.16,
+        "scans": [
+          "Mom_6M_Large"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "SITM",
+        "industry": "Semiconductors",
+        "close": 651.43,
+        "change": -0.79,
+        "volume": 346496,
+        "market_cap": 19589174361,
+        "perf": null,
+        "adr_pct": 5.99,
+        "adr_dvol": 2125631170,
+        "ema5_pct": 0.86,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "AEHR",
+        "industry": "Electronic Production Equipment",
+        "close": 100.78,
+        "change": 2.33,
+        "volume": 2449856,
+        "market_cap": 3291428996,
+        "perf": null,
+        "adr_pct": 8.93,
+        "adr_dvol": 2049108540,
+        "ema5_pct": 1.32,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MTSI",
+        "industry": "Semiconductors",
+        "close": 284.27,
+        "change": 2.05,
+        "volume": 912433,
+        "market_cap": 21709962268,
+        "perf": null,
+        "adr_pct": 4.86,
+        "adr_dvol": 1874643654,
+        "ema5_pct": 1.12,
+        "scans": [
+          "5_Strongest_Stock_10B_Rev_30_JK"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "GH",
+        "industry": "Medical Specialties",
+        "close": 177.73,
+        "change": 0.23,
+        "volume": 1658542,
+        "market_cap": 23850684185,
+        "perf": null,
+        "adr_pct": 4.29,
+        "adr_dvol": 1515280852,
+        "ema5_pct": 0.35,
+        "scans": [
+          "Mom_6M_Large"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "CORT",
+        "industry": "Pharmaceuticals: Major",
+        "close": 114.74,
+        "change": -0.77,
+        "volume": 964469,
+        "market_cap": 12403209760,
+        "perf": null,
+        "adr_pct": 4.72,
+        "adr_dvol": 1389516149,
+        "ema5_pct": -0.52,
+        "scans": [
+          "Mom_6M_Large"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "AGX",
+        "industry": "Engineering & Construction",
+        "close": 378.39,
+        "change": 6.53,
+        "volume": 423550,
+        "market_cap": 5308751902,
+        "perf": null,
+        "adr_pct": 5.92,
+        "adr_dvol": 1017692153,
+        "ema5_pct": 2.35,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "FORM",
+        "industry": "Semiconductors",
+        "close": 136.25,
+        "change": 4.03,
+        "volume": 1270880,
+        "market_cap": 10643949127,
+        "perf": null,
+        "adr_pct": 5.23,
+        "adr_dvol": 874327190,
+        "ema5_pct": 4.28,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "KVYO",
+        "industry": "Packaged Software",
+        "close": 15.25,
+        "change": -0.97,
+        "volume": 7493596,
+        "market_cap": 4342093326,
+        "perf": null,
+        "adr_pct": 6.37,
+        "adr_dvol": 718732586,
+        "ema5_pct": -2.53,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "SANM",
+        "industry": "Electronic Production Equipment",
+        "close": 222.73,
+        "change": 1.21,
+        "volume": 563383,
+        "market_cap": 11937738625,
+        "perf": null,
+        "adr_pct": 4.64,
+        "adr_dvol": 682701818,
+        "ema5_pct": 1.16,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "QLYS",
+        "industry": "Packaged Software",
+        "close": 178.35,
+        "change": 2.6,
+        "volume": 500080,
+        "market_cap": 6170018678,
+        "perf": null,
+        "adr_pct": 5.14,
+        "adr_dvol": 626477331,
+        "ema5_pct": 0.47,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "AAON",
+        "industry": "Industrial Machinery",
+        "close": 85.11,
+        "change": -0.28,
+        "volume": 935845,
+        "market_cap": 7017217632,
+        "perf": null,
+        "adr_pct": 5.05,
+        "adr_dvol": 571985337,
+        "ema5_pct": 0.76,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "XMTR",
+        "industry": "Information Technology Services",
+        "close": 104.23,
+        "change": 1.06,
+        "volume": 797884,
+        "market_cap": 5974836288,
+        "perf": null,
+        "adr_pct": 5.09,
+        "adr_dvol": 568428736,
+        "ema5_pct": 2.11,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ELF",
+        "industry": "Household/Personal Care",
+        "close": 101.7,
+        "change": -0.1,
+        "volume": 879418,
+        "market_cap": 6001112973,
+        "perf": null,
+        "adr_pct": 4.17,
+        "adr_dvol": 550310948,
+        "ema5_pct": 0.92,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "PARR",
+        "industry": "Oil Refining/Marketing",
+        "close": 78.31,
+        "change": 0.44,
+        "volume": 747565,
+        "market_cap": 3923301781,
+        "perf": null,
+        "adr_pct": 5.4,
+        "adr_dvol": 467545944,
+        "ema5_pct": -0.08,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "WOLF",
+        "industry": "Semiconductors",
+        "close": 28.13,
+        "change": 1.99,
+        "volume": 2042971,
+        "market_cap": 1488936853,
+        "perf": null,
+        "adr_pct": 7.59,
+        "adr_dvol": 463624077,
+        "ema5_pct": 2.43,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "YOU",
+        "industry": "Packaged Software",
+        "close": 41.22,
+        "change": 2.13,
+        "volume": 2111804,
+        "market_cap": 5576574900,
+        "perf": null,
+        "adr_pct": 4.26,
+        "adr_dvol": 440363378,
+        "ema5_pct": 2.64,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "PS",
+        "industry": "Investment Managers",
+        "close": 53.56,
+        "change": -9.48,
+        "volume": 333768,
+        "market_cap": 21424000603,
+        "perf": null,
+        "adr_pct": 7.04,
+        "adr_dvol": 437927058,
+        "ema5_pct": -0.84,
+        "scans": [
+          "Mom_6M_Large"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "BAND",
+        "industry": "Packaged Software",
+        "close": 62.28,
+        "change": 2.08,
+        "volume": 538488,
+        "market_cap": 2004219389,
+        "perf": null,
+        "adr_pct": 7.0,
+        "adr_dvol": 417444735,
+        "ema5_pct": 2.84,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "COCO",
+        "industry": "Food: Specialty/Candy",
+        "close": 56.55,
+        "change": -1.93,
+        "volume": 750800,
+        "market_cap": 3245805016,
+        "perf": null,
+        "adr_pct": 4.42,
+        "adr_dvol": 367441967,
+        "ema5_pct": -1.73,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "SEZL",
+        "industry": "Packaged Software",
+        "close": 107.97,
+        "change": -0.3,
+        "volume": 348561,
+        "market_cap": 3635891355,
+        "perf": null,
+        "adr_pct": 5.52,
+        "adr_dvol": 354317002,
+        "ema5_pct": -1.41,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "BRUN",
+        "industry": "Packaged Software",
+        "close": 16.65,
+        "change": 2.52,
+        "volume": 1412980,
+        "market_cap": 1396021555,
+        "perf": null,
+        "adr_pct": 9.02,
+        "adr_dvol": 339387238,
+        "ema5_pct": 0.39,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "STNG",
+        "industry": "Marine Shipping",
+        "close": 83.57,
+        "change": 0.46,
+        "volume": 1284274,
+        "market_cap": 4185298591,
+        "perf": null,
+        "adr_pct": 3.22,
+        "adr_dvol": 323887260,
+        "ema5_pct": 0.75,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "HCC",
+        "industry": "Coal",
+        "close": 88.03,
+        "change": -4.05,
+        "volume": 741921,
+        "market_cap": 4648167555,
+        "perf": null,
+        "adr_pct": 4.61,
+        "adr_dvol": 309247505,
+        "ema5_pct": -1.91,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ECO",
+        "industry": "Marine Shipping",
+        "close": 80.25,
+        "change": 1.36,
+        "volume": 392823,
+        "market_cap": 3077488192,
+        "perf": null,
+        "adr_pct": 4.01,
+        "adr_dvol": 298956550,
+        "ema5_pct": 1.03,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "INSP",
+        "industry": "Medical Specialties",
+        "close": 73.18,
+        "change": 4.54,
+        "volume": 873523,
+        "market_cap": 2115661294,
+        "perf": null,
+        "adr_pct": 4.47,
+        "adr_dvol": 293472041,
+        "ema5_pct": 2.5,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "BRZE",
+        "industry": "Internet Software/Services",
+        "close": 23.15,
+        "change": -0.09,
+        "volume": 1786253,
+        "market_cap": 2629479439,
+        "perf": null,
+        "adr_pct": 6.42,
+        "adr_dvol": 282153810,
+        "ema5_pct": -3.32,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ATRO",
+        "industry": "Aerospace & Defense",
+        "close": 67.46,
+        "change": -0.28,
+        "volume": 554054,
+        "market_cap": 2899528065,
+        "perf": null,
+        "adr_pct": 4.89,
+        "adr_dvol": 250271947,
+        "ema5_pct": -1.03,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "FCFS",
+        "industry": "Finance/Rental/Leasing",
+        "close": 212.82,
+        "change": -1.9,
+        "volume": 287878,
+        "market_cap": 9230386681,
+        "perf": null,
+        "adr_pct": 3.09,
+        "adr_dvol": 238781478,
+        "ema5_pct": -1.42,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "PAY",
+        "industry": "Miscellaneous Commercial Services",
+        "close": 30.0,
+        "change": 0.27,
+        "volume": 855136,
+        "market_cap": 3778189400,
+        "perf": null,
+        "adr_pct": 5.32,
+        "adr_dvol": 223801271,
+        "ema5_pct": -2.2,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ECG",
+        "industry": "Engineering & Construction",
+        "close": 117.8,
+        "change": 0.98,
+        "volume": 416073,
+        "market_cap": 6015319935,
+        "perf": null,
+        "adr_pct": 4.31,
+        "adr_dvol": 205446819,
+        "ema5_pct": 0.86,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "FEIM",
+        "industry": "Telecommunications Equipment",
+        "close": 84.15,
+        "change": 2.01,
+        "volume": 453017,
+        "market_cap": 948647103,
+        "perf": null,
+        "adr_pct": 6.04,
+        "adr_dvol": 195544517,
+        "ema5_pct": -0.5,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "VAC",
+        "industry": "Other Consumer Services",
+        "close": 104.68,
+        "change": 0.11,
+        "volume": 378347,
+        "market_cap": 3600502202,
+        "perf": null,
+        "adr_pct": 4.03,
+        "adr_dvol": 195144564,
+        "ema5_pct": 1.29,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "SNDX",
+        "industry": "Biotechnology",
+        "close": 18.23,
+        "change": 2.1,
+        "volume": 1499417,
+        "market_cap": 1628332466,
+        "perf": null,
+        "adr_pct": 4.38,
+        "adr_dvol": 179158357,
+        "ema5_pct": 1.01,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "VIA",
+        "industry": "Packaged Software",
+        "close": 29.25,
+        "change": 0.52,
+        "volume": 534097,
+        "market_cap": 2384039223,
+        "perf": null,
+        "adr_pct": 4.56,
+        "adr_dvol": 165454969,
+        "ema5_pct": 0.44,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "HRMY",
+        "industry": "Pharmaceuticals: Major",
+        "close": 39.29,
+        "change": -1.8,
+        "volume": 786675,
+        "market_cap": 2288107932,
+        "perf": null,
+        "adr_pct": 3.41,
+        "adr_dvol": 156531716,
+        "ema5_pct": -2.63,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ETON",
+        "industry": "Pharmaceuticals: Major",
+        "close": 59.19,
+        "change": 0.02,
+        "volume": 710718,
+        "market_cap": 1691835757,
+        "perf": null,
+        "adr_pct": 5.01,
+        "adr_dvol": 152405485,
+        "ema5_pct": 1.37,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MSGE",
+        "industry": "Movies/Entertainment",
+        "close": 81.65,
+        "change": -0.15,
+        "volume": 404729,
+        "market_cap": 3862492545,
+        "perf": null,
+        "adr_pct": 3.1,
+        "adr_dvol": 150410602,
+        "ema5_pct": 1.3,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "KNSA",
+        "industry": "Pharmaceuticals: Major",
+        "close": 75.73,
+        "change": -0.49,
+        "volume": 620703,
+        "market_cap": 5908758713,
+        "perf": null,
+        "adr_pct": 3.32,
+        "adr_dvol": 148254566,
+        "ema5_pct": -0.32,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "AAMI",
+        "industry": "Investment Managers",
+        "close": 92.48,
+        "change": -1.4,
+        "volume": 433540,
+        "market_cap": 3282127115,
+        "perf": null,
+        "adr_pct": 3.45,
+        "adr_dvol": 142360713,
+        "ema5_pct": -0.44,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "LPG",
+        "industry": "Marine Shipping",
+        "close": 54.23,
+        "change": -0.24,
+        "volume": 396770,
+        "market_cap": 2320104745,
+        "perf": null,
+        "adr_pct": 3.77,
+        "adr_dvol": 133931128,
+        "ema5_pct": -0.08,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ANIP",
+        "industry": "Biotechnology",
+        "close": 72.62,
+        "change": -2.95,
+        "volume": 328842,
+        "market_cap": 1668107019,
+        "perf": null,
+        "adr_pct": 3.24,
+        "adr_dvol": 119023169,
+        "ema5_pct": -1.97,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MRAM",
+        "industry": "Semiconductors",
+        "close": 18.63,
+        "change": 2.76,
+        "volume": 880948,
+        "market_cap": 453640664,
+        "perf": null,
+        "adr_pct": 6.24,
+        "adr_dvol": 114794991,
+        "ema5_pct": 3.35,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "PSIX",
+        "industry": "Auto Parts: OEM",
+        "close": 47.1,
+        "change": 3.43,
+        "volume": 253283,
+        "market_cap": 1086382601,
+        "perf": null,
+        "adr_pct": 5.06,
+        "adr_dvol": 108961456,
+        "ema5_pct": 1.67,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "DGII",
+        "industry": "Telecommunications Equipment",
+        "close": 76.5,
+        "change": -2.2,
+        "volume": 315360,
+        "market_cap": 2903031189,
+        "perf": null,
+        "adr_pct": 3.5,
+        "adr_dvol": 107502348,
+        "ema5_pct": -0.11,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "QNST",
+        "industry": "Advertising/Marketing Services",
+        "close": 14.44,
+        "change": 1.62,
+        "volume": 845692,
+        "market_cap": 824327744,
+        "perf": null,
+        "adr_pct": 5.43,
+        "adr_dvol": 106597025,
+        "ema5_pct": -1.73,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "AZTA",
+        "industry": "Medical/Nursing Services",
+        "close": 34.28,
+        "change": 0.09,
+        "volume": 813906,
+        "market_cap": 1501751740,
+        "perf": null,
+        "adr_pct": 3.5,
+        "adr_dvol": 105341060,
+        "ema5_pct": 0.47,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "BBT",
+        "industry": "Regional Banks",
+        "close": 27.74,
+        "change": -0.25,
+        "volume": 1069470,
+        "market_cap": 2325058200,
+        "perf": null,
+        "adr_pct": 2.43,
+        "adr_dvol": 94258733,
+        "ema5_pct": -1.33,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ESTA",
+        "industry": "Medical Specialties",
+        "close": 63.7,
+        "change": -2.51,
+        "volume": 516873,
+        "market_cap": 1898380500,
+        "perf": null,
+        "adr_pct": 4.64,
+        "adr_dvol": 92300330,
+        "ema5_pct": -2.97,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "EZPW",
+        "industry": "Finance/Rental/Leasing",
+        "close": 30.16,
+        "change": -2.17,
+        "volume": 498762,
+        "market_cap": 1853132227,
+        "perf": null,
+        "adr_pct": 4.04,
+        "adr_dvol": 90427404,
+        "ema5_pct": -1.3,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "FBK",
+        "industry": "Major Banks",
+        "close": 51.89,
+        "change": -0.73,
+        "volume": 544537,
+        "market_cap": 2593365549,
+        "perf": null,
+        "adr_pct": 2.0,
+        "adr_dvol": 88259826,
+        "ema5_pct": -1.11,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "SEPN",
+        "industry": "Biotechnology",
+        "close": 39.13,
+        "change": -1.53,
+        "volume": 564501,
+        "market_cap": 1826468897,
+        "perf": null,
+        "adr_pct": 5.02,
+        "adr_dvol": 73160654,
+        "ema5_pct": 0.49,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "INDB",
+        "industry": "Regional Banks",
+        "close": 78.16,
+        "change": -1.73,
+        "volume": 343491,
+        "market_cap": 3696639545,
+        "perf": null,
+        "adr_pct": 1.98,
+        "adr_dvol": 67405996,
+        "ema5_pct": -1.9,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "PHAT",
+        "industry": "Pharmaceuticals: Major",
+        "close": 7.36,
+        "change": 0.14,
+        "volume": 657260,
+        "market_cap": 595430928,
+        "perf": null,
+        "adr_pct": 6.24,
+        "adr_dvol": 66471465,
+        "ema5_pct": 0.18,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "STLN",
+        "industry": "Medical/Nursing Services",
+        "close": 6.51,
+        "change": -1.96,
+        "volume": 972913,
+        "market_cap": 650888917,
+        "perf": null,
+        "adr_pct": 6.12,
+        "adr_dvol": 66020538,
+        "ema5_pct": -1.69,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ARQQ",
+        "industry": "Packaged Software",
+        "close": 24.12,
+        "change": -2.11,
+        "volume": 212682,
+        "market_cap": 419746156,
+        "perf": null,
+        "adr_pct": 7.61,
+        "adr_dvol": 64823630,
+        "ema5_pct": 1.48,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MAMA",
+        "industry": "Food: Meat/Fish/Dairy",
+        "close": 12.87,
+        "change": -2.13,
+        "volume": 663512,
+        "market_cap": 606787914,
+        "perf": null,
+        "adr_pct": 5.57,
+        "adr_dvol": 62858936,
+        "ema5_pct": -2.42,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MEI",
+        "industry": "Electronic Components",
+        "close": 14.34,
+        "change": 1.99,
+        "volume": 412367,
+        "market_cap": 511150078,
+        "perf": null,
+        "adr_pct": 7.15,
+        "adr_dvol": 60501431,
+        "ema5_pct": 0.66,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "OOMA",
+        "industry": "Major Telecommunications",
+        "close": 21.29,
+        "change": 0.52,
+        "volume": 269567,
+        "market_cap": 587604033,
+        "perf": null,
+        "adr_pct": 4.54,
+        "adr_dvol": 54109940,
+        "ema5_pct": -1.51,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "NEXA",
+        "industry": "Other Metals/Minerals",
+        "close": 12.38,
+        "change": 1.23,
+        "volume": 477194,
+        "market_cap": 1639590055,
+        "perf": null,
+        "adr_pct": 5.31,
+        "adr_dvol": 50226506,
+        "ema5_pct": -0.88,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MTW",
+        "industry": "Trucks/Construction/Farm Machinery",
+        "close": 22.12,
+        "change": -0.23,
+        "volume": 1391178,
+        "market_cap": 797690800,
+        "perf": null,
+        "adr_pct": 4.07,
+        "adr_dvol": 49935666,
+        "ema5_pct": 0.12,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "CYRX",
+        "industry": "Air Freight/Couriers",
+        "close": 17.32,
+        "change": -0.35,
+        "volume": 931693,
+        "market_cap": 877242418,
+        "perf": null,
+        "adr_pct": 3.43,
+        "adr_dvol": 42816127,
+        "ema5_pct": -0.12,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "ASC",
+        "industry": "Marine Shipping",
+        "close": 18.44,
+        "change": 1.6,
+        "volume": 713986,
+        "market_cap": 753308532,
+        "perf": null,
+        "adr_pct": 3.28,
+        "adr_dvol": 38606856,
+        "ema5_pct": 1.46,
+        "scans": [
+          "4_Strongest_Stock_JK"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "EBS",
+        "industry": "Pharmaceuticals: Major",
+        "close": 6.92,
+        "change": 0.87,
+        "volume": 745108,
+        "market_cap": 354811479,
+        "perf": null,
+        "adr_pct": 4.78,
+        "adr_dvol": 38200639,
+        "ema5_pct": 1.41,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "NVGS",
+        "industry": "Marine Shipping",
+        "close": 22.99,
+        "change": 0.31,
+        "volume": 336019,
+        "market_cap": 1413727038,
+        "perf": null,
+        "adr_pct": 3.09,
+        "adr_dvol": 37197572,
+        "ema5_pct": -0.78,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "HSHP",
+        "industry": "Marine Shipping",
+        "close": 17.24,
+        "change": -0.52,
+        "volume": 429789,
+        "market_cap": 813210758,
+        "perf": null,
+        "adr_pct": 3.56,
+        "adr_dvol": 34953911,
+        "ema5_pct": -2.17,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "HPK",
+        "industry": "Oil & Gas Production",
+        "close": 7.79,
+        "change": 2.64,
+        "volume": 601150,
+        "market_cap": 985067343,
+        "perf": null,
+        "adr_pct": 6.03,
+        "adr_dvol": 33431741,
+        "ema5_pct": 0.66,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "MFA",
+        "industry": "Real Estate Investment Trusts",
+        "close": 8.0,
+        "change": -0.12,
+        "volume": 1858277,
+        "market_cap": 808703491,
+        "perf": null,
+        "adr_pct": 2.14,
+        "adr_dvol": 32805460,
+        "ema5_pct": -1.59,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "TOWN",
+        "industry": "Regional Banks",
+        "close": 35.82,
+        "change": -0.75,
+        "volume": 582447,
+        "market_cap": 3311103023,
+        "perf": null,
+        "adr_pct": 1.61,
+        "adr_dvol": 32171650,
+        "ema5_pct": -0.95,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "TASK",
+        "industry": "Miscellaneous Commercial Services",
+        "close": 8.23,
+        "change": 1.6,
+        "volume": 1050514,
+        "market_cap": 754584144,
+        "perf": null,
+        "adr_pct": 4.93,
+        "adr_dvol": 25923890,
+        "ema5_pct": 0.27,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "CARE",
+        "industry": "Regional Banks",
+        "close": 30.12,
+        "change": 1.55,
+        "volume": 281798,
+        "market_cap": 667577617,
+        "perf": null,
+        "adr_pct": 2.55,
+        "adr_dvol": 25379022,
+        "ema5_pct": 0.09,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "DBI",
+        "industry": "Apparel/Footwear Retail",
+        "close": 6.3,
+        "change": 0.16,
+        "volume": 595707,
+        "market_cap": 322079208,
+        "perf": null,
+        "adr_pct": 5.24,
+        "adr_dvol": 23912265,
+        "ema5_pct": 0.79,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "VMET",
+        "industry": "Investment Trusts/Mutual Funds",
+        "close": 9.03,
+        "change": 1.18,
+        "volume": 201131,
+        "market_cap": 982186270,
+        "perf": null,
+        "adr_pct": 4.86,
+        "adr_dvol": 11970514,
+        "ema5_pct": -1.02,
+        "scans": [
+          "1_Fundamental_Growth"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "PBYI",
+        "industry": "Pharmaceuticals: Major",
+        "close": 9.78,
+        "change": -0.41,
+        "volume": 220569,
+        "market_cap": 504844246,
+        "perf": null,
+        "adr_pct": 3.95,
+        "adr_dvol": 11482760,
+        "ema5_pct": 0.47,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "WEST",
+        "industry": "Food: Specialty/Candy",
+        "close": 8.12,
+        "change": -1.58,
+        "volume": 275454,
+        "market_cap": 792734379,
+        "perf": null,
+        "adr_pct": 3.77,
+        "adr_dvol": 11467711,
+        "ema5_pct": 0.27,
+        "scans": [
+          "Daily_Tightness_Swing"
+        ],
+        "hits": 1
+      },
+      {
+        "ticker": "TMCI",
+        "industry": "Medical Specialties",
+        "close": 4.62,
+        "change": 3.12,
+        "volume": 141679,
+        "market_cap": 300459630,
+        "perf": null,
+        "adr_pct": 5.01,
+        "adr_dvol": 5572918,
+        "ema5_pct": 1.64,
+        "scans": [
+          "Mom_6M_Small"
+        ],
+        "hits": 1
+      }
+    ]
+  },
   "scans": [
-    {
-      "key": "Mom_1W_Small",
-      "label": "1W Momentum — Small Cap",
-      "group": "momentum",
-      "mcap_group": "$300M - $10B",
-      "timeframe": "1 Week",
-      "stocks": [
-        {
-          "ticker": "DNA",
-          "industry": "Medical/Nursing Services",
-          "close": 10.46,
-          "change": -1.88,
-          "volume": 2122119,
-          "market_cap": 704379288,
-          "perf": 29.94,
-          "adr_pct": 7.04,
-          "adr_dvol": 157815383
-        },
-        {
-          "ticker": "MNTK",
-          "industry": "Industrial Specialties",
-          "close": 2.8,
-          "change": -4.44,
-          "volume": 1155826,
-          "market_cap": 398555203,
-          "perf": 26.13,
-          "adr_pct": 8.31,
-          "adr_dvol": 22780389
-        },
-        {
-          "ticker": "LTRX",
-          "industry": "Computer Peripherals",
-          "close": 7.22,
-          "change": 2.92,
-          "volume": 1704353,
-          "market_cap": 338469249,
-          "perf": 21.14,
-          "adr_pct": 5.66,
-          "adr_dvol": 64541831
-        },
-        {
-          "ticker": "AGEN",
-          "industry": "Biotechnology",
-          "close": 9.43,
-          "change": 10.42,
-          "volume": 2766014,
-          "market_cap": 425876855,
-          "perf": 20.9,
-          "adr_pct": 6.06,
-          "adr_dvol": 64550433
-        },
-        {
-          "ticker": "BAND",
-          "industry": "Packaged Software",
-          "close": 61.01,
-          "change": -1.29,
-          "volume": 716031,
-          "market_cap": 1963349873,
-          "perf": 20.79,
-          "adr_pct": 7.36,
-          "adr_dvol": 449442984
-        },
-        {
-          "ticker": "QMCO",
-          "industry": "Computer Peripherals",
-          "close": 31.4,
-          "change": -0.88,
-          "volume": 1616579,
-          "market_cap": 1237474006,
-          "perf": 20.7,
-          "adr_pct": 7.74,
-          "adr_dvol": 532996881
-        },
-        {
-          "ticker": "CDNA",
-          "industry": "Medical Specialties",
-          "close": 64.6,
-          "change": 1.44,
-          "volume": 1081865,
-          "market_cap": 3342030783,
-          "perf": 20.03,
-          "adr_pct": 4.45,
-          "adr_dvol": 418631177
-        }
-      ]
-    },
     {
       "key": "Mom_1M_Small",
       "label": "1M Momentum — Small Cap",
@@ -95,48 +1606,16 @@
       "timeframe": "1 Month",
       "stocks": [
         {
-          "ticker": "MNTK",
-          "industry": "Industrial Specialties",
-          "close": 2.8,
-          "change": -4.44,
-          "volume": 1155826,
-          "market_cap": 398555203,
-          "perf": 54.7,
-          "adr_pct": 8.31,
-          "adr_dvol": 22780389
-        },
-        {
-          "ticker": "DNA",
-          "industry": "Medical/Nursing Services",
-          "close": 10.46,
-          "change": -1.88,
-          "volume": 2122119,
-          "market_cap": 704379288,
-          "perf": 44.67,
-          "adr_pct": 7.04,
-          "adr_dvol": 157815383
-        },
-        {
-          "ticker": "GLOO",
+          "ticker": "USDE",
           "industry": "Packaged Software",
-          "close": 4.66,
-          "change": -2.31,
-          "volume": 1246103,
-          "market_cap": 426534641,
-          "perf": 37.87,
-          "adr_pct": 8.64,
-          "adr_dvol": 97275058
-        },
-        {
-          "ticker": "QMCO",
-          "industry": "Computer Peripherals",
-          "close": 31.4,
-          "change": -0.88,
-          "volume": 1616579,
-          "market_cap": 1237474006,
-          "perf": 34.07,
-          "adr_pct": 7.74,
-          "adr_dvol": 532996881
+          "close": 15.32,
+          "change": -1.54,
+          "volume": 4182448,
+          "market_cap": 416506808,
+          "perf": 111.6,
+          "adr_pct": 11.76,
+          "adr_dvol": 1285438092,
+          "ema5_pct": 3.46
         }
       ]
     },
@@ -148,70 +1627,64 @@
       "timeframe": "3 Months",
       "stocks": [
         {
-          "ticker": "AGEN",
-          "industry": "Biotechnology",
-          "close": 9.43,
-          "change": 10.42,
-          "volume": 2766014,
-          "market_cap": 425876855,
-          "perf": 196.54,
-          "adr_pct": 6.06,
-          "adr_dvol": 64550433
+          "ticker": "USDE",
+          "industry": "Packaged Software",
+          "close": 15.32,
+          "change": -1.54,
+          "volume": 4182448,
+          "market_cap": 416506808,
+          "perf": 465.31,
+          "adr_pct": 11.76,
+          "adr_dvol": 1285438092,
+          "ema5_pct": 3.46
         },
         {
           "ticker": "RCEL",
           "industry": "Medical Specialties",
-          "close": 11.67,
-          "change": -1.44,
-          "volume": 208132,
-          "market_cap": 360916314,
-          "perf": 174.59,
-          "adr_pct": 5.55,
-          "adr_dvol": 20429209
-        },
-        {
-          "ticker": "QMCO",
-          "industry": "Computer Peripherals",
-          "close": 31.4,
-          "change": -0.88,
-          "volume": 1616579,
-          "market_cap": 1237474006,
-          "perf": 165.43,
-          "adr_pct": 7.74,
-          "adr_dvol": 532996881
+          "close": 11.96,
+          "change": 2.49,
+          "volume": 253607,
+          "market_cap": 369885096,
+          "perf": 187.5,
+          "adr_pct": 5.32,
+          "adr_dvol": 20526981,
+          "ema5_pct": 2.68
         },
         {
           "ticker": "CDNA",
           "industry": "Medical Specialties",
-          "close": 64.6,
-          "change": 1.44,
-          "volume": 1081865,
-          "market_cap": 3342030783,
-          "perf": 124.46,
-          "adr_pct": 4.45,
-          "adr_dvol": 418631177
+          "close": 64.02,
+          "change": -0.9,
+          "volume": 796308,
+          "market_cap": 3312024745,
+          "perf": 122.99,
+          "adr_pct": 4.46,
+          "adr_dvol": 411415941,
+          "ema5_pct": 3.34
         },
         {
-          "ticker": "PLSE",
-          "industry": "Medical Specialties",
-          "close": 52.32,
-          "change": 1.34,
-          "volume": 374814,
-          "market_cap": 3803796443,
-          "perf": 80.23,
-          "adr_pct": 6.98,
-          "adr_dvol": 217646511
+          "ticker": "SENS",
+          "industry": "Electronic Components",
+          "close": 10.05,
+          "change": 2.13,
+          "volume": 606989,
+          "market_cap": 531384251,
+          "perf": 78.19,
+          "adr_pct": 4.84,
+          "adr_dvol": 41588993,
+          "ema5_pct": 0.84
         },
         {
-          "ticker": "MNTK",
-          "industry": "Industrial Specialties",
-          "close": 2.8,
-          "change": -4.44,
-          "volume": 1155826,
-          "market_cap": 398555203,
-          "perf": 77.22,
-          "adr_pct": 8.31,
-          "adr_dvol": 22780389
+          "ticker": "EFOR",
+          "industry": "Information Technology Services",
+          "close": 32.9,
+          "change": 0.21,
+          "volume": 405997,
+          "market_cap": 1348900063,
+          "perf": 77.55,
+          "adr_pct": 4.88,
+          "adr_dvol": 105612374,
+          "ema5_pct": 0.16
         }
       ]
     },
@@ -223,224 +1696,263 @@
       "timeframe": "6 Months",
       "stocks": [
         {
-          "ticker": "QMCO",
-          "industry": "Computer Peripherals",
-          "close": 31.4,
-          "change": -0.88,
-          "volume": 1616579,
-          "market_cap": 1237474006,
-          "perf": 547.42,
-          "adr_pct": 7.74,
-          "adr_dvol": 532996881
-        },
-        {
           "ticker": "CDNA",
           "industry": "Medical Specialties",
-          "close": 64.6,
-          "change": 1.44,
-          "volume": 1081865,
-          "market_cap": 3342030783,
-          "perf": 263.74,
-          "adr_pct": 4.45,
-          "adr_dvol": 418631177
+          "close": 64.02,
+          "change": -0.9,
+          "volume": 796308,
+          "market_cap": 3312024745,
+          "perf": 268.78,
+          "adr_pct": 4.46,
+          "adr_dvol": 411415941,
+          "ema5_pct": 3.34
         },
         {
           "ticker": "BAND",
           "industry": "Packaged Software",
-          "close": 61.01,
-          "change": -1.29,
-          "volume": 716031,
-          "market_cap": 1963349873,
-          "perf": 239.13,
-          "adr_pct": 7.36,
-          "adr_dvol": 449442984
+          "close": 62.28,
+          "change": 2.08,
+          "volume": 538488,
+          "market_cap": 2004219389,
+          "perf": 251.47,
+          "adr_pct": 7.0,
+          "adr_dvol": 417444735,
+          "ema5_pct": 2.84
+        },
+        {
+          "ticker": "TMCI",
+          "industry": "Medical Specialties",
+          "close": 4.62,
+          "change": 3.12,
+          "volume": 141679,
+          "market_cap": 300459630,
+          "perf": 230.0,
+          "adr_pct": 5.01,
+          "adr_dvol": 5572918,
+          "ema5_pct": 1.64
         },
         {
           "ticker": "RCEL",
           "industry": "Medical Specialties",
-          "close": 11.67,
-          "change": -1.44,
-          "volume": 208132,
-          "market_cap": 360916314,
-          "perf": 212.87,
-          "adr_pct": 5.55,
-          "adr_dvol": 20429209
+          "close": 11.96,
+          "change": 2.49,
+          "volume": 253607,
+          "market_cap": 369885096,
+          "perf": 226.78,
+          "adr_pct": 5.32,
+          "adr_dvol": 20526981,
+          "ema5_pct": 2.68
         },
         {
           "ticker": "PENG",
           "industry": "Semiconductors",
-          "close": 54.98,
-          "change": -2.21,
-          "volume": 1338567,
-          "market_cap": 2817323634,
-          "perf": 204.43,
-          "adr_pct": 5.97,
-          "adr_dvol": 493917829
-        },
-        {
-          "ticker": "AGEN",
-          "industry": "Biotechnology",
-          "close": 9.43,
-          "change": 10.42,
-          "volume": 2766014,
-          "market_cap": 425876855,
-          "perf": 177.35,
-          "adr_pct": 6.06,
-          "adr_dvol": 64550433
-        },
-        {
-          "ticker": "AMBQ",
-          "industry": "Semiconductors",
-          "close": 68.3,
-          "change": -2.13,
-          "volume": 277988,
-          "market_cap": 1651803828,
-          "perf": 163.91,
-          "adr_pct": 5.62,
-          "adr_dvol": 259137198
+          "close": 55.79,
+          "change": 1.47,
+          "volume": 1196474,
+          "market_cap": 2858830206,
+          "perf": 183.34,
+          "adr_pct": 5.7,
+          "adr_dvol": 484123601,
+          "ema5_pct": 1.42
         },
         {
           "ticker": "AEHR",
           "industry": "Electronic Production Equipment",
-          "close": 98.49,
-          "change": -5.65,
-          "volume": 2111202,
-          "market_cap": 3216638656,
-          "perf": 157.83,
-          "adr_pct": 9.03,
-          "adr_dvol": 1973970832
+          "close": 100.78,
+          "change": 2.33,
+          "volume": 2449856,
+          "market_cap": 3291428996,
+          "perf": 178.17,
+          "adr_pct": 8.93,
+          "adr_dvol": 2049108540,
+          "ema5_pct": 1.32
         },
         {
           "ticker": "MEI",
           "industry": "Electronic Components",
-          "close": 14.06,
-          "change": -3.1,
-          "volume": 353379,
-          "market_cap": 501169465,
-          "perf": 154.71,
-          "adr_pct": 7.56,
-          "adr_dvol": 64001630
-        },
-        {
-          "ticker": "MNTK",
-          "industry": "Industrial Specialties",
-          "close": 2.8,
-          "change": -4.44,
-          "volume": 1155826,
-          "market_cap": 398555203,
-          "perf": 143.48,
-          "adr_pct": 8.31,
-          "adr_dvol": 22780389
-        },
-        {
-          "ticker": "CRSR",
-          "industry": "Packaged Software",
-          "close": 13.5,
-          "change": -1.17,
-          "volume": 737669,
-          "market_cap": 1460388994,
-          "perf": 141.5,
-          "adr_pct": 4.55,
-          "adr_dvol": 63886343
-        },
-        {
-          "ticker": "PLSE",
-          "industry": "Medical Specialties",
-          "close": 52.32,
-          "change": 1.34,
-          "volume": 374814,
-          "market_cap": 3803796443,
-          "perf": 138.25,
-          "adr_pct": 6.98,
-          "adr_dvol": 217646511
+          "close": 14.34,
+          "change": 1.99,
+          "volume": 412367,
+          "market_cap": 511150078,
+          "perf": 162.16,
+          "adr_pct": 7.15,
+          "adr_dvol": 60501431,
+          "ema5_pct": 0.66
         },
         {
           "ticker": "ETON",
           "industry": "Pharmaceuticals: Major",
-          "close": 59.18,
-          "change": 2.6,
-          "volume": 390725,
-          "market_cap": 1691549973,
-          "perf": 136.15,
-          "adr_pct": 5.16,
-          "adr_dvol": 151846926
+          "close": 59.19,
+          "change": 0.02,
+          "volume": 710718,
+          "market_cap": 1691835757,
+          "perf": 136.76,
+          "adr_pct": 5.01,
+          "adr_dvol": 152405485,
+          "ema5_pct": 1.37
         },
         {
           "ticker": "PUBM",
           "industry": "Internet Software/Services",
-          "close": 18.41,
-          "change": -1.02,
-          "volume": 839466,
-          "market_cap": 838576693,
-          "perf": 124.79,
-          "adr_pct": 3.94,
-          "adr_dvol": 62579880
+          "close": 18.8,
+          "change": 2.12,
+          "volume": 701772,
+          "market_cap": 856341167,
+          "perf": 133.54,
+          "adr_pct": 3.77,
+          "adr_dvol": 61592662,
+          "ema5_pct": 2.18
         },
         {
           "ticker": "PAYS",
           "industry": "Miscellaneous Commercial Services",
-          "close": 12.72,
-          "change": 0.39,
-          "volume": 575986,
-          "market_cap": 718198607,
-          "perf": 113.78,
-          "adr_pct": 4.95,
-          "adr_dvol": 48421199
+          "close": 12.85,
+          "change": 1.02,
+          "volume": 399472,
+          "market_cap": 725538705,
+          "perf": 123.87,
+          "adr_pct": 4.74,
+          "adr_dvol": 44540157,
+          "ema5_pct": 0.68
         },
         {
           "ticker": "COHU",
           "industry": "Semiconductors",
-          "close": 66.07,
-          "change": -1.39,
-          "volume": 689176,
-          "market_cap": 3127650222,
-          "perf": 110.75,
-          "adr_pct": 5.56,
-          "adr_dvol": 380263361
-        },
-        {
-          "ticker": "CYRX",
-          "industry": "Air Freight/Couriers",
-          "close": 17.38,
-          "change": -0.17,
-          "volume": 732391,
-          "market_cap": 880281371,
-          "perf": 107.4,
-          "adr_pct": 3.46,
-          "adr_dvol": 41876401
-        },
-        {
-          "ticker": "ATEX",
-          "industry": "Wireless Telecommunications",
-          "close": 81.75,
-          "change": 0.41,
-          "volume": 188794,
-          "market_cap": 1603099893,
-          "perf": 107.01,
-          "adr_pct": 5.68,
-          "adr_dvol": 141117987
-        },
-        {
-          "ticker": "HELE",
-          "industry": "Home Furnishings",
-          "close": 29.16,
-          "change": 1.85,
-          "volume": 433526,
-          "market_cap": 679196474,
-          "perf": 101.66,
-          "adr_pct": 4.41,
-          "adr_dvol": 56341024
+          "close": 65.97,
+          "change": -0.15,
+          "volume": 660558,
+          "market_cap": 3122916437,
+          "perf": 118.79,
+          "adr_pct": 5.48,
+          "adr_dvol": 357755259,
+          "ema5_pct": 1.61
         },
         {
           "ticker": "MRAM",
           "industry": "Semiconductors",
-          "close": 18.13,
-          "change": -1.84,
-          "volume": 812667,
-          "market_cap": 441465662,
-          "perf": 100.33,
-          "adr_pct": 6.41,
-          "adr_dvol": 112870854
+          "close": 18.63,
+          "change": 2.76,
+          "volume": 880948,
+          "market_cap": 453640664,
+          "perf": 111.7,
+          "adr_pct": 6.24,
+          "adr_dvol": 114794991,
+          "ema5_pct": 3.35
+        },
+        {
+          "ticker": "UMAC",
+          "industry": "Electronic Equipment/Instruments",
+          "close": 24.94,
+          "change": 4.09,
+          "volume": 2559646,
+          "market_cap": 1245915257,
+          "perf": 108.88,
+          "adr_pct": 7.43,
+          "adr_dvol": 438098914,
+          "ema5_pct": 3.14
+        },
+        {
+          "ticker": "CYRX",
+          "industry": "Air Freight/Couriers",
+          "close": 17.32,
+          "change": -0.35,
+          "volume": 931693,
+          "market_cap": 877242418,
+          "perf": 108.67,
+          "adr_pct": 3.43,
+          "adr_dvol": 42816127,
+          "ema5_pct": -0.12
+        },
+        {
+          "ticker": "MANE",
+          "industry": "Pharmaceuticals: Major",
+          "close": 117.82,
+          "change": 2.45,
+          "volume": 481703,
+          "market_cap": 4922535624,
+          "perf": 104.87,
+          "adr_pct": 5.17,
+          "adr_dvol": 565736910,
+          "ema5_pct": 1.76
+        }
+      ]
+    },
+    {
+      "key": "4_Strongest_Stock_JK",
+      "label": "Strongest Stock ($300M–$10B)",
+      "group": "operational",
+      "stocks": [
+        {
+          "ticker": "UMAC",
+          "industry": "Electronic Equipment/Instruments",
+          "close": 24.94,
+          "change": 4.09,
+          "volume": 2559646,
+          "market_cap": 1245915257,
+          "perf": null,
+          "adr_pct": 7.43,
+          "adr_dvol": 438098914,
+          "ema5_pct": 3.14
+        },
+        {
+          "ticker": "INSW",
+          "industry": "Marine Shipping",
+          "close": 110.24,
+          "change": 1.78,
+          "volume": 469916,
+          "market_cap": 5460331623,
+          "perf": null,
+          "adr_pct": 3.77,
+          "adr_dvol": 340864178,
+          "ema5_pct": 2.39
+        },
+        {
+          "ticker": "ASC",
+          "industry": "Marine Shipping",
+          "close": 18.44,
+          "change": 1.6,
+          "volume": 713986,
+          "market_cap": 753308532,
+          "perf": null,
+          "adr_pct": 3.28,
+          "adr_dvol": 38606856,
+          "ema5_pct": 1.46
+        },
+        {
+          "ticker": "PAYS",
+          "industry": "Miscellaneous Commercial Services",
+          "close": 12.85,
+          "change": 1.02,
+          "volume": 399472,
+          "market_cap": 725538705,
+          "perf": null,
+          "adr_pct": 4.74,
+          "adr_dvol": 44540157,
+          "ema5_pct": 0.68
+        },
+        {
+          "ticker": "INOD",
+          "industry": "Data Processing Services",
+          "close": 66.94,
+          "change": 0.22,
+          "volume": 963081,
+          "market_cap": 2301574827,
+          "perf": null,
+          "adr_pct": 6.21,
+          "adr_dvol": 865903171,
+          "ema5_pct": -0.66
+        },
+        {
+          "ticker": "COHU",
+          "industry": "Semiconductors",
+          "close": 65.97,
+          "change": -0.15,
+          "volume": 660558,
+          "market_cap": 3122916437,
+          "perf": null,
+          "adr_pct": 5.48,
+          "adr_dvol": 357755259,
+          "ema5_pct": 1.61
         }
       ]
     },
@@ -454,13 +1966,14 @@
         {
           "ticker": "TWST",
           "industry": "Biotechnology",
-          "close": 179.6,
-          "change": -1.77,
-          "volume": 2197179,
-          "market_cap": 11823502813,
-          "perf": 83.22,
-          "adr_pct": 6.2,
-          "adr_dvol": 2813759256
+          "close": 186.13,
+          "change": 3.64,
+          "volume": 3684722,
+          "market_cap": 12253388721,
+          "perf": 84.0,
+          "adr_pct": 5.99,
+          "adr_dvol": 3084495388,
+          "ema5_pct": 4.24
         }
       ]
     },
@@ -474,804 +1987,98 @@
         {
           "ticker": "TWST",
           "industry": "Biotechnology",
-          "close": 179.6,
-          "change": -1.77,
-          "volume": 2197179,
-          "market_cap": 11823502813,
-          "perf": 267.36,
-          "adr_pct": 6.2,
-          "adr_dvol": 2813759256
+          "close": 186.13,
+          "change": 3.64,
+          "volume": 3684722,
+          "market_cap": 12253388721,
+          "perf": 296.11,
+          "adr_pct": 5.99,
+          "adr_dvol": 3084495388,
+          "ema5_pct": 4.24
         },
         {
           "ticker": "ALAB",
           "industry": "Semiconductors",
-          "close": 351.31,
-          "change": -3.65,
-          "volume": 4080543,
-          "market_cap": 60947052272,
-          "perf": 215.9,
-          "adr_pct": 6.63,
-          "adr_dvol": 10099678904
+          "close": 357.84,
+          "change": 1.86,
+          "volume": 2694772,
+          "market_cap": 62079910205,
+          "perf": 251.93,
+          "adr_pct": 6.4,
+          "adr_dvol": 9855384689,
+          "ema5_pct": 1.26
         },
         {
           "ticker": "CORT",
           "industry": "Pharmaceuticals: Major",
-          "close": 115.63,
-          "change": -0.4,
-          "volume": 1155320,
-          "market_cap": 12499417400,
-          "perf": 184.73,
-          "adr_pct": 4.56,
-          "adr_dvol": 1378883965
-        },
-        {
-          "ticker": "HUM",
-          "industry": "Managed Health Care",
-          "close": 389.63,
-          "change": -2.09,
-          "volume": 1492913,
-          "market_cap": 46786889158,
-          "perf": 124.53,
-          "adr_pct": 3.61,
-          "adr_dvol": 1594079857
+          "close": 114.74,
+          "change": -0.77,
+          "volume": 964469,
+          "market_cap": 12403209760,
+          "perf": 180.2,
+          "adr_pct": 4.72,
+          "adr_dvol": 1389516149,
+          "ema5_pct": -0.52
         },
         {
           "ticker": "SMTC",
           "industry": "Semiconductors",
-          "close": 174.78,
-          "change": -4.13,
-          "volume": 2749439,
-          "market_cap": 16311452583,
-          "perf": 122.88,
-          "adr_pct": 6.64,
-          "adr_dvol": 4384815008
+          "close": 180.1,
+          "change": 3.04,
+          "volume": 2742645,
+          "market_cap": 16807945192,
+          "perf": 138.54,
+          "adr_pct": 6.37,
+          "adr_dvol": 4421830101,
+          "ema5_pct": 1.67
+        },
+        {
+          "ticker": "PS",
+          "industry": "Investment Managers",
+          "close": 53.56,
+          "change": -9.48,
+          "volume": 333768,
+          "market_cap": 21424000603,
+          "perf": 123.17,
+          "adr_pct": 7.04,
+          "adr_dvol": 437927058,
+          "ema5_pct": -0.84
+        },
+        {
+          "ticker": "HUM",
+          "industry": "Managed Health Care",
+          "close": 386.87,
+          "change": -0.71,
+          "volume": 1892586,
+          "market_cap": 46455467785,
+          "perf": 119.19,
+          "adr_pct": 3.55,
+          "adr_dvol": 1699380664,
+          "ema5_pct": -0.03
         },
         {
           "ticker": "NTRA",
           "industry": "Biotechnology",
-          "close": 411.77,
-          "change": -0.19,
-          "volume": 1650433,
-          "market_cap": 59354242487,
-          "perf": 104.86,
-          "adr_pct": 3.15,
-          "adr_dvol": 2586413426
-        }
-      ]
-    },
-    {
-      "key": "1_Fundamental_Growth",
-      "label": "Fundamental Growth",
-      "group": "operational",
-      "stocks": [
-        {
-          "ticker": "MSGE",
-          "industry": "Movies/Entertainment",
-          "close": 81.77,
-          "change": 3.39,
-          "volume": 494450,
-          "market_cap": 3868168951,
-          "perf": null,
-          "adr_pct": 3.16,
-          "adr_dvol": 156475558
+          "close": 414.52,
+          "change": 0.67,
+          "volume": 2058203,
+          "market_cap": 59750637708,
+          "perf": 109.15,
+          "adr_pct": 3.12,
+          "adr_dvol": 2615416344,
+          "ema5_pct": 2.16
         },
         {
-          "ticker": "XMTR",
-          "industry": "Information Technology Services",
-          "close": 103.14,
-          "change": 2.56,
-          "volume": 806293,
-          "market_cap": 5912353382,
-          "perf": null,
-          "adr_pct": 5.17,
-          "adr_dvol": 624310293
-        },
-        {
-          "ticker": "INSW",
-          "industry": "Marine Shipping",
-          "close": 108.31,
-          "change": 2.53,
-          "volume": 678656,
-          "market_cap": 5364736267,
-          "perf": null,
-          "adr_pct": 3.84,
-          "adr_dvol": 365111686
-        },
-        {
-          "ticker": "HCC",
-          "industry": "Coal",
-          "close": 91.75,
-          "change": 2.5,
-          "volume": 982143,
-          "market_cap": 4844591495,
-          "perf": null,
-          "adr_pct": 4.3,
-          "adr_dvol": 318845281
-        },
-        {
-          "ticker": "ELF",
-          "industry": "Household/Personal Care",
-          "close": 101.8,
-          "change": 2.3,
-          "volume": 1160746,
-          "market_cap": 6007014081,
-          "perf": null,
-          "adr_pct": 4.23,
-          "adr_dvol": 574505434
-        },
-        {
-          "ticker": "STNG",
-          "industry": "Marine Shipping",
-          "close": 83.19,
-          "change": 2.09,
-          "volume": 962151,
-          "market_cap": 4166267583,
-          "perf": null,
-          "adr_pct": 3.29,
-          "adr_dvol": 314494336
-        },
-        {
-          "ticker": "YOU",
-          "industry": "Packaged Software",
-          "close": 40.36,
-          "change": 1.92,
-          "volume": 2807987,
-          "market_cap": 5460226774,
-          "perf": null,
-          "adr_pct": 4.42,
-          "adr_dvol": 484702858
-        },
-        {
-          "ticker": "LPG",
-          "industry": "Marine Shipping",
-          "close": 54.36,
-          "change": 1.74,
-          "volume": 715313,
-          "market_cap": 2325666526,
-          "perf": null,
-          "adr_pct": 3.79,
-          "adr_dvol": 139626300
-        },
-        {
-          "ticker": "KNSA",
-          "industry": "Pharmaceuticals: Major",
-          "close": 76.1,
-          "change": 1.36,
-          "volume": 734141,
-          "market_cap": 5937627481,
-          "perf": null,
-          "adr_pct": 3.33,
-          "adr_dvol": 146088084
-        },
-        {
-          "ticker": "ANIP",
-          "industry": "Biotechnology",
-          "close": 74.83,
-          "change": 1.12,
-          "volume": 421726,
-          "market_cap": 1718871434,
-          "perf": null,
-          "adr_pct": 3.14,
-          "adr_dvol": 122043982
-        },
-        {
-          "ticker": "FORM",
-          "industry": "Semiconductors",
-          "close": 130.97,
-          "change": 0.99,
-          "volume": 1342528,
-          "market_cap": 10231471878,
-          "perf": null,
-          "adr_pct": 5.53,
-          "adr_dvol": 866774433
-        },
-        {
-          "ticker": "PHAT",
-          "industry": "Pharmaceuticals: Major",
-          "close": 7.35,
-          "change": 0.68,
-          "volume": 1690908,
-          "market_cap": 594621924,
-          "perf": null,
-          "adr_pct": 6.45,
-          "adr_dvol": 73283139
-        },
-        {
-          "ticker": "PARR",
-          "industry": "Oil Refining/Marketing",
-          "close": 77.97,
-          "change": 0.66,
-          "volume": 676926,
-          "market_cap": 3906267984,
-          "perf": null,
-          "adr_pct": 5.52,
-          "adr_dvol": 486130087
-        },
-        {
-          "ticker": "HPK",
-          "industry": "Oil & Gas Production",
-          "close": 7.59,
-          "change": 0.4,
-          "volume": 415719,
-          "market_cap": 959776779,
-          "perf": null,
-          "adr_pct": 6.19,
-          "adr_dvol": 32495484
-        },
-        {
-          "ticker": "PNTG",
-          "industry": "Medical/Nursing Services",
-          "close": 40.9,
-          "change": 0.32,
-          "volume": 461331,
-          "market_cap": 1428599115,
-          "perf": null,
-          "adr_pct": 3.3,
-          "adr_dvol": 72105239
-        },
-        {
-          "ticker": "FIX",
-          "industry": "Engineering & Construction",
-          "close": 1658.3,
-          "change": -0.04,
-          "volume": 335365,
-          "market_cap": 58362755836,
-          "perf": null,
-          "adr_pct": 4.34,
-          "adr_dvol": 2382059546
-        },
-        {
-          "ticker": "AAMI",
-          "industry": "Investment Managers",
-          "close": 93.79,
-          "change": -0.1,
-          "volume": 363977,
-          "market_cap": 3328618966,
-          "perf": null,
-          "adr_pct": 3.24,
-          "adr_dvol": 165540023
-        },
-        {
-          "ticker": "DGII",
-          "industry": "Telecommunications Equipment",
-          "close": 78.22,
-          "change": -0.1,
-          "volume": 364387,
-          "market_cap": 2968302071,
-          "perf": null,
-          "adr_pct": 3.44,
-          "adr_dvol": 110055452
-        },
-        {
-          "ticker": "FCFS",
-          "industry": "Finance/Rental/Leasing",
-          "close": 216.95,
-          "change": -0.23,
-          "volume": 309652,
-          "market_cap": 9409511762,
-          "perf": null,
-          "adr_pct": 3.07,
-          "adr_dvol": 255141599
-        },
-        {
-          "ticker": "ECG",
-          "industry": "Engineering & Construction",
-          "close": 116.66,
-          "change": -0.24,
-          "volume": 323965,
-          "market_cap": 5957107131,
-          "perf": null,
-          "adr_pct": 4.38,
-          "adr_dvol": 225209460
-        },
-        {
-          "ticker": "STLN",
-          "industry": "Medical/Nursing Services",
-          "close": 6.64,
-          "change": -0.3,
-          "volume": 919193,
-          "market_cap": 663886660,
-          "perf": null,
-          "adr_pct": 6.01,
-          "adr_dvol": 66930783
-        },
-        {
-          "ticker": "NVGS",
-          "industry": "Marine Shipping",
-          "close": 22.92,
-          "change": -0.43,
-          "volume": 326972,
-          "market_cap": 1409422561,
-          "perf": null,
-          "adr_pct": 3.13,
-          "adr_dvol": 41324599
-        },
-        {
-          "ticker": "IESC",
-          "industry": "Engineering & Construction",
-          "close": 322.09,
-          "change": -0.63,
-          "volume": 145763,
-          "market_cap": 12834870909,
-          "perf": null,
-          "adr_pct": 5.2,
-          "adr_dvol": 416913837
-        },
-        {
-          "ticker": "SCCO",
-          "industry": "Other Metals/Minerals",
-          "close": 202.63,
-          "change": -0.63,
-          "volume": 907576,
-          "market_cap": 171089360159,
-          "perf": null,
-          "adr_pct": 3.86,
-          "adr_dvol": 748978239
-        },
-        {
-          "ticker": "TOWN",
-          "industry": "Regional Banks",
-          "close": 36.09,
-          "change": -0.74,
-          "volume": 541725,
-          "market_cap": 3336061170,
-          "perf": null,
-          "adr_pct": 1.57,
-          "adr_dvol": 31086820
-        },
-        {
-          "ticker": "PAY",
-          "industry": "Miscellaneous Commercial Services",
-          "close": 29.92,
-          "change": -0.83,
-          "volume": 733075,
-          "market_cap": 3768114238,
-          "perf": null,
-          "adr_pct": 5.56,
-          "adr_dvol": 229837492
-        },
-        {
-          "ticker": "FBK",
-          "industry": "Major Banks",
-          "close": 52.27,
-          "change": -0.89,
-          "volume": 423662,
-          "market_cap": 2612357354,
-          "perf": null,
-          "adr_pct": 2.03,
-          "adr_dvol": 89555173
-        },
-        {
-          "ticker": "ESTA",
+          "ticker": "GH",
           "industry": "Medical Specialties",
-          "close": 65.34,
-          "change": -0.95,
-          "volume": 345900,
-          "market_cap": 1947255615,
-          "perf": null,
-          "adr_pct": 4.45,
-          "adr_dvol": 81889910
-        },
-        {
-          "ticker": "ARW",
-          "industry": "Electronics Distributors",
-          "close": 230.46,
-          "change": -1.01,
-          "volume": 349310,
-          "market_cap": 11731663756,
-          "perf": null,
-          "adr_pct": 3.25,
-          "adr_dvol": 362666300
-        },
-        {
-          "ticker": "EZPW",
-          "industry": "Finance/Rental/Leasing",
-          "close": 30.83,
-          "change": -1.06,
-          "volume": 627170,
-          "market_cap": 1894299289,
-          "perf": null,
-          "adr_pct": 3.99,
-          "adr_dvol": 100519441
-        },
-        {
-          "ticker": "HSHP",
-          "industry": "Marine Shipping",
-          "close": 17.33,
-          "change": -1.2,
-          "volume": 411725,
-          "market_cap": 817456110,
-          "perf": null,
-          "adr_pct": 3.62,
-          "adr_dvol": 35726414
-        },
-        {
-          "ticker": "BBT",
-          "industry": "Regional Banks",
-          "close": 27.81,
-          "change": -1.35,
-          "volume": 1416655,
-          "market_cap": 2330925390,
-          "perf": null,
-          "adr_pct": 2.44,
-          "adr_dvol": 95151684
-        },
-        {
-          "ticker": "QNST",
-          "industry": "Advertising/Marketing Services",
-          "close": 14.21,
-          "change": -1.39,
-          "volume": 781303,
-          "market_cap": 811197885,
-          "perf": null,
-          "adr_pct": 5.7,
-          "adr_dvol": 109317447
-        },
-        {
-          "ticker": "COHU",
-          "industry": "Semiconductors",
-          "close": 66.07,
-          "change": -1.39,
-          "volume": 689176,
-          "market_cap": 3127650222,
-          "perf": null,
-          "adr_pct": 5.56,
-          "adr_dvol": 380263361
-        },
-        {
-          "ticker": "MAMA",
-          "industry": "Food: Meat/Fish/Dairy",
-          "close": 13.15,
-          "change": -1.5,
-          "volume": 691837,
-          "market_cap": 619989229,
-          "perf": null,
-          "adr_pct": 5.59,
-          "adr_dvol": 75170652
-        },
-        {
-          "ticker": "COCO",
-          "industry": "Food: Specialty/Candy",
-          "close": 57.66,
-          "change": -1.59,
-          "volume": 758633,
-          "market_cap": 3309515830,
-          "perf": null,
-          "adr_pct": 4.42,
-          "adr_dvol": 403578253
-        },
-        {
-          "ticker": "NEXA",
-          "industry": "Other Metals/Minerals",
-          "close": 12.23,
-          "change": -1.69,
-          "volume": 477016,
-          "market_cap": 1619724193,
-          "perf": null,
-          "adr_pct": 5.59,
-          "adr_dvol": 54196163
-        },
-        {
-          "ticker": "SNDX",
-          "industry": "Biotechnology",
-          "close": 17.86,
-          "change": -1.87,
-          "volume": 1554158,
-          "market_cap": 1594846069,
-          "perf": null,
-          "adr_pct": 4.58,
-          "adr_dvol": 180449200
-        },
-        {
-          "ticker": "MFA",
-          "industry": "Real Estate Investment Trusts",
-          "close": 8.01,
-          "change": -1.96,
-          "volume": 2164563,
-          "market_cap": 809714378,
-          "perf": null,
-          "adr_pct": 2.13,
-          "adr_dvol": 32188584
-        },
-        {
-          "ticker": "INDB",
-          "industry": "Regional Banks",
-          "close": 79.54,
-          "change": -2.04,
-          "volume": 359440,
-          "market_cap": 3761907427,
-          "perf": null,
-          "adr_pct": 1.92,
-          "adr_dvol": 67018271
-        },
-        {
-          "ticker": "SANM",
-          "industry": "Electronic Production Equipment",
-          "close": 220.06,
-          "change": -2.1,
-          "volume": 431160,
-          "market_cap": 11794634140,
-          "perf": null,
-          "adr_pct": 4.85,
-          "adr_dvol": 690011423
-        },
-        {
-          "ticker": "CARE",
-          "industry": "Regional Banks",
-          "close": 29.66,
-          "change": -2.14,
-          "volume": 217529,
-          "market_cap": 657382179,
-          "perf": null,
-          "adr_pct": 2.59,
-          "adr_dvol": 24480230
-        },
-        {
-          "ticker": "ATRO",
-          "industry": "Aerospace & Defense",
-          "close": 67.65,
-          "change": -2.27,
-          "volume": 529643,
-          "market_cap": 2908214206,
-          "perf": null,
-          "adr_pct": 4.86,
-          "adr_dvol": 255712898
-        },
-        {
-          "ticker": "AGX",
-          "industry": "Engineering & Construction",
-          "close": 355.21,
-          "change": -2.49,
-          "volume": 284590,
-          "market_cap": 4983540088,
-          "perf": null,
-          "adr_pct": 6.12,
-          "adr_dvol": 982117203
-        },
-        {
-          "ticker": "VMET",
-          "industry": "Investment Trusts/Mutual Funds",
-          "close": 8.92,
-          "change": -2.51,
-          "volume": 282047,
-          "market_cap": 970759178,
-          "perf": null,
-          "adr_pct": 5.12,
-          "adr_dvol": 12780140
-        },
-        {
-          "ticker": "KVYO",
-          "industry": "Packaged Software",
-          "close": 15.4,
-          "change": -2.53,
-          "volume": 8985082,
-          "market_cap": 4384802494,
-          "perf": null,
-          "adr_pct": 6.51,
-          "adr_dvol": 719360446
-        },
-        {
-          "ticker": "OOMA",
-          "industry": "Major Telecommunications",
-          "close": 21.18,
-          "change": -2.71,
-          "volume": 580494,
-          "market_cap": 584568020,
-          "perf": null,
-          "adr_pct": 4.72,
-          "adr_dvol": 56981562
-        },
-        {
-          "ticker": "SEZL",
-          "industry": "Packaged Software",
-          "close": 108.3,
-          "change": -2.77,
-          "volume": 392633,
-          "market_cap": 3647003979,
-          "perf": null,
-          "adr_pct": 5.75,
-          "adr_dvol": 363351880
-        },
-        {
-          "ticker": "HRMY",
-          "industry": "Pharmaceuticals: Major",
-          "close": 40.01,
-          "change": -3.03,
-          "volume": 874387,
-          "market_cap": 2330037987,
-          "perf": null,
-          "adr_pct": 3.34,
-          "adr_dvol": 161819544
-        },
-        {
-          "ticker": "INOD",
-          "industry": "Data Processing Services",
-          "close": 66.79,
-          "change": -3.5,
-          "volume": 1285575,
-          "market_cap": 2296417315,
-          "perf": null,
-          "adr_pct": 6.34,
-          "adr_dvol": 888232093
-        },
-        {
-          "ticker": "AAON",
-          "industry": "Industrial Machinery",
-          "close": 85.34,
-          "change": -4.22,
-          "volume": 1733082,
-          "market_cap": 7036593841,
-          "perf": null,
-          "adr_pct": 5.16,
-          "adr_dvol": 598305516
-        },
-        {
-          "ticker": "PICS",
-          "industry": "Miscellaneous Commercial Services",
-          "close": 8.32,
-          "change": -4.26,
-          "volume": 507087,
-          "market_cap": 1078168294,
-          "perf": null,
-          "adr_pct": 7.35,
-          "adr_dvol": 21588576
-        },
-        {
-          "ticker": "BRZE",
-          "industry": "Internet Software/Services",
-          "close": 23.17,
-          "change": -4.92,
-          "volume": 2729469,
-          "market_cap": 2631751261,
-          "perf": null,
-          "adr_pct": 6.57,
-          "adr_dvol": 285443172
-        },
-        {
-          "ticker": "FEIM",
-          "industry": "Telecommunications Equipment",
-          "close": 82.49,
-          "change": -6.72,
-          "volume": 345115,
-          "market_cap": 929933433,
-          "perf": null,
-          "adr_pct": 6.34,
-          "adr_dvol": 197024637
-        },
-        {
-          "ticker": "NESR",
-          "industry": "Oilfield Services/Equipment",
-          "close": 29.81,
-          "change": -7.22,
-          "volume": 2352709,
-          "market_cap": 3006391091,
-          "perf": null,
-          "adr_pct": 4.86,
-          "adr_dvol": 270926457
-        }
-      ]
-    },
-    {
-      "key": "3_Post_Earnings_Cont_Base",
-      "label": "Post-Earnings Continuation Base",
-      "group": "operational",
-      "stocks": [
-        {
-          "ticker": "EGG",
-          "industry": "Miscellaneous Commercial Services",
-          "close": 4.25,
-          "change": 51.79,
-          "volume": 4792623,
-          "market_cap": 119022100,
-          "perf": null,
-          "adr_pct": 11.86,
-          "adr_dvol": 24463462
-        },
-        {
-          "ticker": "CANG",
-          "industry": "Wholesale Distributors",
-          "close": 2.29,
-          "change": 19.9,
-          "volume": 1567698,
-          "market_cap": 93940305,
-          "perf": null,
-          "adr_pct": 13.92,
-          "adr_dvol": 27804826
-        },
-        {
-          "ticker": "MX",
-          "industry": "Semiconductors",
-          "close": 3.79,
-          "change": 14.85,
-          "volume": 6845644,
-          "market_cap": 138373311,
-          "perf": null,
-          "adr_pct": 6.01,
-          "adr_dvol": 45671610
-        },
-        {
-          "ticker": "SDEV",
-          "industry": "Pharmaceuticals: Major",
-          "close": 1.57,
-          "change": 5.37,
-          "volume": 14831044,
-          "market_cap": 79466235,
-          "perf": null,
-          "adr_pct": 10.5,
-          "adr_dvol": 69765926
-        },
-        {
-          "ticker": "SHMD",
-          "industry": "Electronic Components",
-          "close": 4.38,
-          "change": 0.11,
-          "volume": 5348473,
-          "market_cap": 291304556,
-          "perf": null,
-          "adr_pct": 9.81,
-          "adr_dvol": 92772968
-        }
-      ]
-    },
-    {
-      "key": "4_Strongest_Stock_JK",
-      "label": "Strongest Stock ($300M–$10B)",
-      "group": "operational",
-      "stocks": [
-        {
-          "ticker": "INSW",
-          "industry": "Marine Shipping",
-          "close": 108.31,
-          "change": 2.53,
-          "volume": 678656,
-          "market_cap": 5364736267,
-          "perf": null,
-          "adr_pct": 3.84,
-          "adr_dvol": 365111686
-        },
-        {
-          "ticker": "PAYS",
-          "industry": "Miscellaneous Commercial Services",
-          "close": 12.72,
-          "change": 0.39,
-          "volume": 575986,
-          "market_cap": 718198607,
-          "perf": null,
-          "adr_pct": 4.95,
-          "adr_dvol": 48421199
-        },
-        {
-          "ticker": "COHU",
-          "industry": "Semiconductors",
-          "close": 66.07,
-          "change": -1.39,
-          "volume": 689176,
-          "market_cap": 3127650222,
-          "perf": null,
-          "adr_pct": 5.56,
-          "adr_dvol": 380263361
-        },
-        {
-          "ticker": "AMBQ",
-          "industry": "Semiconductors",
-          "close": 68.3,
-          "change": -2.13,
-          "volume": 277988,
-          "market_cap": 1651803828,
-          "perf": null,
-          "adr_pct": 5.62,
-          "adr_dvol": 259137198
-        },
-        {
-          "ticker": "INOD",
-          "industry": "Data Processing Services",
-          "close": 66.79,
-          "change": -3.5,
-          "volume": 1285575,
-          "market_cap": 2296417315,
-          "perf": null,
-          "adr_pct": 6.34,
-          "adr_dvol": 888232093
+          "close": 177.73,
+          "change": 0.23,
+          "volume": 1658542,
+          "market_cap": 23850684185,
+          "perf": 102.73,
+          "adr_pct": 4.29,
+          "adr_dvol": 1515280852,
+          "ema5_pct": 0.35
         }
       ]
     },
@@ -1281,48 +2088,695 @@
       "group": "operational",
       "stocks": [
         {
-          "ticker": "SCCO",
-          "industry": "Other Metals/Minerals",
-          "close": 202.63,
-          "change": -0.63,
-          "volume": 907576,
-          "market_cap": 171089360159,
+          "ticker": "MTSI",
+          "industry": "Semiconductors",
+          "close": 284.27,
+          "change": 2.05,
+          "volume": 912433,
+          "market_cap": 21709962268,
           "perf": null,
-          "adr_pct": 3.86,
-          "adr_dvol": 748978239
+          "adr_pct": 4.86,
+          "adr_dvol": 1874643654,
+          "ema5_pct": 1.12
         },
         {
-          "ticker": "HALO",
-          "industry": "Biotechnology",
-          "close": 112.89,
-          "change": -0.89,
-          "volume": 2236750,
-          "market_cap": 12812789515,
+          "ticker": "SCCO",
+          "industry": "Other Metals/Minerals",
+          "close": 202.55,
+          "change": -0.04,
+          "volume": 829045,
+          "market_cap": 171021816777,
           "perf": null,
-          "adr_pct": 2.69,
-          "adr_dvol": 972718643
+          "adr_pct": 3.79,
+          "adr_dvol": 738726389,
+          "ema5_pct": 0.18
+        },
+        {
+          "ticker": "ARW",
+          "industry": "Electronics Distributors",
+          "close": 230.23,
+          "change": -0.1,
+          "volume": 542489,
+          "market_cap": 11719955138,
+          "perf": null,
+          "adr_pct": 3.21,
+          "adr_dvol": 356991712,
+          "ema5_pct": 0.7
         },
         {
           "ticker": "HUM",
           "industry": "Managed Health Care",
-          "close": 389.63,
-          "change": -2.09,
-          "volume": 1492913,
-          "market_cap": 46786889158,
+          "close": 386.87,
+          "change": -0.71,
+          "volume": 1892586,
+          "market_cap": 46455467785,
           "perf": null,
-          "adr_pct": 3.61,
-          "adr_dvol": 1594079857
+          "adr_pct": 3.55,
+          "adr_dvol": 1699380664,
+          "ema5_pct": -0.03
+        }
+      ]
+    },
+    {
+      "key": "1_Fundamental_Growth",
+      "label": "Fundamental Growth",
+      "group": "operational",
+      "stocks": [
+        {
+          "ticker": "AGX",
+          "industry": "Engineering & Construction",
+          "close": 378.39,
+          "change": 6.53,
+          "volume": 423550,
+          "market_cap": 5308751902,
+          "perf": null,
+          "adr_pct": 5.92,
+          "adr_dvol": 1017692153,
+          "ema5_pct": 2.35
         },
         {
-          "ticker": "MTSI",
+          "ticker": "FORM",
           "industry": "Semiconductors",
-          "close": 278.56,
-          "change": -2.45,
-          "volume": 1067525,
-          "market_cap": 21273885665,
+          "close": 136.25,
+          "change": 4.03,
+          "volume": 1270880,
+          "market_cap": 10643949127,
           "perf": null,
-          "adr_pct": 5.13,
-          "adr_dvol": 1974810235
+          "adr_pct": 5.23,
+          "adr_dvol": 874327190,
+          "ema5_pct": 4.28
+        },
+        {
+          "ticker": "HPK",
+          "industry": "Oil & Gas Production",
+          "close": 7.79,
+          "change": 2.64,
+          "volume": 601150,
+          "market_cap": 985067343,
+          "perf": null,
+          "adr_pct": 6.03,
+          "adr_dvol": 33431741,
+          "ema5_pct": 0.66
+        },
+        {
+          "ticker": "YOU",
+          "industry": "Packaged Software",
+          "close": 41.22,
+          "change": 2.13,
+          "volume": 2111804,
+          "market_cap": 5576574900,
+          "perf": null,
+          "adr_pct": 4.26,
+          "adr_dvol": 440363378,
+          "ema5_pct": 2.64
+        },
+        {
+          "ticker": "SNDX",
+          "industry": "Biotechnology",
+          "close": 18.23,
+          "change": 2.1,
+          "volume": 1499417,
+          "market_cap": 1628332466,
+          "perf": null,
+          "adr_pct": 4.38,
+          "adr_dvol": 179158357,
+          "ema5_pct": 1.01
+        },
+        {
+          "ticker": "FEIM",
+          "industry": "Telecommunications Equipment",
+          "close": 84.15,
+          "change": 2.01,
+          "volume": 453017,
+          "market_cap": 948647103,
+          "perf": null,
+          "adr_pct": 6.04,
+          "adr_dvol": 195544517,
+          "ema5_pct": -0.5
+        },
+        {
+          "ticker": "INSW",
+          "industry": "Marine Shipping",
+          "close": 110.24,
+          "change": 1.78,
+          "volume": 469916,
+          "market_cap": 5460331623,
+          "perf": null,
+          "adr_pct": 3.77,
+          "adr_dvol": 340864178,
+          "ema5_pct": 2.39
+        },
+        {
+          "ticker": "QNST",
+          "industry": "Advertising/Marketing Services",
+          "close": 14.44,
+          "change": 1.62,
+          "volume": 845692,
+          "market_cap": 824327744,
+          "perf": null,
+          "adr_pct": 5.43,
+          "adr_dvol": 106597025,
+          "ema5_pct": -1.73
+        },
+        {
+          "ticker": "CARE",
+          "industry": "Regional Banks",
+          "close": 30.12,
+          "change": 1.55,
+          "volume": 281798,
+          "market_cap": 667577617,
+          "perf": null,
+          "adr_pct": 2.55,
+          "adr_dvol": 25379022,
+          "ema5_pct": 0.09
+        },
+        {
+          "ticker": "NEXA",
+          "industry": "Other Metals/Minerals",
+          "close": 12.38,
+          "change": 1.23,
+          "volume": 477194,
+          "market_cap": 1639590055,
+          "perf": null,
+          "adr_pct": 5.31,
+          "adr_dvol": 50226506,
+          "ema5_pct": -0.88
+        },
+        {
+          "ticker": "SANM",
+          "industry": "Electronic Production Equipment",
+          "close": 222.73,
+          "change": 1.21,
+          "volume": 563383,
+          "market_cap": 11937738625,
+          "perf": null,
+          "adr_pct": 4.64,
+          "adr_dvol": 682701818,
+          "ema5_pct": 1.16
+        },
+        {
+          "ticker": "VMET",
+          "industry": "Investment Trusts/Mutual Funds",
+          "close": 9.03,
+          "change": 1.18,
+          "volume": 201131,
+          "market_cap": 982186270,
+          "perf": null,
+          "adr_pct": 4.86,
+          "adr_dvol": 11970514,
+          "ema5_pct": -1.02
+        },
+        {
+          "ticker": "XMTR",
+          "industry": "Information Technology Services",
+          "close": 104.23,
+          "change": 1.06,
+          "volume": 797884,
+          "market_cap": 5974836288,
+          "perf": null,
+          "adr_pct": 5.09,
+          "adr_dvol": 568428736,
+          "ema5_pct": 2.11
+        },
+        {
+          "ticker": "ECG",
+          "industry": "Engineering & Construction",
+          "close": 117.8,
+          "change": 0.98,
+          "volume": 416073,
+          "market_cap": 6015319935,
+          "perf": null,
+          "adr_pct": 4.31,
+          "adr_dvol": 205446819,
+          "ema5_pct": 0.86
+        },
+        {
+          "ticker": "IESC",
+          "industry": "Engineering & Construction",
+          "close": 324.44,
+          "change": 0.73,
+          "volume": 160082,
+          "market_cap": 12928515280,
+          "perf": null,
+          "adr_pct": 5.09,
+          "adr_dvol": 376992730,
+          "ema5_pct": 0.52
+        },
+        {
+          "ticker": "OOMA",
+          "industry": "Major Telecommunications",
+          "close": 21.29,
+          "change": 0.52,
+          "volume": 269567,
+          "market_cap": 587604033,
+          "perf": null,
+          "adr_pct": 4.54,
+          "adr_dvol": 54109940,
+          "ema5_pct": -1.51
+        },
+        {
+          "ticker": "STNG",
+          "industry": "Marine Shipping",
+          "close": 83.57,
+          "change": 0.46,
+          "volume": 1284274,
+          "market_cap": 4185298591,
+          "perf": null,
+          "adr_pct": 3.22,
+          "adr_dvol": 323887260,
+          "ema5_pct": 0.75
+        },
+        {
+          "ticker": "PARR",
+          "industry": "Oil Refining/Marketing",
+          "close": 78.31,
+          "change": 0.44,
+          "volume": 747565,
+          "market_cap": 3923301781,
+          "perf": null,
+          "adr_pct": 5.4,
+          "adr_dvol": 467545944,
+          "ema5_pct": -0.08
+        },
+        {
+          "ticker": "FIX",
+          "industry": "Engineering & Construction",
+          "close": 1665.05,
+          "change": 0.41,
+          "volume": 275061,
+          "market_cap": 58600318068,
+          "perf": null,
+          "adr_pct": 4.31,
+          "adr_dvol": 2356346694,
+          "ema5_pct": 0.79
+        },
+        {
+          "ticker": "NVGS",
+          "industry": "Marine Shipping",
+          "close": 22.99,
+          "change": 0.31,
+          "volume": 336019,
+          "market_cap": 1413727038,
+          "perf": null,
+          "adr_pct": 3.09,
+          "adr_dvol": 37197572,
+          "ema5_pct": -0.78
+        },
+        {
+          "ticker": "PAY",
+          "industry": "Miscellaneous Commercial Services",
+          "close": 30.0,
+          "change": 0.27,
+          "volume": 855136,
+          "market_cap": 3778189400,
+          "perf": null,
+          "adr_pct": 5.32,
+          "adr_dvol": 223801271,
+          "ema5_pct": -2.2
+        },
+        {
+          "ticker": "INOD",
+          "industry": "Data Processing Services",
+          "close": 66.94,
+          "change": 0.22,
+          "volume": 963081,
+          "market_cap": 2301574827,
+          "perf": null,
+          "adr_pct": 6.21,
+          "adr_dvol": 865903171,
+          "ema5_pct": -0.66
+        },
+        {
+          "ticker": "PHAT",
+          "industry": "Pharmaceuticals: Major",
+          "close": 7.36,
+          "change": 0.14,
+          "volume": 657260,
+          "market_cap": 595430928,
+          "perf": null,
+          "adr_pct": 6.24,
+          "adr_dvol": 66471465,
+          "ema5_pct": 0.18
+        },
+        {
+          "ticker": "SCCO",
+          "industry": "Other Metals/Minerals",
+          "close": 202.55,
+          "change": -0.04,
+          "volume": 829045,
+          "market_cap": 171021816777,
+          "perf": null,
+          "adr_pct": 3.79,
+          "adr_dvol": 738726389,
+          "ema5_pct": 0.18
+        },
+        {
+          "ticker": "BRZE",
+          "industry": "Internet Software/Services",
+          "close": 23.15,
+          "change": -0.09,
+          "volume": 1786253,
+          "market_cap": 2629479439,
+          "perf": null,
+          "adr_pct": 6.42,
+          "adr_dvol": 282153810,
+          "ema5_pct": -3.32
+        },
+        {
+          "ticker": "ELF",
+          "industry": "Household/Personal Care",
+          "close": 101.7,
+          "change": -0.1,
+          "volume": 879418,
+          "market_cap": 6001112973,
+          "perf": null,
+          "adr_pct": 4.17,
+          "adr_dvol": 550310948,
+          "ema5_pct": 0.92
+        },
+        {
+          "ticker": "ARW",
+          "industry": "Electronics Distributors",
+          "close": 230.23,
+          "change": -0.1,
+          "volume": 542489,
+          "market_cap": 11719955138,
+          "perf": null,
+          "adr_pct": 3.21,
+          "adr_dvol": 356991712,
+          "ema5_pct": 0.7
+        },
+        {
+          "ticker": "MFA",
+          "industry": "Real Estate Investment Trusts",
+          "close": 8.0,
+          "change": -0.12,
+          "volume": 1858277,
+          "market_cap": 808703491,
+          "perf": null,
+          "adr_pct": 2.14,
+          "adr_dvol": 32805460,
+          "ema5_pct": -1.59
+        },
+        {
+          "ticker": "MSGE",
+          "industry": "Movies/Entertainment",
+          "close": 81.65,
+          "change": -0.15,
+          "volume": 404729,
+          "market_cap": 3862492545,
+          "perf": null,
+          "adr_pct": 3.1,
+          "adr_dvol": 150410602,
+          "ema5_pct": 1.3
+        },
+        {
+          "ticker": "COHU",
+          "industry": "Semiconductors",
+          "close": 65.97,
+          "change": -0.15,
+          "volume": 660558,
+          "market_cap": 3122916437,
+          "perf": null,
+          "adr_pct": 5.48,
+          "adr_dvol": 357755259,
+          "ema5_pct": 1.61
+        },
+        {
+          "ticker": "LPG",
+          "industry": "Marine Shipping",
+          "close": 54.23,
+          "change": -0.24,
+          "volume": 396770,
+          "market_cap": 2320104745,
+          "perf": null,
+          "adr_pct": 3.77,
+          "adr_dvol": 133931128,
+          "ema5_pct": -0.08
+        },
+        {
+          "ticker": "BBT",
+          "industry": "Regional Banks",
+          "close": 27.74,
+          "change": -0.25,
+          "volume": 1069470,
+          "market_cap": 2325058200,
+          "perf": null,
+          "adr_pct": 2.43,
+          "adr_dvol": 94258733,
+          "ema5_pct": -1.33
+        },
+        {
+          "ticker": "AAON",
+          "industry": "Industrial Machinery",
+          "close": 85.11,
+          "change": -0.28,
+          "volume": 935845,
+          "market_cap": 7017217632,
+          "perf": null,
+          "adr_pct": 5.05,
+          "adr_dvol": 571985337,
+          "ema5_pct": 0.76
+        },
+        {
+          "ticker": "ATRO",
+          "industry": "Aerospace & Defense",
+          "close": 67.46,
+          "change": -0.28,
+          "volume": 554054,
+          "market_cap": 2899528065,
+          "perf": null,
+          "adr_pct": 4.89,
+          "adr_dvol": 250271947,
+          "ema5_pct": -1.03
+        },
+        {
+          "ticker": "SEZL",
+          "industry": "Packaged Software",
+          "close": 107.97,
+          "change": -0.3,
+          "volume": 348561,
+          "market_cap": 3635891355,
+          "perf": null,
+          "adr_pct": 5.52,
+          "adr_dvol": 354317002,
+          "ema5_pct": -1.41
+        },
+        {
+          "ticker": "KNSA",
+          "industry": "Pharmaceuticals: Major",
+          "close": 75.73,
+          "change": -0.49,
+          "volume": 620703,
+          "market_cap": 5908758713,
+          "perf": null,
+          "adr_pct": 3.32,
+          "adr_dvol": 148254566,
+          "ema5_pct": -0.32
+        },
+        {
+          "ticker": "HSHP",
+          "industry": "Marine Shipping",
+          "close": 17.24,
+          "change": -0.52,
+          "volume": 429789,
+          "market_cap": 813210758,
+          "perf": null,
+          "adr_pct": 3.56,
+          "adr_dvol": 34953911,
+          "ema5_pct": -2.17
+        },
+        {
+          "ticker": "FBK",
+          "industry": "Major Banks",
+          "close": 51.89,
+          "change": -0.73,
+          "volume": 544537,
+          "market_cap": 2593365549,
+          "perf": null,
+          "adr_pct": 2.0,
+          "adr_dvol": 88259826,
+          "ema5_pct": -1.11
+        },
+        {
+          "ticker": "TOWN",
+          "industry": "Regional Banks",
+          "close": 35.82,
+          "change": -0.75,
+          "volume": 582447,
+          "market_cap": 3311103023,
+          "perf": null,
+          "adr_pct": 1.61,
+          "adr_dvol": 32171650,
+          "ema5_pct": -0.95
+        },
+        {
+          "ticker": "KVYO",
+          "industry": "Packaged Software",
+          "close": 15.25,
+          "change": -0.97,
+          "volume": 7493596,
+          "market_cap": 4342093326,
+          "perf": null,
+          "adr_pct": 6.37,
+          "adr_dvol": 718732586,
+          "ema5_pct": -2.53
+        },
+        {
+          "ticker": "PNTG",
+          "industry": "Medical/Nursing Services",
+          "close": 40.5,
+          "change": -0.98,
+          "volume": 311262,
+          "market_cap": 1414627469,
+          "perf": null,
+          "adr_pct": 3.43,
+          "adr_dvol": 75195787,
+          "ema5_pct": 0.32
+        },
+        {
+          "ticker": "AAMI",
+          "industry": "Investment Managers",
+          "close": 92.48,
+          "change": -1.4,
+          "volume": 433540,
+          "market_cap": 3282127115,
+          "perf": null,
+          "adr_pct": 3.45,
+          "adr_dvol": 142360713,
+          "ema5_pct": -0.44
+        },
+        {
+          "ticker": "INDB",
+          "industry": "Regional Banks",
+          "close": 78.16,
+          "change": -1.73,
+          "volume": 343491,
+          "market_cap": 3696639545,
+          "perf": null,
+          "adr_pct": 1.98,
+          "adr_dvol": 67405996,
+          "ema5_pct": -1.9
+        },
+        {
+          "ticker": "HRMY",
+          "industry": "Pharmaceuticals: Major",
+          "close": 39.29,
+          "change": -1.8,
+          "volume": 786675,
+          "market_cap": 2288107932,
+          "perf": null,
+          "adr_pct": 3.41,
+          "adr_dvol": 156531716,
+          "ema5_pct": -2.63
+        },
+        {
+          "ticker": "FCFS",
+          "industry": "Finance/Rental/Leasing",
+          "close": 212.82,
+          "change": -1.9,
+          "volume": 287878,
+          "market_cap": 9230386681,
+          "perf": null,
+          "adr_pct": 3.09,
+          "adr_dvol": 238781478,
+          "ema5_pct": -1.42
+        },
+        {
+          "ticker": "COCO",
+          "industry": "Food: Specialty/Candy",
+          "close": 56.55,
+          "change": -1.93,
+          "volume": 750800,
+          "market_cap": 3245805016,
+          "perf": null,
+          "adr_pct": 4.42,
+          "adr_dvol": 367441967,
+          "ema5_pct": -1.73
+        },
+        {
+          "ticker": "STLN",
+          "industry": "Medical/Nursing Services",
+          "close": 6.51,
+          "change": -1.96,
+          "volume": 972913,
+          "market_cap": 650888917,
+          "perf": null,
+          "adr_pct": 6.12,
+          "adr_dvol": 66020538,
+          "ema5_pct": -1.69
+        },
+        {
+          "ticker": "MAMA",
+          "industry": "Food: Meat/Fish/Dairy",
+          "close": 12.87,
+          "change": -2.13,
+          "volume": 663512,
+          "market_cap": 606787914,
+          "perf": null,
+          "adr_pct": 5.57,
+          "adr_dvol": 62858936,
+          "ema5_pct": -2.42
+        },
+        {
+          "ticker": "EZPW",
+          "industry": "Finance/Rental/Leasing",
+          "close": 30.16,
+          "change": -2.17,
+          "volume": 498762,
+          "market_cap": 1853132227,
+          "perf": null,
+          "adr_pct": 4.04,
+          "adr_dvol": 90427404,
+          "ema5_pct": -1.3
+        },
+        {
+          "ticker": "DGII",
+          "industry": "Telecommunications Equipment",
+          "close": 76.5,
+          "change": -2.2,
+          "volume": 315360,
+          "market_cap": 2903031189,
+          "perf": null,
+          "adr_pct": 3.5,
+          "adr_dvol": 107502348,
+          "ema5_pct": -0.11
+        },
+        {
+          "ticker": "ESTA",
+          "industry": "Medical Specialties",
+          "close": 63.7,
+          "change": -2.51,
+          "volume": 516873,
+          "market_cap": 1898380500,
+          "perf": null,
+          "adr_pct": 4.64,
+          "adr_dvol": 92300330,
+          "ema5_pct": -2.97
+        },
+        {
+          "ticker": "ANIP",
+          "industry": "Biotechnology",
+          "close": 72.62,
+          "change": -2.95,
+          "volume": 328842,
+          "market_cap": 1668107019,
+          "perf": null,
+          "adr_pct": 3.24,
+          "adr_dvol": 119023169,
+          "ema5_pct": -1.97
+        },
+        {
+          "ticker": "HCC",
+          "industry": "Coal",
+          "close": 88.03,
+          "change": -4.05,
+          "volume": 741921,
+          "market_cap": 4648167555,
+          "perf": null,
+          "adr_pct": 4.61,
+          "adr_dvol": 309247505,
+          "ema5_pct": -1.91
         }
       ]
     },
@@ -1332,257 +2786,316 @@
       "group": "operational",
       "stocks": [
         {
-          "ticker": "SEPN",
-          "industry": "Biotechnology",
-          "close": 39.74,
-          "change": 5.22,
-          "volume": 338337,
-          "market_cap": 1854941806,
+          "ticker": "INSP",
+          "industry": "Medical Specialties",
+          "close": 73.18,
+          "change": 4.54,
+          "volume": 873523,
+          "market_cap": 2115661294,
+          "perf": null,
+          "adr_pct": 4.47,
+          "adr_dvol": 293472041,
+          "ema5_pct": 2.5
+        },
+        {
+          "ticker": "PSIX",
+          "industry": "Auto Parts: OEM",
+          "close": 47.1,
+          "change": 3.43,
+          "volume": 253283,
+          "market_cap": 1086382601,
           "perf": null,
           "adr_pct": 5.06,
-          "adr_dvol": 68963644
+          "adr_dvol": 108961456,
+          "ema5_pct": 1.67
         },
         {
-          "ticker": "CBLL",
-          "industry": "Medical Specialties",
-          "close": 24.51,
-          "change": 3.46,
-          "volume": 217929,
-          "market_cap": 940647284,
-          "perf": null,
-          "adr_pct": 3.54,
-          "adr_dvol": 36169753
-        },
-        {
-          "ticker": "DBI",
-          "industry": "Apparel/Footwear Retail",
-          "close": 6.29,
-          "change": 2.61,
-          "volume": 687769,
-          "market_cap": 321567967,
-          "perf": null,
-          "adr_pct": 5.42,
-          "adr_dvol": 25721534
-        },
-        {
-          "ticker": "ICHR",
-          "industry": "Industrial Machinery",
-          "close": 59.42,
-          "change": 2.55,
-          "volume": 699445,
-          "market_cap": 2225530368,
-          "perf": null,
-          "adr_pct": 5.86,
-          "adr_dvol": 251745533
-        },
-        {
-          "ticker": "INSW",
-          "industry": "Marine Shipping",
-          "close": 108.31,
-          "change": 2.53,
-          "volume": 678656,
-          "market_cap": 5364736267,
-          "perf": null,
-          "adr_pct": 3.84,
-          "adr_dvol": 365111686
-        },
-        {
-          "ticker": "CVLT",
+          "ticker": "QLYS",
           "industry": "Packaged Software",
-          "close": 148.08,
-          "change": 1.75,
-          "volume": 640820,
-          "market_cap": 6137110310,
+          "close": 178.35,
+          "change": 2.6,
+          "volume": 500080,
+          "market_cap": 6170018678,
           "perf": null,
-          "adr_pct": 3.98,
-          "adr_dvol": 359179173
+          "adr_pct": 5.14,
+          "adr_dvol": 626477331,
+          "ema5_pct": 0.47
         },
         {
-          "ticker": "VAC",
-          "industry": "Other Consumer Services",
-          "close": 104.56,
-          "change": 1.69,
-          "volume": 333625,
-          "market_cap": 3596374742,
+          "ticker": "BRUN",
+          "industry": "Packaged Software",
+          "close": 16.65,
+          "change": 2.52,
+          "volume": 1412980,
+          "market_cap": 1396021555,
           "perf": null,
-          "adr_pct": 4.04,
-          "adr_dvol": 198401621
+          "adr_pct": 9.02,
+          "adr_dvol": 339387238,
+          "ema5_pct": 0.39
         },
         {
-          "ticker": "ECO",
-          "industry": "Marine Shipping",
-          "close": 79.17,
-          "change": 1.63,
-          "volume": 561882,
-          "market_cap": 3036071587,
-          "perf": null,
-          "adr_pct": 4.14,
-          "adr_dvol": 328908876
-        },
-        {
-          "ticker": "FAC",
-          "industry": "Financial Conglomerates",
-          "close": 6.38,
-          "change": 1.59,
-          "volume": 316683,
-          "market_cap": 682808307,
-          "perf": null,
-          "adr_pct": 7.73,
-          "adr_dvol": 28822815
-        },
-        {
-          "ticker": "EBS",
+          "ticker": "MANE",
           "industry": "Pharmaceuticals: Major",
-          "close": 6.86,
-          "change": 1.03,
-          "volume": 682897,
-          "market_cap": 351735072,
+          "close": 117.82,
+          "change": 2.45,
+          "volume": 481703,
+          "market_cap": 4922535624,
           "perf": null,
-          "adr_pct": 4.91,
-          "adr_dvol": 39836795
+          "adr_pct": 5.17,
+          "adr_dvol": 565736910,
+          "ema5_pct": 1.76
         },
         {
-          "ticker": "DIOD",
-          "industry": "Semiconductors",
-          "close": 96.37,
-          "change": 0.55,
-          "volume": 469585,
-          "market_cap": 4438002584,
+          "ticker": "SENS",
+          "industry": "Electronic Components",
+          "close": 10.05,
+          "change": 2.13,
+          "volume": 606989,
+          "market_cap": 531384251,
           "perf": null,
-          "adr_pct": 4.74,
-          "adr_dvol": 243255443
-        },
-        {
-          "ticker": "PBYI",
-          "industry": "Pharmaceuticals: Major",
-          "close": 9.82,
-          "change": 0.51,
-          "volume": 245941,
-          "market_cap": 506909087,
-          "perf": null,
-          "adr_pct": 4.06,
-          "adr_dvol": 12207044
-        },
-        {
-          "ticker": "CSTL",
-          "industry": "Medical Specialties",
-          "close": 35.93,
-          "change": 0.34,
-          "volume": 228425,
-          "market_cap": 1097643833,
-          "perf": null,
-          "adr_pct": 4.15,
-          "adr_dvol": 63375951
-        },
-        {
-          "ticker": "MTW",
-          "industry": "Trucks/Construction/Farm Machinery",
-          "close": 22.17,
-          "change": 0.14,
-          "volume": 445523,
-          "market_cap": 799493847,
-          "perf": null,
-          "adr_pct": 4.02,
-          "adr_dvol": 40909396
-        },
-        {
-          "ticker": "FIX",
-          "industry": "Engineering & Construction",
-          "close": 1658.3,
-          "change": -0.04,
-          "volume": 335365,
-          "market_cap": 58362755836,
-          "perf": null,
-          "adr_pct": 4.34,
-          "adr_dvol": 2382059546
-        },
-        {
-          "ticker": "IESC",
-          "industry": "Engineering & Construction",
-          "close": 322.09,
-          "change": -0.63,
-          "volume": 145763,
-          "market_cap": 12834870909,
-          "perf": null,
-          "adr_pct": 5.2,
-          "adr_dvol": 416913837
-        },
-        {
-          "ticker": "SITM",
-          "industry": "Semiconductors",
-          "close": 656.65,
-          "change": -0.85,
-          "volume": 335445,
-          "market_cap": 19746145968,
-          "perf": null,
-          "adr_pct": 6.09,
-          "adr_dvol": 2204117606
-        },
-        {
-          "ticker": "EFOR",
-          "industry": "Information Technology Services",
-          "close": 32.83,
-          "change": -0.88,
-          "volume": 461421,
-          "market_cap": 1346029956,
-          "perf": null,
-          "adr_pct": 5.03,
-          "adr_dvol": 122852935
+          "adr_pct": 4.84,
+          "adr_dvol": 41588993,
+          "ema5_pct": 0.84
         },
         {
           "ticker": "PUBM",
           "industry": "Internet Software/Services",
-          "close": 18.41,
-          "change": -1.02,
-          "volume": 839466,
-          "market_cap": 838576693,
+          "close": 18.8,
+          "change": 2.12,
+          "volume": 701772,
+          "market_cap": 856341167,
           "perf": null,
-          "adr_pct": 3.94,
-          "adr_dvol": 62579880
+          "adr_pct": 3.77,
+          "adr_dvol": 61592662,
+          "ema5_pct": 2.18
         },
         {
-          "ticker": "VIA",
-          "industry": "Packaged Software",
-          "close": 29.1,
-          "change": -1.05,
-          "volume": 640979,
-          "market_cap": 2371813368,
-          "perf": null,
-          "adr_pct": 4.69,
-          "adr_dvol": 171315729
-        },
-        {
-          "ticker": "BKSY",
-          "industry": "Packaged Software",
-          "close": 22.95,
-          "change": -1.29,
-          "volume": 595771,
-          "market_cap": 939225230,
-          "perf": null,
-          "adr_pct": 6.35,
-          "adr_dvol": 137697509
-        },
-        {
-          "ticker": "AOSL",
+          "ticker": "WOLF",
           "industry": "Semiconductors",
-          "close": 27.36,
-          "change": -2.04,
-          "volume": 392881,
-          "market_cap": 827893262,
+          "close": 28.13,
+          "change": 1.99,
+          "volume": 2042971,
+          "market_cap": 1488936853,
           "perf": null,
-          "adr_pct": 5.31,
-          "adr_dvol": 90024078
+          "adr_pct": 7.59,
+          "adr_dvol": 463624077,
+          "ema5_pct": 2.43
+        },
+        {
+          "ticker": "TASK",
+          "industry": "Miscellaneous Commercial Services",
+          "close": 8.23,
+          "change": 1.6,
+          "volume": 1050514,
+          "market_cap": 754584144,
+          "perf": null,
+          "adr_pct": 4.93,
+          "adr_dvol": 25923890,
+          "ema5_pct": 0.27
         },
         {
           "ticker": "PENG",
           "industry": "Semiconductors",
-          "close": 54.98,
-          "change": -2.21,
-          "volume": 1338567,
-          "market_cap": 2817323634,
+          "close": 55.79,
+          "change": 1.47,
+          "volume": 1196474,
+          "market_cap": 2858830206,
           "perf": null,
-          "adr_pct": 5.97,
-          "adr_dvol": 493917829
+          "adr_pct": 5.7,
+          "adr_dvol": 484123601,
+          "ema5_pct": 1.42
+        },
+        {
+          "ticker": "ECO",
+          "industry": "Marine Shipping",
+          "close": 80.25,
+          "change": 1.36,
+          "volume": 392823,
+          "market_cap": 3077488192,
+          "perf": null,
+          "adr_pct": 4.01,
+          "adr_dvol": 298956550,
+          "ema5_pct": 1.03
+        },
+        {
+          "ticker": "EBS",
+          "industry": "Pharmaceuticals: Major",
+          "close": 6.92,
+          "change": 0.87,
+          "volume": 745108,
+          "market_cap": 354811479,
+          "perf": null,
+          "adr_pct": 4.78,
+          "adr_dvol": 38200639,
+          "ema5_pct": 1.41
+        },
+        {
+          "ticker": "IESC",
+          "industry": "Engineering & Construction",
+          "close": 324.44,
+          "change": 0.73,
+          "volume": 160082,
+          "market_cap": 12928515280,
+          "perf": null,
+          "adr_pct": 5.09,
+          "adr_dvol": 376992730,
+          "ema5_pct": 0.52
+        },
+        {
+          "ticker": "VIA",
+          "industry": "Packaged Software",
+          "close": 29.25,
+          "change": 0.52,
+          "volume": 534097,
+          "market_cap": 2384039223,
+          "perf": null,
+          "adr_pct": 4.56,
+          "adr_dvol": 165454969,
+          "ema5_pct": 0.44
+        },
+        {
+          "ticker": "FIX",
+          "industry": "Engineering & Construction",
+          "close": 1665.05,
+          "change": 0.41,
+          "volume": 275061,
+          "market_cap": 58600318068,
+          "perf": null,
+          "adr_pct": 4.31,
+          "adr_dvol": 2356346694,
+          "ema5_pct": 0.79
+        },
+        {
+          "ticker": "EFOR",
+          "industry": "Information Technology Services",
+          "close": 32.9,
+          "change": 0.21,
+          "volume": 405997,
+          "market_cap": 1348900063,
+          "perf": null,
+          "adr_pct": 4.88,
+          "adr_dvol": 105612374,
+          "ema5_pct": 0.16
+        },
+        {
+          "ticker": "DBI",
+          "industry": "Apparel/Footwear Retail",
+          "close": 6.3,
+          "change": 0.16,
+          "volume": 595707,
+          "market_cap": 322079208,
+          "perf": null,
+          "adr_pct": 5.24,
+          "adr_dvol": 23912265,
+          "ema5_pct": 0.79
+        },
+        {
+          "ticker": "VAC",
+          "industry": "Other Consumer Services",
+          "close": 104.68,
+          "change": 0.11,
+          "volume": 378347,
+          "market_cap": 3600502202,
+          "perf": null,
+          "adr_pct": 4.03,
+          "adr_dvol": 195144564,
+          "ema5_pct": 1.29
+        },
+        {
+          "ticker": "AZTA",
+          "industry": "Medical/Nursing Services",
+          "close": 34.28,
+          "change": 0.09,
+          "volume": 813906,
+          "market_cap": 1501751740,
+          "perf": null,
+          "adr_pct": 3.5,
+          "adr_dvol": 105341060,
+          "ema5_pct": 0.47
+        },
+        {
+          "ticker": "MTW",
+          "industry": "Trucks/Construction/Farm Machinery",
+          "close": 22.12,
+          "change": -0.23,
+          "volume": 1391178,
+          "market_cap": 797690800,
+          "perf": null,
+          "adr_pct": 4.07,
+          "adr_dvol": 49935666,
+          "ema5_pct": 0.12
+        },
+        {
+          "ticker": "PBYI",
+          "industry": "Pharmaceuticals: Major",
+          "close": 9.78,
+          "change": -0.41,
+          "volume": 220569,
+          "market_cap": 504844246,
+          "perf": null,
+          "adr_pct": 3.95,
+          "adr_dvol": 11482760,
+          "ema5_pct": 0.47
+        },
+        {
+          "ticker": "SITM",
+          "industry": "Semiconductors",
+          "close": 651.43,
+          "change": -0.79,
+          "volume": 346496,
+          "market_cap": 19589174361,
+          "perf": null,
+          "adr_pct": 5.99,
+          "adr_dvol": 2125631170,
+          "ema5_pct": 0.86
+        },
+        {
+          "ticker": "PNTG",
+          "industry": "Medical/Nursing Services",
+          "close": 40.5,
+          "change": -0.98,
+          "volume": 311262,
+          "market_cap": 1414627469,
+          "perf": null,
+          "adr_pct": 3.43,
+          "adr_dvol": 75195787,
+          "ema5_pct": 0.32
+        },
+        {
+          "ticker": "SEPN",
+          "industry": "Biotechnology",
+          "close": 39.13,
+          "change": -1.53,
+          "volume": 564501,
+          "market_cap": 1826468897,
+          "perf": null,
+          "adr_pct": 5.02,
+          "adr_dvol": 73160654,
+          "ema5_pct": 0.49
+        },
+        {
+          "ticker": "WEST",
+          "industry": "Food: Specialty/Candy",
+          "close": 8.12,
+          "change": -1.58,
+          "volume": 275454,
+          "market_cap": 792734379,
+          "perf": null,
+          "adr_pct": 3.77,
+          "adr_dvol": 11467711,
+          "ema5_pct": 0.27
+        },
+        {
+          "ticker": "ARQQ",
+          "industry": "Packaged Software",
+          "close": 24.12,
+          "change": -2.11,
+          "volume": 212682,
+          "market_cap": 419746156,
+          "perf": null,
+          "adr_pct": 7.61,
+          "adr_dvol": 64823630,
+          "ema5_pct": 1.48
         }
       ]
     }
