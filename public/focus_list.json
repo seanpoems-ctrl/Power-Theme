@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-09-30T06:43:12.574157+00:00",
+  "scan_time": "2026-09-30T06:51:04.186387+00:00",
   "ema5_band_pct": 5.0,
   "scan_result": {
     "key": "Scan_Result",
@@ -1599,6 +1599,14 @@
   },
   "scans": [
     {
+      "key": "Mom_1W_Small",
+      "label": "1W Momentum — Small Cap",
+      "group": "momentum",
+      "mcap_group": "$300M - $10B",
+      "timeframe": "1 Week",
+      "stocks": []
+    },
+    {
       "key": "Mom_1M_Small",
       "label": "1M Momentum — Small Cap",
       "group": "momentum",
@@ -1955,6 +1963,22 @@
           "ema5_pct": 1.61
         }
       ]
+    },
+    {
+      "key": "Mom_1W_Large",
+      "label": "1W Momentum — Large Cap",
+      "group": "momentum",
+      "mcap_group": "> $10B",
+      "timeframe": "1 Week",
+      "stocks": []
+    },
+    {
+      "key": "Mom_1M_Large",
+      "label": "1M Momentum — Large Cap",
+      "group": "momentum",
+      "mcap_group": "> $10B",
+      "timeframe": "1 Month",
+      "stocks": []
     },
     {
       "key": "Mom_3M_Large",
@@ -2779,6 +2803,12 @@
           "ema5_pct": -1.91
         }
       ]
+    },
+    {
+      "key": "3_Post_Earnings_Cont_Base",
+      "label": "Post-Earnings Continuation Base",
+      "group": "operational",
+      "stocks": []
     },
     {
       "key": "Daily_Tightness_Swing",
