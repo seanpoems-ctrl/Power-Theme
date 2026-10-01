@@ -1,59 +1,6 @@
 {
-  "generated_at": "2026-10-01T01:57:34.749539+00:00",
+  "generated_at": "2026-10-01T05:31:33.459959+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 98.0,
-      "perf_1d": 7.32,
-      "leaders": [
-        {
-          "ticker": "HPE",
-          "price": 63.89,
-          "rs_52w": 98,
-          "adr_pct": 5.57,
-          "vol_surge": 1.63,
-          "mkt_cap": 84811723920,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Fintech",
-      "theme_rs": 92.0,
-      "perf_1d": 5.59,
-      "leaders": [
-        {
-          "ticker": "HOOD",
-          "price": 112.5,
-          "rs_52w": 92,
-          "adr_pct": 5.64,
-          "vol_surge": 1.66,
-          "mkt_cap": 101146755712,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Fintech",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
