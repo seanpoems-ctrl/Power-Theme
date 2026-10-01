@@ -29,7 +29,10 @@ MIN_COUNTS: dict[str, int] = {
     "dn50m":       0,   # 0 is valid in bull markets — stocks down 50%+ monthly are genuinely rare
     "up13_34":     5,
     "dn13_34":     5,
-    "atr_ext":    10,
+    "atr_ext":     5,   # 10x-ATR-extended stocks are rare: the daily count has sat at 8-14 for weeks
+                        # (median 9, never below 8 in the last 30 days), so a floor of 10 failed on
+                        # most days and left a red "exit code 1" on every run. 5 still catches a
+                        # truly empty or broken pull.
     "above50dma":  1,   # ≥50% above the 50-day MA is an extreme threshold — the recent
                         # archive shows 4-6 stocks on every normal day, never near 10
 }

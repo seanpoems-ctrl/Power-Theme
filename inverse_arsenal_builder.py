@@ -26,7 +26,9 @@ sys.dont_write_bytecode = True
 
 import json
 import logging
+import os
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -103,7 +105,8 @@ RELATED_ETFS = {
 ETF_RS_JSON = ROOT / "public" / "etf_rs.json"
 
 TV_COLS = ["name", "description", "close", "change", "volume", "average_volume_60d_calc",
-           "ATR", "Volatility.W", "EMA20", "SMA50", "leverage_ratio", "leveraged_flag"]
+           "ATR", "Volatility.W", "EMA20", "SMA50", "leverage_ratio", "leveraged_flag",
+           "Perf.W", "Perf.1M", "price_52_week_high"]   # last three: fallback when Yahoo is unavailable
 
 
 def _fetch_universe() -> pd.DataFrame:
@@ -182,9 +185,29 @@ def _select_core(df: pd.DataFrame) -> list[dict]:
     return picks
 
 
+def _download_closes(tickers: list[str]):
+    """Yahoo daily bars with retries. In CI this runs right after etf_rs_builder.py has pulled
+    ~210 tickers, and Yahoo can answer with nothing at all (yfinance then raises "No objects to
+    concatenate"), so wait and try again before giving up."""
+    waits = (0, 20, 60) if os.environ.get("CI") else (0, 5, 15)
+    for i, wait in enumerate(waits, 1):
+        if wait:
+            time.sleep(wait)
+        try:
+            data = yf.download(tickers, period="15mo", interval="1d", auto_adjust=False, progress=False)
+            if data is not None and not data.empty and "Close" in data:
+                return data
+            logger.warning("Yahoo returned no data (attempt %d/%d).", i, len(waits))
+        except Exception as e:  # yfinance raises ValueError when every ticker fails
+            logger.warning("Yahoo download failed (attempt %d/%d): %s", i, len(waits), e)
+    return None
+
+
 def _perf_table(tickers: list[str]) -> dict:
     """Price-only 1D / 1W / 1M plus the 52W-high gap, per ticker (Yahoo daily closes)."""
-    data = yf.download(tickers, period="15mo", interval="1d", auto_adjust=False, progress=False)
+    data = _download_closes(tickers)
+    if data is None:
+        return {}
     closes, highs = data["Close"], data["High"]
     out = {}
     for t in tickers:
@@ -197,6 +220,24 @@ def _perf_table(tickers: list[str]) -> dict:
         out[t] = {"perf_1d": _pct_back(s, 1), "perf_1w": _pct_back(s, 5), "perf_1m": _pct_back(s, 20),
                   "off_52w_high": round((float(s.iloc[-1]) / float(h) - 1) * 100, 2) if h else None,
                   "last_bar": s.index[-1].strftime("%Y-%m-%d")}
+    return out
+
+
+def _tv_perf_fallback(df: pd.DataFrame) -> dict:
+    """Yahoo is down: use TradingView's own 1D / 1W / 1M and 52W high so the file still refreshes.
+    TradingView's windows are not identical to the price-only lookbacks above (the UI footer says
+    so via perf_source), and the underlying-ETF columns stay empty."""
+    today = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d")
+    out = {}
+    for _, r in df.iterrows():
+        hi = r.get('price_52_week_high')
+        out[r['name']] = {
+            "perf_1d": round(float(r['change']), 2) if pd.notna(r['change']) else None,
+            "perf_1w": round(float(r['Perf.W']), 2) if pd.notna(r['Perf.W']) else None,
+            "perf_1m": round(float(r['Perf.1M']), 2) if pd.notna(r['Perf.1M']) else None,
+            "off_52w_high": round((float(r['close']) / float(hi) - 1) * 100, 2) if pd.notna(hi) and hi else None,
+            "last_bar": today,
+        }
     return out
 
 
@@ -240,8 +281,13 @@ def main() -> None:
 
     underlyings = sorted({p['underlying'] for p in core_picks if p['underlying']})
     perf = _perf_table(sorted(core_tickers | set(hot_df['name']) | set(underlyings)))
+    perf_source = "yahoo"
     if not perf:
-        logger.error("No price history came back — leaving %s untouched.", OUTPUT_JSON)
+        logger.warning("No Yahoo price history - falling back to TradingView performance figures.")
+        perf = _tv_perf_fallback(df[df['name'].isin(core_tickers | set(hot_df['name']))])
+        perf_source = "tradingview"
+    if not perf:
+        logger.error("No performance data from any source - leaving %s untouched.", OUTPUT_JSON)
         return
 
     etf_rs = _load_etf_rs()
@@ -269,6 +315,7 @@ def main() -> None:
     OUTPUT_JSON.write_text(json.dumps({
         "built_at": datetime.now(tz=timezone.utc).isoformat(),
         "as_of": last_bar,
+        "perf_source": perf_source,
         "rules": {"min_avg_volume": MIN_AVG_VOLUME, "min_dollar_volume": MIN_DOLLAR_VOLUME,
                   "hot_weekly_volatility": HOT_WEEKLY_VOLATILITY, "hot_leverage": list(HOT_LEVERAGE)},
         "core": core,

@@ -15247,6 +15247,9 @@ const InverseArsenalSection = ({ data, etfRsData = null, onMiniCharts = null }) 
             2x/3x funds reset daily and lose value in choppy markets — they are for short holds, not positions you carry.
             Long-VIX funds roll futures and decay steadily when volatility is flat. Check the real spread before sizing.
             {data.as_of && <span className="ml-2 font-mono">Data: {data.as_of}</span>}
+            {data.perf_source === "tradingview" && (
+              <span className="ml-2 text-amber-500">Yahoo was unavailable last night: 1D/1W/1M come from TradingView (windows differ slightly) and the Underlying columns are empty.</span>
+            )}
           </p>
         </div>
       )}
