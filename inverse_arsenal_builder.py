@@ -79,6 +79,29 @@ VOLATILITY = ["UVXY", "UVIX"]
 # as Leveraged or Non-leveraged), so they are fetched by name and signed negative here.
 CRYPTO_INVERSE = ["BTCZ", "SBIT", "BITI", "ETHD"]
 
+# Long-side ETFs (all tracked in etf_rs.json) that an arsenal vehicle expresses. Used to
+# tell the UI which weak-RS ETF each vehicle is the instrument for.
+RELATED_ETFS = {
+    "Nasdaq-100":               ["QQQ", "QQQE"],
+    "S&P 500":                  ["SPY", "IVV"],
+    "Dow 30":                   ["DIA"],
+    "Small Cap (Russell 2000)": ["IWM", "IJR", "IJS", "IJT"],
+    "Semiconductors":           ["SOXX", "SMH", "XSD"],
+    "Biotech":                  ["XBI", "IBB"],
+    "Energy":                   ["XLE", "XOP", "OIH", "RSPG", "XES"],
+    "Financials":               ["XLF"],
+    "Technology":               ["XLK", "RSPT", "IGV"],
+    "Gold Miners":              ["GDX", "GDXJ"],
+    "20Y Treasuries":           ["TLT"],
+    "Crude Oil":                ["USO"],
+    "Natural Gas":              ["UNG"],
+    "Gold":                     ["GLD"],
+    "Silver":                   ["SLV"],
+    "Bitcoin":                  ["IBIT"],
+    "Ethereum":                 ["ETHA"],
+}
+ETF_RS_JSON = ROOT / "public" / "etf_rs.json"
+
 TV_COLS = ["name", "description", "close", "change", "volume", "average_volume_60d_calc",
            "ATR", "Volatility.W", "EMA20", "SMA50", "leverage_ratio", "leveraged_flag"]
 
@@ -102,6 +125,23 @@ def _pct_back(s: pd.Series, bars_back: int):
         return None
     start = float(s.iloc[-1 - bars_back])
     return round((float(s.iloc[-1]) / start - 1) * 100, 2) if start > 0 else None
+
+
+def _load_etf_rs() -> dict:
+    """ETF RS table written earlier in the nightly run: {ticker: row}. Empty if unavailable."""
+    try:
+        return {e["ticker"]: e for e in json.loads(ETF_RS_JSON.read_text(encoding="utf-8")).get("etfs", [])}
+    except Exception as e:
+        logger.warning("etf_rs.json unavailable (%s) - underlying RS columns will be empty.", e)
+        return {}
+
+
+def _rs_1m_pct(hist) -> int | None:
+    """Where the latest RS-vs-SPY histogram bar sits in its 25-day range (same as the ETF RS table)."""
+    if not hist or len(hist) < 2:
+        return None
+    lo, hi = min(hist), max(hist)
+    return 50 if hi == lo else round((hist[-1] - lo) / (hi - lo) * 100)
 
 
 def _leverage_label(row) -> str:
@@ -204,13 +244,20 @@ def main() -> None:
         logger.error("No price history came back — leaving %s untouched.", OUTPUT_JSON)
         return
 
+    etf_rs = _load_etf_rs()
     core = []
     for p in core_picks:
         row = _row(by.loc[p['ticker']].rename(p['ticker']).to_dict() | {"name": p['ticker']}, perf,
                    {"group": p['group'], "exposure": p['exposure'], "underlying": p['underlying']})
         u = perf.get(p['underlying'], {}) if p['underlying'] else {}
-        row.update({"und_1w": u.get("perf_1w"), "und_1m": u.get("perf_1m"), "und_off_52w": u.get("off_52w_high")})
+        e = etf_rs.get(p['underlying'], {}) if p['underlying'] else {}
+        row.update({"und_1w": u.get("perf_1w"), "und_1m": u.get("perf_1m"), "und_off_52w": u.get("off_52w_high"),
+                    "und_rs_thrust": e.get("rs_thrust_1w"), "und_rs_1m": _rs_1m_pct(e.get("rs_histogram"))})
         core.append(row)
+
+    # Which weak-RS ETF each core vehicle is the instrument for (only ETFs present in etf_rs.json).
+    exposure_map = [{"etf": etf, "vehicle": r["ticker"], "exposure": r["exposure"]}
+                    for r in core for etf in RELATED_ETFS.get(r["exposure"], []) if etf in etf_rs]
 
     hot = []
     for _, r in hot_df.iterrows():
@@ -226,6 +273,7 @@ def main() -> None:
                   "hot_weekly_volatility": HOT_WEEKLY_VOLATILITY, "hot_leverage": list(HOT_LEVERAGE)},
         "core": core,
         "hot": hot,
+        "exposure_map": exposure_map,
     }, indent=2, ensure_ascii=False), encoding="utf-8")
     logger.info("Wrote %s: %d core (%d below a floor), %d hot.", OUTPUT_JSON, len(core),
                 sum(r["below_floor"] for r in core), len(hot))

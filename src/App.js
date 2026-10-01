@@ -14923,7 +14923,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
           </div>
 
           {/* ── Inverse Arsenal — ready-made vehicles for the short side ── */}
-          <InverseArsenalSection data={arsenalData}
+          <InverseArsenalSection data={arsenalData} etfRsData={etfRsData}
             onMiniCharts={(tickers, title) => setMiniChartsFor({ title, tickers })} />
 
         </div>
@@ -14999,7 +14999,7 @@ const TrendSparkline = ({ data = [] }) => {
 // Hot = other 2x/3x inverses passing Jeff Sun's screen (avg vol >2M, weekly vol >3%)
 // plus a $20M/day dollar-volume floor.
 // ─────────────────────────────────────────────────────────────────────────────
-const InverseArsenalSection = ({ data, onMiniCharts = null }) => {
+const InverseArsenalSection = ({ data, etfRsData = null, onMiniCharts = null }) => {
   const fmtPct  = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : `$${Math.round(v/1e6)}M`;
   const fmtVol  = v => v == null ? "—" : `${(v/1e6).toFixed(1)}M`;
@@ -15008,9 +15008,51 @@ const InverseArsenalSection = ({ data, onMiniCharts = null }) => {
   const hot  = data?.hot ?? [];
   const rules = data?.rules;
   const GROUP_ORDER = ["Index", "Sector", "Commodity", "Crypto", "Rates", "Volatility"];
-  const groups = GROUP_ORDER.map(g => [g, core.filter(r => r.group === g)]).filter(([, rows]) => rows.length > 0);
 
-  const TickerCell = ({ r }) => (
+  // Every column is sortable. Core rows sort within their own group (Index / Sector / …)
+  // so the grouping stays readable; Hot sorts as one list. Click again to flip direction.
+  const [vehicleOnly, setVehicleOnly] = React.useState(true);
+  const [coreSort, setCoreSort] = React.useState({ col: null, dir: "desc" });
+  const [hotSort,  setHotSort]  = React.useState({ col: null, dir: "desc" });
+  const toggle = (setter) => (col, textual) => setter(prev =>
+    prev.col === col ? { col, dir: prev.dir === "asc" ? "desc" : "asc" } : { col, dir: textual ? "asc" : "desc" });
+  const sortVal = (r, col) => col === "leverage" ? parseFloat(r.leverage)
+    : col === "above_ema20" ? (r.above_ema20 == null ? null : Number(r.above_ema20)) : r[col];
+  const sortRows = (rows, { col, dir }) => {
+    if (!col) return rows;
+    return [...rows].sort((a, b) => {
+      const av = sortVal(a, col), bv = sortVal(b, col);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return dir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return dir === "asc" ? av - bv : bv - av;
+    });
+  };
+  // Weakest-RS view: the ETF RS table's weakest groups, tagged with the arsenal vehicle that
+  // shorts them. 1M RS % is where the latest RS-vs-SPY bar sits in its 25-day range.
+  const rs1m = h => {
+    if (!h || h.length < 2) return null;
+    const lo = Math.min(...h), hi = Math.max(...h);
+    return hi === lo ? 50 : Math.round(((h[h.length - 1] - lo) / (hi - lo)) * 100);
+  };
+  const vehicleOf = Object.fromEntries((data?.exposure_map ?? []).map(m => [m.etf, m]));
+  const coreByTicker = Object.fromEntries(core.map(r => [r.ticker, r]));
+  const weakest = (() => {
+    let rows = (etfRsData?.etfs ?? [])
+      .map(e => ({ e, rs: rs1m(e.rs_histogram), thrust: e.rs_thrust_1w, veh: vehicleOf[e.ticker] }))
+      .filter(x => x.rs != null && x.thrust != null)
+      .sort((a, b) => a.rs - b.rs || a.thrust - b.thrust);
+    if (vehicleOnly) {
+      const seen = new Set();   // one row per vehicle: its weakest related ETF
+      rows = rows.filter(x => x.veh && !seen.has(x.veh.vehicle) && seen.add(x.veh.vehicle));
+    }
+    return rows.slice(0, vehicleOnly ? 10 : 15);
+  })();
+  const groups = GROUP_ORDER.map(g => [g, sortRows(core.filter(r => r.group === g), coreSort)]).filter(([, rows]) => rows.length > 0);
+  const hotRows = sortRows(hot, hotSort);
+
+  const tickerCell = r => (
     <td className="px-3 py-1.5 text-left whitespace-nowrap">
       <a href={`https://www.tradingview.com/chart/?symbol=${r.ticker}`} target="_blank" rel="noreferrer"
          className="font-mono font-bold text-rose-400 hover:underline">{r.ticker}</a>
@@ -15020,20 +15062,63 @@ const InverseArsenalSection = ({ data, onMiniCharts = null }) => {
         className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-amber-500/15 text-amber-300 align-middle">⚠ LIQ</span>}
     </td>
   );
-  const numCells = r => (
-    <>
-      <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.price != null ? `$${r.price.toFixed(2)}` : "—"}</td>
-      <td className={`px-3 py-1.5 text-right font-mono font-semibold ${cls(r.perf_1d)}`}>{fmtPct(r.perf_1d)}</td>
-      <td className={`px-3 py-1.5 text-right font-mono ${cls(r.perf_1w)}`}>{fmtPct(r.perf_1w)}</td>
-      <td className={`px-3 py-1.5 text-right font-mono ${cls(r.perf_1m)}`}>{fmtPct(r.perf_1m)}</td>
-      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.adr_pct != null ? `${r.adr_pct.toFixed(1)}%` : "—"}</td>
-      <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(r.dollar_volume)}</td>
-      <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden md:table-cell">{r.weekly_volatility != null ? `${r.weekly_volatility.toFixed(1)}%` : "—"}</td>
-    </>
+  // RS-vs-SPY cells: weak (<=30) rose, strong (>=70) green — weak underlying RS is what makes an inverse relevant.
+  const rsCls = v => v == null ? "text-zinc-500" : v <= 30 ? "text-rose-400 font-semibold" : v >= 70 ? "text-emerald-400" : "text-zinc-300";
+  const pctCell = (v, extra = "") => <td className={`px-3 py-1.5 text-right font-mono ${cls(v)} ${extra}`}>{fmtPct(v)}</td>;
+
+  // Column definitions: key, header, alignment, responsive visibility, tooltip, body cell.
+  const C = {
+    ticker:   { label: "Ticker", align: "left", textual: true, cell: tickerCell },
+    exposure: { label: "Exposure", align: "left", textual: true,
+                cell: r => <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[170px] truncate" title={r.description}>{r.exposure}</td> },
+    shorts:   { key: "exposure", label: "Shorts", align: "left", textual: true,
+                cell: r => <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[200px] truncate" title={r.description}>{r.exposure !== "—" ? r.exposure : r.description}</td> },
+    leverage: { label: "Lev", align: "right", cell: r => <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.leverage}</td> },
+    price:    { label: "Price", align: "right", cell: r => <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.price != null ? `$${r.price.toFixed(2)}` : "—"}</td> },
+    perf_1d:  { label: "1D", align: "right", cell: r => <td className={`px-3 py-1.5 text-right font-mono font-semibold ${cls(r.perf_1d)}`}>{fmtPct(r.perf_1d)}</td> },
+    perf_1w:  { label: "1W", align: "right", cell: r => pctCell(r.perf_1w) },
+    perf_1m:  { label: "1M", align: "right", cell: r => pctCell(r.perf_1m) },
+    adr_pct:  { label: "ADR%", align: "right", cell: r => <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.adr_pct != null ? `${r.adr_pct.toFixed(1)}%` : "—"}</td> },
+    dollar_volume: { label: "$Vol/day", align: "right", vis: "hidden sm:table-cell",
+                cell: r => <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(r.dollar_volume)}</td> },
+    weekly_volatility: { label: "Wk Vol", align: "right", vis: "hidden md:table-cell",
+                cell: r => <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden md:table-cell">{r.weekly_volatility != null ? `${r.weekly_volatility.toFixed(1)}%` : "—"}</td> },
+    above_ema20: { label: ">EMA20", align: "center", vis: "hidden md:table-cell", title: "Inverse fund's price above its own 20-day EMA",
+                cell: r => <td className="px-3 py-1.5 text-center hidden md:table-cell">{r.above_ema20 == null ? <span className="text-zinc-600">—</span>
+                  : <span className={r.above_ema20 ? "text-emerald-400" : "text-zinc-600"}>{r.above_ema20 ? "▲" : "▼"}</span>}</td> },
+    underlying: { label: "Underlying", align: "left", textual: true, vis: "hidden lg:table-cell", title: "The long-side ETF this vehicle shorts",
+                cell: r => <td className="px-3 py-1.5 text-left font-mono text-cyan-400 hidden lg:table-cell">{r.underlying ?? <span className="text-zinc-700">—</span>}</td> },
+    und_1w:   { label: "Und 1W", align: "right", vis: "hidden lg:table-cell", title: "Underlying ETF, 1-week change",
+                cell: r => pctCell(r.und_1w, "hidden lg:table-cell") },
+    und_1m:   { label: "Und 1M", align: "right", vis: "hidden lg:table-cell", title: "Underlying ETF, 1-month change",
+                cell: r => pctCell(r.und_1m, "hidden lg:table-cell") },
+    und_off_52w: { label: "Off High", align: "right", vis: "hidden lg:table-cell", title: "Underlying ETF's distance below its 52-week high",
+                cell: r => <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden lg:table-cell">{r.und_off_52w != null ? `${r.und_off_52w.toFixed(1)}%` : "—"}</td> },
+    und_rs_thrust: { label: "Und RS Thrust", align: "right", vis: "hidden lg:table-cell", title: "Underlying ETF's RS Thrust Rate % (ETF RS table). Low = weakening vs SPY.",
+                cell: r => <td className={`px-3 py-1.5 text-right font-mono hidden lg:table-cell ${rsCls(r.und_rs_thrust)}`}>{r.und_rs_thrust != null ? `${r.und_rs_thrust.toFixed(0)}%` : "—"}</td> },
+    und_rs_1m: { label: "Und 1M RS", align: "right", vis: "hidden lg:table-cell", title: "Underlying ETF's 1-Month RS % (ETF RS table). Low = weak vs SPY.",
+                cell: r => <td className={`px-3 py-1.5 text-right font-mono hidden lg:table-cell ${rsCls(r.und_rs_1m)}`}>{r.und_rs_1m != null ? `${r.und_rs_1m}%` : "—"}</td> },
+  };
+  const CORE_COLS = ["ticker", "exposure", "leverage", "price", "perf_1d", "perf_1w", "perf_1m", "adr_pct", "dollar_volume",
+                     "weekly_volatility", "above_ema20", "underlying", "und_1w", "und_1m", "und_off_52w", "und_rs_thrust", "und_rs_1m"];
+  const HOT_COLS  = ["ticker", "shorts", "leverage", "price", "perf_1d", "perf_1w", "perf_1m", "adr_pct", "dollar_volume", "weekly_volatility"];
+
+  const head = (keys, sort, setSort) => (
+    <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+      {keys.map(k => {
+        const c = C[k], col = c.key ?? k;
+        return (
+          <th key={k} title={c.title} onClick={() => toggle(setSort)(col, c.textual)}
+              className={`px-3 py-1.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors whitespace-nowrap ${c.align === "right" ? "text-right" : c.align === "center" ? "text-center" : "text-left"} ${c.vis ?? ""}`}>
+            {c.label}
+            {sort.col === col
+              ? <span className="ml-0.5 text-blue-400">{sort.dir === "asc" ? "↑" : "↓"}</span>
+              : <span className="ml-0.5 text-zinc-700">⇅</span>}
+          </th>
+        );
+      })}
+    </tr>
   );
-  const numHeads = ["Price", "1D", "1W", "1M", "ADR%"].map(h => <th key={h} className="px-3 py-1.5 font-medium text-right">{h}</th>);
-  const tail = [<th key="dv" className="px-3 py-1.5 font-medium text-right hidden sm:table-cell">$Vol/day</th>,
-                <th key="wv" className="px-3 py-1.5 font-medium text-right hidden md:table-cell">Wk Vol</th>];
 
   return (
     <div>
@@ -15057,46 +15142,75 @@ const InverseArsenalSection = ({ data, onMiniCharts = null }) => {
         <p className="text-sm text-zinc-500 italic py-4">No arsenal data yet — run <code className="text-zinc-400">python inverse_arsenal_builder.py</code>.</p>
       ) : (
         <div className="space-y-4">
+          <div>
+            <div className="flex items-baseline gap-2 mb-2">
+              <h4 className="text-[12px] font-semibold text-zinc-300">Weakest RS right now</h4>
+              <span className="text-[11px] text-zinc-600">ETF RS table, weakest first — the exposures an inverse vehicle is for</span>
+              <button onClick={() => setVehicleOnly(v => !v)}
+                className={`ml-auto text-[10px] font-semibold px-2 py-1 rounded border transition-colors ${vehicleOnly ? "bg-rose-500/15 border-rose-500/40 text-rose-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>
+                Vehicle only
+              </button>
+            </div>
+            {weakest.length === 0 ? (
+              <p className="text-xs text-zinc-600 italic">{etfRsData ? "No weak-RS ETFs with a vehicle right now." : "Loading ETF RS data…"}</p>
+            ) : (
+              <div className="overflow-x-auto rounded-lg border border-zinc-800">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+                      {[["#", "right"], ["ETF", "left"], ["Group", "left"], ["1M RS", "right"], ["RS Thrust", "right"], ["1M", "right"], ["Off High", "right"], ["Vehicle", "left"], ["Veh 1D", "right"], ["Veh $Vol", "right"]].map(([l, a]) => (
+                        <th key={l} className={`px-3 py-1.5 font-medium whitespace-nowrap ${a === "right" ? "text-right" : "text-left"}`}>{l}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weakest.map((x, i) => {
+                      const v = x.veh ? coreByTicker[x.veh.vehicle] : null;
+                      return (
+                        <tr key={x.e.ticker} className="border-t border-zinc-800/60 hover:bg-zinc-800/30">
+                          <td className="px-3 py-1.5 text-right font-mono text-zinc-600">{i + 1}</td>
+                          <td className="px-3 py-1.5 text-left font-mono font-bold text-cyan-400">{x.e.ticker}</td>
+                          <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[220px] truncate" title={x.e.label ?? x.e.theme}>{x.e.label ?? x.e.theme}</td>
+                          <td className={`px-3 py-1.5 text-right font-mono ${rsCls(x.rs)}`}>{x.rs}%</td>
+                          <td className={`px-3 py-1.5 text-right font-mono ${rsCls(x.thrust)}`}>{x.thrust.toFixed(0)}%</td>
+                          {pctCell(x.e.perf_1m)}
+                          <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{x.e.pct_off_52wh != null ? `${x.e.pct_off_52wh.toFixed(1)}%` : "—"}</td>
+                          {v ? (
+                            <>
+                              <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                                <a href={`https://www.tradingview.com/chart/?symbol=${v.ticker}`} target="_blank" rel="noreferrer"
+                                   className="font-mono font-bold text-rose-400 hover:underline">{v.ticker}</a>
+                                <span className="ml-1.5 font-mono text-[10px] text-zinc-500">{v.leverage}</span>
+                                {v.hot && <span className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-orange-500/15 text-orange-300 align-middle">HOT</span>}
+                                {v.below_floor && <span className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-amber-500/15 text-amber-300 align-middle">⚠ LIQ</span>}
+                              </td>
+                              {pctCell(v.perf_1d)}
+                              <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtDvol(v.dollar_volume)}</td>
+                            </>
+                          ) : (
+                            <td colSpan={3} className="px-3 py-1.5 text-left text-zinc-700">no vehicle in the arsenal</td>
+                          )}
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
           <div className="overflow-x-auto rounded-lg border border-zinc-800">
             <table className="w-full text-xs border-collapse">
-              <thead>
-                <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
-                  <th className="px-3 py-1.5 font-medium text-left">Ticker</th>
-                  <th className="px-3 py-1.5 font-medium text-left">Exposure</th>
-                  <th className="px-3 py-1.5 font-medium text-right">Lev</th>
-                  {numHeads}{tail}
-                  <th className="px-3 py-1.5 font-medium text-center hidden md:table-cell" title="Inverse fund's price above its own 20-day EMA">&gt;EMA20</th>
-                  <th className="px-3 py-1.5 font-medium text-left hidden lg:table-cell" title="The long-side ETF this vehicle shorts: 1W / 1M / distance below its 52W high">Underlying 1W · 1M · off high</th>
-                </tr>
-              </thead>
+              <thead>{head(CORE_COLS, coreSort, setCoreSort)}</thead>
               <tbody>
                 {groups.map(([g, rows]) => (
                   <React.Fragment key={g}>
                     <tr className="bg-zinc-900/70 border-t border-zinc-800/60">
-                      <td colSpan={12} className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500">{g}</td>
+                      <td colSpan={CORE_COLS.length} className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500">{g}</td>
                     </tr>
                     {rows.map(r => (
                       <tr key={r.ticker} className="border-t border-zinc-800/60 hover:bg-zinc-800/30">
-                        <TickerCell r={r} />
-                        <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[170px] truncate" title={r.description}>{r.exposure}</td>
-                        <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.leverage}</td>
-                        {numCells(r)}
-                        <td className="px-3 py-1.5 text-center hidden md:table-cell">
-                          {r.above_ema20 == null ? <span className="text-zinc-600">—</span>
-                            : <span className={r.above_ema20 ? "text-emerald-400" : "text-zinc-600"}>{r.above_ema20 ? "▲" : "▼"}</span>}
-                        </td>
-                        <td className="px-3 py-1.5 text-left font-mono text-[11px] hidden lg:table-cell whitespace-nowrap">
-                          {r.underlying ? (
-                            <>
-                              <span className="text-cyan-400 mr-1.5">{r.underlying}</span>
-                              <span className={cls(r.und_1w)}>{fmtPct(r.und_1w)}</span>
-                              <span className="text-zinc-700"> · </span>
-                              <span className={cls(r.und_1m)}>{fmtPct(r.und_1m)}</span>
-                              <span className="text-zinc-700"> · </span>
-                              <span className="text-zinc-400">{r.und_off_52w != null ? `${r.und_off_52w.toFixed(1)}%` : "—"}</span>
-                            </>
-                          ) : <span className="text-zinc-700">—</span>}
-                        </td>
+                        {CORE_COLS.map(k => <React.Fragment key={k}>{C[k].cell(r)}</React.Fragment>)}
                       </tr>
                     ))}
                   </React.Fragment>
@@ -15116,21 +15230,11 @@ const InverseArsenalSection = ({ data, onMiniCharts = null }) => {
             ) : (
               <div className="overflow-x-auto rounded-lg border border-zinc-800">
                 <table className="w-full text-xs border-collapse">
-                  <thead>
-                    <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
-                      <th className="px-3 py-1.5 font-medium text-left">Ticker</th>
-                      <th className="px-3 py-1.5 font-medium text-left">Shorts</th>
-                      <th className="px-3 py-1.5 font-medium text-right">Lev</th>
-                      {numHeads}{tail}
-                    </tr>
-                  </thead>
+                  <thead>{head(HOT_COLS, hotSort, setHotSort)}</thead>
                   <tbody>
-                    {hot.map(r => (
+                    {hotRows.map(r => (
                       <tr key={r.ticker} className="border-t border-zinc-800/60 hover:bg-zinc-800/30">
-                        <TickerCell r={{ ...r, hot: false }} />
-                        <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[200px] truncate" title={r.description}>{r.exposure !== "—" ? r.exposure : r.description}</td>
-                        <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.leverage}</td>
-                        {numCells(r)}
+                        {HOT_COLS.map(k => <React.Fragment key={k}>{C[k].cell({ ...r, hot: false })}</React.Fragment>)}
                       </tr>
                     ))}
                   </tbody>
