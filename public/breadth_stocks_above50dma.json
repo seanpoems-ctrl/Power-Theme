@@ -2,100 +2,76 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 7,
+  "count": 5,
   "stocks": [
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 94.8,
-      "change_pct": 4.04,
-      "adr_pct": 7.4,
-      "dollar_volume": "$552.5M",
-      "market_cap_b": 5.958,
+      "price": 98.46,
+      "change_pct": 3.86,
+      "adr_pct": 7.3,
+      "dollar_volume": "$603.0M",
+      "market_cap_b": 6.188,
       "rs_ibd": 98,
-      "above50dma_pct": 128.7
+      "above50dma_pct": 131.2
     },
     {
       "ticker": "IOVA",
       "company": "Iovance Biotherapeutics, Inc.",
       "industry": "Biotechnology",
-      "price": 14.82,
-      "change_pct": 2.56,
-      "adr_pct": 5.7,
-      "dollar_volume": "$350.5M",
-      "market_cap_b": 6.713,
+      "price": 14.23,
+      "change_pct": -3.98,
+      "adr_pct": 6.0,
+      "dollar_volume": "$324.8M",
+      "market_cap_b": 6.446,
       "rs_ibd": 99,
-      "above50dma_pct": 87.4
+      "above50dma_pct": 75.9
     },
     {
       "ticker": "SECZ",
       "company": "Securitize Corp.",
       "industry": "Packaged Software",
-      "price": 14.59,
-      "change_pct": -7.89,
-      "adr_pct": 9.0,
-      "dollar_volume": "$114.4M",
-      "market_cap_b": 2.382,
-      "rs_ibd": 76,
-      "above50dma_pct": 73.5
+      "price": 13.74,
+      "change_pct": -5.83,
+      "adr_pct": 9.6,
+      "dollar_volume": "$104.1M",
+      "market_cap_b": 2.243,
+      "rs_ibd": 70,
+      "above50dma_pct": 61.1
     },
     {
       "ticker": "GRAL",
       "company": "GRAIL, Inc.",
       "industry": "Medical Specialties",
-      "price": 140.12,
-      "change_pct": 2.6,
-      "adr_pct": 6.1,
-      "dollar_volume": "$303.1M",
-      "market_cap_b": 6.259,
-      "rs_ibd": 95,
-      "above50dma_pct": 72.1
+      "price": 132.56,
+      "change_pct": -5.4,
+      "adr_pct": 6.5,
+      "dollar_volume": "$279.8M",
+      "market_cap_b": 5.921,
+      "rs_ibd": 94,
+      "above50dma_pct": 60.5
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 192.57,
-      "change_pct": -5.35,
-      "adr_pct": 7.0,
-      "dollar_volume": "$3.47B",
-      "market_cap_b": 76.881,
+      "price": 188.94,
+      "change_pct": -1.89,
+      "adr_pct": 7.2,
+      "dollar_volume": "$3.33B",
+      "market_cap_b": 75.432,
       "rs_ibd": 98,
-      "above50dma_pct": 62.7
-    },
-    {
-      "ticker": "QMCO",
-      "company": "Quantum Corporation",
-      "industry": "Computer Peripherals",
-      "price": 31.72,
-      "change_pct": -3.47,
-      "adr_pct": 7.7,
-      "dollar_volume": "$74.7M",
-      "market_cap_b": 1.25,
-      "rs_ibd": 98,
-      "above50dma_pct": 51.6
-    },
-    {
-      "ticker": "SDGR",
-      "company": "Schrodinger, Inc.",
-      "industry": "Packaged Software",
-      "price": 31.05,
-      "change_pct": 2.37,
-      "adr_pct": 5.8,
-      "dollar_volume": "$105.8M",
-      "market_cap_b": 2.323,
-      "rs_ibd": 90,
-      "above50dma_pct": 50.0
+      "above50dma_pct": 56.2
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.25,
-    "spx_1m": 0.26,
-    "spx_3m": 2.25,
-    "spx_34d": -1.89,
-    "spx_qtd": 0.0,
-    "spx_mtd": 0.0
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-10-01T10:10:23+00:00"
+  "fetched_at_utc": "2026-10-01T23:09:19+00:00"
 }

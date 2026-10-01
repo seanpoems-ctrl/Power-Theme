@@ -2,43 +2,31 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 9,
+  "count": 5,
   "stocks": [
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 94.8,
-      "change_pct": 4.04,
-      "adr_pct": 7.4,
-      "dollar_volume": "$552.5M",
-      "market_cap_b": 5.958,
+      "price": 98.46,
+      "change_pct": 3.86,
+      "adr_pct": 7.3,
+      "dollar_volume": "$603.0M",
+      "market_cap_b": 6.188,
       "rs_ibd": 98,
-      "atr_ext_val": 17.38
+      "atr_ext_val": 17.86
     },
     {
       "ticker": "HZO",
       "company": "MarineMax, Inc. (FL)",
       "industry": "Specialty Stores",
-      "price": 52.3,
-      "change_pct": 0.11,
+      "price": 52.33,
+      "change_pct": 0.06,
       "adr_pct": 0.6,
-      "dollar_volume": "$36.6M",
-      "market_cap_b": 1.155,
-      "rs_ibd": 90,
-      "atr_ext_val": 15.79
-    },
-    {
-      "ticker": "IOVA",
-      "company": "Iovance Biotherapeutics, Inc.",
-      "industry": "Biotechnology",
-      "price": 14.82,
-      "change_pct": 2.56,
-      "adr_pct": 5.7,
-      "dollar_volume": "$350.5M",
-      "market_cap_b": 6.713,
-      "rs_ibd": 99,
-      "atr_ext_val": 15.23
+      "dollar_volume": "$38.5M",
+      "market_cap_b": 1.156,
+      "rs_ibd": 91,
+      "atr_ext_val": 15.02
     },
     {
       "ticker": "ARX",
@@ -47,79 +35,43 @@
       "price": 19.73,
       "change_pct": 0.0,
       "adr_pct": 0.9,
-      "dollar_volume": "$50.2M",
+      "dollar_volume": "$50.6M",
       "market_cap_b": 4.285,
-      "rs_ibd": 82,
-      "atr_ext_val": 13.64
+      "rs_ibd": 81,
+      "atr_ext_val": 13.36
     },
     {
-      "ticker": "GRAL",
-      "company": "GRAIL, Inc.",
-      "industry": "Medical Specialties",
-      "price": 140.12,
-      "change_pct": 2.6,
-      "adr_pct": 6.1,
-      "dollar_volume": "$303.1M",
-      "market_cap_b": 6.259,
-      "rs_ibd": 95,
-      "atr_ext_val": 11.81
-    },
-    {
-      "ticker": "MKTX",
-      "company": "MarketAxess Holdings, Inc.",
-      "industry": "Investment Banks/Brokers",
-      "price": 163.92,
-      "change_pct": -0.02,
-      "adr_pct": 0.4,
-      "dollar_volume": "$158.1M",
-      "market_cap_b": 5.77,
-      "rs_ibd": 70,
-      "atr_ext_val": 10.82
-    },
-    {
-      "ticker": "ATKR",
-      "company": "Atkore Inc.",
-      "industry": "Electrical Products",
-      "price": 94.75,
-      "change_pct": 0.02,
-      "adr_pct": 0.4,
-      "dollar_volume": "$75.0M",
-      "market_cap_b": 3.2,
-      "rs_ibd": 82,
-      "atr_ext_val": 10.17
-    },
-    {
-      "ticker": "ITGR",
-      "company": "Integer Holdings Corporation",
-      "industry": "Medical Specialties",
-      "price": 126.35,
-      "change_pct": 0.02,
-      "adr_pct": 0.4,
-      "dollar_volume": "$109.0M",
-      "market_cap_b": 4.296,
-      "rs_ibd": 73,
-      "atr_ext_val": 10.16
+      "ticker": "IOVA",
+      "company": "Iovance Biotherapeutics, Inc.",
+      "industry": "Biotechnology",
+      "price": 14.23,
+      "change_pct": -3.98,
+      "adr_pct": 6.0,
+      "dollar_volume": "$324.8M",
+      "market_cap_b": 6.446,
+      "rs_ibd": 99,
+      "atr_ext_val": 12.71
     },
     {
       "ticker": "ACVA",
       "company": "ACV Auctions Inc.",
       "industry": "Internet Software/Services",
-      "price": 10.43,
-      "change_pct": -0.1,
-      "adr_pct": 2.5,
-      "dollar_volume": "$121.8M",
-      "market_cap_b": 1.771,
-      "rs_ibd": 72,
-      "atr_ext_val": 10.05
+      "price": 10.45,
+      "change_pct": 0.19,
+      "adr_pct": 2.4,
+      "dollar_volume": "$103.9M",
+      "market_cap_b": 1.774,
+      "rs_ibd": 73,
+      "atr_ext_val": 10.47
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.25,
-    "spx_1m": 0.26,
-    "spx_3m": 2.25,
-    "spx_34d": -1.89,
-    "spx_qtd": 0.0,
-    "spx_mtd": 0.0
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-10-01T10:10:23+00:00"
+  "fetched_at_utc": "2026-10-01T23:09:19+00:00"
 }
