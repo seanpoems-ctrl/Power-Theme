@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-01T03:00:24.050078+00:00",
+  "built_at": "2026-10-01T05:18:53.839158+00:00",
   "as_of": "2026-09-30",
   "rules": {
     "min_avg_volume": 2000000,
@@ -33,7 +33,9 @@
       "pinned": true,
       "und_1w": -0.19,
       "und_1m": 4.54,
-      "und_off_52w": -1.19
+      "und_off_52w": -1.19,
+      "und_rs_thrust": 100.0,
+      "und_rs_1m": 100
     },
     {
       "group": "Index",
@@ -57,7 +59,9 @@
       "pinned": false,
       "und_1w": -0.67,
       "und_1m": 0.11,
-      "und_off_52w": -2.15
+      "und_off_52w": -2.15,
+      "und_rs_thrust": 100.0,
+      "und_rs_1m": 100
     },
     {
       "group": "Index",
@@ -81,7 +85,9 @@
       "pinned": false,
       "und_1w": -1.12,
       "und_1m": -3.64,
-      "und_off_52w": -6.99
+      "und_off_52w": -6.99,
+      "und_rs_thrust": 57.8,
+      "und_rs_1m": 85
     },
     {
       "group": "Index",
@@ -105,7 +111,9 @@
       "pinned": true,
       "und_1w": -1.43,
       "und_1m": -4.36,
-      "und_off_52w": -8.94
+      "und_off_52w": -8.94,
+      "und_rs_thrust": 42.4,
+      "und_rs_1m": 15
     },
     {
       "group": "Sector",
@@ -129,7 +137,9 @@
       "pinned": true,
       "und_1w": 0.52,
       "und_1m": 13.66,
-      "und_off_52w": -13.31
+      "und_off_52w": -13.31,
+      "und_rs_thrust": 100.0,
+      "und_rs_1m": 100
     },
     {
       "group": "Sector",
@@ -153,7 +163,9 @@
       "pinned": true,
       "und_1w": 1.6,
       "und_1m": -3.5,
-      "und_off_52w": -7.19
+      "und_off_52w": -7.19,
+      "und_rs_thrust": 82.3,
+      "und_rs_1m": 31
     },
     {
       "group": "Sector",
@@ -177,7 +189,9 @@
       "pinned": false,
       "und_1w": -1.39,
       "und_1m": -5.05,
-      "und_off_52w": -7.06
+      "und_off_52w": -7.06,
+      "und_rs_thrust": 50.3,
+      "und_rs_1m": 54
     },
     {
       "group": "Sector",
@@ -201,7 +215,9 @@
       "pinned": false,
       "und_1w": -6.16,
       "und_1m": -7.26,
-      "und_off_52w": -25.07
+      "und_off_52w": -25.07,
+      "und_rs_thrust": 4.8,
+      "und_rs_1m": 2
     },
     {
       "group": "Commodity",
@@ -225,7 +241,9 @@
       "pinned": false,
       "und_1w": -2.13,
       "und_1m": 3.3,
-      "und_off_52w": -10.83
+      "und_off_52w": -10.83,
+      "und_rs_thrust": 36.3,
+      "und_rs_1m": 52
     },
     {
       "group": "Commodity",
@@ -249,7 +267,9 @@
       "pinned": false,
       "und_1w": -4.6,
       "und_1m": -1.98,
-      "und_off_52w": -39.11
+      "und_off_52w": -39.11,
+      "und_rs_thrust": 3.9,
+      "und_rs_1m": 20
     },
     {
       "group": "Commodity",
@@ -273,7 +293,9 @@
       "pinned": false,
       "und_1w": -3.06,
       "und_1m": -4.01,
-      "und_off_52w": -25.28
+      "und_off_52w": -25.28,
+      "und_rs_thrust": 27.9,
+      "und_rs_1m": 10
     },
     {
       "group": "Commodity",
@@ -297,7 +319,9 @@
       "pinned": false,
       "und_1w": -6.28,
       "und_1m": -5.89,
-      "und_off_52w": -50.37
+      "und_off_52w": -50.37,
+      "und_rs_thrust": -0.8,
+      "und_rs_1m": 0
     },
     {
       "group": "Crypto",
@@ -321,7 +345,9 @@
       "pinned": false,
       "und_1w": -1.13,
       "und_1m": 8.18,
-      "und_off_52w": -34.09
+      "und_off_52w": -34.09,
+      "und_rs_thrust": 75.9,
+      "und_rs_1m": 80
     },
     {
       "group": "Crypto",
@@ -345,7 +371,9 @@
       "pinned": true,
       "und_1w": -0.45,
       "und_1m": 10.37,
-      "und_off_52w": -44.17
+      "und_off_52w": -44.17,
+      "und_rs_thrust": 53.3,
+      "und_rs_1m": 83
     },
     {
       "group": "Crypto",
@@ -369,7 +397,9 @@
       "pinned": false,
       "und_1w": -5.62,
       "und_1m": 22.59,
-      "und_off_52w": -58.08
+      "und_off_52w": -58.08,
+      "und_rs_thrust": null,
+      "und_rs_1m": null
     },
     {
       "group": "Volatility",
@@ -393,7 +423,9 @@
       "pinned": false,
       "und_1w": null,
       "und_1m": null,
-      "und_off_52w": null
+      "und_off_52w": null,
+      "und_rs_thrust": null,
+      "und_rs_1m": null
     },
     {
       "group": "Volatility",
@@ -417,7 +449,9 @@
       "pinned": true,
       "und_1w": null,
       "und_1m": null,
-      "und_off_52w": null
+      "und_off_52w": null,
+      "und_rs_thrust": null,
+      "und_rs_1m": null
     }
   ],
   "hot": [
@@ -714,6 +748,143 @@
       "hot": true,
       "below_floor": false,
       "pinned": false
+    }
+  ],
+  "exposure_map": [
+    {
+      "etf": "QQQ",
+      "vehicle": "SQQQ",
+      "exposure": "Nasdaq-100"
+    },
+    {
+      "etf": "QQQE",
+      "vehicle": "SQQQ",
+      "exposure": "Nasdaq-100"
+    },
+    {
+      "etf": "SPY",
+      "vehicle": "SPXS",
+      "exposure": "S&P 500"
+    },
+    {
+      "etf": "IVV",
+      "vehicle": "SPXS",
+      "exposure": "S&P 500"
+    },
+    {
+      "etf": "DIA",
+      "vehicle": "SDOW",
+      "exposure": "Dow 30"
+    },
+    {
+      "etf": "IWM",
+      "vehicle": "TZA",
+      "exposure": "Small Cap (Russell 2000)"
+    },
+    {
+      "etf": "IJR",
+      "vehicle": "TZA",
+      "exposure": "Small Cap (Russell 2000)"
+    },
+    {
+      "etf": "IJS",
+      "vehicle": "TZA",
+      "exposure": "Small Cap (Russell 2000)"
+    },
+    {
+      "etf": "IJT",
+      "vehicle": "TZA",
+      "exposure": "Small Cap (Russell 2000)"
+    },
+    {
+      "etf": "SOXX",
+      "vehicle": "SOXS",
+      "exposure": "Semiconductors"
+    },
+    {
+      "etf": "SMH",
+      "vehicle": "SOXS",
+      "exposure": "Semiconductors"
+    },
+    {
+      "etf": "XSD",
+      "vehicle": "SOXS",
+      "exposure": "Semiconductors"
+    },
+    {
+      "etf": "XBI",
+      "vehicle": "LABD",
+      "exposure": "Biotech"
+    },
+    {
+      "etf": "IBB",
+      "vehicle": "LABD",
+      "exposure": "Biotech"
+    },
+    {
+      "etf": "XLE",
+      "vehicle": "ERY",
+      "exposure": "Energy"
+    },
+    {
+      "etf": "XOP",
+      "vehicle": "ERY",
+      "exposure": "Energy"
+    },
+    {
+      "etf": "OIH",
+      "vehicle": "ERY",
+      "exposure": "Energy"
+    },
+    {
+      "etf": "RSPG",
+      "vehicle": "ERY",
+      "exposure": "Energy"
+    },
+    {
+      "etf": "XES",
+      "vehicle": "ERY",
+      "exposure": "Energy"
+    },
+    {
+      "etf": "GDX",
+      "vehicle": "GDXD",
+      "exposure": "Gold Miners"
+    },
+    {
+      "etf": "GDXJ",
+      "vehicle": "GDXD",
+      "exposure": "Gold Miners"
+    },
+    {
+      "etf": "USO",
+      "vehicle": "SCO",
+      "exposure": "Crude Oil"
+    },
+    {
+      "etf": "UNG",
+      "vehicle": "KOLD",
+      "exposure": "Natural Gas"
+    },
+    {
+      "etf": "GLD",
+      "vehicle": "GLL",
+      "exposure": "Gold"
+    },
+    {
+      "etf": "SLV",
+      "vehicle": "ZSL",
+      "exposure": "Silver"
+    },
+    {
+      "etf": "IBIT",
+      "vehicle": "BTCZ",
+      "exposure": "Bitcoin"
+    },
+    {
+      "etf": "ETHA",
+      "vehicle": "ETHD",
+      "exposure": "Ethereum"
     }
   ]
 }
