@@ -235,6 +235,16 @@ That guard turned out to be broken for futures: it only checked `now_et.hour >= 
 
 ---
 
+## Inverse Arsenal (Short tab)
+
+`inverse_arsenal_builder.py` (nightly step in `daily-scrape-deploy.yml`, after `etf_rs_builder.py`) writes `public/inverse_arsenal.json`, rendered by `InverseArsenalSection` under Clean Bases — Sell Watch.
+
+- **Core** — one most-liquid vehicle per exposure (Nasdaq-100, S&P 500, Dow, Russell 2000, sectors, crude/natgas/gold/silver, Bitcoin/Ether/MSTR, long VIX). Floors: avg volume ≥2M (Jeff Sun's Finviz inverse-ETF screen) and ≥$20M/day. Pinned names (`PINNED`: SQQQ SOXS LABD TZA UVIX ETHD) are kept but flagged ⚠ LIQ if they miss a floor. HOT = weekly volatility >3%.
+- **Hot** — other 2x/3x inverses (mostly single-stock) passing the same rules.
+- Universe comes from TradingView (`leveraged_flag == 'Inverse'`); Finviz's free tier ignores its ETF-type filters. TradingView does not flag the Bitcoin/Ether short funds as inverse, so `CRYPTO_INVERSE` fetches them by name. Perf is price-only 1D/1W/1M, same conventions as `etf_rs_builder.py`.
+
+---
+
 ## Removed Features (2026-06-12 audit)
 
 - **News Hub tab** — folded into a collapsed-by-default `NewsHubFold` section at the bottom of the Scanner tab (open state in localStorage `news_hub_open`; content fetches only mount when expanded).

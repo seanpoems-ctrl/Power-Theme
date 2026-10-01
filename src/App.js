@@ -13991,6 +13991,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
+  const [arsenalData, setArsenalData] = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
   const [themeFilter, setThemeFilter] = React.useState(null);      // set by clicking a Category Leaderboard row
   const jumpToThemeLong  = (theme) => { setThemeFilter(theme); setMode("long"); };
@@ -14017,6 +14018,10 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
     fetch(process.env.PUBLIC_URL + "/focus_list.json?v=" + Date.now())
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d) setFocusListData(d); })
+      .catch(() => {});
+    fetch(process.env.PUBLIC_URL + "/inverse_arsenal.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setArsenalData(d); })
       .catch(() => {});
     fetch(process.env.PUBLIC_URL + "/screener_stocks.json?v=" + Date.now())
       .then(r => r.ok ? r.json() : null)
@@ -14917,6 +14922,10 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
             )}
           </div>
 
+          {/* ── Inverse Arsenal — ready-made vehicles for the short side ── */}
+          <InverseArsenalSection data={arsenalData}
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title, tickers })} />
+
         </div>
       )} {/* end SHORT MODE */}
 
@@ -14981,6 +14990,163 @@ const TrendSparkline = ({ data = [] }) => {
       <polyline points={pts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
       <circle cx={lastX} cy={lastY} r="2.5" fill={color}/>
     </svg>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Inverse Arsenal — liquid inverse / long-volatility ETFs (public/inverse_arsenal.json,
+// built by inverse_arsenal_builder.py). Core = one most-liquid vehicle per exposure;
+// Hot = other 2x/3x inverses passing Jeff Sun's screen (avg vol >2M, weekly vol >3%)
+// plus a $20M/day dollar-volume floor.
+// ─────────────────────────────────────────────────────────────────────────────
+const InverseArsenalSection = ({ data, onMiniCharts = null }) => {
+  const fmtPct  = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const fmtDvol = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : `$${Math.round(v/1e6)}M`;
+  const fmtVol  = v => v == null ? "—" : `${(v/1e6).toFixed(1)}M`;
+  const cls     = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-rose-400";
+  const core = data?.core ?? [];
+  const hot  = data?.hot ?? [];
+  const rules = data?.rules;
+  const GROUP_ORDER = ["Index", "Sector", "Commodity", "Crypto", "Rates", "Volatility"];
+  const groups = GROUP_ORDER.map(g => [g, core.filter(r => r.group === g)]).filter(([, rows]) => rows.length > 0);
+
+  const TickerCell = ({ r }) => (
+    <td className="px-3 py-1.5 text-left whitespace-nowrap">
+      <a href={`https://www.tradingview.com/chart/?symbol=${r.ticker}`} target="_blank" rel="noreferrer"
+         className="font-mono font-bold text-rose-400 hover:underline">{r.ticker}</a>
+      {r.hot && <span title={`Weekly volatility ${r.weekly_volatility}% — passes Jeff Sun's >${rules?.hot_weekly_volatility ?? 3}% screen`}
+        className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-orange-500/15 text-orange-300 align-middle">HOT</span>}
+      {r.below_floor && <span title={`Below the liquidity floor (avg volume ≥ ${fmtVol(rules?.min_avg_volume)}, ≥ ${fmtDvol(rules?.min_dollar_volume)}/day) — kept because you pinned it`}
+        className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-amber-500/15 text-amber-300 align-middle">⚠ LIQ</span>}
+    </td>
+  );
+  const numCells = r => (
+    <>
+      <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.price != null ? `$${r.price.toFixed(2)}` : "—"}</td>
+      <td className={`px-3 py-1.5 text-right font-mono font-semibold ${cls(r.perf_1d)}`}>{fmtPct(r.perf_1d)}</td>
+      <td className={`px-3 py-1.5 text-right font-mono ${cls(r.perf_1w)}`}>{fmtPct(r.perf_1w)}</td>
+      <td className={`px-3 py-1.5 text-right font-mono ${cls(r.perf_1m)}`}>{fmtPct(r.perf_1m)}</td>
+      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.adr_pct != null ? `${r.adr_pct.toFixed(1)}%` : "—"}</td>
+      <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(r.dollar_volume)}</td>
+      <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden md:table-cell">{r.weekly_volatility != null ? `${r.weekly_volatility.toFixed(1)}%` : "—"}</td>
+    </>
+  );
+  const numHeads = ["Price", "1D", "1W", "1M", "ADR%"].map(h => <th key={h} className="px-3 py-1.5 font-medium text-right">{h}</th>);
+  const tail = [<th key="dv" className="px-3 py-1.5 font-medium text-right hidden sm:table-cell">$Vol/day</th>,
+                <th key="wv" className="px-3 py-1.5 font-medium text-right hidden md:table-cell">Wk Vol</th>];
+
+  return (
+    <div>
+      <div className="flex items-baseline gap-2 mb-3">
+        <h3 className="text-sm font-semibold text-zinc-100">Inverse Arsenal</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{core.length + hot.length}</span>
+        <span className="text-xs text-zinc-600">
+          most-liquid inverse & long-vol vehicles · avg vol ≥ {fmtVol(rules?.min_avg_volume ?? 2e6)} · ≥ {fmtDvol(rules?.min_dollar_volume ?? 2e7)}/day · HOT = weekly volatility &gt; {rules?.hot_weekly_volatility ?? 3}%
+        </span>
+        {onMiniCharts && core.length + hot.length > 0 && (
+          <button onClick={() => onMiniCharts([...core, ...hot].map(r => ({ ticker: r.ticker, category: r.exposure })), "Inverse Arsenal")}
+            className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
+      </div>
+
+      {!data ? (
+        <p className="text-sm text-zinc-500 italic py-4">Loading arsenal… (built nightly by inverse_arsenal_builder.py)</p>
+      ) : core.length === 0 ? (
+        <p className="text-sm text-zinc-500 italic py-4">No arsenal data yet — run <code className="text-zinc-400">python inverse_arsenal_builder.py</code>.</p>
+      ) : (
+        <div className="space-y-4">
+          <div className="overflow-x-auto rounded-lg border border-zinc-800">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+                  <th className="px-3 py-1.5 font-medium text-left">Ticker</th>
+                  <th className="px-3 py-1.5 font-medium text-left">Exposure</th>
+                  <th className="px-3 py-1.5 font-medium text-right">Lev</th>
+                  {numHeads}{tail}
+                  <th className="px-3 py-1.5 font-medium text-center hidden md:table-cell" title="Inverse fund's price above its own 20-day EMA">&gt;EMA20</th>
+                  <th className="px-3 py-1.5 font-medium text-left hidden lg:table-cell" title="The long-side ETF this vehicle shorts: 1W / 1M / distance below its 52W high">Underlying 1W · 1M · off high</th>
+                </tr>
+              </thead>
+              <tbody>
+                {groups.map(([g, rows]) => (
+                  <React.Fragment key={g}>
+                    <tr className="bg-zinc-900/70 border-t border-zinc-800/60">
+                      <td colSpan={12} className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500">{g}</td>
+                    </tr>
+                    {rows.map(r => (
+                      <tr key={r.ticker} className="border-t border-zinc-800/60 hover:bg-zinc-800/30">
+                        <TickerCell r={r} />
+                        <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[170px] truncate" title={r.description}>{r.exposure}</td>
+                        <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.leverage}</td>
+                        {numCells(r)}
+                        <td className="px-3 py-1.5 text-center hidden md:table-cell">
+                          {r.above_ema20 == null ? <span className="text-zinc-600">—</span>
+                            : <span className={r.above_ema20 ? "text-emerald-400" : "text-zinc-600"}>{r.above_ema20 ? "▲" : "▼"}</span>}
+                        </td>
+                        <td className="px-3 py-1.5 text-left font-mono text-[11px] hidden lg:table-cell whitespace-nowrap">
+                          {r.underlying ? (
+                            <>
+                              <span className="text-cyan-400 mr-1.5">{r.underlying}</span>
+                              <span className={cls(r.und_1w)}>{fmtPct(r.und_1w)}</span>
+                              <span className="text-zinc-700"> · </span>
+                              <span className={cls(r.und_1m)}>{fmtPct(r.und_1m)}</span>
+                              <span className="text-zinc-700"> · </span>
+                              <span className="text-zinc-400">{r.und_off_52w != null ? `${r.und_off_52w.toFixed(1)}%` : "—"}</span>
+                            </>
+                          ) : <span className="text-zinc-700">—</span>}
+                        </td>
+                      </tr>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <div className="flex items-baseline gap-2 mb-2">
+              <h4 className="text-[12px] font-semibold text-zinc-300">Hot right now</h4>
+              <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{hot.length}</span>
+              <span className="text-[11px] text-zinc-600">other 2x/3x inverses (mostly single-stock) passing the screen today — this list changes with the tape</span>
+            </div>
+            {hot.length === 0 ? (
+              <p className="text-xs text-zinc-600 italic">Nothing else passes right now.</p>
+            ) : (
+              <div className="overflow-x-auto rounded-lg border border-zinc-800">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+                      <th className="px-3 py-1.5 font-medium text-left">Ticker</th>
+                      <th className="px-3 py-1.5 font-medium text-left">Shorts</th>
+                      <th className="px-3 py-1.5 font-medium text-right">Lev</th>
+                      {numHeads}{tail}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {hot.map(r => (
+                      <tr key={r.ticker} className="border-t border-zinc-800/60 hover:bg-zinc-800/30">
+                        <TickerCell r={{ ...r, hot: false }} />
+                        <td className="px-3 py-1.5 text-left text-zinc-300 max-w-[200px] truncate" title={r.description}>{r.exposure !== "—" ? r.exposure : r.description}</td>
+                        <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{r.leverage}</td>
+                        {numCells(r)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          <p className="text-[11px] text-zinc-600 leading-relaxed">
+            2x/3x funds reset daily and lose value in choppy markets — they are for short holds, not positions you carry.
+            Long-VIX funds roll futures and decay steadily when volatility is flat. Check the real spread before sizing.
+            {data.as_of && <span className="ml-2 font-mono">Data: {data.as_of}</span>}
+          </p>
+        </div>
+      )}
+    </div>
   );
 };
 

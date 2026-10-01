@@ -151,6 +151,7 @@ jobs:
               echo "etf_rs_builder.py failed after 3 attempts (non-fatal)"
             fi
           done
+          timeout 120 python inverse_arsenal_builder.py || echo "inverse_arsenal_builder.py failed (non-fatal)"
           timeout 120 python universe_builder.py        || echo "universe_builder.py failed (non-fatal)"
           timeout 600 python screener_builder.py       || echo "screener_builder.py failed (non-fatal)"
 
