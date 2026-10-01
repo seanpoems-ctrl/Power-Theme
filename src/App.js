@@ -13175,6 +13175,18 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
     if (v >= 0) return { backgroundColor: `rgba(16,185,129,${(0.08 + Math.min(v / scale, 1) * 0.5).toFixed(2)})` };
     return { backgroundColor: `rgba(244,63,94,${(0.06 + Math.min(-v / scale, 1) * 0.45).toFixed(2)})` };
   };
+  // Same performance windows as the Industry Sector table below (Intraday → 1Y).
+  // `scale` is the % move that fully saturates the cell color for that window.
+  const PERF_COLS = [
+    { col: "perf_intraday", label: "Intraday", scale: 3 },
+    { col: "perf_1d",       label: "1D",       scale: 3 },
+    { col: "perf_1w",       label: "1W",       scale: 5 },
+    { col: "perf_1m",       label: "1M",       scale: 10 },
+    { col: "perf_3m",       label: "3M",       scale: 20 },
+    { col: "perf_6m",       label: "6M",       scale: 30 },
+    { col: "perf_ytd",      label: "YTD",      scale: 40 },
+    { col: "perf_12m",      label: "1Y",       scale: 50 },
+  ];
   // % Off 52W High — always <= 0; deeper red the further below the high.
   const offHighStyle = (v) => {
     if (v == null) return {};
@@ -13196,18 +13208,9 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
       )}
       {sections.map(({ name, rows }) => (
         <div key={name} className="rounded-lg border border-zinc-800 overflow-x-auto">
-          <table className="w-full text-xs border-collapse" style={{ tableLayout: "fixed" }}>
+          <table className="w-full text-xs border-collapse" style={{ tableLayout: "fixed", minWidth: 1300 }}>
             <colgroup>
-              <col style={{ width: "8%" }} />
-              <col style={{ width: "20%" }} />
-              <col style={{ width: "10%" }} />
-              <col style={{ width: "9%" }} />
-              <col style={{ width: "12%" }} />
-              <col style={{ width: "12%" }} />
-              <col style={{ width: "7%" }} />
-              <col style={{ width: "7%" }} />
-              <col style={{ width: "7%" }} />
-              <col style={{ width: "8%" }} />
+              {[6, 15, 7, 6, 9, 9, 6, ...PERF_COLS.slice(1).map(() => 5), 7].map((w, i) => <col key={i} style={{ width: `${w}%` }} />)}
             </colgroup>
             <thead>
               <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-400 text-[11px] whitespace-nowrap">
@@ -13218,7 +13221,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                   { col: "rs_1m_pct",      label: "1-Mth RS %",        align: "right", border: true },
                 ].map(({ col, label, align, border, title }) => (
                   <th key={col} onClick={() => handleSort(col)} title={title}
-                      className={`px-2 py-2 font-semibold cursor-pointer select-none hover:text-zinc-200 ${align === "left" ? "text-left" : "text-right"} ${border ? "border-r border-zinc-800" : ""} ${sortCol === col ? "text-zinc-100" : ""}`}>
+                      className={`px-2 py-2 font-semibold cursor-pointer select-none hover:text-zinc-200 whitespace-normal leading-tight ${align === "left" ? "text-left" : "text-right"} ${border ? "border-r border-zinc-800" : ""} ${sortCol === col ? "text-zinc-100" : ""}`}>
                     {label}
                     {sortCol === col
                       ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
@@ -13228,13 +13231,11 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth Chart</th>
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth RS</th>
                 {[
-                  { col: "perf_intraday", label: "Intraday" },
-                  { col: "perf_1d",       label: "% 1D" },
-                  { col: "perf_1m",       label: "% 1-Mth" },
+                  ...PERF_COLS,
                   { col: "pct_off_52wh",  label: "% Off 52W H", last: true },
                 ].map(({ col, label, last }) => (
                   <th key={col} onClick={() => handleSort(col)}
-                      className={`px-2 py-2 text-right font-semibold cursor-pointer select-none hover:text-zinc-200 ${last ? "" : "border-r border-zinc-800"} ${sortCol === col ? "text-zinc-100" : ""}`}>
+                      className={`${last ? "px-2" : "px-1"} py-2 text-right font-semibold cursor-pointer select-none hover:text-zinc-200 whitespace-normal leading-tight ${last ? "" : "border-r border-zinc-800"} ${sortCol === col ? "text-zinc-100" : ""}`}>
                     {label}
                     {sortCol === col
                       ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
@@ -13271,9 +13272,9 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                     </td>
                     <td className="px-2 py-0.5 border-r border-zinc-800"><EtfSparkline data={e.sparkline ?? []} /></td>
                     <td className="px-2 py-0.5 border-r border-zinc-800"><EtfRsHistogram data={e.rs_histogram ?? []} /></td>
-                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_intraday)}>{fmtP(e.perf_intraday)}</td>
-                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_1d)}>{fmtP(e.perf_1d)}</td>
-                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_1m, 10)}>{fmtP(e.perf_1m)}</td>
+                    {PERF_COLS.map(({ col, scale }) => (
+                      <td key={col} className="px-1 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e[col], scale)}>{fmtP(e[col])}</td>
+                    ))}
                     <td className="px-2 py-1 text-right font-mono" style={offHighStyle(e.pct_off_52wh)}>
                       {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(2)}%` : "—"}
                     </td>
