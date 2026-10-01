@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-01 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Global Flows / Cautious Balance",
+    "spy_price": 763.99,
+    "spy_change_pct": 0.18,
+    "vix": 16.39,
+    "hy_oas": 3.12,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 26.6,
+    "mmth": 45.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RKLB",
+          "company": "Rocket Lab USA, Inc.",
+          "reason": "Announced a new commercial launch deal, signaling robust demand for its space launch services and expanding backlog."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Reports strong cloud computing contract win with a major government agency, boosting investor confidence in its enterprise segment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Trading on momentum from recent product announcements, but lacks fresh fundamental catalysts today to drive significant directional movement."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-01 13:20 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop Corp. (GME) continued its volatile climb, driven by persistent short-squeeze dynamics and speculative retail interest rather than new fundamental catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-11 10:57 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On / Complacent Optimism",
-    "spy_price": 763.92,
-    "spy_change_pct": 0.8,
-    "vix": 16.06,
-    "hy_oas": 2.7,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 41.7,
-    "mmth": 59.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft Corporation (MSFT) is showing strength after announcing a strategic acquisition in the cybersecurity space, expected to significantly expand its enterprise security offerings and recurring revenue."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company (LLY) is capturing investor attention following positive Phase 3 trial results for its new Alzheimer's treatment, potentially opening a massive new market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation (NVDA) is trading higher on sustained institutional demand for its AI GPU technology, continuing the recent momentum without a fresh, specific news catalyst today."
         }
       ]
     }
