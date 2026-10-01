@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-01 13:20 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Divergence",
+    "spy_price": 762.86,
+    "spy_change_pct": 0.03,
+    "vix": 16.82,
+    "hy_oas": 3.12,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 24.7,
+    "mmth": 45.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RKLB",
+          "company": "Rocket Lab USA, Inc.",
+          "reason": "The company announced a significant new commercial deal, boosting investor confidence in its growth trajectory and expanding space operations."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Market sentiment was buoyed by news of a major AI integration announcement, positioning the tech giant for continued leadership in artificial intelligence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "The stock showed activity driven by technical momentum following recent gains, with no fresh fundamental catalyst reported today to justify new conviction."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-01 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation (NVDA) is trading higher on sustained institutional demand for its AI GPU technology, continuing the recent momentum without a fresh, specific news catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-11 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off Sentiment",
-    "spy_price": 757.83,
-    "spy_change_pct": -0.6,
-    "vix": 17.23,
-    "hy_oas": 2.71,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 38.8,
-    "mmth": 59.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SMCI",
-          "company": "Super Micro Computer Inc.",
-          "reason": "Announced a groundbreaking AI server chip design partnership with a major cloud provider, expected to significantly boost Q4 revenue guidance."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Inc.",
-          "reason": "Received favorable regulatory approval for its new telemedicine integration platform, expanding market reach and driving analyst upgrades."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "Observing increased social media chatter and minor price action on a short-squeeze alert, driven purely by technical momentum and retail sentiment."
         }
       ]
     }
