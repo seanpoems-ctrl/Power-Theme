@@ -196,6 +196,25 @@ def _safe_pct(series: pd.Series, periods: int) -> float | None:
         return None
 
 
+def _pct_back(series: pd.Series, bars_back: int) -> float | None:
+    """Return % change from the close `bars_back` trading bars before the last bar.
+
+    _safe_pct's `periods` counts the last bar itself, so _safe_pct(s, 20) only looks 19
+    bars back. This is the exact lookback: _pct_back(s, 20) compares the last close with
+    the close 20 trading days earlier, which is what Jeff Sun's 1M column shows (checked
+    against his 2026-09-29 table: 39/39 ETFs within 0.15 points)."""
+    if len(series) <= bars_back:
+        return None
+    try:
+        end   = float(series.iloc[-1])
+        start = float(series.iloc[-1 - bars_back])
+        if start <= 0:
+            return None
+        return round((end - start) / start * 100, 2)
+    except (IndexError, TypeError, ZeroDivisionError):
+        return None
+
+
 def _median(vals: list) -> float | None:
     vals = sorted(v for v in vals if v is not None)
     if not vals:
@@ -286,7 +305,7 @@ def build_etf_rs() -> dict:
         all_syms,
         period="15mo",
         interval="1d",
-        auto_adjust=True,
+        auto_adjust=False,  # price-only closes (not dividend-adjusted) — matches Jeff Sun's tables and TradingView
         progress=False,
     )
 
@@ -295,7 +314,7 @@ def build_etf_rs() -> dict:
         all_syms,
         period="5d",
         interval="1d",
-        auto_adjust=True,
+        auto_adjust=False,
         progress=False,
     )
 
@@ -338,7 +357,7 @@ def build_etf_rs() -> dict:
 
         # 1-day change: compare last close vs prior close
         s5 = closes5[tkr].dropna() if tkr in closes5.columns else pd.Series(dtype=float)
-        p1d = _safe_pct(s5, 2) if len(s5) >= 3 else _safe_pct(s, 2)
+        p1d = _pct_back(s5, 1) if len(s5) >= 3 else _pct_back(s, 1)
 
         # Intraday change: most recent session's close vs its OWN open — distinct from
         # % 1D (close vs *prior day's* close), which absorbs any overnight/pre-market gap.
@@ -353,7 +372,7 @@ def build_etf_rs() -> dict:
                     p_intraday = round((float(s5.loc[d]) / o_val - 1) * 100, 2)
 
         # 1-week (5 trading days)
-        p1w = _safe_pct(s5, 6) if len(s5) >= 6 else _safe_pct(s, 6)
+        p1w = _pct_back(s5, 5) if len(s5) >= 6 else _pct_back(s, 5)
 
         # Drop 1D / intraday / 1W if this ticker's own latest bar lags the batch
         # consensus — those numbers would be yesterday's move mislabelled as today's.
@@ -362,20 +381,27 @@ def build_etf_rs() -> dict:
             p1d = p_intraday = p1w = None
 
         # Longer-term performance from 12-month data
-        p1m  = _safe_pct(s, D21)
-        p3m  = _safe_pct(s, D63)
-        p6m  = _safe_pct(s, D126)
-        p12m = _safe_pct(s, D252)
+        p1m  = _pct_back(s, D21)
+        p3m  = _pct_back(s, D63)
+        p6m  = _pct_back(s, D126)
+        p12m = _pct_back(s, D252)
 
-        # % YTD — change since the first trading day of the current calendar
-        # year (distinct from perf_12m, which is a rolling trailing-12-month
-        # return and can diverge a lot from calendar YTD around year boundaries).
+        # % YTD — change since the PRIOR year-end close (the usual YTD base, same as
+        # TradingView/Finviz). Measuring from the first trading day's close instead
+        # would silently drop that day's move. Distinct from perf_12m, which is a
+        # rolling trailing-12-month return and can diverge a lot from calendar YTD
+        # around year boundaries.
         p_ytd = None
+        prior_year_bars = s[s.index.year < s.index[-1].year]
         year_bars = s[s.index.year == s.index[-1].year]
-        if len(year_bars) >= 1:
-            ytd_base = float(year_bars.iloc[0])
-            if ytd_base:
-                p_ytd = round((float(s.iloc[-1]) / ytd_base - 1) * 100, 2)
+        if len(prior_year_bars) >= 1:
+            ytd_base = float(prior_year_bars.iloc[-1])
+        elif len(year_bars) >= 1:
+            ytd_base = float(year_bars.iloc[0])  # ETF listed this year: first close is all we have
+        else:
+            ytd_base = 0.0
+        if ytd_base:
+            p_ytd = round((float(s.iloc[-1]) / ytd_base - 1) * 100, 2)
 
         # % off 52-week high — Jeff Sun's own tables measure against the intraday
         # high, not the closing high, so use the High series (always >= Close).
