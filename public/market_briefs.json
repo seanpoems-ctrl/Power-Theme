@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-30 20:10 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows, Cautious Tone",
+    "spy_price": 764.2,
+    "spy_change_pct": -0.18,
+    "vix": 16.34,
+    "hy_oas": 3.08,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 24.2,
+    "mmth": 45.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce announced a strategic partnership with a leading AI infrastructure provider, boosting expectations for accelerated platform innovation and market share growth in enterprise AI solutions."
+        },
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Johnson & Johnson received accelerated FDA approval for its groundbreaking new oncology treatment, expanding its market presence in a high-growth therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continued to see strong institutional buying interest following yesterday's positive analyst commentary on datacenter demand, despite no new fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-30 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop experienced renewed speculative interest driven by sustained high short interest and retail investor engagement across social platforms."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-10 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Surge",
-    "spy_price": 757.83,
-    "spy_change_pct": -0.6,
-    "vix": 17.84,
-    "hy_oas": 2.71,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 38.9,
-    "mmth": 59.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares rallied after the company announced a revolutionary new AI chip architecture that is expected to significantly expand its market leadership in data center and generative AI applications."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon's stock saw renewed interest following reports that Amazon Web Services (AWS) secured a multi-billion dollar, multi-year contract to modernize a key government cloud infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop experienced another day of technical-driven volatility and short-squeeze activity, without any fresh fundamental news catalyst to justify the price action."
         }
       ]
     }
