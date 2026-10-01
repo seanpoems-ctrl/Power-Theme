@@ -449,6 +449,28 @@ def main() -> None:
             logger.warning("Excel file was locked. Saved to: %s", alt_path)
 
 
+def _et_day(ts: datetime) -> str:
+    """Calendar day of a timestamp in US Eastern (falls back to UTC if tzdata is missing)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return ts.astimezone(ZoneInfo("America/New_York")).strftime("%Y-%m-%d")
+    except Exception:
+        return ts.strftime("%Y-%m-%d")
+
+
+def _previous_scan_baseline(today: str) -> tuple[set[str], str | None]:
+    """Scan Result tickers from the last scan on an earlier ET day, so today's list can
+    flag what is new. A re-run on the same day keeps the baseline already stored in the file."""
+    try:
+        old = json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+        old_day = old.get("scan_day") or _et_day(datetime.fromisoformat(old["scan_time"]))
+        if old_day != today:
+            return {s["ticker"] for s in (old.get("scan_result") or {}).get("stocks", [])}, old_day
+        return set(old.get("prev_tickers", [])), old.get("prev_scan_day")
+    except Exception:
+        return set(), None
+
+
 def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None = None) -> None:
     """Build public/focus_list.json for the frontend's Focus List tab."""
     def stock_rows(df: pd.DataFrame, perf_col: str | None) -> list[dict]:
@@ -519,10 +541,21 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
             "stocks": stock_rows(scan_result, None),
         }
 
+    now = datetime.now(tz=timezone.utc)
+    today = _et_day(now)
+    prev_tickers, prev_day = _previous_scan_baseline(today)
+    if scan_result_entry:
+        # None (not False) when there is no earlier scan to compare against.
+        for row in scan_result_entry["stocks"]:
+            row["is_new"] = (row["ticker"] not in prev_tickers) if prev_tickers else None
+
     OUTPUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_JSON.write_text(
         json.dumps({
-            "scan_time": datetime.now(tz=timezone.utc).isoformat(),
+            "scan_time": now.isoformat(),
+            "scan_day": today,
+            "prev_scan_day": prev_day,
+            "prev_tickers": sorted(prev_tickers),
             "tightness": {"mode": TIGHTNESS, "label": TIGHTNESS_LABELS[TIGHTNESS]},
             "scan_result": scan_result_entry,
             "scans": scans,

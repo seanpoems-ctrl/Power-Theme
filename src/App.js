@@ -3971,7 +3971,19 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 4 — Watchlist Maintenance: ▲ Long (10 min)",
+        section: "Step 4 — Focus List Screening: Watchlist → 🎯 Focus List (15 min)",
+        items: [
+          "Write one line on the market read first (Market Pulse + breadth). Risk-off → keep this step light and add no new stalks",
+          "Scan Result → tap 'New only': these tickers were not on the previous scan — look at them before anything else",
+          "Then work the list top-down: names hit by 2+ scans (SCANS column) come first. If there are too many to review in 15 min, only look at the top 20–30",
+          "Skip anything that already ran hard today — big Day% with VS EMA5 near +5% is extended, not tight",
+          "Mark 5–10 names S (Stalk): building a base but not ready — tight above the 10/20-day, earnings more than 5 days away",
+          "Open Mini Charts for your Stalk list. Promote the best 2–3 to F (Focus): high ADR%, strong RS, contraction with volume drying up, a clear range to break",
+          "For every Focus name write the breakout level and the level where the idea is wrong (Trade Journal notes)",
+        ],
+      },
+      {
+        section: "Step 5 — Watchlist Maintenance: ▲ Long (10 min)",
         items: [
           "▲ Long mode: re-sort by RS 52W — add new RS ≥ 85, grade A/A+ names from today's leading themes",
           "Remove stocks that closed below SMA20 on above-average volume (distribution)",
@@ -3981,7 +3993,7 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 5 — RS Flip Scanner: Catch Institutional Rotation (5 min)",
+        section: "Step 6 — RS Flip Scanner: Catch Institutional Rotation (5 min)",
         items: [
           "Watchlist → 📊 ETF RS → RS Flip Scanner: any basket flipping RS vs its sector anchor is where money just started rotating in",
           "Weekly Scanning Checklist (same panel): work down the ▶ SCREEN NOW rows first — those are today's live flips, not yesterday's",
@@ -3990,7 +4002,7 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 6 — Calendar Tab — Tomorrow's Prep (5 min)",
+        section: "Step 7 — Calendar Tab — Tomorrow's Prep (5 min)",
         items: [
           "Check tomorrow's economic calendar for high-impact events",
           "FOMC / CPI / NFP tomorrow → plan for reduced size, wider stops, no new entries pre-event",
@@ -4000,13 +4012,45 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 7 — TradingView & IBKR Close-Out (5 min)",
+        section: "Step 8 — TradingView & IBKR Close-Out (5 min)",
         items: [
           "Set TradingView price alerts for all tomorrow's entry triggers",
           "Mark pivot high, stop level, and target on each candidate's chart",
           "Save IBKR portfolio P&L screenshot for weekly review",
           "Confirm all orders are correct in IBKR (stops set, no accidental open orders)",
           "Close charts, log off IBKR cleanly — done for the day",
+        ],
+      },
+    ],
+  },
+  {
+    id: "weekly",
+    label: "Weekly Review",
+    time: "Saturday · ~1 hr",
+    color: "green",
+    steps: [
+      {
+        section: "Step 1 — Rebuild Your Lists (15 min)",
+        items: [
+          "Focus List tab → My Lists: go through every Stalk and Focus name — keep only what is still tight and strong",
+          "Remove anything that broke its base or closed below the 50-day on volume",
+          "Clear all, then re-add the survivors and any strong names from this week's Scan Result — the weekly rebuild keeps the lists short",
+        ],
+      },
+      {
+        section: "Step 2 — Chart-by-Chart Review (30 min)",
+        items: [
+          "Work through each scan's table in Mini Charts one chart at a time — do not skip the scans that look boring",
+          "Note which industries keep appearing across scans; check them against the Category Leaderboard",
+          "Write the breakout level and invalidation for any new Focus name",
+        ],
+      },
+      {
+        section: "Step 3 — Review The Habit And The Trades (15 min)",
+        items: [
+          "Count the days you completed the post-market routine this week — the habit is the goal, not the P&L",
+          "For each trade or Focus name: write one line on why it worked or did not",
+          "Note which scan the best candidates came from, and whether any scan gave you nothing useful all week",
         ],
       },
     ],
@@ -4145,7 +4189,7 @@ const ChecklistTab = () => {
       </div>
 
       {/* Footer note */}
-      <div className="text-[11px] text-zinc-600 text-center">Checklist resets daily. Progress is saved in browser storage. Using TradingView + IBKR.</div>
+      <div className="text-[11px] text-zinc-600 text-center">Checklist resets daily (the Weekly Review is meant for Saturdays). Progress is saved in browser storage. Using TradingView + IBKR.</div>
     </div>
   );
 };
@@ -14945,7 +14989,7 @@ const TrendSparkline = ({ data = [] }) => {
 // + 5 operational/tightness scans, each already sorted by its defining metric,
 // grouped into Jeff Sun-style watchlist sections under a consolidated Scan Result.
 // ─────────────────────────────────────────────────────────────────────────────
-const FocusScanTable = ({ scan, title = null, scanLabels = {}, onMiniCharts = null }) => {
+const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onMark = null, onMiniCharts = null }) => {
   const fmtPct   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol  = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v/1e6).toFixed(0)}M` : `$${(v/1e3).toFixed(0)}K`;
   const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
@@ -15026,11 +15070,23 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, onMiniCharts = nu
             <tbody>
               {sorted.map((s, i) => (
                 <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                  <td className="px-3 py-1.5 text-left">
+                  <td className="px-3 py-1.5 text-left whitespace-nowrap">
                     <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
                        className="font-mono font-bold text-cyan-400 hover:underline">
                       {s.ticker}
                     </a>
+                    {s.is_new && <span className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-sky-500/15 text-sky-300 align-middle">NEW</span>}
+                    {onMark && (
+                      <span className="ml-2 inline-flex gap-0.5 align-middle">
+                        {[["stalk", "S", "Stalk — building a base, not ready", "bg-amber-500/25 text-amber-300 border-amber-500/40"],
+                          ["focus", "F", "Focus — actionable setup", "bg-emerald-500/25 text-emerald-300 border-emerald-500/40"]].map(([kind, letter, tip, on]) => (
+                          <button key={kind} title={tip} onClick={() => onMark(s, kind)}
+                            className={`w-4 h-4 text-[9px] font-bold leading-none rounded border transition-colors ${marks?.[s.ticker]?.kind === kind ? on : "border-zinc-700 text-zinc-600 hover:text-zinc-300 hover:border-zinc-500"}`}>
+                            {letter}
+                          </button>
+                        ))}
+                      </span>
+                    )}
                   </td>
                   <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[140px] truncate">{s.industry || "—"}</td>
                   {isResult && (
@@ -15058,6 +15114,21 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, onMiniCharts = nu
 };
 
 const FocusListTab = ({ data, onMiniCharts = null }) => {
+  // Stalk / Focus marks live in this browser only (weekly rebuild = Clear all).
+  const [marks, setMarks] = React.useState(() => {
+    try { return JSON.parse(localStorage.getItem("focus_marks") || "{}"); } catch { return {}; }
+  });
+  const [newOnly, setNewOnly] = React.useState(false);
+  React.useEffect(() => {
+    try { localStorage.setItem("focus_marks", JSON.stringify(marks)); } catch { /* storage unavailable */ }
+  }, [marks]);
+  const onMark = (stock, kind) => setMarks(prev => {
+    const next = { ...prev };
+    if (prev[stock.ticker]?.kind === kind) delete next[stock.ticker];
+    else next[stock.ticker] = { kind, industry: stock.industry || null, added: new Date().toISOString().slice(0, 10) };
+    return next;
+  });
+
   if (!data) return <p className="text-sm text-zinc-600 italic py-8 text-center">Loading Focus List…</p>;
 
   const scanTimeLabel = (() => {
@@ -15100,12 +15171,65 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
         {scanTimeLabel && <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {scanTimeLabel}</span>}
       </div>
 
-      {scanResult && scanResult.stocks?.length > 0 && (
-        <div>
-          <FocusSec title="Scan Result" sub={`all scans consolidated · ${scanResult.stocks.length} unique tickers · ranked by # of scans hit`} />
-          <FocusScanTable scan={scanResult} scanLabels={scanLabels} onMiniCharts={onMiniCharts} />
-        </div>
-      )}
+      {(() => {
+        const entries = Object.entries(marks);
+        const focusList = entries.filter(([, m]) => m.kind === "focus");
+        const stalkList = entries.filter(([, m]) => m.kind === "stalk");
+        const chip = ([t, m]) => (
+          <span key={t} className="inline-flex items-center gap-1 rounded border border-zinc-700 bg-zinc-900 px-1.5 py-0.5">
+            <a href={`https://www.tradingview.com/chart/?symbol=${t}`} target="_blank" rel="noreferrer" className="font-mono text-[11px] font-bold text-cyan-400 hover:underline">{t}</a>
+            <button onClick={() => setMarks(prev => { const n = { ...prev }; delete n[t]; return n; })} title="Remove"
+              className="text-zinc-600 hover:text-zinc-300 text-[11px] leading-none">×</button>
+          </span>
+        );
+        const row = (label, color, list, withCharts) => (
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className={`text-[10px] font-bold uppercase tracking-wide w-16 ${color}`}>{label} ({list.length})</span>
+            {list.length === 0 ? <span className="text-[11px] text-zinc-700 italic">nothing marked yet</span> : list.map(chip)}
+            {withCharts && onMiniCharts && list.length > 0 && (
+              <button onClick={() => onMiniCharts(list.map(([t, m]) => ({ ticker: t, category: m.industry })), "Focus")}
+                className="ml-1 text-[10px] font-medium px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+            )}
+          </div>
+        );
+        return (
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 px-3 py-2.5 space-y-2">
+            <div className="flex items-baseline gap-2">
+              <h4 className="text-[12px] font-semibold text-zinc-100">My Lists</h4>
+              <span className="text-[10px] text-zinc-600">tap S (stalk) or F (focus) next to any ticker below · saved in this browser</span>
+              {entries.length > 0 && (
+                <button onClick={() => { if (window.confirm("Clear all Stalk and Focus marks? (weekly rebuild)")) setMarks({}); }}
+                  className="ml-auto text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/60 rounded px-2 py-0.5 transition-colors">Clear all</button>
+              )}
+            </div>
+            {row("Focus", "text-emerald-400", focusList, true)}
+            {row("Stalk", "text-amber-400", stalkList, false)}
+          </div>
+        );
+      })()}
+
+      {scanResult && scanResult.stocks?.length > 0 && (() => {
+        const all = scanResult.stocks;
+        const hasNewInfo = all.some(s => s.is_new != null);
+        const newCount = all.filter(s => s.is_new).length;
+        const shown = newOnly ? all.filter(s => s.is_new) : all;
+        return (
+          <div>
+            <div className="flex items-baseline gap-2 mb-3">
+              <h3 className="text-sm font-semibold text-zinc-100">Scan Result</h3>
+              <span className="text-xs text-zinc-600">all scans consolidated · {all.length} unique tickers · ranked by # of scans hit</span>
+              {hasNewInfo && (
+                <button onClick={() => setNewOnly(v => !v)}
+                  title={data.prev_scan_day ? `New since the ${data.prev_scan_day} scan` : "New since the previous scan"}
+                  className={`ml-auto text-[10px] font-semibold px-2 py-1 rounded border transition-colors ${newOnly ? "bg-sky-500/20 border-sky-500/40 text-sky-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>
+                  New only · {newCount}
+                </button>
+              )}
+            </div>
+            <FocusScanTable scan={{ ...scanResult, stocks: shown }} scanLabels={scanLabels} marks={marks} onMark={onMark} onMiniCharts={onMiniCharts} />
+          </div>
+        );
+      })()}
 
       {SECTIONS.map(sec => {
         const groups = sec.groups.filter(g => byKey[g.key]);
@@ -15115,7 +15239,7 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
             <FocusSec title={sec.title} sub={sec.sub} />
             <div className="space-y-4">
               {groups.map(g => (
-                <FocusScanTable key={g.key} scan={byKey[g.key]} title={g.label} onMiniCharts={onMiniCharts} />
+                <FocusScanTable key={g.key} scan={byKey[g.key]} title={g.label} marks={marks} onMark={onMark} onMiniCharts={onMiniCharts} />
               ))}
             </div>
           </div>
