@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-01 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Resilience, US Flat",
+    "spy_price": 762.63,
+    "spy_change_pct": -0.21,
+    "vix": 16.25,
+    "hy_oas": 3.08,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 24.2,
+    "mmth": 45.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company reports exceptional Phase 3 trial results for its next-generation obesity drug, exceeding efficacy expectations and poised for accelerated regulatory review."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft announces a groundbreaking partnership with a leading AI research firm to integrate advanced quantum computing capabilities into its Azure cloud platform, potentially revolutionizing enterprise solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil Corporation gains traction as crude oil prices climb above $91.00, fueling sector-wide momentum and attracting flow-based buying in energy majors."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-30 20:10 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "Observing increased social media chatter and minor price action on a short-squeeze alert, driven purely by technical momentum and retail sentiment."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-10 18:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Global Retreat",
-    "spy_price": 757.83,
-    "spy_change_pct": -0.6,
-    "vix": 17.84,
-    "hy_oas": 2.71,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 38.8,
-    "mmth": 59.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a groundbreaking AI-driven cybersecurity platform, expected to significantly boost its enterprise subscription revenue and market share."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase boosted its quarterly dividend and initiated a new share repurchase program, underscoring robust financial health and commitment to shareholder returns."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop experienced renewed speculative interest driven by sustained high short interest and retail investor engagement across social platforms."
         }
       ]
     }
