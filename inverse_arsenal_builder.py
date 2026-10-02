@@ -109,16 +109,60 @@ TV_COLS = ["name", "description", "close", "change", "volume", "average_volume_6
            "Perf.W", "Perf.1M", "price_52_week_high"]   # last three: fallback when Yahoo is unavailable
 
 
+def _tv(label: str, *conds, limit: int = 300) -> pd.DataFrame:
+    """One TradingView query; logs how many rows came back so an empty result is visible in CI."""
+    try:
+        q = (Query().set_markets('america').select(*TV_COLS).where(*conds)
+             .order_by('average_volume_60d_calc', ascending=False).limit(limit))
+        # tradingview_screener >= 3.2 adds a default `filter2` that EXCLUDES ETFs, mutual funds and
+        # closed-end funds (type=fund AND typespecs has_none_of [etf, mutual, closedend]). CI installs
+        # the latest version, so every ETF query came back empty there ("Universe: 0") while 3.1.0
+        # locally returned them. Drop the default; our own conditions already restrict to ETFs.
+        q.query.pop('filter2', None)
+        total, df = q.get_scanner_data()
+        logger.info("TradingView [%s]: total=%s rows=%d", label, total, len(df))
+        return df
+    except Exception as e:
+        logger.warning("TradingView [%s] failed: %s", label, e)
+        return pd.DataFrame()
+
+
+def _previous_tickers() -> set[str]:
+    """Tickers from the last good output, so the universe survives a TradingView hiccup."""
+    try:
+        old = json.loads(OUTPUT_JSON.read_text(encoding="utf-8"))
+        return {r["ticker"] for r in old.get("core", []) + old.get("hot", [])}
+    except Exception:
+        return set()
+
+
 def _fetch_universe() -> pd.DataFrame:
-    """Inverse ETFs (TradingView flag) with a sane liquidity pre-filter, plus the VIX and crypto funds."""
+    """Inverse ETFs (TradingView flag) with a liquidity pre-filter, plus the VIX and crypto funds.
+
+    2026-10-01: the nightly CI run got zero rows from the flag-based query (it returned 31 locally)
+    and then asked Yahoo for an empty ticker list, which surfaced as "No objects to concatenate".
+    So: log every query's row count, and if the flag query comes back empty fall back to a
+    by-name query of the known candidates plus last night's tickers."""
+    try:
+        import importlib.metadata as md
+        logger.info("tradingview_screener %s", md.version("tradingview_screener"))
+    except Exception:
+        pass
     base = [col('type') == 'fund', col('typespecs').has('etf')]
-    _, inv = (Query().set_markets('america').select(*TV_COLS)
-              .where(*base, col('leveraged_flag') == 'Inverse', col('average_volume_60d_calc') > 300_000)
-              .order_by('average_volume_60d_calc', ascending=False).limit(300)).get_scanner_data()
-    _, vol = (Query().set_markets('america').select(*TV_COLS)
-              .where(*base, col('name').isin(VOLATILITY + CRYPTO_INVERSE)).limit(30)).get_scanner_data()
-    df = pd.concat([inv, vol], ignore_index=True).drop_duplicates('name')
+    inv = _tv("inverse flag", *base, col('leveraged_flag') == 'Inverse', col('average_volume_60d_calc') > 300_000)
+    named = VOLATILITY + CRYPTO_INVERSE
+    if inv.empty:
+        names = sorted({c for _, _, cands, _ in CORE_EXPOSURES for c in cands} | set(named) | _previous_tickers())
+        logger.warning("Inverse-flag query returned nothing - falling back to %d known tickers by name.", len(names))
+        inv = _tv("known tickers by name", col('name').isin(names), limit=len(names) + 20)
+    vol = _tv("volatility + crypto by name", col('name').isin(named), limit=30)
+    frames = [d for d in (inv, vol) if not d.empty]
+    if not frames:
+        return pd.DataFrame()
+    df = pd.concat(frames, ignore_index=True).drop_duplicates('name')
     df['dollar_volume'] = df['average_volume_60d_calc'] * df['close']
+    df['is_inverse'] = [_is_inverse(r) for r in df.to_dict('records')]
+    df['lev'] = [_ratio(r) for r in df.to_dict('records')]
     return df
 
 
@@ -147,11 +191,42 @@ def _rs_1m_pct(hist) -> int | None:
     return 50 if hi == lo else round((hist[-1] - lo) / (hi - lo) * 100)
 
 
-def _leverage_label(row) -> str:
+INVERSE_NAMES = {c for _, _, cands, _ in CORE_EXPOSURES for c in cands} | set(CRYPTO_INVERSE)
+KNOWN_RATIO = {"UVXY": "1.5x", "UVIX": "2x"}   # long-VIX funds, for when TradingView omits leverage_ratio
+
+
+def _is_inverse(row) -> bool:
+    """TradingView's flag when present; otherwise our own lists and the fund's name. (UVXY / UVIX
+    are long-volatility, and their names contain 'Short Term' / 'Short' only incidentally.)"""
+    name = row.get('name')
+    if name in VOLATILITY:
+        return False
+    if row.get('leveraged_flag') == 'Inverse' or name in INVERSE_NAMES:
+        return True
+    return bool(re.search(r'\b(Short|Bear|Inverse|UltraShort)\b', str(row.get('description') or ''), re.I))
+
+
+def _ratio(row) -> str:
+    """'2x' / '3x' from TradingView's leverage_ratio, else read from the name ('Bear 3X', 'UltraPro
+    Short' = 3x, 'UltraShort' = 2x), else '1x'."""
     ratio = row.get('leverage_ratio')
-    ratio = ratio if isinstance(ratio, str) and ratio.endswith('x') else '1x'
-    inverse = row.get('leveraged_flag') == 'Inverse' or row.get('name') in CRYPTO_INVERSE
-    return ('-' if inverse else '+') + ratio
+    if isinstance(ratio, str) and ratio.endswith('x'):
+        return ratio
+    if row.get('name') in KNOWN_RATIO:
+        return KNOWN_RATIO[row['name']]
+    desc = str(row.get('description') or '')
+    m = re.search(r'(\d(?:\.\d)?)\s*[xX]\b', desc)
+    if m:
+        return f"{m.group(1)}x"
+    if re.search(r'UltraPro', desc, re.I):
+        return '3x'
+    if re.search(r'UltraShort|Ultra\b', desc, re.I):
+        return '2x'
+    return '1x'
+
+
+def _leverage_label(row) -> str:
+    return ('-' if _is_inverse(row) else '+') + _ratio(row)
 
 
 def _underlying_hint(desc: str):
@@ -267,14 +342,18 @@ def _row(r, perf: dict, meta: dict) -> dict:
 def main() -> None:
     df = _fetch_universe()
     logger.info("Universe: %d inverse / volatility ETFs from TradingView.", len(df))
+    if df.empty:
+        # Never hand Yahoo an empty ticker list (that is what produced "No objects to concatenate").
+        logger.error("TradingView returned no ETFs - leaving %s untouched.", OUTPUT_JSON)
+        return
     by = df.set_index('name')
 
     core_picks = _select_core(df)
     core_tickers = {p['ticker'] for p in core_picks}
 
     hot_df = df[(df['name'].isin(core_tickers) == False)
-                & df['leverage_ratio'].isin(HOT_LEVERAGE)
-                & (df['leveraged_flag'] == 'Inverse')
+                & df['lev'].isin(HOT_LEVERAGE)
+                & df['is_inverse']
                 & (df['Volatility.W'] > HOT_WEEKLY_VOLATILITY)
                 & (df['average_volume_60d_calc'] >= MIN_AVG_VOLUME)
                 & (df['dollar_volume'] >= MIN_DOLLAR_VOLUME)].sort_values('dollar_volume', ascending=False)
