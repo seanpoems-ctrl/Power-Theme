@@ -8,7 +8,7 @@ on:
 
 jobs:
   market-intel:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
       contents: write
@@ -63,7 +63,7 @@ jobs:
   deploy:
     needs: market-intel
     if: needs.market-intel.outputs.is_trading_day == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read

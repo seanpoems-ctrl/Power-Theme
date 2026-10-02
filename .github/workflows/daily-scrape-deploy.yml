@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   scrape-build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 55
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"

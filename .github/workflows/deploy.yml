@@ -31,7 +31,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       pages: write
