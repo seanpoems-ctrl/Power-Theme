@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-02 12:35 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Rally, Risk Appetite",
+    "spy_price": 769.29,
+    "spy_change_pct": 0.69,
+    "vix": 15.57,
+    "hy_oas": 3.24,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 29.5,
+    "mmth": 47.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ON",
+          "company": "ON Semiconductor Corporation",
+          "reason": "Company confirmed a revised merger agreement, acting as a fresh catalyst for a potential re-rating and strong directional flow."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Benefited from positive analyst sentiment following news of expanded cloud services partnerships, driving fresh institutional interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Capitalized on the broad tech sector momentum as global risk appetite improved, without any specific new company-specific catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-02 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "NVIDIA Corp. (NVDA) experienced intraday volatility driven by options expiry flow and profit-taking after recent gains, lacking any fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-14 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Volatile US Strength / Divergent Signals",
-    "spy_price": 764.29,
-    "spy_change_pct": 0.85,
-    "vix": 17.64,
-    "hy_oas": 2.7,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 44.0,
-    "mmth": 60.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil is set for a strong session as crude oil surges over 2.39%, driven by renewed global demand forecasts and tight supply, boosting its profitability outlook."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announces a significant breakthrough in AI data center efficiency and next-gen chip architecture, leading to analyst upgrades and fresh institutional buying interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to attract speculative interest based on technical support levels and high retail flow, but lacks a fresh, specific fundamental catalyst today."
         }
       ]
     }
