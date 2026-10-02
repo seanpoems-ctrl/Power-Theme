@@ -2,31 +2,43 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 5,
+  "count": 8,
   "stocks": [
+    {
+      "ticker": "XRPN",
+      "company": "Armada Acquisition Corp. II",
+      "industry": "Financial Conglomerates",
+      "price": 39.42,
+      "change_pct": 68.25,
+      "adr_pct": 8.8,
+      "dollar_volume": "$79.5M",
+      "market_cap_b": 1.245,
+      "rs_ibd": 98,
+      "atr_ext_val": 27.45
+    },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 98.46,
-      "change_pct": 3.86,
-      "adr_pct": 7.3,
-      "dollar_volume": "$603.1M",
-      "market_cap_b": 6.188,
+      "price": 94.45,
+      "change_pct": -4.07,
+      "adr_pct": 7.9,
+      "dollar_volume": "$588.6M",
+      "market_cap_b": 5.936,
       "rs_ibd": 98,
-      "atr_ext_val": 17.86
+      "atr_ext_val": 14.74
     },
     {
       "ticker": "HZO",
       "company": "MarineMax, Inc. (FL)",
       "industry": "Specialty Stores",
-      "price": 52.33,
-      "change_pct": 0.06,
-      "adr_pct": 0.6,
-      "dollar_volume": "$38.5M",
+      "price": 52.35,
+      "change_pct": 0.04,
+      "adr_pct": 0.5,
+      "dollar_volume": "$34.3M",
       "market_cap_b": 1.156,
-      "rs_ibd": 91,
-      "atr_ext_val": 15.02
+      "rs_ibd": 90,
+      "atr_ext_val": 14.35
     },
     {
       "ticker": "ARX",
@@ -34,44 +46,68 @@
       "industry": "Property/Casualty Insurance",
       "price": 19.73,
       "change_pct": 0.0,
-      "adr_pct": 0.9,
-      "dollar_volume": "$50.6M",
+      "adr_pct": 0.8,
+      "dollar_volume": "$40.1M",
       "market_cap_b": 4.285,
-      "rs_ibd": 81,
-      "atr_ext_val": 13.36
+      "rs_ibd": 83,
+      "atr_ext_val": 13.33
     },
     {
       "ticker": "IOVA",
       "company": "Iovance Biotherapeutics, Inc.",
       "industry": "Biotechnology",
-      "price": 14.23,
-      "change_pct": -3.98,
+      "price": 14.21,
+      "change_pct": -0.11,
       "adr_pct": 6.0,
-      "dollar_volume": "$324.8M",
-      "market_cap_b": 6.446,
+      "dollar_volume": "$308.8M",
+      "market_cap_b": 6.439,
       "rs_ibd": 99,
-      "atr_ext_val": 12.71
+      "atr_ext_val": 12.07
+    },
+    {
+      "ticker": "GRAL",
+      "company": "GRAIL, Inc.",
+      "industry": "Medical Specialties",
+      "price": 143.26,
+      "change_pct": 8.07,
+      "adr_pct": 6.1,
+      "dollar_volume": "$293.0M",
+      "market_cap_b": 6.399,
+      "rs_ibd": 95,
+      "atr_ext_val": 11.48
     },
     {
       "ticker": "ACVA",
       "company": "ACV Auctions Inc.",
       "industry": "Internet Software/Services",
       "price": 10.45,
-      "change_pct": 0.19,
-      "adr_pct": 2.4,
-      "dollar_volume": "$103.9M",
+      "change_pct": 0.0,
+      "adr_pct": 2.2,
+      "dollar_volume": "$95.0M",
       "market_cap_b": 1.774,
-      "rs_ibd": 73,
-      "atr_ext_val": 10.47
+      "rs_ibd": 72,
+      "atr_ext_val": 10.78
+    },
+    {
+      "ticker": "IMOS",
+      "company": "ChipMOS TECHNOLOGIES INC.",
+      "industry": "Semiconductors",
+      "price": 83.3,
+      "change_pct": 14.61,
+      "adr_pct": 4.3,
+      "dollar_volume": "$9.3M",
+      "market_cap_b": 2.547,
+      "rs_ibd": 97,
+      "atr_ext_val": 10.23
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": null,
-    "spx_1m": null,
-    "spx_3m": null,
-    "spx_34d": null,
-    "spx_qtd": null,
-    "spx_mtd": null
+    "spx_1d": 0.73,
+    "spx_1m": -0.32,
+    "spx_3m": 2.92,
+    "spx_34d": -0.29,
+    "spx_qtd": 0.73,
+    "spx_mtd": 0.73
   },
-  "fetched_at_utc": "2026-10-02T03:50:34+00:00"
+  "fetched_at_utc": "2026-10-02T23:07:23+00:00"
 }
