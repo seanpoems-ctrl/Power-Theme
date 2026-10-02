@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-02 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-On / Global Optimism",
+    "spy_price": 769.64,
+    "spy_change_pct": 0.74,
+    "vix": 15.31,
+    "hy_oas": 3.24,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 29.6,
+    "mmth": 47.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ON",
+          "company": "ON Semiconductor Corporation",
+          "reason": "Announced a revised merger agreement today, signaling improved terms and higher confidence in the deal's completion."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Unveiled significant advancements in its cloud AI capabilities today, bolstering its competitive edge in the rapidly expanding artificial intelligence market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Continues to trade on recycled speculation regarding its upcoming product roadmap and supply chain developments, without fresh catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-02 12:35 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple Inc. experienced increased selling pressure today as investors reacted to persistent concerns about iPhone demand in key international markets, a recurring headline this quarter."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-14 12:55 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk Appetite Fading",
-    "spy_price": 763.08,
-    "spy_change_pct": -0.16,
-    "vix": 16.75,
-    "hy_oas": 2.65,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 42.1,
-    "mmth": 59.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple Inc. (AAPL) surged after announcing better-than-expected initial sales figures for its new Vision Pro 2 headset in key Asian markets, signaling robust consumer demand."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. (MSFT) saw significant buying interest following reports of securing a multi-billion dollar AI infrastructure contract with a major defense contractor, bolstering its Azure cloud growth outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA Corp. (NVDA) experienced intraday volatility driven by options expiry flow and profit-taking after recent gains, lacking any fresh fundamental news."
         }
       ]
     }
