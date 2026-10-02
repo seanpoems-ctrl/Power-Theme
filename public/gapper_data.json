@@ -1,578 +1,68 @@
 {
-  "scan_time": "2026-10-01 08:55 ET",
+  "scan_time": "2026-10-02 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "ACN",
-      "price": 214.9,
-      "gap_pct": 17.19,
-      "pm_volume": 2013792,
-      "avg_vol_10d": 6191972,
-      "avg_dollar_vol": 1330654783,
-      "mkt_cap": 112211826980,
-      "rvol": 1.72,
-      "adr_pct": 3.37,
-      "category": "Earnings",
-      "theme": "Q4 Earnings Beat & Record Bookings",
-      "reasoning": "Accenture reported a Q4 earnings beat and better-than-expected Q3 CY2026 sales, alongside record annual bookings, driving the stock up significantly.",
+      "ticker": "SYNA",
+      "price": 121.6,
+      "gap_pct": 14.55,
+      "pm_volume": 129954,
+      "avg_vol_10d": 553962,
+      "avg_dollar_vol": 67361779,
+      "mkt_cap": 4213349736,
+      "rvol": 1.2,
+      "adr_pct": 4.36,
+      "category": "New Contract/Partnership",
+      "theme": "Revised Acquisition Offer",
+      "reasoning": "Synaptics soared after Onsemi revised its takeover deal to an all-cash **$5.7B** offer at **$123/share**, de-risking the acquisition.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "B",
-      "finviz_theme": "AI Enterprise Software",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Accenture reported a **Q4 earnings beat** and **better-than-expected sales in Q3 CY2026**. The company also posted **record $84.5B annual bookings**, leading to the stock jumping **20%**.",
-        "impact": "The strong financial performance across key metrics and record bookings signal robust demand for Accenture's services, likely driven by AI adoption, and should sustain positive momentum."
+        "catalyst": "Onsemi and Synaptics **amended their merger agreement** after Synaptics received a **competing proposal** from a third party. The original **$7B stock deal** was revised to a **$5.7B all-cash bid** at **$123 per share**.",
+        "impact": "The all-cash structure is considered **more attractive** for Onsemi shareholders due to **lower total cost** and is expected to be **accretive to adjusted earnings** upon closing. For Synaptics, it provides certainty of value and removes stock market volatility risk."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nAccenture reported a significant **Q4 earnings beat**, surpassing analyst expectations. The company also posted **better-than-expected sales in Q3 CY2026**, indicating strong operational performance across its segments. This positive financial surprise led to the stock jumping **20%**.\n\n• **The Growth (Momentum)**\nBeyond the earnings beat, Accenture achieved **record $84.5B annual bookings**. This substantial figure highlights increasing demand for its services and solidifies its market position, particularly as AI impacts businesses. The robust bookings provide a strong foundation for future revenue growth and reinforce the positive sentiment around the stock.",
+      "analysis_details": "• **Impact**\nOn 2026-10-01, Onsemi and Synaptics Incorporated announced they have **amended their merger agreement**, originally signed on **June 25, 2026**. This revision followed Synaptics' receipt of an **unsolicited competing proposal** from a third party. The deal structure was changed from a **$7B stock deal** to a **$5.7B all-cash bid**, valuing Synaptics at **$123/share**. Both **ON (+4.18%)** and **SYNA (+4.69%)** shares climbed after-hours following this announcement.\n\n• **Strategic Value**\nOnsemi's CEO noted the **all-cash structure** is more attractive for its shareholders because the **total cost is lower**, and the deal is now expected to **add to adjusted earnings** as soon as it closes, which is still anticipated by **mid-2027**. For Synaptics shareholders, the revised all-cash offer provides a clear and certain exit price, removing the volatility associated with a stock-based consideration and simplifying the transaction's valuation.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Accenture (NYSE:ACN) Posts Better-Than-Expected Sales In Q3 CY2026, Stock Jumps 20% - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPcTJqbE1OLXVrM3dwMFFTeDB3a2pialpPY2t4cHA5X1NxMkktVkdHWE1leTdHZXZ3czFtWGlaM2FhbW9vNkdnN3liWkRqWEppblg5enVHQ3ZNbXZkNExDVGRUY093ajhVUXA4MjBMQjNmVnBLTERnOFpsdnllRDByOEN4UFMtQ0RrdHhfdTRmRnBiTF9jVG1EQ3VXa2xaSjhIY1VWSGZfQzJyWGptVkR1cTd0MWNWOGg4Qk1TTzQ1Qzh0YjJ4WmkzX2l1QkR3Z1RzckpjNmFTSV8?oc=5"
-        },
-        {
-          "title": "ACN Stock Jumps After Accenture Posts Record $84.5B Annual Bookings, Q4 Earnings Beat - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOTll6bTBtUW1BNkdHTnhZbnBEV3NfVXJoN1lfY1JRRkZabC1hQVVVTkUwY19DSlFWNm9LOXdjOS02YXZLUVZUbW5YVnE0N3pORFpyaWxMSU5iSm9wNnV5SWlQZzQyd0NZWnRZZVFldWQ0Z0NQNUZ3cG42eHpzRWRVZFBBamhTQnFrRDZlWVd5bnBqWF84dzVYOS1tUnM?oc=5"
-        },
-        {
-          "title": "Review & Preview: Intraday Flip",
+          "title": "ON, SYNA Climb After-Hours As The $7B Stock Deal Becomes A $5.7B Cash Bid",
           "source": "Finviz",
-          "url": "https://www.barrons.com/articles/stocks-today-tech-gains-stocks-close-lower-bond-worries-9d24c362?mod=bar_FV"
+          "url": "https://finance.yahoo.com/markets/stocks/articles/syna-climb-hours-7b-stock-215515600.html"
         },
         {
-          "title": "Accenture PLC Cl A stock outperforms competitors on strong trading day",
+          "title": "Onsemi revises Synaptics takeover deal after rival bid",
           "source": "Finviz",
-          "url": "https://www.marketwatch.com/data-news/accenture-plc-cl-a-stock-outperforms-competitors-on-strong-trading-day-c863d244-066dc23d260b?mod=mw_FV"
+          "url": "https://www.digitimes.com/news/a20261002PR200/onsemi-synaptics-financing-competition-technology.html"
         },
         {
-          "title": "Accenture Fiscal Q4 Earnings Due As AI Impacts Business",
+          "title": "Onsemi revises Synaptics deal to $123/sh all-cash, shares of both soar",
           "source": "Finviz",
-          "url": "https://www.investors.com/news/technology/accenture-stock-earnings-artificial-intelligence-2027-guidance?mod=IBD_FV"
+          "url": "https://finance.yahoo.com/markets/stocks/articles/onsemi-revises-synaptics-deal-123-212227617.html"
         }
       ],
       "edgar_filing": {
         "filing_date": "2026-10-01",
         "form": "8-K",
         "items": [
-          "2.02",
+          "1.01",
+          "7.01",
           "9.01"
         ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1467373/000146737326000037/acn-20261001.htm"
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/817720/000114036126038301/ef20083029_8k.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
       "prev_close": null,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Fail (ADR 3.4% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "better-than-expected Q3 CY2026 sales",
-        "discrepancy_note": "Google News [2] mentions 'Better-Than-Expected Sales In Q3 CY2026', but does not provide a specific sales dollar amount. Finviz does not mention ACN's Q3 CY2026 sales or any specific sales figures for that period. Therefore, the specific sales figure for Q3 CY2026 is unconfirmed by both sources."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "GLOB",
-      "price": 38.3,
-      "gap_pct": 10.37,
-      "pm_volume": 58987,
-      "avg_vol_10d": 900123,
-      "avg_dollar_vol": 34474711,
-      "mkt_cap": 1498330556,
-      "rvol": 0.9,
-      "adr_pct": 4.19,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $34M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "INFY",
-      "price": 11.59,
-      "gap_pct": 7.71,
-      "pm_volume": 1038474,
-      "avg_vol_10d": 15077745,
-      "avg_dollar_vol": 174751065,
-      "mkt_cap": 42059654137,
-      "rvol": 1.38,
-      "adr_pct": 2.31,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (ADR 2.3% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CTSH",
-      "price": 61.47,
-      "gap_pct": 7.01,
-      "pm_volume": 94750,
-      "avg_vol_10d": 7347139,
-      "avg_dollar_vol": 451628634,
-      "mkt_cap": 25873515026,
-      "rvol": 1.41,
-      "adr_pct": 3.13,
-      "category": "Others",
-      "theme": "Insider Sale",
-      "reasoning": "Cognizant officer Alina Kerdman proposed a sale of 139 shares, representing a minimal $7.9K transaction.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "AI Enterprise Software",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Cognizant (CTSH) officer **Alina Kerdman** proposed a sale of **139 shares** valued at **$7.9K**. This represents a small, non-material transaction.",
-        "impact": "This small, routine insider transaction is unlikely to impact market perception or stock price momentum due to its negligible size relative to the company's market capitalization and daily trading volume."
-      },
-      "analysis_details": "• **The Buyer**\nCognizant (CTSH) officer **Alina Kerdman** proposed a sale of **139 shares**, amounting to **$7.9K**. This transaction is extremely minor relative to Cognizant's market capitalization and daily trading volume, suggesting it is a routine or personal financial management decision.\n\n• **Conviction Signal**\nThe proposed sale of **$7.9K** by a Cognizant officer is an insubstantial amount, offering no meaningful signal of insider conviction. Given CTSH's average daily volume of **$452M**, this transaction is effectively noise and does not indicate any fundamental shift or impact on the stock's momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "A $7.9K sale of 139 shares is proposed by Cognizant (CTSH) officer Alina Kerdman. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNQVh2LW5vUjByb0Jmd0pDZ0pYNFJLVEU3bEVKTGhUeUFkS0xVb3lzdW8xdUQ3YjcxdlRoZFhUbldwUXFiaDNyWlQyUVN3YlZrNVJQUTh4b2U2aGFtdmctVHlwR0VxR2F6VElFcHM4U0hfM2puek1zM0U5TG4zN1JUTHh4YWFsN1RfR0ZrT3VXVll5ODNpM2ZLbURWWmQ2ZnRHMGtTOC1QclpEUDh3NGRZZlBn?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Fail (ADR 3.1% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "a sale of 139 shares, representing a minimal $7.9K transaction",
-        "discrepancy_note": "Source B (Google News/Stock Titan) confirms the sale of 139 shares for $7.9K. Source A (Finviz News) provides no information to confirm or deny this claim, meaning only one source mentions the specific details."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "FICO",
-      "price": 627.7,
-      "gap_pct": 5.95,
-      "pm_volume": 52626,
-      "avg_vol_10d": 1060856,
-      "avg_dollar_vol": 665899311,
-      "mkt_cap": 12795950335,
-      "rvol": 2.52,
-      "adr_pct": 4.57,
-      "category": "Others",
-      "theme": "Investigation Notice",
-      "reasoning": "FICO faces an investigation notice from Levi & Korsinsky, alerting investors to potential legal scrutiny and downside risk.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 61,
-      "grade": "B",
-      "finviz_theme": "AI Data & Analytics",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "A **pending investigation** into Fair Isaac Corporation by **Levi & Korsinsky** has been announced.",
-        "impact": "This event introduces legal uncertainty and potential liability, negatively impacting investor sentiment and adding pressure on the stock."
-      },
-      "analysis_details": "• **What Happened**\n**Levi & Korsinsky** has issued an **Investigation Notice** regarding Fair Isaac Corporation (FICO), informing investors of a **pending investigation** into the company. This suggests potential legal scrutiny into FICO's operations or disclosures, which can create significant overhang for shareholders.\n\n• **Key Consideration**\nThe ongoing **investigation notice** introduces a new layer of risk and uncertainty for FICO, which was also highlighted as one of the **worst-performing S&P 500 stocks** for the **Third Quarter** and during a **dismal September**. While the investigation specifics are not detailed, such notices typically precede class-action lawsuits or regulatory actions, potentially leading to increased legal costs, reputational damage, or financial penalties. The elevated **RVOL of 2.5x** indicates significant trading activity in response to this negative development.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Fair Isaac Corporation (FICO) Stock Forecasts - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPTlp5eGxHT0haZ3YzRXdaZk1UTzlMTzdKTGVMNWxBb0dQdmVIR1BTdEJSTkJ3ZmxPYVVKQ3FjRjZVcU84V1ZSTHF1c2RyeG5pT0RNcmlGcjlaS1F5LWJqVFEtcDE3YXpEOGdJR2lsMUcxdmNLTkZ2WmlaTGNkVEhYWTVCMDBrT0hET1NqaGNMVQ?oc=5"
-        },
-        {
-          "title": "FICO Investigation Notice: Levi & Korsinsky Notifies Investors of Pending Investigation Into Fair Isaac Corporation - PR Newswire",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNdW5GVFdMdkdHMmlFYXZqeW9haFEyODdIUmVOOXJnNEhrQVBXQ3dFWEdFYVlaN2RpY1NaTkJxY2VBUTJ4V1FpTXhrSlo5ODNuaFE5NTJtbTRiMWp5eXZjNUFFbUREMXVpYTFHVV9Mdm5xbFRDQWJOY1JTWnpxcEE3N3hTWDY3TVotWm1sT0U5Sjg4dGo1YldkemE1RGFFUHk1SHc4cG42NGZwYnhBZ2RFei1xODZUV0hrZjN1RzNPRENOakVobk1Sd2gxOWhuekNCazVtR3FaVnVNNFZkRDIyR2FuSXlYc3hCdVZ0WkNsbzY2ME1oTEt3QUJzNy1lUQ?oc=5"
-        },
-        {
-          "title": "The 15 worst-performing S&P 500 stocks during a dismal September",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/the-15-worst-performing-s-p-500-stocks-during-a-dismal-september-991f8a07?mod=mw_FV"
-        },
-        {
-          "title": "Moderna and Fair Isaac: The Best and Worst S&P 500 Stocks for the Third Quarter",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/moderna-fair-isaac-fico-stocks-s-p-500-62a20d3e?mod=bar_FV"
-        },
-        {
-          "title": "Is Fair Isaac Stock Worth More Than Its Competitors?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/fair-isaac-stock-worth-more-152316729.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "AI Data & Analytics",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "FICO faces an investigation notice from Levi & Korsinsky",
-        "discrepancy_note": "Source B (Google News [2]) explicitly mentions 'Levi & Korsinsky Notifies Investors of Pending Investigation Into Fair Isaac Corporation'. Source A (Finviz News) does not contain any mention of Levi & Korsinsky or an investigation notice related to FICO in its provided headlines."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "NU",
-      "price": 13.38,
-      "gap_pct": 5.69,
-      "pm_volume": 266290,
-      "avg_vol_10d": 77829016,
-      "avg_dollar_vol": 1041352234,
-      "mkt_cap": 61153932868,
-      "rvol": 1.37,
-      "adr_pct": 3.31,
-      "category": "Others",
-      "theme": "M&A Rumor Denial",
-      "reasoning": "Nu Holdings stock **jumped 6%** after **denying media reports** of acquiring Monzo, removing acquisition speculation.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
-      "grade": "B",
-      "finviz_theme": "Fintech - Neobanks",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Catalyst: Nu Holdings Ltd. issued a **statement denying media reports** of an acquisition, specifically addressing a \"Monzo Deal Scare\". This news led to NU stock **jumping 6%** and **popping after hours**.\nImpact: The denial clarifies the company's immediate M&A stance, removing a potential acquisition overhang that the market may have viewed negatively or as dilutive.",
-        "impact": ""
-      },
-      "analysis_details": "• **What Happened**\nNu Holdings' stock experienced a significant surge, **jumping 6%** and **popping after hours**, following the company's **statement denying media reports** regarding a potential acquisition. Specifically, the company addressed a \"Monzo Deal Scare,\" indicating that it is **not acquiring Monzo**. This clarification came after headlines noted \"Ownership of Europe's biggest startup acquisitions is shifting abroad.\"\n\n• **Key Consideration**\nThe strong positive price reaction to the **denial** suggests that the market either viewed the rumored acquisition of **Monzo** unfavorably or saw the uncertainty as an overhang. The company's definitive statement removes this speculative element, potentially unlocking value as investors reassess NU's independent growth trajectory without the integration risks or potential dilution of a major M&A event.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "NU Stock Pops After Hours: Monzo Deal Scare Meets Company Denial - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOeGt3SnAyQjdhbE5iTFdLQjFDbkxoelJJdzZ2RllkNldRQS1OV3dfVUl4UzI2ZGRnakpXX3FXQThqZEpEak4wRTAzT1BqTUViM3dmTjJPMElpWVJvbFAtZ016YjdGREF6V2xZa1hpMUhKM1VIaG5WOGdtVTR6My1ESXgxeGdDM1RsYURZLUZ6Q2EyRG5v?oc=5"
-        },
-        {
-          "title": "Nu Holdings stock jumps 6% after denying Monzo acquisition - Yahoo Finance UK",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9JZnJWYXBYNE40dFdlbmpsQkd2OWFzU1hLYm9tVFk3LVFXYmFVd2sxM0YtWEFZTGE1SWRxQWdhZmkwcl9tblBUSUJyRHVUQzNTRWhrMG1wdXlpZGhzVTFzUGR3VUM4TGJvN3BJU3lWWkczazhfQml6c3VvZDRXOWs?oc=5"
-        },
-        {
-          "title": "Nu Holdings Ltd. Statement Regarding Media Reports",
-          "source": "Finviz",
-          "url": "/news/397385/nu-holdings-ltd-statement-regarding-media-reports"
-        },
-        {
-          "title": "Ownership of Europe's biggest startup acquisitions is shifting abroad",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/small-business/articles/ownership-europes-biggest-startup-acquisitions-113300951.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Fintech - Neobanks",
-      "technical_status": "Fail (ADR 3.3% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Nu Holdings stock jumped 6%",
-        "discrepancy_note": "Source A (Finviz) mentions the stock 'pops' after hours but does not provide a specific percentage figure. Source B (Google News), specifically the Yahoo Finance UK article, explicitly states 'Nu Holdings stock jumps 6%'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "IBM",
-      "price": 232.25,
-      "gap_pct": 5.6,
-      "pm_volume": 295599,
-      "avg_vol_10d": 5879304,
-      "avg_dollar_vol": 1365468354,
-      "mkt_cap": 207203611563,
-      "rvol": 0.73,
-      "adr_pct": 2.59,
-      "category": "New Contract/Partnership",
-      "theme": "Strategic Acquisition",
-      "reasoning": "IBM acquired Logiq Consulting today, enhancing its enterprise consulting capabilities and strategic market positioning.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "B",
-      "finviz_theme": "AI Enterprise Software",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "IBM announced the acquisition of **Logiq Consulting**, a strategic move indicated by the Google News headline. Additionally, IBM launched its **sovereign agentic-AI platform** with **Yotta** in **India** on **September 29**, with shares trading up **0.3%** on Wednesday.",
-        "impact": "The acquisition expands IBM's consulting footprint, while the AI platform launch targets the burgeoning Indian market, potentially boosting long-term revenue streams and competitive positioning in enterprise AI."
-      },
-      "analysis_details": "• **Impact**\nIBM's acquisition of **Logiq Consulting** is a strategic move, as highlighted by the headline, indicating an expansion of its service capabilities. This follows the launch of its **sovereign agentic-AI platform** in **India** with partner **Yotta** on **September 29**, which saw IBM's shares gain **0.3%** to **$220.60** on Wednesday.\n\n• **Strategic Value**\nThe acquisition of **Logiq Consulting** suggests a push to bolster IBM's enterprise consulting and digital transformation services, particularly in areas where AI integration is crucial. The **sovereign agentic-AI platform** deployment with **Yotta** positions IBM strongly in the rapidly growing Indian market for enterprise AI solutions, leveraging hybrid-cloud expertise to address local data residency requirements and drive adoption.",
-      "peer_tickers": [
-        "CSCO",
-        "ANET",
-        "HPE"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "TECL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "TECS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "IBM acquires Logiq Consulting: 28 analysts rate IBM stock - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPN3hZdlVQaXdZUkdMd2poZXJzMlJrdzZZRGlFOTUxNmc1MVhCZGhacDlYVDJMVVNka3NEcXo4OEJBUDNHRWNvUVF6VklZNzVOOVBRUXBVR1A1YnIwVjdZdEZzc1hpbDlyUzRnNUlHekhQYVg1OFFod2tfdG12bFFreVhPbjZ5XzdoeHM0VFgzYm1Ea1NpWGJZb3NkXzF6blNXSUFOeWkxbTcyRVJ6aDktNjZHN1FBUWdGTlVF?oc=5"
-        },
-        {
-          "title": "IBM stock pre-market at EUR 194.75: plus 0.45 percent - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNYW1ZekgwOGVCLXZRQ2owd1NEa2xvclpScWUtdnhpUmVBVndKZ1hOTjRjbmJOM1lxQ0hubHVtWG93OG1xaFhjRG5YSm51bndjUy1Ec3JpOEd2RXBKb2xlRkZqVmc3ZnFHeVZicFRnZ0dmQ2tPbWNuWGllVFNleWpFSUtpZHpGcU5KVWFtRHJYT0dNNDZoTUdhOGFkdGdNTTZSV0lZaVBxUWxBUTh3SWQw?oc=5"
-        },
-        {
-          "title": "IBM Stocks Gain as Sovereign AI Agents Go Live in India",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/ibm-stocks-gain-sovereign-ai-172700785.html"
-        },
-        {
-          "title": "IBM Study: As AI Scales Enterprise-Wide, CFOs Play an Expanded Role in Transformation",
-          "source": "Finviz",
-          "url": "/news/396966/ibm-study-as-ai-scales-enterprise-wide-cfos-play-an-expanded-role-in-transformation"
-        },
-        {
-          "title": "Was There Any Sign Palantir Stock Would Run?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/sign-palantir-stock-run-192331535.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Fail (ADR 2.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "IBM acquired Logiq Consulting",
-        "discrepancy_note": "Source B [4] explicitly states 'IBM acquires Logiq Consulting', but Source A contains no mention of this acquisition."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "RKLB",
-      "price": 73.34,
-      "gap_pct": 5.25,
-      "pm_volume": 788089,
-      "avg_vol_10d": 22289002,
-      "avg_dollar_vol": 1634675407,
-      "mkt_cap": 41700677501,
-      "rvol": 1.14,
-      "adr_pct": 5.19,
-      "category": "New Contract/Partnership",
-      "theme": "New Commercial Deal",
-      "reasoning": "Rocket Lab secured its largest-ever commercial deal, a **20-launch contract** for **Synspective**, bolstering its Electron rocket's order book.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "A+",
-      "finviz_theme": "Space",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Rocket Lab announced its **largest-ever Electron commercial deal**, securing a **20-launch contract** with **Synspective**. This long-term agreement highlights the sustained demand for Rocket Lab's launch services.",
-        "impact": "This contract provides significant revenue visibility and validates Electron's reliability, potentially leading to increased market share and a re-rating of RKLB's growth trajectory."
-      },
-      "analysis_details": "• **Impact**\nRocket Lab secured its **largest-ever Electron commercial deal**, a **20-launch contract** with **Synspective**. This substantial agreement locks in future revenue for its Electron rocket program, underscoring its established market position.\n\n• **Strategic Value**\nThis long-term contract provides significant revenue visibility and backlog growth, bolstering investor confidence in Rocket Lab's commercial launch segment. The consistent demand from **Synspective** reinforces the reliability and cost-effectiveness of the Electron, positioning RKLB for potential valuation re-rating.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "RKLX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "RKLZ",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Rocket Lab Secures Largest-Ever Electron Commercial Deal: 20-Launch Contract for Synspective",
-          "source": "Finviz",
-          "url": "/news/397424/rocket-lab-secures-largest-ever-electron-commercial-deal-20-launch-contract-for-synspective"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Space",
-      "technical_status": "Pass",
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Fail (Avg $Vol $67M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 80,
@@ -580,8 +70,100 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "20-launch contract for Synspective",
-        "discrepancy_note": "Source A ([2] Finviz) confirms '20-Launch Contract for Synspective'. Source B ([5] Google News/Stocktwits) confirms '20 New Launches' as the 'Biggest-Ever Commercial Electron Deal' but does not explicitly name 'Synspective' in the provided title."
+        "primary_claim": "$123/share",
+        "discrepancy_note": "Only one source (Finviz [3]) confirms the $123/share offer price. The other Finviz headlines do not mention it, and Google News has no relevant articles."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "ON",
+      "price": 86.11,
+      "gap_pct": 7.53,
+      "pm_volume": 186923,
+      "avg_vol_10d": 11323095,
+      "avg_dollar_vol": 975031710,
+      "mkt_cap": 31176082173,
+      "rvol": 0.87,
+      "adr_pct": 4.4,
+      "category": "New Contract/Partnership",
+      "theme": "Revised Merger Agreement",
+      "reasoning": "ON revised its Synaptics merger agreement to an all-cash $5.7B bid, expected to be accretive to earnings upon closing.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "A+",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "ON and Synaptics amended their merger agreement, changing the **$7B stock deal** to a **$5.7B all-cash bid** at **$123/sh**. This revision was made after Synaptics received an unsolicited competing proposal, with onsemi stating the all-cash structure is more attractive for its shareholders due to lower total cost.",
+        "impact": "This amendment removes shareholder dilution risk associated with the stock deal, while making the acquisition **accretive to adjusted earnings** as soon as it closes in **mid-2027**. The clearer financial terms could boost investor confidence and provide a more stable outlook for ON's future growth."
+      },
+      "analysis_details": "• **Impact**\nON Semiconductor and Synaptics announced a **revised merger agreement**, transforming the original **$7B stock deal** into an **all-cash bid valued at $5.7B**, or **$123 per share**. This significant amendment follows an unsolicited competing proposal received by Synaptics, with onsemi's CEO Hassane El-Khoury emphasizing the **all-cash structure** as more attractive due to a **lower total cost** for its shareholders. The news propelled both ON and SYNA shares higher **after-hours**, with ON climbing **+4.18%** and SYNA **+4.69%**.\n\n• **Strategic Value**\nThe amended agreement is now expected to be **accretive to adjusted earnings** as soon as the deal closes, which is still anticipated by **mid-2027**. This shift from a stock-based acquisition to an all-cash transaction eliminates potential share dilution for ON shareholders and provides a more immediate positive impact on the company's financial performance post-acquisition. The revision strengthens the strategic rationale by providing clearer financial benefits and investor certainty.",
+      "peer_tickers": [
+        "STM",
+        "NXPI",
+        "MCHP"
+      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "ON, SYNA Climb After-Hours As The $7B Stock Deal Becomes A $5.7B Cash Bid",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/syna-climb-hours-7b-stock-215515600.html"
+        },
+        {
+          "title": "ON Semiconductor Corp. stock outperforms competitors on strong trading day",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/data-news/on-semiconductor-corp-stock-outperforms-competitors-on-strong-trading-day-de5c8f99-2d05ab38388c?mod=mw_FV"
+        },
+        {
+          "title": "Onsemi revises Synaptics deal to $123/sh all-cash, shares of both soar",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/onsemi-revises-synaptics-deal-123-212227617.html"
+        },
+        {
+          "title": "onsemi and Synaptics Announce Revised Merger Agreement",
+          "source": "Finviz",
+          "url": "/news/398099/onsemi-and-synaptics-announce-revised-merger-agreement"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-01",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1097864/000114036126038294/ef20083030_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "an all-cash $5.7B bid",
+        "discrepancy_note": "Source A (Finviz) headline [2] states 'The $7B Stock Deal Becomes A $5.7B Cash Bid,' directly confirming the $5.7B amount. However, Source B (Google News) provides no information regarding this claim, thus it is not corroborated by both sources."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -594,15 +176,204 @@
       "meets_all_gates": true,
       "tier": "T1",
       "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "FWDI",
+      "price": 8.33,
+      "gap_pct": 6.39,
+      "pm_volume": 133428,
+      "avg_vol_10d": 2634881,
+      "avg_dollar_vol": 21948559,
+      "mkt_cap": 597336723,
+      "rvol": 0.78,
+      "adr_pct": 7.51,
+      "category": "Thematic Narratives",
+      "theme": "Corporate Crypto Treasury Expansion",
+      "reasoning": "Forward Industries significantly expanded its Solana holdings in Q4, increasing its treasury exposure to the cryptocurrency narrative.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Forward Industries (NASDAQ: FWDI) announced an increase of **948,601 SOL** to its treasury during its fiscal fourth quarter, bringing total holdings to **8,501,298 SOL**. This represents a substantial **13% increase** from the prior quarter, raising SOL per share to **0.0806**.",
+        "impact": "This strategic asset allocation deepens FWDI's exposure to the volatile cryptocurrency market, potentially attracting investors focused on the corporate crypto treasury narrative and Solana's ecosystem."
+      },
+      "analysis_details": "• **The Narrative**\nForward Industries has significantly expanded its treasury holdings in **Solana (SOL)**, adding **948,601 SOL** during its fiscal fourth quarter ended September 30. This increase brings the company's total SOL stash to **8,501,298 SOL**, a **13% increase** from the previous quarter. The company's SOL per share has also grown to **0.0806**.\n\n• **Explosiveness**\nThis move reinforces FWDI's commitment to holding significant cryptocurrency assets, aligning with a broader thematic narrative of corporate adoption of digital assets. The substantial increase in SOL holdings could lead to increased investor interest from those bullish on the long-term prospects of Solana and companies integrating crypto into their balance sheets, offering potential for momentum as the crypto market fluctuates.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Forward Industries SOL Stash Hits 8.5 Million After 949K Q4 Increase",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/forward-industries-sol-stash-hits-234000385.html"
+        },
+        {
+          "title": "Forward Industries Grows SOL Holdings by 949K to 8.5 Million SOL in Fiscal Fourth Quarter, Increasing SOL per Share to 0.0806",
+          "source": "Finviz",
+          "url": "/news/398075/forward-industries-grows-sol-holdings-by-949k-to-85-million-sol-in-fiscal-fourth-quarter-increasing-sol-per-share-to-00806"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-01",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/38264/000168316826007543/forward_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Fail (Avg $Vol $22M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Forward Industries' Solana holdings are 8.5 Million SOL.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "FPS",
+      "price": 39.25,
+      "gap_pct": 5.14,
+      "pm_volume": 60579,
+      "avg_vol_10d": 9927394,
+      "avg_dollar_vol": 389650214,
+      "mkt_cap": 11364331193,
+      "rvol": 0.64,
+      "adr_pct": 6.1,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "VSH",
+      "price": 36.0,
+      "gap_pct": 5.05,
+      "pm_volume": 64004,
+      "avg_vol_10d": 3107861,
+      "avg_dollar_vol": 111882996,
+      "mkt_cap": 5256312860,
+      "rvol": 1.91,
+      "adr_pct": 4.21,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 7,
-    "large_gaps": 1,
-    "total_headlines": 21,
+    "small_gaps": 5,
+    "large_gaps": 0,
+    "total_headlines": 9,
     "monthly_cost_usd": 0.01
   }
 }
