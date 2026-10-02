@@ -7,6 +7,8 @@ import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
 import FlaggingStocksBox from "./FlaggingStocksBox";
+import CotTab from "./CotTab";
+import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
 const LangCtx = React.createContext('zh');
@@ -8061,11 +8063,12 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v6"; // bumped 2026-09-22: invalidate briefs
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v7"; // bumped 2026-10-02: v6 briefs predate the COT paragraph
+                                                                     // (v6 note, 2026-09-22: invalidate briefs
                                                                      // cached before the extra manual re-scrapes
                                                                      // (today's SPX/NDX/DJI fix) — v5 briefs cite
                                                                      // stale SPY/QQQ vs SMA50/200 that no longer
-                                                                     // match the on-screen tiles
+                                                                     // match the on-screen tiles)
 
 // Tier 1+2+3 macro keywords — all three tiers, no daily noise
 const MAJOR_NEWS_RE = new RegExp(
@@ -8129,8 +8132,9 @@ async function geminiGenerateText(prompt, { retries = 2 } = {}) {
 }
 
 // marketMove: null | { direction: 'drop' | 'surge', spy_pct: number, qqq_pct: number }
-async function fetchMarketSituation(payload, newsItems = [], marketMove = null) {
+async function fetchMarketSituation(payload, newsItems = [], marketMove = null, cot = null) {
   const hasNews = newsItems.length > 0;
+  const hasCot  = !!cot;
   const hasMove = marketMove !== null;
   const needsExtra = hasNews || hasMove;
 
@@ -8170,34 +8174,55 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null) 
     ? `\nMajor market headlines (last 48 h):\n${newsItems.map((h, i) => `${i + 1}. ${h}`).join("\n")}`
     : "";
 
+  // COT is always the last paragraph, so the 3 core paragraphs and the optional event paragraph keep their numbers.
+  const cotInstruction = hasCot
+    ? `Paragraph ${needsExtra ? 5 : 4} (Futures Positioning / COT): Using the CFTC COT data below (Legacy report; Large Specs = hedge funds/CTAs; ` +
+      `positions are as of the report date and up to a week old, so treat them as context, not a timing signal), describe where speculators are crowded ` +
+      `across stock-index, volatility, crypto, metals, energy and Treasury futures (for Treasuries net long = positioned for lower yields, and Large Spec shorts are largely hedged cash-futures basis trades, not directional views). Lead with any market at an extreme (3Y index >= 90 = crowded long, i.e. liquidation risk; ` +
+      `<= 10 = crowded short, i.e. squeeze fuel), mention hedger (Commercials) positioning only where notable, and say whether positioning confirms or contradicts ` +
+      `the tactical stance from paragraph 3. If nothing is at an extreme, say so in one sentence instead of padding. Only use numbers from the data.\n`
+    : "";
+  const cotSection = hasCot ? `\n\nCFTC COT positioning:\n${JSON.stringify(cot.prompt, null, 2)}` : "";
+
   const prompt =
     `You are a senior market analyst providing a pre-trading situational awareness brief for a swing trader. ` +
-    `Analyse all the data below and write exactly ${needsExtra ? 4 : 3} paragraphs with NO headers or labels:\n\n` +
+    `Analyse all the data below and write exactly ${3 + (needsExtra ? 1 : 0) + (hasCot ? 1 : 0)} paragraphs with NO headers or labels:\n\n` +
     `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index, and new 52W highs vs lows. Be specific with the numbers.\n` +
     `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure?\n` +
     `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n` +
     para4Instruction +
+    cotInstruction +
     `\nBe direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\n` +
     `Market data:\n${JSON.stringify(payload, null, 2)}` +
-    newsSection;
+    newsSection +
+    cotSection;
 
   return geminiGenerateText(prompt);
 }
 
-const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
+const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
   const [text, setText]           = useState(null);
   const [loading, setLoading]     = useState(false);
   const [failed, setFailed]       = useState(false);
   const [newsCount, setNewsCount] = useState(0);
   const [marketMove, setMarketMove] = useState(null); // { direction, spy_pct, qqq_pct } | null
+  const [cotBrief, setCotBrief]   = useState(null);     // CFTC COT summary (strip + Gemini paragraph)
+  const cotPromise = useRef(null);
   const todayKey = new Date().toISOString().slice(0, 10);
+
+  // One COT load shared by the on-screen strip and the Gemini prompt (null if the file is unavailable).
+  const getCot = useCallback(() => {
+    if (!cotPromise.current) cotPromise.current = loadCotBrief().then(b => { setCotBrief(b); return b; });
+    return cotPromise.current;
+  }, []);
+  useEffect(() => { getCot(); }, [getCot]);
 
   const doFetch = useCallback(async () => {
     if (!MARKET_SITUATION_GEMINI_KEY || !mc) return;
     setLoading(true); setFailed(false);
 
     // Parallel: fetch news + compute market move trigger from today's SPY/QQQ change
-    const newsItems = await fetchMajorMarketNews();
+    const [newsItems, cot] = await Promise.all([fetchMajorMarketNews(), getCot()]);
     setNewsCount(newsItems.length);
 
     const spyPct = mc.spy?.change_pct ?? 0;
@@ -8234,7 +8259,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
       qqq_vs_sma50:     mc.qqq?.sma50_pct,
       qqq_vs_sma200:    mc.qqq?.sma200_pct,
     };
-    fetchMarketSituation(payload, newsItems, move)
+    fetchMarketSituation(payload, newsItems, move, cot)
       .then(t => {
         if (t) {
           setText(t); setFailed(false);
@@ -8247,7 +8272,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
       })
       .catch(() => setFailed(true))
       .finally(() => setLoading(false));
-  }, [mc, internalsData, bmLatest, todayKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [mc, internalsData, bmLatest, todayKey, getCot]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!mc?.signal) return;
@@ -8333,6 +8358,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
       {!loading && !text && !failed && MARKET_SITUATION_GEMINI_KEY && (
         <p className="text-[12px] text-zinc-600 italic">Awaiting data…</p>
       )}
+      <CotBriefStrip brief={cotBrief} onOpen={onOpenCot} />
     </div>
   );
 };
@@ -8554,7 +8580,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   );
 };
 
-const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [] }) => {
+const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [], onOpenCot }) => {
   const [miniChartsFor, setMiniChartsFor] = React.useState(null); // { title, tickers } for the Market Breadth drill-down's mini-chart grid
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
@@ -8809,7 +8835,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
         )}
 
         {/* ── Market Situation — Gemini thinking narrative ──────────────── */}
-        <MarketSituationBlock mc={mc} internalsData={internalsData} bmLatest={bmLatest} />
+        <MarketSituationBlock mc={mc} internalsData={internalsData} bmLatest={bmLatest} onOpenCot={onOpenCot} />
 
         {/* 8 metric chips — compact single row */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -16522,6 +16548,9 @@ const appScreenerMap = useMemo(() => {
               <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Market Breadth
               </button>
+              <button onClick={() => setTab("cot")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "cot" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                COT
+              </button>
               <button onClick={() => setTab("watchlist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "watchlist" ? "border-amber-400 text-amber-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 ★ Watchlist
               </button>
@@ -16610,7 +16639,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")}/> : tab === "cot" ? <CotTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}

@@ -245,6 +245,17 @@ That guard turned out to be broken for futures: it only checked `now_et.hour >= 
 
 ---
 
+## COT tab (CFTC Commitment of Traders)
+
+`cot_builder.py` (nightly step in `daily-scrape-deploy.yml`, after `inverse_arsenal_builder.py`) writes `public/cot_data.json` from the CFTC Public Reporting API (Socrata dataset `6dca-aqww` = **Legacy futures-only**, so every market splits the same way: Large Specs = non-commercial, Commercials, Small Specs = non-reportable). ~24 markets (`MARKETS` list: indices, crypto, metals, energy, bonds ZT/ZN/UB — ags/softs/livestock were dropped on request; re-add rows there to restore). CFTC has no 20Y contract, so bonds are 2Y/10Y plus Ultra Bond (UB) as the 30Y, ~5 years of weekly rows `[date, oi, ls_long, ls_short, c_long, c_short, ss_long, ss_short]`. The CFTC publishes Fridays 15:30 ET (Tuesday positions); the builder rewrites the file only when data changed, so nightly runs make no commit noise. The workflow needs `git add -f public/cot_data.json` (new file; `add -u` skips untracked).
+
+- **Frontend**: `src/CotTab.js` (tab "COT": grouped-bar net-positioning chart in SVG, searchable market picker, 3Y/1Y range-band toggles, per-group stat cards, cross-market crowding scanner), `src/cotUtils.js` (pure helpers + `buildCotBrief`; tested in `cotUtils.test.js`), `src/cotBrief.js` (loader + strip for the brief).
+- **COT index** = where current net sits between its low (0) and high (100) over the trailing 3Y (or 1Y). **Crowded** = Large Specs 3Y index ≥90 (long) / ≤10 (short). Contracts with <3Y history (SOL, XRP) use what exists and show `*`.
+- **Market Situation brief** (`MarketSituationBlock`, Market Breadth tab): the Gemini prompt gets a `CFTC COT positioning` section plus a final "Futures Positioning / COT" paragraph (always last, so the existing paragraph numbers are unchanged), and a COT strip renders under the narrative. Cache key bumped to `gemini_market_situation_v7`. If `cot_data.json` is missing the brief just omits COT.
+- The chart's tooltip "range" lines are true min→max of Large Specs net over the trailing 3Y / 1Y.
+
+---
+
 ## Removed Features (2026-06-12 audit)
 
 - **News Hub tab** — folded into a collapsed-by-default `NewsHubFold` section at the bottom of the Scanner tab (open state in localStorage `news_hub_open`; content fetches only mount when expanded).

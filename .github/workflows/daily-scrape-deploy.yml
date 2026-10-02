@@ -152,6 +152,8 @@ jobs:
             fi
           done
           timeout 240 python inverse_arsenal_builder.py || echo "inverse_arsenal_builder.py failed (non-fatal)"
+          # CFTC COT: positions update weekly (Fri 15:30 ET); the builder only rewrites the file when data changed.
+          timeout 180 python cot_builder.py             || echo "cot_builder.py failed (non-fatal)"
           timeout 120 python universe_builder.py        || echo "universe_builder.py failed (non-fatal)"
           timeout 600 python screener_builder.py       || echo "screener_builder.py failed (non-fatal)"
 
@@ -171,6 +173,7 @@ jobs:
           git status --short public/
           git add -u public/
           git add -f public/breadth_stocks_*.json 2>/dev/null || true
+          git add -f public/cot_data.json 2>/dev/null || true   # new file on first run — `add -u` only stages tracked files
           git add -f public/breadth_history/*.json 2>/dev/null || true
           echo "=== Staged files ==="
           git diff --staged --stat
