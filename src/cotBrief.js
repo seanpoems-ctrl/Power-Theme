@@ -1,5 +1,5 @@
 import React from "react";
-import { buildCotBrief, idxTone, fmtDate, cotDataUrl } from "./cotUtils";
+import { buildCotBrief, idxTone, BASIS_NOTE, fmtDate, cotDataUrl } from "./cotUtils";
 
 // COT pieces of the Market Situation brief: the loader that feeds Gemini, and the
 // compact strip shown under the narrative.
@@ -29,15 +29,15 @@ const chipCls = {
 export function CotBriefStrip({ brief, onOpen }) {
   if (!brief) return null;
   const Chip = ({ s, flag }) => (
-    <span className={`px-1.5 py-0.5 rounded border text-[11px] font-mono ${chipCls[flag]}`} title={`${s.name} — Large Specs 3Y COT index ${Math.round(s.ls.idx3)}`}>
-      {s.symbol} <span className="opacity-70">{Math.round(s.ls.idx3)}</span>
+    <span className={`px-1.5 py-0.5 rounded border text-[11px] font-mono ${chipCls[flag]}`} title={`${s.name} — ${s.tff ? "Asset Managers" : "Large Specs"} 3Y COT index ${Math.round(s.ls.idx3)}`}>
+      {s.symbol}{s.tff ? " AM" : ""} <span className="opacity-70">{Math.round(s.ls.idx3)}</span>
     </span>
   );
   return (
     <div className="mt-3 pt-3 border-t border-zinc-800/80">
       <div className="flex items-center gap-2 flex-wrap mb-2">
         <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Futures Positioning · COT</span>
-        <span className="text-[10px] text-zinc-600 font-mono">Large Specs 3Y index · as of {dayName(brief.reportDate)} {fmtDate(brief.reportDate)}</span>
+        <span className="text-[10px] text-zinc-600 font-mono">primary-group 3Y index (Treasuries = Asset Mgrs) · as of {dayName(brief.reportDate)} {fmtDate(brief.reportDate)}</span>
         {onOpen && (
           <button onClick={onOpen} className="ml-auto text-[11px] text-blue-400/90 hover:text-blue-300">open COT →</button>
         )}
@@ -61,6 +61,16 @@ export function CotBriefStrip({ brief, onOpen }) {
           <span className="text-[10px] font-semibold tracking-wider text-teal-300">CROWDED SHORT</span>
           {brief.shorts.length ? brief.shorts.map(s => <Chip key={s.symbol} s={s} flag="short" />) : <span className="text-[11px] text-zinc-600">none</span>}
         </div>
+        {brief.basis.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5" title={BASIS_NOTE}>
+            <span className="text-[10px] font-semibold tracking-wider text-sky-300">TREASURY BASIS</span>
+            {brief.basis.map(s => (
+              <span key={s.symbol} className="px-1.5 py-0.5 rounded border border-sky-500/40 bg-sky-500/10 text-sky-300 text-[11px] font-mono">
+                {s.symbol} <span className="opacity-70">{s.basisLabel.toLowerCase()}</span>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

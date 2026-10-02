@@ -8178,13 +8178,15 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
   const cotInstruction = hasCot
     ? `Paragraph ${needsExtra ? 5 : 4} (Futures Positioning / COT): Using the CFTC COT data below (Legacy report; Large Specs = hedge funds/CTAs; ` +
       `positions are as of the report date and up to a week old, so treat them as context, not a timing signal), describe where speculators are crowded ` +
-      `across stock-index, volatility, crypto, metals and energy futures. Lead with any market at an extreme (3Y index >= 90 = crowded long, i.e. liquidation risk; ` +
+      `across stock-index, volatility, crypto, metals, energy and Treasury futures. Lead with any market at an extreme (3Y index >= 90 = crowded long, i.e. liquidation risk; ` +
       `<= 10 = crowded short, i.e. squeeze fuel), mention hedger (Commercials) positioning only where notable, and say whether positioning confirms or contradicts ` +
-      `the tactical stance from paragraph 3. If nothing is at an extreme, say so in one sentence instead of padding. Only use numbers from the data. ` +
-      `Always state whether a position is net long or net short (use large_specs_side) — a high index with a negative net is a short that has shrunk, not a long. ` +
-      `STRICT TREASURY RULE (ZT, ZN, UB): Large Specs are structurally net short there because of hedged cash-futures basis trades, so their positioning is NOT a directional view on yields. ` +
-      `Never call Treasury Large Specs "crowded long", "bullish", or "positioned for lower yields", and never use them to confirm or contradict the tactical stance. ` +
-      `If treasury_positioning_extremes is non-empty, mention it in one neutral sentence only (e.g. the short is at a 3-year low/high, which usually reflects basis-trade unwinding or build-up), otherwise omit Treasuries.\n`
+      `the tactical stance from paragraph 3. If nothing is at an extreme, say so in one sentence instead of padding. Only use numbers from the data. Keep the paragraph to about 5 sentences — extremes first, no market-by-market tour of mid-range readings. ` +
+      `Always state whether a position is net long or net short (use the *_side field) — a high index with a negative net is a short that has shrunk, not a long. ` +
+      `TREASURIES (ZT, ZN, UB) come from the TFF report: asset_managers_* is real-money directional duration positioning — use it for Treasury crowding ` +
+      `(net long = positioned for lower yields) and call it crowded long/short only when its idx is extreme. leveraged_funds_* are mostly hedged cash-futures basis-trade shorts: ` +
+      `never describe them as bullish, bearish or a view on yields. For leveraged funds that are net short: a LOW idx means the short is near its 3Y LARGEST (a big basis trade, unwind risk) and a HIGH idx means it is near its 3Y SMALLEST (basis trade being cut back) — use the wording in treasury_basis_trade_extremes and do not invert it. ` +
+      `If treasury_basis_trade_extremes is non-empty, mention it in one neutral sentence about basis-trade size and unwind risk; otherwise omit it. Dealers are the counterparty and never a signal.
+`
     : "";
   const cotSection = hasCot ? `\n\nCFTC COT positioning:\n${JSON.stringify(cot.prompt, null, 2)}` : "";
 

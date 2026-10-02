@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback } from "react";
 import { RefreshCw, Search, Info, ChevronDown } from "lucide-react";
 import {
-  GROUPS, WEEKS_1Y, WEEKS_3Y, CROWDED_HI, CROWDED_LO,
-  buildSeries, rangeAt, summarize, fmtNet, fmtChg, fmtDate, addDays, niceMax, fmtTick, idxTone, cotDataUrl,
+  groupsFor, WEEKS_1Y, WEEKS_3Y, CROWDED_HI, CROWDED_LO,
+  buildSeries, rangeAt, summarize, fmtNet, fmtChg, fmtDate, addDays, niceMax, fmtTick, idxTone, idxToneNeutral, BASIS_NOTE, cotDataUrl,
 } from "./cotUtils";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// COT tab — CFTC Commitment of Traders (Legacy, futures-only) positioning.
+// COT tab — CFTC Commitment of Traders positioning (Legacy futures-only; TFF for Treasuries).
 // Data: public/cot_data.json, built weekly-ish by cot_builder.py. The CFTC
 // publishes Fridays 15:30 ET with Tuesday's positions.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -16,8 +16,6 @@ const WEEK_CHOICES = [26, 51, 104, 156];
 const WEEKDAY = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const LS_KEY = "cot_market";
 
-const GROUP_BY_KEY = Object.fromEntries(GROUPS.map(g => [g.key, g]));
-
 const weekdayOf = (iso) => {
   const [y, m, d] = iso.split("-").map(Number);
   return WEEKDAY[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
@@ -26,10 +24,10 @@ const weekdayOf = (iso) => {
 const readPref = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch { return d; } };
 const writePref = (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage unavailable */ } };
 
-function IdxCell({ v, short }) {
+function IdxCell({ v, short, neutral }) {
   return (
     <span
-      className={`inline-block min-w-[34px] text-center px-1.5 py-0.5 rounded font-mono text-[12px] ${idxTone(v)}`}
+      className={`inline-block min-w-[34px] text-center px-1.5 py-0.5 rounded font-mono text-[12px] ${neutral ? idxToneNeutral(v) : idxTone(v)}`}
       title={short && v != null ? "Less than 3 years of history for this contract — index uses what exists" : undefined}
     >
       {v == null ? "—" : Math.round(v)}{short && v != null ? "*" : ""}
@@ -37,10 +35,16 @@ function IdxCell({ v, short }) {
   );
 }
 
-function FlagBadge({ flag }) {
-  if (flag === "long") return <span className="text-[10px] font-semibold tracking-wide px-1.5 py-0.5 rounded border border-amber-500/40 bg-amber-500/10 text-amber-300 whitespace-nowrap">CROWDED LONG</span>;
-  if (flag === "short") return <span className="text-[10px] font-semibold tracking-wide px-1.5 py-0.5 rounded border border-teal-500/40 bg-teal-500/10 text-teal-300 whitespace-nowrap">CROWDED SHORT</span>;
-  return <span className="text-zinc-700">—</span>;
+function FlagBadge({ flag, label, tff }) {
+  if (!flag && !label) return <span className="text-zinc-700">—</span>;
+  const who = tff ? "Asset managers" : "Large specs";
+  return (
+    <span className="flex flex-wrap items-center gap-1">
+      {flag === "long" && <span title={`${who} 3Y COT index ≥ ${CROWDED_HI}`} className="text-[10px] font-semibold tracking-wide px-1.5 py-0.5 rounded border border-amber-500/40 bg-amber-500/10 text-amber-300 whitespace-nowrap">CROWDED LONG</span>}
+      {flag === "short" && <span title={`${who} 3Y COT index ≤ ${CROWDED_LO}`} className="text-[10px] font-semibold tracking-wide px-1.5 py-0.5 rounded border border-teal-500/40 bg-teal-500/10 text-teal-300 whitespace-nowrap">CROWDED SHORT</span>}
+      {label && <span title={BASIS_NOTE} className="text-[10px] font-semibold tracking-wide px-1.5 py-0.5 rounded border border-sky-500/40 bg-sky-500/10 text-sky-300 whitespace-nowrap">{label}</span>}
+    </span>
+  );
 }
 
 // ── Market picker (searchable, grouped — like the reference dropdown) ────────
@@ -151,21 +155,20 @@ function CotChart({ market, weeks, show3y, show1y }) {
     return () => ro.disconnect();
   }, []);
 
+  const defs = groupsFor(market);
   const s = useMemo(() => buildSeries(market.rows), [market]);
   const n = s.dates.length;
   const nVis = Math.min(weeks, n);
   const start = n - nVis;
 
-  // Trailing 3Y / 1Y range of Large Specs net, evaluated at each visible week.
+  // Trailing 3Y / 1Y range of the primary group's net (Large Specs / Asset Managers), evaluated at each visible week.
   const bands = useMemo(() => {
     const out = [];
     for (let i = start; i < n; i++) out.push({ r3: rangeAt(s.ls, i, WEEKS_3Y), r1: rangeAt(s.ls, i, WEEKS_1Y) });
     return out;
   }, [s, start, n]);
 
-  const H = 400, m = { l: 66, r: 16, t: 10, b: 66 };
-  const plotW = w - m.l - m.r, plotH = H - m.t - m.b;
-  const band = plotW / nVis;
+  const H = 400;
 
   const M = useMemo(() => {
     let maxAbs = 0;
@@ -177,6 +180,11 @@ function CotChart({ market, weeks, show3y, show1y }) {
     }
     return niceMax(maxAbs * 1.04);
   }, [s, bands, start, nVis, show3y, show1y]);
+
+  // Left margin grows with the widest y label so big numbers (Treasuries: "(3,000,000)") aren't clipped.
+  const m = { l: Math.max(66, fmtTick(-M).length * 6.8 + 18), r: 16, t: 10, b: 66 };
+  const plotW = w - m.l - m.r, plotH = H - m.t - m.b;
+  const band = plotW / nVis;
 
   const y = (v) => m.t + plotH / 2 - (v / M) * (plotH / 2);
   const cx = (k) => m.l + band * (k + 0.5);
@@ -204,7 +212,7 @@ function CotChart({ market, weeks, show3y, show1y }) {
   const activeKey = show3y ? "r3" : show1y ? "r1" : null;
   const shown = hi ?? n - 1;
 
-  const legend = GROUPS.map(g => ({ ...g, value: s[g.key][shown] }));
+  const legend = defs.map(g => ({ ...g, value: s[g.key][shown] }));
   const tipLeft = hover != null && cx(hover) < w * 0.62;
 
   return (
@@ -230,14 +238,14 @@ function CotChart({ market, weeks, show3y, show1y }) {
             </g>
           ))}
 
-          {/* range bands of Large Specs net (3Y lighter underneath, 1Y over it) */}
+          {/* range bands of the primary group's net (3Y lighter underneath, 1Y over it) */}
           {show3y && <polygon points={bandPoly("r3")} fill="rgba(107,155,216,0.07)" stroke="rgba(107,155,216,0.18)" strokeWidth={1} />}
           {show1y && <polygon points={bandPoly("r1")} fill="rgba(107,155,216,0.12)" stroke="rgba(107,155,216,0.25)" strokeWidth={1} />}
 
           {/* bars */}
           {Array.from({ length: nVis }, (_, k) => {
             const i = start + k;
-            return GROUPS.map((g, j) => {
+            return defs.map((g, j) => {
               const v = s[g.key][i];
               if (!v) return null;
               const x = cx(k) + (j - 1) * (barW + barGap) - barW / 2;
@@ -274,12 +282,12 @@ function CotChart({ market, weeks, show3y, show1y }) {
             <div className="text-zinc-500 mb-1.5">{fmtDate(s.dates[hi])}</div>
             {[["3Y", bands[hover].r3], ["1Y", bands[hover].r1]].map(([lab, r]) => (
               <div key={lab} className="flex justify-between gap-4 text-zinc-300">
-                <span className="text-zinc-600">{lab} range</span>
+                <span className="text-zinc-600" title={`Range of ${defs[0].label} net`}>{lab} range</span>
                 <span>{fmtNet(r[0])} → {fmtNet(r[1])}</span>
               </div>
             ))}
             <div className="mt-1.5 pt-1.5 border-t border-zinc-800 space-y-0.5">
-              {GROUPS.map(g => (
+              {defs.map(g => (
                 <div key={g.key} className="flex justify-between gap-4" style={{ color: g.color }}>
                   <span className="text-zinc-600">{g.label}</span>
                   <span className="font-semibold">{fmtNet(s[g.key][hi])}</span>
@@ -294,22 +302,31 @@ function CotChart({ market, weeks, show3y, show1y }) {
 }
 
 // ── COT-index gauge ──────────────────────────────────────────────────────────
-function IndexBar({ label, value, short }) {
+function IndexBar({ label, value, short, neutral }) {
   return (
     <div className="flex items-center gap-2">
       <span className="w-6 text-[10px] font-mono text-zinc-500">{label}</span>
       <div className="relative flex-1 h-1.5 rounded-full bg-zinc-800">
-        <div className="absolute inset-y-0 left-0 rounded-l-full bg-teal-500/25" style={{ width: `${CROWDED_LO}%` }} />
-        <div className="absolute inset-y-0 right-0 rounded-r-full bg-amber-500/25" style={{ width: `${100 - CROWDED_HI}%` }} />
+        <div className={`absolute inset-y-0 left-0 rounded-l-full ${neutral ? "bg-sky-500/25" : "bg-teal-500/25"}`} style={{ width: `${CROWDED_LO}%` }} />
+        <div className={`absolute inset-y-0 right-0 rounded-r-full ${neutral ? "bg-sky-500/25" : "bg-amber-500/25"}`} style={{ width: `${100 - CROWDED_HI}%` }} />
         {value != null && <div className="absolute top-1/2 w-2.5 h-2.5 rounded-full bg-zinc-100 border border-zinc-900 -translate-x-1/2 -translate-y-1/2" style={{ left: `${value}%` }} />}
       </div>
-      <IdxCell v={value} short={short} />
+      <IdxCell v={value} short={short} neutral={neutral} />
     </div>
   );
 }
 
-function verdict(key, idx) {
+function verdict(key, idx, sum) {
   if (idx == null) return "Not enough history for a COT index yet.";
+  if (sum?.tff) {
+    if (key === "ls") {
+      if (idx >= CROWDED_HI) return "Crowded long — asset managers (real money) hold near their most duration in 3 years. Little buying power left; exposed to a yield spike.";
+      if (idx <= CROWDED_LO) return "Crowded short — asset managers are near their most underweight duration in 3 years. Short-covering fuel if yields fall.";
+      return "Mid-range — real-money duration positioning isn't stretched.";
+    }
+    if (key === "c") return `${BASIS_NOTE}${sum.basisLabel ? ` Currently: ${sum.basisLabel.toLowerCase()}.` : ""}`;
+    return "Dealers take the other side of asset-manager and leveraged-fund flows — a balancing position, not a directional signal.";
+  }
   if (key === "ls") {
     if (idx >= CROWDED_HI) return "Crowded long — specs are near their most bullish in 3 years. Little buying power left; the position is the risk if the market turns.";
     if (idx <= CROWDED_LO) return "Crowded short — specs are near their most bearish in 3 years. Short-covering fuel if price firms.";
@@ -328,7 +345,7 @@ function verdict(key, idx) {
 function StatCards({ sum }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-      {GROUPS.map(g => {
+      {groupsFor(sum).map(g => {
         const x = sum[g.key];
         return (
           <div key={g.key} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-3.5">
@@ -344,10 +361,10 @@ function StatCards({ sum }) {
               </span>
             </div>
             <div className="mt-3 space-y-1.5">
-              <IndexBar label="3Y" value={x.idx3} short={sum.shortHistory} />
-              <IndexBar label="1Y" value={x.idx1} />
+              <IndexBar label="3Y" value={x.idx3} short={sum.shortHistory} neutral={sum.tff && g.key === "c"} />
+              <IndexBar label="1Y" value={x.idx1} neutral={sum.tff && g.key === "c"} />
             </div>
-            <p className="mt-3 text-[12px] leading-snug text-zinc-500">{verdict(g.key, x.idx3)}</p>
+            <p className="mt-3 text-[12px] leading-snug text-zinc-500">{verdict(g.key, x.idx3, sum)}</p>
           </div>
         );
       })}
@@ -366,7 +383,8 @@ const SORTS = {
   "ss.net": s => s.ss.net, "ss.idx3": s => s.ss.idx3,
 };
 
-function Scanner({ summaries, selected, onPick }) {
+function Scanner({ summaries, selected, onPick, kicker, title, chips, footnote }) {
+  const defs = groupsFor(summaries[0]);
   const [groupFilter, setGroupFilter] = useState("All");
   const [crowdedOnly, setCrowdedOnly] = useState(false);
   const [sort, setSort] = useState({ key: "extreme", dir: -1 });
@@ -374,7 +392,7 @@ function Scanner({ summaries, selected, onPick }) {
   const rows = useMemo(() => {
     const get = SORTS[sort.key];
     return summaries
-      .filter(s => (groupFilter === "All" || s.group === groupFilter) && (!crowdedOnly || s.flag))
+      .filter(s => (groupFilter === "All" || s.group === groupFilter) && (!crowdedOnly || s.flag || s.basisLabel))
       .sort((a, b) => {
         const va = get(a), vb = get(b);
         if (va == null && vb == null) return 0;
@@ -399,11 +417,11 @@ function Scanner({ summaries, selected, onPick }) {
     <div className="bg-zinc-900/40 border border-zinc-800 rounded-lg">
       <div className="flex flex-wrap items-center gap-2 px-4 pt-3.5 pb-2">
         <div>
-          <div className="text-[10px] tracking-[0.18em] font-mono text-zinc-500 uppercase">CFTC · Crowding scanner</div>
-          <div className="text-[15px] font-semibold text-zinc-200">All markets — where positioning is stretched</div>
+          <div className="text-[10px] tracking-[0.18em] font-mono text-zinc-500 uppercase">{kicker}</div>
+          <div className="text-[15px] font-semibold text-zinc-200">{title}</div>
         </div>
         <div className="flex flex-wrap items-center gap-1.5 ml-auto">
-          {["All", ...GROUP_ORDER].map(g => (
+          {(chips ? ["All", ...chips] : []).map(g => (
             <button key={g} onClick={() => setGroupFilter(g)}
               className={`px-2.5 py-1 text-[12px] rounded-md border transition-colors ${groupFilter === g ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : "bg-zinc-800/50 border-zinc-700/50 text-zinc-400 hover:text-zinc-200"}`}>
               {g}
@@ -411,7 +429,7 @@ function Scanner({ summaries, selected, onPick }) {
           ))}
           <label className="flex items-center gap-1.5 pl-2 text-[12px] text-zinc-400 cursor-pointer">
             <input type="checkbox" checked={crowdedOnly} onChange={e => setCrowdedOnly(e.target.checked)} className="rounded" />
-            Crowded only
+            Extremes only
           </label>
         </div>
       </div>
@@ -421,9 +439,9 @@ function Scanner({ summaries, selected, onPick }) {
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-zinc-600 border-b border-zinc-800/60">
               <th colSpan={2} />
-              <th colSpan={5} className="px-2 pt-1 text-center" style={{ color: GROUP_BY_KEY.ls.color }}>Large Specs</th>
-              <th colSpan={2} className="px-2 pt-1 text-center border-l border-zinc-800/60" style={{ color: GROUP_BY_KEY.c.color }}>Commercials</th>
-              <th colSpan={2} className="px-2 pt-1 text-center border-l border-zinc-800/60" style={{ color: GROUP_BY_KEY.ss.color }}>Small Specs</th>
+              <th colSpan={5} className="px-2 pt-1 text-center" style={{ color: defs[0].color }}>{defs[0].label}</th>
+              <th colSpan={2} className="px-2 pt-1 text-center border-l border-zinc-800/60" style={{ color: defs[1].color }}>{defs[1].label}</th>
+              <th colSpan={2} className="px-2 pt-1 text-center border-l border-zinc-800/60" style={{ color: defs[2].color }}>{defs[2].label}</th>
               <th />
             </tr>
             <tr className="text-[11px] text-zinc-500 border-b border-zinc-800">
@@ -453,10 +471,10 @@ function Scanner({ summaries, selected, onPick }) {
                 <td className="px-2 py-1.5 text-center"><IdxCell v={s.ls.idx3} short={s.shortHistory} /></td>
                 <td className="px-2 py-1.5 text-center"><IdxCell v={s.ls.idx1} /></td>
                 <td className={`${num} text-zinc-300 border-l border-zinc-800/60`}>{fmtNet(s.c.net)}</td>
-                <td className="px-2 py-1.5 text-center"><IdxCell v={s.c.idx3} short={s.shortHistory} /></td>
+                <td className="px-2 py-1.5 text-center"><IdxCell v={s.c.idx3} short={s.shortHistory} neutral={s.tff} /></td>
                 <td className={`${num} text-zinc-300 border-l border-zinc-800/60`}>{fmtNet(s.ss.net)}</td>
                 <td className="px-2 py-1.5 text-center"><IdxCell v={s.ss.idx3} short={s.shortHistory} /></td>
-                <td className="px-2 py-1.5"><FlagBadge flag={s.flag} /></td>
+                <td className="px-2 py-1.5"><FlagBadge flag={s.flag} label={s.basisLabel} tff={s.tff} /></td>
               </tr>
             ))}
             {rows.length === 0 && (
@@ -465,10 +483,7 @@ function Scanner({ summaries, selected, onPick }) {
           </tbody>
         </table>
       </div>
-      <p className="px-4 py-2.5 text-[11px] text-zinc-600 leading-relaxed">
-        COT index = where the current net sits between its lowest (0) and highest (100) over the window. Crowded = Large Specs 3Y index ≥ {CROWDED_HI} or ≤ {CROWDED_LO}.
-        Positioning is context, not a timing signal — crowded markets can stay crowded while a trend runs. * = under 3 years of history.
-      </p>
+      <p className="px-4 py-2.5 text-[11px] text-zinc-600 leading-relaxed">{footnote}</p>
     </div>
   );
 }
@@ -478,8 +493,8 @@ function CrowdedStrip({ summaries, onPick, data }) {
   const longs = summaries.filter(s => s.flag === "long").sort((a, b) => b.ls.idx3 - a.ls.idx3);
   const shorts = summaries.filter(s => s.flag === "short").sort((a, b) => a.ls.idx3 - b.ls.idx3);
   const chip = (s, cls) => (
-    <button key={s.symbol} onClick={() => onPick(s.symbol)} className={`px-2 py-0.5 rounded border text-[12px] font-mono ${cls}`} title={`${s.name} — Large Specs 3Y index ${Math.round(s.ls.idx3)}`}>
-      {s.symbol} <span className="opacity-70">{Math.round(s.ls.idx3)}</span>
+    <button key={s.symbol} onClick={() => onPick(s.symbol)} className={`px-2 py-0.5 rounded border text-[12px] font-mono ${cls}`} title={`${s.name} — ${s.tff ? "Asset Managers" : "Large Specs"} 3Y index ${Math.round(s.ls.idx3)}`}>
+      {s.symbol}{s.tff ? " AM" : ""} <span className="opacity-70">{Math.round(s.ls.idx3)}</span>
     </button>
   );
   const none = <span className="text-[12px] text-zinc-600">none</span>;
@@ -493,6 +508,17 @@ function CrowdedStrip({ summaries, onPick, data }) {
         <span className="text-[11px] font-semibold tracking-wider text-teal-300 mr-1">CROWDED SHORT</span>
         {shorts.length ? shorts.map(s => chip(s, "border-teal-500/40 bg-teal-500/10 text-teal-300 hover:bg-teal-500/20")) : none}
       </div>
+      {summaries.some(s => s.basisLabel) && (
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-[11px] font-semibold tracking-wider text-sky-300 mr-1" title={BASIS_NOTE}>TREASURY BASIS</span>
+          {summaries.filter(s => s.basisLabel).map(s => (
+            <button key={s.symbol} onClick={() => onPick(s.symbol)} title={`${s.name} — ${BASIS_NOTE}`}
+              className="px-2 py-0.5 rounded border border-sky-500/40 bg-sky-500/10 text-sky-300 hover:bg-sky-500/20 text-[12px] font-mono">
+              {s.symbol} <span className="opacity-70">{s.basisLabel.toLowerCase()}</span>
+            </button>
+          ))}
+        </div>
+      )}
       <div className="ml-auto text-[11px] font-mono text-zinc-500 text-right">
         Positions as of {weekdayOf(data.report_date)} {fmtDate(data.report_date)} · CFTC releases Fri 3:30 PM ET · next ≈ {fmtDate(addDays(data.report_date, 10))}
       </div>
@@ -582,11 +608,21 @@ export default function CotTab() {
 
         {showInfo && (
           <div className="mt-3 text-[12px] leading-relaxed text-zinc-400 bg-zinc-950/60 border border-zinc-800 rounded-md p-3 space-y-1.5">
-            <p><b style={{ color: GROUP_BY_KEY.ls.color }}>Large Specs</b> — non-commercial reportable traders (hedge funds, CTAs). Trend-followers; the group whose crowding matters most.</p>
-            <p><b style={{ color: GROUP_BY_KEY.c.color }}>Commercials</b> — hedgers (producers, dealers). Usually on the other side of the specs.</p>
-            <p><b style={{ color: GROUP_BY_KEY.ss.color }}>Small Specs</b> — non-reportable positions (retail).</p>
-            <p>Treasury futures: net long = positioned for lower yields. Large Spec shorts there are largely cash-futures basis trades (hedged), not directional bets — read bond extremes with that in mind.</p>
-            <p>Bars are net positions (long − short, contracts). The shaded band is the lowest → highest Large Specs net over the trailing 3 years / 1 year at each date; the tooltip shows both ranges. Source: CFTC Legacy Futures-Only report — positions as of Tuesday, published Friday.</p>
+            {sum.tff ? (
+              <>
+                <p><b style={{ color: groupsFor(sum)[0].color }}>Asset Managers</b> — real-money institutions (pensions, insurers, mutual funds). Their net is the directional duration view; this is the group whose crowding matters.</p>
+                <p><b style={{ color: groupsFor(sum)[1].color }}>Leveraged Funds</b> — hedge funds. Their Treasury shorts are mostly the short leg of hedged cash-futures basis trades, not a bet on higher yields: a very large short is a big trade that can unwind.</p>
+                <p><b style={{ color: groupsFor(sum)[2].color }}>Dealers</b> — banks and primary dealers, the counterparty to the other two.</p>
+                <p>Treasury futures: net long = positioned for lower yields. Bars are net positions (long − short, contracts). The shaded band is the lowest → highest Asset Managers net over the trailing 3 years / 1 year at each date. Source: CFTC Traders in Financial Futures (TFF), futures-only — positions as of Tuesday, published Friday.</p>
+              </>
+            ) : (
+              <>
+                <p><b style={{ color: groupsFor(sum)[0].color }}>Large Specs</b> — non-commercial reportable traders (hedge funds, CTAs). Trend-followers; the group whose crowding matters most.</p>
+                <p><b style={{ color: groupsFor(sum)[1].color }}>Commercials</b> — hedgers (producers, dealers). Usually on the other side of the specs.</p>
+                <p><b style={{ color: groupsFor(sum)[2].color }}>Small Specs</b> — non-reportable positions (retail).</p>
+                <p>Bars are net positions (long − short, contracts). The shaded band is the lowest → highest Large Specs net over the trailing 3 years / 1 year at each date; the tooltip shows both ranges. Source: CFTC Legacy Futures-Only report — positions as of Tuesday, published Friday.</p>
+              </>
+            )}
           </div>
         )}
 
@@ -596,7 +632,18 @@ export default function CotTab() {
       </div>
 
       <StatCards sum={sum} />
-      <Scanner summaries={summaries} selected={market.symbol} onPick={pick} />
+      <Scanner
+        summaries={summaries.filter(s => !s.tff)} selected={market.symbol} onPick={pick}
+        kicker="CFTC · Crowding scanner" title="Where positioning is stretched" chips={GROUP_ORDER.filter(g => g !== "Bonds")}
+        footnote={`COT index = where the current net sits between its lowest (0) and highest (100) over the window. Crowded = Large Specs 3Y index ≥ ${CROWDED_HI} or ≤ ${CROWDED_LO}. Positioning is context, not a timing signal — crowded markets can stay crowded while a trend runs. * = under 3 years of history.`}
+      />
+      {summaries.some(s => s.tff) && (
+        <Scanner
+          summaries={summaries.filter(s => s.tff)} selected={market.symbol} onPick={pick}
+          kicker="CFTC · TFF · Treasuries" title="Treasury futures — real-money duration vs. the basis trade" chips={null}
+          footnote={`Treasuries use the Traders in Financial Futures report, which separates real-money Asset Managers (crowded = 3Y index ≥ ${CROWDED_HI} or ≤ ${CROWDED_LO}) from Leveraged Funds, whose shorts are mostly hedged basis trades. The blue label tracks the size of that basis trade, not a directional view.`}
+        />
+      )}
     </div>
   );
 }

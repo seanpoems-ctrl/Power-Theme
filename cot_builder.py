@@ -2,23 +2,32 @@ import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Window
 """
 cot_builder.py — CFTC Commitment of Traders (COT) positioning for the COT tab.
 
-Builds public/cot_data.json from the CFTC Public Reporting Environment
-(Socrata dataset 6dca-aqww = "Legacy - Futures Only"). The Legacy report splits
-every market the same way, which is what makes cross-market comparison possible:
+Builds public/cot_data.json from the CFTC Public Reporting Environment. Two reports:
 
-  Large Specs  = non-commercial reportable traders (hedge funds / CTAs)
-  Commercials  = hedgers (producers, dealers, the "smart money" in commodities)
-  Small Specs  = non-reportable (retail)
+  Legacy futures-only (Socrata 6dca-aqww) — every market except Treasuries. It splits
+  every market the same way, which is what makes cross-market comparison possible:
+    Large Specs  = non-commercial reportable traders (hedge funds / CTAs)
+    Commercials  = hedgers (producers, dealers, the "smart money" in commodities)
+    Small Specs  = non-reportable (retail)
+
+  TFF, Traders in Financial Futures, futures-only (Socrata gpe5-46if) — Treasuries.
+  Legacy lumps hedged cash-futures basis trades into "Large Specs", so a Treasury
+  Legacy reading says nothing about direction. TFF separates them:
+    Asset Managers = real-money directional positioning (slot 1: the crowding signal)
+    Leveraged Funds = hedge funds; their Treasury shorts are mostly basis trades (slot 2)
+    Dealers = the counterparty (slot 3)
 
 Net = long - short per group. Each market keeps ~5 years of weekly history so the
-frontend can compute 1Y / 3Y ranges and COT-index percentiles itself.
+frontend can compute 1Y / 3Y ranges and COT-index percentiles itself. Each market
+carries `report` ("legacy" | "tff") so the frontend knows what the three slots mean.
 
 The CFTC publishes Fridays 15:30 ET with Tuesday's positions, so the file only
 changes weekly; running nightly is harmless (the file is rewritten only when the
 data changes, so no commit noise).
 
-Row layout (oldest -> newest), kept as arrays to keep the file small:
-  [date, open_interest, ls_long, ls_short, c_long, c_short, ss_long, ss_short]
+Row layout (oldest -> newest), kept as arrays to keep the file small. Slots 1-3 are
+Large Specs / Commercials / Small Specs (legacy) or Asset Mgrs / Lev Funds / Dealers (tff):
+  [date, open_interest, s1_long, s1_short, s2_long, s2_short, s3_long, s3_short]
 
 Run: python cot_builder.py
 """
@@ -37,7 +46,7 @@ import requests
 ROOT = Path(__file__).parent
 OUTPUT_JSON = ROOT / "public" / "cot_data.json"
 
-API_URL = "https://publicreporting.cftc.gov/resource/6dca-aqww.json"
+API_BASE = "https://publicreporting.cftc.gov/resource"
 HISTORY_YEARS = 5            # 3Y COT index + 51-week chart + a year of slack
 MIN_MARKETS_FRACTION = 0.8   # refuse to publish if the pull is badly incomplete
 MAX_STALE_DAYS = 21          # report_date older than this = the CFTC feed is stuck
@@ -80,20 +89,41 @@ MARKETS = [
     ("020604", "UB",  "Ultra T-Bond (30Y)",   "Bonds", "CBOT"),
 ]
 
-_FIELDS = [
-    "report_date_as_yyyy_mm_dd", "cftc_contract_market_code", "open_interest_all",
-    "noncomm_positions_long_all", "noncomm_positions_short_all",
-    "comm_positions_long_all", "comm_positions_short_all",
-    "nonrept_positions_long_all", "nonrept_positions_short_all",
-]
+# Which CFTC report each group comes from. Treasuries use TFF (see module docstring).
+TFF_GROUPS = {"Bonds"}
+
+REPORTS = {
+    "legacy": {
+        "dataset": "6dca-aqww",
+        "fields": [
+            "report_date_as_yyyy_mm_dd", "cftc_contract_market_code", "open_interest_all",
+            "noncomm_positions_long_all", "noncomm_positions_short_all",
+            "comm_positions_long_all", "comm_positions_short_all",
+            "nonrept_positions_long_all", "nonrept_positions_short_all",
+        ],
+    },
+    "tff": {
+        "dataset": "gpe5-46if",
+        "fields": [
+            "report_date_as_yyyy_mm_dd", "cftc_contract_market_code", "open_interest_all",
+            "asset_mgr_positions_long", "asset_mgr_positions_short",
+            "lev_money_positions_long", "lev_money_positions_short",
+            "dealer_positions_long_all", "dealer_positions_short_all",
+        ],
+    },
+}
 
 
-def _get(params, attempts=4):
+def report_of(group):
+    return "tff" if group in TFF_GROUPS else "legacy"
+
+
+def _get(dataset, params, attempts=4):
     """GET with backoff — the CFTC endpoint occasionally 5xx's or times out."""
     last = None
     for i in range(attempts):
         try:
-            r = requests.get(API_URL, params=params, timeout=90,
+            r = requests.get(f"{API_BASE}/{dataset}.json", params=params, timeout=90,
                              headers={"User-Agent": "thematic-scanner-cot/1.0"})
             r.raise_for_status()
             return r.json()
@@ -110,15 +140,16 @@ def _in_ci():
     return bool(os.environ.get("CI"))
 
 
-def fetch_rows(since):
-    """All Legacy-Futures-Only rows for our contract codes since `since` (a date)."""
-    codes = ",".join(f"'{m[0]}'" for m in MARKETS)
+def fetch_rows(report, since):
+    """All rows of one report (legacy / tff) for our contract codes in that report, since `since`."""
+    spec = REPORTS[report]
+    codes = ",".join(f"'{m[0]}'" for m in MARKETS if report_of(m[3]) == report)
     where = (f"cftc_contract_market_code in({codes}) "
              f"AND report_date_as_yyyy_mm_dd >= '{since.isoformat()}T00:00:00.000'")
     out, offset, page = [], 0, 20000
     while True:
-        batch = _get({
-            "$select": ",".join(_FIELDS), "$where": where,
+        batch = _get(spec["dataset"], {
+            "$select": ",".join(spec["fields"]), "$where": where,
             "$order": "report_date_as_yyyy_mm_dd ASC", "$limit": page, "$offset": offset,
         })
         out.extend(batch)
@@ -134,30 +165,39 @@ def _int(v):
         return None
 
 
-def build_markets(raw):
+def build_markets(raw_by_report):
     """Group raw API rows by contract code into the compact per-market structure."""
-    by_code = {}
-    for r in raw:
-        vals = [_int(r.get(k)) for k in _FIELDS[2:]]
-        if any(v is None for v in vals):
-            continue  # a row with a missing field would corrupt the nets — skip it
-        by_code.setdefault(r["cftc_contract_market_code"].strip(), {})[r["report_date_as_yyyy_mm_dd"][:10]] = vals
+    by_code = {}  # (report, code) -> {date: [values]}
+    for report, raw in raw_by_report.items():
+        fields = REPORTS[report]["fields"]
+        for r in raw:
+            vals = [_int(r.get(k)) for k in fields[2:]]
+            if any(v is None for v in vals):
+                continue  # a row with a missing field would corrupt the nets — skip it
+            by_code.setdefault((report, r["cftc_contract_market_code"].strip()), {})[r["report_date_as_yyyy_mm_dd"][:10]] = vals
 
     markets = []
     for code, symbol, name, group, exchange in MARKETS:
-        weeks = by_code.get(code)
+        report = report_of(group)
+        weeks = by_code.get((report, code))
         if not weeks:
-            logger.warning("No data for %s (%s) — omitted", symbol, code)
+            logger.warning("No data for %s (%s, %s) — omitted", symbol, code, report)
             continue
         rows = [[d] + weeks[d] for d in sorted(weeks)]  # dict keyed by date: de-duplicates restatements
         markets.append({"code": code, "symbol": symbol, "name": name, "group": group,
-                        "exchange": exchange, "rows": rows})
+                        "exchange": exchange, "report": report, "rows": rows})
     return markets
 
 
 def validate(markets, today):
     if len(markets) < len(MARKETS) * MIN_MARKETS_FRACTION:
         raise RuntimeError(f"only {len(markets)}/{len(MARKETS)} markets came back — not publishing")
+    # Each report must be present on its own, so a dead TFF endpoint can't silently drop the Treasuries.
+    for report in REPORTS:
+        want = sum(1 for m in MARKETS if report_of(m[3]) == report)
+        got = sum(1 for m in markets if m["report"] == report)
+        if got < want * MIN_MARKETS_FRACTION:
+            raise RuntimeError(f"only {got}/{want} {report} markets came back — not publishing")
     latest = max(m["rows"][-1][0] for m in markets)
     age = (today - datetime.strptime(latest, "%Y-%m-%d").date()).days
     if age > MAX_STALE_DAYS:
@@ -168,13 +208,13 @@ def validate(markets, today):
 def main():
     today = datetime.now(timezone.utc).date()
     since = today - timedelta(days=int(365.25 * HISTORY_YEARS))
-    markets = build_markets(fetch_rows(since))
+    markets = build_markets({report: fetch_rows(report, since) for report in REPORTS})
     report_date = validate(markets, today)
 
     payload = {
         "report_date": report_date,
-        "source": "CFTC Legacy Futures-Only (publicreporting.cftc.gov, dataset 6dca-aqww)",
-        "columns": ["date", "open_interest", "ls_long", "ls_short", "c_long", "c_short", "ss_long", "ss_short"],
+        "source": "CFTC Legacy futures-only (6dca-aqww) + TFF futures-only for Treasuries (gpe5-46if), publicreporting.cftc.gov",
+        "columns": ["date", "open_interest", "s1_long", "s1_short", "s2_long", "s2_short", "s3_long", "s3_short"],
         "markets": markets,
     }
 

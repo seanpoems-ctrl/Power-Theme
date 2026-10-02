@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { buildSeries, rangeAt, cotIndex, crowdedFlag, summarize, fmtNet, fmtChg, fmtDate, addDays, niceMax, buildCotBrief, idxTone } from "./cotUtils";
+import { buildSeries, rangeAt, cotIndex, crowdedFlag, summarize, fmtNet, fmtChg, fmtDate, addDays, niceMax, buildCotBrief, idxTone, basisLabel, idxToneNeutral, groupsFor } from "./cotUtils";
 
 test("fmtNet puts negatives in parentheses", () => {
   expect(fmtNet(56150)).toBe("56,150");
@@ -93,22 +93,63 @@ maybe("buildCotBrief produces a compact, serialisable brief", () => {
   expect(JSON.stringify(b.prompt).length).toBeLessThan(6000);
 });
 
-maybe("Treasury Large Specs are never presented as crowded long in the brief payload", () => {
+test("basisLabel describes the size of the leveraged-fund position, never a direction call", () => {
+  expect(basisLabel(-1350740, 5)).toBe("LEV FUNDS SHORT NEAR 3Y LARGEST");
+  expect(basisLabel(-1350740, 95)).toBe("LEV FUNDS SHORT NEAR 3Y SMALLEST");
+  expect(basisLabel(5000, 95)).toBe("LEV FUNDS LONG NEAR 3Y LARGEST");
+  expect(basisLabel(-1, 50)).toBeNull();
+  expect(basisLabel(-1, null)).toBeNull();
+  expect(idxToneNeutral(95)).toContain("sky");
+  expect(idxToneNeutral(50)).toBe("text-zinc-400");
+});
+
+test("groupsFor picks trader-group names by report", () => {
+  expect(groupsFor({ report: "legacy" }).map(g => g.label)).toEqual(["Large Specs", "Commercials", "Small Specs"]);
+  expect(groupsFor({ report: "tff" }).map(g => g.label)).toEqual(["Asset Managers", "Leveraged Funds", "Dealers"]);
+  expect(groupsFor(undefined)[0].label).toBe("Large Specs");
+});
+
+maybe("Treasuries come from TFF: asset managers drive crowding, leveraged funds drive the basis label", () => {
+  const d = JSON.parse(fs.readFileSync(dataFile, "utf8"));
+  const by = Object.fromEntries(d.markets.map(m => [m.symbol, summarize(m)]));
+  for (const sym of ["ZT", "ZN", "UB"]) {
+    const m = d.markets.find(x => x.symbol === sym);
+    expect(m.report).toBe("tff");
+    expect(by[sym].tff).toBe(true);
+    // slot 1 = asset managers (real money, net long), slot 2 = leveraged funds (basis shorts, net short)
+    expect(by[sym].ls.net).toBeGreaterThan(0);
+    expect(by[sym].c.net).toBeLessThan(0);
+    // crowded flag comes from the asset-manager index, basis label from the leveraged-fund index
+    expect(by[sym].flag).toBe(by[sym].ls.idx3 >= 90 ? "long" : by[sym].ls.idx3 <= 10 ? "short" : null);
+    expect(by[sym].basisLabel).toBe(basisLabel(by[sym].c.net, by[sym].c.idx3));
+  }
+  for (const sym of ["NQ", "ES", "GC", "CL", "BTC"]) {
+    expect(by[sym].tff).toBe(false);
+    expect(by[sym].basisLabel).toBeNull();
+  }
+  // TFF OI matches the Legacy report's for ZT on the same date: 4,539,374 on 2026-09-22
+  const zt = d.markets.find(x => x.symbol === "ZT");
+  if (zt.rows[zt.rows.length - 1][0] === "2026-09-22") expect(zt.rows[zt.rows.length - 1][1]).toBe(4539374);
+});
+
+maybe("brief payload: bonds use TFF field names and report basis-trade extremes separately", () => {
   const d = JSON.parse(fs.readFileSync(dataFile, "utf8"));
   const b = buildCotBrief(d, "2026-10-02");
-  const bondNames = ["2-Year T-Note", "10-Year T-Note", "Ultra T-Bond"];
-  // bonds are excluded from the crowded long/short lists…
-  for (const t of [...b.prompt.crowded_long_all_markets, ...b.prompt.crowded_short_all_markets]) {
-    expect(bondNames.some(n => t.includes(n))).toBe(false);
+  const zt = b.prompt.key_markets.find(m => m.market.endsWith("(ZT)"));
+  expect(zt.report).toMatch(/TFF/);
+  expect(zt.asset_managers_side).toBe("net long");
+  expect(zt).toHaveProperty("leveraged_funds_net");
+  expect(zt).not.toHaveProperty("large_specs_net");
+  const nq = b.prompt.key_markets.find(m => m.market.endsWith("(NQ)"));
+  expect(nq).toHaveProperty("large_specs_net");
+  expect(nq).not.toHaveProperty("asset_managers_net");
+  // basis extremes always talk about leveraged funds, never "crowded"
+  for (const t of b.prompt.treasury_basis_trade_extremes) {
+    expect(t).toMatch(/leveraged funds/);
+    expect(t).not.toMatch(/crowded/i);
+    // meaning is spelled out: SMALLEST = being cut back, LARGEST = big trade / unwind risk (never inverted)
+    if (/3Y SMALLEST/.test(t)) expect(t).toMatch(/cut back/);
+    if (/3Y LARGEST/.test(t)) expect(t).toMatch(/unwind/);
   }
-  // …every key market states its side, bonds carry the basis-trade note…
-  expect(b.prompt.key_markets.every(m => m.large_specs_side === "net long" || m.large_specs_side === "net short")).toBe(true);
-  for (const m of b.prompt.key_markets.filter(m => bondNames.some(n => m.market.includes(n)))) {
-    expect(m.treasury_note).toMatch(/basis-trade/);
-  }
-  // …and a net-short Treasury extreme is described as a change in the short, never a long.
-  for (const t of b.prompt.treasury_positioning_extremes) {
-    if (t.includes("net short")) expect(t).toMatch(/short is near its 3Y (smallest|largest)/);
-    expect(t).not.toMatch(/crowded long/i);
-  }
+  expect(JSON.stringify(b.prompt).length).toBeLessThan(7000);
 });
