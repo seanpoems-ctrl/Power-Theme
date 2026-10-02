@@ -209,7 +209,7 @@ def discover_candidates(master: dict) -> list[dict]:
         return []
 
     try:
-        _, df = (
+        q = (
             Query()
             .set_markets("america")
             .select("name", "description", "close", "average_volume_10d_calc", "type")
@@ -220,8 +220,12 @@ def discover_candidates(master: dict) -> list[dict]:
             )
             .order_by("average_volume_10d_calc", ascending=False)
             .limit(DISCOVER_LIMIT)
-            .get_scanner_data()
         )
+        # tradingview_screener >= 3.2 adds a default `filter2` that EXCLUDES ETFs, mutual funds and
+        # closed-end funds. CI installs the latest version, so discovery found nothing there while
+        # 3.1.0 locally found ~167. Drop the default; the type=fund condition above is what we want.
+        q.query.pop("filter2", None)
+        _, df = q.get_scanner_data()
     except Exception as e:
         logger.error("TradingView ETF discovery failed: %s", e)
         return []
