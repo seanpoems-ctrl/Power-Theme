@@ -8178,9 +8178,13 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
   const cotInstruction = hasCot
     ? `Paragraph ${needsExtra ? 5 : 4} (Futures Positioning / COT): Using the CFTC COT data below (Legacy report; Large Specs = hedge funds/CTAs; ` +
       `positions are as of the report date and up to a week old, so treat them as context, not a timing signal), describe where speculators are crowded ` +
-      `across stock-index, volatility, crypto, metals, energy and Treasury futures (for Treasuries net long = positioned for lower yields, and Large Spec shorts are largely hedged cash-futures basis trades, not directional views). Lead with any market at an extreme (3Y index >= 90 = crowded long, i.e. liquidation risk; ` +
+      `across stock-index, volatility, crypto, metals and energy futures. Lead with any market at an extreme (3Y index >= 90 = crowded long, i.e. liquidation risk; ` +
       `<= 10 = crowded short, i.e. squeeze fuel), mention hedger (Commercials) positioning only where notable, and say whether positioning confirms or contradicts ` +
-      `the tactical stance from paragraph 3. If nothing is at an extreme, say so in one sentence instead of padding. Only use numbers from the data.\n`
+      `the tactical stance from paragraph 3. If nothing is at an extreme, say so in one sentence instead of padding. Only use numbers from the data. ` +
+      `Always state whether a position is net long or net short (use large_specs_side) — a high index with a negative net is a short that has shrunk, not a long. ` +
+      `STRICT TREASURY RULE (ZT, ZN, UB): Large Specs are structurally net short there because of hedged cash-futures basis trades, so their positioning is NOT a directional view on yields. ` +
+      `Never call Treasury Large Specs "crowded long", "bullish", or "positioned for lower yields", and never use them to confirm or contradict the tactical stance. ` +
+      `If treasury_positioning_extremes is non-empty, mention it in one neutral sentence only (e.g. the short is at a 3-year low/high, which usually reflects basis-trade unwinding or build-up), otherwise omit Treasuries.\n`
     : "";
   const cotSection = hasCot ? `\n\nCFTC COT positioning:\n${JSON.stringify(cot.prompt, null, 2)}` : "";
 

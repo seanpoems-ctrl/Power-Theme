@@ -146,6 +146,16 @@ export function buildCotBrief(data, todayIso = new Date().toISOString().slice(0,
   const longs = sums.filter(s => s.flag === "long").sort((a, b) => b.ls.idx3 - a.ls.idx3);
   const shorts = sums.filter(s => s.flag === "short").sort((a, b) => a.ls.idx3 - b.ls.idx3);
   const tag = (s) => `${s.name} (${s.symbol}) idx ${r(s.ls.idx3)}`;
+  const isBond = (s) => s.group === "Bonds";
+  // Treasury Large Specs are structurally net short (hedged cash-futures basis trades), so a high index
+  // only means that short shrank. Describe it as a change in the short, never as "crowded long".
+  const bondTag = (s) => {
+    const side = s.ls.net < 0 ? "net short" : "net long";
+    const move = s.ls.net < 0
+      ? (s.ls.idx3 >= CROWDED_HI ? "short is near its 3Y smallest" : "short is near its 3Y largest")
+      : (s.ls.idx3 >= CROWDED_HI ? "long is near its 3Y largest" : "long is near its 3Y smallest");
+    return `${s.name} (${s.symbol}): Large Specs ${side} ${Math.abs(s.ls.net).toLocaleString("en-US")}, ${move} (idx ${r(s.ls.idx3)})`;
+  };
   return {
     reportDate: data.report_date, key, longs, shorts,
     prompt: {
@@ -156,6 +166,8 @@ export function buildCotBrief(data, todayIso = new Date().toISOString().slice(0,
               `Crowded long = Large Specs 3Y idx >= ${CROWDED_HI}; crowded short <= ${CROWDED_LO}.`,
       key_markets: key.map(s => ({
         market: `${s.name} (${s.symbol})`,
+        ...(isBond(s) ? { treasury_note: "structural basis-trade short; idx is NOT a directional yield view" } : {}),
+        large_specs_side: s.ls.net < 0 ? "net short" : "net long",
         large_specs_net: s.ls.net,
         large_specs_pct_of_oi: s.ls.pctOi == null ? null : +s.ls.pctOi.toFixed(1),
         large_specs_wk_change: s.ls.chg,
@@ -165,8 +177,9 @@ export function buildCotBrief(data, todayIso = new Date().toISOString().slice(0,
         commercials_idx_3y: r(s.c.idx3),
         small_specs_net: s.ss.net,
       })),
-      crowded_long_all_markets: longs.map(tag),
-      crowded_short_all_markets: shorts.map(tag),
+      crowded_long_all_markets: longs.filter(s => !isBond(s)).map(tag),
+      crowded_short_all_markets: shorts.filter(s => !isBond(s)).map(tag),
+      treasury_positioning_extremes: [...longs, ...shorts].filter(isBond).map(bondTag),
     },
   };
 }

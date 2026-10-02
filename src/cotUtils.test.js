@@ -92,3 +92,23 @@ maybe("buildCotBrief produces a compact, serialisable brief", () => {
   expect(b.shorts.every(s => s.ls.idx3 <= 10)).toBe(true);
   expect(JSON.stringify(b.prompt).length).toBeLessThan(6000);
 });
+
+maybe("Treasury Large Specs are never presented as crowded long in the brief payload", () => {
+  const d = JSON.parse(fs.readFileSync(dataFile, "utf8"));
+  const b = buildCotBrief(d, "2026-10-02");
+  const bondNames = ["2-Year T-Note", "10-Year T-Note", "Ultra T-Bond"];
+  // bonds are excluded from the crowded long/short lists…
+  for (const t of [...b.prompt.crowded_long_all_markets, ...b.prompt.crowded_short_all_markets]) {
+    expect(bondNames.some(n => t.includes(n))).toBe(false);
+  }
+  // …every key market states its side, bonds carry the basis-trade note…
+  expect(b.prompt.key_markets.every(m => m.large_specs_side === "net long" || m.large_specs_side === "net short")).toBe(true);
+  for (const m of b.prompt.key_markets.filter(m => bondNames.some(n => m.market.includes(n)))) {
+    expect(m.treasury_note).toMatch(/basis-trade/);
+  }
+  // …and a net-short Treasury extreme is described as a change in the short, never a long.
+  for (const t of b.prompt.treasury_positioning_extremes) {
+    if (t.includes("net short")) expect(t).toMatch(/short is near its 3Y (smallest|largest)/);
+    expect(t).not.toMatch(/crowded long/i);
+  }
+});
