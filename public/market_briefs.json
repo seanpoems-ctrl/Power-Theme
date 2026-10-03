@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-02 19:59 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Momentum Prevails",
+    "spy_price": 769.64,
+    "spy_change_pct": 0.74,
+    "vix": 15.31,
+    "hy_oas": 3.24,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 29.6,
+    "mmth": 47.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ON",
+          "company": "ON Semiconductor Corporation",
+          "reason": "Revised merger agreement provides fresh catalyst and potential for re-rating, driving significant pre-market activity."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Positive analyst commentary regarding sustained cloud and AI segment growth drove renewed investor interest and pre-market momentum."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Consolidating on broader market strength; lacks specific fresh catalysts beyond general tech sector trends for today's session."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-02 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla Inc. (TSLA) saw persistent selling pressure today, extending its recent downtrend as technical support levels failed to hold amidst broader market declines."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-14 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Heightened Volatility",
-    "spy_price": 760.88,
-    "spy_change_pct": -0.45,
-    "vix": 17.1,
-    "hy_oas": 2.65,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 41.6,
-    "mmth": 59.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. announced a major advancement in its quantum computing division, positioning it as a leader in next-generation processing capabilities."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil Corporation surged on news of a significant offshore oil discovery, capitalizing on today's rise in crude oil prices to $101.97."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple Inc. experienced increased selling pressure today as investors reacted to persistent concerns about iPhone demand in key international markets, a recurring headline this quarter."
         }
       ]
     }
