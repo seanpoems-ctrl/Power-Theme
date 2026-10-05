@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-05 16:56 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equities Rally, Cautious Optimism",
+    "spy_price": 774.83,
+    "spy_change_pct": 0.67,
+    "vix": 15.52,
+    "hy_oas": 3.1,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 32.1,
+    "mmth": 48.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CBRS",
+          "company": "Cyborg Robotics Systems",
+          "reason": "Leveraging its new strategic partnership with OpenAI, CBRS is poised for significant advancements in autonomous AI applications."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Stronger-than-expected ad revenue growth and continued progress in AI initiatives bolstered investor confidence today."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Momentum traders continued to rotate into NVIDIA, driven by persistent thematic tailwinds in artificial intelligence."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-05 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Trading on a recycled headline regarding ongoing enterprise AI integration talks, lacking a fresh catalyst but showing consistent technical flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-15 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off Tendencies",
-    "spy_price": 760.88,
-    "spy_change_pct": -0.45,
-    "vix": 17.2,
-    "hy_oas": 2.65,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 41.6,
-    "mmth": 59.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly's new Alzheimer's drug has reportedly received accelerated approval from the FDA, opening up a significant new market opportunity."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a groundbreaking partnership to integrate its generative AI capabilities across a major automotive manufacturer's entire vehicle lineup, boosting its cloud and AI revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to exhibit volatility driven by ongoing retail speculative interest and technical levels, lacking fresh fundamental news today."
         }
       ]
     }
