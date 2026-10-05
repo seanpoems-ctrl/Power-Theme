@@ -2,43 +2,43 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 8,
+  "count": 9,
   "stocks": [
     {
       "ticker": "XRPN",
       "company": "Armada Acquisition Corp. II",
       "industry": "Financial Conglomerates",
-      "price": 39.42,
-      "change_pct": 68.25,
-      "adr_pct": 8.8,
-      "dollar_volume": "$79.6M",
-      "market_cap_b": 1.245,
+      "price": 38.65,
+      "change_pct": -1.95,
+      "adr_pct": 11.5,
+      "dollar_volume": "$88.8M",
+      "market_cap_b": 1.221,
       "rs_ibd": 98,
-      "atr_ext_val": 27.45
+      "atr_ext_val": 19.06
     },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 94.45,
-      "change_pct": -4.07,
-      "adr_pct": 7.9,
-      "dollar_volume": "$588.6M",
-      "market_cap_b": 5.936,
-      "rs_ibd": 98,
-      "atr_ext_val": 14.74
+      "price": 93.81,
+      "change_pct": -0.68,
+      "adr_pct": 8.1,
+      "dollar_volume": "$608.7M",
+      "market_cap_b": 5.896,
+      "rs_ibd": 99,
+      "atr_ext_val": 13.62
     },
     {
       "ticker": "HZO",
       "company": "MarineMax, Inc. (FL)",
       "industry": "Specialty Stores",
       "price": 52.35,
-      "change_pct": 0.04,
+      "change_pct": 0.0,
       "adr_pct": 0.5,
-      "dollar_volume": "$34.3M",
+      "dollar_volume": "$37.1M",
       "market_cap_b": 1.156,
       "rs_ibd": 90,
-      "atr_ext_val": 14.35
+      "atr_ext_val": 13.38
     },
     {
       "ticker": "ARX",
@@ -47,67 +47,79 @@
       "price": 19.73,
       "change_pct": 0.0,
       "adr_pct": 0.8,
-      "dollar_volume": "$40.1M",
+      "dollar_volume": "$35.8M",
       "market_cap_b": 4.285,
-      "rs_ibd": 83,
-      "atr_ext_val": 13.33
-    },
-    {
-      "ticker": "IOVA",
-      "company": "Iovance Biotherapeutics, Inc.",
-      "industry": "Biotechnology",
-      "price": 14.21,
-      "change_pct": -0.11,
-      "adr_pct": 6.0,
-      "dollar_volume": "$308.8M",
-      "market_cap_b": 6.439,
-      "rs_ibd": 99,
-      "atr_ext_val": 12.07
+      "rs_ibd": 81,
+      "atr_ext_val": 13.28
     },
     {
       "ticker": "GRAL",
       "company": "GRAIL, Inc.",
       "industry": "Medical Specialties",
-      "price": 143.26,
-      "change_pct": 8.07,
-      "adr_pct": 6.1,
-      "dollar_volume": "$293.0M",
-      "market_cap_b": 6.399,
-      "rs_ibd": 95,
-      "atr_ext_val": 11.48
+      "price": 154.08,
+      "change_pct": 7.55,
+      "adr_pct": 6.0,
+      "dollar_volume": "$291.6M",
+      "market_cap_b": 6.882,
+      "rs_ibd": 96,
+      "atr_ext_val": 13.18
+    },
+    {
+      "ticker": "IOVA",
+      "company": "Iovance Biotherapeutics, Inc.",
+      "industry": "Biotechnology",
+      "price": 14.15,
+      "change_pct": -0.46,
+      "adr_pct": 5.9,
+      "dollar_volume": "$305.5M",
+      "market_cap_b": 6.41,
+      "rs_ibd": 98,
+      "atr_ext_val": 11.41
+    },
+    {
+      "ticker": "DNA",
+      "company": "Ginkgo Bioworks Holdings, Inc.",
+      "industry": "Medical/Nursing Services",
+      "price": 14.98,
+      "change_pct": 21.3,
+      "adr_pct": 7.2,
+      "dollar_volume": "$53.5M",
+      "market_cap_b": 1.009,
+      "rs_ibd": 62,
+      "atr_ext_val": 11.4
+    },
+    {
+      "ticker": "XP",
+      "company": "XP Inc.",
+      "industry": "Investment Banks/Brokers",
+      "price": 28.15,
+      "change_pct": 30.93,
+      "adr_pct": 4.6,
+      "dollar_volume": "$341.0M",
+      "market_cap_b": 14.554,
+      "rs_ibd": 91,
+      "atr_ext_val": 11.34
     },
     {
       "ticker": "ACVA",
       "company": "ACV Auctions Inc.",
       "industry": "Internet Software/Services",
-      "price": 10.45,
-      "change_pct": 0.0,
-      "adr_pct": 2.2,
-      "dollar_volume": "$95.1M",
-      "market_cap_b": 1.774,
-      "rs_ibd": 72,
-      "atr_ext_val": 10.78
-    },
-    {
-      "ticker": "IMOS",
-      "company": "ChipMOS TECHNOLOGIES INC.",
-      "industry": "Semiconductors",
-      "price": 83.3,
-      "change_pct": 14.61,
-      "adr_pct": 4.3,
-      "dollar_volume": "$9.3M",
-      "market_cap_b": 2.801,
-      "rs_ibd": 97,
-      "atr_ext_val": 10.23
+      "price": 10.5,
+      "change_pct": 0.48,
+      "adr_pct": 2.1,
+      "dollar_volume": "$92.4M",
+      "market_cap_b": 1.783,
+      "rs_ibd": 65,
+      "atr_ext_val": 11.34
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.73,
-    "spx_1m": -0.32,
-    "spx_3m": 2.92,
-    "spx_34d": -0.29,
-    "spx_qtd": 0.73,
-    "spx_mtd": 0.73
+    "spx_1d": 0.66,
+    "spx_1m": 0.72,
+    "spx_3m": 3.89,
+    "spx_34d": 1.07,
+    "spx_qtd": 1.4,
+    "spx_mtd": 1.4
   },
-  "fetched_at_utc": "2026-10-05T01:40:50+00:00"
+  "fetched_at_utc": "2026-10-05T23:08:59+00:00"
 }

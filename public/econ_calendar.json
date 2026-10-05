@@ -1,17 +1,7 @@
 {
-  "generated_at": "2026-10-05T01:39:25.837617+00:00",
+  "generated_at": "2026-10-05T23:07:12.358193+00:00",
   "data_source": "tradingview",
   "events": [
-    {
-      "date": "2026-09-06",
-      "time_et": "20:00",
-      "event": "Labor Day",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
     {
       "date": "2026-09-08",
       "time_et": "06:00",
@@ -3257,7 +3247,7 @@
       "time_et": "09:45",
       "event": "S&P Global Composite PMI Final",
       "impact": "Low",
-      "actual": null,
+      "actual": "58.4",
       "forecast": "58.4",
       "previous": "56",
       "currency": "USD"
@@ -3267,7 +3257,7 @@
       "time_et": "09:45",
       "event": "S&P Global Services PMI Final",
       "impact": "Low",
-      "actual": null,
+      "actual": "58.8",
       "forecast": "58.7",
       "previous": "56.5",
       "currency": "USD"
@@ -3275,9 +3265,19 @@
     {
       "date": "2026-10-05",
       "time_et": "10:00",
+      "event": "ISM Services New Orders",
+      "impact": "Low",
+      "actual": "59.8",
+      "forecast": null,
+      "previous": "60.9",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-05",
+      "time_et": "10:00",
       "event": "ISM Services Business Activity",
       "impact": "Low",
-      "actual": null,
+      "actual": "56.5",
       "forecast": null,
       "previous": "61.7",
       "currency": "USD"
@@ -3287,7 +3287,7 @@
       "time_et": "10:00",
       "event": "ISM Services Prices",
       "impact": "Low",
-      "actual": null,
+      "actual": "74",
       "forecast": null,
       "previous": "72.6",
       "currency": "USD"
@@ -3297,7 +3297,7 @@
       "time_et": "10:00",
       "event": "ISM Services Employment",
       "impact": "Low",
-      "actual": null,
+      "actual": "50.1",
       "forecast": null,
       "previous": "47.8",
       "currency": "USD"
@@ -3305,20 +3305,10 @@
     {
       "date": "2026-10-05",
       "time_et": "10:00",
-      "event": "ISM Services New Orders",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "60.9",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-05",
-      "time_et": "10:00",
       "event": "ISM Services PMI",
       "impact": "Low",
-      "actual": null,
-      "forecast": "55.7",
+      "actual": "54.9",
+      "forecast": "55",
       "previous": "55.4",
       "currency": "USD"
     },
@@ -3327,7 +3317,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.165",
       "forecast": null,
       "previous": "4.285",
       "currency": "USD"
@@ -3337,7 +3327,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.05",
       "forecast": null,
       "previous": "4.11",
       "currency": "USD"
@@ -3388,7 +3378,7 @@
       "event": "Balance of Trade",
       "impact": "Low",
       "actual": null,
-      "forecast": "-89.8",
+      "forecast": "-102",
       "previous": "-88.6",
       "currency": "USD"
     },
@@ -3678,7 +3668,7 @@
       "event": "Consumer Credit Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "15.2",
+      "forecast": "15",
       "previous": "18.06",
       "currency": "USD"
     },
@@ -3688,7 +3678,7 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1710",
       "previous": "1701",
       "currency": "USD"
     },
@@ -3708,7 +3698,7 @@
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "195",
+      "forecast": "200",
       "previous": "197",
       "currency": "USD"
     },
@@ -3838,7 +3828,7 @@
       "event": "Michigan Current Conditions Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "50.5",
       "previous": "50.9",
       "currency": "USD"
     },
@@ -3848,7 +3838,7 @@
       "event": "Michigan Consumer Expectations Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "45.9",
       "previous": "46.3",
       "currency": "USD"
     },
@@ -3858,7 +3848,7 @@
       "event": "Michigan Consumer Sentiment Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": "48.1",
+      "forecast": "47.6",
       "previous": "48.1",
       "currency": "USD"
     },
@@ -3979,7 +3969,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.165",
       "currency": "USD"
     },
     {
@@ -3989,7 +3979,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.05",
       "currency": "USD"
     },
     {
@@ -4690,6 +4680,36 @@
       "actual": null,
       "forecast": null,
       "previous": "-27.9",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-19",
+      "time_et": "10:00",
+      "event": "NAHB Housing Market Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "32",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-19",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-19",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
       "currency": "USD"
     }
   ]
