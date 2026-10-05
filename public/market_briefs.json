@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-05 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Uneasy Gains, Rising Volatility",
+    "spy_price": 769.64,
+    "spy_change_pct": 0.74,
+    "vix": 16.27,
+    "hy_oas": 3.24,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 29.7,
+    "mmth": 47.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announces a breakthrough in next-generation AI chip architecture, propelling sentiment in the semiconductor sector with anticipated future revenue growth."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly receives accelerated FDA approval for its innovative obesity drug, significantly expanding its addressable market and strengthening its pharmaceutical pipeline."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase sees continued institutional inflows as the yield curve normalizes, positioning the financial sector for sustained strength in a supportive macro environment."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-02 19:59 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to exhibit volatility driven by ongoing retail speculative interest and technical levels, lacking fresh fundamental news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-14 19:27 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Resurfacing",
-    "spy_price": 760.88,
-    "spy_change_pct": -0.45,
-    "vix": 17.1,
-    "hy_oas": 2.65,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 41.6,
-    "mmth": 59.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company (LLY) rallied sharply after announcing positive Phase 3 trial results for its new Alzheimer's drug, exceeding expectations and boosting future revenue projections."
-        },
-        {
-          "ticker": "CAT",
-          "company": "Caterpillar Inc.",
-          "reason": "Caterpillar Inc. (CAT) demonstrated resilience today, driven by a new large-scale infrastructure contract win in a key emerging market and strong analyst upgrades based on robust global demand for heavy machinery."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla Inc. (TSLA) saw persistent selling pressure today, extending its recent downtrend as technical support levels failed to hold amidst broader market declines."
         }
       ]
     }
