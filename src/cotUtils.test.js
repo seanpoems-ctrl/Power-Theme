@@ -84,10 +84,14 @@ test("idxTone highlights crowded extremes", () => {
 maybe("buildCotBrief produces a compact, serialisable brief", () => {
   const d = JSON.parse(fs.readFileSync(dataFile, "utf8"));
   const b = buildCotBrief(d, "2026-10-02");
-  expect(b.prompt.data_age_days).toBe(10);
+  // Expectations come from the data itself: cot_data.json is refreshed weekly by the nightly job, so a hard-coded
+  // report date or net position goes stale every Friday.
+  const utc = (iso) => { const [y, m, dd] = iso.split("-").map(Number); return Date.UTC(y, m - 1, dd); };
+  expect(b.prompt.data_age_days).toBe(Math.round((utc("2026-10-02") - utc(d.report_date)) / 86400000));
   expect(b.prompt.key_markets.length).toBeGreaterThanOrEqual(10);
   const nq = b.prompt.key_markets.find(m => m.market.endsWith("(NQ)"));
-  expect(nq.large_specs_net).toBe(56150);
+  const nqLast = d.markets.find(m => m.symbol === "NQ").rows.at(-1);
+  expect(nq.large_specs_net).toBe(nqLast[2] - nqLast[3]);
   expect(b.longs.every(s => s.ls.idx3 >= 90)).toBe(true);
   expect(b.shorts.every(s => s.ls.idx3 <= 10)).toBe(true);
   expect(JSON.stringify(b.prompt).length).toBeLessThan(6000);
