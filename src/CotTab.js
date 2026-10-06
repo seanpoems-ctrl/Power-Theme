@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback } from "react";
-import { RefreshCw, Search, Info, ChevronDown } from "lucide-react";
+import { RefreshCw, Search, Info, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   groupsFor, WEEKS_1Y, WEEKS_3Y, CROWDED_HI, CROWDED_LO,
   buildSeries, rangeAt, summarize, fmtNet, fmtChg, fmtDate, addDays, niceMax, fmtTick, idxTone, idxToneNeutral, BASIS_NOTE, cotDataUrl,
@@ -558,6 +558,30 @@ export default function CotTab() {
     chartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
+  // Previous / next market in the picker's order (grouped), wrapping at the ends. No scrolling: the chart is already in view.
+  const ordered = useMemo(() => GROUP_ORDER.flatMap(g => summaries.filter(s => s.group === g)), [summaries]);
+  const at = ordered.findIndex(s => s.symbol === market?.symbol);
+  const neighbour = (dir) => (ordered.length > 1 && at >= 0 ? ordered[(at + dir + ordered.length) % ordered.length] : null);
+  const prevMarket = neighbour(-1), nextMarket = neighbour(1);
+  const step = useCallback((dir) => {
+    if (ordered.length < 2 || at < 0) return;
+    const sym = ordered[(at + dir + ordered.length) % ordered.length].symbol;
+    setSelected(sym); writePref(LS_KEY, sym);
+  }, [ordered, at]);
+
+  // ← / → step through markets, unless the user is typing or using a modifier shortcut.
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      step(e.key === "ArrowLeft" ? -1 : 1);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [step]);
+
   if (error) {
     return (
       <div className="max-w-[1560px] mx-auto px-4 py-16 text-center">
@@ -579,9 +603,21 @@ export default function CotTab() {
       <div ref={chartRef} className="bg-zinc-900/40 border border-zinc-800 rounded-lg p-4 scroll-mt-24">
         <div className="text-[10px] tracking-[0.18em] font-mono text-zinc-500 uppercase">CFTC · Commitment of Traders</div>
         <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2 pb-3 border-b border-zinc-800/80">
-          <div className="flex flex-wrap items-baseline gap-x-2">
+          <div className="flex flex-wrap items-center gap-x-2">
             <MarketPicker summaries={summaries} selected={market.symbol} onSelect={pick} />
             <span className="text-[22px] sm:text-2xl text-zinc-500">· Net Positioning</span>
+            <div className="flex items-center gap-1 ml-1">
+              <button
+                onClick={() => step(-1)} disabled={!prevMarket}
+                title={prevMarket ? `Previous market: ${prevMarket.name} (${prevMarket.symbol})  ←` : "Previous market"} aria-label="Previous market"
+                className="p-1.5 rounded-md border border-zinc-700/60 bg-zinc-800/50 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700/60 disabled:opacity-30 transition-colors"
+              ><ChevronLeft size={16} /></button>
+              <button
+                onClick={() => step(1)} disabled={!nextMarket}
+                title={nextMarket ? `Next market: ${nextMarket.name} (${nextMarket.symbol})  →` : "Next market"} aria-label="Next market"
+                className="p-1.5 rounded-md border border-zinc-700/60 bg-zinc-800/50 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700/60 disabled:opacity-30 transition-colors"
+              ><ChevronRight size={16} /></button>
+            </div>
           </div>
           <div className="ml-auto flex items-center gap-4 text-[12px] text-zinc-400 font-mono">
             <select
