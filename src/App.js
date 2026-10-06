@@ -14038,6 +14038,20 @@ const PERF_MODES = [
 ];
 const PERF_KEY_BY_MODE = Object.fromEntries(PERF_MODES.map(m => [m.k, m.key]));
 
+// Period toggle for Market Leaders / Market Laggards. Separate state from PERF_MODES (Leading/Laggard Themes) because
+// these cards read the stock's own perf_* field directly; the options mirror the same periods.
+const LEADER_PERF_OPTIONS = [
+  { k: "perf_intraday", l: "Intra" },
+  { k: "perf_1d",       l: "1D" },
+  { k: "perf_1w",       l: "1W" },
+  { k: "perf_1m",       l: "1M" },
+  { k: "perf_3m",       l: "3M" },
+  { k: "perf_6m",       l: "6M" },
+  { k: "perf_ytd",      l: "YTD" },
+  { k: "perf_1y",       l: "1Y" },
+];
+const LEADER_PERF_LABEL = Object.fromEntries(LEADER_PERF_OPTIONS.map(o => [o.k, o.l]));
+
 const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
@@ -14644,9 +14658,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
-                {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
+            <div className="flex flex-wrap items-center justify-end gap-2">
+              <div className="flex flex-wrap bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+                {LEADER_PERF_OPTIONS.map(o => (
                   <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
                     className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
                     {o.l}
@@ -14671,7 +14685,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
             {leaders.map(s => {
               const perfVal = s[leaderPerfMode] ?? null;
-              const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
+              const perfLabel = LEADER_PERF_LABEL[leaderPerfMode];
               return (
               <a key={s.ticker}
                  href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
@@ -14859,9 +14873,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                     </button>
                   )}
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
-                    {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
+                <div className="flex flex-wrap items-center justify-end gap-2">
+                  <div className="flex flex-wrap bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+                    {LEADER_PERF_OPTIONS.map(o => (
                       <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
                         className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
                         {o.l}
@@ -14885,7 +14899,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                   </p>
                 ) : laggards.map(s => {
                   const perfVal = s[leaderPerfMode] ?? null;
-                  const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
+                  const perfLabel = LEADER_PERF_LABEL[leaderPerfMode];
                   return (
                   <a key={s.ticker}
                      href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
