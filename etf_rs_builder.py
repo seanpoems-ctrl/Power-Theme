@@ -226,11 +226,11 @@ def _median(vals: list) -> float | None:
 
 def _build_fine_theme_rankings(result_rows: list[dict]) -> list[dict]:
     """Roll individual ETFs up into fine_theme buckets — the same median-based
-    aggregation EtfCategoryLeaderboard (Category Leaderboard) computes
+    aggregation EtfCategoryLeaderboard (Theme Leaderboard) computes
     client-side, done once here so every other dashboard surface (Industry
     Matrix, Theme Leaderboard, Thematic Spotlight) can read the exact same
     'what's hot' ranking instead of running an independent Finviz-based score
-    that can (and does) disagree with Category Leaderboard."""
+    that can (and does) disagree with Theme Leaderboard."""
     by_cat: dict[str, list[dict]] = {}
     for r in result_rows:
         if r.get("benchmark"):

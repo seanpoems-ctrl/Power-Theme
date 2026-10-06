@@ -39,7 +39,7 @@ def load_master() -> dict:
     """ticker -> (category, fine_theme, label, type, liquid, description, benchmark) from etf_master.json.
 
     fine_theme is the Matrix-aligned (industry-level) grouping — finer than the
-    12-bucket category, used by Category Leaderboard's fine view. Benchmark
+    12-bucket category, used by Theme Leaderboard's fine view. Benchmark
     ETFs (broad index/sector funds) don't get one since that view excludes them.
     """
     raw = json.loads(MASTER_PATH.read_text(encoding="utf-8"))

@@ -9,7 +9,7 @@ IBKR TWS WebSocket Bridge — ibkr_ws_server.py
 ==============================================
 Connects to IBKR TWS/Gateway via ib_insync, subscribes to delayed (15-min)
 market data for the top tickers in public/thematic_data.json + key market
-internals + one category-leader ETF per Category Leaderboard category
+internals + one category-leader ETF per Theme Leaderboard category
 (public/etf_rs.json), then fans out price updates to any browser client via
 WebSocket on port 5003.
 
@@ -51,7 +51,7 @@ DATA_PATH   = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
 GAPPER_PATH = Path(os.getenv("GAPPER_JSON",   "public/gapper_data.json"))
 ETF_RS_PATH = Path(os.getenv("ETF_RS_JSON",   "public/etf_rs.json"))
 MAX_TICKERS = 40  # max stock ticker subscriptions
-# ETF RS tab (Category Leaderboard) tickers get a small separate pool. IBKR's
+# Theme Tracker tab (Theme Leaderboard) tickers get a small separate pool. IBKR's
 # ~100-line simultaneous market-data cap is shared with whatever TWS itself
 # has open (watchlists, other windows) — that overhead isn't fixed, so this
 # is kept conservative rather than computed against a hardcoded TWS-usage
@@ -176,7 +176,7 @@ def load_gapper_tickers() -> list[tuple[str, int]]:
 
 def load_etf_leader_tickers() -> list[tuple[str, float]]:
     """
-    Return [(ticker, category_score), ...] — one leader ETF per Category
+    Return [(ticker, category_score), ...] — one leader ETF per Theme
     Leaderboard category, sorted by that category's current median score
     descending (highest-conviction categories get a live slot first).
 
@@ -323,7 +323,7 @@ async def subscribe_all(
         else:
             await asyncio.sleep(0.02)
 
-    # 3. ETF RS tab (Category Leaderboard) category-leader tickers — separate
+    # 3. Theme Tracker tab (Theme Leaderboard) category-leader tickers — separate
     # small pool, deduplicated against stocks already subscribed above.
     already = set(all_tickers)
     etf_symbols = [s for s, _ in (etf_tickers or [])[:MAX_ETF_TICKERS] if s not in already]

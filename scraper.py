@@ -352,14 +352,14 @@ INDUSTRY_TO_THEME = {
     "Shell Companies": "Other",
 }
 
-# fine_theme is the 29-bucket, ETF-price-based taxonomy Category Leaderboard
+# fine_theme is the 29-bucket, ETF-price-based taxonomy Theme Leaderboard
 # (etf_rs_builder.py / public/etf_metadata.json) already groups by — the
 # reconciliation target so Industry Matrix, Theme Leaderboard, and Thematic
-# Spotlight all rank/group the same way Category Leaderboard does. Almost
+# Spotlight all rank/group the same way Theme Leaderboard does. Almost
 # every INDUSTRY_TO_THEME name already equals a fine_theme bucket name
 # 1:1; only a handful of scanner-only themes (not present as their own
 # fine_theme bucket in etf_metadata.json) need remapping to their closest
-# Category Leaderboard bucket.
+# Theme Leaderboard bucket.
 THEME_TO_FINE_THEME_OVERRIDES = {
     "Hardware": "Semiconductors",
     "Neocloud": "Cloud Computing",
@@ -2318,9 +2318,9 @@ def build_data() -> dict:
         for _r in _rankings:
             _r["perf_intraday"] = _theme_intraday.get((_r.get("name") or "").lower())
 
-    # fine_theme — tag every theme/output-theme with its Category Leaderboard
+    # fine_theme — tag every theme/output-theme with its Theme Leaderboard
     # bucket so the frontend can cross-reference "which of our drilled themes
-    # corresponds to Category Leaderboard's #1 fine_theme" without its own
+    # corresponds to Theme Leaderboard's #1 fine_theme" without its own
     # name-matching table. theme_rankings' ~30 names already line up almost
     # 1:1 with fine_theme's 29 buckets (see THEME_TO_FINE_THEME_OVERRIDES);
     # finviz_theme_rankings uses a different, more granular ~40-name Finviz
