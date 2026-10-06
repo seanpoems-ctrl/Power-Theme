@@ -9,6 +9,7 @@ import MarketBreadthMonitor from "./MarketBreadthMonitor";
 import FlaggingStocksBox from "./FlaggingStocksBox";
 import CotTab from "./CotTab";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
+import { fetchFinnhubQuote } from "./finnhubQuote";
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
 const LangCtx = React.createContext('en');
@@ -2240,7 +2241,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     // Finnhub's free tier doesn't include historical candles.)
     try {
       const quoteData = FINNHUB_KEY
-        ? await fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`).then(r => r.ok ? r.json() : null).catch(() => null)
+        ? await fetchFinnhubQuote(s)
         : null;
 
       const fCur = quoteData?.c;
@@ -9419,9 +9420,9 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
       const results = await Promise.all(
         tickers.map(async (sym) => {
           try {
-            const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${sym}&token=${FINNHUB_KEY}`);
-            if (!r.ok) return null;
-            const q = await r.json();
+            // 30s poller: accept a cached quote only if it's younger than the poll interval
+            const q = await fetchFinnhubQuote(sym, { maxAgeMs: 25_000 });
+            if (!q) return null;
             const price = q?.c;
             const prevClose = q?.pc;
             if (price == null || !prevClose) return null;
@@ -10432,8 +10433,7 @@ const SearchBar = ({ data, search, setSearch, categoryThemeMap = {}, categoryEtf
     let cancelled = false;
     const doFetch = () => {
       setLivePriceLoading(true);
-      fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${FINNHUB_KEY}`)
-        .then(r => r.ok ? r.json() : null)
+      fetchFinnhubQuote(ticker, { maxAgeMs: 25_000 })   // 30s poller (see below): keep its refresh rate
         .then(q => {
           if (cancelled || !q) return;
           if (q.c != null && q.c > 0) {
@@ -14091,9 +14091,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       const results = await Promise.all(
         tickers.map(async (sym) => {
           try {
-            const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${sym}&token=${FINNHUB_KEY}`);
-            if (!r.ok) return null;
-            const q = await r.json();
+            const q = await fetchFinnhubQuote(sym);
+            if (!q) return null;
             const price = q?.c;
             const prevClose = q?.pc;
             if (price == null || !prevClose) return null;
