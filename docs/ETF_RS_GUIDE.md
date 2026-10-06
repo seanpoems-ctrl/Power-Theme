@@ -1,9 +1,9 @@
 # ETF Relative Strength System — Usage Guide
 
-How to read and trade off the **ETF RS** view (Watchlist tab → 📊 ETF RS).
+How to read and trade off the **ETF RS** view (Watchlist tab → 📊 Theme Tracker).
 Three stacked panels, designed to be read **top-down**:
 
-1. 🏆 **Category Leaderboard** — *where* is money rotating? (12 theme-categories)
+1. 🏆 **Theme Leaderboard** — *where* is money rotating? (12 theme-categories)
 2. ⚡ **RS Flip Scanner** — *which basket* just turned up inside a hot category?
 3. **ETF Relative Strength table** — *the full detail* on every ETF.
 
@@ -12,7 +12,7 @@ Three stacked panels, designed to be read **top-down**:
 ## The mental model
 
 ```
-Category Leaderboard   →   pick the 1-3 leading CATEGORIES
+Theme Leaderboard   →   pick the 1-3 leading CATEGORIES
         ↓
 RS Flip Scanner        →   inside those, find the basket whose RS just FLIPPED up
         ↓
@@ -41,13 +41,13 @@ And the `liquid` flag:
 
 ---
 
-## Panel 1 — 🏆 Category Leaderboard
+## Panel 1 — 🏆 Theme Leaderboard
 
 Ranks the 12 categories. Columns:
 
 | Column | Meaning | What "good" looks like |
 |--------|---------|------------------------|
-| **Category Score** | Median RS Score of all baskets in the category (0–100 percentile vs *every* ETF) | **70+** = category is broadly leading the whole market |
+| **Theme Score** | Median RS Score of all baskets in the theme (0–100 percentile vs *every* ETF) | **70+** = category is broadly leading the whole market |
 | **1W / 1M / 3M** | Median performance of the category's baskets | 1W green while 3M green = sustained; 1W green + 3M red = *early rotation in* |
 | **Leader** | Highest-scoring basket in the category (click → holdings) | Your first drill-down candidate |
 | **Anchor** | The pure-sector benchmark + its 1M move | Context for the whole category |
@@ -78,7 +78,7 @@ than its *1-month* average weekly pace — i.e. RS is **accelerating**, not just
 **How to act on a flip:** click the ticker → holdings modal → those are the
 individual stocks. Run your VCP/breakout screen on them *that day*.
 
-> A flip is a **timing** signal (entry window opening). Category Score is a
+> A flip is a **timing** signal (entry window opening). Theme Score is a
 > **selection** signal (what deserves attention). Use them together.
 
 ---
@@ -103,7 +103,7 @@ Other columns: Day/Wk/Mth/Qtr/HY/Yr **%** (rolling performance), matching **RS r
 
 ## A complete weekly routine
 
-1. **Monday — top-down.** Open Category Leaderboard, sort by **1W**. Note the top 2-3
+1. **Monday — top-down.** Open Theme Leaderboard, sort by **1W**. Note the top 2-3
    categories and anything with a ⚡ flip that's also climbing.
 2. **Confirm durability.** Switch sort to **Score**. Categories that are top on *both*
    1W and Score = your core focus. 1W-only = early-rotation watchlist.

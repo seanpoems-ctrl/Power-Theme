@@ -11,7 +11,7 @@ import CotTab from "./CotTab";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
-const LangCtx = React.createContext('zh');
+const LangCtx = React.createContext('en');
 const useLang = () => React.useContext(LangCtx);
 
 // eslint-disable-next-line no-unused-vars
@@ -555,12 +555,12 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
       }
     }
 
-    // Default: Category Leaderboard's #1 fine_theme — the one "what's hot"
+    // Default: Theme Leaderboard's #1 fine_theme — the one "what's hot"
     // signal shared across the whole dashboard. Prefer a theme we actually
     // drilled into for real per-stock detail; when the top fine_theme wasn't
     // one of the drilled themes (common — only 5 of ~29 get drilled nightly),
     // fall back to that fine_theme's own ETF holdings so the highlighted
-    // name still matches Category Leaderboard instead of silently reverting
+    // name still matches Theme Leaderboard instead of silently reverting
     // to a different, weaker-scoring theme that happened to get scanned.
     const topFine = fineThemeRankings[0];
     if (topFine) {
@@ -816,10 +816,10 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   // color tiles, not the circle-packing "Clusters" mode). Grouping + within-group
   // order both follow the currently selected metric so the strongest theme/industry
   // rises to the top whenever the metric changes.
-  // Grouped by fine_theme — the same Category Leaderboard bucket Category
+  // Grouped by fine_theme — the same Theme Leaderboard bucket Category
   // Leaderboard, Theme Leaderboard and Thematic Spotlight all use — instead
   // of the old parent_theme (a separate Finviz-industry-composite grouping
-  // that could name/bucket things differently from Category Leaderboard).
+  // that could name/bucket things differently from Theme Leaderboard).
   const fineThemeScore = useMemo(() => {
     const m = {};
     for (const r of fineThemeRankings) m[r.name] = r.score;
@@ -839,7 +839,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       const sorted = [...inds].sort((a, b) => (b[matrixMetric] ?? -999) - (a[matrixMetric] ?? -999));
       return { theme, avg, score: fineThemeScore[theme] ?? null, industries: sorted };
     });
-    // Category Leaderboard's score orders the groups when available (matches
+    // Theme Leaderboard's score orders the groups when available (matches
     // the rest of the dashboard); groups with no fine_theme score (e.g.
     // "Other") fall back to the metric-local average.
     arr.sort((a, b) => (b.score ?? b.avg ?? -999) - (a.score ?? a.avg ?? -999));
@@ -1358,14 +1358,14 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fineThemeRankings = [], themes = [], heatmapThemes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
-  const [view, setView] = useState("finetheme"); // "finetheme" (Category Leaderboard ranking) or "industry" (Finviz industry detail)
+  const [view, setView] = useState("finetheme"); // "finetheme" (Theme Leaderboard ranking) or "industry" (Finviz industry detail)
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
   const [rsMode, setRsMode] = useState('52w');
   const [etfPopup, setEtfPopup] = useState(null); // { etf, anchorRect }
 
-  // "finetheme" — Category Leaderboard's own ranking (fine_theme_rankings),
-  // so this leaderboard's default #1 always agrees with Category Leaderboard
+  // "finetheme" — Theme Leaderboard's own ranking (fine_theme_rankings),
+  // so this leaderboard's default #1 always agrees with Theme Leaderboard
   // and Thematic Spotlight instead of running an independent Finviz score.
   // "industry" stays a distinct drill-down lens into raw Finviz industry
   // detail, not a second competing "what's hot" claim.
@@ -1460,9 +1460,9 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fin
           const cmp = sa < sb ? -1 : 1;
           return direction === 'asc' ? cmp : -cmp;
         }
-        // rs_score sorts by Category Leaderboard's own score when the row has
+        // rs_score sorts by Theme Leaderboard's own score when the row has
         // one (fine_theme_rankings rows — the "finetheme" view, so the default
-        // #1 always matches Category Leaderboard), falling back to the
+        // #1 always matches Theme Leaderboard), falling back to the
         // stock-level RS average (themeAvgRS) for theme_rankings rows, which
         // don't carry a comparable composite score of their own.
         let va = key === 'rs_score' ? (a.score ?? themeAvgRS[a.name?.toLowerCase()] ?? 0) : (a[key] ?? 0);
@@ -1536,7 +1536,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fin
         )}
         <div className="flex-1"></div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
-          {[{k:"finetheme",l:"Category Leaderboard"},{k:"industry",l:"Industry Detail"}].map(v => (
+          {[{k:"finetheme",l:"Theme Leaderboard"},{k:"industry",l:"Industry Detail"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); onViewChange && onViewChange(v.k); }}
               className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
               {v.l}
@@ -1583,8 +1583,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fin
               const isExpanded = isIndustryView && expanded === t.name;
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
 
-              // In the Category Leaderboard view, prefer the row's own leader_ticker
-              // (the same leader Category Leaderboard itself picked for this bucket)
+              // In the Theme Leaderboard view, prefer the row's own leader_ticker
+              // (the same leader Theme Leaderboard itself picked for this bucket)
               // over the static THEME_ETF_MAP lookup.
               const etfTicker = view === "finetheme" ? (t.leader_ticker || THEME_ETF_MAP[t.name] || null) : null;
 
@@ -1644,7 +1644,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fin
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   <RotCellLB row={t}/>
                   {(() => {
-                    // Category Leaderboard's own score fills in when no scanned
+                    // Theme Leaderboard's own score fills in when no scanned
                     // stocks exist for this fine_theme (themeAvgRS needs real
                     // per-stock data, which most fine_theme buckets don't have).
                     const rsVal = themeAvgRS[t.name?.toLowerCase()] ?? (view === "finetheme" && t.score != null ? Math.round(t.score) : null);
@@ -3768,7 +3768,7 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 2 — Find the Strongest Theme (10 min)",
         items: [
-          "Watchlist → 📊 ETF RS → Category Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
+          "Watchlist → 📊 Theme Tracker → Theme Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
           "⚡ flip badge on a category = institutional money just accelerated into it vs its sector anchor — outranks a plain high score",
           "Click the top 2–3 rows to expand their top movers (same panel) — note the Leader ticker, that's your theme's flagship",
           "RS Flip Scanner below it: any new flip today = tomorrow's rotation candidate, screen it even if its category score is still low",
@@ -3847,8 +3847,8 @@ const CHECKLIST_SECTIONS = [
         section: "Step 2 — Find the Weakest Theme (10 min)",
         items: [
           "Watchlist → ▼ Short mode → Laggard Themes panel: themes ranked by worst momentum — your short universe, same logic as Long's Leading Themes, inverted",
-          "Watchlist → 📊 ETF RS → Category Leaderboard: sort by Score, then scroll to the BOTTOM rows — there's no ascending sort, the weakest categories are the last rows, not the first",
-          "Category Leaderboard's Anchor column: the sector's own benchmark ETF red on 1M = the whole sector is breaking, not just one weak name inside it",
+          "Watchlist → 📊 Theme Tracker → Theme Leaderboard: sort by Score, then scroll to the BOTTOM rows — there's no ascending sort, the weakest categories are the last rows, not the first",
+          "Theme Leaderboard's Anchor column: the sector's own benchmark ETF red on 1M = the whole sector is breaking, not just one weak name inside it",
           "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — a theme with MULTIPLE red industry tiles (not just one) is broad-based weakness, the safer short",
           "RS Flip Scanner: an empty or thin flip list during a Red signal confirms broad risk-off — no theme is genuinely accelerating up right now",
           "Correlation warning applies here too — don't short 2-3 correlated weak themes as if they were independent bets",
@@ -3963,12 +3963,12 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 3 — Scanner Refresh: Category Leaderboard + Leaderboard RS/ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
+        section: "Step 3 — Scanner Refresh: Theme Leaderboard + Leaderboard RS/ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
         items: [
           "Reload after the nightly scrape lands — fresh theme rankings, RS scores, and rotation deltas",
-          "Category Leaderboard: did the #1 row by Score change? New theme entering with a ⚡ flip = rotation confirming — build tomorrow's list from it",
+          "Theme Leaderboard: did the #1 row by Score change? New theme entering with a ⚡ flip = rotation confirming — build tomorrow's list from it",
           "Track ⚡ flips day over day: accelerating 2–3 sessions in a row = real rotation; one-day blips fade",
-          "Leaderboard tab: did the RS top 5 change, and does ROT agree with the Category Leaderboard move?",
+          "Leaderboard tab: did the RS top 5 change, and does ROT agree with the Theme Leaderboard move?",
           "Your open positions' themes: fell out of the top half of BOTH leaderboards AND position below SMA20 → write the exit plan now",
         ],
       },
@@ -3991,15 +3991,15 @@ const CHECKLIST_SECTIONS = [
           "Remove stocks that closed below SMA20 on above-average volume (distribution)",
           "Update each candidate's entry trigger and stop based on today's close",
           "VCP Tightening flag on any stock → top of tomorrow's focus list",
-          "Category Leaderboard: theme jumped into the top 5 by Score → cross-check Leaderboard tab (Thematic Scanner) for its strongest stocks",
+          "Theme Leaderboard: theme jumped into the top 5 by Score → cross-check Leaderboard tab (Thematic Scanner) for its strongest stocks",
         ],
       },
       {
         section: "Step 6 — RS Flip Scanner: Catch Institutional Rotation (5 min)",
         items: [
-          "Watchlist → 📊 ETF RS → RS Flip Scanner: any basket flipping RS vs its sector anchor is where money just started rotating in",
+          "Watchlist → 📊 Theme Tracker → RS Flip Scanner: any basket flipping RS vs its sector anchor is where money just started rotating in",
           "Weekly Scanning Checklist (same panel): work down the ▶ SCREEN NOW rows first — those are today's live flips, not yesterday's",
-          "A flip inside a theme already in your Category Leaderboard top 5 = highest-conviction setup of the day",
+          "A flip inside a theme already in your Theme Leaderboard top 5 = highest-conviction setup of the day",
           "Add the flip's leader ticker to TradingView and set a price alert at the next pivot / breakout level",
         ],
       },
@@ -4043,7 +4043,7 @@ const CHECKLIST_SECTIONS = [
         section: "Step 2 — Chart-by-Chart Review (30 min)",
         items: [
           "Work through each scan's table in Mini Charts one chart at a time — do not skip the scans that look boring",
-          "Note which industries keep appearing across scans; check them against the Category Leaderboard",
+          "Note which industries keep appearing across scans; check them against the Theme Leaderboard",
           "Write the breakout level and invalidation for any new Focus name",
         ],
       },
@@ -4061,7 +4061,7 @@ const CHECKLIST_SECTIONS = [
 
 const CORE_RULES = [
   { rule: "Never fight the Market Signal", detail: "Red means stop — no new entries, no exceptions. Close swings, protect capital." },
-  { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Category Leaderboard Score + Leaderboard RS/ROT before every entry — rising theme, rising stock." },
+  { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Theme Leaderboard Score + Leaderboard RS/ROT before every entry — rising theme, rising stock." },
   { rule: "Only trade your wired-in universe", detail: "ADR ≥5%, $Vol ≥$300M, RS ≥85 are baked into the scanner and the default filters. If a trade needs the filters loosened, it is not your trade." },
   { rule: "Every trade gets logged", detail: "No log = no review = no improvement. Journal is mandatory, not optional." },
 ];
@@ -5164,7 +5164,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     return m;
   }, [etfRsData]);
 
-  // Same priority order the search bar's Theme row uses: Category Leaderboard's
+  // Same priority order the search bar's Theme row uses: Theme Leaderboard's
   // ETF-holdings mapping first (most current), then today's scanner tree, then
   // stock_db.json's static Finviz-derived theme as a last resort. A leveraged/
   // inverse ETF ticker (SOXS, PLTU, ...) has no theme of its own, so it falls
@@ -8773,7 +8773,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
 
   // ── Leading themes ───────────────────────────────────────────────────────────
   const leadingThemes = useMemo(() => {
-    // Category Leaderboard's fine_theme ranking first (same signal as
+    // Theme Leaderboard's fine_theme ranking first (same signal as
     // everywhere else on the dashboard), falling back to the older Finviz
     // scores only if etf_rs data hasn't loaded yet.
     const rankings = fineThemeRankings.length > 0
@@ -10872,7 +10872,7 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
               {(fullResult.appearances.length > 0 || categoryThemeMap[fullResult.ticker]) && (
                 <div className="mt-2 pt-2 border-t border-zinc-800 space-y-1.5">
                   {/* Single "Theme" row — display only, not expandable.
-                      Category Leaderboard's ETF-based mapping (categoryThemeMap)
+                      Theme Leaderboard's ETF-based mapping (categoryThemeMap)
                       wins when available — same standardization already used in
                       Calendar/Watchlist, and covers far more tickers than the
                       scanner's own appearances (only the 5 nightly-drilled themes). */}
@@ -12285,23 +12285,24 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
   );
 };
 
-// ── ETF Category Benchmark Leaderboard ───────────────────────────────────────
+// ── ETF Theme Benchmark Leaderboard ───────────────────────────────────────
 // Rolls up the per-ETF RS data one level up: ranks the 12 theme-CATEGORIES so you
 // can see top-down which area of the market money is rotating into, before drilling
 // into individual baskets (Flip Scanner) or tickers (RS table).
-// ── ETF Rotation Brief — Gemini morning read of the category leaderboard ──────
-const ETF_BRIEF_CACHE_KEY = "gemini_etf_brief_v2"; // bumped 2026-09-22: invalidate briefs cached before the
+// ── ETF Rotation Brief — Gemini morning read of the theme leaderboard ──────
+const ETF_BRIEF_CACHE_KEY = "gemini_etf_brief_v3"; // v3 2026-10-06: wording follows the Category -> Theme relabel
+                                                     // (v2 bumped 2026-09-22: invalidate briefs cached before the
                                                      // fine_theme category-grouping fix (v1 briefs cite stale
                                                      // category medians that no longer match the leaderboard)
 
 async function fetchEtfBrief(payload) {
   const prompt =
     `You are a senior market analyst writing a concise morning ETF-rotation brief for a swing trader. ` +
-    `The data is a relative-strength rollup of ~180 US ETFs grouped into 12 theme-categories (Category Score = median RS percentile 0–100 of the baskets in it; perf medians for 1W/1M/3M; the top "leader" basket; the pure-sector "anchor"; and count of active RS "flips" = baskets whose RS is sharply accelerating vs their anchor). ` +
+    `The data is a relative-strength rollup of ~180 US ETFs grouped into themes (the Data below calls them "categories"; Theme Score = median RS percentile 0–100 of the baskets in it; perf medians for 1W/1M/3M; the top "leader" basket; the pure-sector "anchor"; and count of active RS "flips" = baskets whose RS is sharply accelerating vs their anchor). ` +
     `Write exactly 3 short paragraphs, NO headers or labels:\n\n` +
-    `Paragraph 1 (Rotation call): Name today's rotation in a phrase (e.g. "defensive rotation", "risk-on growth leadership", "broad risk-off"). State which categories money is rotating INTO (high Score + positive 1W/1M) and OUT of (weak/negative). Cite specific category scores and 1W/1M numbers.\n` +
-    `Paragraph 2 (The tell): Flag any category strong long-term (high 3M) but rolling over short-term (negative 1W/1M) — the early warning. Say where the active flips are and whether they fire INSIDE strong categories (trust them) or weak ones (counter-trend — fade/caution).\n` +
-    `Paragraph 3 (Action): Name the safest category setups (top on BOTH Score and momentum) with 2–3 specific leader ETF tickers to drill into, and what to avoid (bottom categories). Be specific with tickers and numbers, tight and tactical.\n\n` +
+    `Paragraph 1 (Rotation call): Name today's rotation in a phrase (e.g. "defensive rotation", "risk-on growth leadership", "broad risk-off"). State which themes money is rotating INTO (high Score + positive 1W/1M) and OUT of (weak/negative). Cite specific theme scores and 1W/1M numbers.\n` +
+    `Paragraph 2 (The tell): Flag any theme strong long-term (high 3M) but rolling over short-term (negative 1W/1M) — the early warning. Say where the active flips are and whether they fire INSIDE strong themes (trust them) or weak ones (counter-trend — fade/caution).\n` +
+    `Paragraph 3 (Action): Name the safest theme setups (top on BOTH Score and momentum) with 2–3 specific leader ETF tickers to drill into, and what to avoid (bottom themes). Be specific with tickers and numbers, tight and tactical.\n\n` +
     `Data:\n${JSON.stringify(payload, null, 2)}`;
   return geminiGenerateText(prompt);
 }
@@ -12656,7 +12657,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
   return (
     <div className="mb-2">
       <div className="flex items-center gap-3 mb-3 flex-wrap">
-        <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Category Leaderboard</h3>
+        <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Theme Leaderboard</h3>
         <span className="text-[11px] text-zinc-500">Fine-grained industry RS rollup · top-down rotation view · click any column to sort</span>
         {onMiniCharts && (
           <button onClick={() => {
@@ -12683,8 +12684,8 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
           <thead>
             <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-500 text-[10px] uppercase tracking-wide">
               <th className="px-2 py-1.5 text-left w-7">#</th>
-              <CatTh col="cat" label="Category" align="left" />
-              <CatTh col="score" label="Category Score (median)" align="left" className="w-[28%]" />
+              <CatTh col="cat" label="Theme" align="left" />
+              <CatTh col="score" label="Theme Score (median)" align="left" className="w-[28%]" />
               <CatTh col="perf_intraday" label="Intraday" />
               <CatTh col="perf_1d" label="1D" />
               <CatTh col="perf_1w" label="1W" />
@@ -12874,7 +12875,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
         </table>
       </div>
       <p className="text-[10px] text-zinc-600 mt-1.5">
-        Category Score = median RS Score of all baskets in the category (0–100, percentile vs every ETF). Leader = highest-scoring basket. Anchor = the pure-sector benchmark its boosters are measured against. ⚡ = active RS flips. Click a row to see that category's top movers by % P5D change.
+        Theme Score = median RS Score of all baskets in the theme (0–100, percentile vs every ETF). Leader = highest-scoring basket. Anchor = the pure-sector benchmark its boosters are measured against. ⚡ = active RS flips. Click a row to see that theme's top movers by % P5D change.
       </p>
 
       {holdingsModal && (
@@ -12979,7 +12980,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniC
                   <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-500 text-[10px] uppercase tracking-wide">
                     {[
                       { col: "ticker",           label: "Beta Booster", align: "left" },
-                      { col: "category",         label: "Category",     align: "left" },
+                      { col: "category",         label: "Theme",        align: "left" },
                       { col: "anchor_ticker",    label: "Anchor",       align: "left" },
                       { col: "rs_vs_anchor_1m",  label: "1M Excess" },
                       { col: "rs_vs_anchor_1w",  label: "1W Excess" },
@@ -13412,6 +13413,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
     { col: "score",         label: "Score ↓",     align: "right" },
     { col: "rs_thrust_1w",  label: "RS Thrust %", align: "right", tooltip: "1-week recency-weighted RS line vs its own 1-month baseline. >100% = relative strength accelerating this week; <100% = decelerating." },
     { col: "rs_pct",        label: "RS%",         align: "right", tooltip: "Use Score for theme selection, and RS% for tactical entry/exit timing" },
+    { col: "perf_intraday", label: "Intra %",     align: "right", tooltip: "Intraday: % change from today's open" },
     { col: "perf_1d",       label: "Day %",       align: "right" },
     { col: "perf_1w",       label: "Wk %",        align: "right" },
     { col: "perf_1m",       label: "Mth %",       align: "right" },
@@ -13442,7 +13444,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
         <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
         {onMiniCharts && (
           <button onClick={() => {
-            // Same grouping as Category Leaderboard's Mini Charts: bucket by
+            // Same grouping as Theme Leaderboard's Mini Charts: bucket by
             // fine_theme/category, order categories by the table's own active
             // sort metric (median across members), and order each category's
             // members by that same metric. rs_pct isn't a stored field (it's
@@ -13538,6 +13540,10 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
                               : "text-rose-400";
                     return <span className={cls}>{pct}%</span>;
                   })()}
+                </td>
+                {/* Intraday % — change from today's open */}
+                <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_intraday)}`}>
+                  {fmtP(e.perf_intraday)}
                 </td>
                 {/* Day / Wk / Mth / Qtr / HY / Yr % — performance columns (swapped to position 5-10) */}
                 <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_1d)}`}>
@@ -13801,7 +13807,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
   // so prev/next can carry across page boundaries.
   const [enlargedIdx, setEnlargedIdx] = React.useState(null);
   // `tickers` is either a flat array of ticker strings (Clean Bases, ETF RS,
-  // RS Flip Scanner) or {ticker, category} objects (Category Leaderboard,
+  // RS Flip Scanner) or {ticker, category} objects (Theme Leaderboard,
   // which groups/orders by category) — normalize once so the rest of this
   // component doesn't care which shape it got.
   const items = React.useMemo(() => tickers.map(t => typeof t === "string" ? { ticker: t, category: null } : t), [tickers]);
@@ -14019,16 +14025,28 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
   );
 };
 
+// Period toggle shared by Leading Themes (Group ETF) and Laggard Themes (Short): one perfMode state, one source of truth.
+const PERF_MODES = [
+  { k: "intra", l: "Intra", key: "perf_intraday" },
+  { k: "1d",    l: "1D",    key: "perf_1d" },
+  { k: "1m",    l: "1M",    key: "perf_1m" },
+  { k: "3m",    l: "3M",    key: "perf_3m" },
+  { k: "6m",    l: "6M",    key: "perf_6m" },
+  { k: "ytd",   l: "YTD",   key: "perf_ytd" },
+  { k: "1y",    l: "1Y",    key: "perf_1y" },
+];
+const PERF_KEY_BY_MODE = Object.fromEntries(PERF_MODES.map(m => [m.k, m.key]));
+
 const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
   const [arsenalData, setArsenalData] = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
-  const [themeFilter, setThemeFilter] = React.useState(null);      // set by clicking a Category Leaderboard row
+  const [themeFilter, setThemeFilter] = React.useState(null);      // set by clicking a Theme Leaderboard row
   const jumpToThemeLong  = (theme) => { setThemeFilter(theme); setMode("long"); };
   const jumpToThemeShort = (theme) => { setThemeFilter(theme); setMode("short"); };
-  const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
+  const [perfMode, setPerfMode]       = React.useState("1m");      // see PERF_MODES: intra | 1d | 1m | 3m | 6m | ytd | 1y
   const [leaderPerfMode, setLeaderPerfMode] = React.useState("perf_1m");
   const [selectedThemeModal, setSelectedThemeModal] = React.useState(null); // { name, stocks }
   const [miniChartsFor, setMiniChartsFor] = React.useState(null); // { title, tickers } for the mini-chart grid modal
@@ -14131,7 +14149,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
   };
 
   // Enrich allStocks with TradingView rolling perf for Clean Bases / Short Candidates.
-  // Also standardizes the displayed theme to the Category Leaderboard's category
+  // Also standardizes the displayed theme to the Theme Leaderboard's category
   // when the ticker is held by a tracked ETF (see buildCategoryThemeMap).
   const enrichedAllStocks = React.useMemo(() => {
     return allStocks.map(s => {
@@ -14256,7 +14274,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
   }, [screenerStocks, allStocks, tickerThemeMap]);
 
-  // themeFilter is set by clicking a Category Leaderboard row (jumpToTheme) —
+  // themeFilter is set by clicking a Theme Leaderboard row (jumpToTheme) —
   // case-insensitive match against each stock's theme/industry tag. When active,
   // shows every qualifying leader in that theme instead of just the top 15.
   const leaders = React.useMemo(() => {
@@ -14585,16 +14603,16 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
           </button>
           <button onClick={() => setMode("etf")}
             className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "etf" ? "bg-blue-600/25 text-blue-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
-            📊 ETF RS
-          </button>
-          <button onClick={() => setMode("focus")}
-            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "focus" ? "bg-amber-600/25 text-amber-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
-            🎯 Focus List
+            📊 Theme Tracker
           </button>
           <button onClick={() => setMode("universe")}
-            title="Sector heatmap, full ETF RS table, ETF rotation, daily stock universe — moved here to keep the main views lean"
-            className={`px-3 py-1.5 transition-colors ${mode === "universe" ? "bg-violet-600/25 text-violet-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
-            🗄 Archive
+            title="Group ETFs — sector heatmap, full ETF RS table, ETF rotation, daily stock universe"
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "universe" ? "bg-violet-600/25 text-violet-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            🗂 Group ETF
+          </button>
+          <button onClick={() => setMode("focus")}
+            className={`px-3 py-1.5 transition-colors ${mode === "focus" ? "bg-amber-600/25 text-amber-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            🎯 Focus List
           </button>
         </div>
         {mc?.spy?.sma50_pct != null && (
@@ -14692,7 +14710,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef}
-            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF Category Leaderboard", tickers })} />
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF Theme Leaderboard", tickers })} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
             onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "RS Flip Scanner", tickers })} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
@@ -14705,18 +14723,27 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {mode === "focus" && <FocusListTab data={focusListData}
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Focus List", tickers })} />}
 
-      {/* ── ARCHIVE ── overflow/legacy views kept for reference: Leading Themes
+      {/* ── GROUP ETF (mode "universe", formerly "Archive") ── Leading Themes
           mini-list, the full flat ETF RS table, and the Universe tab's sector
           heatmap + ETF rotation + daily stock universe. Each duplicates a
-          primary-flow tool (Category Leaderboard, Leaderboard tab) in a
+          primary-flow tool (Theme Leaderboard, Leaderboard tab) in a
           rawer or differently-scored form — parked here instead of deleted. */}
       {mode === "universe" && (
         <div className="space-y-6">
           <div>
             <div className="flex items-center justify-between mb-2">
               <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
-              <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
-                {[{k:"1d",l:"1D"},{k:"1m",l:"1M"},{k:"3m",l:"3M"}].map(({k,l}) => (
+              <button
+                onClick={() => setMiniChartsFor({ title: "Leading Themes", tickers: topThemes.flatMap(theme =>
+                  [...(theme.subthemes?.flatMap(sub => sub.stocks || []) ?? [])]
+                    .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)).slice(0, 3)
+                    .map(st => ({ ticker: st.ticker, category: theme.name }))) })}
+                title="Mini charts of each leading theme's top 3 stocks by RS"
+                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                ▦ Mini Charts
+              </button>
+              <div className="ml-auto flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
+                {PERF_MODES.map(({k,l}) => (
                   <button key={k} onClick={() => setPerfMode(k)}
                     className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
                     {l}
@@ -14730,12 +14757,12 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                 const stocks = rawStocks.map(s => {
                   const sc = screenerMap[s.ticker];
                   if (!sc) return s;
-                  return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+                  return { ...s, perf_intraday: sc.perf_intraday ?? s.perf_intraday, perf_ytd: sc.perf_ytd ?? s.perf_ytd, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
                 });
                 const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
                 const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-                const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
-                const perf = topS?.[perfKey] != null ? topS[perfKey] : (theme[perfKey] ?? 0);
+                const perfKey = PERF_KEY_BY_MODE[perfMode] ?? "perf_3m";
+                const perf = topS?.[perfKey] ?? theme[perfKey] ?? null;
                 return (
                   <div key={theme.name}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
@@ -14746,8 +14773,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                       <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
                     </div>
                     {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
-                    <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                      {perf > 0 ? "+" : ""}{perf.toFixed(1)}%
+                    <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf == null ? "text-zinc-600" : perf > 0 ? "text-emerald-400" : "text-rose-400"}`}
+                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data (YTD is only available for stocks in the screener universe)` : undefined}>
+                      {perf == null ? "—" : `${perf > 0 ? "+" : ""}${perf.toFixed(1)}%`}
                     </span>
                   </div>
                 );
@@ -14773,7 +14801,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
               <div className="flex items-center justify-between mb-2">
                 <Sec title="Laggard Themes — Avoid / Short Bias" badge={laggardThemes.length} sub="worst by momentum" />
                 <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
-                  {[{k:"1d",l:"1D"},{k:"1m",l:"1M"},{k:"3m",l:"3M"}].map(({k,l}) => (
+                  {PERF_MODES.map(({k,l}) => (
                     <button key={k} onClick={() => setPerfMode(k)}
                       className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
                       {l}
@@ -14787,14 +14815,14 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                   const stocks = rawStocks.map(s => {
                     const sc = screenerMap[s.ticker];
                     if (!sc) return s;
-                    return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+                    return { ...s, perf_intraday: sc.perf_intraday ?? s.perf_intraday, perf_ytd: sc.perf_ytd ?? s.perf_ytd, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
                   });
                   const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
                   const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-                  const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
+                  const perfKey = PERF_KEY_BY_MODE[perfMode] ?? "perf_3m";
                   // Prefer the displayed ticker's own perf; only fall back to the theme-level
                   // aggregate when there's no per-stock data at all (e.g. screenerMap missed it).
-                  const perf = topS?.[perfKey] != null ? topS[perfKey] : (theme[perfKey] ?? 0);
+                  const perf = topS?.[perfKey] ?? theme[perfKey] ?? null;
                   return (
                     <div key={theme.name}
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
@@ -14805,8 +14833,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                         <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
                       </div>
                       {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
-                      <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                        {perf > 0 ? "+" : ""}{perf.toFixed(1)}%
+                      <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf == null ? "text-zinc-600" : perf > 0 ? "text-emerald-400" : "text-rose-400"}`}
+                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data (YTD is only available for stocks in the screener universe)` : undefined}>
+                        {perf == null ? "—" : `${perf > 0 ? "+" : ""}${perf.toFixed(1)}%`}
                       </span>
                     </div>
                   );
@@ -15629,13 +15658,18 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
   }, [sectorFilter, uData]);
 
   const sortedHeatmap = useMemo(() => {
-    const rows = uData?.sector_heatmap || [];
+    // universe.json's sector rows carry no intraday figure — derive it as the median of the sector's ETFs' perf_intraday.
+    const rows = (uData?.sector_heatmap || []).map(r => {
+      const v = (r.etfs || []).map(t => etfRsMap[t]?.perf_intraday).filter(x => x != null).sort((a, b) => a - b);
+      const mid = v.length >> 1;
+      return { ...r, perf_intraday: v.length ? (v.length % 2 ? v[mid] : (v[mid - 1] + v[mid]) / 2) : null };
+    });
     return [...rows].sort((a, b) => {
       const av = a[hmSort.col] ?? (hmSort.dir === "asc" ? Infinity : -Infinity);
       const bv = b[hmSort.col] ?? (hmSort.dir === "asc" ? Infinity : -Infinity);
       return hmSort.dir === "asc" ? av - bv : bv - av;
     });
-  }, [uData, hmSort]);
+  }, [uData, hmSort, etfRsMap]);
 
   const filteredStocks = useMemo(() => {
     if (!uData?.stocks) return [];
@@ -15667,6 +15701,11 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
   const rotIn  = etf_rotation?.rotating_in  || [];
   const rotOut = etf_rotation?.rotating_out || [];
 
+  // Intra / Day / Wk / Mth % — the rotation lists only carry 1M, so pull the rest from the ETF RS table when it has the ticker.
+  const rotPerf = (e) => {
+    const r = etfRsMap[e.ticker] || {};
+    return [["I", r.perf_intraday ?? e.perf_intraday], ["D", r.perf_1d ?? e.perf_1d], ["W", r.perf_1w ?? e.perf_1w], ["M", r.perf_1m ?? e.perf_1m]];
+  };
   const EtfRotCard = ({ e, dir }) => (
     <div className={`flex items-center justify-between px-3 py-2 rounded-lg border ${dir === "in" ? "bg-emerald-900/20 border-emerald-700/30" : "bg-rose-900/20 border-rose-700/30"}`}>
       <div className="flex items-center gap-2 min-w-0">
@@ -15682,7 +15721,11 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
         <span className={`text-[10px] font-mono ${rsColor(e.rs_day ?? e.day_rs)}`}>{e.rs_day ?? e.day_rs ?? "—"}</span>
         <span className="text-zinc-700 text-[9px]">→</span>
         <span className={`text-[10px] font-mono ${rsColor(e.rs_mth ?? e.mth_rs)}`}>{e.rs_mth ?? e.mth_rs ?? "—"}</span>
-        <span className={`text-[11px] font-mono font-semibold ${pctColor(e.perf_1m)}`}>{fmtP(e.perf_1m)}</span>
+        {rotPerf(e).map(([lab, v]) => (
+          <span key={lab} className={`text-[10px] font-mono ${lab === "M" ? "font-semibold" : ""} ${pctColor(v)}`} title={{ I: "Intraday % (from today's open)", D: "Day %", W: "Week %", M: "Month %" }[lab]}>
+            <span className="text-zinc-600 mr-0.5">{lab}</span>{fmtP(v)}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -15716,6 +15759,14 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
           <div className="flex items-center gap-2 mb-1.5">
             <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Sector Heatmap</span>
             <span className="text-[10px] text-zinc-600">click to filter stocks</span>
+            {onMiniCharts && (
+              <button
+                onClick={() => onMiniCharts(sortedHeatmap.flatMap(r => (r.etfs || []).map(t => ({ ticker: t, category: r.sector }))), "Sector Heatmap")}
+                title="Mini charts of every sector's ETFs, in the table's current sort order"
+                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                ▦ Mini Charts
+              </button>
+            )}
             {sectorFilter && (
               <button onClick={() => setSectorFilter(null)}
                 className="ml-auto text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700 rounded px-1.5 py-0.5">
@@ -15736,6 +15787,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                     { col:"rs_qtr",   label:"Qtr"   },
                     { col:"rs_hy",    label:"HY"    },
                     { col:"rs_yr",    label:"Yr"    },
+                    { col:"perf_intraday", label:"Intra %" },
                     { col:"perf_1d",  label:"Day %" },
                     { col:"perf_1w",  label:"Wk %"  },
                     { col:"perf_1m",  label:"Mth %" },
@@ -15752,6 +15804,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                       </th>
                     );
                   })}
+                  {onMiniCharts && <th className="px-1 py-1.5 w-7" title="Mini charts for the sector's ETFs" />}
                 </tr>
               </thead>
               <tbody>
@@ -15771,9 +15824,17 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                           {v != null ? (ci === 0 ? v.toFixed(1) : Math.round(v)) : "—"}
                         </td>
                       ))}
-                      {[row.perf_1d, row.perf_1w, row.perf_1m, row.perf_3m, row.perf_6m, row.perf_12m].map((v, ci) => (
+                      {[row.perf_intraday, row.perf_1d, row.perf_1w, row.perf_1m, row.perf_3m, row.perf_6m, row.perf_12m].map((v, ci) => (
                         <td key={"p"+ci} className={`px-1.5 py-1 text-right font-mono text-[10px] ${pctColor(v)}`}>{fmtP(v)}</td>
                       ))}
+                      {onMiniCharts && (
+                        <td className="px-1 py-1 text-center">
+                          <button
+                            onClick={ev => { ev.stopPropagation(); onMiniCharts((row.etfs || []).map(t => ({ ticker: t, category: row.sector })), row.sector); }}
+                            title={`Mini charts: ${row.sector} ETFs`}
+                            className="text-[12px] leading-none text-zinc-500 hover:text-zinc-100 px-1">▦</button>
+                        </td>
+                      )}
                     </tr>
                   );
                 })}
@@ -15788,6 +15849,10 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">▲ Rotating In</span>
+              {onMiniCharts && rotIn.length > 0 && (
+                <button onClick={() => onMiniCharts(rotIn.map(e => ({ ticker: e.ticker, category: e.theme })), "Rotating In")}
+                  className="text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+              )}
               <span className="ml-auto text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotIn.length}</span>
             </div>
             <div className="space-y-1 max-h-52 overflow-y-auto">
@@ -15800,6 +15865,10 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider">▼ Rotating Out</span>
+              {onMiniCharts && rotOut.length > 0 && (
+                <button onClick={() => onMiniCharts(rotOut.map(e => ({ ticker: e.ticker, category: e.theme })), "Rotating Out")}
+                  className="text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+              )}
               <span className="ml-auto text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotOut.length}</span>
             </div>
             <div className="space-y-1 max-h-52 overflow-y-auto">
@@ -15974,7 +16043,7 @@ const CalcModal = ({ onClose, ibkrThemesData, thematicData, vix }) => {
   );
 };
 
-// ── Category Leaderboard theme standardization ──────────────────────────────
+// ── Theme Leaderboard theme standardization ──────────────────────────────
 // Secondary tables (Clean Bases, Market Leaders, Calendar earnings tags, Gapper
 // Scanner, …) historically tagged each stock with its Thematic Scanner theme
 // (Finviz industry-derived). That's a different taxonomy from the Category
@@ -15987,7 +16056,7 @@ const CalcModal = ({ onClose, ibkrThemesData, thematicData, vix }) => {
 // at least one tracked (non-benchmark) ETF, so those tables can standardize on
 // it — falling back to the stock's original Scanner theme when it isn't held
 // by any tracked ETF. When a stock is held by ETFs spanning multiple
-// categories, the category with the higher current median Category Score
+// categories, the category with the higher current median Theme Score
 // (same figure shown in the Leaderboard) wins — the same "which theme is
 // strongest right now" read a trader would use to break the tie manually.
 function buildCategoryThemeMap(etfHoldings, etfRsData) {
@@ -16036,8 +16105,15 @@ function buildCategoryThemeMap(etfHoldings, etfRsData) {
 }
 
 export default function App() {
-  const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
-  const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
+  // Default is English; the 中/EN button switches to Chinese and the choice is remembered. The key is "ui_lang_v2"
+  // (not "ui_lang") on purpose: the old default was Chinese, so a value saved under the old key may just be a leftover
+  // from that era, not a deliberate choice — ignoring it makes every browser start in English.
+  const [lang, setLang] = useState(() => { try { return localStorage.getItem('ui_lang_v2') === 'zh' ? 'zh' : 'en'; } catch { return 'en'; } });
+  const toggleLang = useCallback(() => setLang(l => {
+    const next = l === 'zh' ? 'en' : 'zh';
+    try { localStorage.setItem('ui_lang_v2', next); } catch { /* storage unavailable */ }
+    return next;
+  }), []);
   const [tab, setTab] = useState("scanner");
   const [pendingTheme, setPendingTheme] = useState(null); // theme to auto-open in ThemeHeatmap
   const [data, setData] = useState(null);
@@ -16202,7 +16278,7 @@ export default function App() {
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Ticker -> Category Leaderboard category, standardized across secondary
+  // Ticker -> Theme Leaderboard category, standardized across secondary
   // tables (Clean Bases, Market Leaders, Calendar earnings tags, Gapper
   // Scanner). categoryEtfMap is the same computation's other half — which
   // specific ETF(s) within that winning category actually hold the stock —
@@ -16213,10 +16289,10 @@ export default function App() {
     [data?.etf_holdings, appEtfRsData]
   );
 
-  // The single "what's hot" ranking — Category Leaderboard's ETF-price-based
+  // The single "what's hot" ranking — Theme Leaderboard's ETF-price-based
   // fine_theme rollup (etf_rs_builder.py), reconciled dashboard-wide so
   // Industry Matrix, Theme Leaderboard, Thematic Spotlight, and Leading
-  // Themes all agree with Category Leaderboard instead of each running its
+  // Themes all agree with Theme Leaderboard instead of each running its
   // own independent Finviz-based score.
   const fineThemeRankings = appEtfRsData?.fine_theme_rankings || [];
 
@@ -16412,7 +16488,7 @@ const appScreenerMap = useMemo(() => {
     .sort((a, b) => {
       const getRankingRS = (theme) => {
         const name = theme.name.toLowerCase();
-        // Category Leaderboard's fine_theme score first — same ranking as
+        // Theme Leaderboard's fine_theme score first — same ranking as
         // everywhere else on the dashboard — then the older Finviz scores,
         // then raw stock RS as a last resort.
         const ftEntry = fineThemeRankings.find(r => r.name?.toLowerCase() === (theme.fine_theme || "").toLowerCase());
