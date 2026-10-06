@@ -12954,16 +12954,16 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniC
       <div className="flex items-center gap-3">
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">⚡ RS Flip Scanner</h3>
         <span className="text-[11px] text-zinc-500">Beta Booster vs Pure Sector Anchor · When RS turns up sharply → run stock screens on that basket</span>
+        {flips.length > 0 && (
+          <span className="ml-auto px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            {flips.length} FLIP{flips.length > 1 ? "S" : ""} ACTIVE
+          </span>
+        )}
         {onMiniCharts && flips.length > 0 && (
           <button onClick={() => onMiniCharts(flips.map(e => ({ ticker: e.ticker, category: e.category })))}
             className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
             ▦ Mini Charts
           </button>
-        )}
-        {flips.length > 0 && (
-          <span className="ml-auto px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-            {flips.length} FLIP{flips.length > 1 ? "S" : ""} ACTIVE
-          </span>
         )}
       </div>
 
@@ -13442,6 +13442,11 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
         <h3 className="text-sm font-semibold text-zinc-100">Industry Sector Relative Strength</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
         <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
+        {etfRsData.generated_at && (
+          <span className="text-xs text-zinc-700 ml-auto font-mono">
+            {new Date(etfRsData.generated_at).toLocaleDateString()}
+          </span>
+        )}
         {onMiniCharts && (
           <button onClick={() => {
             // Same grouping as Theme Leaderboard's Mini Charts: bucket by
@@ -13471,14 +13476,9 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
                 .map(e => ({ ticker: e.ticker, category: cat })));
             onMiniCharts(items);
           }}
-            className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            className={`${etfRsData.generated_at ? "" : "ml-auto "}text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors`}>
             ▦ Mini Charts
           </button>
-        )}
-        {etfRsData.generated_at && (
-          <span className="text-xs text-zinc-700 ml-auto font-mono">
-            {new Date(etfRsData.generated_at).toLocaleDateString()}
-          </span>
         )}
       </div>
       <div className="overflow-x-auto rounded-lg border border-zinc-800">
@@ -14731,8 +14731,16 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {mode === "universe" && (
         <div className="space-y-6">
           <div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2 mb-2">
               <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
+              <div className="ml-auto flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
+                {PERF_MODES.map(({k,l}) => (
+                  <button key={k} onClick={() => setPerfMode(k)}
+                    className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
+                    {l}
+                  </button>
+                ))}
+              </div>
               <button
                 onClick={() => setMiniChartsFor({ title: "Leading Themes", tickers: topThemes.flatMap(theme =>
                   [...(theme.subthemes?.flatMap(sub => sub.stocks || []) ?? [])]
@@ -14742,14 +14750,6 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                 className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
                 ▦ Mini Charts
               </button>
-              <div className="ml-auto flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
-                {PERF_MODES.map(({k,l}) => (
-                  <button key={k} onClick={() => setPerfMode(k)}
-                    className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
-                    {l}
-                  </button>
-                ))}
-              </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
               {topThemes.map((theme, i) => {
@@ -14774,7 +14774,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                     </div>
                     {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
                     <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf == null ? "text-zinc-600" : perf > 0 ? "text-emerald-400" : "text-rose-400"}`}
-                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data (YTD is only available for stocks in the screener universe)` : undefined}>
+                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data` : undefined}>
                       {perf == null ? "—" : `${perf > 0 ? "+" : ""}${perf.toFixed(1)}%`}
                     </span>
                   </div>
@@ -14834,7 +14834,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                       </div>
                       {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
                       <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf == null ? "text-zinc-600" : perf > 0 ? "text-emerald-400" : "text-rose-400"}`}
-                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data (YTD is only available for stocks in the screener universe)` : undefined}>
+                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data` : undefined}>
                         {perf == null ? "—" : `${perf > 0 ? "+" : ""}${perf.toFixed(1)}%`}
                       </span>
                     </div>
@@ -15482,8 +15482,8 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
   // title. Groups without a label keep the scan's own title.
   const SMALL = "Small Cap < $10B", LARGE = "Large Cap > $10B";
   const SECTIONS = [
-    { title: "1W Momentum", sub: "1-week gain >20%, weekly volatility >4%", groups: [{ label: SMALL, key: "Mom_1W_Small" }] },
-    { title: "1M Momentum", sub: "1-month gain >30%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_1M_Small" }] },
+    { title: "1W Momentum", sub: "1-week gain >20%, weekly volatility >4%", groups: [{ label: SMALL, key: "Mom_1W_Small" }, { label: LARGE, key: "Mom_1W_Large" }] },
+    { title: "1M Momentum", sub: "1-month gain >30%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_1M_Small" }, { label: LARGE, key: "Mom_1M_Large" }] },
     { title: "3M Momentum", sub: "3-month gain >50%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_3M_Small" }, { label: LARGE, key: "Mom_3M_Large" }] },
     { title: "6M Momentum", sub: "6-month gain >100%, monthly volatility >5%", groups: [{ label: SMALL, key: "Mom_6M_Small" }, { label: LARGE, key: "Mom_6M_Large" }] },
     { title: "Strongest Stocks", sub: "EPS and revenue growth >25%, above SMA50", groups: [{ label: SMALL, key: "4_Strongest_Stock_JK" }, { label: LARGE, key: "5_Strongest_Stock_10B_Rev_30_JK" }] },
@@ -15706,21 +15706,27 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
     const r = etfRsMap[e.ticker] || {};
     return [["I", r.perf_intraday ?? e.perf_intraday], ["D", r.perf_1d ?? e.perf_1d], ["W", r.perf_1w ?? e.perf_1w], ["M", r.perf_1m ?? e.perf_1m]];
   };
+  // Two rows: ticker / theme / sparkline / RS on top, I / D / W / M % underneath. One row can't fit all of it in a ~350px
+  // column — the % group alone was ~190px and squeezed the ticker down to ~13px.
   const EtfRotCard = ({ e, dir }) => (
-    <div className={`flex items-center justify-between px-3 py-2 rounded-lg border ${dir === "in" ? "bg-emerald-900/20 border-emerald-700/30" : "bg-rose-900/20 border-rose-700/30"}`}>
-      <div className="flex items-center gap-2 min-w-0">
-        <button
-          onClick={() => setHoldingsModal({ ticker: e.ticker, theme: e.theme, holdings: etfHoldings[e.ticker] ?? [] })}
-          className="font-mono font-bold text-cyan-400 text-[12px] shrink-0 hover:underline cursor-pointer bg-none border-none p-0">
-          {e.ticker}
-        </button>
-        <span className="text-zinc-400 text-[11px] truncate max-w-[120px]">{e.theme}</span>
+    <div className={`px-3 py-2 rounded-lg border ${dir === "in" ? "bg-emerald-900/20 border-emerald-700/30" : "bg-rose-900/20 border-rose-700/30"}`}>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <button
+            onClick={() => setHoldingsModal({ ticker: e.ticker, theme: e.theme, holdings: etfHoldings[e.ticker] ?? [] })}
+            className="font-mono font-bold text-cyan-400 text-[12px] shrink-0 hover:underline cursor-pointer bg-none border-none p-0">
+            {e.ticker}
+          </button>
+          <span className="text-zinc-400 text-[11px] truncate">{e.theme}</span>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          {(e.trend||[]).length >= 2 && <TrendSparkline data={e.trend}/>}
+          <span className={`text-[10px] font-mono ${rsColor(e.rs_day ?? e.day_rs)}`}>{e.rs_day ?? e.day_rs ?? "—"}</span>
+          <span className="text-zinc-700 text-[9px]">→</span>
+          <span className={`text-[10px] font-mono ${rsColor(e.rs_mth ?? e.mth_rs)}`}>{e.rs_mth ?? e.mth_rs ?? "—"}</span>
+        </div>
       </div>
-      <div className="flex items-center gap-2 shrink-0 ml-2">
-        {(e.trend||[]).length >= 2 && <TrendSparkline data={e.trend}/>}
-        <span className={`text-[10px] font-mono ${rsColor(e.rs_day ?? e.day_rs)}`}>{e.rs_day ?? e.day_rs ?? "—"}</span>
-        <span className="text-zinc-700 text-[9px]">→</span>
-        <span className={`text-[10px] font-mono ${rsColor(e.rs_mth ?? e.mth_rs)}`}>{e.rs_mth ?? e.mth_rs ?? "—"}</span>
+      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5">
         {rotPerf(e).map(([lab, v]) => (
           <span key={lab} className={`text-[10px] font-mono ${lab === "M" ? "font-semibold" : ""} ${pctColor(v)}`} title={{ I: "Intraday % (from today's open)", D: "Day %", W: "Week %", M: "Month %" }[lab]}>
             <span className="text-zinc-600 mr-0.5">{lab}</span>{fmtP(v)}
@@ -15729,6 +15735,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
       </div>
     </div>
   );
+
 
   const SIGNAL_TABS = ["All", "Strong", "Emerging", "Watch", "Weakening"];
 
@@ -15759,6 +15766,13 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
           <div className="flex items-center gap-2 mb-1.5">
             <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Sector Heatmap</span>
             <span className="text-[10px] text-zinc-600">click to filter stocks</span>
+            <div className="ml-auto flex items-center gap-2">
+            {sectorFilter && (
+              <button onClick={() => setSectorFilter(null)}
+                className="text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700 rounded px-1.5 py-0.5">
+                ✕ {sectorFilter}
+              </button>
+            )}
             {onMiniCharts && (
               <button
                 onClick={() => onMiniCharts(sortedHeatmap.flatMap(r => (r.etfs || []).map(t => ({ ticker: t, category: r.sector }))), "Sector Heatmap")}
@@ -15767,12 +15781,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                 ▦ Mini Charts
               </button>
             )}
-            {sectorFilter && (
-              <button onClick={() => setSectorFilter(null)}
-                className="ml-auto text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700 rounded px-1.5 py-0.5">
-                ✕ {sectorFilter}
-              </button>
-            )}
+            </div>
           </div>
                     <div className="rounded-lg border border-zinc-800 overflow-x-auto">
             <table className="w-full border-collapse">
@@ -15849,11 +15858,11 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">▲ Rotating In</span>
+              <span className="ml-auto text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotIn.length}</span>
               {onMiniCharts && rotIn.length > 0 && (
                 <button onClick={() => onMiniCharts(rotIn.map(e => ({ ticker: e.ticker, category: e.theme })), "Rotating In")}
                   className="text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
               )}
-              <span className="ml-auto text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotIn.length}</span>
             </div>
             <div className="space-y-1 max-h-52 overflow-y-auto">
               {rotIn.length === 0
@@ -15865,11 +15874,11 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider">▼ Rotating Out</span>
+              <span className="ml-auto text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotOut.length}</span>
               {onMiniCharts && rotOut.length > 0 && (
                 <button onClick={() => onMiniCharts(rotOut.map(e => ({ ticker: e.ticker, category: e.theme })), "Rotating Out")}
                   className="text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
               )}
-              <span className="ml-auto text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotOut.length}</span>
             </div>
             <div className="space-y-1 max-h-52 overflow-y-auto">
               {rotOut.length === 0
