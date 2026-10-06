@@ -1865,6 +1865,9 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
       perf_1d/1w/1m/3m/6m — TradingView rolling Perf.* fields, identical to
                        what screener_builder.py uses.  Overrides the yfinance
                        trading-day-window values set by _rolling_perf_from_closes().
+      perf_1y/perf_ytd — TradingView Perf.Y / Perf.YTD.  perf_ytd is set here, AFTER
+                       get_thematic_stocks() pops it from the Finviz detail dict, so the
+                       frontend's YTD period toggle has a value for every US thematic stock.
 
     Foreign tickers (contain '.') are skipped — Finviz/yfinance values kept.
     All tickers resolved in a single batched screener call (≤1 500 per batch).
@@ -1897,6 +1900,7 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
                     "Perf.3M",    # 3M rolling %
                     "Perf.6M",    # 6M rolling %
                     "Perf.Y",     # 1Y rolling %
+                    "Perf.YTD",   # calendar year-to-date %
                 )
                 .where(tv_col("name").isin(chunk))
                 .limit(len(chunk) + 50)
@@ -1922,6 +1926,7 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
                     ("Perf.3M", "perf_3m"),
                     ("Perf.6M", "perf_6m"),
                     ("Perf.Y",  "perf_1y"),
+                    ("Perf.YTD", "perf_ytd"),
                 ]:
                     try:
                         v = row.get(tv_field)
