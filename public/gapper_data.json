@@ -1,140 +1,47 @@
 {
-  "scan_time": "2026-10-05 08:55 ET",
+  "scan_time": "2026-10-06 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "PCVX",
-      "price": 87.97,
-      "gap_pct": 55.75,
-      "pm_volume": 936725,
-      "avg_vol_10d": 1527384,
-      "avg_dollar_vol": 134363970,
-      "mkt_cap": 8404522293,
-      "rvol": 2.18,
-      "adr_pct": 3.56,
-      "category": "FDA",
-      "theme": "Clinical Trial Data Release",
-      "reasoning": "Vaxcyte stock reacted to the presentation of **OPUS-1 trial data** today for its **bacterial pneumonia vaccine**, a key clinical milestone.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 25,
-      "grade": "B",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Vaxcyte is set to present **OPUS-1 trial data** for its **bacterial pneumonia vaccine** on **October 5th**. The stock is **heating up** and **jumps** as traders anticipate the results.",
-        "impact": "This data release is a critical step in the regulatory pathway for the vaccine, potentially de-risking the development and setting the stage for future regulatory submissions."
-      },
-      "analysis_details": "• **The Drug**\nVaxcyte is presenting **OPUS-1 trial data** today, **October 5th**, for a vaccine designed to prevent **bacterial pneumonia**. The company, Vaxcyte (PCVX), is seeing its stock **heat up** and **jump** in anticipation of this significant data release.\n\n• **The Significance**\nThe release of **OPUS-1 trial data** represents a pivotal moment for PCVX, as positive results could validate the vaccine's efficacy and safety, significantly de-risking its development path. Successful data could enhance the company's competitive positioning in the preventative medicine market and attract further investor interest ahead of potential regulatory filings.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Vaxcyte PCVX Stock Heats Up Ahead OPUS-1 Data - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1IejVDbmxoZ0hBcHpVOWJQb0o4MnU3VGdRbklJSnluaVE2VkR0b3FLX29KbE5PeEgyZFZ6T2taaE4wU25WZkgwR0VTVGFNQmxsR3NyeXZ1WHpJcDBHN245N0RQQzc5dXF1RWQyRHJmVVFFdUo1?oc=5"
-        },
-        {
-          "title": "PCVX Stock Jumps As Traders Brace For OPUS-1 Catalyst - timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5tcm1wSEFUaWRLQ21fd08tT2xldGhPeTZnUW5uSkhIeUNNU0piQnVlbklUSENYbE12d3dtaWpKNkQxcXhCSUcxbkpmb1p5N1VFQkpHeVFLOFdrRl9SVE9hRGFoc0dEek9ld00tRXpiOW53MHk2cUE?oc=5"
-        },
-        {
-          "title": "Trial data on a vaccine designed to prevent bacterial pneumonia are set for Oct. 5. Vaxcyte will present them. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQaDh4b1ItYmJmSU9yR3BqYTVlWHJWTG5PUjZFMEVmSDRVejFFVjQ3RXI4dVdOaldvcWNTSkdBZHFXamN6SW50cmNzUUFmcFNkUGRUU2dTU1RuWEl0UXNxaGpBTzRMZ1VsaUJOcFQzNVpiQkRZYjc4YnBwRF9KU1ZFc1RVak01RW9jZXNaYm05MGE5ZjNOam9faG81Z0wydURsWGtZNWF2YUJRUHkzbjNfcl9UU3lhWXJkeHVfR3NXQQ?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-05",
-        "form": "8-K",
-        "items": [
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1649094/000119312526413168/d21202d8k.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (ADR 3.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "OPUS-1 trial data was presented today for Vaxcyte's bacterial pneumonia vaccine.",
-        "discrepancy_note": "The primary catalyst claims the OPUS-1 trial data was presented 'today'. Source A states Vaxcyte is 'to Host Webcast and Conference Call to Present Topline Data from OPUS-1', implying an upcoming or imminent event, not necessarily one already completed today. Source B explicitly states 'Trial data on a vaccine designed to prevent bacterial pneumonia are set for Oct. 5. Vaxcyte will present them' (Source B[4]), indicating a future date for the presentation, contradicting the 'today' claim."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "PTC",
-      "price": 195.5,
-      "gap_pct": 35.74,
-      "pm_volume": 922863,
-      "avg_vol_10d": 1331780,
-      "avg_dollar_vol": 260362990,
-      "mkt_cap": 15628155934,
-      "rvol": 0.68,
-      "adr_pct": 3.41,
+      "ticker": "OPCH",
+      "price": 31.06,
+      "gap_pct": 32.91,
+      "pm_volume": 3429926,
+      "avg_vol_10d": 1701277,
+      "avg_dollar_vol": 52841664,
+      "mkt_cap": 3500481366,
+      "rvol": 0.66,
+      "adr_pct": 2.86,
       "category": "New Contract/Partnership",
-      "theme": "Acquisition",
-      "reasoning": "PTC agreed to be acquired by Schneider Electric in a significant $22.6 billion deal, representing a major structural change for the company.",
+      "theme": "McKesson/CD&R $5B Takeover",
+      "reasoning": "OPCH stock soared **22%** on reports of a **$5 billion** takeover by **McKesson** and **CD&R**, confirmed by an 8-K filing.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "B",
-      "finviz_theme": "AI Enterprise Software",
+      "conviction": 75,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "**Schneider Electric** announced its intent to acquire **PTC**, a US software firm, in a deal valued at **$22.6 billion**. This acquisition represents the **French industrial giant’s largest-ever acquisition**, signifying a significant strategic move.",
-        "impact": "This acquisition removes PTC as a standalone publicly traded entity, shifting its future momentum dynamics to a fixed acquisition price. It represents a significant premium for existing shareholders, but also eliminates independent growth potential."
+        "catalyst": "**Option Care Health (OPCH)** filed an 8-K on **2026-10-06** regarding a material contract or agreement. News headlines specified this as a **$5 billion takeover** by **McKesson** and **CD&R**, causing OPCH stock to **soar 22% after-hours** and **surge 22%** in pre-market trading.",
+        "impact": "This event signals a major re-rating for OPCH, removing M&A risk and establishing a clear acquisition price, likely leading to significant short-term price appreciation towards the reported takeover value."
       },
-      "analysis_details": "• **Impact**\n**Schneider Electric** has agreed to acquire **PTC**, a US-based software firm, in a deal valued at **$22.6 billion**. This marks **Schneider Electric's largest-ever acquisition**, according to news reports, highlighting the strategic importance of PTC's industrial software and IoT platforms.\n\n• **Strategic Value**\nThis acquisition fundamentally transforms **PTC's** future as a standalone entity, immediately impacting its shareholder base as the company will be integrated into **Schneider Electric**. The move is poised to bolster **Schneider Electric's** capabilities in industrial software, IoT, and digital transformation, while delivering a clear exit for **PTC's** shareholders. Halper Sadeh LLC is investigating whether **PTC Inc.** is obtaining a **fair price** for its shareholders.",
+      "analysis_details": "• **Impact**\n**Option Care Health (OPCH)** stock **soared 22% after-hours** and **surged 22%** on news of a definitive **$5 billion takeover** agreement. The acquisition involves major healthcare distributor **McKesson** and private equity firm **CD&R**, fundamentally revaluing the company at the reported deal price.\n\n• **Strategic Value**\nThis **$5 billion** takeover by **McKesson** and **CD&R** represents a significant strategic consolidation in the healthcare services sector. For OPCH, it signals a premium valuation and a major exit for shareholders, while for the acquirers, it strengthens their market position in specialized infusion and alternate site care.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Schneider Electric to Buy PTC in French Industrial Giant’s Largest-Ever Acquisition - Morningstar",
+          "title": "OPCH Stock Soars 22% After-Hours On $5B McKesson Buyout Talks - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNVnl0WHdrNzlqcmw3UkwtOXhXZzJCSWVrMWNpdnRpNmxLZDFoYllMMnh3UTd1LUhfVWZVZUdBRnJrdjJacUtmUlN5c3plV3RfR3FoWk5EcGFiTGJ2THRoeGhkdWNEOEZEVHRtZnVFVFJfVGVxWXNXNFFWdkpGQlczQWtFdWl2QnZ5aEhtYlFMTGwwdjJWWXZfQ2RIR0pWLUxCVmxiNzNEa3JCTFBvQ0p2aUpwaDBCdFJDOEtBVw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMnUta3NQaTJBTFRxWFJjamdkZF9KZWZZNXFfT2lpX0FPWW9HeFdHZmtHUFRjQkx1MFFmZ29wY3NUcklpTDd0ZC1maTQ2cHYzbU1CRVFiTDZZb0dpWjd3dmpHeFFsRzctbDJRN1JkdWRQbHMxSkhuV1ctQzJvMWk1UHBHYWxyVTZBNnlkMDk4RWtJdlZu?oc=5"
         },
         {
-          "title": "Schneider Electric to buy US software firm PTC in $22.6 billion deal - Euronext Markets",
+          "title": "Option Care Health surges 22% on report of $5 billion takeover by McKesson, CD&R - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPWk5UbldnWHRlRUM5YWRQNVl2eURqUmIxdkhkQVh5V2FZQ21aTEEzSXgzNEVYSEE2Q1VnalB3ZkJybmlsSUVtNGxyOWdBMWNWZTQ0VUdOTWUxcnZxTzVqSFZNSzYzV0wydUFoOTFxYS1hY3B4NGpQUUk5R2RFT1Jkd0QtQVBVQlZqSFFvRWFNdUFFeE1sTnEzOHctdW9mNVpaaTJTZ2d0RQ?oc=5"
-        },
-        {
-          "title": "PTC Stock Alert: Halper Sadeh LLC is Investigating Whether PTC Inc. is Obtaining a Fair Price for its Shareholders - Business Wire",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxQN29zRWgzdUU5cWt4VGV4X01rU2JqY0gteXo1NUVURUNhMUZ5Vk1oSEU3bkR5SkVuUWpBZG1kVWxaRm5BNjI2XzVBdnYwZnJ0c080VDY5Uk1xN09TZ0pBbEo1NDAxal9PWERXb2dXYnVOX19nTG0yTmZfUDl6QlNlWFVIVGc3RVF2aW9FQ1pMN0RwXzM4UEtCMmZxQWRDYnlaUU9qNWVKZjh2dWhraDBPZTZlam14TTM2QlJ6MEs1STlVTUtQaFR1Yi1zMHkyVS1JVWY1TmJQQ29BQnYzSS1lMVRYTk9OOGJ5T3pNeVpiR19US2R1ZVVET1V4ZVpkRzQ?oc=5"
-        },
-        {
-          "title": "Schneider Electric to buy U.S. software maker PTC for $22.6 bln",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/schneider-electric-close-20-bln-205814637.html"
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNQVFhX2xiNjZrWlZxMkN1M3JMaXdlUm9HZmlaVnpLYklmN0dzbHNLeUtYcWE2a1VBWjRDdHBiTmZ4UnRJMll5bHBZemNLVDNKNnlwN1BWUkthZTBfcDhCbzA4enJtYTcwbG9UVzBuSVlPTXJhanYxN2Fxd1I3djlhUjVKX1FQUk1hWjh4UFpBbjE0N1JDbzZBX2hodm5INTc3TlFTdHRjcUlJOU9rNnFXdW53c01lc01DQzFMS2MwQVFVSS15ZGstcXl6T2lGUQ?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-10-05",
+        "filing_date": "2026-10-06",
         "form": "8-K",
         "items": [
           "1.01",
@@ -143,23 +50,182 @@
         ],
         "category": "New Contract/Partnership",
         "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/857005/000119312526413124/d174191d8k.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1014739/000110465926113904/tm2627097d1_8k.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
       "prev_close": null,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Fail (ADR 3.4% < 4%)",
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (Avg $Vol $53M < $100M, ADR 2.9% < 4%)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$22.6 billion deal",
-        "discrepancy_note": ""
+        "primary_claim": "takeover confirmed by an 8-K filing",
+        "discrepancy_note": "The primary catalyst claims confirmation by an 8-K filing, but neither Finviz nor Google News sources mention an 8-K filing. All sources refer to the news as 'reports', 'talks', 'bid', or being 'near' a deal, not officially confirmed via an SEC filing."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BRUN",
+      "price": 16.31,
+      "gap_pct": 13.82,
+      "pm_volume": 315869,
+      "avg_vol_10d": 1762337,
+      "avg_dollar_vol": 28743716,
+      "mkt_cap": 1201500855,
+      "rvol": 2.73,
+      "adr_pct": 8.11,
+      "category": "New Contract/Partnership",
+      "theme": "AI Cloud Deal with Cohere",
+      "reasoning": "Boost Run secured a **$525.6M AI cloud deal** with **Cohere**, driving **customer commitments** to **$2.6 billion**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 82,
+      "grade": "C",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Boost Run (BRUN) announced a **$525.6M AI cloud deal** with **Cohere**, triggering a **9.5% surge** in its stock. This new AI computing deal brings Boost Run's total **customer commitments** to over **$2.6 billion**. The agreement includes **prepayments** with **conditional refund rights** for BRUN.",
+        "impact": "This substantial contract significantly expands BRUN's revenue visibility and strengthens its position in the competitive AI computing market, signaling strong demand for its cloud services."
+      },
+      "analysis_details": "• **Impact**\nBoost Run's stock surged **9.5%** today following the announcement of a significant **AI cloud deal**. This new agreement, specifically valued at **$525.6M**, is with AI partner **Cohere** and reportedly includes **prepayments** with **conditional refund rights**. The deal is a major contributor to Boost Run's total **customer commitments**, which now top **$2.6 billion** for AI computing.\n\n• **Strategic Value**\nSecuring a **$525.6M** contract with a key AI player like **Cohere**, pushing total commitments past **$2.6 billion**, materially enhances BRUN's long-term revenue growth and market share in the AI computing sector. This strategic partnership solidifies BRUN's role as a critical infrastructure provider for AI development, with the prepayment structure offering immediate capital and commitment certainty.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Prepayments come with conditional refund rights in Boost Run (BRUN)'s cloud deal with Cohere. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQbFBLYmhaNXZaTnZZdFc1SGNvTGJHZkZkOWtDOVFwOEctUGhVaEowMGpRbFJ1anRJZUtGd0tmaTdTcEdLTTNqaUFoTkJiNVVmU21sTS1HMGphTXNSVkdFRmg1MFJjdVNQUjV1YnZqLW9Zb0psRmhDWXVSeVFPNFRNOGVQeU9yQ2QzWkF2bXlrMjc2bGswcXFvSUF4NE1KR0RLalZIMw?oc=5"
+        },
+        {
+          "title": "A COO at Boost Run (BRUN) must repay award payments if he resigns within 24 months of the first payment. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQR1NYN1ZFVENnb25oUElKTGlxME9hM29IZHVkYl9CSm12d1dWRWVWU3o2dS1HS3h1Qm8wWjhWdjhUM0tZWGlSUHBrVXhER241LWpsSGhyX2c0MFFCVEtYWXJnRHNQUjlIMDdySnlNOHE2Sk9wNnZwQWxNNTRJNWFSLW9vMnhqRl9PajNPNE9xWF9mWGp1RkRPV2s2UWNMSVBJSlV6eA?oc=5"
+        },
+        {
+          "title": "Boost Run stock surges 9.5% on $525.6M AI cloud deal - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcWdkWXppVF9YM05ac29LUmE2WDVWUzVPWTAzdURuY1NYMnhjYTdmdWpuQ3pPbGZCWHZqeU5WelFoV3ZBZndYLUF2cnVlNDdoTDBQRmV1VmtXekZDN0tNR2dtYmh1OXJJbWFZRndVaW9VQURwSnE5bnJGWGxHVl9nYkpZQTdpajRpYlRkSDhWSm1QZjBod2tBM1NzQlNmb2E1eElJbzhwczI?oc=5"
+        },
+        {
+          "title": "Customer commitments to Boost Run top $2.6 billion after a new AI computing deal - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQR1ZsTTJIZEN1eDA3VVdUenlma093aVpUU0Fkc18xSGFUWGxpbXhWT2JhNWFLRk5IMkpZbDQxbm1aY3FrTnBfbWdHQTVPRDYxQnRHTzFpNTIyWDZCRkhZdGd2UENFTkRiMVlqaTllZDlaNEZRUXk4TjlpalIzR29JVEtHYldpTEhtcFRBcjVCNWlYQ1hGUEJEbGJ4OTlEWE1HLXl3R05ScDI1Zkd1MXp0ZXc5T21ZdEk?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-06",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/2090646/000149315226045861/form8-k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "AI Cloud",
+      "technical_status": "Fail (Avg $Vol $29M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$525.6M AI cloud deal with Cohere",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News) confirms the $525.6M deal (articles [2], [3]) and Cohere as the partner (article [4]), but dual source confirmation is not met."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CEG",
+      "price": 290.3,
+      "gap_pct": 8.47,
+      "pm_volume": 384545,
+      "avg_vol_10d": 2895079,
+      "avg_dollar_vol": 840441434,
+      "mkt_cap": 94819737445,
+      "rvol": 1.28,
+      "adr_pct": 3.61,
+      "category": "New Contract/Partnership",
+      "theme": "Google Nuclear Power Purchase Agreement",
+      "reasoning": "Constellation Energy (CEG) announced a nuclear power deal with Google, which will create about 7,200 construction jobs, driving momentum.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Constellation Energy (CEG) has entered into a new **nuclear power deal** with **Google**, a development that is expected to create approximately **7,200 construction jobs**. This new information regarding the job creation impact of the previously reported 20-year power purchase agreement provides a fresh angle on the partnership.",
+        "impact": "This strategic partnership with a major tech player like Google strengthens CEG's position in the clean energy market and underscores the increasing demand for reliable, carbon-free power for large-scale operations."
+      },
+      "analysis_details": "• **Impact**\nConstellation Energy (CEG) has confirmed a **nuclear power deal with Google**, which is projected to generate roughly **7,200 construction jobs**. This partnership involves a **20-year power purchase agreement** that Constellation Energy previously announced last week.\n\n• **Strategic Value**\nThis agreement with **Google** highlights the growing demand for clean energy, particularly nuclear power, from major corporations. The creation of **7,200 jobs** also suggests significant investment and expansion within CEG's nuclear fleet, reinforcing its role as a key player in the clean energy sector and potentially attracting further institutional interest in the company's long-term growth trajectory.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "VST Vs CEG: Which Nuclear Power Fleet Stock Is A Better Bet?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/energy/articles/vst-vs-ceg-nuclear-power-075728216.html"
+        },
+        {
+          "title": "Google’s nuclear deal with Constellation will create about 7,200 construction jobs - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxObUpFcDM5MVhCdGNJZG5TbVUxb1lqeFNEcjlvVnkxWHVJU1pLQ25pR0tlc0w4OTVMUVphWGhtTmhGeWNSUXpZU3pRaEJ5VUpvaEZpdXZYdmNuSVQ4SE1iM2JmVE9oaUNDTncyQnVxRWFVWGZLVjZ1bEhiQnlyWVY2a1BWZXR4R1hCSkE1VnhiT19ySFZRNzU5MlhVMDQ3ME14RGhUZk9Ic29kQUdDS1dmbWlHYVhXR202NDVPTTJsZw?oc=5"
+        },
+        {
+          "title": "Your Vistra Stock Thesis Has One Loose End",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/vistra-stock-thesis-one-loose-154012091.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Fail (ADR 3.6% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "7,200 construction jobs",
+        "discrepancy_note": "Source B [4] (Stock Titan) explicitly states 'about 7,200 construction jobs'. However, none of the articles provided from Source A (Finviz News) mention this specific job creation number, nor do the other articles from Source B."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -174,649 +240,60 @@
       "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "RXO",
-      "price": 28.76,
-      "gap_pct": 23.01,
-      "pm_volume": 282992,
-      "avg_vol_10d": 1853223,
-      "avg_dollar_vol": 53298693,
-      "mkt_cap": 3855972832,
-      "rvol": 2.59,
-      "adr_pct": 5.25,
+      "ticker": "XNDU",
+      "price": 4.86,
+      "gap_pct": 7.52,
+      "pm_volume": 1047302,
+      "avg_vol_10d": 11557182,
+      "avg_dollar_vol": 56167905,
+      "mkt_cap": 1384416617,
+      "rvol": 0.6,
+      "adr_pct": 6.55,
       "category": "New Contract/Partnership",
-      "theme": "Acquisition",
-      "reasoning": "RXO is being acquired by C.H. Robinson in a **$5.8 billion** deal, as confirmed by an 8-K filing.",
+      "theme": "Quantum Production Partnership",
+      "reasoning": "Xanadu announced a new partnership to move its quantum components from lab prototypes into factory production, indicating progress towards commercialization.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
+      "conviction": 75,
       "grade": "C",
-      "finviz_theme": "Infrastructure",
-      "analysis_source": "gemini+edgar",
+      "finviz_theme": "AI AGI",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Freight broker **RXO** is being acquired by **C.H. Robinson** in a definitive agreement valued at **$5.8 billion**. This material contract was disclosed via an **8-K filing** on **2026-10-05**.",
-        "impact": "This acquisition signals a significant consolidation in the freight brokerage industry, likely leading to a re-rating of RXO's valuation to the acquisition price and potentially impacting the competitive landscape."
+        "catalyst": "A **new partnership** has been established to transition Xanadu's **quantum components** from **lab prototypes** to **factory production**.",
+        "impact": "This partnership marks a crucial step in operationalizing Xanadu's technology, potentially accelerating commercial scalability and market readiness of its quantum offerings."
       },
-      "analysis_details": "• **Impact**\nFreight broker **RXO** has entered a definitive agreement to be acquired by **C.H. Robinson** in a deal worth **$5.8 billion**. This material contract was officially disclosed via an **8-K filing** with the SEC on **2026-10-05**, confirming earlier news reports.\n\n• **Strategic Value**\nThis acquisition marks a substantial consolidation within the freight brokerage sector, providing **C.H. Robinson** with expanded market share and operational scale. For **RXO** shareholders, the **$5.8 billion** offer likely represents a significant premium, driving a re-valuation of the stock towards the acquisition price.",
+      "analysis_details": "• **Impact**\nXanadu has forged a **new partnership** focused on moving its **quantum components** from **lab prototypes** directly into **factory production**. This strategic collaboration aims to bridge the gap between early-stage development and large-scale manufacturing for its advanced quantum technology.\n\n• **Strategic Value**\nThis development signifies a pivotal move towards commercializing Xanadu's quantum technology, shifting from theoretical models and lab environments to tangible, manufacturable products. The ability to produce components at scale could dramatically enhance market penetration and solidify Xanadu's position in the emerging quantum computing industry, attracting further investment and potential customers seeking production-ready solutions.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "C.H. Robinson to buy Charlotte freight broker RXO in $5.8B deal - bizjournals.com",
+          "title": "A new partnership aims to move Xanadu's quantum components from lab prototypes to factory production. - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQNWNzblNLR1lhNm5CWEZIbnp0dTBiSDJETE1YcDA4bTc2N1UwZUZTc254c05TZmNKdWt0MUFOYjJ0d21jVVFTQWtnS09YTjM5anRNakVNU3NFX1BHemlteTlTR0pveFJtYnRiMGwzM0N4cnpqN2xCb2NKN2tHUmVMU2tNaC1nN1BMWmRZ?oc=5"
-        },
-        {
-          "title": "C.H. Robinson to acquire RXO for $5.8 billion - Transport Topics",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBJY0MzVDVfbGxxdFdhS3lqZDhGdmtQRkdCeUVldXJMZUpMUUFDZl84X2FpMHYxaG80U0lteHRXcWduSlhIZzg3Rlh6SXdNYldWbmhHLThVVmItSDhCY1Atb2YzTlh5Q21zRW5BeV9LUjZHQzJo?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTU9UdjNTSk5yM0dyRzZhUjBSSlZ1STBIXzJxRExYUmZiUm5RMVhwTDh0SXFUNHBWcS1BN0ZnMnZZNU93UkpOTWpGZEJZMmFOOWh5MGZ1SEV2WlZkWm9GR3c1M2lidzlIT3VLM3lXUUdfY0hLUWFmRG5SNFo4ZklGRlFxUFNkcFE2SEd2bEtjYms3bTZKZUtIWF8wWW1uaVFCY0ZBamRBaS1fWHU3bEE5S3hXaDl0c2s?oc=5"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-10-05",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1929561/000114036126038548/ef20083265_8k.htm"
-      },
+      "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
       "prev_close": null,
-      "industry": "Infrastructure",
-      "technical_status": "Fail (Avg $Vol $53M < $100M)",
+      "industry": "AI AGI",
+      "technical_status": "Fail (Avg $Vol $56M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$5.8 billion",
-        "discrepancy_note": "Source A (Finviz News) provides no information regarding the claim. Source B (Google News) consistently reports the acquisition value as $5.8 billion across multiple independent headlines, but since one source is empty, it does not meet the 'BOTH sources confirm' criteria for 'Verified'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "XP",
-      "price": 25.03,
-      "gap_pct": 16.42,
-      "pm_volume": 320870,
-      "avg_vol_10d": 8089218,
-      "avg_dollar_vol": 202473127,
-      "mkt_cap": 11115833905,
-      "rvol": 1.72,
-      "adr_pct": 3.71,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; likely a technical breakout or institutional flow driving market action.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 59,
-      "grade": "C",
-      "finviz_theme": "Fintech - Trading",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
-      },
-      "analysis_details": "• **What Happened**\nNews headline mentions **\"Responsive Playbooks and the XP Inflection\"** without detailing a specific event or financial catalyst. The lack of concrete information suggests the move is not tied to a clear fundamental development.\n\n• **Key Consideration**\nWith an **Avg $ Vol (20d) of $202M** and **RVOL of 1.7x**, significant trading activity is observed, potentially indicating a **technical breakout** or **institutional flow**. However, the absence of a discernible news driver increases the risk profile for this move.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Responsive Playbooks and the XP Inflection - Stock Traders Daily",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNU3VGN3FyU2VVaVRKempPVVJCaFVXS1Y4VXo3ZVpxUjVEZkl6OFdrLVUxYUZVY2JWZG1tdm91M0tPNGYtSVppNUViOWlxZ3ZqdHU3N0phN0lYT3NVQ2hJOERVU05yS2Rtb1U4WnNpXzJEamw5bVdZbTJHUjctSnFMNUstVVZiNjdyd09HRVc2MG53eTN4eGxjMG9OemtqT3MzTW1scW9NUVhtblNiY3JCZElsc01vTmFzYjdlMy1R?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Fintech - Trading",
-      "technical_status": "Fail (ADR 3.7% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "XP stock is surging 15% today",
-        "discrepancy_note": "Finviz News provides no information. Google News [1] mentions a '15% surge' but this claim is not explicitly confirmed by a second source."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "STNE",
-      "price": 11.01,
-      "gap_pct": 15.29,
-      "pm_volume": 437434,
-      "avg_vol_10d": 4825274,
-      "avg_dollar_vol": 53126267,
-      "mkt_cap": 2322829614,
-      "rvol": 1.03,
-      "adr_pct": 3.88,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $53M < $100M, ADR 3.9% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ITUB",
-      "price": 9.84,
-      "gap_pct": 14.55,
-      "pm_volume": 1177454,
-      "avg_vol_10d": 27410407,
-      "avg_dollar_vol": 269718405,
-      "mkt_cap": 98753665116,
-      "rvol": 1.85,
-      "adr_pct": 2.65,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (ADR 2.6% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found for ITUB, with price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SBS",
-      "price": 6.15,
-      "gap_pct": 14.31,
-      "pm_volume": 140885,
-      "avg_vol_10d": 6862243,
-      "avg_dollar_vol": 42202794,
-      "mkt_cap": 19033889232,
-      "rvol": 1.5,
-      "adr_pct": 2.58,
-      "category": "Upgrade",
-      "theme": "JPMorgan Reiteration of Buy Rating",
-      "reasoning": "Sabesp's stock maintains analyst support as JPMorgan reiterates its Buy rating with a USD 35.00 price target.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 33,
-      "grade": "C",
-      "finviz_theme": "Infrastructure",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "JPMorgan keeps its **Buy** rating on Sabesp stock, affirming a price target of **USD 35.00**.",
-        "impact": "The reiteration signals continued institutional confidence, potentially attracting sustained buying interest from funds following analyst recommendations."
-      },
-      "analysis_details": "• **The Firm & Rating**\nJPMorgan has **kept** its **Buy** rating on Sabesp (SBS) stock, simultaneously reiterating a price target of **USD 35.00**. This reaffirms the investment bank's positive stance on the company's outlook, providing continued analyst support.\n\n• **The Thesis**\nThis reiteration reinforces the positive investment thesis for SBS, suggesting that JPMorgan sees sustained value at the **USD 35.00** price target. While not a new upgrade or price target increase, it confirms existing bullish sentiment from a major financial institution, which can help maintain positive momentum and provide a floor for the stock.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "SBS stock reports 13.9 percent revenue growth in Q2 2026 - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxORUhFTGtzdWhnaV9fZWlURTNEOEVnT2piNU91WkQtY214RGVobXlLMTRaN2tmaHhwdWhUaFpuMVpBUzh2MjlUOHdQc1pJbXhMU19GN0VwYjdWMDdEQkJHcWd0cUFYV2ktLXlWVE8wc3RVaVRZUHBzTENlUUxfbnZ0NU1VcUZhMWNua1R6R0laaUZSQkM1ZlRaei1XbEhMTHlTOWVrNVJISXRlUjQ1a183UmhHUENsakJBcG80?oc=5"
-        },
-        {
-          "title": "JPMorgan keeps Buy on Sabesp stock at USD 35.00 - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxORTVSZHJST3V4dlRsalZiRlBQdlhQOEZtc1BhNkd4RGhKcXZ4RnFuSGdneWNjWWxMejRVY2FWemRYSG85NnVQS3NqeHVUb0tqaE1WNWFFV2wzeV9xdXJfamhpVkxxSjRVV1IyN3JZTWFYZm11SUJsWVVsNF9rckhidjQyamxwV2NaT04xVzQ2VnU5c3ZlOHlEMTI1YlplNjBMb3NsbzhObDNBZw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Infrastructure",
-      "technical_status": "Fail (Avg $Vol $42M < $100M, ADR 2.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "USD 35.00 price target",
-        "discrepancy_note": "Source B (Google News) confirms a USD 35.00 price target from JPMorgan, but Source A (Finviz News) does not mention this claim."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "INTR",
-      "price": 6.25,
-      "gap_pct": 14.05,
-      "pm_volume": 404611,
-      "avg_vol_10d": 5016600,
-      "avg_dollar_vol": 31353750,
-      "mkt_cap": 2411228786,
-      "rvol": 0.96,
-      "adr_pct": 3.86,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; any significant move likely stems from technical breakout or institutional flow dynamics.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
-      },
-      "analysis_details": "• **What Happened**\nNo specific company news or external catalysts directly related to INTR were reported in the last **24 hours**. The provided headlines detail unrelated news, including **DA Davidson raising target for Standex International stock to USD 350.00**, **Hana Securities keeping KRW 105,000.00 target for Posco International stock**, and **Brinker International stock gaining 3.95% on October 2**.\n\n• **Key Consideration**\nWithout a discernible fundamental driver, any significant price movement in INTR is likely attributable to **technical factors** or **institutional flow**. This absence of specific news introduces higher risk for momentum traders, with potential for a **gap and trap** scenario due to speculative trading.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "DA Davidson raises target for Standex International stock to USD 350.00 - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQSlUtVzdLeTZPZ3F2YnZ0VFRNZVBSbzBtNWhHS25SRjR6Q1Y1NW5HOTdFc2dsRFQ3ZHVWcUNnOXhWQjRURlVwU1FvZ3JLbkFFdjgtb09VVjBOdjYtWmhld1R2SS1oRjJFeF8wT01aQzdmbDlvckhuN2ZReHBhWjdxNG5haDlkSlhVdWVqN1Q2YkpYd3YtelZrLVlLVkJpcFJ6R1hNRWJnZEZMZVlmR2dnLS1WbUdoMXZUVmhLTF9kOWdaRDh3eklDQkh3?oc=5"
-        },
-        {
-          "title": "Hana Securities keeps KRW 105,000.00 target for Posco International stock - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNSnhwRkM2akVTRVdwRkRFSmFDSkJyYnhfMjdqNXlwME9GY3hiWHBmWFQ5SEoxVUtVXzJoU2NGRWRqQTVlYk5JY182cC0yelktLUU5OFNqdHc0WndlZzZWUGJRUWlSY0NvcWc1azJ1cUowaUNDNTdzR2xSdXJlZm5PZVJWcXRZVllNYUloZjhHaDNCTnJ0Mk8zRGc4cEd4NjFScHozRHlzZll4NDczUjNZWHBNMVc3TzNXX19WeTRITjctU2tEa1REbzVVUjk?oc=5"
-        },
-        {
-          "title": "Brinker International stock gained 3.95% on October 2 - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPTzU1ZjBXamFCRDJET2dxODRIV0FMRXhLY3ZzOGV5Y3l6dFlWTnZsUEtLcWQ5RkJKWlRmQkVyX0x2a190anpEWldxUTdNV1BMRVV2NG1DOEFaV0g4Rk1NZEdORkoweW9vcmtsUjB6WElHVzJxMDJ3anNJZEtxUlA4Wkx3MnFKT091emhDM2Z1SXJfeUlZem5HNHZ5RXZ4R1VNNVoyMkU0alpPamk5MmpCbWQ4bTJGUnl5MEJ5LWh6VFA?oc=5"
-        },
-        {
-          "title": "Oil States International stock stood at USD 8.22 after Q2 profit beat - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPRVY2aXBYeUlQb1ZEeHZEQ0ZiTlk0cnRIQkQ4c285YmtWdVpQdy1Rb2FOeXk2ZXk5TEZHWUYwNWdhWFdEWU9ZMUZUTnNIT0VFcmFYLWVPQ0lnNmxfNDdwUzFnWVhaMExWbFdyNFNHWUt3ckxGNS01SFltNDJUdlhlQlZYUVNqckg5aGJXUkRtc2FzMko0eGlCbUNHWlNZMmszcDM2NHlJYnpsTVdlYUdCMnhjQllLY2tKNXVUSXhnd2R2aWlyaFZFSVpHQUU?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $31M < $100M, ADR 3.9% < 4%)",
-      "verification": {
-        "status": "Verified",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; any significant move likely stems from technical breakout or institutional flow dynamics.",
-        "discrepancy_note": null
+        "primary_claim": "Xanadu announced a new partnership to move its quantum components from lab prototypes into factory production.",
+        "discrepancy_note": "Source A (Finviz News) reports '(none)', providing no confirmation. Source B (Google News) articles [2] and [4] confirm the claim, with [2] stating 'A new partnership aims to move Xanadu's quantum components from lab prototypes to factory production' and [4] identifying 'Multi-Year GlobalFoundries Manufacturing Partnership'."
       },
       "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "PAGS",
-      "price": 10.2,
-      "gap_pct": 13.08,
-      "pm_volume": 250527,
-      "avg_vol_10d": 3144712,
-      "avg_dollar_vol": 32076062,
-      "mkt_cap": 2503201431,
-      "rvol": 1.07,
-      "adr_pct": 3.45,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $32M < $100M, ADR 3.5% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BBD",
-      "price": 4.1,
-      "gap_pct": 12.33,
-      "pm_volume": 2195367,
-      "avg_vol_10d": 30241123,
-      "avg_dollar_vol": 123988604,
-      "mkt_cap": 38519285209,
-      "rvol": 1.77,
-      "adr_pct": 2.89,
-      "category": "Insider Buying",
-      "theme": "Insider Buying",
-      "reasoning": "Banco Bradesco insiders loading up shares signals strong internal confidence, driving BBD stock higher.",
-      "hypothesis": "Medium Conviction (RS Hold) — Insider conviction signal; look for base breakout.",
-      "conviction": 59,
-      "grade": "B",
-      "finviz_theme": "Fintech - Lending",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Banco Bradesco **insiders are loading up shares**, which has caused **BBD stock to pop** according to news.",
-        "impact": "This suggests strong internal conviction in the company's future prospects, potentially indicating upcoming positive developments."
-      },
-      "analysis_details": "• **The Buyer**\nNews reports indicate that **Banco Bradesco insiders** have been **loading up shares** of the company. This action immediately preceded a **pop** in **BBD stock**, as reported.\n\n• **Conviction Signal**\nThe move by insiders to **load up shares** acts as a strong conviction signal, suggesting those with direct knowledge of **Banco Bradesco's** operations and future plans are bullish. This often precedes positive company-specific news or improved financial performance, potentially leading to continued positive price momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "BBD Stock Pops As Banco Bradesco Insiders Load Up Shares - timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5CNnZJeXZYd3E5SHd1LTBNUV9fMDM1NmVPQlZKM01oaXVQNFRNN3AwNm1iSzNWTXZNWHg1azhoTVBSMUNhb0Q1OHNyVVFoNzJnODJwNmJJMHV4aW1GUGpJUlA1b1pRWE1VY1ZyV0tyRFh2ZEd4SXR0NkcyQWc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Fintech - Lending",
-      "technical_status": "Fail (ADR 2.9% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Banco Bradesco insiders loading up shares",
-        "discrepancy_note": "Source A provides no information. Source B's headline mentions 'Banco Bradesco Insiders Load Up Shares', which generally aligns, but lacks specific details (e.g., quantity, dollar amount, date of transactions) needed for a 'Verified' status, and only one source references the claim."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "NU",
-      "price": 15.08,
-      "gap_pct": 12.26,
-      "pm_volume": 3584316,
-      "avg_vol_10d": 82316663,
-      "avg_dollar_vol": 1241335278,
-      "mkt_cap": 64873408135,
-      "rvol": 0.98,
-      "adr_pct": 3.23,
-      "category": "Thematic Narratives",
-      "theme": "Global Expansion & Buy Rating",
-      "reasoning": "Nubank is surging on news of global expansion plans, further bolstered by a 'buy' rating from Goldman Sachs.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Fintech - Neobanks",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Nubank (NU) is experiencing a stock pop driven by reports of its **global expansion**, which is seen as reframing the company's story. Concurrently, **Goldman Sachs** predicts **upside** and holds **buy ratings** on **5 stocks**, including NU.",
-        "impact": "The combination of a new growth narrative via global expansion and institutional validation from a major investment bank suggests sustained momentum and potential for re-rating."
-      },
-      "analysis_details": [
-        {
-          "title": "The Narrative",
-          "body": "NU's stock is popping as its **Nu Global Expansion** efforts are reported to be reframing the company's growth story. This news includes **Nubank denying a Monzo deal** while simultaneously confirming its intent to **expand globally**. This strategic move represents a significant shift in market perception for the Latin American banking player."
-        },
-        {
-          "title": "Explosiveness",
-          "body": "The momentum is further amplified by a **Goldman Sachs** prediction of **upside** in **5 stocks**, with NU listed among them and showing a prior day's movement of **+1.05%**. Goldman Sachs explicitly holds **buy ratings** on these companies, adding institutional conviction to the global expansion narrative. The combination of an internal growth catalyst and external analyst endorsement creates a powerful upward catalyst."
-        }
-      ],
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "NU Stock Pops As Nu Global Expansion Reframes The Story - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBPcjhwM1E5dHVaMVlGR2VYemxlZmxlc1NzZW16aUp2VDZjNWMzeGN6M0VhdnE3cmtQNmIycU5uVHhXN1lPVjZrUTJVTDJxMC00dGZvNFcyZmV2QjR2TGYwUTRaTGxYTHNWbnh4UWhNME9fS28yRTdz?oc=5"
-        },
-        {
-          "title": "NU Stock Pops As Nubank Denies Monzo Deal, Expands Globally - timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE05dmp1MjlWSnB5cU0yTFNaM0NyY0phSXB5N0J6VnFYSjA3VDVESnhJMmxpSF9pX1V4Q1Y5UmQ3d0JydnNPRGhOTWNOVHhvZWtsLS1vWGxMcXduMGN2cXhaeWotbkhYSjBUeWtzbmdmVGhqcllCLW1hdQ?oc=5"
-        },
-        {
-          "title": "Goldman Sachs Predicts Upside in 5 Stocks",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-predicts-upside-5-040928501.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Fintech - Neobanks",
-      "technical_status": "Fail (ADR 3.2% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "'buy' rating from Goldman Sachs",
-        "discrepancy_note": "Finviz mentions 'Goldman Sachs Predicts Upside in 5 Stocks' but does not explicitly confirm NU is one of them, nor does it explicitly state a 'buy' rating for NU. Google News sources do not mention Goldman Sachs or a buy rating."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CRML",
-      "price": 7.78,
-      "gap_pct": 10.67,
-      "pm_volume": 845854,
-      "avg_vol_10d": 13882889,
-      "avg_dollar_vol": 108008876,
-      "mkt_cap": 1033366050,
-      "rvol": 0.36,
-      "adr_pct": 6.87,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
         "gate_mkt_cap": false,
         "gate_adr": true
       },
@@ -825,53 +302,146 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ABEV",
-      "price": 3.3,
-      "gap_pct": 10.37,
-      "pm_volume": 140866,
-      "avg_vol_10d": 16869550,
-      "avg_dollar_vol": 55669515,
-      "mkt_cap": 46908479342,
-      "rvol": 1.31,
-      "adr_pct": 2.0,
+      "ticker": "PRME",
+      "price": 3.45,
+      "gap_pct": 7.45,
+      "pm_volume": 194962,
+      "avg_vol_10d": 3773840,
+      "avg_dollar_vol": 13019748,
+      "mkt_cap": 582219733,
+      "rvol": 1.4,
+      "adr_pct": 7.83,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
+      "theme": "Analyst Rating (Maintained)",
+      "reasoning": "Citizens maintained Prime Medicine's Market Outperform rating, indicating consistent analyst sentiment without a new upgrade catalyst.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
       "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "finviz_theme": "Biotech - Gene Therapy",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Citizens **maintained** Prime Medicine's stock rating at **Market Outperform**. This action confirms existing analyst sentiment.",
+        "impact": "This is not a new catalyst; it simply reiterates prior expectations, potentially offering mild support but unlikely to drive significant momentum independently."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **What Happened**\nCitizens **maintained** Prime Medicine's stock rating at **Market Outperform**, indicating no change in their investment stance. Additionally, option activity highlighted a **Jan 2027 7.000 call** for PRME.\n\n• **Key Consideration**\nWhile an analyst rating maintenance provides a degree of validation for the stock's current position, it does not introduce a new catalyst for price momentum. Without an upgrade or a price target adjustment, this news is more reflective of ongoing sentiment rather than a fresh driver for significant movement.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "PRME Jan 2027 7.000 call (PRME270115C00007000) Interactive Stock Chart - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5kbGpDUVlTYmMxTkZISnZ2dXRyVTYzZ0tySXAyZVRId2kwZ2RJcFZfV0ZXcVpsVktZZkNNR2h6RWhXNU0xOGFDMUMtb0pTWU56aUVsUDVCTGRNbjlDZFVBV1NhRGx3bU5WYXFacDZn?oc=5"
+        },
+        {
+          "title": "Prime Medicine stock rating maintained at Market Outperform by Citizens - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNWUd1OEdzYlVyQWRScTJZNzRqUEp4RUJkMi1ONms0aHluZ1dib1pRX3pjREhsVUs2cXZtTy1nZjdaeTRXTVJLR0taNjk5dXJmcjFrS09rY1hZcTc0aDd3MncxaEZpMF92VE5vUUlSS05RYWxtTDUtQmpXVXd2ZFZmVFpBT0lkREtXeUdHeEpEdmo3a3dpNFJoTHNBcGhHbmpIbGNGZThoY1djemtlSUluV1B3RV9wSi1RZFU3Uk41QjNHZXluX3RBLTJyRQ?oc=5"
+        }
+      ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
       "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $56M < $100M, ADR 2.0% < 4%)",
+      "industry": "Biotech - Gene Therapy",
+      "technical_status": "Fail (Avg $Vol $13M < $100M)",
       "verification": {
-        "status": "Verified",
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Prime Medicine's Market Outperform rating was maintained by Citizens.",
+        "discrepancy_note": "Source A (Finviz News) contains no information regarding the claim. Source B (Google News) headline [2] explicitly states 'Prime Medicine stock rating maintained at Market Outperform by Citizens - Investing.com', which confirms the claim, but since Source A does not corroborate, it is marked as a Discrepancy per the auditing rules requiring confirmation from BOTH sources."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PENN",
+      "price": 15.9,
+      "gap_pct": 5.3,
+      "pm_volume": 55235,
+      "avg_vol_10d": 3596645,
+      "avg_dollar_vol": 57186656,
+      "mkt_cap": 2024405550,
+      "rvol": 0.75,
+      "adr_pct": 3.9,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "PENN stock outperformed competitors without specific news, suggesting technical momentum or significant institutional order flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Consumer - Gaming",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests potential for a **low float squeeze**; however, this carries a high risk of being a **Gap and Trap**."
+      },
+      "analysis_details": "• **What Happened**\nPENN Entertainment Inc. stock **outperformed competitors** on a recent strong trading day. However, no specific fundamental news or company-specific announcements were identified from the available headlines to explain this outperformance. The company has an upcoming **Q3 call on Nov. 5**, which is not a catalyst for today's price action.\n\n• **Key Consideration**\nGiven the absence of direct catalysts, the stock's outperformance likely stems from **technical factors** or **institutional order flow**. Such moves, lacking fundamental backing, may be driven by **short-term momentum** or **low-float dynamics**, and are often prone to rapid reversals if sustained buying interest does not materialize.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "PENN Entertainment Inc. stock outperforms competitors on strong trading day - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQdklDWnB2djZ6N251WEVLTjVPYWN3SFBMWV9JMnB5U1dMQWxXdENEMkUtN2FyMW9qeDhTNTVPT0F5c0hoSHZuTzlCUlBkWmppM3BsUm1tWEZLb3JaaFZ4dmRMN2YyVjZaWUdnTmEwX0U0M1pUMmxFMV82WFIyRUlZVGtQeExPSkxQZVlYTi00ZXdrazZuanppYkJhTGFYNGM4MS16elRISmltN0x1bm9ETWc5VmZ6bHRoVGlzSEsxTDZRUWU0WmY1UGQtZFN0UlM1TDM0cDFzbnZ2MHZ3aFBnc3VCS2VrWjQ?oc=5"
+        },
+        {
+          "title": "Anyone can listen to PENN Entertainment's Q3 call on Nov. 5. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQMWJWWUZ4emtGaGI2VkFOLXNSenQ5a1p0U3hCakFQcGNtYm5DUTRGUURQS1hOanVyYmN2d05PV3JFUy1TTUpmUGhzTF9mLVJkOHJqMmVSWTY3Y295QzQ0UlRLUUR4TGhILW5xOU5xekFiQnVNcFFoRnhjcnMxQzhWZEtuSlZ1eWpJMmZ6MTIzcE12MjdBeURsSk0wOXpVTzRRT1dieHcwSC1aWmNxdExGYlZjMzU?oc=5"
+        },
+        {
+          "title": "Meet the 28p penny stock with a £1.20 broker target! - uk.finance.yahoo.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1tc2M1UzN1TFZtMTMtcmJqZnVmSHY2SkxYeDBDc3g5NXJlNDhBSm55MW4yZWJIRVZZV05EQ3I3VlpRWndGTEg0bjhkYjB3UXNpT2dxbWM4QXAyUzktcE5mRWxhZ0ZTTEdDblJhZ3dSVGpTTHU3Ym5pa1lKdw?oc=5"
+        },
+        {
+          "title": "Penny-Stock Bet on Athabasca Yields 6,500% Gain for Ninepoint - Bloomberg.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQVndodGVzcktuU3M4VVJTZ0VRSDRHYXkyeW1pcDBLMWIwa1lQSlhYcWdrcG90c3R0dkxIUnVBTE9CZHF3Ym5kLXdlZWJOb0g3OV9SZmpybEFzR2V5Tmx1M0huSTN2ZVFKNXF2Y3ZrYWJ2SDNlNXFIOExvU0Y1ajFCRWhOOWFpMGh2cDdpUWV2aFJhQ0NYVGhWY2pHbEh1d3o0MkhRSmlWQUk0SWhsRnhib1dSaG11RWtqNGtJ?oc=5"
+        },
+        {
+          "title": "Stock Up, Stock Down (10.5.26) - Black Shoe Diaries",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOTWhiWlB2YWx5QUMyRHU5a09EeVN3UnBXZTNzSDZPbTJ1OS0ybmQ2bXNHUERWTURKd0xJZll1MmFWeDBuN2UxLXA5QTN2b3F0RjZtVUNGS3lpdHQtdjNDRTQwRUZ6Ujk5cEZLTFR3UVNRM2pDbHRLV2NQdnpGdmV0Y3BUSTIweUhCbHlUb2FJOA?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "prev_close": null,
+      "industry": "Consumer - Gaming",
+      "technical_status": "Fail (Avg $Vol $57M < $100M, ADR 3.9% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
         "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": null
+        "primary_claim": "PENN stock outperformed competitors",
+        "discrepancy_note": "Source B (Google News [4]) states 'PENN Entertainment Inc. stock outperforms competitors on strong trading day', directly supporting the claim. However, Source A (Finviz News) contains no information to confirm this claim. Since both sources do not independently confirm the claim, it is marked as Discrepancy."
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": true,
         "gate_adr": false
@@ -881,421 +451,46 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "CIG",
-      "price": 2.36,
-      "gap_pct": 9.77,
-      "pm_volume": 162144,
-      "avg_vol_10d": 4289308,
-      "avg_dollar_vol": 10122767,
-      "mkt_cap": 7300983041,
-      "rvol": 0.75,
-      "adr_pct": 2.64,
-      "category": "Others",
-      "theme": "Credit Rating Affirmation",
-      "reasoning": "CIG's stock gained after Moody's affirmed its AAA.br rating, signaling financial stability and investor confidence.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Energy - Oil & Gas",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Moody's confirmed its **AAA.br rating** on CIG stock on **2026-10-04**. The rating affirmation led to CIG stock gaining **2.14 percent**.",
-        "impact": "Maintaining a top-tier credit rating signifies strong financial health, which can positively influence investor sentiment and potentially lower borrowing costs for the company, supporting price momentum."
-      },
-      "analysis_details": "• **What Happened**\nMoody's, a leading credit rating agency, formally kept its **AAA.br rating** on CIG stock, a crucial affirmation of the company's financial stability. Following this announcement, **CIG stock gained 2.14 percent**, reflecting positive investor reaction to the sustained top-tier rating.\n\n• **Key Consideration**\nThis affirmation removes potential uncertainty regarding CIG's credit profile and reinforces its attractiveness to investors seeking stability. The continued **AAA rating** can support CIG's access to capital markets and may provide a base for sustained positive momentum, particularly if the broader market values financial resilience.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Moody's keeps AAA.br rating on CIG stock - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNUHZLVFYyQ09jekZGYnlrYUNrQUo0Ukt1S1V6eG1mVmpUNGU3cmtkcXY2M05iWkt4NUdYNmpGYUdOWFFCMHhPU0c4TmxzWmZvVXZlWkNEZGZIdGM5dUt2RzFHbjVvTEJ4N3htbUpXa2FXTHZDZk9YYWhVTmJNQm15b3NjZEF4MzRxandwSnNpRUdUeHZYR0ptTEFFeTQ2cEVa?oc=5"
-        },
-        {
-          "title": "CIG stock gained 2.14 percent as Cemig kept its AAA rating - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMmlxSEpvUk94T0ZiTHJlMVhhYk1CdlE0LWtCa3Q5NWM3NDcyRlZkc0x3eVlqckN6NlVQamVuLTBVWlZvMl9fdW5PTU50X3RBNjFtRWY3dUctUTJJWlk0TEEyZG5OMENqQnlhMmNIa3ZjMWI0YVNhRl9ZWUZCMEJOel9RaTZBZTdBQmF5UFktMzJlN1dzRmpNZERmZURhc2RuWlpYOHVPSUp1X0F6enhySHZZVWVlLXZ1LTFHenVB?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (Avg $Vol $10M < $100M, ADR 2.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Moody's affirmed its AAA.br rating",
-        "discrepancy_note": "Source A (Finviz) contains no information regarding the rating affirmation. Source B (Google News) confirms the claim with 'Moody's keeps AAA.br rating on CIG stock' [1] and 'Cemig kept its AAA rating' [2], but confirmation from both sources is required."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "PBR",
-      "price": 23.68,
-      "gap_pct": 9.36,
-      "pm_volume": 2165839,
-      "avg_vol_10d": 20385566,
-      "avg_dollar_vol": 482730203,
-      "mkt_cap": 132600880892,
-      "rvol": 1.1,
-      "adr_pct": 2.37,
+      "ticker": "CLF",
+      "price": 12.81,
+      "gap_pct": 5.04,
+      "pm_volume": 173668,
+      "avg_vol_10d": 17626056,
+      "avg_dollar_vol": 225789777,
+      "mkt_cap": 6960588368,
+      "rvol": 1.44,
+      "adr_pct": 4.76,
       "category": "Upgrade",
-      "theme": "Wall Street Zen Upgrade to Strong Buy",
-      "reasoning": "Petrobras stock gained momentum after Wall Street Zen upgraded its rating to **Strong Buy**, indicating positive analyst sentiment and potential for further re-rating.",
+      "theme": "JPMorgan Price Target Raise & Project Showcasing",
+      "reasoning": "JPMorgan raised CLF's price target to $13.00 following the company hosting U.S. Secretary of Energy for its GOES expansion project.",
       "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 32,
-      "grade": "B",
-      "finviz_theme": "Energy - Oil & Gas",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Wall Street Zen upgraded Petrobras stock to **Strong Buy** on **2026-10-05**. This positive analyst sentiment follows an **oil discovery** on **2026-10-04** which saw the stock gain **3.19 percent**.",
-        "impact": "The upgrade suggests a potential re-rating for PBR, potentially attracting further institutional interest and driving momentum after the recent oil discovery."
-      },
-      "analysis_details": "• **The Firm & Rating**\nOn **2026-10-05**, Wall Street Zen upgraded Petrobras stock to **Strong Buy**. This re-rating from the research firm signals a shift in perception, providing a fresh catalyst for the stock.\n\n• **The Thesis**\nThe upgrade highlights Petrobras's perceived **high growth momentum** and a **breakout setup**, suggesting underlying strength. This positive sentiment follows the stock's **3.19 percent** gain after an **oil discovery** on **2026-10-04**, reinforcing the positive trajectory.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Kolon ranks among low-PBR names: Kolon stock sits 73.30 percent below its high - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPUzJtWl8zTUQ4Q29lQWRpaDdwTEE5M09CT25WcW90cWdxZTRrSEozUkxjMXRsak1ULUpEVFZSajBfNkNVWXZGV0t3ZU54VE80MmVhQ3N4bWNKckwtR01QbG5yS3JtN1FsQjJKSnRxQllOSWRnODd0eU1wQXctN3B1Wk1oMHZoa2lma3FpNnd5aHRVeGx0a2tLVVRZakVGQTZabDFmWDJRS0V3UnhvZG5JSjE3MHJXcS15bWJ2VlVXSWt6cDNVOFlYUHNUaw?oc=5"
-        },
-        {
-          "title": "Petroleo Brasileiro ADR (NYSE:PBR) Combines High Growth Momentum With a Breakout Setup - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOZ0F4VnU5QmNZVXp6TEVmOUFEQ0NkMkhQMnd6NldEdzhLd3ZuMG1hSzdOTFVGY3NsajJuLWhleENuamx2c3N4TnVkR3duRXRqSUNIbDktM0pNS2tOTDhRWFF3bWtxWkJtT0g3cHZ2NkYtZVRGYVVHMThzUzlva3QzeDFXY19Kb0s0MG40WlZnbHRJNE9uWTBheUhVbkgwbzZ3XzNGT1lFdkY2YTdJSkw1M2dQVFZfSEt1bXpPSzg1N2xmTW9ERHVsNnJqRkRCWGM?oc=5"
-        },
-        {
-          "title": "Wall Street Zen upgrades Petrobras stock to Strong Buy - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPRnBOUWRpZEtBQndheDNHekt1Qm5jaXV6X3hLaGh5WEdVNDhyTE9NSzYwV2h0VEM1b0dnUnZXU2FOSG83aUFsc3hKS1psbUxicUI0YmdXV3Y3UWJXeXdyN3p1MGJPMXFKVEgxaURDS2EzbkJJYl9ia21SdmNoV1pDSzV1VENFUHlfeml0aVpaZzUtNXVBOUxJc0tPS0J5Z2ZNSmhna2FFTzJyQzZMZFJFOF81NThoZ1ZE?oc=5"
-        },
-        {
-          "title": "Petrobras stock gained 3.19 percent after an oil discovery - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNTURRZG5WYU9hVFowNkhwV1hFVWZ5cjBiaHA1V016N3ozdTBmcjFHb3dTQmpBSVoza2xYQURHVEtOM0EtRV8tbk5VdG9mSDVzV3I2WVBuaG9hV3Nxb3hCeUR6ZGM1UkRveXd5ampCd1JNc2JHSmE1eFo0LV8tQU5lWXVrUmM3ejRBY0E5ZTFnUW9NQ1RoRkxncU81QUFlY1RvZmEtaHlQS1NRNFZ3LU9NenlSeEE3LTZkRVdrQmJB?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (ADR 2.4% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Wall Street Zen upgraded its rating to Strong Buy",
-        "discrepancy_note": "Source A (Finviz News) contains no relevant information. Source B (Google News, headline [3]) mentions the upgrade to 'Strong Buy', but it is not confirmed by both sources."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "PAX",
-      "price": 11.07,
-      "gap_pct": 8.42,
-      "pm_volume": 51907,
-      "avg_vol_10d": 906553,
-      "avg_dollar_vol": 10035542,
-      "mkt_cap": 1647831190,
-      "rvol": 0.96,
-      "adr_pct": 2.45,
-      "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "PAX is moving in sympathy with NovoCure (NVCR) following its Japan approval for **Optune Pax** and strong Q2 earnings.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Medical Devices",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "NovoCure (NVCR) received **Japan approval** for its product **Optune Pax**, and reported **Q2 2026 earnings** where **Optune Pax** was a primary driver of **recovery**.",
-        "impact": "Secondary. PAX's move is correlated to NVCR's positive developments regarding a product sharing a similar name, suggesting either an indirect relationship or market confusion."
-      },
-      "analysis_details": "• **What Happened**\nNews headlines indicate that **NovoCure (NVCR)** secured **Japan approval** for its product **Optune Pax**. Additionally, **NovoCure** experienced a breakout following its **Q2 2026 earnings**, with **Optune Pax** specifically cited as **driving recovery** for the company.\n\n• **Key Consideration**\nPAX's movement is likely a sympathy play or misidentification, given that the reported news directly pertains to **NovoCure (NVCR)** and its product **Optune Pax**. Investors should discern if PAX has a direct commercial or strategic tie to **NovoCure** or the **Optune Pax** product to assess the sustainability of any momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "NovoCure stock gets Japan approval for Optune Pax - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOTHVQaDlsLWdNYVlGZWNjZ0tJTkRvRkJzejNiWGxEYlBFUVNiaTVnZHBqVHc0S25sWGF0dEVpZkdCdVhyRV9DNExqdEhGaDQ2RXdRX3NvOGdMTXNudm0yOTBadTJVYVBuaHhCUFFINWJoc0o1UVZtMHhDcGRpc0x3TGo5bVhpT29Ncm5uaWk5bzB3cm52SHNOUTBzdjg1TDIxN1lyT0dmSUVGRUJNVTNNam13?oc=5"
-        },
-        {
-          "title": "NovoCure (NVCR) Breaks Out on Q2 2026 Earnings - Optune Pax Driving Recovery - TradingKey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNQkd2NE9jMFJlYzBFMmRHeFBqeHVGczgyYlRVLXg4V1hCZHB0aWpnXzIzclNRXy1oSnJ6dTdkdUFaZTN6a01WdEdCWmtrNFEycnFnYVBjZTZEcFNGRTNNOVd1UXFsQWZNRExPZFk2ODJwMjQ3VkJEajJ0bXEwSVFjX3dnTVdyWDY1aWNWcHZzYkZZejczSFhqNXpTR05xNkQ3TUVjb0h6RHlwVmF4Sk5KaGtuQXp3MncwUGRtVUpVcktyLWNrQlo3Sk1R?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Medical Devices",
-      "technical_status": "Fail (Avg $Vol $10M < $100M, ADR 2.5% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Japan approval for Optune Pax",
-        "discrepancy_note": "Source A (Finviz) does not mention the Japan approval for Optune Pax. Source B (Google News) explicitly confirms 'NovoCure stock gets Japan approval for Optune Pax'."
-      },
-      "gates_passed": 1,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "PBR.A",
-      "price": 21.25,
-      "gap_pct": 8.42,
-      "pm_volume": 1950589,
-      "avg_vol_10d": 7391357,
-      "avg_dollar_vol": 157066336,
-      "mkt_cap": 132600880892,
-      "rvol": 1.18,
-      "adr_pct": null,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (ADR 0.0% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found for PBR.A.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "XRPN",
-      "price": 42.6,
-      "gap_pct": 8.07,
-      "pm_volume": 180928,
-      "avg_vol_10d": 2019452,
-      "avg_dollar_vol": 86028655,
-      "mkt_cap": 1245277706,
-      "rvol": 7.51,
-      "adr_pct": 9.93,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $86M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ALVO",
-      "price": 5.86,
-      "gap_pct": 7.52,
-      "pm_volume": 57863,
-      "avg_vol_10d": 1066422,
-      "avg_dollar_vol": 6249233,
-      "mkt_cap": 2127851369,
-      "rvol": 0.52,
-      "adr_pct": 4.89,
-      "category": "FDA",
-      "theme": "FDA Approval - Capacity Expansion",
-      "reasoning": "Alvotech received FDA approval to double capacity for its Humira alternative, significantly expanding U.S. supply and market potential.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 20,
-      "grade": "C",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "**Alvotech** secured **FDA approval** on **2026-10-05**, enabling the company to **double its manufacturing capacity** for a **Humira alternative**. This approval specifically targets **U.S. supply**, indicating a major push into the lucrative American market for biosimilars.",
-        "impact": "This development significantly enhances **Alvotech's** competitive positioning and market share potential in the biosimilar space by substantially increasing supply capabilities for a high-demand alternative."
-      },
-      "analysis_details": "• **The Drug**\n**Alvotech** has received **FDA approval** allowing it to **double capacity** for producing a **Humira alternative**. This key development directly impacts the company's ability to supply the **U.S. market** with a crucial biosimilar drug.\n\n• **The Significance**\nThe **FDA approval** for **doubled capacity** on a **Humira alternative** for **U.S. supply** represents a significant structural change for **Alvotech**. This expansion suggests a substantial increase in potential market penetration and revenue streams, positioning the company to capitalize on the multi-billion dollar biosimilar market for immunology drugs.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "FDA approval lets Alvotech double capacity to make a Humira alternative for U.S. supply - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNb1dlVDNwN1hSek9ydjZZekNGMGdRZTFKdmx0MlJLR1F5NmJVQTNteXRDN0Zjb0wwSkJ1VndFaG5BRFZGbnl5Nm9lSVdGaXA5MzNWQzhySFZLUFdEOExWTmNQZDV3Q1FIelM2Uy1jLWRFYnU0c0dGVXVPMGhySmdIX1dTUTEwNW9EaHUxNHFRdEo1emhXalhXR2x2RUpQTlRvRjVGR1l5WlBaYVdFYUtQMmhnUFR4QS1PN2c?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (Avg $Vol $6M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Alvotech received FDA approval to double capacity for its Humira alternative.",
-        "discrepancy_note": "Source A (Finviz) contains no information. Source B (Google News) mentions FDA approval for additional/doubled capacity in some articles, but the lack of confirmation from both primary sources (Finviz and Google News as a collective, not individual articles within Google News) means the claim cannot be marked as 'Verified'."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "GGB",
-      "price": 5.35,
-      "gap_pct": 6.79,
-      "pm_volume": 210690,
-      "avg_vol_10d": 11870639,
-      "avg_dollar_vol": 63507919,
-      "mkt_cap": 9245198518,
-      "rvol": 1.78,
-      "adr_pct": 2.88,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 59,
-      "grade": "C",
+      "conviction": 33,
+      "grade": "A",
       "finviz_theme": "Materials - Metals & Mining",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+        "catalyst": "JPMorgan raised its target for Cleveland-Cliffs stock to **USD 13.00**. This follows Cleveland-Cliffs' **GOES Expansion Project** at Butler Works, a **$200 million project** set to expand steel production for power-grid transformers by up to **25%**. The company hosted U.S. Secretary of Energy **Chris Wright** and other government officials to showcase this strategic project.",
+        "impact": "The price target increase combined with significant government interest in a strategic expansion project signals strong institutional conviction and potential for re-rating, enhancing momentum and investor confidence."
       },
-      "analysis_details": "• **What Happened**\nThe headline indicates that Gerdau stock **gained 4.16 percent** on **2026-10-04**, closing **above its 200-day moving average**. This movement suggests a technical breakout or shift in momentum rather than a response to specific fundamental company news.\n\n• **Key Consideration**\nGiven the absence of a discernible fundamental catalyst, the **4.16 percent** gain is likely driven by technical factors, such as a **200-day line breakout** or potential institutional flow. This type of move, particularly with a **1.8x RVOL**, carries a higher risk of being a \"gap and trap\" scenario without underlying news support.",
+      "analysis_details": "• **The Firm & Rating**\nJPMorgan has issued an analyst action, raising its price target for Cleveland-Cliffs stock to **USD 13.00**. This re-rating reflects an updated valuation or outlook from the institutional firm, directly impacting investor sentiment and potentially attracting new buying interest.\n\n• **The Thesis**\nThe upgrade's underlying thesis is bolstered by Cleveland-Cliffs' strategic **$200 million GOES Expansion Project**, designed to increase steel production for critical power-grid transformers by up to **25%**. The involvement of U.S. Secretary of Energy **Chris Wright** and other government officials at Butler Works to showcase this project underscores its national importance and potential for long-term demand and policy support, aligning with broader infrastructure and energy grid thematic narratives.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Gerdau stock gained 4.16 percent above the 200-day line - AD HOC NEWS",
+          "title": "JPMorgan raises target for Cleveland-Cliffs stock to USD 13.00 - AD HOC NEWS",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPVFRZQkdOdEJicWtUalNydUs3bmFaQlpBQjhtNlZrVGlSWlh1QzZHc0NPaVJDRW94R25KVXpBdDdBOGg5S0VvM1RfZUpjSF9oQUREMGU2eC1NNm9xYnc3cnExMW1nc0J3ekpaUWRkX3NOZ0V0LXhzXzE4NnBGSGtuSlVzc2RsdTlrV3Z5ME0taEFNeFlIMTFjYTJDVTZnbnUxeVVYYWtfNGtWUUtCWk9UYlk3U3pHRy01QUE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQdW56YXlURXhsV1lDZFZDMHQwVVlicFhkNFVFY0xrdm5KdS1rdmZpblcyZEFRNVk4c21ha2pGYTNnQnpNc3hfOGlNUEducnd1UjgzQjJVZ3F3bWlOOUJJOUt4UGJLeS15OC10eGFvS1BQdm42SUJ4S2pPV1BTQWI2MmoxT282Zm8tVHJOTWlGU0JlcnVvSnRkT1VLYnZnWUdOalo1cXBsdjBkWkJDQTJNOENkVmdJYnpURWlYb2p3?oc=5"
+        },
+        {
+          "title": "A $200 million project will expand steel production for power-grid transformers by up to 25%. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOUmVhb2V5TFZ3TUlSQlJBQWFRa3lyVi1SMVJvLXhrR2F6Wmt4azA4UEhHQW93cThacktqck40c2U1ZXZuWW5tbFNseVJWaU1Fb1hwS0pwSFVLZEZUMnMwUGhHUm1vdEJoVzBERzY1OE1fOVo1ZUltMFBSUHljNDdKVUotaWJGRmFHZ29tenJTUVRoT0dWVUpySFhPSnhHSDVvcHl0T05ZRFlabEdMYTFvZW1FVkZYVE8tV1BR?oc=5"
+        },
+        {
+          "title": "Cleveland-Cliffs to Host U.S. Secretary of Energy Chris Wright and Other Government Officials at Butler Works to Showcase GOES Expansion Project",
+          "source": "Finviz",
+          "url": "/news/398912/cleveland-cliffs-to-host-us-secretary-of-energy-chris-wright-and-other-government-officials-at-butler-works-to-showcase-goes-expansion-project"
         }
       ],
       "edgar_filing": null,
@@ -1304,7 +499,7 @@
       "daily_pct": null,
       "prev_close": null,
       "industry": "Materials - Metals & Mining",
-      "technical_status": "Fail (Avg $Vol $64M < $100M, ADR 2.9% < 4%)",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 75,
@@ -1312,249 +507,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
-        "discrepancy_note": "Source B[1] mentions a technical breakout ('above the 200-day line') and no fundamental catalyst, supporting the claim. However, Source B[2] directly contradicts 'no immediate fundamental catalyst found' by reporting 'Downgrade And Insider Sale' as reasons for a stock slump, which are fundamental catalysts."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "VALE",
-      "price": 14.56,
-      "gap_pct": 5.81,
-      "pm_volume": 1189525,
-      "avg_vol_10d": 28569846,
-      "avg_dollar_vol": 415976958,
-      "mkt_cap": 54971392481,
-      "rvol": 1.73,
-      "adr_pct": 2.34,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; VALE is noted to be heading toward **October 29** results, suggesting current activity is likely technical or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 59,
-      "grade": "C",
-      "finviz_theme": "Materials - Metals & Mining",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. No specific fundamental news reported today for VALE, with the next significant event being **Q3 results on October 29**. Current price action suggests technical or institutional flow."
-      },
-      "analysis_details": "• **What Happened**\nVALE shares are exhibiting activity today with **no specific fundamental catalyst** reported in the last **24 hours**. The sole headline indicates that the company is heading toward its **Q3 results**, which are scheduled for **October 29**.\n\n• **Key Consideration**\nGiven the absence of immediate fundamental news, today's move in VALE is likely driven by technical factors or institutional flow. With **Q3 results on October 29** serving as the next known catalyst, current price action carries a higher risk of being a temporary move or a low-float squeeze, potentially leading to a gap and trap scenario.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "VALE stock heads toward October 29 results - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNRDV3aGttNXA1R3otdWhxeFBNTGtzaW9rRUloOXdPRnJCdVNydmJvV2tMTTMwdnFWWFJfX1liZFU0UGgzaWo4U0ZCN0lSXzRlTkZrbDVxQjV6bGR3YUJJYlMtV1RTNngyeGVzdEFrNEF0ZXdVaWc3NEVQZGNSU2FMWUJuT1IzWEhTSWZwYXVpYTFIb2t3RV9CSVRldjFIcFJta2lTMG5NRUk?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Fail (ADR 2.3% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "VALE is heading toward October 29 results",
-        "discrepancy_note": "Source B ([2] AD HOC NEWS) explicitly mentions 'October 29 results'. Source A (Finviz) has no news entries. Since only one of the two sources confirms the specific date, it is marked as a discrepancy."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SUZ",
-      "price": 8.95,
-      "gap_pct": 5.29,
-      "pm_volume": 67644,
-      "avg_vol_10d": 2427351,
-      "avg_dollar_vol": 21724791,
-      "mkt_cap": 10622803805,
-      "rvol": 0.81,
-      "adr_pct": 2.18,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $22M < $100M, ADR 2.2% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": "The primary claim states no immediate fundamental catalyst. Finviz reports 'none', supporting this. However, Google News mentions 'Suzano Stock Slips as Hot Pulp Rally Cools', which indicates a fundamental market-related reason (catalyst) for the stock movement, contradicting the claim of no immediate fundamental catalyst."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BSBR",
-      "price": 5.68,
-      "gap_pct": 5.28,
-      "pm_volume": 1519046,
-      "avg_vol_10d": 2341947,
-      "avg_dollar_vol": 13302259,
-      "mkt_cap": 20147117365,
-      "rvol": 1.07,
-      "adr_pct": 1.84,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $13M < $100M, ADR 1.8% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CBRS",
-      "price": 175.02,
-      "gap_pct": 5.16,
-      "pm_volume": 330727,
-      "avg_vol_10d": 7892919,
-      "avg_dollar_vol": 1381418683,
-      "mkt_cap": 37255109618,
-      "rvol": 1.69,
-      "adr_pct": 5.96,
-      "category": "New Contract/Partnership",
-      "theme": "Strategic Partnership with OpenAI",
-      "reasoning": "Cerebras stock received a boost after **OpenAI CEO Sam Altman** explicitly called the **chipmaker** a **‘close partner’**, signaling strategic collaboration.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "A+",
-      "finviz_theme": "AI Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Cerebras's stock gained momentum following **OpenAI CEO Sam Altman’s** public statement, where he referred to **Cerebras** as a **‘close partner’**. This endorsement from a leading AI figure highlights a significant strategic collaboration for the chipmaker.",
-        "impact": "This partnership with a generative AI leader like OpenAI provides strong validation for Cerebras's technology, potentially leading to increased adoption and market share in the competitive AI compute space, as well as de-risking future revenue streams."
-      },
-      "analysis_details": "• **Impact**\nCerebras stock received a **boost** after **OpenAI CEO Sam Altman** publicly referred to the **chipmaker** as a **‘close partner’**. This statement implies a significant strategic relationship between Cerebras Systems and a leading entity in the Artificial Intelligence space.\n\n• **Strategic Value**\nThis endorsement from **Sam Altman** and **OpenAI** provides strong validation for Cerebras's technology and its position in the **AI chipmaker** sector. It signals potential deeper collaboration or integration, which could substantially enhance Cerebras's competitive standing and market perception, potentially attracting further enterprise customers or strategic investments.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Cerebras Stock Gets A Boost After OpenAI CEO Sam Altman Calls Chipmaker ‘Close Partner’ - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOVGswZ25GMUQ1b1NRTS05R1NWY1NDZ2FoeVdGMjhHWTloenpTMDFsZjBzWWwzVTJJM2M4ek0xMnZqSXNoTkFDeE9ZTjBvdHNEam1Wckc4THFUeHBXdDU4UjZvaEhNWEEyajlOZThPcjY4enZuS0x5NUpSTjM2c2E3cFZ5emRONmZ2UzhzZEU3ZzR6RFhjMTE2WFN0dmlIZw?oc=5"
-        },
-        {
-          "title": "Cerebras Systems vs. Innodata: Which AI Infrastructure Stock Is a Better Buy in 2026? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPek0yQ192XzJqMWpUSUJEMVprUjdaaVZna21Vb2o5MDk2WE9wVGU2ekZyZ014UXROeEp5MWs1WUZHOE1KcEU0YVlZOXVUazRfQkhXN2ZaVmtXY0g2RjhOekwyMzZ1bDktaXgxYXBPRTc0b2tuR0RWMmk3Ry1Da3drY2hwUWhpWGsycGd5bnVtN1FlM0pKYjVPSFJCMA?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "prev_close": null,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Cerebras stock received a boost of a specific percentage in pre-market due to Sam Altman's statement.",
-        "discrepancy_note": "Source B [4] states Cerebras stock jumped 'Over 5% in Pre-Market', while Source B [5] states CBRS stock 'Surges Over 6% in Monday Pre-Market'. Source A and B [1,2] confirm a boost but do not provide a specific percentage. The percentages 'Over 5%' and 'Over 6%' are specific but conflicting."
+        "primary_claim": "JPMorgan raised CLF's price target to $13.00",
+        "discrepancy_note": "Source B [5] confirms 'JPMorgan raises target for Cleveland-Cliffs stock to USD 13.00', but Source A does not mention any price target or analyst upgrade."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1565,17 +519,17 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 19,
-    "large_gaps": 5,
-    "total_headlines": 33,
+    "small_gaps": 6,
+    "large_gaps": 1,
+    "total_headlines": 20,
     "monthly_cost_usd": 0.01
   }
 }
