@@ -13489,10 +13489,10 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
                 <th key={col}
                     onClick={() => !nosort && handleSort(col)}
                     title={tooltip}
-                    className={`py-2 font-semibold whitespace-nowrap leading-tight align-bottom border-r border-zinc-800 last:border-r-0
+                    className={`py-2 font-semibold whitespace-nowrap leading-tight align-middle border-r border-zinc-800 last:border-r-0
                       ${col === "pct_off_52wh" ? "pl-4 pr-3 min-w-[104px]" : "px-2"}
                       ${nosort ? "cursor-default" : "cursor-pointer hover:text-zinc-200 transition-colors"}
-                      ${align === "right" ? "text-right" : "text-left"}`}>
+                      text-center`}>
                   {label.split("\n").map((ln, i, arr) => <React.Fragment key={i}>{ln}{i < arr.length - 1 && <br />}</React.Fragment>)}{!nosort && <SortIcon col={col}/>}
                 </th>
               ))}

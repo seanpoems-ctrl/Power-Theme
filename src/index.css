@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Table headers are centered horizontally and vertically across the whole dashboard, so every table reads
+   the same. !important is deliberate: many columns carry per-column utilities (text-left / text-right /
+   align-bottom) on their <th>, and a class utility outranks an element selector. Every table here uses a
+   <thead>, so this covers all of them. */
+thead th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
 body {
   zoom: 1.15;
 }
