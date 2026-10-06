@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-06 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-On Accumulation",
+    "spy_price": 779.09,
+    "spy_change_pct": 0.55,
+    "vix": 15.01,
+    "hy_oas": 3.12,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 34.4,
+    "mmth": 52.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CLF",
+          "company": "Cleveland-Cliffs Inc.",
+          "reason": "JPMorgan's price target raise and the showcasing of new projects provided a strong, specific catalyst, driving significant pre-market and daily volume for the steel producer."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Strong analyst upgrades citing an accelerating demand outlook for its AI data center GPUs, coupled with robust Q4 projections, generated fresh buying interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amidst broad market strength, Amazon saw continued accumulation driven by technical flow and general e-commerce growth momentum, lacking a specific fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-06 13:08 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil is facing renewed pressure as crude oil prices experience a significant decline, suggesting continued headwinds for the energy sector."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-16 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "US Pullback, Complacent Credit",
-    "spy_price": 757.39,
-    "spy_change_pct": -0.46,
-    "vix": 16.97,
-    "hy_oas": 2.71,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 38.1,
-    "mmth": 56.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) is rallying on news of a strategic partnership with a major telecommunications firm to integrate its generative AI suite across their global infrastructure, signaling new revenue streams."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Nvidia (NVDA) surges on reports of a new multi-year supply agreement with a leading automotive manufacturer for its AI-driven autonomous driving platforms."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla (TSLA) is experiencing heightened volatility pre-market, driven by technical trading flows and ongoing debate regarding EV demand, rather than any fresh company-specific news."
         }
       ]
     }
