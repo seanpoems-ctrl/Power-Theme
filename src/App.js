@@ -13411,24 +13411,24 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
     { col: "ticker",        label: "Group",       align: "left"  },
     { col: "theme",         label: "Group",       align: "left"  },
     { col: "score",         label: "Score ↓",     align: "right" },
-    { col: "rs_thrust_1w",  label: "RS Thrust %", align: "right", tooltip: "1-week recency-weighted RS line vs its own 1-month baseline. >100% = relative strength accelerating this week; <100% = decelerating." },
+    { col: "rs_thrust_1w",  label: "RS\nThrust %", align: "right", tooltip: "1-week recency-weighted RS line vs its own 1-month baseline. >100% = relative strength accelerating this week; <100% = decelerating." },
     { col: "rs_pct",        label: "RS%",         align: "right", tooltip: "Use Score for theme selection, and RS% for tactical entry/exit timing" },
-    { col: "perf_intraday", label: "Intra %",     align: "right", tooltip: "Intraday: % change from today's open" },
-    { col: "perf_1d",       label: "Day %",       align: "right" },
-    { col: "perf_1w",       label: "Wk %",        align: "right" },
-    { col: "perf_1m",       label: "Mth %",       align: "right" },
-    { col: "perf_3m",       label: "Qtr %",       align: "right" },
-    { col: "perf_6m",       label: "HY %",        align: "right" },
-    { col: "perf_12m",      label: "Yr %",        align: "right" },
-    { col: "_chart",        label: "1-Mth Chart", align: "left",  nosort: true },
-    { col: "_rs_bar",       label: "1-Mth RS",    align: "left",  nosort: true },
-    { col: "rs_day",        label: "Day RS",      align: "right" },
-    { col: "rs_wk",         label: "Wk RS",       align: "right" },
-    { col: "rs_mth",        label: "Mth RS",      align: "right" },
-    { col: "rs_qtr",        label: "Qtr RS",      align: "right" },
-    { col: "rs_hy",         label: "HY RS",       align: "right" },
-    { col: "rs_yr",         label: "Yr RS",       align: "right" },
-    { col: "pct_off_52wh",  label: "% Off 52W H", align: "right" },
+    { col: "perf_intraday", label: "Intra\n%",     align: "right", tooltip: "Intraday: % change from today's open" },
+    { col: "perf_1d",       label: "Day\n%",       align: "right" },
+    { col: "perf_1w",       label: "Wk\n%",        align: "right" },
+    { col: "perf_1m",       label: "Mth\n%",       align: "right" },
+    { col: "perf_3m",       label: "Qtr\n%",       align: "right" },
+    { col: "perf_6m",       label: "HY\n%",        align: "right" },
+    { col: "perf_12m",      label: "Yr\n%",        align: "right" },
+    { col: "_chart",        label: "1-Mth\nChart", align: "left",  nosort: true },
+    { col: "_rs_bar",       label: "1-Mth\nRS",    align: "left",  nosort: true },
+    { col: "rs_day",        label: "Day\nRS",      align: "right" },
+    { col: "rs_wk",         label: "Wk\nRS",       align: "right" },
+    { col: "rs_mth",        label: "Mth\nRS",      align: "right" },
+    { col: "rs_qtr",        label: "Qtr\nRS",      align: "right" },
+    { col: "rs_hy",         label: "HY\nRS",       align: "right" },
+    { col: "rs_yr",         label: "Yr\nRS",       align: "right" },
+    { col: "pct_off_52wh",  label: "% Off\n52W H", align: "right" },
   ];
 
   if (!etfRsData) return (
@@ -13489,10 +13489,11 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
                 <th key={col}
                     onClick={() => !nosort && handleSort(col)}
                     title={tooltip}
-                    className={`px-2 py-2 font-semibold whitespace-nowrap border-r border-zinc-800 last:border-r-0
+                    className={`py-2 font-semibold whitespace-nowrap leading-tight align-bottom border-r border-zinc-800 last:border-r-0
+                      ${col === "pct_off_52wh" ? "pl-4 pr-3 min-w-[104px]" : "px-2"}
                       ${nosort ? "cursor-default" : "cursor-pointer hover:text-zinc-200 transition-colors"}
                       ${align === "right" ? "text-right" : "text-left"}`}>
-                  {label}{!nosort && <SortIcon col={col}/>}
+                  {label.split("\n").map((ln, i, arr) => <React.Fragment key={i}>{ln}{i < arr.length - 1 && <br />}</React.Fragment>)}{!nosort && <SortIcon col={col}/>}
                 </th>
               ))}
             </tr>
@@ -13580,8 +13581,8 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_hy)}</td>
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_yr)}</td>
                 {/* % Off 52W High — pink bar (fixed width) proportional to distance from high */}
-                <td className="px-2 py-1 font-mono">
-                  <div className="flex items-center justify-end gap-1.5">
+                <td className="pl-4 pr-3 py-1 font-mono">
+                  <div className="flex items-center justify-end gap-2">
                     {/* Value text */}
                     <span className={`text-right shrink-0 ${e.pct_off_52wh == null ? "text-zinc-600" : e.pct_off_52wh >= -1 ? "text-zinc-400" : "text-rose-400"}`}>
                       {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
@@ -14731,25 +14732,27 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {mode === "universe" && (
         <div className="space-y-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
               <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
-              <div className="ml-auto flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
-                {PERF_MODES.map(({k,l}) => (
-                  <button key={k} onClick={() => setPerfMode(k)}
-                    className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
-                    {l}
-                  </button>
-                ))}
+              <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+                <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
+                  {PERF_MODES.map(({k,l}) => (
+                    <button key={k} onClick={() => setPerfMode(k)}
+                      className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
+                      {l}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setMiniChartsFor({ title: "Leading Themes", tickers: topThemes.flatMap(theme =>
+                    [...(theme.subthemes?.flatMap(sub => sub.stocks || []) ?? [])]
+                      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)).slice(0, 3)
+                      .map(st => ({ ticker: st.ticker, category: theme.name }))) })}
+                  title="Mini charts of each leading theme's top 3 stocks by RS"
+                  className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                  ▦ Mini Charts
+                </button>
               </div>
-              <button
-                onClick={() => setMiniChartsFor({ title: "Leading Themes", tickers: topThemes.flatMap(theme =>
-                  [...(theme.subthemes?.flatMap(sub => sub.stocks || []) ?? [])]
-                    .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)).slice(0, 3)
-                    .map(st => ({ ticker: st.ticker, category: theme.name }))) })}
-                title="Mini charts of each leading theme's top 3 stocks by RS"
-                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
-                ▦ Mini Charts
-              </button>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
               {topThemes.map((theme, i) => {
