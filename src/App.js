@@ -494,6 +494,14 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
   };
 
   const { themeName, stocks, themeRS, analysis } = useMemo(() => {
+    // Rows built from ETF holdings / IBKR leaders carry no short interest of their own, but the scanner's theme data has it
+    // for nearly every stock — look it up by ticker instead of leaving the SHORT% column blank.
+    const shortPctByTicker = {};
+    for (const grp of [data?.themes, data?.heatmap_themes]) {
+      for (const t of grp || []) for (const sub of t.subthemes || []) for (const st of sub.stocks || []) {
+        if (st.short_pct != null && shortPctByTicker[st.ticker] == null) shortPctByTicker[st.ticker] = st.short_pct;
+      }
+    }
     const buildFromScannedTheme = (name) => {
       const theme = (data?.themes || []).find(t => t.name === name);
       if (!theme) return null;
@@ -521,6 +529,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
             ticker: h.ticker, company: h.name, price: h.price,
             mkt_cap_b: h.mkt_cap != null ? h.mkt_cap / 1e9 : null,
             adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs, rvol: h.rvol, setup_label: h.setup_label,
+            short_pct: shortPctByTicker[h.ticker] ?? null,
           });
         }
       }
@@ -534,7 +543,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
       if (pt) {
         return {
           themeName: spotlightThemeName,
-          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
+          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: l.short_pct ?? shortPctByTicker[l.ticker] ?? null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
           themeRS: pt.theme_rs,
           analysis: null,
         };
@@ -549,7 +558,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
       if (pt) {
         return {
           themeName: pt.name,
-          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
+          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: l.short_pct ?? shortPctByTicker[l.ticker] ?? null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
           themeRS: pt.theme_rs,
           analysis: null,
         };
@@ -12206,7 +12215,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                   <div className="text-zinc-600 text-xs mt-1">This won't change on future scrapes; it's structural to how {etf} is built, not a data gap.</div>
                 </>
               ) : (
-                "No holdings data — scraper populates this on the next nightly run"
+                "No US-tradable holdings — this fund's listed holdings trade on foreign exchanges (no US listing or ADR), so they are hidden"
               )}
             </div>
           ) : (
@@ -14390,6 +14399,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
     const n = parseDvol(v);
     if (n >= 1e9) return `$${(n/1e9).toFixed(1)}B`;
     if (n >= 1e6) return `$${(n/1e6).toFixed(0)}M`;
+    if (n >= 1e3) return `$${Math.round(n/1e3)}K`;   // sub-$1M names are real data (illiquid), not missing
     return "—";
   };
 
