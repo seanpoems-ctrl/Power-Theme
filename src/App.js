@@ -16104,8 +16104,9 @@ const buildLeadershipGroups = etfs => {
 };
 const HEAT_PERIODS = [["Premarket", "perf_pre"], ["After Hours", "perf_post"], ["Intraday", "perf_intraday"], ["1 Day", "perf_1d"],
   ["1 Week", "perf_1w"], ["1 Month", "perf_1m"], ["3 Months", "perf_3m"], ["6 Months", "perf_6m"], ["1 Year", "perf_12m"]];
-const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }) => {
-  const [mode, setMode]     = React.useState("themes");
+const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf, sectorNames = null }) => {
+  const [modeState, setMode] = React.useState("themes");
+  const mode = sectorNames ? "etfs" : modeState;   // sector mode: just the SPDR sector ETFs, no Themes toggle
   const [period, setPeriod] = React.useState("perf_1d");
   const [sortCol, setSortCol] = React.useState("v");     // "v" = return, "label" = name
   const [sortDir, setSortDir] = React.useState("desc");
@@ -16117,7 +16118,9 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
     const k = period;
     let out;
     if (mode === "etfs") {
-      out = etfs.filter(e => !e.benchmark && e[k] != null).map(e => ({ key: e.ticker, label: e.ticker, sub: themeOf(e) || e.label || "", v: e[k], etf: e.ticker }));
+      out = sectorNames
+        ? etfs.filter(e => sectorNames[e.ticker] && e[k] != null).map(e => ({ key: e.ticker, label: e.ticker, sub: sectorNames[e.ticker], v: e[k], etf: e.ticker }))
+        : etfs.filter(e => !e.benchmark && e[k] != null).map(e => ({ key: e.ticker, label: e.ticker, sub: themeOf(e) || e.label || "", v: e[k], etf: e.ticker }));
     } else {
       const byT = Object.fromEntries(etfs.map(e => [e.ticker, e]));
       out = groups.map(g => {
@@ -16129,7 +16132,7 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
       const d = sortCol === "label" ? a.label.localeCompare(b.label) : a.v - b.v;
       return sortDir === "asc" ? d : -d;
     });
-  }, [mode, period, groups, etfs, sortCol, sortDir]);
+  }, [mode, period, groups, etfs, sortCol, sortDir, sectorNames]);
   // Axis runs from the worst return (or 0) to the best return (or 0); the zero line sits where 0 falls between them.
   const { lo, hi } = React.useMemo(() => ({ lo: Math.min(0, ...items.map(i => i.v)), hi: Math.max(0, ...items.map(i => i.v)) }), [items]);
   const span = hi - lo || 1;
@@ -16142,12 +16145,12 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
     <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
       <div className="flex items-center gap-3 flex-wrap mb-3">
         <h3 className="text-sm font-semibold text-zinc-100">ETF Performance</h3>
-        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+        {!sectorNames && <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
           {[["themes", "Themes"], ["etfs", "ETFs"]].map(([kk, l]) => (
             <button key={kk} onClick={() => setMode(kk)}
               className={`px-3 py-0.5 text-[11px] font-medium rounded-md transition-all ${mode === kk ? "bg-orange-500/20 text-orange-300 border border-orange-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
           ))}
-        </div>
+        </div>}
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{items.length}</span>
         <span className="text-[11px] text-zinc-600">{ext ? `${label} % vs prior close · TradingView · ${extAsOf || "not loaded"}` : "click a row for holdings"}</span>
       </div>
@@ -16197,14 +16200,14 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
 };
 
 // Top-10 theme table for one window (module-level so its sort state survives the parent re-rendering).
-const ThemeTopTable = ({ t, top, onRow, onLeader, onMini }) => {
+const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", titleSuffix = "Top 10", footer = null }) => {
   const rows = React.useMemo(() => top.map(r => ({ ...r, ratio: r.total ? r.confirmed / r.total : null })), [top]);
   const sort = useTableSort(rows, "rank", "asc");
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
   return (
     <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
       <div className="flex items-center gap-2 mb-2">
-        <h4 className="text-[13px] font-semibold text-zinc-100">{t.w} Top 10</h4>
+        <h4 className="text-[13px] font-semibold text-zinc-100">{t.w} {titleSuffix}</h4>
         {onMini && top.some(r => r.leader) && (
           <button onClick={() => onMini(sort.rows.filter(r => r.leader).map(r => ({ ticker: r.leader, category: r.name })))}
             className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
@@ -16215,7 +16218,7 @@ const ThemeTopTable = ({ t, top, onRow, onLeader, onMini }) => {
           <thead>
             <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
               <SortTh sort={sort} col="rank" label="#" textual align="center" className="px-2 py-2 w-7" />
-              <SortTh sort={sort} col="name" label="Theme" textual align="left" />
+              <SortTh sort={sort} col="name" label={nameLabel} textual align="left" />
               <SortTh sort={sort} col="strength" label="Strength" />
               <SortTh sort={sort} col="median" label="Median" />
               <SortTh sort={sort} col="leader" label="Leader" textual align="left" />
@@ -16241,6 +16244,7 @@ const ThemeTopTable = ({ t, top, onRow, onLeader, onMini }) => {
           </tbody>
         </table>
       </div>
+      {footer}
     </div>
   );
 };
@@ -16427,19 +16431,127 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
   );
 };
 
+// ── Leadership → Sectors: the 11 SPDR sector ETFs ranked per window, with leadership-over-time and an ETF Performance bar chart ─────
+// Strength = (n − rank + 1) / n × 100 across the 11 sectors (best = 100.0, then 90.9, 81.8 …, worst = 9.1). Median = the sector ETF's own return.
+// Confirmed = the equal-weight twin ETF (XLK ↔ RSPT …) is also up AND at/above the median of all 11 twins — i.e. the cap-weighted
+// lead is shared by the average stock. Leadership-over-time comes from public/sector_leadership.json (sector_history_builder.py).
+const SPDR_SECTORS = { XLK: "Technology", XLE: "Energy", XLV: "Health Care", XLF: "Financial Services", XLI: "Industrials", XLP: "Consumer Staples",
+  XLY: "Consumer Discretionary", XLU: "Utilities", XLRE: "Real Estate", XLB: "Materials", XLC: "Communication Services" };
+const SPDR_TWIN = { XLK: "RSPT", XLE: "RSPG", XLV: "RSPH", XLF: "RSPF", XLI: "RSPN", XLP: "RSPS", XLY: "RSPD", XLU: "RSPU", XLRE: "RSPR", XLB: "RSPM", XLC: "RSPC" };
+const SECTOR_LINE_COLORS = ["#6db8ae", "#e5b567", "#7aa2f7"];
+
+const StrengthOverTime = ({ dates, series, names, top }) => {
+  if (!dates?.length) return null;
+  const W = 360, H = 120, L = 24, R = 6, T = 6, B = 16;
+  const x = i => L + (i / (dates.length - 1)) * (W - L - R);
+  const y = v => T + (1 - v / 100) * (H - T - B);
+  const path = vals => vals.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const topSet = new Set(top);
+  return (
+    <div className="mt-3">
+      <div className="text-[11px] font-semibold text-zinc-400 mb-1">Leadership Over Time</div>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto">
+        {[0, 50, 100].map(v => (
+          <g key={v}><line x1={L} x2={W - R} y1={y(v)} y2={y(v)} stroke="#3f3f46" strokeWidth="0.5" strokeDasharray="2 3" />
+            <text x={L - 4} y={y(v) + 3} textAnchor="end" fontSize="8" fill="#71717a">{v}</text></g>
+        ))}
+        {Object.entries(series).filter(([t]) => !topSet.has(t)).map(([t, vals]) => (
+          <path key={t} d={path(vals)} fill="none" stroke="#52525b" strokeWidth="0.8" opacity="0.7"><title>{names[t] || t}</title></path>
+        ))}
+        {top.map((t, i) => series[t] && (
+          <path key={t} d={path(series[t])} fill="none" stroke={SECTOR_LINE_COLORS[i % SECTOR_LINE_COLORS.length]} strokeWidth="1.8"><title>{names[t] || t}</title></path>
+        ))}
+        {[0, Math.floor((dates.length - 1) / 2), dates.length - 1].map((i, k) => (
+          <text key={i} x={x(i)} y={H - 3} textAnchor={k === 0 ? "start" : k === 2 ? "end" : "middle"} fontSize="8" fill="#71717a">{dates[i].slice(5)}</text>
+        ))}
+      </svg>
+      <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+        {top.map((t, i) => (
+          <span key={t} className="text-[10px] text-zinc-400 flex items-center gap-1">
+            <span className="inline-block w-2.5 h-0.5" style={{ backgroundColor: SECTOR_LINE_COLORS[i % SECTOR_LINE_COLORS.length] }} />{names[t] || t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }) => {
+  const [hist, setHist]       = React.useState(null);   // public/sector_leadership.json
+  const [stats, setStats]     = React.useState(null);   // public/etf_stats.json
+  const [extHours, setExtHours] = React.useState(null); // public/etf_extended_hours.json
+  const [sel, setSel]         = React.useState(null);   // { group, win, only }
+  React.useEffect(() => {
+    const v = Date.now(), base = process.env.PUBLIC_URL;
+    fetch(`${base}/sector_leadership.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.windows) setHist(d); }).catch(() => {});
+    fetch(`${base}/etf_stats.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.etfs) setStats(d); }).catch(() => {});
+    fetch(`${base}/etf_extended_hours.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.etfs) setExtHours(d); }).catch(() => {});
+  }, []);
+  const etfsRaw = etfRsData?.etfs || [];
+  const etfs = React.useMemo(() => etfsRaw.map(e => ({ ...e, perf_pre: extHours?.etfs?.[e.ticker]?.premarket ?? null, perf_post: extHours?.etfs?.[e.ticker]?.afterhours ?? null })), [etfsRaw, extHours]);
+
+  const tables = React.useMemo(() => THEME_WINDOWS.map(([w, k]) => {
+    const by = Object.fromEntries(etfs.map(e => [e.ticker, e]));
+    const ranked = Object.keys(SPDR_SECTORS).map(t => by[t]).filter(e => e && e[k] != null).sort((a, b) => b[k] - a[k]);
+    const n = ranked.length;
+    const twinPerfs = Object.values(SPDR_TWIN).map(t => by[t]?.[k]).filter(v => v != null).sort((a, b) => a - b);
+    const twinMed = twinPerfs.length ? twinPerfs[twinPerfs.length >> 1] : 0;
+    return {
+      w, k, n,
+      rows: ranked.map((e, i) => {
+        const twin = by[SPDR_TWIN[e.ticker]]?.[k];
+        return { rank: i + 1, name: SPDR_SECTORS[e.ticker], strength: Math.round(((n - i) / n) * 1000) / 10,
+          median: e[k], leader: e.ticker, confirmed: twin != null && twin > 0 && twin >= twinMed ? 1 : 0, total: twin != null ? 1 : 0, members: [e.ticker, SPDR_TWIN[e.ticker]] };
+      }),
+    };
+  }), [etfs]);
+  const leaderCount = new Set(tables.flatMap(t => t.rows.slice(0, 3).map(r => r.leader))).size;
+  const openSector = (ticker, win) => setSel({ group: { name: SPDR_SECTORS[ticker] || ticker, member_tickers: [ticker, SPDR_TWIN[ticker]].filter(Boolean) }, win });
+  const openEtfOnly = (ticker, win) => setSel({ group: { name: SPDR_SECTORS[ticker] || ticker, member_tickers: [ticker] }, win, only: ticker });
+
+  if (!tables.some(t => t.rows.length)) return <p className="text-xs text-zinc-600 italic py-6">Loading sector data…</p>;
+  return (
+    <div className="space-y-4">
+      <div className="flex items-baseline gap-2 flex-wrap">
+        <h3 className="text-sm font-semibold text-zinc-100">Sector Leaders</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{leaderCount} sectors</span>
+        <span className="text-[11px] text-zinc-600">top 3 per window of the 11 SPDR sectors · Confirmed = the equal-weight twin ETF is also up and above the median of all twins</span>
+      </div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {tables.map(t => {
+          const topTickers = t.rows.slice(0, 3).map(r => r.leader);
+          return (
+            <ThemeTopTable key={t.w} t={t} top={t.rows.slice(0, 3)} nameLabel="Sector" titleSuffix="Top 3"
+              onRow={r => openSector(r.leader, { w: t.w, k: t.k })}
+              onLeader={ticker => openEtfOnly(ticker, { w: t.w, k: t.k })}
+              onMini={onMiniCharts ? list => onMiniCharts(list, `Sector Leaders · ${t.w}`) : null}
+              footer={hist?.windows?.[t.w] ? <StrengthOverTime dates={hist.dates} series={hist.windows[t.w]} names={hist.sectors} top={topTickers} /> : null} />
+          );
+        })}
+      </div>
+      <EtfPerformanceHeatmap groups={[]} etfs={etfs} extAsOf={extHours?.generated_at} sectorNames={SPDR_SECTORS}
+        onPickGroup={() => {}} onPickEtf={(ticker, win) => openEtfOnly(ticker, win)} />
+      {sel?.group && <ThemeGroupPopup key={`${sel.group.name}|${sel.win.w}|${sel.only || ""}`} only={sel.only || null} group={sel.group} window={sel.win} etfs={etfs} etfHoldings={etfHoldings} stats={stats}
+        onClose={() => setSel(null)} onMiniCharts={onMiniCharts} />}
+    </div>
+  );
+};
+
 // Leadership page = Stocks (LL → NEL → T-NEL) | Themes (theme group leaders), mirroring a two-page leadership layout.
 const LeadershipScreen = ({ onMiniCharts = null, etfRsData = null, etfHoldings = {} }) => {
-  const [view, setView] = React.useState(() => { try { return localStorage.getItem("leadership_view") === "themes" ? "themes" : "stocks"; } catch { return "stocks"; } });
+  const [view, setView] = React.useState(() => { try { const v = localStorage.getItem("leadership_view"); return v === "themes" || v === "sectors" ? v : "stocks"; } catch { return "stocks"; } });
   React.useEffect(() => { try { localStorage.setItem("leadership_view", view); } catch { /* ignore */ } }, [view]);
   return (
     <div className="space-y-4">
       <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 w-fit">
-        {[["stocks", "Stocks"], ["themes", "Themes"]].map(([k, l]) => (
+        {[["stocks", "Stocks"], ["themes", "Themes"], ["sectors", "Sectors"]].map(([k, l]) => (
           <button key={k} onClick={() => setView(k)}
             className={`px-4 py-1 text-[12px] font-medium rounded-md transition-all ${view === k ? "bg-orange-500/20 text-orange-300 border border-orange-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
         ))}
       </div>
-      {view === "stocks" ? <LeadershipStocksView onMiniCharts={onMiniCharts} /> : <ThemeLeadersView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />}
+      {view === "stocks" ? <LeadershipStocksView onMiniCharts={onMiniCharts} />
+        : view === "themes" ? <ThemeLeadersView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />
+        : <SectorsView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />}
     </div>
   );
 };

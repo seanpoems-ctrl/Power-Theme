@@ -161,6 +161,7 @@ jobs:
           timeout 300 python leadership_builder.py     || echo "leadership_builder.py failed (non-fatal)"
           timeout 180 python etf_stats_builder.py      || echo "etf_stats_builder.py failed (non-fatal)"
           timeout 120 python etf_extended_hours_builder.py || echo "etf_extended_hours_builder.py failed (non-fatal)"
+          timeout 120 python sector_history_builder.py    || echo "sector_history_builder.py failed (non-fatal)"
 
       - name: Validate breadth data quality
         if: steps.trading_day.outputs.is_trading_day == 'true'
@@ -180,7 +181,7 @@ jobs:
           git add -f public/breadth_stocks_*.json 2>/dev/null || true
           git add -f public/cot_data.json 2>/dev/null || true   # new file on first run — `add -u` only stages tracked files
           git add -f public/leveraged_stock_etfs.json 2>/dev/null || true   # same: new file
-          git add -f public/leadership.json public/leadership_history.json public/etf_stats.json public/etf_extended_hours.json 2>/dev/null || true   # same: new files
+          git add -f public/leadership.json public/leadership_history.json public/etf_stats.json public/etf_extended_hours.json public/sector_leadership.json 2>/dev/null || true   # same: new files
           git add -f public/breadth_history/*.json 2>/dev/null || true
           # Daily universe snapshots (RS Δ / "new ETF" diffs need yesterday's file). Never committed before, so every
           # run started from an empty history and the Daily Stock Universe's RS Δ column was blank for all stocks.
