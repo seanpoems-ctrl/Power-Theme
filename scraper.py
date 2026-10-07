@@ -2984,7 +2984,10 @@ _US_TICKER_FOR_LOCAL_HOLDING = {
     "ANDINA-B": "AKO.B",   # Embotelladora Andina B     -> NYSE ADR
     "HELP.NE":  "HELP",    # Helus Pharma (NEO)         -> Nasdaq
     "HITI.V":   "HITI",    # High Tide (TSXV)           -> Nasdaq
+    "PSKY":     "SKYD",    # Paramount Skydance: US ticker is SKYD (NYSE); PSKY is not a tradable US symbol
 }
+# Still reported by some ETF sources / Yahoo but with no US ticker to trade (confirmed by the user) - always dropped.
+_NO_US_TICKER = {"QRVO"}
 _YF_US_EXCHANGES = {"NMS", "NGM", "NCM", "NAS", "NYQ", "ASE", "PCX", "BTS", "OQB", "PNK", "OBB"}   # Nasdaq / NYSE / American / Arca / Cboe / OTC
 
 
@@ -3010,6 +3013,8 @@ def restrict_holdings_to_us_tradable(etf_holdings_dict: dict) -> dict:
         out, seen = [], {}
         for h in holdings:
             h = dict(h)
+            if h.get("ticker") in _NO_US_TICKER:
+                continue
             us = _US_TICKER_FOR_LOCAL_HOLDING.get(h.get("ticker"))
             if us:
                 h["local_ticker"], h["ticker"] = h["ticker"], us
