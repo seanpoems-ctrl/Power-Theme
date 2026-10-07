@@ -1678,5 +1678,29 @@
     "liquid": true,
     "description": "Equal-weight S&P 500 industrial companies",
     "benchmark": true
+  },
+  "BWET": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
+    "label": "Tanker Shipping",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Crude and product tanker freight-rate futures, not shipping-company stocks"
+  },
+  "CRAK": {
+    "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
+    "label": "Oil Refiners",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global oil refining and marketing companies"
+  },
+  "ZCSH": {
+    "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
+    "label": "Zcash",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Exposure to Zcash (ZEC), a privacy-focused cryptocurrency"
   }
 }
