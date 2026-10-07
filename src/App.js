@@ -11,6 +11,7 @@ import CotTab from "./CotTab";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
 import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
+import { buildDataset, scenarioReport } from "./breadthScenario";
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
 const LangCtx = React.createContext('en');
@@ -2645,6 +2646,14 @@ const BreadthChip = ({ signal, onOpen = null, showText = false, className = "" }
   );
 };
 
+// One-line divergence sentence (nothing when there is nothing to flag) — used under the Breadth tab's Market Pulse banner.
+const BreadthNote = ({ signal }) => {
+  const cycle = useBreadthCycle();
+  const div = breadthDivergence(signal, cycle);
+  if (!div) return null;
+  return <div className="text-[11px] leading-snug mt-2 pt-2 border-t border-current/20 opacity-90">{div.tone === "warn" ? "⚠ " : ""}<b>{div.label}:</b> {div.text}</div>;
+};
+
 // Strip under the Market Situation narrative: breadth phase, divergence read, link to the page.
 const BreadthBriefStrip = ({ cycle, signal, onOpen }) => {
   if (!cycle) return null;
@@ -3820,11 +3829,14 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 1 — Market Gate: Market Pulse + Breadth Tab (5 min)",
         items: [
-          "Read Market Pulse signal first (Scanner sidebar): 🟢 Uptrend / 🟡 Pullback / 🔴 Bear — this decides whether you trade at all today",
+          "Read Market Pulse signal first (Stocks → Scanner sidebar): 🟢 Uptrend / 🟡 Pullback / 🔴 Bear — this decides whether you trade at all today",
+          "Breadth chip right beside it (Breadth: Repair / Contraction / Distribution / Expansion + flag): 🟢 Uptrend with ⚠ Narrow or ⚠ Fading = the index is carried by a few names → size down 50%, RS leaders only. 'Confirmed' = full size allowed",
+          "Red signal + 'Bounce watch' (T2108 ≤ 20 or breadth Repair) = relief-rally risk — don't press shorts, don't chase longs either",
           "🔴 Red → no new entries. Manage exits only, then jump to Calendar step — done in 10 min",
           "🟡 Yellow → half size, A/A+ grades only, stock must be above its own SMA20 + SMA50",
           "VIX ≥ 24 → halve all position sizes regardless of signal (expected move shown on Market Pulse)",
-          "Breadth tab: %Above SMA50 trend, A/D, NH−NL — price up but breadth down = divergence → size down 50%",
+          "Breadth → Market Breadth: %Above SMA50 trend, A/D, NH−NL — price up but breadth down = divergence → size down 50%",
+          "Breadth → Breadth Cycle (Time Machine on today): Strength and the 5-session change — and the scenario odds for 1M/3M (use as context, not a signal; the base rate is shown next to every number)",
           "Market Monitor panel: 5-day ratio ≥ 1.5 confirms bull momentum; below 1.0 = thrust unconfirmed, stay selective",
         ],
       },
@@ -3834,6 +3846,9 @@ const CHECKLIST_SECTIONS = [
           "Themes → Theme Tracker → Theme Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
           "⚡ flip badge on a category = institutional money just accelerated into it vs its sector anchor — outranks a plain high score",
           "Click the top 2–3 rows to expand their top movers (same panel) — note the Leader ticker, that's your theme's flagship",
+          "Themes → Leadership: a theme in the top 10 on BOTH 1M and 3M with Confirmed n/n is durable leadership; top 10 on 1M only = early or a blip. Click the row for its holdings (Extension per stock)",
+          "Themes → Leadership → ETF NEL: confirmed ETFs with Extension under 4× — the ETF to watch or trade for that theme, not the one that already ran",
+          "Before the open: ETF Performance (bottom of Themes → Leadership) → Premarket — what is actually moving before 9:30",
           "RS Flip Scanner below it: any new flip today = tomorrow's rotation candidate, screen it even if its category score is still low",
           "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — does the raw % agree with the RS Score leader, or is it a one-day blip? Agreement across both = higher conviction",
           "Leaderboard tab (Thematic Scanner): confirm the same theme shows up in the stock-level RS top 5 with a positive ROT (rotation rank) — this is your final theme pick",
@@ -3844,6 +3859,8 @@ const CHECKLIST_SECTIONS = [
         section: "Step 3 — Stock Selection in Leading Themes (10 min)",
         items: [
           "Open the #1–#3 RS themes plus every ⚡ accelerating theme from Step 2",
+          "Cross-check Stocks → Leadership: names that sit in T-NEL (tight AND non-extended leaders) for the window matching your theme go first; Stocks → Universe (ADR > 5%, Avg $ Vol > $500M) is the liquid pool, incl. stocks whose leveraged ETF (MUU, TSLL…) qualifies",
+          "Extension column (Scanner, Focus List, Universe, Leadership): < 4× actionable · 4–7× stretched, wait for a pullback · 7×+ overextended, never chase",
           "Filters are ON at your criteria (ADR ≥5%, $Vol ≥$300M, RS ≥85) — never loosen them to 'find more'",
           "Tradeable names float to the top of every table by design — the first rows ARE your universe",
           "Priority: A+ grade → VCP Tightening / Tight / VDU flags → Pure Play badge → dist to 52W high ≤ 8%",
@@ -3862,9 +3879,9 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 5 — Pre-Market Gappers (8:05 AM scan) (10 min)",
+        section: "Step 5 — Pre-Market Gappers: Tools → Pre-Market Gappers (8:05 AM scan) (10 min)",
         items: [
-          "Scan gappers ≥5% with Gemini conviction ≥60 only",
+          "Scan gappers ≥5% with Gemini conviction ≥60 only — check the Avg $Vol column (10-day average dollar volume; PM $ shown beneath) — thin names gap and fade",
           "Best setups: Earnings Gap & Go, New Contract/Partnership — gapper inside a ⚡ accelerating theme = top priority",
           "Avoid: FDA (Volatility Trap), Upgrade (Fade Candidate) unless breadth is roaring green",
           "Chart top 2–3 on 5-min + daily: mark pre-market high, yesterday's close, overnight resistance",
@@ -3872,7 +3889,7 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 6 — Calendar & News Check (5 min)",
+        section: "Step 6 — Calendar & News Check: Tools → Calendar (5 min)",
         items: [
           "Economic calendar: FOMC / CPI / NFP / PCE today → half size, widen stops, no entries 30 min pre-event",
           "Earnings calendar: shortlist name reporting within 2 days → off the entry list, flag for post-earnings gap watch",
@@ -3903,6 +3920,7 @@ const CHECKLIST_SECTIONS = [
           "Only run this routine when Market Pulse signal is 🔴 Red — shorting in a Yellow/Green tape fights the trend",
           "Breadth tab: %Above SMA50 falling and A/D net negative multiple days running — confirms broad distribution, not one bad day",
           "5-day ratio < 0.7 = real downside thrust; 0.7–1.0 = choppy, size down further or skip",
+          "Breadth chip: 'Confirms weakness' (Contraction) = shorts have breadth behind them. 'Bounce watch' (Repair, or T2108 ≤ 20) = oversold relief-rally risk — skip new shorts or size down",
           "VIX ≥ 24 → size shorts down too, not just longs — bear-market rallies squeeze hard and fast",
         ],
       },
@@ -3971,7 +3989,7 @@ const CHECKLIST_SECTIONS = [
           "Volume check: RVOL ≥ 1.5× on breakout candle — low volume = no entry",
           "Use Position Calc tab: enter equity, ticker, entry price → get exact share count",
           "Stop placement: below pivot low or SMA20 (whichever is tighter, max 7% away)",
-          "Log every trade in Trade Journal the moment you enter — before anything else",
+          "Log every trade in Tools → Trade Journal the moment you enter — before anything else",
           "Max 2 open swing positions — if full, wait for an exit before adding",
           "Do not chase: if stock runs ≥5% past pivot without you → skip this one",
         ],
@@ -3979,7 +3997,7 @@ const CHECKLIST_SECTIONS = [
       {
         section: "2:00 – 4:00 PM — Position Management",
         items: [
-          "Open Watchlist ▲ Long → review your open positions' current RS and grade",
+          "Open Stocks → Long → review your open positions' current RS and grade",
           "Still above SMA20 with volume drying up (VDU) = hold, pattern is healthy",
           "Partial profit rule: position up ≥20% from entry → sell 50%, move stop to breakeven",
           "Remaining 50%: trail stop to 10-EMA on daily chart in TradingView",
@@ -3995,7 +4013,7 @@ const CHECKLIST_SECTIONS = [
           "Daily max loss hit (1% portfolio) → close everything, log it, done for the day",
           "After a losing trade: mandatory 30-min break before next entry — no revenge trading",
           "Set TradingView price alerts at pivot levels — do not stare at charts all day",
-          "Watchlist ▼ Short mode: only check if Market Signal is 🔴 Red or heavy distribution",
+          "Stocks → Short: only check if Market Signal is 🔴 Red or heavy distribution",
         ],
       },
     ],
@@ -4007,7 +4025,7 @@ const CHECKLIST_SECTIONS = [
     color: "amber",
     steps: [
       {
-        section: "Step 1 — Trade Journal Tab (10 min) — DO THIS FIRST",
+        section: "Step 1 — Tools → Trade Journal (10 min) — DO THIS FIRST",
         items: [
           "Log every trade taken today: ticker, entry, exit, P&L, setup type",
           "Record market condition at time of entry (Green / Yellow / Red)",
@@ -4017,18 +4035,21 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 2 — Market Breadth Tab (5 min)",
+        section: "Step 2 — Breadth → Market Breadth + Breadth Cycle (5 min)",
         items: [
           "Did the breadth signal change today? (Green→Yellow, Yellow→Red, etc.)",
           "Signal downgrade → tomorrow's plan: tighten stops, reduce size, no new longs",
           "Signal upgrade → tomorrow's plan: full size allowed, look for breakout entries",
           "Note A/D net, %Above SMA50 trend — improving or deteriorating over the week?",
+          "Breadth Cycle: did the phase change today (Contraction → Repair, Distribution → Contraction…)? Did a ⚠ Narrow / Fading flag appear or clear? Write it into tomorrow's plan",
         ],
       },
       {
         section: "Step 3 — Scanner Refresh: Theme Leaderboard + Leaderboard RS/ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
         items: [
           "Reload after the nightly scrape lands — fresh theme rankings, RS scores, and rotation deltas",
+          "Themes → Leadership: did the 1M/3M top 10 change? A new theme entering the top 10 with Confirmed n/n = rotation confirming. Sectors → Sector Leadership: did the top-3 sectors change, and does the Leadership Over Time chart show a flip?",
+          "Stocks → Leadership (LL → NEL → T-NEL): new T-NEL names today go on the list for tomorrow — Copy the tickers into TradingView",
           "Theme Leaderboard: did the #1 row by Score change? New theme entering with a ⚡ flip = rotation confirming — build tomorrow's list from it",
           "Track ⚡ flips day over day: accelerating 2–3 sessions in a row = real rotation; one-day blips fade",
           "Leaderboard tab: did the RS top 5 change, and does ROT agree with the Theme Leaderboard move?",
@@ -4050,7 +4071,7 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 5 — Watchlist Maintenance: ▲ Long (10 min)",
         items: [
-          "▲ Long mode: re-sort by RS 52W — add new RS ≥ 85, grade A/A+ names from today's leading themes",
+          "Stocks → Long: re-sort by RS 52W — add new RS ≥ 85, grade A/A+ names from today's leading themes",
           "Remove stocks that closed below SMA20 on above-average volume (distribution)",
           "Update each candidate's entry trigger and stop based on today's close",
           "VCP Tightening flag on any stock → top of tomorrow's focus list",
@@ -4067,7 +4088,7 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 7 — Calendar Tab — Tomorrow's Prep (5 min)",
+        section: "Step 7 — Tools → Calendar — Tomorrow's Prep (5 min)",
         items: [
           "Check tomorrow's economic calendar for high-impact events",
           "FOMC / CPI / NFP tomorrow → plan for reduced size, wider stops, no new entries pre-event",
@@ -4111,7 +4132,17 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 3 — Review The Habit And The Trades (15 min)",
+        section: "Step 3 — Leadership & Breadth Review (15 min)",
+        items: [
+          "Stocks → Leadership: which industries hold the most leaders on 1M / 3M / 6M / 1Y (snapshot cards)? An industry that appears on all four is the market's real leadership",
+          "Themes → Leadership → ETF Performance: switch 1 Week → 1 Month → 3 Months — is leadership broadening (many themes green) or narrowing (a handful of themes carrying it)?",
+          "Sectors → Sector Leadership: Leadership Over Time lines — has the top-3 sector set changed in the last month?",
+          "Breadth → Breadth Cycle: pick Max range for Strength vs S&P — where are we in the cycle, and what do the 3M/6M odds say compared with the base rate?",
+          "Re-check the Narrow / Fading flag history this week: how many days did green Pulse and weak breadth disagree, and did that cost you on entries?",
+        ],
+      },
+      {
+        section: "Step 4 — Review The Habit And The Trades (15 min)",
         items: [
           "Count the days you completed the post-market routine this week — the habit is the goal, not the P&L",
           "For each trade or Focus name: write one line on why it worked or did not",
@@ -4127,6 +4158,8 @@ const CORE_RULES = [
   { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Theme Leaderboard Score + Leaderboard RS/ROT before every entry — rising theme, rising stock." },
   { rule: "Only trade your wired-in universe", detail: "ADR ≥5%, $Vol ≥$300M, RS ≥85 are baked into the scanner and the default filters. If a trade needs the filters loosened, it is not your trade." },
   { rule: "Every trade gets logged", detail: "No log = no review = no improvement. Journal is mandatory, not optional." },
+  { rule: "Breadth has to back the trend", detail: "A green Market Pulse with a ⚠ Narrow / Fading breadth flag means the index is carried by a few names — size down 50% and trade RS leaders only. Stocks → Scanner sidebar or Breadth → Breadth Cycle." },
+  { rule: "Don't buy extended", detail: "Extension (ATR multiple from the 50-MA): under 4× is actionable, 4–7× is stretched — wait for the pullback, 7×+ is overextended. Start from Stocks → Leadership → T-NEL (tight AND non-extended)." },
 ];
 
 const COLOR_MAP = {
@@ -4174,7 +4207,7 @@ const ChecklistTab = () => {
     <div className="max-w-[1100px] mx-auto px-4 pt-4 pb-10 flex flex-col gap-5">
       {/* Core Rules */}
       <div className="bg-zinc-900/60 border border-zinc-700/50 rounded-xl p-4">
-        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3">The 3 Core Rules Before Anything Else</div>
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Core Rules Before Anything Else</div>
         <div className="flex flex-col gap-2">
           {CORE_RULES.map((r, i) => (
             <div key={i} className="flex items-start gap-3 bg-zinc-800/40 rounded-lg px-4 py-2.5">
@@ -8128,7 +8161,7 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v8"; // bumped 2026-10-07: v7 briefs predate the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v9"; // bumped 2026-10-07 (v9: v8 briefs quoted raw field names like pulse_breadth_divergence; v8 added the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
                                                                      // (v6 note, 2026-09-22: invalidate briefs
                                                                      // cached before the extra manual re-scrapes
                                                                      // (today's SPX/NDX/DJI fix) — v5 briefs cite
@@ -8260,7 +8293,8 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
     `Analyse all the data below and write exactly ${3 + (needsExtra ? 1 : 0) + (hasCot ? 1 : 0)} paragraphs with NO headers or labels:\n\n` +
     `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index, and new 52W highs vs lows. Be specific with the numbers.\n` +
     `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure? ` +
-    `Also use breadth_cycle (our own 0-100 participation score and phase: Expansion / Distribution / Contraction / Repair, with its 5-session change) and say whether participation is improving or deteriorating.\n` +
+    `Also use breadth_cycle (our own 0-100 participation score and phase: Expansion / Distribution / Contraction / Repair, with its 5-session change) and say whether participation is improving or deteriorating. ` +
+    `Never quote JSON field names (breadth_cycle, pulse_breadth_divergence, up4_pct ...) in the text - say "the breadth cycle" or "the breadth divergence" in plain English.\n` +
     `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. If pulse_breadth_divergence is not null, state that divergence in one sentence and let it temper the stance (e.g. index uptrend with narrow breadth = selective, not aggressive). State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n` +
     para4Instruction +
     cotInstruction +
@@ -8750,24 +8784,51 @@ const BREADTH_MEASURES = [
   { key: "d34", label: "34D ±13%", note: "Intermediate-momentum participation." },
   { key: "t2108", label: "T2108", note: "Percentage of stocks above their 40-day moving average." },
 ];
-const BREADTH_RANGES = [["1W", 5], ["1M", 21], ["3M", 63], ["6M", 126], ["YTD", "ytd"], ["1Y", 252]];
+const BREADTH_RANGES = [["1W", 5], ["1M", 21], ["3M", 63], ["6M", 126], ["YTD", "ytd"], ["1Y", 252], ["3Y", 756], ["5Y", 1260], ["10Y", 2520], ["Max", 1e9]];
 
-const BreadthCycleTab = () => {
-  const [rows, setRows]   = React.useState(null);        // ascending by date
+// React.memo: App re-renders every second (the data-age countdown) and this page is heavy (4,400-row history), so it must not re-render with it.
+const BreadthCycleTab = React.memo(function BreadthCycleTab() {
+  const [hist, setHist] = React.useState(null);         // breadth_long_history.json (2009 →), when available
+  const [shortRows, setShortRows] = React.useState(null); // fallback: breadth_monitor.json (current year only)
   const [selDate, setSelDate] = React.useState(null);
   const [measure, setMeasure] = React.useState("d4");
   const [range, setRange] = React.useState("3M");
+  const [showAllRows, setShowAllRows] = React.useState(false);
   React.useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/breadth_monitor.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => {
-      if (!d?.rows?.length) return;
-      const asc = [...d.rows].filter(r => r.date).sort((a, b) => a.date.localeCompare(b.date));
-      setRows(asc); setSelDate(asc[asc.length - 1].date);
-    }).catch(() => {});
+    const base = process.env.PUBLIC_URL;
+    fetch(`${base}/breadth_long_history.json?v=${new Date().toISOString().slice(0, 13)}`).then(r => r.ok ? r.json() : null).then(h => {
+      if (h?.dates?.length > 1500) { setHist(h); setSelDate(h.dates[h.dates.length - 1]); return; }
+      throw new Error("no long history");
+    }).catch(() => {
+      fetch(`${base}/breadth_monitor.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => {
+        if (!d?.rows?.length) return;
+        const asc = [...d.rows].filter(r => r.date).sort((a, b) => a.date.localeCompare(b.date));
+        setShortRows(asc); setSelDate(asc[asc.length - 1].date);
+      }).catch(() => {});
+    });
   }, []);
+  // Long history -> the same row shape the sheet gives (ratios recomputed as sum(up 4%)/sum(down 4%), S&P from Yahoo).
+  const ds = React.useMemo(() => (hist ? buildDataset(hist) : null), [hist]);
+  const rows = React.useMemo(() => {
+    if (!hist) return shortRows;
+    const c = hist.cols, spxJ = new Map(hist.spx_dates.map((d, j) => [d, j]));
+    const cu = [0], cd = [0];
+    hist.dates.forEach((_, i) => { cu.push(cu[i] + (c.up_4_pct[i] || 0)); cd.push(cd[i] + (c.down_4_pct[i] || 0)); });
+    const ratio = (i, k) => cd[i + 1] - cd[i + 1 - k] > 0 ? (cu[i + 1] - cu[i + 1 - k]) / (cd[i + 1] - cd[i + 1 - k]) : 1;
+    return hist.dates.map((date, i) => ({
+      date, up_4_pct: c.up_4_pct[i], down_4_pct: c.down_4_pct[i], ratio_5d: i >= 4 ? ratio(i, 5) : 1, ratio_10d: i >= 9 ? ratio(i, 10) : 1,
+      up_25_q: c.up_25_q[i], down_25_q: c.down_25_q[i], up_25_m: c.up_25_m[i], down_25_m: c.down_25_m[i], up_50_m: c.up_50_m[i], down_50_m: c.down_50_m[i],
+      up_13_34d: c.up_13_34d[i], down_13_34d: c.down_13_34d[i], t2108: c.t2108[i], sp_index: spxJ.has(date) ? hist.spx[spxJ.get(date)] : null,
+    })).slice(10);       // the first days have no 10-day ratio
+  }, [hist, shortRows]);
+  const dsIndex = React.useMemo(() => (ds ? new Map(ds.dates.map((d, i) => [d, i])) : null), [ds]);
 
   const enriched = React.useMemo(() => computeBreadthCycle(rows), [rows]);
   const selIdx = enriched.findIndex(r => r.date === selDate);
   const sel = selIdx >= 0 ? enriched[selIdx] : null;
+  // ~4,400 <option>s: build once per data load, not on every Time Machine change.
+  const dateOptions = React.useMemo(() => [...enriched].reverse().map(r => <option key={r.date} value={r.date}>{r.date}</option>), [enriched]);
+  const scenarios = React.useMemo(() => (ds && sel && dsIndex.has(sel.date) ? scenarioReport(ds, dsIndex.get(sel.date)) : null), [ds, dsIndex, sel?.date]);   // eslint-disable-line react-hooks/exhaustive-deps
 
   const windowRows = React.useMemo(() => {
     if (!sel) return [];
@@ -8813,7 +8874,7 @@ const BreadthCycleTab = () => {
       <div className="text-[12px] font-semibold text-zinc-200">{label}</div>
       <div className="text-[10px] text-zinc-600 mb-2">{note}</div>
       <div className="flex justify-between text-[11px] text-zinc-500"><span>Up</span><span>Down</span></div>
-      <div className="flex justify-between font-mono text-[18px] font-bold"><span className="text-emerald-400">{up.toLocaleString()}</span><span className="text-rose-400">{down.toLocaleString()}</span></div>
+      <div className="flex justify-between font-mono text-[18px] font-bold"><span className="text-emerald-400">{(up ?? 0).toLocaleString()}</span><span className="text-rose-400">{(down ?? 0).toLocaleString()}</span></div>
     </div>
   );
   const dateIdxStep = step => { const i = Math.max(0, Math.min(enriched.length - 1, selIdx + step)); setSelDate(enriched[i].date); };
@@ -8830,7 +8891,7 @@ const BreadthCycleTab = () => {
           <div className="flex items-center gap-1">
             <button onClick={() => dateIdxStep(-1)} disabled={selIdx <= 0} className="px-2.5 py-1 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800 disabled:opacity-30">‹</button>
             <select value={selDate} onChange={e => setSelDate(e.target.value)} className="px-2 py-1 rounded border border-zinc-700 bg-zinc-900 text-zinc-100 text-[13px] font-mono">
-              {[...enriched].reverse().map(r => <option key={r.date} value={r.date}>{r.date}</option>)}
+              {dateOptions}
             </select>
             <button onClick={() => dateIdxStep(1)} disabled={selIdx >= enriched.length - 1} className="px-2.5 py-1 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800 disabled:opacity-30">›</button>
           </div>
@@ -8838,7 +8899,7 @@ const BreadthCycleTab = () => {
         </div>
       </div>
 
-      <div className="rounded-xl border bg-zinc-900/60 p-5 grid gap-6 md:grid-cols-[260px_1fr]" style={{ borderTopColor: phase.color, borderTopWidth: 2, borderColor: "#27272a" }}>
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 grid gap-6 md:grid-cols-[260px_1fr]" style={{ borderTopColor: phase.color, borderTopWidth: 2 }}>
         <div><BreadthGauge strength={sel.strength} phase={sel.phase} /></div>
         <div>
           <div className="text-[11px] font-semibold tracking-wider text-zinc-500">BREADTH CYCLE · {sel.date}</div>
@@ -8850,7 +8911,7 @@ const BreadthCycleTab = () => {
           <div className="grid grid-cols-3 gap-3 mt-4">
             <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">STRENGTH</div><div className="font-mono text-lg font-bold text-zinc-100">{Math.round(sel.strength)} / 100</div></div>
             <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">5-SESSION CHANGE</div><div className={`font-mono text-lg font-bold ${sel.change >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{sel.change >= 0 ? "+" : ""}{sel.change.toFixed(1)} pts</div></div>
-            <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">T2108</div><div className="font-mono text-lg font-bold text-zinc-100">{sel.t2108.toFixed(2)}%</div></div>
+            <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">T2108</div><div className="font-mono text-lg font-bold text-zinc-100">{sel.t2108 != null ? `${sel.t2108.toFixed(2)}%` : "—"}</div></div>
           </div>
           <p className="text-[10px] text-zinc-600 mt-3">The cycle estimate combines daily ±4% breadth, 5- and 10-day pressure, quarter and 34-day participation, and T2108 (equal weights). It is our own scoring — use it as context, not a mechanical signal.</p>
         </div>
@@ -8904,6 +8965,53 @@ const BreadthCycleTab = () => {
         <BreadthLineChart dates={dates} series={[{ label: "SPX", color: "#e4e4e7", vals: d("sp_index") }]} selIdx={sIdx} height={120} fmt={v => Math.round(v).toLocaleString()} />
       </div>
 
+      {scenarios && (
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+          <div className="text-[11px] font-semibold tracking-wider text-zinc-500">SPX HISTORICAL SCENARIO ENGINE · {sel.date}</div>
+          <div className="text-lg font-bold text-zinc-100">What Tended To Happen Next?</div>
+          <p className="text-[12px] text-zinc-500 mb-3">
+            Earlier days are weighted by how similar they were to {sel.date} in breadth (±4% movers, 5/10-day ratios, quarter and 34-day participation) and in S&amp;P 500
+            momentum, trend and volatility. Overlapping forward periods are down-weighted so one persistent episode cannot dominate. Only outcomes that were
+            already complete on the selected date are used, so Time Machine dates never see the future.
+          </p>
+          <div className="grid gap-4 lg:grid-cols-2">
+            {scenarios.map((r, i) => {
+              const hz = ["1 Month", "3 Months", "6 Months", "1 Year"][i];
+              if (!r) return <div key={hz} className="rounded-lg border border-zinc-800 p-4 text-[12px] text-zinc-600 italic">{hz}: not enough completed history before {sel.date}.</div>;
+              const names = { up: "Strong upside", range: "Range / modest move", down: "Meaningful downside" };
+              const colors = { up: "#5fd4b0", range: "#a1a1aa", down: "#ff6b8b" };
+              const pct = v => `${(v * 100).toFixed(1)}%`;
+              const sgn = v => `${v >= 0 ? "+" : ""}${(v * 100).toFixed(1)}%`;
+              return (
+                <div key={hz} className="rounded-lg border border-zinc-800 p-4">
+                  <div className="flex items-baseline gap-2"><span className="text-[13px] font-bold text-zinc-100">{hz}</span><span className="text-[10px] text-zinc-600">{r.sessions} sessions</span></div>
+                  <div className="text-[10px] font-semibold tracking-wider text-zinc-500 mt-2">MOST LIKELY · {names[r.most].toUpperCase()}</div>
+                  <div className="text-3xl font-bold" style={{ color: colors[r.most] }}>{pct(r.probs[r.most])}</div>
+                  <div className="text-[11px] text-zinc-500 mb-2">{r.vsBase >= 0 ? "+" : "−"}{Math.abs(r.vsBase).toFixed(1)} pts versus the historical base rate</div>
+                  {["up", "range", "down"].map(k => (
+                    <div key={k} className="flex items-center gap-2 mb-1">
+                      <span className="w-36 text-[11px] text-zinc-400">{names[k]}</span>
+                      <span className="flex-1 h-2 rounded bg-zinc-800 overflow-hidden"><span className="block h-full" style={{ width: `${r.probs[k] * 100}%`, backgroundColor: colors[k] }} /></span>
+                      <span className="w-14 text-right font-mono text-[12px] text-zinc-200">{pct(r.probs[k])}</span>
+                      <span className="w-20 text-right text-[10px] text-zinc-600">base {pct(r.base[k])}</span>
+                    </div>
+                  ))}
+                  <div className="grid grid-cols-3 gap-2 mt-3 text-[11px]">
+                    <div><div className="text-zinc-600 tracking-wide text-[10px]">MEDIAN SPX RETURN</div><div className={`font-mono text-[14px] font-bold ${r.median >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{sgn(r.median)}</div></div>
+                    <div><div className="text-zinc-600 tracking-wide text-[10px]">MIDDLE 50% RANGE</div><div className="font-mono text-zinc-200">{sgn(r.q25)} to {sgn(r.q75)}</div></div>
+                    <div><div className="text-zinc-600 tracking-wide text-[10px]">SCENARIO THRESHOLD</div><div className="font-mono text-zinc-200">±{Math.round(r.thr * 100)}%</div></div>
+                    <div><div className="text-zinc-600 tracking-wide text-[10px]">EFFECTIVE EPISODES</div><div className="font-mono text-zinc-200">{Math.round(r.effective).toLocaleString()}</div></div>
+                    <div><div className="text-zinc-600 tracking-wide text-[10px]">ELIGIBLE HISTORY</div><div className="font-mono text-zinc-200">{r.eligible.toLocaleString()} dates</div></div>
+                    <div><div className="text-zinc-600 tracking-wide text-[10px]">CORE SIMILAR DATES</div><div className="font-mono text-zinc-200">{r.core.toLocaleString()}</div></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-[10px] text-zinc-600 mt-3">Scenario odds are historical frequencies from Stockbee breadth data since 2009 (the 2008 crash is not covered), not guaranteed forecasts. Similarity method and weights are our own — see src/breadthScenario.js.</p>
+        </div>
+      )}
+
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
         <div className="text-[11px] font-semibold tracking-wider text-zinc-500 mb-2">READINGS THROUGH SELECTED DATE</div>
         <div className="overflow-auto max-h-[520px] rounded-lg border border-zinc-800">
@@ -8923,7 +9031,7 @@ const BreadthCycleTab = () => {
               </tr>
             </thead>
             <tbody>
-              {sort.rows.map((r, i) => (
+              {(showAllRows ? sort.rows : sort.rows.slice(0, 400)).map((r, i) => (
                 <tr key={r.date} onClick={() => setSelDate(r.date)} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${r.date === sel.date ? "bg-blue-500/10" : i % 2 ? "bg-zinc-900/20" : ""}`}>
                   <td className="px-3 py-1.5 text-left font-mono text-zinc-300">{r.date}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{r.up}</td>
@@ -8933,17 +9041,22 @@ const BreadthCycleTab = () => {
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.r10.toFixed(2)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.qUp.toLocaleString()}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.qDown.toLocaleString()}</td>
-                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.t2108.toFixed(2)}%</td>
-                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.spx.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.t2108 != null ? `${r.t2108.toFixed(2)}%` : "—"}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.spx != null ? r.spx.toLocaleString(undefined, { maximumFractionDigits: 2 }) : "—"}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        {sort.rows.length > 400 && (
+          <button onClick={() => setShowAllRows(v => !v)} className="mt-2 text-[11px] text-blue-400 hover:text-blue-300">
+            {showAllRows ? "Show fewer rows" : `Show all ${sort.rows.length.toLocaleString()} rows`}
+          </button>
+        )}
       </div>
     </div>
   );
-};
+});
 
 const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [], onOpenCot, onOpenBreadthCycle = null }) => {
   const [miniChartsFor, setMiniChartsFor] = React.useState(null); // { title, tickers } for the Market Breadth drill-down's mini-chart grid
@@ -9185,17 +9298,21 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
 
         {/* ── Market Condition Signal ── */}
         {sig && (
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border mb-4 ${sig.badge}`}>
+          <div className={`px-4 py-3 rounded-xl border mb-4 ${sig.badge}`}>
+          <div className="flex items-center gap-x-3 gap-y-2 flex-wrap">
             <span className={`w-3 h-3 rounded-full shrink-0 ${sig.dot} shadow-lg`} style={{boxShadow:`0 0 8px 2px var(--tw-shadow-color)`}}/>
-            <span className="font-bold text-sm">{sig.label}</span>
-            <span className="text-xs opacity-80 hidden sm:block">{sig.guidance}</span>
-            <div className="ml-auto flex items-center gap-3 text-[11px] font-mono shrink-0">
+            <span className="font-bold text-sm whitespace-nowrap">{sig.label}</span>
+            <span className="text-xs opacity-80 hidden sm:block flex-1 min-w-[180px]">{sig.guidance}</span>
+            <BreadthChip signal={signal} onOpen={onOpenBreadthCycle} />
+            <div className="ml-auto flex items-center gap-x-3 gap-y-1 flex-wrap text-[11px] font-mono">
               <span>SPY SMA50: <span className={spySma50 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(spySma50)}</span></span>
               <span>SMA200: <span className={spySma200 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(spySma200)}</span></span>
               <span className="text-zinc-600">|</span>
               <span>QQQ SMA50: <span className={qqqSma50 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(qqqSma50)}</span></span>
               <span>SMA200: <span className={qqqSma200 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(qqqSma200)}</span></span>
             </div>
+          </div>
+          <BreadthNote signal={signal} />
           </div>
         )}
 
