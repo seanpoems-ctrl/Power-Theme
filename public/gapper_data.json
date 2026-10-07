@@ -1,222 +1,77 @@
 {
-  "scan_time": "2026-10-06 08:55 ET",
+  "scan_time": "2026-10-07 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "OPCH",
-      "price": 31.06,
-      "gap_pct": 32.91,
-      "pm_volume": 3429926,
-      "avg_vol_10d": 1701277,
-      "avg_dollar_vol": 52841664,
-      "mkt_cap": 3500481366,
-      "rvol": 0.66,
-      "adr_pct": 2.86,
-      "category": "New Contract/Partnership",
-      "theme": "McKesson/CD&R $5B Takeover",
-      "reasoning": "OPCH stock soared **22%** on reports of a **$5 billion** takeover by **McKesson** and **CD&R**, confirmed by an 8-K filing.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "**Option Care Health (OPCH)** filed an 8-K on **2026-10-06** regarding a material contract or agreement. News headlines specified this as a **$5 billion takeover** by **McKesson** and **CD&R**, causing OPCH stock to **soar 22% after-hours** and **surge 22%** in pre-market trading.",
-        "impact": "This event signals a major re-rating for OPCH, removing M&A risk and establishing a clear acquisition price, likely leading to significant short-term price appreciation towards the reported takeover value."
-      },
-      "analysis_details": "• **Impact**\n**Option Care Health (OPCH)** stock **soared 22% after-hours** and **surged 22%** on news of a definitive **$5 billion takeover** agreement. The acquisition involves major healthcare distributor **McKesson** and private equity firm **CD&R**, fundamentally revaluing the company at the reported deal price.\n\n• **Strategic Value**\nThis **$5 billion** takeover by **McKesson** and **CD&R** represents a significant strategic consolidation in the healthcare services sector. For OPCH, it signals a premium valuation and a major exit for shareholders, while for the acquirers, it strengthens their market position in specialized infusion and alternate site care.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "OPCH Stock Soars 22% After-Hours On $5B McKesson Buyout Talks - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMnUta3NQaTJBTFRxWFJjamdkZF9KZWZZNXFfT2lpX0FPWW9HeFdHZmtHUFRjQkx1MFFmZ29wY3NUcklpTDd0ZC1maTQ2cHYzbU1CRVFiTDZZb0dpWjd3dmpHeFFsRzctbDJRN1JkdWRQbHMxSkhuV1ctQzJvMWk1UHBHYWxyVTZBNnlkMDk4RWtJdlZu?oc=5"
-        },
-        {
-          "title": "Option Care Health surges 22% on report of $5 billion takeover by McKesson, CD&R - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNQVFhX2xiNjZrWlZxMkN1M3JMaXdlUm9HZmlaVnpLYklmN0dzbHNLeUtYcWE2a1VBWjRDdHBiTmZ4UnRJMll5bHBZemNLVDNKNnlwN1BWUkthZTBfcDhCbzA4enJtYTcwbG9UVzBuSVlPTXJhanYxN2Fxd1I3djlhUjVKX1FQUk1hWjh4UFpBbjE0N1JDbzZBX2hodm5INTc3TlFTdHRjcUlJOU9rNnFXdW53c01lc01DQzFMS2MwQVFVSS15ZGstcXl6T2lGUQ?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-06",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "7.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1014739/000110465926113904/tm2627097d1_8k.htm"
-      },
-      "float_shares": "147.15M",
-      "short_float": "11.26%",
-      "daily_pct": 32.65,
-      "prev_close": 31.0,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $53M < $100M, ADR 2.9% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "takeover confirmed by an 8-K filing",
-        "discrepancy_note": "The primary catalyst claims confirmation by an 8-K filing, but neither Finviz nor Google News sources mention an 8-K filing. All sources refer to the news as 'reports', 'talks', 'bid', or being 'near' a deal, not officially confirmed via an SEC filing."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BRUN",
-      "price": 16.31,
-      "gap_pct": 13.82,
-      "pm_volume": 315869,
-      "avg_vol_10d": 1762337,
-      "avg_dollar_vol": 28743716,
-      "mkt_cap": 1201500855,
-      "rvol": 2.73,
-      "adr_pct": 8.11,
-      "category": "New Contract/Partnership",
-      "theme": "AI Cloud Deal with Cohere",
-      "reasoning": "Boost Run secured a **$525.6M AI cloud deal** with **Cohere**, driving **customer commitments** to **$2.6 billion**.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 82,
-      "grade": "C",
-      "finviz_theme": "AI Cloud",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Boost Run (BRUN) announced a **$525.6M AI cloud deal** with **Cohere**, triggering a **9.5% surge** in its stock. This new AI computing deal brings Boost Run's total **customer commitments** to over **$2.6 billion**. The agreement includes **prepayments** with **conditional refund rights** for BRUN.",
-        "impact": "This substantial contract significantly expands BRUN's revenue visibility and strengthens its position in the competitive AI computing market, signaling strong demand for its cloud services."
-      },
-      "analysis_details": "• **Impact**\nBoost Run's stock surged **9.5%** today following the announcement of a significant **AI cloud deal**. This new agreement, specifically valued at **$525.6M**, is with AI partner **Cohere** and reportedly includes **prepayments** with **conditional refund rights**. The deal is a major contributor to Boost Run's total **customer commitments**, which now top **$2.6 billion** for AI computing.\n\n• **Strategic Value**\nSecuring a **$525.6M** contract with a key AI player like **Cohere**, pushing total commitments past **$2.6 billion**, materially enhances BRUN's long-term revenue growth and market share in the AI computing sector. This strategic partnership solidifies BRUN's role as a critical infrastructure provider for AI development, with the prepayment structure offering immediate capital and commitment certainty.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Prepayments come with conditional refund rights in Boost Run (BRUN)'s cloud deal with Cohere. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQbFBLYmhaNXZaTnZZdFc1SGNvTGJHZkZkOWtDOVFwOEctUGhVaEowMGpRbFJ1anRJZUtGd0tmaTdTcEdLTTNqaUFoTkJiNVVmU21sTS1HMGphTXNSVkdFRmg1MFJjdVNQUjV1YnZqLW9Zb0psRmhDWXVSeVFPNFRNOGVQeU9yQ2QzWkF2bXlrMjc2bGswcXFvSUF4NE1KR0RLalZIMw?oc=5"
-        },
-        {
-          "title": "A COO at Boost Run (BRUN) must repay award payments if he resigns within 24 months of the first payment. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQR1NYN1ZFVENnb25oUElKTGlxME9hM29IZHVkYl9CSm12d1dWRWVWU3o2dS1HS3h1Qm8wWjhWdjhUM0tZWGlSUHBrVXhER241LWpsSGhyX2c0MFFCVEtYWXJnRHNQUjlIMDdySnlNOHE2Sk9wNnZwQWxNNTRJNWFSLW9vMnhqRl9PajNPNE9xWF9mWGp1RkRPV2s2UWNMSVBJSlV6eA?oc=5"
-        },
-        {
-          "title": "Boost Run stock surges 9.5% on $525.6M AI cloud deal - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcWdkWXppVF9YM05ac29LUmE2WDVWUzVPWTAzdURuY1NYMnhjYTdmdWpuQ3pPbGZCWHZqeU5WelFoV3ZBZndYLUF2cnVlNDdoTDBQRmV1VmtXekZDN0tNR2dtYmh1OXJJbWFZRndVaW9VQURwSnE5bnJGWGxHVl9nYkpZQTdpajRpYlRkSDhWSm1QZjBod2tBM1NzQlNmb2E1eElJbzhwczI?oc=5"
-        },
-        {
-          "title": "Customer commitments to Boost Run top $2.6 billion after a new AI computing deal - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQR1ZsTTJIZEN1eDA3VVdUenlma093aVpUU0Fkc18xSGFUWGxpbXhWT2JhNWFLRk5IMkpZbDQxbm1aY3FrTnBfbWdHQTVPRDYxQnRHTzFpNTIyWDZCRkhZdGd2UENFTkRiMVlqaTllZDlaNEZRUXk4TjlpalIzR29JVEtHYldpTEhtcFRBcjVCNWlYQ1hGUEJEbGJ4OTlEWE1HLXl3R05ScDI1Zkd1MXp0ZXc5T21ZdEk?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-06",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/2090646/000149315226045861/form8-k.htm"
-      },
-      "float_shares": "37.08M",
-      "short_float": null,
-      "daily_pct": 5.86,
-      "prev_close": 15.17,
-      "industry": "AI Cloud",
-      "technical_status": "Fail (Avg $Vol $29M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$525.6M AI cloud deal with Cohere",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News) confirms the $525.6M deal (articles [2], [3]) and Cohere as the partner (article [4]), but dual source confirmation is not met."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CEG",
-      "price": 290.3,
-      "gap_pct": 8.47,
-      "pm_volume": 384545,
-      "avg_vol_10d": 2895079,
-      "avg_dollar_vol": 840441434,
-      "mkt_cap": 94819737445,
-      "rvol": 1.28,
-      "adr_pct": 3.61,
-      "category": "New Contract/Partnership",
-      "theme": "Google Nuclear Power Purchase Agreement",
-      "reasoning": "Constellation Energy (CEG) announced a nuclear power deal with Google, which will create about 7,200 construction jobs, driving momentum.",
+      "ticker": "NEOG",
+      "price": 13.8,
+      "gap_pct": 15.38,
+      "pm_volume": 116117,
+      "avg_vol_10d": 5897568,
+      "avg_dollar_vol": 81386438,
+      "mkt_cap": 2608547802,
+      "rvol": 1.07,
+      "adr_pct": 4.68,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Neogen shares rose **8%** after reporting **better-than-expected Q1 results**, including **6.5% sales growth**, and **raised its full-year guidance**.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Clean Energy - Nuclear",
-      "analysis_source": "gemini",
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Constellation Energy (CEG) has entered into a new **nuclear power deal** with **Google**, a development that is expected to create approximately **7,200 construction jobs**. This new information regarding the job creation impact of the previously reported 20-year power purchase agreement provides a fresh angle on the partnership.",
-        "impact": "This strategic partnership with a major tech player like Google strengthens CEG's position in the clean energy market and underscores the increasing demand for reliable, carbon-free power for large-scale operations."
+        "catalyst": "Neogen Corporation (NEOG) filed an 8-K on **2026-10-06** reporting its first-quarter financial results for fiscal year 2027, which **exceeded analyst expectations**. Sales rose by **6.5%**, despite the company reporting an **$11.9 million loss**. The company also **raised its full-year guidance**, leading to the stock soaring.",
+        "impact": "The better-than-expected Q1 results and increased full-year guidance suggest improving operational execution and a strengthened outlook, likely bolstering investor confidence and potentially driving continued positive price momentum."
       },
-      "analysis_details": "• **Impact**\nConstellation Energy (CEG) has confirmed a **nuclear power deal with Google**, which is projected to generate roughly **7,200 construction jobs**. This partnership involves a **20-year power purchase agreement** that Constellation Energy previously announced last week.\n\n• **Strategic Value**\nThis agreement with **Google** highlights the growing demand for clean energy, particularly nuclear power, from major corporations. The creation of **7,200 jobs** also suggests significant investment and expansion within CEG's nuclear fleet, reinforcing its role as a key player in the clean energy sector and potentially attracting further institutional interest in the company's long-term growth trajectory.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nNeogen Corporation reported **first-quarter results** for fiscal year 2027 that **exceeded analyst expectations**. The company demonstrated **strong sales**, leading to the stock being up **8%** in after-hours trading, reversing previous losses.\n\n• **The Growth (Momentum)**\nSales for the quarter **rose 6.5%**, indicating robust top-line expansion for the food safety solutions company. This growth occurred despite Neogen reporting an **$11.9 million loss** for the period, with investors focusing on the positive sales momentum.\n\n• **The Guide**\nNeogen further bolstered investor sentiment by **raising its full-year guidance**. This updated outlook signals management's confidence in sustained business momentum and future financial performance, which is a critical indicator for momentum investors.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "VST Vs CEG: Which Nuclear Power Fleet Stock Is A Better Bet?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/energy/articles/vst-vs-ceg-nuclear-power-075728216.html"
-        },
-        {
-          "title": "Google’s nuclear deal with Constellation will create about 7,200 construction jobs - Stock Titan",
+          "title": "Neogen’s (NASDAQ:NEOG) Q3 CY2026: Strong Sales, Stock Soars - StockStory",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxObUpFcDM5MVhCdGNJZG5TbVUxb1lqeFNEcjlvVnkxWHVJU1pLQ25pR0tlc0w4OTVMUVphWGhtTmhGeWNSUXpZU3pRaEJ5VUpvaEZpdXZYdmNuSVQ4SE1iM2JmVE9oaUNDTncyQnVxRWFVWGZLVjZ1bEhiQnlyWVY2a1BWZXR4R1hCSkE1VnhiT19ySFZRNzU5MlhVMDQ3ME14RGhUZk9Ic29kQUdDS1dmbWlHYVhXR202NDVPTTJsZw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPTGxuOERLcWZtVkdvUDMwSE44VzRFV2x1cFBNYTBfT1VaX3BhOEhjcHN0N2JCdFBnU3JQU1JBVFRPS3lzYmRjMGhteF9Oc3VsRjQ4MXlYOEQxWlNhVTdMdXBHdFI5YlVUdFIwVWg5ZHd6NDlDU2dUOXZmLVpwdk9fYXlmUmxWRGpNZHFoSF8tOTRMR0VOcXRwQTM2Zk10QmVudkl3ekZ4eFBZQjI3NlA3am1R?oc=5"
         },
         {
-          "title": "Your Vistra Stock Thesis Has One Loose End",
+          "title": "Sales rose 6.5%, but Neogen reported an $11.9 million loss. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQbUtYX1ZZWmo5VndUVnNOWWgwVVNQVWtLU1FoejRJMmlNOE93OWJJWlZaTHRVQ1lCTUh3ZDhQRjR4UEVJSlBtcmdCdlpnNzFCVmZocVVLQ3FjQVFNWU1xX09wWnVMcVFVVXA2OG5SOXpZZTB5Tl9wcEx6cGdHc1Y3REZVR2JuQzIwWjhheEtiV2Vzb1Y2RUFheFNieWxPa2dmbUVKUWNzRDJjMUpFSmVZeldtYVY1YW5U?oc=5"
+        },
+        {
+          "title": "Neogen stock up 8% on better-than-expected Q1 results, guidance",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/vistra-stock-thesis-one-loose-154012091.html"
+          "url": "https://finance.yahoo.com/markets/stocks/articles/neogen-stock-8-better-expected-203944569.html"
+        },
+        {
+          "title": "Neogen: Fiscal Q1 Earnings Snapshot",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/neogen-fiscal-q1-earnings-snapshot-201005923.html"
+        },
+        {
+          "title": "Neogen Reports First-Quarter Financial Results for Fiscal Year 2027",
+          "source": "Finviz",
+          "url": "/news/399515/neogen-reports-first-quarter-financial-results-for-fiscal-year-2027"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "338.59M",
-      "short_float": "3.70%",
-      "daily_pct": 12.25,
-      "prev_close": 300.4,
-      "industry": "Clean Energy - Nuclear",
-      "technical_status": "Fail (ADR 3.6% < 4%)",
+      "edgar_filing": {
+        "filing_date": "2026-10-06",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/711377/000119312526415544/neog-20261006.htm"
+      },
+      "float_shares": "216.02M",
+      "short_float": "6.84%",
+      "daily_pct": -8.07,
+      "prev_close": 11.96,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $81M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -224,312 +79,29 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "7,200 construction jobs",
-        "discrepancy_note": "Source B [4] (Stock Titan) explicitly states 'about 7,200 construction jobs'. However, none of the articles provided from Source A (Finviz News) mention this specific job creation number, nor do the other articles from Source B."
+        "primary_claim": "Neogen shares rose 8%",
+        "discrepancy_note": "Source A (Finviz [1]) states Neogen stock is up 8%, while Source B (GuruFocus [5]) states Neogen shares rose 11%."
       },
       "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "XNDU",
-      "price": 4.86,
-      "gap_pct": 7.52,
-      "pm_volume": 1047302,
-      "avg_vol_10d": 11557182,
-      "avg_dollar_vol": 56167905,
-      "mkt_cap": 1384416617,
-      "rvol": 0.6,
-      "adr_pct": 6.55,
-      "category": "New Contract/Partnership",
-      "theme": "Quantum Production Partnership",
-      "reasoning": "Xanadu announced a new partnership to move its quantum components from lab prototypes into factory production, indicating progress towards commercialization.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "C",
-      "finviz_theme": "AI AGI",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "A **new partnership** has been established to transition Xanadu's **quantum components** from **lab prototypes** to **factory production**.",
-        "impact": "This partnership marks a crucial step in operationalizing Xanadu's technology, potentially accelerating commercial scalability and market readiness of its quantum offerings."
-      },
-      "analysis_details": "• **Impact**\nXanadu has forged a **new partnership** focused on moving its **quantum components** from **lab prototypes** directly into **factory production**. This strategic collaboration aims to bridge the gap between early-stage development and large-scale manufacturing for its advanced quantum technology.\n\n• **Strategic Value**\nThis development signifies a pivotal move towards commercializing Xanadu's quantum technology, shifting from theoretical models and lab environments to tangible, manufacturable products. The ability to produce components at scale could dramatically enhance market penetration and solidify Xanadu's position in the emerging quantum computing industry, attracting further investment and potential customers seeking production-ready solutions.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "A new partnership aims to move Xanadu's quantum components from lab prototypes to factory production. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTU9UdjNTSk5yM0dyRzZhUjBSSlZ1STBIXzJxRExYUmZiUm5RMVhwTDh0SXFUNHBWcS1BN0ZnMnZZNU93UkpOTWpGZEJZMmFOOWh5MGZ1SEV2WlZkWm9GR3c1M2lidzlIT3VLM3lXUUdfY0hLUWFmRG5SNFo4ZklGRlFxUFNkcFE2SEd2bEtjYms3bTZKZUtIWF8wWW1uaVFCY0ZBamRBaS1fWHU3bEE5S3hXaDl0c2s?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "2.09M",
-      "short_float": "22.10%",
-      "daily_pct": 11.95,
-      "prev_close": 5.06,
-      "industry": "AI AGI",
-      "technical_status": "Fail (Avg $Vol $56M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Xanadu announced a new partnership to move its quantum components from lab prototypes into factory production.",
-        "discrepancy_note": "Source A (Finviz News) reports '(none)', providing no confirmation. Source B (Google News) articles [2] and [4] confirm the claim, with [2] stating 'A new partnership aims to move Xanadu's quantum components from lab prototypes to factory production' and [4] identifying 'Multi-Year GlobalFoundries Manufacturing Partnership'."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
+        "gate_mkt_cap": true,
         "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
-    },
-    {
-      "ticker": "PRME",
-      "price": 3.45,
-      "gap_pct": 7.45,
-      "pm_volume": 194962,
-      "avg_vol_10d": 3773840,
-      "avg_dollar_vol": 13019748,
-      "mkt_cap": 582219733,
-      "rvol": 1.4,
-      "adr_pct": 7.83,
-      "category": "Others",
-      "theme": "Analyst Rating (Maintained)",
-      "reasoning": "Citizens maintained Prime Medicine's Market Outperform rating, indicating consistent analyst sentiment without a new upgrade catalyst.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "Biotech - Gene Therapy",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Citizens **maintained** Prime Medicine's stock rating at **Market Outperform**. This action confirms existing analyst sentiment.",
-        "impact": "This is not a new catalyst; it simply reiterates prior expectations, potentially offering mild support but unlikely to drive significant momentum independently."
-      },
-      "analysis_details": "• **What Happened**\nCitizens **maintained** Prime Medicine's stock rating at **Market Outperform**, indicating no change in their investment stance. Additionally, option activity highlighted a **Jan 2027 7.000 call** for PRME.\n\n• **Key Consideration**\nWhile an analyst rating maintenance provides a degree of validation for the stock's current position, it does not introduce a new catalyst for price momentum. Without an upgrade or a price target adjustment, this news is more reflective of ongoing sentiment rather than a fresh driver for significant movement.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "PRME Jan 2027 7.000 call (PRME270115C00007000) Interactive Stock Chart - Yahoo! Finance Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5kbGpDUVlTYmMxTkZISnZ2dXRyVTYzZ0tySXAyZVRId2kwZ2RJcFZfV0ZXcVpsVktZZkNNR2h6RWhXNU0xOGFDMUMtb0pTWU56aUVsUDVCTGRNbjlDZFVBV1NhRGx3bU5WYXFacDZn?oc=5"
-        },
-        {
-          "title": "Prime Medicine stock rating maintained at Market Outperform by Citizens - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNWUd1OEdzYlVyQWRScTJZNzRqUEp4RUJkMi1ONms0aHluZ1dib1pRX3pjREhsVUs2cXZtTy1nZjdaeTRXTVJLR0taNjk5dXJmcjFrS09rY1hZcTc0aDd3MncxaEZpMF92VE5vUUlSS05RYWxtTDUtQmpXVXd2ZFZmVFpBT0lkREtXeUdHeEpEdmo3a3dpNFJoTHNBcGhHbmpIbGNGZThoY1djemtlSUluV1B3RV9wSi1RZFU3Uk41QjNHZXluX3RBLTJyRQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "97.44M",
-      "short_float": "22.65%",
-      "daily_pct": 9.03,
-      "prev_close": 3.5,
-      "industry": "Biotech - Gene Therapy",
-      "technical_status": "Fail (Avg $Vol $13M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Prime Medicine's Market Outperform rating was maintained by Citizens.",
-        "discrepancy_note": "Source A (Finviz News) contains no information regarding the claim. Source B (Google News) headline [2] explicitly states 'Prime Medicine stock rating maintained at Market Outperform by Citizens - Investing.com', which confirms the claim, but since Source A does not corroborate, it is marked as a Discrepancy per the auditing rules requiring confirmation from BOTH sources."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "PENN",
-      "price": 15.9,
-      "gap_pct": 5.3,
-      "pm_volume": 55235,
-      "avg_vol_10d": 3596645,
-      "avg_dollar_vol": 57186656,
-      "mkt_cap": 2024405550,
-      "rvol": 0.75,
-      "adr_pct": 3.9,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "PENN stock outperformed competitors without specific news, suggesting technical momentum or significant institutional order flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Consumer - Gaming",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests potential for a **low float squeeze**; however, this carries a high risk of being a **Gap and Trap**."
-      },
-      "analysis_details": "• **What Happened**\nPENN Entertainment Inc. stock **outperformed competitors** on a recent strong trading day. However, no specific fundamental news or company-specific announcements were identified from the available headlines to explain this outperformance. The company has an upcoming **Q3 call on Nov. 5**, which is not a catalyst for today's price action.\n\n• **Key Consideration**\nGiven the absence of direct catalysts, the stock's outperformance likely stems from **technical factors** or **institutional order flow**. Such moves, lacking fundamental backing, may be driven by **short-term momentum** or **low-float dynamics**, and are often prone to rapid reversals if sustained buying interest does not materialize.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "PENN Entertainment Inc. stock outperforms competitors on strong trading day - MarketWatch",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQdklDWnB2djZ6N251WEVLTjVPYWN3SFBMWV9JMnB5U1dMQWxXdENEMkUtN2FyMW9qeDhTNTVPT0F5c0hoSHZuTzlCUlBkWmppM3BsUm1tWEZLb3JaaFZ4dmRMN2YyVjZaWUdnTmEwX0U0M1pUMmxFMV82WFIyRUlZVGtQeExPSkxQZVlYTi00ZXdrazZuanppYkJhTGFYNGM4MS16elRISmltN0x1bm9ETWc5VmZ6bHRoVGlzSEsxTDZRUWU0WmY1UGQtZFN0UlM1TDM0cDFzbnZ2MHZ3aFBnc3VCS2VrWjQ?oc=5"
-        },
-        {
-          "title": "Anyone can listen to PENN Entertainment's Q3 call on Nov. 5. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQMWJWWUZ4emtGaGI2VkFOLXNSenQ5a1p0U3hCakFQcGNtYm5DUTRGUURQS1hOanVyYmN2d05PV3JFUy1TTUpmUGhzTF9mLVJkOHJqMmVSWTY3Y295QzQ0UlRLUUR4TGhILW5xOU5xekFiQnVNcFFoRnhjcnMxQzhWZEtuSlZ1eWpJMmZ6MTIzcE12MjdBeURsSk0wOXpVTzRRT1dieHcwSC1aWmNxdExGYlZjMzU?oc=5"
-        },
-        {
-          "title": "Meet the 28p penny stock with a £1.20 broker target! - uk.finance.yahoo.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1tc2M1UzN1TFZtMTMtcmJqZnVmSHY2SkxYeDBDc3g5NXJlNDhBSm55MW4yZWJIRVZZV05EQ3I3VlpRWndGTEg0bjhkYjB3UXNpT2dxbWM4QXAyUzktcE5mRWxhZ0ZTTEdDblJhZ3dSVGpTTHU3Ym5pa1lKdw?oc=5"
-        },
-        {
-          "title": "Penny-Stock Bet on Athabasca Yields 6,500% Gain for Ninepoint - Bloomberg.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQVndodGVzcktuU3M4VVJTZ0VRSDRHYXkyeW1pcDBLMWIwa1lQSlhYcWdrcG90c3R0dkxIUnVBTE9CZHF3Ym5kLXdlZWJOb0g3OV9SZmpybEFzR2V5Tmx1M0huSTN2ZVFKNXF2Y3ZrYWJ2SDNlNXFIOExvU0Y1ajFCRWhOOWFpMGh2cDdpUWV2aFJhQ0NYVGhWY2pHbEh1d3o0MkhRSmlWQUk0SWhsRnhib1dSaG11RWtqNGtJ?oc=5"
-        },
-        {
-          "title": "Stock Up, Stock Down (10.5.26) - Black Shoe Diaries",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOTWhiWlB2YWx5QUMyRHU5a09EeVN3UnBXZTNzSDZPbTJ1OS0ybmQ2bXNHUERWTURKd0xJZll1MmFWeDBuN2UxLXA5QTN2b3F0RjZtVUNGS3lpdHQtdjNDRTQwRUZ6Ujk5cEZLTFR3UVNRM2pDbHRLV2NQdnpGdmV0Y3BUSTIweUhCbHlUb2FJOA?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "131.94M",
-      "short_float": "16.62%",
-      "daily_pct": 5.36,
-      "prev_close": 15.91,
-      "industry": "Consumer - Gaming",
-      "technical_status": "Fail (Avg $Vol $57M < $100M, ADR 3.9% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "PENN stock outperformed competitors",
-        "discrepancy_note": "Source B (Google News [4]) states 'PENN Entertainment Inc. stock outperforms competitors on strong trading day', directly supporting the claim. However, Source A (Finviz News) contains no information to confirm this claim. Since both sources do not independently confirm the claim, it is marked as Discrepancy."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CLF",
-      "price": 12.81,
-      "gap_pct": 5.04,
-      "pm_volume": 173668,
-      "avg_vol_10d": 17626056,
-      "avg_dollar_vol": 225789777,
-      "mkt_cap": 6960588368,
-      "rvol": 1.44,
-      "adr_pct": 4.76,
-      "category": "Upgrade",
-      "theme": "JPMorgan Price Target Raise & Project Showcasing",
-      "reasoning": "JPMorgan raised CLF's price target to $13.00 following the company hosting U.S. Secretary of Energy for its GOES expansion project.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 33,
-      "grade": "A",
-      "finviz_theme": "Materials - Metals & Mining",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "JPMorgan raised its target for Cleveland-Cliffs stock to **USD 13.00**. This follows Cleveland-Cliffs' **GOES Expansion Project** at Butler Works, a **$200 million project** set to expand steel production for power-grid transformers by up to **25%**. The company hosted U.S. Secretary of Energy **Chris Wright** and other government officials to showcase this strategic project.",
-        "impact": "The price target increase combined with significant government interest in a strategic expansion project signals strong institutional conviction and potential for re-rating, enhancing momentum and investor confidence."
-      },
-      "analysis_details": "• **The Firm & Rating**\nJPMorgan has issued an analyst action, raising its price target for Cleveland-Cliffs stock to **USD 13.00**. This re-rating reflects an updated valuation or outlook from the institutional firm, directly impacting investor sentiment and potentially attracting new buying interest.\n\n• **The Thesis**\nThe upgrade's underlying thesis is bolstered by Cleveland-Cliffs' strategic **$200 million GOES Expansion Project**, designed to increase steel production for critical power-grid transformers by up to **25%**. The involvement of U.S. Secretary of Energy **Chris Wright** and other government officials at Butler Works to showcase this project underscores its national importance and potential for long-term demand and policy support, aligning with broader infrastructure and energy grid thematic narratives.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "JPMorgan raises target for Cleveland-Cliffs stock to USD 13.00 - AD HOC NEWS",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQdW56YXlURXhsV1lDZFZDMHQwVVlicFhkNFVFY0xrdm5KdS1rdmZpblcyZEFRNVk4c21ha2pGYTNnQnpNc3hfOGlNUEducnd1UjgzQjJVZ3F3bWlOOUJJOUt4UGJLeS15OC10eGFvS1BQdm42SUJ4S2pPV1BTQWI2MmoxT282Zm8tVHJOTWlGU0JlcnVvSnRkT1VLYnZnWUdOalo1cXBsdjBkWkJDQTJNOENkVmdJYnpURWlYb2p3?oc=5"
-        },
-        {
-          "title": "A $200 million project will expand steel production for power-grid transformers by up to 25%. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOUmVhb2V5TFZ3TUlSQlJBQWFRa3lyVi1SMVJvLXhrR2F6Wmt4azA4UEhHQW93cThacktqck40c2U1ZXZuWW5tbFNseVJWaU1Fb1hwS0pwSFVLZEZUMnMwUGhHUm1vdEJoVzBERzY1OE1fOVo1ZUltMFBSUHljNDdKVUotaWJGRmFHZ29tenJTUVRoT0dWVUpySFhPSnhHSDVvcHl0T05ZRFlabEdMYTFvZW1FVkZYVE8tV1BR?oc=5"
-        },
-        {
-          "title": "Cleveland-Cliffs to Host U.S. Secretary of Energy Chris Wright and Other Government Officials at Butler Works to Showcase GOES Expansion Project",
-          "source": "Finviz",
-          "url": "/news/398912/cleveland-cliffs-to-host-us-secretary-of-energy-chris-wright-and-other-government-officials-at-butler-works-to-showcase-goes-expansion-project"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "560.60M",
-      "short_float": "14.21%",
-      "daily_pct": 0.41,
-      "prev_close": 12.25,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "JPMorgan raised CLF's price target to $13.00",
-        "discrepancy_note": "Source B [5] confirms 'JPMorgan raises target for Cleveland-Cliffs stock to USD 13.00', but Source A does not mention any price target or analyst upgrade."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 6,
+    "small_gaps": 0,
     "large_gaps": 1,
-    "total_headlines": 20,
+    "total_headlines": 5,
     "monthly_cost_usd": 0.01
   }
 }
