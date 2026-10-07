@@ -15930,11 +15930,13 @@ const THEME_WINDOWS = [["1M", "perf_1m"], ["3M", "perf_3m"], ["6M", "perf_6m"], 
 // Stats come from public/etf_stats.json (etf_stats_builder.py); weights/holdings from thematic_data.json `etf_holdings`.
 // Combined = average weight across ALL of the group's ETFs (0% where an ETF doesn't hold the stock), so it reads as an
 // equal-weighted blend of the group's ETFs and sums to ~100% of the shown holdings' share.
-const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose, onMiniCharts }) => {
-  const [tab, setTab] = React.useState("Combined");
+// `only` = a single ETF ticker (opened from an ETF row, e.g. the ETF NEL tables): the popup is then scoped to that ETF —
+// "XSD Holdings", one stats row, one holdings tab — instead of the whole group.
+const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose, onMiniCharts, only = null }) => {
+  const [tab, setTab] = React.useState(only || "Combined");
   const k = win.k;
-  const members = React.useMemo(() => (group.member_tickers || []).map(t => etfs.find(e => e.ticker === t)).filter(Boolean)
-    .sort((a, b) => (b[k] ?? -Infinity) - (a[k] ?? -Infinity)), [group, etfs, k]);
+  const members = React.useMemo(() => (group.member_tickers || []).filter(t => !only || t === only).map(t => etfs.find(e => e.ticker === t)).filter(Boolean)
+    .sort((a, b) => (b[k] ?? -Infinity) - (a[k] ?? -Infinity)), [group, etfs, k, only]);
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
   const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
   const holdings = React.useMemo(() => {
@@ -15963,7 +15965,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
       <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8" style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
         <div className="bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[880px] max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
           <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
-            <h3 className="text-base font-bold text-zinc-100">{group.name} Holdings</h3>
+            <h3 className="text-base font-bold text-zinc-100">{only || group.name} Holdings</h3>
             <button onClick={onClose} className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-900 font-bold hover:bg-white" aria-label="Close">×</button>
           </div>
           <div className="px-5 py-4 space-y-5">
@@ -16000,12 +16002,12 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
               <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <div className="text-sm font-semibold text-zinc-200">Top stock holdings</div>
                 {holdings.length > 0 && onMiniCharts && (
-                  <button onClick={() => setMiniOpen({ title: `${group.name} · ${tab}`, tickers: holdings.map(h => ({ ticker: h.ticker, category: group.name })) })}
+                  <button onClick={() => setMiniOpen({ title: `${only || group.name} · ${tab}`, tickers: holdings.map(h => ({ ticker: h.ticker, category: group.name })) })}
                     className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
                 )}
               </div>
               <div className="flex gap-2 flex-wrap mb-2">
-                {["Combined", ...members.map(m => m.ticker)].map(t => (
+                {(only ? [only] : ["Combined", ...members.map(m => m.ticker)]).map(t => (
                   <button key={t} onClick={() => setTab(t)}
                     className={`px-3 py-1 rounded-full text-[12px] font-semibold transition-colors ${tab === t ? "bg-zinc-100 text-zinc-900" : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"}`}>{t}</button>
                 ))}
@@ -16100,7 +16102,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
       const st = stats?.etfs?.[e.ticker] || {};
       return { ticker: e.ticker, group: e.fine_theme, perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null };
     }).filter(x => x.ext != null && x.ext < nelCrit.maxExt && (x.dvol ?? 0) >= nelCrit.minDvolM * 1e6).sort((a, b) => b.perf - a.perf);
-    return { w: t.w, rows };
+    return { w: t.w, k: t.k, rows };
   }), [tables, etfs, stats, nelCrit]);
   const nelUnique = [...new Set(nel.flatMap(n => n.rows.map(r => r.ticker)))];
   const nelCopy = () => {
@@ -16160,7 +16162,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
                         <td className={`px-3 py-1.5 text-right font-mono ${r.median >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.median)}</td>
                         <td className="px-3 py-1.5 text-left whitespace-nowrap">
                           {r.leader
-                            ? <a href={`https://www.tradingview.com/chart/?symbol=${r.leader}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{r.leader}</a>
+                            ? <a href={`https://www.tradingview.com/chart/?symbol=${r.leader}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="font-mono font-bold text-cyan-400 hover:underline">{r.leader}</a>
                             : "—"}
                         </td>
                         <td className={`px-3 py-1.5 text-right font-mono ${r.total && r.confirmed === r.total ? "text-emerald-400" : r.confirmed === 0 ? "text-zinc-600" : "text-zinc-300"}`}>{r.confirmed}/{r.total}</td>
@@ -16219,8 +16221,9 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
                       </thead>
                       <tbody>
                         {n.rows.map((r, i) => (
-                          <tr key={r.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                            <td className="px-3 py-1.5 text-left whitespace-nowrap"><a href={`https://www.tradingview.com/chart/?symbol=${r.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</a></td>
+                          <tr key={r.ticker} title={`${r.ticker} · ${r.group} — click for holdings`} onClick={() => { const g = groups.find(x => x.name === r.group); if (g) setSel({ group: g, win: { w: n.w, k: n.k }, only: r.ticker }); }}
+                              className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                            <td className="px-3 py-1.5 text-left whitespace-nowrap"><a href={`https://www.tradingview.com/chart/?symbol=${r.ticker}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</a></td>
                             <td className="px-3 py-1.5 text-left text-zinc-400 whitespace-nowrap">{r.group}</td>
                             <td className={`px-3 py-1.5 text-right font-mono ${r.perf >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.perf)}</td>
                             <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
@@ -16237,7 +16240,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
           </div>
         )}
       </div>
-      {sel?.group && <ThemeGroupPopup group={sel.group} window={sel.win} etfs={etfs} etfHoldings={etfHoldings} stats={stats}
+      {sel?.group && <ThemeGroupPopup key={`${sel.group.name}|${sel.win.w}|${sel.only || ""}`} only={sel.only || null} group={sel.group} window={sel.win} etfs={etfs} etfHoldings={etfHoldings} stats={stats}
         onClose={() => setSel(null)} onMiniCharts={onMiniCharts} />}
     </div>
   );
