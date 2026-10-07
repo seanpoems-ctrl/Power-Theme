@@ -15920,7 +15920,7 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
 };
 
 // ── Leadership → Themes: which theme groups lead each window ──────────────────────────────────────────────────────────
-// Built client-side from etf_rs.json (`fine_theme_rankings` = per-group median performance of its ETFs; `etfs` = the members).
+// Built client-side from etf_rs.json `etfs`, grouped by each ETF's `leadership_theme` (see buildLeadershipGroups) — group return = median of its ETFs.
 //   Strength   percentile of the group's median performance among all groups for that window (100 = best)
 //   Median     the group's median ETF performance over the window
 //   Leader     the member ETF with the best performance over the window
@@ -16054,6 +16054,19 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
 // Themes = the 31 theme groups (median ETF return per period); ETFs = every non-benchmark ETF. Tiles are ranked best → worst and
 // shown as bars from a zero line. Premarket / After hours come from public/etf_extended_hours.json (etf_extended_hours_builder.py); there is no
 // Overnight period because TradingView's screener returns no overnight data.
+// Leadership → Themes uses a NARROWER grouping than the rest of the dashboard: each ETF's `leadership_theme` (etf_master.json,
+// ~63 themes) instead of `fine_theme` (31 buckets that Industry Matrix / Theme Leaderboard / Spotlight are aligned to and must keep).
+const themeOf = e => e.leadership_theme || e.fine_theme;
+const LEADERSHIP_PERF_KEYS = ["perf_intraday", "perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m", "perf_12m"];
+const buildLeadershipGroups = etfs => {
+  const med = vals => { const v = vals.filter(x => x != null).sort((a, b) => a - b); if (!v.length) return null; const m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
+  const by = {};
+  for (const e of etfs) { if (e.benchmark || !themeOf(e)) continue; (by[themeOf(e)] ||= []).push(e); }
+  return Object.entries(by).map(([name, ms]) => ({
+    name, count: ms.length, member_tickers: ms.map(m => m.ticker).sort(),
+    ...Object.fromEntries(LEADERSHIP_PERF_KEYS.map(k => [k, med(ms.map(m => m[k]))])),
+  }));
+};
 const HEAT_PERIODS = [["Premarket", "perf_pre"], ["After hours", "perf_post"], ["Intraday", "perf_intraday"], ["1 Day", "perf_1d"],
   ["1 Week", "perf_1w"], ["1 Month", "perf_1m"], ["3 Months", "perf_3m"], ["6 Months", "perf_6m"], ["1 Year", "perf_12m"]];
 const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }) => {
@@ -16065,7 +16078,7 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
     const k = period;
     let out;
     if (mode === "etfs") {
-      out = etfs.filter(e => !e.benchmark && e[k] != null).map(e => ({ key: e.ticker, label: e.ticker, sub: e.fine_theme || e.label || "", v: e[k], etf: e.ticker }));
+      out = etfs.filter(e => !e.benchmark && e[k] != null).map(e => ({ key: e.ticker, label: e.ticker, sub: themeOf(e) || e.label || "", v: e[k], etf: e.ticker }));
     } else {
       const byT = Object.fromEntries(etfs.map(e => [e.ticker, e]));
       out = groups.map(g => {
@@ -16154,10 +16167,10 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
   const etfsRaw = etfRsData?.etfs || [];
   // Adds perf_pre / perf_post (extended-hours %) so the heatmap and popups treat them like any other period key.
   const etfs    = React.useMemo(() => etfsRaw.map(e => ({ ...e, perf_pre: extHours?.etfs?.[e.ticker]?.premarket ?? null, perf_post: extHours?.etfs?.[e.ticker]?.afterhours ?? null })), [etfsRaw, extHours]);
-  const groups = etfRsData?.fine_theme_rankings || [];
+  const groups = React.useMemo(() => buildLeadershipGroups(etfs), [etfs]);
   const openEtf = (ticker, win) => {
     const e = etfs.find(x => x.ticker === ticker);
-    const g = groups.find(x => x.name === e?.fine_theme) || { name: e?.label || ticker, member_tickers: [ticker] };
+    const g = groups.find(x => x.name === (e && themeOf(e))) || { name: e?.label || ticker, member_tickers: [ticker] };
     setSel({ group: g, win, only: ticker });
   };
   const tables = React.useMemo(() => {
@@ -16200,9 +16213,9 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
     const top = new Set(t.rows.slice(0, 10).map(r => r.name));
     // Same "confirmed" test as the ranking table: up over the window AND at/above the median of all (non-benchmark) ETFs, so a
     // broad group doesn't drag in every laggard ETF it happens to contain.
-    const rows = etfs.filter(e => !e.benchmark && e.fine_theme && top.has(e.fine_theme) && e[t.k] != null && e[t.k] > 0 && e[t.k] >= t.med).map(e => {
+    const rows = etfs.filter(e => !e.benchmark && themeOf(e) && top.has(themeOf(e)) && e[t.k] != null && e[t.k] > 0 && e[t.k] >= t.med).map(e => {
       const st = stats?.etfs?.[e.ticker] || {};
-      return { ticker: e.ticker, group: e.fine_theme, perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null };
+      return { ticker: e.ticker, group: themeOf(e), perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null };
     }).filter(x => x.ext != null && x.ext < nelCrit.maxExt && (x.dvol ?? 0) >= nelCrit.minDvolM * 1e6).sort((a, b) => b.perf - a.perf);
     return { w: t.w, k: t.k, rows };
   }), [tables, etfs, stats, nelCrit]);
@@ -16227,7 +16240,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
     <div className="space-y-4">
       <div className="flex items-baseline gap-2 flex-wrap">
         <h3 className="text-sm font-semibold text-zinc-100">Theme Leaders</h3>
-        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{groups.length} groups</span>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{groups.length} themes</span>
         <span className="text-[11px] text-zinc-600">top 10 per window · Strength = percentile of the group's median ETF return · Confirmed = member ETFs up and above the all-ETF median</span>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">

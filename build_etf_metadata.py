@@ -125,8 +125,9 @@ def main() -> None:
     _validate(etf_meta)
 
     # 1) public/etf_metadata.json — ticker → category/fine_theme/label/type/liquid/description/benchmark
+    leadership = {t: m.get("leadership_theme") for t, m in json.loads(MASTER_PATH.read_text(encoding="utf-8")).items()}
     metadata = [
-        {"ticker": t, "category": cat, "fine_theme": fine, "label": lbl, "type": typ, "liquid": liq, "description": desc, "benchmark": bm}
+        {"ticker": t, "category": cat, "fine_theme": fine, "leadership_theme": leadership.get(t), "label": lbl, "type": typ, "liquid": liq, "description": desc, "benchmark": bm}
         for t, (cat, fine, lbl, typ, liq, desc, bm) in etf_meta.items()
     ]
     metadata.sort(key=lambda x: (x["category"], not x["liquid"], x["type"], x["ticker"]))

@@ -2,6 +2,7 @@
   "NANC": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Meme & sentiment",
     "label": "Political",
     "type": "beta_booster",
     "liquid": false,
@@ -10,6 +11,7 @@
   "PSIL": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Biotechnology",
     "label": "Psychedelics",
     "type": "beta_booster",
     "liquid": false,
@@ -18,6 +20,7 @@
   "BAI": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Artificial Intelligence",
+    "leadership_theme": "AI",
     "label": "AI Value Chain",
     "type": "beta_booster",
     "liquid": false,
@@ -26,6 +29,7 @@
   "ASHR": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "China",
     "label": "China A-Shares",
     "type": "beta_booster",
     "liquid": true,
@@ -34,6 +38,7 @@
   "HELX": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Genomics & oncology",
     "label": "Gene Editing",
     "type": "beta_booster",
     "liquid": false,
@@ -42,6 +47,7 @@
   "FCG": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Natural gas",
     "label": "Natural Gas Producers",
     "type": "beta_booster",
     "liquid": false,
@@ -50,6 +56,7 @@
   "IEO": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Oil & gas",
     "label": "Oil & Gas Cap-Weighted",
     "type": "pure_sector",
     "liquid": true,
@@ -58,6 +65,7 @@
   "BOAT": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Transportation & Logistics",
+    "leadership_theme": "Shipping",
     "label": "Shipping",
     "type": "beta_booster",
     "liquid": false,
@@ -66,6 +74,7 @@
   "XES": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Oil services",
     "label": "Oil Services Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -74,6 +83,7 @@
   "OIH": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Oil services",
     "label": "Oil Services Concentrated",
     "type": "beta_booster",
     "liquid": true,
@@ -82,6 +92,7 @@
   "PLTM": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Platinum & palladium",
     "label": "Platinum",
     "type": "beta_booster",
     "liquid": false,
@@ -90,6 +101,7 @@
   "CANC": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Genomics & oncology",
     "label": "Healthcare",
     "type": "beta_booster",
     "liquid": false,
@@ -98,6 +110,7 @@
   "PBE": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Biotechnology",
     "label": "Biotech Multi-Factor",
     "type": "beta_booster",
     "liquid": false,
@@ -106,6 +119,7 @@
   "PHO": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Utilities",
+    "leadership_theme": "Water & grid",
     "label": "Water",
     "type": "pure_sector",
     "liquid": false,
@@ -114,6 +128,7 @@
   "XSD": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Semiconductors",
     "label": "Semiconductors Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -122,6 +137,7 @@
   "KURE": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "China",
     "label": "China Healthcare",
     "type": "beta_booster",
     "liquid": false,
@@ -130,6 +146,7 @@
   "GUNR": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Materials & Mining",
+    "leadership_theme": "Natural resources",
     "label": "Natural Resources Upstream",
     "type": "beta_booster",
     "liquid": true,
@@ -138,6 +155,7 @@
   "EVX": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Environmental Sustainability",
+    "leadership_theme": "Environment & carbon",
     "label": "Environment",
     "type": "beta_booster",
     "liquid": false,
@@ -146,6 +164,7 @@
   "RACK": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Data centers & neocloud",
     "label": "Data Centers",
     "type": "beta_booster",
     "liquid": false,
@@ -154,6 +173,7 @@
   "FFTY": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Factors",
     "label": "Growth Stocks",
     "type": "beta_booster",
     "liquid": false,
@@ -162,6 +182,7 @@
   "USO": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Oil & gas",
     "label": "Crude Oil",
     "type": "pure_sector",
     "liquid": true,
@@ -170,6 +191,7 @@
   "GXC": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "China",
     "label": "China Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -178,6 +200,7 @@
   "CHIQ": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "China",
     "label": "China Consumer",
     "type": "beta_booster",
     "liquid": false,
@@ -186,6 +209,7 @@
   "GNR": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Materials & Mining",
+    "leadership_theme": "Natural resources",
     "label": "Natural Resources Global",
     "type": "pure_sector",
     "liquid": false,
@@ -194,6 +218,7 @@
   "JETS": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Transportation & Logistics",
+    "leadership_theme": "Travel & leisure",
     "label": "Airlines",
     "type": "beta_booster",
     "liquid": true,
@@ -202,6 +227,7 @@
   "TAN": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Renewable",
+    "leadership_theme": "Solar & wind",
     "label": "Solar",
     "type": "beta_booster",
     "liquid": true,
@@ -210,6 +236,7 @@
   "IBB": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Biotechnology",
     "label": "Biotech Large-Cap",
     "type": "beta_booster",
     "liquid": true,
@@ -218,6 +245,7 @@
   "NLR": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Nuclear & Coal",
+    "leadership_theme": "Nuclear & uranium",
     "label": "Nuclear",
     "type": "beta_booster",
     "liquid": false,
@@ -226,6 +254,7 @@
   "ARGT": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "Latin America",
     "label": "Argentina",
     "type": "beta_booster",
     "liquid": false,
@@ -234,6 +263,7 @@
   "IYZ": {
     "category": "Telecom & Communication",
     "fine_theme": "Telecommunications",
+    "leadership_theme": "Telecom",
     "label": "Telecom Cap-Weighted",
     "type": "pure_sector",
     "liquid": false,
@@ -242,6 +272,7 @@
   "XOP": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Oil & gas",
     "label": "Oil & Gas Equal",
     "type": "beta_booster",
     "liquid": true,
@@ -250,6 +281,7 @@
   "FDRV": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Electric Vehicles",
+    "leadership_theme": "EVs & batteries",
     "label": "EV Suppliers",
     "type": "beta_booster",
     "liquid": false,
@@ -258,6 +290,7 @@
   "SLX": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Materials & Mining",
+    "leadership_theme": "Metals & mining",
     "label": "Steel",
     "type": "beta_booster",
     "liquid": false,
@@ -266,6 +299,7 @@
   "FXI": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "China",
     "label": "China Large-Cap",
     "type": "pure_sector",
     "liquid": true,
@@ -274,6 +308,7 @@
   "SUPL": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Transportation & Logistics",
+    "leadership_theme": "Transportation & logistics",
     "label": "Logistics",
     "type": "beta_booster",
     "liquid": false,
@@ -282,6 +317,7 @@
   "HYDR": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Renewable",
+    "leadership_theme": "Clean energy",
     "label": "Hydrogen",
     "type": "beta_booster",
     "liquid": false,
@@ -290,6 +326,7 @@
   "PPH": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Pharmaceuticals",
     "label": "Pharma Concentrated",
     "type": "pure_sector",
     "liquid": false,
@@ -298,6 +335,7 @@
   "ITB": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Real Estate & REITs",
+    "leadership_theme": "Housing",
     "label": "Homebuilding",
     "type": "beta_booster",
     "liquid": false,
@@ -306,6 +344,7 @@
   "BLOK": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Blockchain & miners",
     "label": "Blockchain",
     "type": "beta_booster",
     "liquid": false,
@@ -314,6 +353,7 @@
   "XAR": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Defense & Aerospace",
+    "leadership_theme": "Defense",
     "label": "Defense Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -322,6 +362,7 @@
   "ILF": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "Latin America",
     "label": "Latin America",
     "type": "beta_booster",
     "liquid": true,
@@ -330,6 +371,7 @@
   "XRPI": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Ethereum & altcoins",
     "label": "XRP Futures",
     "type": "beta_booster",
     "liquid": false,
@@ -338,6 +380,7 @@
   "FAN": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Renewable",
+    "leadership_theme": "Solar & wind",
     "label": "Wind Energy",
     "type": "beta_booster",
     "liquid": false,
@@ -346,6 +389,7 @@
   "HLAL": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "ESG & values",
     "label": "Values-based",
     "type": "beta_booster",
     "liquid": false,
@@ -354,6 +398,7 @@
   "DRIV": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Electric Vehicles",
+    "leadership_theme": "EVs & batteries",
     "label": "EV Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -362,6 +407,7 @@
   "AMLP": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Energy infrastructure",
     "label": "MLP & Midstream",
     "type": "beta_booster",
     "liquid": false,
@@ -370,6 +416,7 @@
   "PBW": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Renewable",
+    "leadership_theme": "Clean energy",
     "label": "Clean Energy Growth",
     "type": "beta_booster",
     "liquid": false,
@@ -378,6 +425,7 @@
   "XHB": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Real Estate & REITs",
+    "leadership_theme": "Housing",
     "label": "Homebuilders Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -386,6 +434,7 @@
   "IDGT": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Data centers & neocloud",
     "label": "Digital Infrastructure",
     "type": "beta_booster",
     "liquid": false,
@@ -394,6 +443,7 @@
   "ITA": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Defense & Aerospace",
+    "leadership_theme": "Defense",
     "label": "Defense Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
@@ -402,6 +452,7 @@
   "PAVE": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrials",
+    "leadership_theme": "Infrastructure",
     "label": "Infrastructure US",
     "type": "beta_booster",
     "liquid": true,
@@ -410,6 +461,7 @@
   "IHI": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Medical equipment",
     "label": "Medical Devices",
     "type": "beta_booster",
     "liquid": false,
@@ -418,6 +470,7 @@
   "KWEB": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "China",
     "label": "China Internet",
     "type": "pure_sector",
     "liquid": true,
@@ -426,6 +479,7 @@
   "OZEM": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Pharmaceuticals",
     "label": "Weight Loss & GLP-1",
     "type": "beta_booster",
     "liquid": false,
@@ -434,6 +488,7 @@
   "SOLZ": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Ethereum & altcoins",
     "label": "Solana Futures",
     "type": "beta_booster",
     "liquid": false,
@@ -442,6 +497,7 @@
   "UNG": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Natural gas",
     "label": "Natural Gas Futures",
     "type": "pure_sector",
     "liquid": true,
@@ -450,6 +506,7 @@
   "KRE": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Fintech",
+    "leadership_theme": "Banks",
     "label": "Regional Banks",
     "type": "pure_sector",
     "liquid": true,
@@ -458,6 +515,7 @@
   "ARKX": {
     "category": "Space Exploration",
     "fine_theme": "Space Exploration",
+    "leadership_theme": "Space",
     "label": "Space Active",
     "type": "beta_booster",
     "liquid": false,
@@ -466,6 +524,7 @@
   "ARKW": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Internet",
     "label": "Internet Active",
     "type": "beta_booster",
     "liquid": true,
@@ -474,6 +533,7 @@
   "ESPO": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Digital Entertainment",
+    "leadership_theme": "Gaming & gambling",
     "label": "Gaming",
     "type": "beta_booster",
     "liquid": false,
@@ -482,6 +542,7 @@
   "IBIT": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Bitcoin & crypto index",
     "label": "Bitcoin Spot",
     "type": "beta_booster",
     "liquid": true,
@@ -490,6 +551,7 @@
   "MOO": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Agriculture & Food",
+    "leadership_theme": "Agriculture",
     "label": "Agriculture & FoodTech",
     "type": "beta_booster",
     "liquid": false,
@@ -498,6 +560,7 @@
   "XTL": {
     "category": "Telecom & Communication",
     "fine_theme": "Telecommunications",
+    "leadership_theme": "Telecom",
     "label": "Telecom Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -506,6 +569,7 @@
   "MAGS": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Software",
+    "leadership_theme": "Mega-cap & innovation",
     "label": "Mega-cap Technology",
     "type": "beta_booster",
     "liquid": true,
@@ -514,6 +578,7 @@
   "RTH": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Retail & e-commerce",
     "label": "Retail Concentrated",
     "type": "pure_sector",
     "liquid": true,
@@ -522,6 +587,7 @@
   "EWZ": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "Latin America",
     "label": "Brazil",
     "type": "pure_sector",
     "liquid": true,
@@ -530,6 +596,7 @@
   "BUZZ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Meme & sentiment",
     "label": "Social Sentiment",
     "type": "beta_booster",
     "liquid": false,
@@ -538,6 +605,7 @@
   "IGV": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Software",
+    "leadership_theme": "Software",
     "label": "Software Cap-Weighted",
     "type": "beta_booster",
     "liquid": false,
@@ -546,6 +614,7 @@
   "ARKQ": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Industrial Automation",
+    "leadership_theme": "Robotics & automation",
     "label": "Robotics Active",
     "type": "beta_booster",
     "liquid": false,
@@ -554,6 +623,7 @@
   "XBI": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Biotechnology",
     "label": "Biotech Equal",
     "type": "beta_booster",
     "liquid": true,
@@ -562,6 +632,7 @@
   "IGF": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrials",
+    "leadership_theme": "Infrastructure",
     "label": "Infrastructure Global",
     "type": "pure_sector",
     "liquid": false,
@@ -570,6 +641,7 @@
   "ESGU": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "ESG & values",
     "label": "ESG",
     "type": "beta_booster",
     "liquid": false,
@@ -578,6 +650,7 @@
   "SHLD": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Defense & Aerospace",
+    "leadership_theme": "Defense",
     "label": "Defense Technology",
     "type": "beta_booster",
     "liquid": false,
@@ -586,6 +659,7 @@
   "ICLN": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Renewable",
+    "leadership_theme": "Clean energy",
     "label": "Clean Energy Broad",
     "type": "beta_booster",
     "liquid": true,
@@ -594,6 +668,7 @@
   "BETZ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Digital Entertainment",
+    "leadership_theme": "Gaming & gambling",
     "label": "Gambling",
     "type": "beta_booster",
     "liquid": true,
@@ -602,6 +677,7 @@
   "QTUM": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Photonics & quantum",
     "label": "Quantum Computing",
     "type": "beta_booster",
     "liquid": false,
@@ -610,6 +686,7 @@
   "PBJ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Agriculture & Food",
+    "leadership_theme": "Food & beverage",
     "label": "Food & Beverage Multi-Factor",
     "type": "pure_sector",
     "liquid": false,
@@ -618,6 +695,7 @@
   "USCA": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "ESG & values",
     "label": "Climate",
     "type": "beta_booster",
     "liquid": false,
@@ -626,6 +704,7 @@
   "ARKG": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Genomics & oncology",
     "label": "Genomics Active",
     "type": "beta_booster",
     "liquid": false,
@@ -634,6 +713,7 @@
   "URNM": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Nuclear & Coal",
+    "leadership_theme": "Nuclear & uranium",
     "label": "Uranium Miners Pure-Play",
     "type": "beta_booster",
     "liquid": true,
@@ -642,6 +722,7 @@
   "CNBS": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Cannabis",
     "label": "Cannabis Global",
     "type": "beta_booster",
     "liquid": false,
@@ -650,6 +731,7 @@
   "ROBO": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrial Automation",
+    "leadership_theme": "Robotics & automation",
     "label": "Robotics Diversified",
     "type": "beta_booster",
     "liquid": false,
@@ -658,6 +740,7 @@
   "XHE": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Medical equipment",
     "label": "Medical Equipment",
     "type": "beta_booster",
     "liquid": false,
@@ -666,6 +749,7 @@
   "METV": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Digital Entertainment",
+    "leadership_theme": "Gaming & gambling",
     "label": "Metaverse",
     "type": "beta_booster",
     "liquid": false,
@@ -674,6 +758,7 @@
   "SHE": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "ESG & values",
     "label": "Gender Diversity",
     "type": "beta_booster",
     "liquid": false,
@@ -682,6 +767,7 @@
   "GRID": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Utilities",
+    "leadership_theme": "Water & grid",
     "label": "Electrical Grid",
     "type": "beta_booster",
     "liquid": false,
@@ -690,6 +776,7 @@
   "XTN": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Transportation & Logistics",
+    "leadership_theme": "Transportation & logistics",
     "label": "Transportation Equal",
     "type": "pure_sector",
     "liquid": false,
@@ -698,6 +785,7 @@
   "GLD": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Gold & gold miners",
     "label": "Gold",
     "type": "pure_sector",
     "liquid": true,
@@ -706,6 +794,7 @@
   "XPH": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare & Biotech",
+    "leadership_theme": "Pharmaceuticals",
     "label": "Pharma Equal",
     "type": "pure_sector",
     "liquid": false,
@@ -714,6 +803,7 @@
   "ETHA": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Ethereum & altcoins",
     "label": "Ethereum",
     "type": "beta_booster",
     "liquid": true,
@@ -722,6 +812,7 @@
   "CIBR": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cybersecurity",
+    "leadership_theme": "Cybersecurity",
     "label": "Cybersecurity Broad",
     "type": "beta_booster",
     "liquid": true,
@@ -730,6 +821,7 @@
   "KBE": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Fintech",
+    "leadership_theme": "Banks",
     "label": "Banks Equal",
     "type": "pure_sector",
     "liquid": true,
@@ -738,6 +830,7 @@
   "IAI": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Fintech",
+    "leadership_theme": "Capital markets",
     "label": "Capital Markets Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
@@ -746,6 +839,7 @@
   "ARKF": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Fintech",
+    "leadership_theme": "Fintech & payments",
     "label": "Fintech",
     "type": "beta_booster",
     "liquid": false,
@@ -754,6 +848,7 @@
   "XHS": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare Services",
+    "leadership_theme": "Healthcare services",
     "label": "Healthcare Services",
     "type": "beta_booster",
     "liquid": true,
@@ -762,6 +857,7 @@
   "AIQ": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Artificial Intelligence",
+    "leadership_theme": "AI",
     "label": "AI Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -770,6 +866,7 @@
   "SVIX": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Volatility",
     "label": "Volatility",
     "type": "pure_sector",
     "liquid": true,
@@ -778,6 +875,7 @@
   "PEJ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Digital Entertainment",
+    "leadership_theme": "Travel & leisure",
     "label": "Leisure",
     "type": "beta_booster",
     "liquid": false,
@@ -786,6 +884,7 @@
   "KCE": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Fintech",
+    "leadership_theme": "Capital markets",
     "label": "Capital Markets Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -794,6 +893,7 @@
   "GDX": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Gold & gold miners",
     "label": "Gold Miners Large-Cap",
     "type": "beta_booster",
     "liquid": true,
@@ -802,6 +902,7 @@
   "HOMZ": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Real Estate & REITs",
+    "leadership_theme": "Housing",
     "label": "Housing Cycle",
     "type": "beta_booster",
     "liquid": false,
@@ -810,6 +911,7 @@
   "COPX": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Copper & strategic metals",
     "label": "Copper",
     "type": "beta_booster",
     "liquid": false,
@@ -818,6 +920,7 @@
   "PAWZ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Consumer",
     "label": "Pet Industry",
     "type": "beta_booster",
     "liquid": false,
@@ -826,6 +929,7 @@
   "PALL": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Platinum & palladium",
     "label": "Palladium",
     "type": "beta_booster",
     "liquid": false,
@@ -834,6 +938,7 @@
   "SCHH": {
     "category": "Real Estate & Utilities",
     "fine_theme": "Real Estate & REITs",
+    "leadership_theme": "Real estate",
     "label": "Real Estate Broad",
     "type": "pure_sector",
     "liquid": false,
@@ -842,6 +947,7 @@
   "CLOU": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Cloud",
     "label": "Cloud Revenue",
     "type": "beta_booster",
     "liquid": true,
@@ -858,6 +964,7 @@
   "SILJ": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Silver & silver miners",
     "label": "Silver Miners Junior",
     "type": "beta_booster",
     "liquid": false,
@@ -866,6 +973,7 @@
   "XME": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Materials & Mining",
+    "leadership_theme": "Metals & mining",
     "label": "Metals & Mining",
     "type": "beta_booster",
     "liquid": false,
@@ -874,6 +982,7 @@
   "IYT": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Transportation & Logistics",
+    "leadership_theme": "Transportation & logistics",
     "label": "Transportation Cap-Weighted",
     "type": "pure_sector",
     "liquid": true,
@@ -882,6 +991,7 @@
   "LIT": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Electric Vehicles",
+    "leadership_theme": "EVs & batteries",
     "label": "Lithium",
     "type": "beta_booster",
     "liquid": false,
@@ -890,6 +1000,7 @@
   "GENZ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Other thematic",
     "label": "Digital Economy",
     "type": "beta_booster",
     "liquid": false,
@@ -898,6 +1009,7 @@
   "GDXJ": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Gold & gold miners",
     "label": "Gold Miners Junior",
     "type": "beta_booster",
     "liquid": false,
@@ -906,6 +1018,7 @@
   "AWAY": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Travel & leisure",
     "label": "Travel Technology",
     "type": "beta_booster",
     "liquid": false,
@@ -914,6 +1027,7 @@
   "FDN": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "E-Commerce",
+    "leadership_theme": "Internet",
     "label": "Internet Large-Cap",
     "type": "pure_sector",
     "liquid": true,
@@ -922,6 +1036,7 @@
   "ARKK": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Software",
+    "leadership_theme": "Mega-cap & innovation",
     "label": "Innovation",
     "type": "beta_booster",
     "liquid": true,
@@ -930,6 +1045,7 @@
   "REMX": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Copper & strategic metals",
     "label": "Strategic Metals",
     "type": "beta_booster",
     "liquid": false,
@@ -938,6 +1054,7 @@
   "IHF": {
     "category": "Healthcare & Biotech",
     "fine_theme": "Healthcare Services",
+    "leadership_theme": "Healthcare services",
     "label": "Healthcare Providers",
     "type": "pure_sector",
     "liquid": false,
@@ -946,6 +1063,7 @@
   "SLV": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Silver & silver miners",
     "label": "Silver",
     "type": "pure_sector",
     "liquid": true,
@@ -954,6 +1072,7 @@
   "XRT": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Retail & e-commerce",
     "label": "Retail Equal",
     "type": "pure_sector",
     "liquid": true,
@@ -962,6 +1081,7 @@
   "KIE": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Insurance",
+    "leadership_theme": "Insurance",
     "label": "Insurance Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -970,6 +1090,7 @@
   "MEME": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Meme & sentiment",
     "label": "Meme Stocks",
     "type": "beta_booster",
     "liquid": false,
@@ -978,6 +1099,7 @@
   "URA": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Nuclear & Coal",
+    "leadership_theme": "Nuclear & uranium",
     "label": "Uranium & Nuclear",
     "type": "beta_booster",
     "liquid": true,
@@ -986,6 +1108,7 @@
   "WOOD": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Materials & Mining",
+    "leadership_theme": "Natural resources",
     "label": "Timber",
     "type": "pure_sector",
     "liquid": false,
@@ -994,6 +1117,7 @@
   "SIL": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Commodities Metals",
+    "leadership_theme": "Silver & silver miners",
     "label": "Silver Miners Established",
     "type": "beta_booster",
     "liquid": false,
@@ -1002,6 +1126,7 @@
   "IBUY": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "E-Commerce",
+    "leadership_theme": "Retail & e-commerce",
     "label": "Online Retail",
     "type": "beta_booster",
     "liquid": false,
@@ -1010,6 +1135,7 @@
   "MSOS": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Cannabis",
     "label": "Cannabis US Operators",
     "type": "beta_booster",
     "liquid": false,
@@ -1018,6 +1144,7 @@
   "SKYY": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Cloud",
     "label": "Cloud Infrastructure",
     "type": "beta_booster",
     "liquid": true,
@@ -1026,6 +1153,7 @@
   "BOTZ": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrial Automation",
+    "leadership_theme": "Robotics & automation",
     "label": "Robotics Industrial",
     "type": "beta_booster",
     "liquid": false,
@@ -1034,6 +1162,7 @@
   "SOCL": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Digital Entertainment",
+    "leadership_theme": "Meme & sentiment",
     "label": "Social Media",
     "type": "beta_booster",
     "liquid": true,
@@ -1042,6 +1171,7 @@
   "XSW": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Software",
+    "leadership_theme": "Software",
     "label": "Software Equal",
     "type": "pure_sector",
     "liquid": false,
@@ -1050,6 +1180,7 @@
   "SMH": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Semiconductors",
     "label": "Semiconductors Mega-Cap",
     "type": "pure_sector",
     "liquid": true,
@@ -1058,6 +1189,7 @@
   "WCLD": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Cloud",
     "label": "Cloud Growth",
     "type": "beta_booster",
     "liquid": false,
@@ -1066,6 +1198,7 @@
   "IPAY": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Fintech",
+    "leadership_theme": "Fintech & payments",
     "label": "Payments",
     "type": "beta_booster",
     "liquid": false,
@@ -1074,6 +1207,7 @@
   "WGMI": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Blockchain & miners",
     "label": "Bitcoin Miners",
     "type": "beta_booster",
     "liquid": false,
@@ -1082,6 +1216,7 @@
   "NASA": {
     "category": "Space Exploration",
     "fine_theme": "Space Exploration",
+    "leadership_theme": "Space",
     "label": "Space Pre-IPO",
     "type": "beta_booster",
     "liquid": false,
@@ -1090,6 +1225,7 @@
   "UFO": {
     "category": "Space Exploration",
     "fine_theme": "Space Exploration",
+    "leadership_theme": "Space",
     "label": "Space Rules-Based",
     "type": "beta_booster",
     "liquid": false,
@@ -1098,6 +1234,7 @@
   "SOXX": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Semiconductors",
     "label": "Semiconductors Broad",
     "type": "pure_sector",
     "liquid": true,
@@ -1106,6 +1243,7 @@
   "DXYZ": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Private technology",
     "label": "Private Tech Growth",
     "type": "beta_booster",
     "liquid": false,
@@ -1114,6 +1252,7 @@
   "EWY": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "South Korea & EM",
     "label": "South Korea",
     "type": "pure_sector",
     "liquid": true,
@@ -1122,6 +1261,7 @@
   "DRAM": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Memory",
     "label": "Memory",
     "type": "beta_booster",
     "liquid": false,
@@ -1130,6 +1270,7 @@
   "BUG": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cybersecurity",
+    "leadership_theme": "Cybersecurity",
     "label": "Cybersecurity Pure-Play",
     "type": "beta_booster",
     "liquid": true,
@@ -1138,6 +1279,7 @@
   "CABZ": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrial Automation",
+    "leadership_theme": "EVs & batteries",
     "label": "Robotaxis",
     "type": "beta_booster",
     "liquid": false,
@@ -1146,6 +1288,7 @@
   "CHAT": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Artificial Intelligence",
+    "leadership_theme": "AI",
     "label": "Generative AI",
     "type": "beta_booster",
     "liquid": false,
@@ -1154,6 +1297,7 @@
   "ENFR": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Energy infrastructure",
     "label": "Energy Infrastructure",
     "type": "beta_booster",
     "liquid": false,
@@ -1162,6 +1306,7 @@
   "ERTH": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Environmental Sustainability",
+    "leadership_theme": "Environment & carbon",
     "label": "Sustainable Economy",
     "type": "beta_booster",
     "liquid": false,
@@ -1170,6 +1315,7 @@
   "FRI": {
     "category": "Real Estate & Utilities",
     "fine_theme": "Real Estate & REITs",
+    "leadership_theme": "Real estate",
     "label": "Real Estate Cap-Weighted",
     "type": "beta_booster",
     "liquid": false,
@@ -1178,6 +1324,7 @@
   "FTXG": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Agriculture & Food",
+    "leadership_theme": "Food & beverage",
     "label": "Food & Beverage Growth",
     "type": "pure_sector",
     "liquid": false,
@@ -1186,6 +1333,7 @@
   "GBTC": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Bitcoin & crypto index",
     "label": "Bitcoin Legacy Trust",
     "type": "pure_sector",
     "liquid": true,
@@ -1194,6 +1342,7 @@
   "HACK": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cybersecurity",
+    "leadership_theme": "Cybersecurity",
     "label": "Cybersecurity Hardware",
     "type": "beta_booster",
     "liquid": true,
@@ -1202,6 +1351,7 @@
   "HUMN": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrial Automation",
+    "leadership_theme": "Robotics & automation",
     "label": "Humanoid Robotics",
     "type": "beta_booster",
     "liquid": false,
@@ -1210,6 +1360,7 @@
   "IAK": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Insurance",
+    "leadership_theme": "Insurance",
     "label": "Insurance Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
@@ -1218,6 +1369,7 @@
   "IYC": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Consumer",
     "label": "Consumer Discretionary",
     "type": "pure_sector",
     "liquid": false,
@@ -1226,6 +1378,7 @@
   "IYG": {
     "category": "Finance & Capital Markets",
     "fine_theme": "Fintech",
+    "leadership_theme": "Fintech & payments",
     "label": "Financial Services",
     "type": "beta_booster",
     "liquid": true,
@@ -1234,6 +1387,7 @@
   "IYK": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Consumer",
     "label": "Consumer Staples",
     "type": "pure_sector",
     "liquid": false,
@@ -1242,6 +1396,7 @@
   "KRBN": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Environmental Sustainability",
+    "leadership_theme": "Environment & carbon",
     "label": "Carbon Credits",
     "type": "beta_booster",
     "liquid": false,
@@ -1250,6 +1405,7 @@
   "LOHA": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Other thematic",
     "label": "AI-resistant Assets",
     "type": "beta_booster",
     "liquid": false,
@@ -1258,6 +1414,7 @@
   "LYTE": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Photonics & quantum",
     "label": "Photonics",
     "type": "beta_booster",
     "liquid": false,
@@ -1266,6 +1423,7 @@
   "EUV": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Semiconductors",
     "label": "EUV Lithography",
     "type": "beta_booster",
     "liquid": false,
@@ -1274,6 +1432,7 @@
   "MARS": {
     "category": "Space Exploration",
     "fine_theme": "Space Exploration",
+    "leadership_theme": "Space",
     "label": "Space Infrastructure",
     "type": "beta_booster",
     "liquid": false,
@@ -1282,6 +1441,7 @@
   "MJ": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Cannabis",
     "label": "Cannabis Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -1290,6 +1450,7 @@
   "MTUM": {
     "category": "Quantitative Factors & Volatility",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Factors",
     "label": "Momentum Broad",
     "type": "pure_sector",
     "liquid": true,
@@ -1298,6 +1459,7 @@
   "NCLD": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Cloud Computing",
+    "leadership_theme": "Data centers & neocloud",
     "label": "Neocloud",
     "type": "beta_booster",
     "liquid": false,
@@ -1306,6 +1468,7 @@
   "NERD": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Digital Entertainment",
+    "leadership_theme": "Gaming & gambling",
     "label": "Video Games",
     "type": "beta_booster",
     "liquid": false,
@@ -1314,6 +1477,7 @@
   "PRNT": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Industrial Automation",
+    "leadership_theme": "Robotics & automation",
     "label": "3D Printing",
     "type": "beta_booster",
     "liquid": false,
@@ -1330,6 +1494,7 @@
   "UX": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Nuclear & Coal",
+    "leadership_theme": "Nuclear & uranium",
     "label": "Uranium Physical",
     "type": "beta_booster",
     "liquid": false,
@@ -1338,6 +1503,7 @@
   "VCX": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Quantitative Factors & Volatility",
+    "leadership_theme": "Private technology",
     "label": "Private Tech Venture",
     "type": "beta_booster",
     "liquid": false,
@@ -1346,6 +1512,7 @@
   "VEGI": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Agriculture & Food",
+    "leadership_theme": "Agriculture",
     "label": "Agriculture Producers",
     "type": "pure_sector",
     "liquid": false,
@@ -1354,6 +1521,7 @@
   "WEED": {
     "category": "Consumer, Gaming & E-Commerce",
     "fine_theme": "Consumer Goods",
+    "leadership_theme": "Cannabis",
     "label": "Cannabis Concentrated",
     "type": "beta_booster",
     "liquid": false,
@@ -1450,6 +1618,7 @@
   "FOTO": {
     "category": "Technology & Digital Disruption",
     "fine_theme": "Semiconductors",
+    "leadership_theme": "Photonics & quantum",
     "label": "Photonics Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -1458,6 +1627,7 @@
   "EEM": {
     "category": "Geographic / Country Specific",
     "fine_theme": "Geographic / Country Specific",
+    "leadership_theme": "South Korea & EM",
     "label": "Emerging Markets",
     "type": "beta_booster",
     "liquid": true,
@@ -1466,6 +1636,7 @@
   "BITW": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Bitcoin & crypto index",
     "label": "Multi Asset",
     "type": "pure_sector",
     "liquid": true,
@@ -1682,6 +1853,7 @@
   "BWET": {
     "category": "Industrials, Transportation & Infrastructure",
     "fine_theme": "Transportation & Logistics",
+    "leadership_theme": "Shipping",
     "label": "Tanker Shipping",
     "type": "beta_booster",
     "liquid": true,
@@ -1690,6 +1862,7 @@
   "CRAK": {
     "category": "Energy, Metals & Commodities",
     "fine_theme": "Energy Traditional",
+    "leadership_theme": "Oil & gas",
     "label": "Oil Refiners",
     "type": "beta_booster",
     "liquid": false,
@@ -1698,6 +1871,7 @@
   "ZCSH": {
     "category": "Crypto & Digital Assets",
     "fine_theme": "Crypto & Digital Assets",
+    "leadership_theme": "Ethereum & altcoins",
     "label": "Zcash",
     "type": "beta_booster",
     "liquid": false,
