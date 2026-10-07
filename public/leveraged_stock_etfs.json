@@ -1,0 +1,995 @@
+{
+  "generated_at": "2026-10-06 22:40 ET",
+  "etfs": [
+    {
+      "ticker": "SOXL",
+      "description": "Direxion Daily Semiconductor Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 6.98,
+      "avg_dollar_volume": 9448734353,
+      "avg_volume": 57523038,
+      "underlying": null
+    },
+    {
+      "ticker": "TQQQ",
+      "description": "ProShares UltraPro QQQ",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 3.36,
+      "avg_dollar_volume": 4395352173,
+      "avg_volume": 52170352,
+      "underlying": null
+    },
+    {
+      "ticker": "SOXS",
+      "description": "Direxion Daily Semiconductor Bear 3X ETF",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 11.54,
+      "avg_dollar_volume": 2192932748,
+      "avg_volume": 74010555,
+      "underlying": null
+    },
+    {
+      "ticker": "SQQQ",
+      "description": "ProShares UltraPro Short QQQ",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 4.33,
+      "avg_dollar_volume": 1548128226,
+      "avg_volume": 48637393,
+      "underlying": null
+    },
+    {
+      "ticker": "MUU",
+      "description": "Direxion Daily MU Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 8.22,
+      "avg_dollar_volume": 924304804,
+      "avg_volume": 26303494,
+      "underlying": "MU"
+    },
+    {
+      "ticker": "RWM",
+      "description": "ProShares Short Russell2000",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 1.27,
+      "avg_dollar_volume": 681910106,
+      "avg_volume": 47853340,
+      "underlying": null
+    },
+    {
+      "ticker": "TSLL",
+      "description": "Direxion Daily TSLA Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.19,
+      "avg_dollar_volume": 669882621,
+      "avg_volume": 64974066,
+      "underlying": "TSLA"
+    },
+    {
+      "ticker": "SNXX",
+      "description": "Tradr 2X Long SNDK Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.11,
+      "avg_dollar_volume": 663463125,
+      "avg_volume": 43677625,
+      "underlying": "SNDK"
+    },
+    {
+      "ticker": "SPXL",
+      "description": "Direxion Daily S&P 500 Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 2.5,
+      "avg_dollar_volume": 490736745,
+      "avg_volume": 1640108,
+      "underlying": null
+    },
+    {
+      "ticker": "PSQ",
+      "description": "ProShares Short QQQ",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 1.31,
+      "avg_dollar_volume": 472974708,
+      "avg_volume": 19560575,
+      "underlying": null
+    },
+    {
+      "ticker": "QID",
+      "description": "ProShares UltraShort QQQ",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 2.75,
+      "avg_dollar_volume": 467332172,
+      "avg_volume": 37326850,
+      "underlying": null
+    },
+    {
+      "ticker": "NVDL",
+      "description": "GraniteShares 2x Long NVDA Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 4.56,
+      "avg_dollar_volume": 412969384,
+      "avg_volume": 10280542,
+      "underlying": "NVDA"
+    },
+    {
+      "ticker": "QLD",
+      "description": "ProShares Ultra QQQ",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 2.32,
+      "avg_dollar_volume": 381750276,
+      "avg_volume": 3788332,
+      "underlying": null
+    },
+    {
+      "ticker": "SPDN",
+      "description": "Direxion Daily S&P 500 Bear 1X ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 0.99,
+      "avg_dollar_volume": 348420393,
+      "avg_volume": 41978360,
+      "underlying": null
+    },
+    {
+      "ticker": "KORU",
+      "description": "Direxion Daily South Korea Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 9.45,
+      "avg_dollar_volume": 340366948,
+      "avg_volume": 16200235,
+      "underlying": null
+    },
+    {
+      "ticker": "TNA",
+      "description": "Direxion Small Cap Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 4.01,
+      "avg_dollar_volume": 338007620,
+      "avg_volume": 5658925,
+      "underlying": null
+    },
+    {
+      "ticker": "SPXS",
+      "description": "Direxion Daily S&P 500 Bear 3X ETF",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 2.84,
+      "avg_dollar_volume": 331032277,
+      "avg_volume": 14231826,
+      "underlying": null
+    },
+    {
+      "ticker": "TMF",
+      "description": "Direxion Daily 20-Yr Treasury Bull 3x Shrs",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 3.32,
+      "avg_dollar_volume": 322354219,
+      "avg_volume": 12711128,
+      "underlying": null
+    },
+    {
+      "ticker": "SH",
+      "description": "ProShares Short S&P500",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 0.89,
+      "avg_dollar_volume": 319998703,
+      "avg_volume": 10081874,
+      "underlying": null
+    },
+    {
+      "ticker": "UPRO",
+      "description": "ProShares UltraPro S&P 500",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 2.51,
+      "avg_dollar_volume": 310464340,
+      "avg_volume": 1984939,
+      "underlying": null
+    },
+    {
+      "ticker": "SPCH",
+      "description": "Leverage Shares 2X Long SPCX Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 7.2,
+      "avg_dollar_volume": 296147176,
+      "avg_volume": 22939363,
+      "underlying": "SPCX"
+    },
+    {
+      "ticker": "TSLG",
+      "description": "Leverage Shares 2X Long TSLA Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.13,
+      "avg_dollar_volume": 288158044,
+      "avg_volume": 55840253,
+      "underlying": "TSLA"
+    },
+    {
+      "ticker": "SNDQ",
+      "description": "Tradr 2X Short SNDK Daily ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 15.05,
+      "avg_dollar_volume": 281487639,
+      "avg_volume": 24203580,
+      "underlying": "SNDK"
+    },
+    {
+      "ticker": "NVD",
+      "description": "GraniteShares 2x Short NVDA Daily ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 6.08,
+      "avg_dollar_volume": 272428340,
+      "avg_volume": 82554042,
+      "underlying": "NVDA"
+    },
+    {
+      "ticker": "SPXU",
+      "description": "ProShares UltraPro Short S&P500",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 2.78,
+      "avg_dollar_volume": 265365504,
+      "avg_volume": 8117635,
+      "underlying": null
+    },
+    {
+      "ticker": "MSTU",
+      "description": "T-Rex 2X Long MSTR Daily Target ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 9.76,
+      "avg_dollar_volume": 245878179,
+      "avg_volume": 5380266,
+      "underlying": "MSTR"
+    },
+    {
+      "ticker": "DOG",
+      "description": "ProShares Short Dow30",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 0.93,
+      "avg_dollar_volume": 230406058,
+      "avg_volume": 10458740,
+      "underlying": null
+    },
+    {
+      "ticker": "LABD",
+      "description": "Direxion Daily S&P Biotech Bear 3X ETF",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 7.4,
+      "avg_dollar_volume": 218067301,
+      "avg_volume": 27361016,
+      "underlying": null
+    },
+    {
+      "ticker": "SSO",
+      "description": "ProShares Ultra S&P500",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 1.7,
+      "avg_dollar_volume": 215529156,
+      "avg_volume": 2981039,
+      "underlying": null
+    },
+    {
+      "ticker": "AGQ",
+      "description": "ProShares Ultra Silver",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.13,
+      "avg_dollar_volume": 209554801,
+      "avg_volume": 3023878,
+      "underlying": null
+    },
+    {
+      "ticker": "TZA",
+      "description": "Direxion Small Cap Bear 3X ETF",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 3.72,
+      "avg_dollar_volume": 207668322,
+      "avg_volume": 4529298,
+      "underlying": null
+    },
+    {
+      "ticker": "BITX",
+      "description": "2x Bitcoin ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 5.19,
+      "avg_dollar_volume": 205474581,
+      "avg_volume": 10023150,
+      "underlying": null
+    },
+    {
+      "ticker": "SDS",
+      "description": "ProShares UltraShort S&P500",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 1.81,
+      "avg_dollar_volume": 197943811,
+      "avg_volume": 3784776,
+      "underlying": null
+    },
+    {
+      "ticker": "BOIL",
+      "description": "ProShares Ultra Bloomberg Natural Gas",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.12,
+      "avg_dollar_volume": 179863244,
+      "avg_volume": 8597669,
+      "underlying": null
+    },
+    {
+      "ticker": "ERY",
+      "description": "Direxion Daily Energy Bear 2X ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 4.08,
+      "avg_dollar_volume": 178664116,
+      "avg_volume": 20210872,
+      "underlying": null
+    },
+    {
+      "ticker": "GDXU",
+      "description": "MicroSectors Gold Miners 3x Leveraged ETN",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 11.91,
+      "avg_dollar_volume": 175249025,
+      "avg_volume": 1647077,
+      "underlying": null
+    },
+    {
+      "ticker": "ETHU",
+      "description": "2x Ether ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 5.96,
+      "avg_dollar_volume": 172491592,
+      "avg_volume": 5685286,
+      "underlying": null
+    },
+    {
+      "ticker": "AAOX",
+      "description": "Tradr 2X Long AAOI Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.13,
+      "avg_dollar_volume": 171462437,
+      "avg_volume": 11083544,
+      "underlying": "AAOI"
+    },
+    {
+      "ticker": "METU",
+      "description": "Direxion Daily META Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.12,
+      "avg_dollar_volume": 168885397,
+      "avg_volume": 5322577,
+      "underlying": "META"
+    },
+    {
+      "ticker": "AMDL",
+      "description": "GraniteShares 2x Long AMD Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.52,
+      "avg_dollar_volume": 163682298,
+      "avg_volume": 1844099,
+      "underlying": "AMD"
+    },
+    {
+      "ticker": "GGLL",
+      "description": "Direxion Daily GOOGL Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 4.81,
+      "avg_dollar_volume": 163053279,
+      "avg_volume": 1607703,
+      "underlying": "GOOGL"
+    },
+    {
+      "ticker": "MSTX",
+      "description": "Defiance Daily Target 2x Long MSTR ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 9.74,
+      "avg_dollar_volume": 148170575,
+      "avg_volume": 7065835,
+      "underlying": "MSTR"
+    },
+    {
+      "ticker": "MULL",
+      "description": "GraniteShares 2x Long MU Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 8.24,
+      "avg_dollar_volume": 142278562,
+      "avg_volume": 5819164,
+      "underlying": "MU"
+    },
+    {
+      "ticker": "UCO",
+      "description": "ProShares Ultra Bloomberg Crude Oil",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 3.57,
+      "avg_dollar_volume": 137589618,
+      "avg_volume": 2527826,
+      "underlying": null
+    },
+    {
+      "ticker": "MSTZ",
+      "description": "T-Rex 2X Inverse MSTR Daily Target ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 22.72,
+      "avg_dollar_volume": 132805003,
+      "avg_volume": 56633263,
+      "underlying": "MSTR"
+    },
+    {
+      "ticker": "MSFU",
+      "description": "Direxion Daily MSFT Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 4.17,
+      "avg_dollar_volume": 129683480,
+      "avg_volume": 3102475,
+      "underlying": "MSFT"
+    },
+    {
+      "ticker": "UGL",
+      "description": "ProShares Ultra Gold",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 3.52,
+      "avg_dollar_volume": 126967626,
+      "avg_volume": 2763770,
+      "underlying": null
+    },
+    {
+      "ticker": "INTW",
+      "description": "GraniteShares 2x Long INTC Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 10.76,
+      "avg_dollar_volume": 126402202,
+      "avg_volume": 4628421,
+      "underlying": "INTC"
+    },
+    {
+      "ticker": "UDOW",
+      "description": "ProShares UltraPro Dow30",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 2.92,
+      "avg_dollar_volume": 120050591,
+      "avg_volume": 1844945,
+      "underlying": null
+    },
+    {
+      "ticker": "SCO",
+      "description": "ProShares UltraShort Bloomberg Crude Oil",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 4.24,
+      "avg_dollar_volume": 119593593,
+      "avg_volume": 6142454,
+      "underlying": null
+    },
+    {
+      "ticker": "LITX",
+      "description": "Tradr 2X Long LITE Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 9.68,
+      "avg_dollar_volume": 115165860,
+      "avg_volume": 2511796,
+      "underlying": "LITE"
+    },
+    {
+      "ticker": "BEX",
+      "description": "Tradr 2X Long BE Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.41,
+      "avg_dollar_volume": 113171303,
+      "avg_volume": 2756913,
+      "underlying": "BE"
+    },
+    {
+      "ticker": "ZSL",
+      "description": "ProShares UltraShort Silver",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 5.25,
+      "avg_dollar_volume": 111817488,
+      "avg_volume": 4189490,
+      "underlying": null
+    },
+    {
+      "ticker": "SDOW",
+      "description": "UltraPro Short Dow30",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 2.78,
+      "avg_dollar_volume": 110439930,
+      "avg_volume": 4380798,
+      "underlying": null
+    },
+    {
+      "ticker": "KOLD",
+      "description": "ProShares UltraShort Bloomberg Natural Gas",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 6.43,
+      "avg_dollar_volume": 109689934,
+      "avg_volume": 4159648,
+      "underlying": null
+    },
+    {
+      "ticker": "UVXY",
+      "description": "ProShares Ultra VIX Short Term Futures ETF",
+      "direction": "bull",
+      "ratio": 1.5,
+      "adr_pct": 4.57,
+      "avg_dollar_volume": 109522768,
+      "avg_volume": 6815355,
+      "underlying": null
+    },
+    {
+      "ticker": "CONL",
+      "description": "GraniteShares 2x Long COIN Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.12,
+      "avg_dollar_volume": 109349758,
+      "avg_volume": 19285671,
+      "underlying": "COIN"
+    },
+    {
+      "ticker": "LABU",
+      "description": "Direxion Daily S&P Biotech Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 9.37,
+      "avg_dollar_volume": 109111219,
+      "avg_volume": 472445,
+      "underlying": null
+    },
+    {
+      "ticker": "BMNU",
+      "description": "T-REX 2X Long BMNR Daily Target ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 11.92,
+      "avg_dollar_volume": 106956146,
+      "avg_volume": 5250669,
+      "underlying": "BMNR"
+    },
+    {
+      "ticker": "NUGT",
+      "description": "Direxion Daily Gold Miners Index Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 7.06,
+      "avg_dollar_volume": 106251452,
+      "avg_volume": 714776,
+      "underlying": null
+    },
+    {
+      "ticker": "TECL",
+      "description": "Direxion Daily Technology Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 4.0,
+      "avg_dollar_volume": 106244334,
+      "avg_volume": 417627,
+      "underlying": null
+    },
+    {
+      "ticker": "RAM",
+      "description": "Roundhill T-REX 2X Long DRAM Daily Target ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 7.96,
+      "avg_dollar_volume": 104215169,
+      "avg_volume": 7865295,
+      "underlying": null
+    },
+    {
+      "ticker": "NVDX",
+      "description": "T-Rex 2X Long NVIDIA Daily Target ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 4.55,
+      "avg_dollar_volume": 98544301,
+      "avg_volume": 4358438,
+      "underlying": "NVDA"
+    },
+    {
+      "ticker": "NBIL",
+      "description": "GraniteShares 2x Long NBIS Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.48,
+      "avg_dollar_volume": 98368617,
+      "avg_volume": 3360731,
+      "underlying": "NBIS"
+    },
+    {
+      "ticker": "PLTD",
+      "description": "Direxion Daily PLTR Bear 1X ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 3.87,
+      "avg_dollar_volume": 97700145,
+      "avg_volume": 20965696,
+      "underlying": "PLTR"
+    },
+    {
+      "ticker": "SSPC",
+      "description": "Leverage Shares 2X Short SPCX Daily ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 14.13,
+      "avg_dollar_volume": 97352775,
+      "avg_volume": 14840362,
+      "underlying": "SPCX"
+    },
+    {
+      "ticker": "MVLL",
+      "description": "GraniteShares 2x Long MRVL Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 8.91,
+      "avg_dollar_volume": 94444113,
+      "avg_volume": 2247064,
+      "underlying": "MRVL"
+    },
+    {
+      "ticker": "AXTX",
+      "description": "Tradr 2X Long AXTI Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 15.28,
+      "avg_dollar_volume": 93382539,
+      "avg_volume": 2316035,
+      "underlying": "AXTI"
+    },
+    {
+      "ticker": "AMZD",
+      "description": "Direxion Daily AMZN Bear 1X ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 2.21,
+      "avg_dollar_volume": 90291501,
+      "avg_volume": 10610047,
+      "underlying": "AMZN"
+    },
+    {
+      "ticker": "TMV",
+      "description": "Direxion Daily 20-Year Treasury Bear 3X",
+      "direction": "inverse",
+      "ratio": 3.0,
+      "adr_pct": 2.72,
+      "avg_dollar_volume": 84484006,
+      "avg_volume": 1672619,
+      "underlying": null
+    },
+    {
+      "ticker": "FNGU",
+      "description": "MicroSectors FANG+ 3X Leveraged ETNs",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 3.88,
+      "avg_dollar_volume": 81834967,
+      "avg_volume": 2242053,
+      "underlying": null
+    },
+    {
+      "ticker": "MUZ",
+      "description": "Defiance Daily Target 2X Short MU ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 10.35,
+      "avg_dollar_volume": 81563173,
+      "avg_volume": 11569244,
+      "underlying": "MU"
+    },
+    {
+      "ticker": "AMZU",
+      "description": "Direxion Daily AMZN Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 4.3,
+      "avg_dollar_volume": 77505044,
+      "avg_volume": 2159516,
+      "underlying": "AMZN"
+    },
+    {
+      "ticker": "CRDU",
+      "description": "Tradr 2X Long CRDO Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.94,
+      "avg_dollar_volume": 76815455,
+      "avg_volume": 6685418,
+      "underlying": "CRDO"
+    },
+    {
+      "ticker": "TSLQ",
+      "description": "Tradr 2X Short TSLA Daily ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 7.59,
+      "avg_dollar_volume": 76518368,
+      "avg_volume": 4570989,
+      "underlying": "TSLA"
+    },
+    {
+      "ticker": "SNDU",
+      "description": "T-REX 2X Long SNDK Daily Target ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.11,
+      "avg_dollar_volume": 75700861,
+      "avg_volume": 3230937,
+      "underlying": "SNDK"
+    },
+    {
+      "ticker": "FAS",
+      "description": "Direxion Financial Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 3.94,
+      "avg_dollar_volume": 72548411,
+      "avg_volume": 500161,
+      "underlying": null
+    },
+    {
+      "ticker": "AVS",
+      "description": "Direxion Daily AVGO Bear 1X ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 3.23,
+      "avg_dollar_volume": 71947221,
+      "avg_volume": 9358136,
+      "underlying": "AVGO"
+    },
+    {
+      "ticker": "UVIX",
+      "description": "2x Long VIX Futures ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 6.37,
+      "avg_dollar_volume": 69405525,
+      "avg_volume": 2081125,
+      "underlying": null
+    },
+    {
+      "ticker": "GLL",
+      "description": "ProShares UltraShort Gold",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 3.08,
+      "avg_dollar_volume": 69070982,
+      "avg_volume": 2782876,
+      "underlying": null
+    },
+    {
+      "ticker": "DXD",
+      "description": "ProShares UltraShort Dow30",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 1.85,
+      "avg_dollar_volume": 69051923,
+      "avg_volume": 3892442,
+      "underlying": null
+    },
+    {
+      "ticker": "IRE",
+      "description": "Defiance Daily Target 2X Long IREN ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 13.77,
+      "avg_dollar_volume": 67517552,
+      "avg_volume": 7299194,
+      "underlying": "IREN"
+    },
+    {
+      "ticker": "WDCX",
+      "description": "Tradr 2X Long WDC Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 16.62,
+      "avg_dollar_volume": 65782315,
+      "avg_volume": 4739359,
+      "underlying": "WDC"
+    },
+    {
+      "ticker": "RKLX",
+      "description": "Defiance Daily Target 2X Long RKLB ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 10.46,
+      "avg_dollar_volume": 64174181,
+      "avg_volume": 3262541,
+      "underlying": "RKLB"
+    },
+    {
+      "ticker": "BITU",
+      "description": "ProShares Ultra Bitcoin ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 5.12,
+      "avg_dollar_volume": 63729366,
+      "avg_volume": 4008136,
+      "underlying": null
+    },
+    {
+      "ticker": "SVXY",
+      "description": "ProShares Short VIX Short Term Futures ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 1.29,
+      "avg_dollar_volume": 63513419,
+      "avg_volume": 972342,
+      "underlying": null
+    },
+    {
+      "ticker": "DLLL",
+      "description": "GraniteShares 2x Long DELL Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 9.29,
+      "avg_dollar_volume": 62708131,
+      "avg_volume": 1700790,
+      "underlying": "DELL"
+    },
+    {
+      "ticker": "SMCX",
+      "description": "Defiance Daily Target 2X Long SMCI ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 9.34,
+      "avg_dollar_volume": 61770640,
+      "avg_volume": 4050533,
+      "underlying": "SMCI"
+    },
+    {
+      "ticker": "NAIL",
+      "description": "Direxion Daily Homebuilders & Supplies Bull 3X ETF",
+      "direction": "bull",
+      "ratio": 3.0,
+      "adr_pct": 7.8,
+      "avg_dollar_volume": 58396775,
+      "avg_volume": 2087089,
+      "underlying": null
+    },
+    {
+      "ticker": "AVL",
+      "description": "Direxion Daily AVGO Bull 2X ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 5.74,
+      "avg_dollar_volume": 57630651,
+      "avg_volume": 1414249,
+      "underlying": "AVGO"
+    },
+    {
+      "ticker": "AAPD",
+      "description": "Direxion Daily AAPL Bear 1X ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 2.08,
+      "avg_dollar_volume": 57543327,
+      "avg_volume": 5597436,
+      "underlying": "AAPL"
+    },
+    {
+      "ticker": "MUD",
+      "description": "Direxion Daily MU Bear 1X ETF",
+      "direction": "inverse",
+      "ratio": 1.0,
+      "adr_pct": 4.63,
+      "avg_dollar_volume": 57354335,
+      "avg_volume": 6200468,
+      "underlying": "MU"
+    },
+    {
+      "ticker": "ASTX",
+      "description": "Tradr 2X Long ASTS Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 13.14,
+      "avg_dollar_volume": 57164341,
+      "avg_volume": 5234829,
+      "underlying": "ASTS"
+    },
+    {
+      "ticker": "NEBX",
+      "description": "Tradr 2X Long NBIS Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.43,
+      "avg_dollar_volume": 56642942,
+      "avg_volume": 1890618,
+      "underlying": "NBIS"
+    },
+    {
+      "ticker": "BTCZ",
+      "description": "T-Rex 2X Inverse Bitcoin Daily Target ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 7.0,
+      "avg_dollar_volume": 56457847,
+      "avg_volume": 20199587,
+      "underlying": null
+    },
+    {
+      "ticker": "CBRG",
+      "description": "Leverage Shares 2X Long CBRS Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 18.23,
+      "avg_dollar_volume": 55065440,
+      "avg_volume": 20858121,
+      "underlying": "CBRS"
+    },
+    {
+      "ticker": "PTIR",
+      "description": "GraniteShares 2x Long PLTR Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 5.95,
+      "avg_dollar_volume": 53041493,
+      "avg_volume": 2395731,
+      "underlying": "PLTR"
+    },
+    {
+      "ticker": "NBIG",
+      "description": "Leverage Shares 2X Long NBIS Daily ETF",
+      "direction": "bull",
+      "ratio": 2.0,
+      "adr_pct": 12.42,
+      "avg_dollar_volume": 50393067,
+      "avg_volume": 2495941,
+      "underlying": "NBIS"
+    },
+    {
+      "ticker": "NBIZ",
+      "description": "Tradr 2X Short NBIS Daily ETF",
+      "direction": "inverse",
+      "ratio": 2.0,
+      "adr_pct": 25.21,
+      "avg_dollar_volume": 50240827,
+      "avg_volume": 2794261,
+      "underlying": "NBIS"
+    }
+  ]
+}
