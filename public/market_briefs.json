@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-07 13:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Divergence, Cautious Tone",
+    "spy_price": 777.53,
+    "spy_change_pct": -0.2,
+    "vix": 15.15,
+    "hy_oas": 3.03,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 33.0,
+    "mmth": 51.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a new enterprise AI suite integrated with Azure, promising substantial productivity gains and projecting a significant uplift in cloud services revenue."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company revealed positive Phase 3 trial data for its new obesity drug, demonstrating superior efficacy and safety profiles, setting it up for accelerated regulatory approval."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced continued momentum today, likely a continuation of sector rotation into high-growth semiconductors following recent analyst upgrades and favorable technical setups."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-07 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla seeing renewed interest from retail traders following recent volatility, with options activity suggesting a short-term rebound play."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-16 19:14 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Sentiment / Risk Aversion",
-    "spy_price": 754.05,
-    "spy_change_pct": -0.44,
-    "vix": 17.71,
-    "hy_oas": 2.76,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 33.9,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JNJ",
-          "company": "Johnson & Johnson",
-          "reason": "Announced FDA approval for its groundbreaking Alzheimer's treatment, creating significant upside potential for future revenue streams."
-        },
-        {
-          "ticker": "ORCL",
-          "company": "Oracle Corporation",
-          "reason": "Secured a multi-billion dollar cloud services contract with a major government agency, significantly boosting its cloud revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Benefited from continued AI sector momentum and strong technical buying, pushing shares higher on sustained flow rather than new specific news today."
         }
       ]
     }
