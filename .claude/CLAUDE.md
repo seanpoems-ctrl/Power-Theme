@@ -286,6 +286,16 @@ Where dashes ("—") in the UI came from, and what was done. Check here before a
 
 ---
 
+## Leadership ladder (Watchlist → 🏆 Leadership)
+
+Modelled on the Liquid Leadership / NEL layout (i-manage-risk.github.io/NEL): a snapshot, then **LL → NEL → T-NEL** per window (1M/3M/6M/1Y). `leadership_builder.py` (nightly, after `leveraged_etf_builder.py`) writes `public/leadership.json` + `public/leadership_history.json` (daily industry counts, 60 days — the snapshot sparklines need ≥2 days). `LeadershipScreen` in `App.js` applies the tiers client-side so the thresholds are editable (localStorage `leadership_criteria_v1`).
+
+- **LL** — top 20 by 1M/3M/6M/1Y performance among NASDAQ/NYSE/AMEX stocks+ADRs, price ≥ $2, avg vol ≥ 500K, avg $ vol (10d) ≥ $40M. **NEL** — LL with Extension < 4× (default). **T-NEL** — NEL with RMV ≤ 20 (default) and optional Coil ≥ N.
+- **RMV and Coil are our own definitions** (his formulas aren't published): RMV = 5-day avg true range ÷ close, scaled 0–100 between its own min/max over the last 50 sessions; Coil = consecutive sessions (max 10) with true range below the 20-day average. Computed from Yahoo bars for the LL tickers only. Copy = comma-separated tickers (TradingView-importable); Export = CSV.
+- Not built yet from his layout: per-window theme ranking (Strength/Median/Leader/Confirmed), non-extended ETF leaders, a Sectors view, and regrouping the top-level nav into Stocks/Themes/Sectors/Breadth.
+
+---
+
 ## Removed Features (2026-06-12 audit)
 
 - **News Hub tab** — folded into a collapsed-by-default `NewsHubFold` section at the bottom of the Scanner tab (open state in localStorage `news_hub_open`; content fetches only mount when expanded).

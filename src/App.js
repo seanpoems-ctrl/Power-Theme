@@ -14669,8 +14669,13 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
           </button>
           <button onClick={() => setMode("adrUniverse")}
             title="Liquid, volatile stocks: ADR > 5% · Avg $ Vol > $500M · Avg Vol > 1M shares (thresholds editable)"
-            className={`px-3 py-1.5 transition-colors ${mode === "adrUniverse" ? "bg-cyan-600/25 text-cyan-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "adrUniverse" ? "bg-cyan-600/25 text-cyan-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             🌐 Universe
+          </button>
+          <button onClick={() => setMode("leadership")}
+            title="Leadership ladder: Liquid Leaders (LL) → Non-Extended Leaders (NEL) → Tight NEL (T-NEL) over 1M/3M/6M/1Y"
+            className={`px-3 py-1.5 transition-colors ${mode === "leadership" ? "bg-orange-600/25 text-orange-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            🏆 Leadership
           </button>
         </div>
         {mc?.spy?.sma50_pct != null && (
@@ -14784,6 +14789,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {/* ── FOCUS LIST ───────────────────────────────────── */}
       {mode === "focus" && <FocusListTab data={focusListData}
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Focus List", tickers })} />}
+
+      {/* ── LEADERSHIP (mode "leadership") ── */}
+      {mode === "leadership" && <LeadershipScreen onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Leadership", tickers })} />}
 
       {/* ── UNIVERSE (mode "adrUniverse" — not to be confused with mode "universe" = Group ETF) ── */}
       {mode === "adrUniverse" && <UniverseScreen stocks={screenerStocks} tickerThemeMap={tickerThemeMap}
@@ -15718,6 +15726,195 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
           </table>
         </div>
       )}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Leadership — the LL → NEL → T-NEL ladder (Watchlist → 🏆 Leadership), built by leadership_builder.py.
+//   LL    Liquid Leaders   top 20 performers per window (1M/3M/6M/1Y) among stocks with avg $ vol ≥ $40M
+//   NEL   Non-Extended     the LL whose Extension (ATR% multiple from the 50-MA) is below the cutoff (default 4×)
+//   T-NEL Tight NEL        the NEL that are also coiling: RMV at/below the cutoff and at least N contracting days
+// Snapshot on top = which industries hold the most leaders in each window (+ a count-over-time sparkline once the nightly
+// history has two or more days).
+// ─────────────────────────────────────────────────────────────────────────────
+const LEADERSHIP_WINDOWS = ["1M", "3M", "6M", "1Y"];
+const LEADERSHIP_DEFAULTS = { maxExt: 4, maxRmv: 20, minCoil: 0 };
+const LEADERSHIP_LS_KEY = "leadership_criteria_v1";
+const LeadershipScreen = ({ onMiniCharts = null }) => {
+  const [data, setData]       = React.useState(null);
+  const [history, setHistory] = React.useState({});
+  const [win, setWin]         = React.useState("1M");
+  const [crit, setCrit]       = React.useState(() => {
+    try {
+      const v = JSON.parse(localStorage.getItem(LEADERSHIP_LS_KEY) || "null");
+      if (v && ["maxExt", "maxRmv", "minCoil"].every(k => Number.isFinite(v[k]))) return v;
+    } catch { /* storage unavailable — defaults */ }
+    return LEADERSHIP_DEFAULTS;
+  });
+  React.useEffect(() => { try { localStorage.setItem(LEADERSHIP_LS_KEY, JSON.stringify(crit)); } catch { /* ignore */ } }, [crit]);
+  const [copied, setCopied]   = React.useState(null);
+  React.useEffect(() => {
+    const v = Date.now();
+    fetch(`${process.env.PUBLIC_URL}/leadership.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.leaders) setData(d); }).catch(() => {});
+    fetch(`${process.env.PUBLIC_URL}/leadership_history.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d) setHistory(d); }).catch(() => {});
+  }, []);
+
+  const fmtD   = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+  const fmtPf  = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  const setField = (k, v) => setCrit(c => ({ ...c, [k]: Number.isFinite(v) ? v : 0 }));
+  const isDefault = Object.keys(LEADERSHIP_DEFAULTS).every(k => crit[k] === LEADERSHIP_DEFAULTS[k]);
+
+  const tiers = React.useMemo(() => {
+    const out = { LL: {}, NEL: {}, TNEL: {} };
+    if (!data) return out;
+    for (const w of LEADERSHIP_WINDOWS) {
+      const ll  = data.leaders?.[w] || [];
+      const nel = ll.filter(x => x.extension != null && x.extension < crit.maxExt);
+      const tn  = nel.filter(x => x.rmv != null && x.rmv <= crit.maxRmv && (x.coil ?? 0) >= crit.minCoil);
+      out.LL[w] = ll; out.NEL[w] = nel; out.TNEL[w] = tn;
+    }
+    return out;
+  }, [data, crit]);
+  const uniq = tier => [...new Set(LEADERSHIP_WINDOWS.flatMap(w => tiers[tier][w].map(x => x.ticker)))];
+
+  const copyList = (tier) => {
+    const txt = uniq(tier).join(",");
+    (navigator.clipboard?.writeText(txt) || Promise.reject()).then(() => { setCopied(tier); setTimeout(() => setCopied(null), 1500); }).catch(() => {});
+  };
+  const exportList = (tier, label) => {
+    const rows = [["Window", "Symbol", "Industry", "Performance %", "Avg $ Vol", "Extension", "Coil", "RMV"]];
+    for (const w of LEADERSHIP_WINDOWS) for (const x of tiers[tier][w]) rows.push([w, x.ticker, x.industry || "", x.perf, x.avg_dollar_volume, x.extension ?? "", x.coil ?? "", x.rmv ?? ""]);
+    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = `${label}-${data?.date || "leadership"}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+
+  // Count of leaders per industry per day, for the snapshot sparklines.
+  const histDays = React.useMemo(() => Object.keys(history).sort().slice(-30), [history]);
+  const Spark = ({ vals }) => {
+    if (vals.length < 2) return null;
+    const mx = Math.max(...vals, 1), W = 56, H = 14;
+    const pts = vals.map((v, i) => `${(i / (vals.length - 1)) * W},${H - (v / mx) * (H - 2) - 1}`).join(" ");
+    return <svg width={W} height={H} className="inline-block ml-2 align-middle"><polyline points={pts} fill="none" stroke="#60a5fa" strokeWidth="1.2" /></svg>;
+  };
+
+  const numInput = (label, key, step, suffix) => (
+    <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">
+      {label}
+      <input type="number" step={step} value={crit[key]} onChange={e => setField(key, parseFloat(e.target.value))}
+        className="w-14 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" />
+      <span className="text-zinc-600">{suffix}</span>
+    </label>
+  );
+
+  const Section = ({ tier, title, sub, showTight }) => {
+    const rows = tiers[tier][win] || [];
+    const total = uniq(tier).length;
+    return (
+      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+        <div className="flex items-center gap-2 flex-wrap mb-1">
+          <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
+          <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{total} tickers</span>
+          <span className="text-[11px] text-zinc-600">{sub}</span>
+          <div className="ml-auto flex items-center gap-2">
+            <button onClick={() => copyList(tier)} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied === tier ? "Copied ✓" : "Copy"}</button>
+            <button onClick={() => exportList(tier, title.split(" ")[0])} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
+            {onMiniCharts && rows.length > 0 && (
+              <button onClick={() => onMiniCharts(rows.map(x => ({ ticker: x.ticker, category: x.industry })), `${title.split(" ")[0]} · ${win}`)}
+                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+            )}
+          </div>
+        </div>
+        <div className="text-[11px] text-zinc-500 mb-2">{win} · {rows.length} {rows.length === 1 ? "stock" : "stocks"}
+          <span className="text-zinc-700"> · {LEADERSHIP_WINDOWS.map(w => `${w} ${tiers[tier][w].length}`).join(" · ")}</span></div>
+        {rows.length === 0 ? (
+          <p className="text-xs text-zinc-600 italic py-3">{showTight ? "No tight NEL setups." : "None in this window."}</p>
+        ) : (
+          <div className="overflow-x-auto rounded-lg border border-zinc-800">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                  <th className="px-3 py-2 text-left font-medium">Symbol</th>
+                  <th className="px-3 py-2 text-left font-medium">Industry</th>
+                  <th className="px-3 py-2 text-right font-medium">Performance</th>
+                  <th className="px-3 py-2 text-right font-medium">Avg $ Vol</th>
+                  {showTight && <th className="px-3 py-2 text-right font-medium" title="Consecutive sessions (max 10) with a true range below the 20-day average">Coil</th>}
+                  {showTight && <th className="px-3 py-2 text-right font-medium" title="Relative measured volatility: 5-day avg true range on a 0–100 scale of its own 50-day range. Low = tight">RMV</th>}
+                  <th className="px-3 py-2 text-right font-medium" title={EXTENSION_TIP}>Extension</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((x, i) => (
+                  <tr key={x.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                    <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                      <a href={`https://www.tradingview.com/chart/?symbol=${x.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{x.ticker}</a>
+                    </td>
+                    <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[220px] truncate">{x.industry || "—"}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{fmtPf(x.perf)}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(x.avg_dollar_volume)}</td>
+                    {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.coil ?? "—"}</td>}
+                    {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.rmv ?? "—"}</td>}
+                    <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(x.extension)}`}>{fmtExtension(x.extension)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  if (!data) return <p className="text-xs text-zinc-600 italic py-6">Loading leadership data…</p>;
+  const c = data.criteria || {};
+  return (
+    <div className="space-y-4">
+      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+        <div className="flex items-center gap-3 flex-wrap">
+          <h3 className="text-sm font-semibold text-zinc-100">Thematic Leadership</h3>
+          <span className="text-[11px] text-zinc-600">top {data.top_n} per window of {data.universe_size} liquid stocks (avg $ vol ≥ ${((c.min_dollar_volume || 0) / 1e6).toFixed(0)}M) · {data.date}</span>
+          <div className="ml-auto flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+            {LEADERSHIP_WINDOWS.map(w => (
+              <button key={w} onClick={() => setWin(w)}
+                className={`px-3 py-0.5 text-[11px] font-medium rounded-md transition-all ${win === w ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{w}</button>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center gap-4 flex-wrap mt-3 pt-3 border-t border-zinc-800/60">
+          {numInput("NEL: Extension <", "maxExt", 0.5, "×")}
+          {numInput("T-NEL: RMV ≤", "maxRmv", 5, "")}
+          {numInput("Coil ≥", "minCoil", 1, "days")}
+          {!isDefault && <button onClick={() => setCrit(LEADERSHIP_DEFAULTS)} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+          {LEADERSHIP_WINDOWS.map(w => {
+            const top = Object.entries(data.industry_counts?.[w] || {}).sort((a, b) => b[1] - a[1]).slice(0, 5);
+            const mx = Math.max(...top.map(t => t[1]), 1);
+            return (
+              <div key={w} className={`rounded-lg border p-3 ${win === w ? "border-blue-500/30 bg-blue-500/5" : "border-zinc-800 bg-zinc-900/40"}`}>
+                <div className="text-[11px] font-semibold text-zinc-400 mb-1.5">{w} leadership</div>
+                {top.map(([ind, n]) => (
+                  <div key={ind} className="mb-1">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-zinc-300 truncate pr-2">{ind}</span>
+                      <span className="font-mono text-zinc-400 whitespace-nowrap">{n}<Spark vals={histDays.map(d => history[d]?.[w]?.[ind] ?? 0)} /></span>
+                    </div>
+                    <div className="h-1 rounded bg-zinc-800 overflow-hidden"><div className="h-full bg-blue-500/60" style={{ width: `${(n / mx) * 100}%` }} /></div>
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+        {histDays.length < 2 && <p className="text-[10px] text-zinc-700 mt-2">Leadership-over-time sparklines appear once the nightly run has stored two or more days.</p>}
+      </div>
+      <Section tier="LL"   title="Liquid Leaders (LL)"            sub={`top ${data.top_n} performers per window`} />
+      <Section tier="NEL"  title="Non-Extended Leaders (NEL)"     sub={`LL with Extension < ${crit.maxExt}×`} />
+      <Section tier="TNEL" title="Tight Non-Extended Leaders (T-NEL)" sub={`NEL with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`} showTight />
     </div>
   );
 };
