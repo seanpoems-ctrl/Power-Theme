@@ -8443,13 +8443,14 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   };
 
   // Column widths as % — must sum to 100 (# col is separate at 3%)
-  const COL_WIDTHS = ["9%","13%","9%","7%","7%","7%","7%","7%","7%","7%","7%","7%","5%"];
+  const COL_WIDTHS = ["9%","9%","7%","7%","7%","10%","7%","5.5%","5.5%","5.5%","5.5%","5.5%","6%","6%"];
   const COLS = [
     { col: "ticker",        label: "Sym"                                                                     },
     { col: "industry",      label: "Industry",  label2: "Theme",    leftAlign: true                         },
     { col: "adr_dvol",      label: "ADR×",      label2: "Avg$Vol",  tooltip: "ADR% × Avg Daily $Vol"        },
     { col: "pct_52w_range", label: "52W%",                          tooltip: "Price position in 52W range"  },
     { col: "adr_pct",       label: "ADR%"                                                                    },
+    { col: "extension",     label: "Extension",                     tooltip: "ATR% multiple from the 50-MA: (% above 50-MA) ÷ ATR%. 4x+ stretched, 7x+ overextended (Jeff Sun)" },
     { col: "perf_intraday", label: "Intra",                         tooltip: "% change from today's open"   },
     { col: "perf_1d",       label: "1D%"                                                                     },
     { col: "perf_1w",       label: "1W%"                                                                     },
@@ -8515,6 +8516,11 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                 return "text-rose-300 font-bold";
               };
               const fmtPerf = v => v != null ? `${v >= 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+              const extCls = v => v == null ? "text-zinc-600"
+                : v >= 7 ? "text-rose-300 font-bold"
+                : v >= 4 ? "text-amber-300 font-semibold"
+                : v >= 0 ? "text-emerald-400"
+                : "text-zinc-400";
               const rs = s.rs_score ?? s.rs_52w;
               // RS% — position of today's score in 25-day min/max range (same as ETF RS table)
               const rsHist = s.rs_histogram;
@@ -8571,6 +8577,10 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                   {/* ADR% */}
                   <td className="px-2 py-1.5 text-center text-[12px] font-mono text-zinc-300">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
+                  </td>
+                  {/* Extension — ATR% multiple from 50-MA */}
+                  <td className={`px-2 py-1.5 text-center text-[12px] font-mono ${extCls(s.extension)}`}>
+                    {s.extension != null ? `${s.extension > 0 ? "+" : ""}${s.extension.toFixed(1)}x` : "—"}
                   </td>
                   {/* Intraday 1D 1W 1M 3M 6M 1YR */}
                   {[s.perf_intraday, p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (

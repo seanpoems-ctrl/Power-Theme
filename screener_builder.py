@@ -3,8 +3,9 @@ import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 """
 screener_builder.py — Independent Hot-Money Stock Screener
 ===========================================================
-Fetches the top momentum stocks from TradingView screener, sorted by
-ADR% × Avg$Vol (daily dollar volatility = institutional hot-money signal).
+Fetches the most liquid stocks from TradingView screener: the universe is the
+top TOP_N by average DOLLAR volume (price × 10d avg shares), then displayed sorted
+by ADR% × Avg$Vol (daily dollar volatility = institutional hot-money signal).
 
 Universe: all NYSE/NASDAQ stocks, mkt cap ≥ $1B, avg daily vol ≥ 500K shares,
           price ≥ $5, not ETF/fund.
@@ -62,6 +63,7 @@ FIELDS = [
     "price_52_week_high",       # 52W high
     "price_52_week_low",        # 52W low
     "ATR",                      # Average True Range (14-day)
+    "SMA50",                    # 50-day simple moving average — for the Extension column
     "open",                     # today's open — for % intraday (close vs own open)
     "Perf.W",                   # 1W performance %
     "Perf.1M",                  # 1M performance %
@@ -75,7 +77,11 @@ FIELDS = [
 MIN_MKTCAP   = 1e9     # $1B minimum market cap
 MIN_AVG_VOL  = 500_000 # 500K avg daily shares
 MIN_PRICE    = 5.0     # $5 minimum price
-TOP_N        = 500     # fetch top 500 by avg dollar volume
+TOP_N        = 500     # keep top 500 by avg dollar volume
+# TradingView can only sort server-side by share volume, which would drop expensive, very liquid names (LLY, ASML,
+# CAT, GS...) in favour of cheap high-share-count ones. So pull every candidate that passes the floors (~2,000, well
+# under the pool size), rank by price × avg volume locally, and keep TOP_N.
+QUERY_POOL   = 4000
 
 # ── Single-Stock ETF mapping  ─────────────────────────────────────────────────
 # Maps underlying ticker → list of single-stock ETFs (2x bull / -1x bear)
@@ -133,7 +139,7 @@ def build_screener() -> list[dict]:
         logger.error("tradingview_screener not installed")
         return []
 
-    logger.info("Querying TradingView screener for top %d stocks…", TOP_N)
+    logger.info("Querying TradingView screener (pool %d, keeping top %d by avg dollar volume)…", QUERY_POOL, TOP_N)
 
     try:
         _, df = (
@@ -148,7 +154,7 @@ def build_screener() -> list[dict]:
                 col("exchange").isin(["NASDAQ", "NYSE"]),
             )
             .order_by("average_volume_10d_calc", ascending=False)
-            .limit(TOP_N)
+            .limit(QUERY_POOL)
             .get_scanner_data()
         )
     except Exception as e:
@@ -156,6 +162,12 @@ def build_screener() -> list[dict]:
         return []
 
     logger.info("Fetched %d stocks from TradingView", len(df))
+    if len(df) >= QUERY_POOL:
+        logger.warning("Candidate pool hit QUERY_POOL=%d - lowest-volume names may be cut before the dollar-volume ranking; raise it", QUERY_POOL)
+
+    # Rank by average dollar volume (price × 10d avg shares) and keep the top TOP_N.
+    df = df.assign(_dv=df["close"].astype(float) * df["average_volume_10d_calc"].astype(float))
+    df = df.dropna(subset=["_dv"]).sort_values("_dv", ascending=False).head(TOP_N)
 
     stocks = []
     for _, row in df.iterrows():
@@ -177,6 +189,15 @@ def build_screener() -> list[dict]:
             adr_pct = round(float(atr) / float(price) * 100, 2) if atr and price and math.isfinite(float(atr)) else None
         except (TypeError, ValueError):
             adr_pct = None
+
+        # Extension (Jeff Sun): ATR% multiple from the 50-MA = (% above 50-MA) / ATR%.
+        # +4x is stretched, +7x+ is the usual overextension / take-profit zone; negative = below the 50-MA.
+        try:
+            sma50 = float(row.get("SMA50"))
+            extension = (round(((float(price) / sma50) - 1) / (float(atr) / float(price)), 2)
+                         if sma50 > 0 and float(atr) > 0 and math.isfinite(sma50) and math.isfinite(float(atr)) else None)
+        except (TypeError, ValueError):
+            extension = None
 
         # Avg dollar volume
         try:
@@ -226,6 +247,7 @@ def build_screener() -> list[dict]:
             "market_cap_b":        _f(row.get("market_cap_basic") / 1e9 if row.get("market_cap_basic") else None),
             "adr_pct":             adr_pct,
             "adr_dvol":            adr_dvol,
+            "extension":           extension,
             "week52_high":         _f(hi52),
             "week52_low":          _f(lo52),
             "pct_52w_range":       pct_52w,
