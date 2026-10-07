@@ -290,6 +290,16 @@
     "benchmark": false
   },
   {
+    "ticker": "ZCSH",
+    "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
+    "label": "Zcash",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Exposure to Zcash (ZEC), a privacy-focused cryptocurrency",
+    "benchmark": false
+  },
+  {
     "ticker": "RSPC",
     "category": "EW Sector",
     "fine_theme": null,
@@ -547,6 +557,16 @@
     "type": "beta_booster",
     "liquid": false,
     "description": "Global copper miners—not the physical copper price",
+    "benchmark": false
+  },
+  {
+    "ticker": "CRAK",
+    "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
+    "label": "Oil Refiners",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global oil refining and marketing companies",
     "benchmark": false
   },
   {
@@ -1208,6 +1228,16 @@
     "liquid": true,
     "description": "Market-cap-weighted S&P 500 index",
     "benchmark": true
+  },
+  {
+    "ticker": "BWET",
+    "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
+    "label": "Tanker Shipping",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Crude and product tanker freight-rate futures, not shipping-company stocks",
+    "benchmark": false
   },
   {
     "ticker": "ITA",
