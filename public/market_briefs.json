@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-06 20:07 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Uptick in Risk Appetite",
+    "spy_price": 774.83,
+    "spy_change_pct": 0.67,
+    "vix": 15.01,
+    "hy_oas": 3.12,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 34.4,
+    "mmth": 52.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CLF",
+          "company": "Cleveland-Cliffs Inc.",
+          "reason": "JPMorgan's price target raise and recent project showcasing are driving strong institutional and retail interest in the steel and mining firm."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Reports of accelerated adoption in key cloud segments and robust enterprise spending continue to fuel bullish sentiment for the tech giant."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Ongoing focus on the Federal Reserve's future interest rate trajectory continues to influence sentiment for major banking institutions."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-06 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to draw attention as headlines regarding its latest Gigafactory expansion circulate, with price action driven by ongoing short-term technical swings."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-16 11:23 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On Momentum, Tech Leading",
-    "spy_price": 760.5,
-    "spy_change_pct": 0.41,
-    "vix": 16.66,
-    "hy_oas": 2.76,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 38.3,
-    "mmth": 57.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a groundbreaking AI integration into its cloud productivity suite, poised to drive significant enterprise adoption and efficiency gains."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla reported record pre-orders for its new mass-market electric vehicle, signaling robust demand and expanded market reach."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil is facing renewed pressure as crude oil prices experience a significant decline, suggesting continued headwinds for the energy sector."
         }
       ]
     }
