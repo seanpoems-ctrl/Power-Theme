@@ -892,6 +892,32 @@ def fetch_tv_fundamentals(tickers: list[str]) -> dict[str, dict]:
     return out
 
 
+def fetch_tv_avg_dollar_volume(tickers: list[str]) -> dict[str, int]:
+    """One batched TradingView call -> {ticker: 10-day average dollar volume (avg shares x price)}."""
+    out: dict[str, int] = {}
+    if not tickers:
+        return out
+    try:
+        from tradingview_screener import Query, col
+        _, df = (
+            Query()
+            .select("name", "close", "average_volume_10d_calc")
+            .where(col("name").isin(list(dict.fromkeys(tickers))))
+            .limit(len(tickers) + 50)
+            .get_scanner_data()
+        )
+        for _, row in df.iterrows():
+            try:
+                dv = float(row["close"]) * float(row["average_volume_10d_calc"])
+            except (TypeError, ValueError):
+                continue
+            if dv == dv and dv > 0:
+                out[str(row["name"])] = round(dv)
+    except Exception as e:
+        logger.warning(f"  TradingView avg dollar volume failed: {e}")
+    return out
+
+
 def fetch_short_float(ticker: str) -> str | None:
     """% of float sold short as a display string ('12.34%'), via yfinance; None when unavailable."""
     try:
@@ -1615,6 +1641,8 @@ def _build_ibkr_scanner() -> list[dict]:
         if not ibkr_client.IS_LIVE:
             return []
         raw = ibkr_client.get_premarket_scanner() or []
+        # The scanner only reports today's share volume; the table shows average dollar volume, so look that up.
+        avg_dvol = fetch_tv_avg_dollar_volume([(i.get("ticker") or "").upper() for i in raw if i.get("ticker")])
         results = []
         for item in raw:
             ticker = (item.get("ticker") or "").upper()
@@ -1625,6 +1653,7 @@ def _build_ibkr_scanner() -> list[dict]:
                 "price":         item.get("last") or 0.0,
                 "change_pct":    item.get("change_pct"),
                 "volume":        item.get("volume"),
+                "avg_dollar_volume": avg_dvol.get(ticker),
                 "rs_placeholder": item.get("rs_placeholder"),
             }
             gates_passed, gates_detail, meets_all = _compute_gates(stock)

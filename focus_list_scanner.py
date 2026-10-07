@@ -501,6 +501,11 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
             if pd.notna(sma50) and pd.notna(atr) and pd.notna(close) and float(sma50) > 0 and float(atr) > 0:
                 extension = round(((float(close) / float(sma50)) - 1) / (float(atr) / float(close)), 2)
 
+            # Average dollar volume = 10-day avg shares × price (the "Avg $ Vol" column; ADR×$Vol is this × ADR%).
+            avg_dollar_volume = None
+            if pd.notna(avg_vol10) and pd.notna(close):
+                avg_dollar_volume = round(float(avg_vol10) * float(close))
+
             row = {
                 "ticker":     r.get("name"),
                 "industry":   r.get("industry") if pd.notna(r.get("industry")) else None,
@@ -511,6 +516,7 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
                 "perf":       round(float(perf), 2) if perf is not None and pd.notna(perf) else None,
                 "adr_pct":    adr_pct,
                 "adr_dvol":   adr_dvol,
+                "avg_dollar_volume": avg_dollar_volume,
                 "ema5_pct":   ema5_pct,
                 "extension":  extension,
             }

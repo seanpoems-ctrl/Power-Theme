@@ -3001,7 +3001,7 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
                 <th className="py-2 px-3 font-medium text-center">Ticker</th>
                 <th className="py-2 px-3 font-medium text-center">Last</th>
                 <th className="py-2 px-3 font-medium text-center">Chg%</th>
-                <th className="py-2 px-3 font-medium text-center">Vol</th>
+                <th className="py-2 px-3 font-medium text-center" title="10-day average dollar volume (avg shares × price)">Avg $ Vol</th>
                 <th className="py-2 px-3 font-medium text-center">RS</th>
                 <th className="py-2 px-3 font-medium text-center">Gate Status</th>
                 <th className="py-2 px-3 font-medium text-center">Source</th>
@@ -3047,9 +3047,9 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
                           </span>
                         : <span className="text-zinc-600">—</span>}
                     </td>
-                    {/* Vol */}
+                    {/* Avg $ Vol — 10-day average shares × price (looked up at scan time) */}
                     <td className="py-2 px-3 text-center font-mono text-zinc-400">
-                      {row.volume != null ? fmtNum(row.volume) : '—'}
+                      {row.avg_dollar_volume != null ? fmtVol(row.avg_dollar_volume) : '—'}
                     </td>
                     {/* RS */}
                     <td className="py-2 px-3 text-center font-mono">
@@ -7024,7 +7024,9 @@ const NewsHubTab = ({ newsData, embedded = false }) => {
                   <div className="flex items-center gap-3 text-[11px] text-zinc-500">
                     <span>Conviction: <strong className="text-zinc-300">{gapper.conviction ?? '—'}</strong></span>
                     <span>•</span>
-                    <span>Volume: <strong className="text-zinc-300">{gapper.pm_volume != null ? `${(gapper.pm_volume / 1e6).toFixed(1)}M` : '—'}</strong></span>
+                    <span>Avg $Vol: <strong className="text-zinc-300">{gapper.avg_dollar_vol != null ? fmtVol(gapper.avg_dollar_vol) : '—'}</strong></span>
+                    <span>•</span>
+                    <span>PM $Vol: <strong className="text-zinc-300">{gapper.pm_volume != null && gapper.price ? fmtVol(gapper.pm_volume * gapper.price) : '—'}</strong></span>
                     <span>•</span>
                     <span>RVOL: <strong className="text-zinc-300">{gapper.rvol != null ? `${gapper.rvol.toFixed(2)}x` : '—'}</strong></span>
                   </div>
@@ -9572,7 +9574,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
               <th className="text-center py-1.5 px-2 font-medium align-middle">Ticker</th>
               <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Avg<br/>$Vol</th>
               <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text={lang === 'zh' ? "Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 <2x 弱" : "Relative Volume: Today's vol ÷ 10-day avg. 🟢 ≥5x Extreme  🟡 ≥3x Strong  ⚪ ≥2x Normal  Gray <2x Weak"}>RVol</Tip></th>
               <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text={lang === 'zh' ? "Daily %：昨日收盤漲跌幅（非盤前）" : "Daily %: Prior close change (not pre-market)"}>Daily %</Tip></th>
               <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight"><Tip text={lang === 'zh' ? "Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空" : "Short Interest: % of float sold short. >20% = short squeeze potential but also bearish sentiment"}>Short<br/>Int</Tip></th>
@@ -9641,8 +9643,11 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                     {liveChgPct >= 0 ? '+' : ''}{liveChgPct.toFixed(1)}%
                   </span>
                 </td>
-                {/* Premkt Vol */}
-                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                {/* Avg $Vol — 10-day average dollar volume; today's pre-market $ volume sits underneath */}
+                <td className="py-1 px-2 align-middle text-center font-mono">
+                  <div className="text-[12px] text-zinc-300">{(g.avg_dollar_vol ?? (g.avg_vol_10d != null && g.price ? g.avg_vol_10d * g.price : null)) != null ? fmtVol(g.avg_dollar_vol ?? g.avg_vol_10d * g.price) : "—"}</div>
+                  {g.pm_volume != null && g.price ? <div className="text-[10px] text-zinc-600" title="Pre-market $ volume so far">PM {fmtVol(g.pm_volume * g.price)}</div> : null}
+                </td>
                 {/* RVol */}
                 <td className="py-1 px-2 align-middle text-center">
                   <span className={`text-[12px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
@@ -11690,13 +11695,13 @@ const MomentumCockpit = () => {
                 {[
                   { label: "Price",    value: analysis.price    != null ? `$${analysis.price.toFixed(2)}` : "—" },
                   { label: "Gap",      value: analysis.gap_pct  != null ? `+${analysis.gap_pct.toFixed(1)}%` : "—" },
-                  { label: "PM Vol",   value: analysis.pm_volume != null ? `${(analysis.pm_volume/1000).toFixed(0)}K` : "—" },
+                  { label: "PM $Vol",  value: analysis.pm_volume != null && analysis.price ? fmtVol(analysis.pm_volume * analysis.price) : "—" },
                   { label: "ADR(20)",  value: analysis.adr_pct  != null ? `${analysis.adr_pct.toFixed(1)}%` : "—" },
                   { label: "RVOL",     value: analysis.rvol     != null ? `${analysis.rvol.toFixed(2)}x` : "—" },
                   { label: "Mkt Cap",  value: analysis.mkt_cap  != null ? `$${(analysis.mkt_cap/1e9).toFixed(2)}B` : "—" },
                   { label: "Float",    value: analysis.float_shares || "—" },
                   { label: "Short",    value: analysis.short_float || "—" },
-                  { label: "Avg Vol",  value: analysis.avg_vol_10d != null ? `${(analysis.avg_vol_10d/1000).toFixed(0)}K` : "—" },
+                  { label: "Avg $Vol", value: analysis.avg_vol_10d != null && analysis.price ? fmtVol(analysis.avg_vol_10d * analysis.price) : "—" },
                 ].map(({ label, value }) => (
                   <div key={label} className="bg-zinc-900 rounded p-2">
                     <div className="text-[11px] text-zinc-500 uppercase tracking-wide">{label}</div>
@@ -14740,6 +14745,10 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                     <span className="text-zinc-600 mr-0.5">{perfLabel}</span>{fmtPct(perfVal)}
                   </span>
                 </div>
+                <div className="flex items-center justify-between mt-0.5" title={EXTENSION_TIP}>
+                  <span className="text-[10px] font-mono text-zinc-600">Ext</span>
+                  <span className={`text-[10px] font-mono font-semibold ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</span>
+                </div>
               </a>
               );
             })}
@@ -14953,6 +14962,10 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                       <span className={`text-[10px] font-mono font-semibold ${(perfVal ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                         <span className="text-zinc-600 mr-0.5">{perfLabel}</span>{fmtPct(perfVal)}
                       </span>
+                    </div>
+                    <div className="flex items-center justify-between mt-0.5" title={EXTENSION_TIP}>
+                      <span className="text-[10px] font-mono text-zinc-600">Ext</span>
+                      <span className={`text-[10px] font-mono font-semibold ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</span>
                     </div>
                   </a>
                   );
@@ -15377,7 +15390,6 @@ const InverseArsenalSection = ({ data, etfRsData = null, onMiniCharts = null }) 
 const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onMark = null, onMiniCharts = null }) => {
   const fmtPct   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol  = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v/1e6).toFixed(0)}M` : `$${(v/1e3).toFixed(0)}K`;
-  const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
   const chgCls   = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-rose-400";
 
   const hasPerf = scan.group === "momentum";
@@ -15395,7 +15407,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
     { key: "ema5_pct",   label: "vs EMA5",    align: "right" },
     { key: "adr_pct",    label: "ADR%",       align: "right" },
     { key: "extension",  label: "Extension",  align: "right", tip: EXTENSION_TIP },
-    { key: "volume",     label: "Vol",        align: "right", hideSm: true },
+    { key: "avg_dollar_volume", label: "Avg $ Vol", align: "right", hideSm: true, tip: "10-day average dollar volume (avg shares × price)" },
     { key: "market_cap", label: "Mkt Cap",    align: "right", hideSm: true },
   ];
 
@@ -15489,7 +15501,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
                   <td className={`px-3 py-1.5 text-right font-mono ${chgCls(s.ema5_pct)}`}>{fmtPct(s.ema5_pct)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                   <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</td>
-                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtVol(s.volume)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.avg_dollar_volume)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.market_cap)}</td>
                 </tr>
               ))}
