@@ -16050,14 +16050,116 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
   );
 };
 
+// ── ETF Performance heatmap (bottom of Leadership → Themes) ───────────────────────────────────────────────────────────
+// Themes = the 31 theme groups (median ETF return per period); ETFs = every non-benchmark ETF. Tiles are ranked best → worst and
+// shown as bars from a zero line. Premarket / After hours come from public/etf_extended_hours.json (etf_extended_hours_builder.py); there is no
+// Overnight period because TradingView's screener returns no overnight data.
+const HEAT_PERIODS = [["Premarket", "perf_pre"], ["After hours", "perf_post"], ["Intraday", "perf_intraday"], ["1 Day", "perf_1d"],
+  ["1 Week", "perf_1w"], ["1 Month", "perf_1m"], ["3 Months", "perf_3m"], ["6 Months", "perf_6m"], ["1 Year", "perf_12m"]];
+const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }) => {
+  const [mode, setMode]     = React.useState("themes");
+  const [period, setPeriod] = React.useState("perf_1d");
+  const label = HEAT_PERIODS.find(p => p[1] === period)?.[0] || "";
+  const median = vals => { const v = vals.filter(x => x != null).sort((a, b) => a - b); if (!v.length) return null; const m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
+  const items = React.useMemo(() => {
+    const k = period;
+    let out;
+    if (mode === "etfs") {
+      out = etfs.filter(e => !e.benchmark && e[k] != null).map(e => ({ key: e.ticker, label: e.ticker, sub: e.fine_theme || e.label || "", v: e[k], etf: e.ticker }));
+    } else {
+      const byT = Object.fromEntries(etfs.map(e => [e.ticker, e]));
+      out = groups.map(g => {
+        const v = (k === "perf_pre" || k === "perf_post" || g[k] == null) ? median((g.member_tickers || []).map(t => byT[t]?.[k])) : g[k];
+        return v == null ? null : { key: g.name, label: g.name, sub: `${(g.member_tickers || []).length} ETFs`, v, group: g };
+      }).filter(Boolean);
+    }
+    return out.sort((a, b) => b.v - a.v);
+  }, [mode, period, groups, etfs]);
+  // Axis runs from the worst return (or 0) to the best return (or 0); the zero line sits where 0 falls between them.
+  const { lo, hi } = React.useMemo(() => ({ lo: Math.min(0, ...items.map(i => i.v)), hi: Math.max(0, ...items.map(i => i.v)) }), [items]);
+  const span = hi - lo || 1;
+  const zeroPct = ((0 - lo) / span) * 100;
+  const fmtAxis = v => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
+  const fmt = v => `${v > 0 ? "+" : ""}${v.toFixed(Math.abs(v) >= 100 ? 0 : 2)}%`;
+  const ext = period === "perf_pre" || period === "perf_post";
+
+  return (
+    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+      <div className="flex items-center gap-3 flex-wrap mb-3">
+        <h3 className="text-sm font-semibold text-zinc-100">ETF Performance</h3>
+        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+          {[["themes", "Themes"], ["etfs", "ETFs"]].map(([kk, l]) => (
+            <button key={kk} onClick={() => setMode(kk)}
+              className={`px-3 py-0.5 text-[11px] font-medium rounded-md transition-all ${mode === kk ? "bg-orange-500/20 text-orange-300 border border-orange-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
+          ))}
+        </div>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{items.length}</span>
+        <span className="text-[11px] text-zinc-600">{ext ? `${label} % vs prior close · TradingView · ${extAsOf || "not loaded"}` : "click a row for holdings"}</span>
+      </div>
+      <div className="flex flex-wrap gap-1 mb-3">
+        {HEAT_PERIODS.map(([l, k]) => (
+          <button key={k} onClick={() => setPeriod(k)}
+            className={`px-2.5 py-1 text-[11px] font-medium rounded-md border transition-colors ${period === k ? "bg-blue-500/20 text-blue-300 border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border-zinc-800"}`}>{l}</button>
+        ))}
+      </div>
+      {items.length === 0 ? (
+        <p className="text-xs text-zinc-600 italic py-4">No {label.toLowerCase()} data for {mode === "etfs" ? "these ETFs" : "these groups"} right now.</p>
+      ) : (
+        <div className="max-h-[680px] overflow-y-auto rounded-lg border border-zinc-800/60 bg-zinc-950/40">
+          <div className="grid items-center gap-3 px-3 py-1.5 sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800/60 text-[10px] font-mono text-zinc-500"
+               style={{ gridTemplateColumns: "minmax(110px, 190px) 1fr 70px" }}>
+            <span />
+            <div className="relative h-3">
+              <span className="absolute left-0">{fmtAxis(lo)}</span>
+              <span className="absolute -translate-x-1/2" style={{ left: `${zeroPct}%` }}>0%</span>
+              <span className="absolute right-0">{fmtAxis(hi)}</span>
+            </div>
+            <span />
+          </div>
+          {items.map(i => {
+            const left  = i.v >= 0 ? zeroPct : ((i.v - lo) / span) * 100;
+            const width = (Math.abs(i.v) / span) * 100;
+            return (
+              <button key={i.key} onClick={() => i.etf ? onPickEtf(i.etf, { w: label, k: period }) : onPickGroup(i.group, { w: label, k: period })}
+                title={`${i.label}${i.sub ? " · " + i.sub : ""} · ${fmt(i.v)} — click for holdings`}
+                className="w-full grid items-center gap-3 px-3 py-1 border-b border-zinc-800/40 hover:bg-zinc-800/50 transition-colors text-left"
+                style={{ gridTemplateColumns: "minmax(110px, 190px) 1fr 70px" }}>
+                <span className={`truncate font-semibold text-zinc-100 ${i.etf ? "font-mono text-[12px]" : "text-[12px]"}`}>
+                  {i.label}{i.etf && i.sub && <span className="ml-1.5 font-sans font-normal text-[10px] text-zinc-600">{i.sub}</span>}
+                </span>
+                <span className="relative h-3.5 rounded bg-zinc-900 overflow-hidden">
+                  <span className="absolute top-0 bottom-0 w-px bg-zinc-600" style={{ left: `${zeroPct}%` }} />
+                  <span className="absolute top-0.5 bottom-0.5 rounded-sm" style={{ left: `${left}%`, width: `${Math.max(width, 0.4)}%`, backgroundColor: i.v >= 0 ? "#6db8ae" : "#d9736f" }} />
+                </span>
+                <span className={`text-right font-mono text-[12px] font-semibold ${i.v >= 0 ? "text-zinc-100" : "text-rose-300"}`}>{fmt(i.v)}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }) => {
   const [sel, setSel]     = React.useState(null);   // { group, window } for the group popup
   const [stats, setStats] = React.useState(null);   // public/etf_stats.json
   React.useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/etf_stats.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.etfs) setStats(d); }).catch(() => {});
   }, []);
-  const etfs   = etfRsData?.etfs || [];
+  const [extHours, setExtHours] = React.useState(null);   // public/etf_extended_hours.json
+  React.useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/etf_extended_hours.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.etfs) setExtHours(d); }).catch(() => {});
+  }, []);
+  const etfsRaw = etfRsData?.etfs || [];
+  // Adds perf_pre / perf_post (extended-hours %) so the heatmap and popups treat them like any other period key.
+  const etfs    = React.useMemo(() => etfsRaw.map(e => ({ ...e, perf_pre: extHours?.etfs?.[e.ticker]?.premarket ?? null, perf_post: extHours?.etfs?.[e.ticker]?.afterhours ?? null })), [etfsRaw, extHours]);
   const groups = etfRsData?.fine_theme_rankings || [];
+  const openEtf = (ticker, win) => {
+    const e = etfs.find(x => x.ticker === ticker);
+    const g = groups.find(x => x.name === e?.fine_theme) || { name: e?.label || ticker, member_tickers: [ticker] };
+    setSel({ group: g, win, only: ticker });
+  };
   const tables = React.useMemo(() => {
     const byTicker = Object.fromEntries(etfs.map(e => [e.ticker, e]));
     return THEME_WINDOWS.map(([w, k]) => {
@@ -16162,7 +16264,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
                         <td className={`px-3 py-1.5 text-right font-mono ${r.median >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.median)}</td>
                         <td className="px-3 py-1.5 text-left whitespace-nowrap">
                           {r.leader
-                            ? <a href={`https://www.tradingview.com/chart/?symbol=${r.leader}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="font-mono font-bold text-cyan-400 hover:underline">{r.leader}</a>
+                            ? <button onClick={e => { e.stopPropagation(); openEtf(r.leader, { w: t.w, k: t.k }); }} title={`${r.leader} holdings`} className="font-mono font-bold text-cyan-400 hover:underline">{r.leader}</button>
                             : "—"}
                         </td>
                         <td className={`px-3 py-1.5 text-right font-mono ${r.total && r.confirmed === r.total ? "text-emerald-400" : r.confirmed === 0 ? "text-zinc-600" : "text-zinc-300"}`}>{r.confirmed}/{r.total}</td>
@@ -16223,7 +16325,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
                         {n.rows.map((r, i) => (
                           <tr key={r.ticker} title={`${r.ticker} · ${r.group} — click for holdings`} onClick={() => { const g = groups.find(x => x.name === r.group); if (g) setSel({ group: g, win: { w: n.w, k: n.k }, only: r.ticker }); }}
                               className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                            <td className="px-3 py-1.5 text-left whitespace-nowrap"><a href={`https://www.tradingview.com/chart/?symbol=${r.ticker}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</a></td>
+                            <td className="px-3 py-1.5 text-left whitespace-nowrap"><span className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</span></td>
                             <td className="px-3 py-1.5 text-left text-zinc-400 whitespace-nowrap">{r.group}</td>
                             <td className={`px-3 py-1.5 text-right font-mono ${r.perf >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.perf)}</td>
                             <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
@@ -16240,6 +16342,8 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
           </div>
         )}
       </div>
+      <EtfPerformanceHeatmap groups={groups} etfs={etfs} extAsOf={extHours?.generated_at}
+        onPickGroup={(g, win) => setSel({ group: g, win })} onPickEtf={openEtf} />
       {sel?.group && <ThemeGroupPopup key={`${sel.group.name}|${sel.win.w}|${sel.only || ""}`} only={sel.only || null} group={sel.group} window={sel.win} etfs={etfs} etfHoldings={etfHoldings} stats={stats}
         onClose={() => setSel(null)} onMiniCharts={onMiniCharts} />}
     </div>

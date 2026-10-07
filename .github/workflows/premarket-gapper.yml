@@ -113,6 +113,12 @@ jobs:
           echo "Gapper failed after 3 attempts"
           exit 1
 
+      # Pre-market % for the ETF Performance heatmap (Leadership → Themes) — fresh at 8:55 AM ET. Non-fatal.
+      - name: ETF pre-market / after-hours snapshot
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        continue-on-error: true
+        run: python etf_extended_hours_builder.py
+
       - name: Run earnings calendar for gapper strip
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: python earnings_calendar.py
@@ -128,6 +134,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase --autostash
           git add public/gapper_data.json public/earnings_calendar.json public/sec_cik_map.json
+          git add -f public/etf_extended_hours.json 2>/dev/null || true
           git diff --staged --quiet || git commit -m "data: gapper_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
           pushed=false
           for i in 1 2 3 4 5; do
