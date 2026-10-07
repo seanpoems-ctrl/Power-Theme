@@ -16064,7 +16064,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
       const ranked = groups.filter(g => g[k] != null).sort((a, b) => b[k] - a[k]);
       const n = ranked.length;
       return {
-        w, k, n,
+        w, k, n, med,
         rows: ranked.map((g, i) => {
           const members = (g.member_tickers || []).map(t => byTicker[t]).filter(m => m && m[k] != null);
           const leader  = [...members].sort((a, b) => b[k] - a[k])[0];
@@ -16080,6 +16080,43 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
     });
   }, [etfs, groups]);
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+
+  // Non-Extended ETF Leaders (NEL): ETFs inside that window's top-10 groups whose Extension is below the cutoff and that clear a
+  // liquidity floor, best performance first. Stats from etf_stats.json.
+  const [nelCrit, setNelCrit] = React.useState(() => {
+    try {
+      const v = JSON.parse(localStorage.getItem("leadership_etf_nel_v1") || "null");
+      if (v && Number.isFinite(v.maxExt) && Number.isFinite(v.minDvolM)) return v;
+    } catch { /* defaults */ }
+    return { maxExt: 4, minDvolM: 10 };
+  });
+  React.useEffect(() => { try { localStorage.setItem("leadership_etf_nel_v1", JSON.stringify(nelCrit)); } catch { /* ignore */ } }, [nelCrit]);
+  const [nelCopied, setNelCopied] = React.useState(false);
+  const nel = React.useMemo(() => tables.map(t => {
+    const top = new Set(t.rows.slice(0, 10).map(r => r.name));
+    // Same "confirmed" test as the ranking table: up over the window AND at/above the median of all (non-benchmark) ETFs, so a
+    // broad group doesn't drag in every laggard ETF it happens to contain.
+    const rows = etfs.filter(e => !e.benchmark && e.fine_theme && top.has(e.fine_theme) && e[t.k] != null && e[t.k] > 0 && e[t.k] >= t.med).map(e => {
+      const st = stats?.etfs?.[e.ticker] || {};
+      return { ticker: e.ticker, group: e.fine_theme, perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null };
+    }).filter(x => x.ext != null && x.ext < nelCrit.maxExt && (x.dvol ?? 0) >= nelCrit.minDvolM * 1e6).sort((a, b) => b.perf - a.perf);
+    return { w: t.w, rows };
+  }), [tables, etfs, stats, nelCrit]);
+  const nelUnique = [...new Set(nel.flatMap(n => n.rows.map(r => r.ticker)))];
+  const nelCopy = () => {
+    (navigator.clipboard?.writeText(nelUnique.join(",")) || Promise.reject()).then(() => { setNelCopied(true); setTimeout(() => setNelCopied(false), 1500); }).catch(() => {});
+  };
+  const nelExport = () => {
+    const out = [["Window", "ETF", "Group", "Performance %", "ADR %", "Avg $ Vol", "Extension"]];
+    for (const n of nel) for (const r of n.rows) out.push([n.w, r.ticker, r.group, r.perf, r.adr ?? "", r.dvol ?? "", r.ext]);
+    const csv = out.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = "NEL-ETFs.csv";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+  const fmtD = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
 
   if (!groups.length) return <p className="text-xs text-zinc-600 italic py-6">Loading theme data…</p>;
   return (
@@ -16135,6 +16172,70 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
             </div>
           );
         })}
+      </div>
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3 className="text-sm font-semibold text-zinc-100">Non-Extended ETF Leaders (NEL)</h3>
+          <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{nelUnique.length} tickers</span>
+          <span className="text-[11px] text-zinc-600">confirmed ETFs (up and above the all-ETF median) in each window's top-10 groups, with Extension &lt; {nelCrit.maxExt}×</span>
+          <div className="ml-auto flex items-center gap-2">
+            <button onClick={nelCopy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{nelCopied ? "Copied ✓" : "Copy"}</button>
+            <button onClick={nelExport} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 flex-wrap">
+          <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">Extension &lt;
+            <input type="number" step="0.5" value={nelCrit.maxExt} onChange={e => setNelCrit(c => ({ ...c, maxExt: Number.isFinite(parseFloat(e.target.value)) ? parseFloat(e.target.value) : 0 }))}
+              className="w-14 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" /><span className="text-zinc-600">×</span></label>
+          <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">Avg $ Vol ≥
+            <input type="number" step="5" min="0" value={nelCrit.minDvolM} onChange={e => setNelCrit(c => ({ ...c, minDvolM: Number.isFinite(parseFloat(e.target.value)) ? parseFloat(e.target.value) : 0 }))}
+              className="w-14 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" /><span className="text-zinc-600">M</span></label>
+          {(nelCrit.maxExt !== 4 || nelCrit.minDvolM !== 10) && <button onClick={() => setNelCrit({ maxExt: 4, minDvolM: 10 })} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>}
+        </div>
+        {!stats ? <p className="text-xs text-zinc-600 italic py-3">Loading ETF stats…</p> : (
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            {nel.map(n => (
+              <div key={n.w} className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <h4 className="text-[13px] font-semibold text-zinc-100">{n.w} NEL</h4>
+                  <span className="text-[11px] text-zinc-500">{n.rows.length} {n.rows.length === 1 ? "ETF" : "ETFs"}</span>
+                  {onMiniCharts && n.rows.length > 0 && (
+                    <button onClick={() => onMiniCharts(n.rows.map(r => ({ ticker: r.ticker, category: r.group })), `ETF NEL · ${n.w}`)}
+                      className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+                  )}
+                </div>
+                {n.rows.length === 0 ? <p className="text-xs text-zinc-600 italic py-2">No non-extended ETF leaders.</p> : (
+                  <div className="overflow-x-auto rounded-lg border border-zinc-800">
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                          <th className="px-3 py-2 text-left font-medium">ETF</th>
+                          <th className="px-3 py-2 text-left font-medium">Group</th>
+                          <th className="px-3 py-2 text-right font-medium">Performance</th>
+                          <th className="px-3 py-2 text-right font-medium">ADR</th>
+                          <th className="px-3 py-2 text-right font-medium">Avg $ Vol</th>
+                          <th className="px-3 py-2 text-right font-medium" title={EXTENSION_TIP}>Extension</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {n.rows.map((r, i) => (
+                          <tr key={r.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                            <td className="px-3 py-1.5 text-left whitespace-nowrap"><a href={`https://www.tradingview.com/chart/?symbol=${r.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</a></td>
+                            <td className="px-3 py-1.5 text-left text-zinc-400 whitespace-nowrap">{r.group}</td>
+                            <td className={`px-3 py-1.5 text-right font-mono ${r.perf >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.perf)}</td>
+                            <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
+                            <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.dvol)}</td>
+                            <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.ext)}`}>{fmtExtension(r.ext)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       {sel?.group && <ThemeGroupPopup group={sel.group} window={sel.win} etfs={etfs} etfHoldings={etfHoldings} stats={stats}
         onClose={() => setSel(null)} onMiniCharts={onMiniCharts} />}
