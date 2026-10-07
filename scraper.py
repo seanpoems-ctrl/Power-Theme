@@ -2972,6 +2972,118 @@ def fetch_etf_holdings(etf_ticker: str, _max_attempts: int = 3) -> list:
                 return []
 
 
+# ETF holdings are published with the fund's own local tickers. Anything you can't trade from a US brokerage is noise
+# on this dashboard, so holdings are narrowed to US-tradable names before enrichment:
+#   1. local lines that have an NYSE/Nasdaq-listed equivalent are renamed to it (B3 prefs -> ADRs, TSXV/NEO -> Nasdaq);
+#   2. everything else must resolve on a US exchange (TradingView "america", else yfinance's exchange), or it is dropped.
+# Unknown results (network errors) KEEP the row - a transient failure must never delete real holdings.
+_US_TICKER_FOR_LOCAL_HOLDING = {
+    "PETR4":    "PBR.A",   # Petrobras preferred (B3)   -> NYSE ADR
+    "ITUB4":    "ITUB",    # Itau Unibanco pref (B3)    -> NYSE ADR
+    "BBDC4":    "BBD",     # Bradesco pref (B3)         -> NYSE ADR
+    "ANDINA-B": "AKO.B",   # Embotelladora Andina B     -> NYSE ADR
+    "HELP.NE":  "HELP",    # Helus Pharma (NEO)         -> Nasdaq
+    "HITI.V":   "HITI",    # High Tide (TSXV)           -> Nasdaq
+}
+_YF_US_EXCHANGES = {"NMS", "NGM", "NCM", "NAS", "NYQ", "ASE", "PCX", "BTS", "OQB", "PNK", "OBB"}   # Nasdaq / NYSE / American / Arca / Cboe / OTC
+
+
+def _yf_exchange(ticker: str):
+    """yfinance exchange code; '' = confirmed unknown to Yahoo; None = couldn't tell (transient failure)."""
+    try:
+        import yfinance as yf
+        tk = yf.Ticker(ticker)
+        ex = (tk.info or {}).get("exchange")
+        if ex:
+            return ex
+        hist = tk.history(period="5d")
+        return "" if hist is None or hist.empty else "?"
+    except Exception:
+        return None
+
+
+def restrict_holdings_to_us_tradable(etf_holdings_dict: dict) -> dict:
+    """Return a copy of {etf: [holding,...]} containing only holdings tradable in the US (see block comment above)."""
+    mapped: dict[str, list] = {}
+    renamed = 0
+    for etf, holdings in etf_holdings_dict.items():
+        out, seen = [], {}
+        for h in holdings:
+            h = dict(h)
+            us = _US_TICKER_FOR_LOCAL_HOLDING.get(h.get("ticker"))
+            if us:
+                h["local_ticker"], h["ticker"] = h["ticker"], us
+                renamed += 1
+            if h["ticker"] in seen:                       # a mapped line landed on a ticker the ETF already lists
+                prev = seen[h["ticker"]]
+                if isinstance(prev.get("weight"), (int, float)) and isinstance(h.get("weight"), (int, float)):
+                    prev["weight"] = round(prev["weight"] + h["weight"], 4)
+                continue
+            seen[h["ticker"]] = h
+            out.append(h)
+        mapped[etf] = out
+
+    tickers = sorted({h["ticker"] for hs in mapped.values() for h in hs if h.get("ticker")})
+    found: set[str] = set()
+    try:
+        from tradingview_screener import Query, col as tv_col  # type: ignore
+        tv_alias = {t.replace("-", "."): t for t in tickers if "-" in t}      # BRK-B -> BRK.B
+        asked = [t.replace("-", ".") for t in tickers]
+        for i in range(0, len(asked), 1500):
+            chunk = asked[i : i + 1500]
+            _, df = (Query().select("name").where(tv_col("name").isin(chunk)).set_markets("america")
+                     .limit(len(chunk) + 50).get_scanner_data())
+            for n in df["name"].tolist():
+                found.add(tv_alias.get(str(n), str(n)))
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"US-tradable filter skipped: TradingView lookup failed ({exc}); holdings left unfiltered")
+        return mapped
+    if len(found) < 0.5 * len(tickers):
+        logger.warning(f"US-tradable filter skipped: TradingView resolved only {len(found)}/{len(tickers)} tickers")
+        return mapped
+
+    drop: set[str] = set()
+    for t in tickers:
+        if t in found:
+            continue
+        ex = _yf_exchange(t)
+        if ex is None or ex == "?":
+            logger.info(f"  US check inconclusive for {t} - keeping")
+        elif ex == "" or ex not in _YF_US_EXCHANGES:
+            drop.add(t)
+    names = {h["ticker"]: h.get("name", "") for hs in mapped.values() for h in hs}
+    if drop:
+        logger.info(f"Dropping {len(drop)} non-US holdings: " + ", ".join(f"{t} ({names.get(t, '')[:24]})" for t in sorted(drop)))
+    logger.info(f"US-tradable holdings filter: {renamed} local lines mapped to US tickers, {len(drop)} non-US tickers dropped")
+    return {etf: [h for h in hs if h["ticker"] not in drop] for etf, hs in mapped.items()}
+
+
+# TradingView column -> output key. YTD / 1Y can't come from the 7-month yfinance download the holdings enrichment
+# uses, and the short windows are only used to fill holdings yfinance failed on.
+_TV_HOLDING_PERF = [
+    ("change",   "perf_1d"),
+    ("Perf.W",   "perf_1w"),
+    ("Perf.1M",  "perf_1m"),
+    ("Perf.3M",  "perf_3m"),
+    ("Perf.6M",  "perf_6m"),
+    ("Perf.YTD", "perf_ytd"),
+    ("Perf.Y",   "perf_1y"),
+]
+
+
+def _tv_perf_from_row(row) -> dict:
+    """{perf_* : float} from one TradingView scanner row; periods TradingView has no value for are omitted."""
+    out = {}
+    for tv_field, key in _TV_HOLDING_PERF:
+        try:
+            v = float(row.get(tv_field))
+        except (TypeError, ValueError):
+            continue
+        if v == v:   # drop NaN
+            out[key] = round(v, 2)
+    return out
+
+
 def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
     """
     Enrich all ETF holdings with price, 1D/1W/1M perf, ADR%, and RS score.
@@ -2979,6 +3091,8 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
     RS is a percentile rank within the combined universe of all ETF holding tickers.
     """
     import yfinance as yf
+
+    etf_holdings_dict = restrict_holdings_to_us_tradable(etf_holdings_dict)
 
     # Collect all unique tickers across all ETFs
     all_tickers = sorted({
@@ -3110,7 +3224,10 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
     company_names: dict[str, str] = {}
     tv_dollar_volumes: dict[str, int] = {}
     tv_mkt_caps: dict[str, float] = {}
+    tv_perf: dict[str, dict] = {}      # TradingView perf_* (YTD/1Y always; short windows only fill yfinance gaps)
+    tv_closes: dict[str, float] = {}
     us_tickers = [t for t in all_tickers if "." not in t]
+    tv_alias = {t.replace("-", "."): t for t in us_tickers if "-" in t}   # TradingView writes class shares with a dot: BRK-B -> BRK.B
     if us_tickers:
         try:
             from tradingview_screener import Query, col as tv_col  # type: ignore
@@ -3119,18 +3236,18 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             )
             batch_size = 1500
             for i in range(0, len(us_tickers), batch_size):
-                chunk = us_tickers[i : i + batch_size]
+                chunk = [t.replace("-", ".") for t in us_tickers[i : i + batch_size]]
                 try:
                     _, df = (
                         Query()
                         .select("name", "description", "close", "average_volume_10d_calc",
-                                "market_cap_basic")
+                                "market_cap_basic", *[c for c, _ in _TV_HOLDING_PERF])
                         .where(tv_col("name").isin(chunk))
                         .limit(len(chunk) + 50)
                         .get_scanner_data()
                     )
                     for _, row in df.iterrows():
-                        tkr = str(row["name"])
+                        tkr = tv_alias.get(str(row["name"]), str(row["name"]))
                         desc = str(row.get("description", "")).strip()
                         if desc:
                             company_names[tkr] = desc
@@ -3145,6 +3262,14 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
                             mc = float(row["market_cap_basic"])
                             if mc > 0:
                                 tv_mkt_caps[tkr] = mc
+                        except (TypeError, ValueError, KeyError):
+                            pass
+                        perf_row = _tv_perf_from_row(row)
+                        if perf_row:
+                            tv_perf[tkr] = perf_row
+                        try:
+                            if float(row["close"]) > 0:
+                                tv_closes[tkr] = round(float(row["close"]), 2)
                         except (TypeError, ValueError, KeyError):
                             pass
                 except Exception as exc:
@@ -3164,15 +3289,15 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
         for h in holdings:
             new_h = dict(h)
             s = stats.get(h["ticker"], {})
-            new_h["price"]         = s.get("price")
+            tvp = tv_perf.get(h["ticker"], {})
+            new_h["price"]         = s.get("price") if s.get("price") is not None else tv_closes.get(h["ticker"])
             new_h["perf_intraday"] = s.get("perf_intraday")
             new_h["rvol"]          = s.get("rvol")
             new_h["setup_label"]   = s.get("setup_label")
-            new_h["perf_1d"]       = s.get("perf_1d")
-            new_h["perf_1w"]       = s.get("perf_1w")
-            new_h["perf_1m"]       = s.get("perf_1m")
-            new_h["perf_3m"]       = s.get("perf_3m")
-            new_h["perf_6m"]       = s.get("perf_6m")
+            for _k in ("perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m"):
+                new_h[_k] = s.get(_k) if s.get(_k) is not None else tvp.get(_k)
+            new_h["perf_ytd"]      = tvp.get("perf_ytd")
+            new_h["perf_1y"]       = tvp.get("perf_1y")
             new_h["adr_pct"]       = s.get("adr_pct")
             # $Vol: TradingView avg 10-day dollar volume (primary),
             # yfinance last-day price×volume as fallback.
