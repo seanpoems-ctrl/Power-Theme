@@ -274,7 +274,15 @@ Where dashes ("—") in the UI came from, and what was done. Check here before a
 
 `public/screener_stocks.json` = TradingView screener (NASDAQ/NYSE, `stock`+`dr`, mkt cap >$1B, 10d avg vol >500K shares, price >$5). TradingView can only sort server-side by *share* volume, which used to drop expensive liquid names (LLY, ASML, CAT, GS...), so the builder pulls the whole candidate pool (`QUERY_POOL`=4000, ~1,900 pass today), ranks locally by price × avg volume and keeps the top `TOP_N`=500 by **dollar** volume (2026-10-07; the min is now ~$239M/day vs $24M before). Display order is still ADR% × Avg$Vol. A warning logs if the pool is ever full.
 
-`extension` (the **Extension** column in the Stock Screener table and every Focus List table — `focus_list_scanner.py` computes it the same way from TradingView `SMA50`/`ATR`) = Jeff Sun's ATR% multiple from the 50-MA: `((close / SMA50) − 1) / (ATR / close)`, from TradingView's `SMA50` + `ATR`. Colours: ≥4x amber (stretched), ≥7x red (overextended), negative = below the 50-MA. Stocks with a recent spin-off/split TradingView hasn't adjusted (e.g. CTVA) give a misleading value.
+`extension` (the **Extension** column in the Stock Screener table every Focus List table, the Daily Stock Universe, and the Market Leaders/Laggards cards — `focus_list_scanner.py` and `universe_builder.py` (`fetch_extensions`) compute it the same way from TradingView `SMA50`/`ATR`) = Jeff Sun's ATR% multiple from the 50-MA: `((close / SMA50) − 1) / (ATR / close)`, from TradingView's `SMA50` + `ATR`. Colours: ≥4x amber (stretched), ≥7x red (overextended), negative = below the 50-MA. Stocks with a recent spin-off/split TradingView hasn't adjusted (e.g. CTVA) give a misleading value.
+
+---
+
+## Universe mode (Watchlist → 🌐 Universe)
+
+`UniverseScreen` in `App.js` (mode key `adrUniverse`; mode `universe` is Group ETF). Reads `screener_stocks.json` and shows stocks with **ADR > 5% · Avg $ Vol > $500M · Avg Vol > 1M shares** (all editable, kept in localStorage `universe_criteria_v1`). `UNIVERSE_EXCLUDE` drops tickers with known-bad data (CTVA).
+
+**Via leveraged ETF:** `leveraged_etf_builder.py` (nightly, after `screener_builder.py`) writes `public/leveraged_stock_etfs.json` — every TradingView leveraged/inverse fund above $50M/day with its `underlying` stock when resolvable (index/commodity/crypto funds like SOXL, TQQQ, AGQ have none; names resolve by ticker token or company first word, 2+ letters only so "S&P"/"T-Rex" don't match). A stock joins the Universe when a leveraged or inverse ETF on it clears the same $ vol / share-volume floors and **ETF ADR > 3%** (editable), and the ETF is shown as a badge beside the stock (green long, red inverse). New file → the workflow `git add -f`s it. `q.query.pop("filter2")` is required — tradingview_screener ≥3.2 hides ETFs by default.
 
 ---
 

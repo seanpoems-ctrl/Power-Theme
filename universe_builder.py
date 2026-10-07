@@ -50,6 +50,35 @@ SECTOR_GROUPS: dict[str, list[str]] = {
 }
 
 
+# ── Extension (Jeff Sun's ATR% multiple from the 50-MA) ──────────────────────
+
+def fetch_extensions(tickers: list[str]) -> dict[str, float]:
+    """{ticker: ((close / SMA50) - 1) / (ATR / close)} from one batched TradingView call; missing tickers omitted.
+    Same formula as screener_builder.py / focus_list_scanner.py."""
+    out: dict[str, float] = {}
+    if not tickers:
+        return out
+    try:
+        from tradingview_screener import Query, col
+        alias = {t.replace("-", "."): t for t in tickers if "-" in t}          # BRK-B -> BRK.B
+        asked = [t.replace("-", ".") for t in tickers]
+        for i in range(0, len(asked), 400):
+            chunk = asked[i:i + 400]
+            _, df = (Query().set_markets("america").select("name", "close", "SMA50", "ATR")
+                     .where(col("name").isin(chunk)).limit(len(chunk) + 50).get_scanner_data())
+            for _, r in df.iterrows():
+                try:
+                    close, sma50, atr = float(r["close"]), float(r["SMA50"]), float(r["ATR"])
+                except (TypeError, ValueError):
+                    continue
+                if sma50 > 0 and atr > 0 and close > 0 and all(v == v for v in (close, sma50, atr)):
+                    name = str(r["name"])
+                    out[alias.get(name, name)] = round(((close / sma50) - 1) / (atr / close), 2)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Extension lookup failed (%s) - column left blank", exc)
+    return out
+
+
 # ── Signal classification ─────────────────────────────────────────────────────
 
 def stock_signal(rs, perf_1d, perf_1w, perf_1m, perf_3m, etf_count):
@@ -294,6 +323,11 @@ def build_universe() -> dict:
         stocks_out.append(s)
 
     stocks_out.sort(key=lambda x: -(x.get("rs") or 0))
+
+    ext = fetch_extensions([s["ticker"] for s in stocks_out])
+    for s in stocks_out:
+        s["extension"] = ext.get(s["ticker"])
+    logger.info("Extension: %d / %d stocks", len(ext), len(stocks_out))
 
     # Save daily snapshot for tomorrow's diff
     save_snapshot(today, stocks_out)

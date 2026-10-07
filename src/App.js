@@ -14664,8 +14664,13 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
             🗂 Group ETF
           </button>
           <button onClick={() => setMode("focus")}
-            className={`px-3 py-1.5 transition-colors ${mode === "focus" ? "bg-amber-600/25 text-amber-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "focus" ? "bg-amber-600/25 text-amber-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             🎯 Focus List
+          </button>
+          <button onClick={() => setMode("adrUniverse")}
+            title="Liquid, volatile stocks: ADR > 5% · Avg $ Vol > $500M · Avg Vol > 1M shares (thresholds editable)"
+            className={`px-3 py-1.5 transition-colors ${mode === "adrUniverse" ? "bg-cyan-600/25 text-cyan-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            🌐 Universe
           </button>
         </div>
         {mc?.spy?.sma50_pct != null && (
@@ -14779,6 +14784,10 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {/* ── FOCUS LIST ───────────────────────────────────── */}
       {mode === "focus" && <FocusListTab data={focusListData}
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Focus List", tickers })} />}
+
+      {/* ── UNIVERSE (mode "adrUniverse" — not to be confused with mode "universe" = Group ETF) ── */}
+      {mode === "adrUniverse" && <UniverseScreen stocks={screenerStocks} tickerThemeMap={tickerThemeMap}
+        onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Universe", tickers })} />}
 
       {/* ── GROUP ETF (mode "universe", formerly "Archive") ── Leading Themes
           mini-list, the full flat ETF RS table, and the Universe tab's sector
@@ -15513,6 +15522,206 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
   );
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Universe — stocks that clear a liquidity + volatility screen (Watchlist → 🌐 Universe).
+// Built on the top-500 dollar-volume list in screener_stocks.json. Defaults: ADR > 5% (ATR ÷ price, same ADR as the rest
+// of the dashboard) · Avg $ Vol > $500M · Avg Vol > 1M shares. The three thresholds are editable and remembered per browser.
+// ─────────────────────────────────────────────────────────────────────────────
+const UNIVERSE_DEFAULTS = { adr: 5, dvolM: 500, volM: 1, etfOn: true, etfAdr: 3 };
+const UNIVERSE_LS_KEY = "universe_criteria_v1";
+// Tickers whose TradingView data is known-bad and would pass the screen by accident (CTVA: unadjusted spin-off price → ADR 40.9%).
+const UNIVERSE_EXCLUDE = new Set(["CTVA"]);
+const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null }) => {
+  const [crit, setCrit] = React.useState(() => {
+    try {
+      const v = JSON.parse(localStorage.getItem(UNIVERSE_LS_KEY) || "null");
+      if (v && ["adr", "dvolM", "volM"].every(k => Number.isFinite(v[k]))) return { ...UNIVERSE_DEFAULTS, ...v };
+    } catch { /* storage unavailable — fall back to defaults */ }
+    return UNIVERSE_DEFAULTS;
+  });
+  React.useEffect(() => { try { localStorage.setItem(UNIVERSE_LS_KEY, JSON.stringify(crit)); } catch { /* ignore */ } }, [crit]);
+  const [search, setSearch]   = React.useState("");
+  const [sortCol, setSortCol] = React.useState("avg_dollar_volume");
+  const [sortDir, setSortDir] = React.useState("desc");
+  const [etfs, setEtfs]       = React.useState([]);   // public/leveraged_stock_etfs.json (leveraged_etf_builder.py)
+  React.useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/leveraged_stock_etfs.json?v=${Date.now()}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.etfs) setEtfs(d.etfs); })
+      .catch(() => {});
+  }, []);
+
+  const fmtPct  = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const fmtD    = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+  const fmtCap  = b => b == null ? "—" : b >= 1000 ? `$${(b / 1000).toFixed(1)}T` : `$${b.toFixed(0)}B`;
+  const perfCls = v => v == null ? "text-zinc-600" : v >= 0 ? "text-emerald-400" : "text-rose-400";
+  const rsCls   = v => v == null ? "text-zinc-600" : v >= 90 ? "text-emerald-400 font-bold" : v >= 70 ? "text-emerald-400" : v >= 50 ? "text-zinc-300" : "text-rose-400";
+
+  const rows = React.useMemo(() => {
+    const q = search.trim().toLowerCase();
+    // Leveraged / inverse ETFs on a single stock that clear the same $ volume + share volume floors and the lower ETF ADR bar.
+    const etfsByStock = {};
+    if (crit.etfOn) {
+      for (const e of etfs) {
+        if (e.underlying && (e.adr_pct ?? 0) > crit.etfAdr && (e.avg_dollar_volume ?? 0) > crit.dvolM * 1e6 && (e.avg_volume ?? 0) > crit.volM * 1e6)
+          (etfsByStock[e.underlying] ||= []).push(e);
+      }
+    }
+    const ownPass = s => (s.adr_pct ?? 0) > crit.adr && (s.avg_dollar_volume ?? 0) > crit.dvolM * 1e6 && (s.avg_volume ?? 0) > crit.volM * 1e6;
+    const passing = stocks.filter(s => {
+      if (UNIVERSE_EXCLUDE.has(s.ticker)) return false;
+      const e = etfsByStock[s.ticker] || [];
+      if (!ownPass(s) && !e.length) return false;
+      return !q || s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q) || (s.industry || "").toLowerCase().includes(q)
+        || e.some(x => x.ticker.toLowerCase().includes(q));
+    }).map(s => ({
+      ...s,
+      theme: tickerThemeMap[s.ticker] ?? null,
+      levEtfs: [...(etfsByStock[s.ticker] || [])].sort((a, b) => b.avg_dollar_volume - a.avg_dollar_volume),
+      viaEtfOnly: !ownPass(s),
+    }));
+    const val = s => s[sortCol] ?? null;
+    return passing.sort((a, b) => {
+      const av = val(a), bv = val(b);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return sortDir === "asc" ? av - bv : bv - av;
+    });
+  }, [stocks, etfs, crit, search, sortCol, sortDir, tickerThemeMap]);
+  const viaEtfCount = rows.filter(r => r.viaEtfOnly).length;
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "industry" ? "asc" : "desc"); }
+  };
+  const SortIcon = ({ col }) => sortCol !== col
+    ? <span className="ml-0.5 text-zinc-700">⇅</span>
+    : <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
+
+  const COLS = [
+    { col: "ticker",             label: "Ticker",    align: "left"  },
+    { col: "industry",           label: "Industry",  align: "left"  },
+    { col: "adr_pct",            label: "ADR%"                      },
+    { col: "extension",          label: "Extension", tip: EXTENSION_TIP },
+    { col: "avg_dollar_volume",  label: "Avg $ Vol", tip: "10-day average dollar volume (avg shares × price)" },
+    { col: "market_cap_b",       label: "Mkt Cap"                   },
+    { col: "perf_intraday",      label: "Intra",     tip: "% change from today's open" },
+    { col: "perf_1d",            label: "1D"                        },
+    { col: "perf_1w",            label: "1W"                        },
+    { col: "perf_1m",            label: "1M"                        },
+    { col: "perf_3m",            label: "3M"                        },
+    { col: "perf_6m",            label: "6M"                        },
+    { col: "perf_1y",            label: "1YR"                       },
+    { col: "rs_score",           label: "RS"                        },
+    { col: "pct_52w_range",      label: "52W%",      tip: "Price position in 52W range" },
+  ];
+
+  const setField = (k, v) => setCrit(c => ({ ...c, [k]: Number.isFinite(v) && v >= 0 ? v : 0 }));
+  const isDefault = Object.keys(UNIVERSE_DEFAULTS).every(k => crit[k] === UNIVERSE_DEFAULTS[k]);
+  const numInput = (label, key, step, suffix) => (
+    <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">
+      {label}
+      <input type="number" min="0" step={step} value={crit[key]} onChange={e => setField(key, parseFloat(e.target.value))}
+        className="w-16 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" />
+      <span className="text-zinc-600">{suffix}</span>
+    </label>
+  );
+
+  return (
+    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+      <div className="flex items-center gap-3 flex-wrap mb-3">
+        <h3 className="text-sm font-semibold text-zinc-100">Universe</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rows.length}</span>
+        <span className="text-[11px] text-zinc-600">ADR &gt; {crit.adr}% · Avg $ Vol &gt; ${crit.dvolM}M · Avg Vol &gt; {crit.volM}M shares{crit.etfOn && ` · + stocks whose leveraged ETF has ADR > ${crit.etfAdr}%${viaEtfCount ? ` (${viaEtfCount} added)` : ""}`}</span>
+        <div className="ml-auto flex items-center gap-2 flex-wrap justify-end">
+          <div className="relative">
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter ticker / industry…"
+              className="pl-6 pr-3 py-1 text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 w-44" />
+            <span className="absolute left-2 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]">⌕</span>
+          </div>
+          {onMiniCharts && rows.length > 0 && (
+            <button onClick={() => onMiniCharts(rows.map(s => ({ ticker: s.ticker, category: s.industry })), "Universe")}
+              className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+              ▦ Mini Charts
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="flex items-center gap-4 flex-wrap mb-3 pb-3 border-b border-zinc-800/60">
+        {numInput("ADR >", "adr", 0.5, "%")}
+        {numInput("Avg $ Vol >", "dvolM", 50, "M")}
+        {numInput("Avg Vol >", "volM", 0.5, "M sh")}
+        <label className="flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer" title="Add a stock when a leveraged or inverse ETF on it clears the same $ volume and share volume floors and this lower ADR bar">
+          <input type="checkbox" checked={crit.etfOn} onChange={e => setCrit(c => ({ ...c, etfOn: e.target.checked }))} className="accent-blue-500" />
+          + via leveraged ETF, ETF ADR &gt;
+        </label>
+        <input type="number" min="0" step="0.5" value={crit.etfAdr} disabled={!crit.etfOn} onChange={e => setField("etfAdr", parseFloat(e.target.value))}
+          className="w-14 -ml-2 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right disabled:opacity-40" />
+        <span className="-ml-2 text-[11px] text-zinc-600">%</span>
+        {!isDefault && (
+          <button onClick={() => setCrit(UNIVERSE_DEFAULTS)} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>
+        )}
+        <span className="text-[10px] text-zinc-600 ml-auto">Drawn from the top-500 US stocks by dollar volume (Stock Screener list) · ADR = ATR ÷ price · ETF badges: green = leveraged long, red = inverse</span>
+      </div>
+      {stocks.length === 0 ? (
+        <p className="text-xs text-zinc-600 italic py-4">Loading screener data…</p>
+      ) : rows.length === 0 ? (
+        <p className="text-xs text-zinc-600 italic py-4">No stocks meet these criteria right now.</p>
+      ) : (
+        <div className="overflow-x-auto overflow-y-auto max-h-[640px] rounded-lg border border-zinc-800">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide select-none">
+                <th className="sticky top-0 z-10 bg-zinc-900 px-2 py-2 text-center w-8">#</th>
+                {COLS.map(({ col, label, align, tip }) => (
+                  <th key={col} onClick={() => handleSort(col)} title={tip}
+                      className={`sticky top-0 z-10 bg-zinc-900 px-3 py-2 font-medium cursor-pointer hover:text-zinc-300 transition-colors whitespace-nowrap ${align === "left" ? "text-left" : "text-right"} ${sortCol === col ? "text-blue-400" : ""}`}>
+                    {label}<SortIcon col={col} />
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((s, i) => (
+                <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                  <td className="px-2 py-1.5 text-center text-zinc-600 text-[11px]">{i + 1}</td>
+                  <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                    <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
+                       className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                    {s.price != null && <span className="ml-1.5 text-[10px] font-mono text-zinc-500">${s.price.toFixed(2)}</span>}
+                    {s.levEtfs.map(e => (
+                      <span key={e.ticker}
+                        title={`${e.description} · ADR ${e.adr_pct.toFixed(1)}% · ${fmtD(e.avg_dollar_volume)}/day${s.viaEtfOnly ? " — qualifies this stock" : ""}`}
+                        className={`ml-1 text-[9px] font-mono font-semibold px-1 py-0.5 rounded align-middle ${e.direction === "inverse" ? "bg-rose-900/60 text-rose-300" : "bg-emerald-900/60 text-emerald-300"}`}>
+                        {e.ticker} {e.direction === "inverse" ? "−" : ""}{e.ratio}x
+                      </span>
+                    ))}
+                  </td>
+                  <td className="px-3 py-1.5 text-left max-w-[190px]">
+                    <div className="text-zinc-300 truncate leading-tight">{s.industry || "—"}</div>
+                    {s.theme && <div className="text-zinc-600 text-[10px] truncate leading-tight">{s.theme}</div>}
+                  </td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(s.avg_dollar_volume)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtCap(s.market_cap_b)}</td>
+                  {[s.perf_intraday, s.perf_1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y].map((v, k) => (
+                    <td key={k} className={`px-3 py-1.5 text-right font-mono ${perfCls(v)}`}>{fmtPct(v)}</td>
+                  ))}
+                  <td className={`px-3 py-1.5 text-right font-mono ${rsCls(s.rs_score)}`}>{s.rs_score ?? "—"}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{s.pct_52w_range != null ? `${s.pct_52w_range.toFixed(0)}%` : "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const FocusListTab = ({ data, onMiniCharts = null }) => {
   // Stalk / Focus marks live in this browser only (weekly rebuild = Clear all).
   const [marks, setMarks] = React.useState(() => {
@@ -16019,10 +16228,11 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                   { col:"perf_3m",       label:"3M",       align:"right" },
                   { col:"perf_6m",       label:"6M",       align:"right" },
                   { col:"adr_pct",       label:"ADR%",     align:"right" },
+                  { col:"extension",     label:"Extension", align:"right", tip: EXTENSION_TIP },
                   { col:"dollar_volume", label:"$ Vol",    align:"right" },
                   { col:"mkt_cap",       label:"Mkt Cap",  align:"right" },
-                ].map(({ col, label, align }) => (
-                  <th key={col} onClick={() => handleSort(col)}
+                ].map(({ col, label, align, tip }) => (
+                  <th key={col} onClick={() => handleSort(col)} title={tip}
                       className={`px-3 py-2.5 font-semibold cursor-pointer hover:text-zinc-200 transition-colors whitespace-nowrap ${align==="left"?"text-left":"text-right"}`}>
                     {label}<SortIcon col={col}/>
                   </th>
@@ -16061,6 +16271,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_3m)}`}>{fmtP(s.perf_3m)}</td>
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_6m)}`}>{fmtP(s.perf_6m)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct!=null?`${s.adr_pct.toFixed(1)}%`:"—"}</td>
+                    <td className={`px-3 py-2 text-right font-mono ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtV(s.dollar_volume)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtMC(s.mkt_cap)}</td>
                     <td className="px-3 py-2 max-w-[200px]">
