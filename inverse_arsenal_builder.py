@@ -229,10 +229,42 @@ def _leverage_label(row) -> str:
     return ('-' if _is_inverse(row) else '+') + _ratio(row)
 
 
+# Funds that name the underlying by company ("T-Rex 2X Inverse NVIDIA Daily Target ETF") instead of by ticker.
+# The first word of each company's legal name -> ticker is built from the screener universe the dashboard already
+# ships; _NAME_ALIASES covers names that don't appear in the issuer's legal name.
+_NAME_ALIASES = {"spacex": "SPCX"}
+_NAME_STOPWORDS = {"daily", "target", "etf", "index", "the", "bull", "bear", "short", "inverse", "leveraged"}
+_name_index = None
+
+
+def _company_name_index() -> dict:
+    global _name_index
+    if _name_index is None:
+        _name_index = {}
+        try:
+            d = json.loads((ROOT / "public" / "screener_stocks.json").read_text(encoding="utf-8"))
+            stocks = d["stocks"] if isinstance(d, dict) else d
+            for st in sorted(stocks, key=lambda x: -(x.get("market_cap_b") or 0)):   # biggest company wins a shared name
+                words = re.findall(r"[A-Za-z0-9]+", st.get("company") or "")
+                if words and st.get("ticker"):
+                    _name_index.setdefault(words[0].lower(), st["ticker"])
+        except Exception as e:  # noqa: BLE001 - optional enrichment; the ticker regex still works without it
+            logger.warning("company-name index unavailable (%s) - name-only inverse funds keep a blank exposure.", e)
+    return _name_index
+
+
 def _underlying_hint(desc: str):
-    """Best-effort underlying ticker from names like '2x Short NVDA Daily ETF'."""
-    m = re.search(r'(?:Short|Inverse|Bear)\s+([A-Z]{2,5})\b', desc or '')
-    return m.group(1) if m else None
+    """Best-effort underlying ticker from names like '2x Short NVDA Daily ETF' or '2X Inverse NVIDIA Daily Target ETF'."""
+    m = re.search(r'(?:Short|Inverse|Bear)\s+([A-Za-z][A-Za-z0-9]*)', desc or '')
+    if not m:
+        return None
+    word = m.group(1)
+    if re.fullmatch(r'[A-Z]{2,5}', word):
+        return word
+    key = word.lower()
+    if key in _NAME_STOPWORDS:
+        return None
+    return _NAME_ALIASES.get(key) or _company_name_index().get(key)
 
 
 def _passes_floors(r) -> bool:
