@@ -15738,9 +15738,89 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
 // Snapshot on top = which industries hold the most leaders in each window (+ a count-over-time sparkline once the nightly
 // history has two or more days).
 // ─────────────────────────────────────────────────────────────────────────────
+// ── Sortable-table helpers shared by the Leadership tables (click a header to sort; click again to reverse) ──────────────────
+const useTableSort = (rows, defCol, defDir = "desc") => {
+  const [col, setCol] = React.useState(defCol);
+  const [dir, setDir] = React.useState(defDir);
+  const sorted = React.useMemo(() => [...rows].sort((a, b) => {
+    const av = a[col], bv = b[col];
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    if (typeof av === "string") return dir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    return dir === "asc" ? av - bv : bv - av;
+  }), [rows, col, dir]);
+  const toggle = (c, textual = false) => { if (c === col) setDir(d => d === "asc" ? "desc" : "asc"); else { setCol(c); setDir(textual ? "asc" : "desc"); } };
+  return { rows: sorted, col, dir, toggle };
+};
+const SortTh = ({ sort, col, label, textual = false, align = "right", title, className = "px-3 py-2" }) => (
+  <th onClick={() => sort.toggle(col, textual)} title={title}
+      className={`${className} font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors ${align === "left" ? "text-left" : align === "center" ? "text-center" : "text-right"} ${sort.col === col ? "text-blue-400" : ""}`}>
+    {label}<span className={`ml-0.5 text-[9px] ${sort.col === col ? "text-blue-400" : "text-zinc-700"}`}>{sort.col === col ? (sort.dir === "asc" ? "↑" : "↓") : "⇅"}</span>
+  </th>
+);
+
 const LEADERSHIP_WINDOWS = ["1M", "3M", "6M", "1Y"];
 const LEADERSHIP_DEFAULTS = { maxExt: 4, maxRmv: 20, minCoil: 0 };
 const LEADERSHIP_LS_KEY = "leadership_criteria_v1";
+// One LL / NEL / T-NEL table (module-level so its sort state survives the parent re-rendering).
+const LeadershipTier = ({ title, sub, showTight, rows, total, win, perWindow, copied, onCopy, onExport, onMini }) => {
+  const sort = useTableSort(rows, "perf", "desc");
+  const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+  const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  return (
+    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+      <div className="flex items-center gap-2 flex-wrap mb-1">
+        <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{total} tickers</span>
+        <span className="text-[11px] text-zinc-600">{sub}</span>
+        <div className="ml-auto flex items-center gap-2">
+          <button onClick={onCopy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : "Copy"}</button>
+          <button onClick={onExport} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
+          {onMini && rows.length > 0 && (
+            <button onClick={() => onMini(sort.rows)} className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+          )}
+        </div>
+      </div>
+      <div className="text-[11px] text-zinc-500 mb-2">{win} · {rows.length} {rows.length === 1 ? "stock" : "stocks"}<span className="text-zinc-700"> · {perWindow}</span></div>
+      {rows.length === 0 ? (
+        <p className="text-xs text-zinc-600 italic py-3">{showTight ? "No tight NEL setups." : "None in this window."}</p>
+      ) : (
+        <div className="overflow-x-auto rounded-lg border border-zinc-800">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                <SortTh sort={sort} col="ticker" label="Symbol" textual align="left" />
+                <SortTh sort={sort} col="industry" label="Industry" textual align="left" />
+                <SortTh sort={sort} col="perf" label="Performance" />
+                <SortTh sort={sort} col="avg_dollar_volume" label="Avg $ Vol" />
+                {showTight && <SortTh sort={sort} col="coil" label="Coil" title="Consecutive sessions (max 10) with a true range below the 20-day average" />}
+                {showTight && <SortTh sort={sort} col="rmv" label="RMV" title="Relative measured volatility: 5-day avg true range on a 0–100 scale of its own 50-day range. Low = tight" />}
+                <SortTh sort={sort} col="extension" label="Extension" title={EXTENSION_TIP} />
+              </tr>
+            </thead>
+            <tbody>
+              {sort.rows.map((x, i) => (
+                <tr key={x.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                  <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                    <a href={`https://www.tradingview.com/chart/?symbol=${x.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{x.ticker}</a>
+                  </td>
+                  <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[220px] truncate">{x.industry || "—"}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{fmtPf(x.perf)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(x.avg_dollar_volume)}</td>
+                  {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.coil ?? "—"}</td>}
+                  {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.rmv ?? "—"}</td>}
+                  <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(x.extension)}`}>{fmtExtension(x.extension)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const LeadershipStocksView = ({ onMiniCharts = null }) => {
   const [data, setData]       = React.useState(null);
   const [history, setHistory] = React.useState({});
@@ -15811,63 +15891,12 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
     </label>
   );
 
-  const Section = ({ tier, title, sub, showTight }) => {
-    const rows = tiers[tier][win] || [];
-    const total = uniq(tier).length;
-    return (
-      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
-        <div className="flex items-center gap-2 flex-wrap mb-1">
-          <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
-          <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{total} tickers</span>
-          <span className="text-[11px] text-zinc-600">{sub}</span>
-          <div className="ml-auto flex items-center gap-2">
-            <button onClick={() => copyList(tier)} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied === tier ? "Copied ✓" : "Copy"}</button>
-            <button onClick={() => exportList(tier, title.split(" ")[0])} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
-            {onMiniCharts && rows.length > 0 && (
-              <button onClick={() => onMiniCharts(rows.map(x => ({ ticker: x.ticker, category: x.industry })), `${title.split(" ")[0]} · ${win}`)}
-                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
-            )}
-          </div>
-        </div>
-        <div className="text-[11px] text-zinc-500 mb-2">{win} · {rows.length} {rows.length === 1 ? "stock" : "stocks"}
-          <span className="text-zinc-700"> · {LEADERSHIP_WINDOWS.map(w => `${w} ${tiers[tier][w].length}`).join(" · ")}</span></div>
-        {rows.length === 0 ? (
-          <p className="text-xs text-zinc-600 italic py-3">{showTight ? "No tight NEL setups." : "None in this window."}</p>
-        ) : (
-          <div className="overflow-x-auto rounded-lg border border-zinc-800">
-            <table className="w-full text-xs border-collapse">
-              <thead>
-                <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                  <th className="px-3 py-2 text-left font-medium">Symbol</th>
-                  <th className="px-3 py-2 text-left font-medium">Industry</th>
-                  <th className="px-3 py-2 text-right font-medium">Performance</th>
-                  <th className="px-3 py-2 text-right font-medium">Avg $ Vol</th>
-                  {showTight && <th className="px-3 py-2 text-right font-medium" title="Consecutive sessions (max 10) with a true range below the 20-day average">Coil</th>}
-                  {showTight && <th className="px-3 py-2 text-right font-medium" title="Relative measured volatility: 5-day avg true range on a 0–100 scale of its own 50-day range. Low = tight">RMV</th>}
-                  <th className="px-3 py-2 text-right font-medium" title={EXTENSION_TIP}>Extension</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((x, i) => (
-                  <tr key={x.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                    <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                      <a href={`https://www.tradingview.com/chart/?symbol=${x.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{x.ticker}</a>
-                    </td>
-                    <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[220px] truncate">{x.industry || "—"}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{fmtPf(x.perf)}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(x.avg_dollar_volume)}</td>
-                    {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.coil ?? "—"}</td>}
-                    {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.rmv ?? "—"}</td>}
-                    <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(x.extension)}`}>{fmtExtension(x.extension)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    );
-  };
+  const tierEl = (tier, title, short, sub, showTight = false) => (
+    <LeadershipTier title={title} sub={sub} showTight={showTight} rows={tiers[tier][win] || []} total={uniq(tier).length} win={win}
+      perWindow={LEADERSHIP_WINDOWS.map(w => `${w} ${tiers[tier][w].length}`).join(" · ")}
+      copied={copied === tier} onCopy={() => copyList(tier)} onExport={() => exportList(tier, short)}
+      onMini={onMiniCharts ? rows => onMiniCharts(rows.map(x => ({ ticker: x.ticker, category: x.industry })), `${short} · ${win}`) : null} />
+  );
 
   if (!data) return <p className="text-xs text-zinc-600 italic py-6">Loading leadership data…</p>;
   const c = data.criteria || {};
@@ -15896,7 +15925,7 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
             const mx = Math.max(...top.map(t => t[1]), 1);
             return (
               <div key={w} className={`rounded-lg border p-3 ${win === w ? "border-blue-500/30 bg-blue-500/5" : "border-zinc-800 bg-zinc-900/40"}`}>
-                <div className="text-[11px] font-semibold text-zinc-400 mb-1.5">{w} leadership</div>
+                <div className="text-[11px] font-semibold text-zinc-400 mb-1.5">{w} Leadership</div>
                 {top.map(([ind, n]) => (
                   <div key={ind} className="mb-1">
                     <div className="flex items-center justify-between text-[11px]">
@@ -15912,9 +15941,9 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
         </div>
         {histDays.length < 2 && <p className="text-[10px] text-zinc-700 mt-2">Leadership-over-time sparklines appear once the nightly run has stored two or more days.</p>}
       </div>
-      <Section tier="LL"   title="Liquid Leaders (LL)"            sub={`top ${data.top_n} performers per window`} />
-      <Section tier="NEL"  title="Non-Extended Leaders (NEL)"     sub={`LL with Extension < ${crit.maxExt}×`} />
-      <Section tier="TNEL" title="Tight Non-Extended Leaders (T-NEL)" sub={`NEL with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`} showTight />
+      {tierEl("LL",   "Liquid Leaders (LL)",                 "LL",    `top ${data.top_n} performers per window`)}
+      {tierEl("NEL",  "Non-Extended Leaders (NEL)",          "NEL",   `LL with Extension < ${crit.maxExt}×`)}
+      {tierEl("TNEL", "Tight Non-Extended Leaders (T-NEL)",  "T-NEL", `NEL with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`, true)}
     </div>
   );
 };
@@ -15952,6 +15981,13 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
     return Object.values(acc).map(a => row(a.h, members.length ? a.sum / members.length : null)).sort((a, b) => (b.weight ?? -1) - (a.weight ?? -1));
   }, [tab, members, etfHoldings, stats]);
 
+  const statRows = React.useMemo(() => members.map(m => ({
+    ticker: m.ticker, desc: stats?.etfs?.[m.ticker]?.description || m.label || null, perf: m[k] ?? null,
+    adr: stats?.etfs?.[m.ticker]?.adr_pct ?? null, dvol: stats?.etfs?.[m.ticker]?.avg_dollar_volume ?? null, ext: stats?.etfs?.[m.ticker]?.extension ?? null,
+  })), [members, stats, k]);
+  const statSort = useTableSort(statRows, "perf", "desc");
+  const holdSort = useTableSort(holdings, "weight", "desc");
+
   const [miniOpen, setMiniOpen] = React.useState(null);
   React.useEffect(() => {
     const h = e => { if (e.key === "Escape" && !miniOpen) onClose(); };
@@ -15959,7 +15995,6 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
     return () => window.removeEventListener("keydown", h);
   }, [onClose, miniOpen]);
 
-  const st = t => stats?.etfs?.[t] || {};
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8" style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
@@ -15970,28 +16005,28 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
           </div>
           <div className="px-5 py-4 space-y-5">
             <div>
-              <div className="text-sm font-semibold text-zinc-200 mb-2">ETF statistics <span className="text-[11px] font-normal text-zinc-600">· Performance is {win.w}</span></div>
+              <div className="text-sm font-semibold text-zinc-200 mb-2">ETF Statistics <span className="text-[11px] font-normal text-zinc-600">· Performance is {win.w}</span></div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs border-collapse">
                   <thead>
                     <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                      <th className="px-2 py-2 text-left font-medium">ETF</th>
-                      <th className="px-2 py-2 text-left font-medium">Description</th>
-                      <th className="px-2 py-2 text-right font-medium">Performance</th>
-                      <th className="px-2 py-2 text-right font-medium">ADR</th>
-                      <th className="px-2 py-2 text-right font-medium">Avg $ Vol</th>
-                      <th className="px-2 py-2 text-right font-medium" title={EXTENSION_TIP}>Extension</th>
+                      <SortTh sort={statSort} col="ticker" label="ETF" textual align="left" className="px-2 py-2" />
+                      <SortTh sort={statSort} col="desc" label="Description" textual align="left" className="px-2 py-2" />
+                      <SortTh sort={statSort} col="perf" label="Performance" className="px-2 py-2" />
+                      <SortTh sort={statSort} col="adr" label="ADR" className="px-2 py-2" />
+                      <SortTh sort={statSort} col="dvol" label="Avg $ Vol" className="px-2 py-2" />
+                      <SortTh sort={statSort} col="ext" label="Extension" title={EXTENSION_TIP} className="px-2 py-2" />
                     </tr>
                   </thead>
                   <tbody>
-                    {members.map(m => (
+                    {statSort.rows.map(m => (
                       <tr key={m.ticker} className="border-t border-zinc-800/70">
                         <td className="px-2 py-2.5"><a href={`https://www.tradingview.com/chart/?symbol=${m.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-zinc-100 hover:text-cyan-400">{m.ticker}</a></td>
-                        <td className="px-2 py-2.5 text-zinc-400 max-w-[300px]">{st(m.ticker).description || m.label || "—"}</td>
-                        <td className={`px-2 py-2.5 text-right font-mono ${(m[k] ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(m[k])}</td>
-                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300">{st(m.ticker).adr_pct != null ? `${st(m.ticker).adr_pct.toFixed(1)}%` : "—"}</td>
-                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300">{fmtD(st(m.ticker).avg_dollar_volume)}</td>
-                        <td className={`px-2 py-2.5 text-right font-mono ${extensionCls(st(m.ticker).extension)}`}>{fmtExtension(st(m.ticker).extension)}</td>
+                        <td className="px-2 py-2.5 text-zinc-400 max-w-[300px]">{m.desc || "—"}</td>
+                        <td className={`px-2 py-2.5 text-right font-mono ${(m.perf ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(m.perf)}</td>
+                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300">{m.adr != null ? `${m.adr.toFixed(1)}%` : "—"}</td>
+                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300">{fmtD(m.dvol)}</td>
+                        <td className={`px-2 py-2.5 text-right font-mono ${extensionCls(m.ext)}`}>{fmtExtension(m.ext)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -16000,9 +16035,9 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <div className="text-sm font-semibold text-zinc-200">Top stock holdings</div>
+                <div className="text-sm font-semibold text-zinc-200">Top Stock Holdings</div>
                 {holdings.length > 0 && onMiniCharts && (
-                  <button onClick={() => setMiniOpen({ title: `${only || group.name} · ${tab}`, tickers: holdings.map(h => ({ ticker: h.ticker, category: group.name })) })}
+                  <button onClick={() => setMiniOpen({ title: `${only || group.name} · ${tab}`, tickers: holdSort.rows.map(h => ({ ticker: h.ticker, category: group.name })) })}
                     className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
                 )}
               </div>
@@ -16020,15 +16055,15 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                   <table className="w-full text-xs border-collapse">
                     <thead>
                       <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                        <th className="px-2 py-2 text-left font-medium">Ticker</th>
-                        <th className="px-2 py-2 text-left font-medium">Company</th>
-                        <th className="px-2 py-2 text-right font-medium">Weight</th>
-                        <th className="px-2 py-2 text-right font-medium">Avg $ Vol</th>
-                        <th className="px-2 py-2 text-right font-medium" title={EXTENSION_TIP}>Extension</th>
+                        <SortTh sort={holdSort} col="ticker" label="Ticker" textual align="left" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="name" label="Company" textual align="left" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="weight" label="Weight" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="dvol" label="Avg $ Vol" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="ext" label="Extension" title={EXTENSION_TIP} className="px-2 py-2" />
                       </tr>
                     </thead>
                     <tbody>
-                      {holdings.map(h => (
+                      {holdSort.rows.map(h => (
                         <tr key={h.ticker} className="border-t border-zinc-800/70">
                           <td className="px-2 py-2"><a href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-zinc-100 hover:text-cyan-400">{h.ticker}</a></td>
                           <td className="px-2 py-2 text-zinc-400 max-w-[260px] truncate">{h.name || "—"}</td>
@@ -16067,11 +16102,15 @@ const buildLeadershipGroups = etfs => {
     ...Object.fromEntries(LEADERSHIP_PERF_KEYS.map(k => [k, med(ms.map(m => m[k]))])),
   }));
 };
-const HEAT_PERIODS = [["Premarket", "perf_pre"], ["After hours", "perf_post"], ["Intraday", "perf_intraday"], ["1 Day", "perf_1d"],
+const HEAT_PERIODS = [["Premarket", "perf_pre"], ["After Hours", "perf_post"], ["Intraday", "perf_intraday"], ["1 Day", "perf_1d"],
   ["1 Week", "perf_1w"], ["1 Month", "perf_1m"], ["3 Months", "perf_3m"], ["6 Months", "perf_6m"], ["1 Year", "perf_12m"]];
 const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }) => {
   const [mode, setMode]     = React.useState("themes");
   const [period, setPeriod] = React.useState("perf_1d");
+  const [sortCol, setSortCol] = React.useState("v");     // "v" = return, "label" = name
+  const [sortDir, setSortDir] = React.useState("desc");
+  const sortBy = c => { if (c === sortCol) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortCol(c); setSortDir(c === "label" ? "asc" : "desc"); } };
+  const sortIcon = c => <span className={`ml-0.5 text-[9px] ${sortCol === c ? "text-blue-400" : "text-zinc-700"}`}>{sortCol === c ? (sortDir === "asc" ? "↑" : "↓") : "⇅"}</span>;
   const label = HEAT_PERIODS.find(p => p[1] === period)?.[0] || "";
   const median = vals => { const v = vals.filter(x => x != null).sort((a, b) => a - b); if (!v.length) return null; const m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; };
   const items = React.useMemo(() => {
@@ -16086,8 +16125,11 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
         return v == null ? null : { key: g.name, label: g.name, sub: `${(g.member_tickers || []).length} ETFs`, v, group: g };
       }).filter(Boolean);
     }
-    return out.sort((a, b) => b.v - a.v);
-  }, [mode, period, groups, etfs]);
+    return out.sort((a, b) => {
+      const d = sortCol === "label" ? a.label.localeCompare(b.label) : a.v - b.v;
+      return sortDir === "asc" ? d : -d;
+    });
+  }, [mode, period, groups, etfs, sortCol, sortDir]);
   // Axis runs from the worst return (or 0) to the best return (or 0); the zero line sits where 0 falls between them.
   const { lo, hi } = React.useMemo(() => ({ lo: Math.min(0, ...items.map(i => i.v)), hi: Math.max(0, ...items.map(i => i.v)) }), [items]);
   const span = hi - lo || 1;
@@ -16121,13 +16163,13 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
         <div className="max-h-[680px] overflow-y-auto rounded-lg border border-zinc-800/60 bg-zinc-950/40">
           <div className="grid items-center gap-3 px-3 py-1.5 sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800/60 text-[10px] font-mono text-zinc-500"
                style={{ gridTemplateColumns: "minmax(110px, 190px) 1fr 70px" }}>
-            <span />
+            <button onClick={() => sortBy("label")} className={`text-left uppercase tracking-wide font-sans font-medium hover:text-zinc-300 ${sortCol === "label" ? "text-blue-400" : ""}`}>{mode === "etfs" ? "ETF" : "Theme"}{sortIcon("label")}</button>
             <div className="relative h-3">
               <span className="absolute left-0">{fmtAxis(lo)}</span>
               <span className="absolute -translate-x-1/2" style={{ left: `${zeroPct}%` }}>0%</span>
               <span className="absolute right-0">{fmtAxis(hi)}</span>
             </div>
-            <span />
+            <button onClick={() => sortBy("v")} className={`text-right uppercase tracking-wide font-sans font-medium hover:text-zinc-300 ${sortCol === "v" ? "text-blue-400" : ""}`}>Return{sortIcon("v")}</button>
           </div>
           {items.map(i => {
             const left  = i.v >= 0 ? zeroPct : ((i.v - lo) / span) * 100;
@@ -16148,6 +16190,103 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf }
               </button>
             );
           })}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Top-10 theme table for one window (module-level so its sort state survives the parent re-rendering).
+const ThemeTopTable = ({ t, top, onRow, onLeader, onMini }) => {
+  const rows = React.useMemo(() => top.map(r => ({ ...r, ratio: r.total ? r.confirmed / r.total : null })), [top]);
+  const sort = useTableSort(rows, "rank", "asc");
+  const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  return (
+    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+      <div className="flex items-center gap-2 mb-2">
+        <h4 className="text-[13px] font-semibold text-zinc-100">{t.w} Top 10</h4>
+        {onMini && top.some(r => r.leader) && (
+          <button onClick={() => onMini(sort.rows.filter(r => r.leader).map(r => ({ ticker: r.leader, category: r.name })))}
+            className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+        )}
+      </div>
+      <div className="overflow-x-auto rounded-lg border border-zinc-800">
+        <table className="w-full text-xs border-collapse">
+          <thead>
+            <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+              <SortTh sort={sort} col="rank" label="#" textual align="center" className="px-2 py-2 w-7" />
+              <SortTh sort={sort} col="name" label="Theme" textual align="left" />
+              <SortTh sort={sort} col="strength" label="Strength" />
+              <SortTh sort={sort} col="median" label="Median" />
+              <SortTh sort={sort} col="leader" label="Leader" textual align="left" />
+              <SortTh sort={sort} col="ratio" label="Confirmed" />
+            </tr>
+          </thead>
+          <tbody>
+            {sort.rows.map((r, i) => (
+              <tr key={r.name} title={`${r.name}: ${r.members.join(", ")} — click for holdings`} onClick={() => onRow(r)}
+                  className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                <td className="px-2 py-1.5 text-center text-zinc-600 text-[11px]">{r.rank}</td>
+                <td className="px-3 py-1.5 text-left text-zinc-200 whitespace-nowrap">{r.name}</td>
+                <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.strength.toFixed(1)}</td>
+                <td className={`px-3 py-1.5 text-right font-mono ${r.median >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.median)}</td>
+                <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                  {r.leader
+                    ? <button onClick={e => { e.stopPropagation(); onLeader(r.leader); }} title={`${r.leader} holdings`} className="font-mono font-bold text-cyan-400 hover:underline">{r.leader}</button>
+                    : "—"}
+                </td>
+                <td className={`px-3 py-1.5 text-right font-mono ${r.total && r.confirmed === r.total ? "text-emerald-400" : r.confirmed === 0 ? "text-zinc-600" : "text-zinc-300"}`}>{r.confirmed}/{r.total}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// ETF NEL table for one window.
+const NelTable = ({ n, onRow, onMini }) => {
+  const sort = useTableSort(n.rows, "perf", "desc");
+  const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+  return (
+    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+      <div className="flex items-center gap-2 mb-2">
+        <h4 className="text-[13px] font-semibold text-zinc-100">{n.w} NEL</h4>
+        <span className="text-[11px] text-zinc-500">{n.rows.length} {n.rows.length === 1 ? "ETF" : "ETFs"}</span>
+        {onMini && n.rows.length > 0 && (
+          <button onClick={() => onMini(sort.rows.map(r => ({ ticker: r.ticker, category: r.group })))}
+            className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+        )}
+      </div>
+      {n.rows.length === 0 ? <p className="text-xs text-zinc-600 italic py-2">No non-extended ETF leaders.</p> : (
+        <div className="overflow-x-auto rounded-lg border border-zinc-800">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                <SortTh sort={sort} col="ticker" label="ETF" textual align="left" />
+                <SortTh sort={sort} col="group" label="Theme" textual align="left" />
+                <SortTh sort={sort} col="perf" label="Performance" />
+                <SortTh sort={sort} col="adr" label="ADR" />
+                <SortTh sort={sort} col="dvol" label="Avg $ Vol" />
+                <SortTh sort={sort} col="ext" label="Extension" title={EXTENSION_TIP} />
+              </tr>
+            </thead>
+            <tbody>
+              {sort.rows.map((r, i) => (
+                <tr key={r.ticker} title={`${r.ticker} · ${r.group} — click for holdings`} onClick={() => onRow(r)}
+                    className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                  <td className="px-3 py-1.5 text-left whitespace-nowrap"><span className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</span></td>
+                  <td className="px-3 py-1.5 text-left text-zinc-400 whitespace-nowrap">{r.group}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono ${r.perf >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.perf)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.dvol)}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.ext)}`}>{fmtExtension(r.ext)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
@@ -16244,51 +16383,12 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
         <span className="text-[11px] text-zinc-600">top 10 per window · Strength = percentile of the group's median ETF return · Confirmed = member ETFs up and above the all-ETF median</span>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {tables.map(t => {
-          const top = t.rows.slice(0, 10);
-          return (
-            <div key={t.w} className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <h4 className="text-[13px] font-semibold text-zinc-100">{t.w} top 10</h4>
-                {onMiniCharts && top.some(r => r.leader) && (
-                  <button onClick={() => onMiniCharts(top.filter(r => r.leader).map(r => ({ ticker: r.leader, category: r.name })), `Theme leaders · ${t.w}`)}
-                    className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
-                )}
-              </div>
-              <div className="overflow-x-auto rounded-lg border border-zinc-800">
-                <table className="w-full text-xs border-collapse">
-                  <thead>
-                    <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                      <th className="px-2 py-2 text-center font-medium w-7">#</th>
-                      <th className="px-3 py-2 text-left font-medium">Group</th>
-                      <th className="px-3 py-2 text-right font-medium">Strength</th>
-                      <th className="px-3 py-2 text-right font-medium">Median</th>
-                      <th className="px-3 py-2 text-left font-medium">Leader</th>
-                      <th className="px-3 py-2 text-right font-medium">Confirmed</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {top.map((r, i) => (
-                      <tr key={r.name} title={`${r.name}: ${r.members.join(", ")} — click for holdings`} onClick={() => setSel({ group: groups.find(g => g.name === r.name), win: { w: t.w, k: t.k } })}
-                          className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                        <td className="px-2 py-1.5 text-center text-zinc-600 text-[11px]">{r.rank}</td>
-                        <td className="px-3 py-1.5 text-left text-zinc-200 whitespace-nowrap">{r.name}</td>
-                        <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.strength.toFixed(1)}</td>
-                        <td className={`px-3 py-1.5 text-right font-mono ${r.median >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.median)}</td>
-                        <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                          {r.leader
-                            ? <button onClick={e => { e.stopPropagation(); openEtf(r.leader, { w: t.w, k: t.k }); }} title={`${r.leader} holdings`} className="font-mono font-bold text-cyan-400 hover:underline">{r.leader}</button>
-                            : "—"}
-                        </td>
-                        <td className={`px-3 py-1.5 text-right font-mono ${r.total && r.confirmed === r.total ? "text-emerald-400" : r.confirmed === 0 ? "text-zinc-600" : "text-zinc-300"}`}>{r.confirmed}/{r.total}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          );
-        })}
+        {tables.map(t => (
+          <ThemeTopTable key={t.w} t={t} top={t.rows.slice(0, 10)}
+            onRow={r => setSel({ group: groups.find(g => g.name === r.name), win: { w: t.w, k: t.k } })}
+            onLeader={ticker => openEtf(ticker, { w: t.w, k: t.k })}
+            onMini={onMiniCharts ? list => onMiniCharts(list, `Theme Leaders · ${t.w}`) : null} />
+        ))}
       </div>
       <div className="space-y-3">
         <div className="flex items-center gap-2 flex-wrap">
@@ -16312,45 +16412,9 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
         {!stats ? <p className="text-xs text-zinc-600 italic py-3">Loading ETF stats…</p> : (
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             {nel.map(n => (
-              <div key={n.w} className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <h4 className="text-[13px] font-semibold text-zinc-100">{n.w} NEL</h4>
-                  <span className="text-[11px] text-zinc-500">{n.rows.length} {n.rows.length === 1 ? "ETF" : "ETFs"}</span>
-                  {onMiniCharts && n.rows.length > 0 && (
-                    <button onClick={() => onMiniCharts(n.rows.map(r => ({ ticker: r.ticker, category: r.group })), `ETF NEL · ${n.w}`)}
-                      className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
-                  )}
-                </div>
-                {n.rows.length === 0 ? <p className="text-xs text-zinc-600 italic py-2">No non-extended ETF leaders.</p> : (
-                  <div className="overflow-x-auto rounded-lg border border-zinc-800">
-                    <table className="w-full text-xs border-collapse">
-                      <thead>
-                        <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                          <th className="px-3 py-2 text-left font-medium">ETF</th>
-                          <th className="px-3 py-2 text-left font-medium">Group</th>
-                          <th className="px-3 py-2 text-right font-medium">Performance</th>
-                          <th className="px-3 py-2 text-right font-medium">ADR</th>
-                          <th className="px-3 py-2 text-right font-medium">Avg $ Vol</th>
-                          <th className="px-3 py-2 text-right font-medium" title={EXTENSION_TIP}>Extension</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {n.rows.map((r, i) => (
-                          <tr key={r.ticker} title={`${r.ticker} · ${r.group} — click for holdings`} onClick={() => { const g = groups.find(x => x.name === r.group); if (g) setSel({ group: g, win: { w: n.w, k: n.k }, only: r.ticker }); }}
-                              className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                            <td className="px-3 py-1.5 text-left whitespace-nowrap"><span className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</span></td>
-                            <td className="px-3 py-1.5 text-left text-zinc-400 whitespace-nowrap">{r.group}</td>
-                            <td className={`px-3 py-1.5 text-right font-mono ${r.perf >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.perf)}</td>
-                            <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
-                            <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.dvol)}</td>
-                            <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.ext)}`}>{fmtExtension(r.ext)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
+              <NelTable key={n.w} n={n}
+                onRow={r => { const g = groups.find(x => x.name === r.group); if (g) setSel({ group: g, win: { w: n.w, k: n.k }, only: r.ticker }); }}
+                onMini={onMiniCharts ? list => onMiniCharts(list, `ETF NEL · ${n.w}`) : null} />
             ))}
           </div>
         )}
