@@ -16880,8 +16880,9 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
 
 // ── Leadership → Sectors: the 11 SPDR sector ETFs ranked per window, with leadership-over-time and an ETF Performance bar chart ─────
 // Strength = (n − rank + 1) / n × 100 across the 11 sectors (best = 100.0, then 90.9, 81.8 …, worst = 9.1). Median = the sector ETF's own return.
-// Confirmed = the equal-weight twin ETF (XLK ↔ RSPT …) is also up AND at/above the median of all 11 twins — i.e. the cap-weighted
-// lead is shared by the average stock. Leadership-over-time comes from public/sector_leadership.json (sector_history_builder.py).
+// Confirmed = how many of the sector's two ETFs — the SPDR (XLK) and its equal-weight twin (RSPT) — are up AND at/above the median of all
+// 22 sector ETFs over the window ("2/2" = the cap-weighted lead is shared by the average stock). Same test as the theme tables, with the 22
+// sector ETFs as the peer set. Leadership-over-time comes from public/sector_leadership.json (sector_history_builder.py).
 const SPDR_SECTORS = { XLK: "Technology", XLE: "Energy", XLV: "Health Care", XLF: "Financial Services", XLI: "Industrials", XLP: "Consumer Staples",
   XLY: "Consumer Discretionary", XLU: "Utilities", XLRE: "Real Estate", XLB: "Materials", XLC: "Communication Services" };
 const SPDR_TWIN = { XLK: "RSPT", XLE: "RSPG", XLV: "RSPH", XLF: "RSPF", XLI: "RSPN", XLP: "RSPS", XLY: "RSPD", XLU: "RSPU", XLRE: "RSPR", XLB: "RSPM", XLC: "RSPC" };
@@ -16941,14 +16942,15 @@ const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }
     const by = Object.fromEntries(etfs.map(e => [e.ticker, e]));
     const ranked = Object.keys(SPDR_SECTORS).map(t => by[t]).filter(e => e && e[k] != null).sort((a, b) => b[k] - a[k]);
     const n = ranked.length;
-    const twinPerfs = Object.values(SPDR_TWIN).map(t => by[t]?.[k]).filter(v => v != null).sort((a, b) => a - b);
-    const twinMed = twinPerfs.length ? twinPerfs[twinPerfs.length >> 1] : 0;
+    const peerPerfs = [...Object.keys(SPDR_SECTORS), ...Object.values(SPDR_TWIN)].map(t => by[t]?.[k]).filter(v => v != null).sort((a, b) => a - b);
+    const peerMed = peerPerfs.length ? peerPerfs[peerPerfs.length >> 1] : 0;   // same median convention as the theme tables
     return {
       w, k, n,
       rows: ranked.map((e, i) => {
-        const twin = by[SPDR_TWIN[e.ticker]]?.[k];
+        const pair = [e.ticker, SPDR_TWIN[e.ticker]].filter(Boolean);
+        const perfs = pair.map(t => by[t]?.[k]).filter(v => v != null);
         return { rank: i + 1, name: SPDR_SECTORS[e.ticker], strength: Math.round(((n - i) / n) * 1000) / 10,
-          median: e[k], leader: e.ticker, confirmed: twin != null && twin > 0 && twin >= twinMed ? 1 : 0, total: twin != null ? 1 : 0, members: [e.ticker, SPDR_TWIN[e.ticker]] };
+          median: e[k], leader: e.ticker, confirmed: perfs.filter(v => v > 0 && v >= peerMed).length, total: perfs.length, members: pair };
       }),
     };
   }), [etfs]);
@@ -16962,7 +16964,7 @@ const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }
       <div className="flex items-baseline gap-2 flex-wrap">
         <h3 className="text-sm font-semibold text-zinc-100">Sector Leaders</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{leaderCount} sectors</span>
-        <span className="text-[11px] text-zinc-600">top 3 per window of the 11 SPDR sectors · Confirmed = the equal-weight twin ETF is also up and above the median of all twins</span>
+        <span className="text-[11px] text-zinc-600">top 3 per window of the 11 SPDR sectors · Confirmed = the sector's SPDR ETF and its equal-weight twin that are up and at/above the median of all 22 sector ETFs (n/2)</span>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {tables.map(t => {
