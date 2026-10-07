@@ -10,6 +10,7 @@ import FlaggingStocksBox from "./FlaggingStocksBox";
 import CotTab from "./CotTab";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
+import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
 const LangCtx = React.createContext('en');
@@ -2249,9 +2250,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     // ADR-20 for tickers outside the thematic universe is unavailable without it;
     // Finnhub's free tier doesn't include historical candles.)
     try {
-      const quoteData = FINNHUB_KEY
-        ? await fetchFinnhubQuote(s)
-        : null;
+      const quoteData = await fetchFinnhubQuote(s);   // Finnhub first, Finance Query fallback (works without a key too)
 
       const fCur = quoteData?.c;
       const fPrevClose = quoteData?.pc;
@@ -2614,7 +2613,60 @@ const VIX_ZONES_NOTE = [
 ];
 
 
-const MarketPulseCard = ({ vix, generatedAt, mc }) => {
+// ── Breadth chip: the Breadth Cycle phase next to the Market Pulse trend signal, plus a divergence flag when they disagree ─────────
+const BREADTH_TONE = {
+  warn: "bg-amber-500/15 border-amber-500/40 text-amber-300",
+  info: "bg-sky-500/15 border-sky-500/40 text-sky-300",
+  ok:   "bg-emerald-500/15 border-emerald-500/40 text-emerald-300",
+  bad:  "bg-rose-500/15 border-rose-500/40 text-rose-300",
+};
+const BreadthChip = ({ signal, onOpen = null, showText = false, className = "" }) => {
+  const cycle = useBreadthCycle();
+  if (!cycle) return null;
+  const div = breadthDivergence(signal, cycle);
+  const phase = BREADTH_PHASES[cycle.phase];
+  const Wrap = onOpen ? "button" : "div";
+  return (
+    <div className={className}>
+      <div className="flex items-center gap-1.5 flex-wrap">
+        <Wrap onClick={onOpen || undefined} title={`Breadth Cycle ${cycle.date}: ${cycle.phase}, strength ${Math.round(cycle.strength)}/100 (${cycle.change >= 0 ? "+" : ""}${cycle.change.toFixed(1)} vs 5 sessions ago)${cycle.t2108 != null ? `, T2108 ${cycle.t2108.toFixed(1)}%` : ""}${onOpen ? " — click for the Breadth Cycle page" : ""}`}
+          className={`flex items-center gap-1.5 px-2 py-0.5 rounded-md border border-zinc-700/60 bg-zinc-800/60 text-[11px] font-semibold text-zinc-200 whitespace-nowrap ${onOpen ? "hover:bg-zinc-700/60 cursor-pointer" : ""}`}>
+          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: phase?.color }} />
+          Breadth: {cycle.phase} <span className="font-mono text-zinc-400">{Math.round(cycle.strength)}</span>
+        </Wrap>
+        {div && (
+          <span title={div.text} className={`px-2 py-0.5 rounded-md border text-[11px] font-bold whitespace-nowrap ${BREADTH_TONE[div.tone]}`}>
+            {div.tone === "warn" ? "⚠ " : ""}{div.label}
+          </span>
+        )}
+      </div>
+      {showText && div && <div className="text-[11px] text-zinc-400 leading-snug mt-1">{div.text}</div>}
+    </div>
+  );
+};
+
+// Strip under the Market Situation narrative: breadth phase, divergence read, link to the page.
+const BreadthBriefStrip = ({ cycle, signal, onOpen }) => {
+  if (!cycle) return null;
+  const div = breadthDivergence(signal, cycle);
+  const phase = BREADTH_PHASES[cycle.phase];
+  return (
+    <div className="mt-3 pt-3 border-t border-zinc-800/60 flex items-center gap-2 flex-wrap text-[11px]">
+      <span className="text-zinc-500 font-semibold tracking-wider">BREADTH CYCLE</span>
+      <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-md border border-zinc-700/60 bg-zinc-800/60 font-semibold text-zinc-200">
+        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: phase?.color }} />{cycle.phase}
+        <span className="font-mono text-zinc-400">{Math.round(cycle.strength)}/100</span>
+        <span className={`font-mono ${cycle.change >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{cycle.change >= 0 ? "+" : ""}{cycle.change.toFixed(1)}</span>
+      </span>
+      {cycle.t2108 != null && <span className="text-zinc-500 font-mono">T2108 {cycle.t2108.toFixed(1)}%</span>}
+      {div && <span className={`px-2 py-0.5 rounded-md border font-semibold ${BREADTH_TONE[div.tone]}`}>{div.tone === "warn" ? "⚠ " : ""}{div.label}</span>}
+      {div && <span className="text-zinc-400 basis-full leading-snug">{div.text}</span>}
+      {onOpen && <button onClick={onOpen} className="ml-auto text-blue-400 hover:text-blue-300">Breadth Cycle →</button>}
+    </div>
+  );
+};
+
+const MarketPulseCard = ({ vix, generatedAt, mc, onOpenBreadth = null }) => {
   const lang = useLang();
   const [showVixNote, setShowVixNote] = React.useState(false);
   const vixNoteRef = React.useRef(null);
@@ -2661,6 +2713,7 @@ const MarketPulseCard = ({ vix, generatedAt, mc }) => {
         <span className={`w-2 h-2 rounded-full flex-shrink-0 ${signalCfg.dot}`}/>
         <span className="text-[13px] font-semibold text-zinc-100">{signalCfg.label}</span>
       </div>
+      <BreadthChip signal={signal} onOpen={onOpenBreadth} showText className="mb-1" />
       {/* VIX row */}
       <div className="mt-1 pt-2 border-t border-zinc-800/60 flex items-end justify-between">
         <div>
@@ -8075,7 +8128,7 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v7"; // bumped 2026-10-02: v6 briefs predate the COT paragraph
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v8"; // bumped 2026-10-07: v7 briefs predate the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
                                                                      // (v6 note, 2026-09-22: invalidate briefs
                                                                      // cached before the extra manual re-scrapes
                                                                      // (today's SPX/NDX/DJI fix) — v5 briefs cite
@@ -8206,8 +8259,9 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
     `You are a senior market analyst providing a pre-trading situational awareness brief for a swing trader. ` +
     `Analyse all the data below and write exactly ${3 + (needsExtra ? 1 : 0) + (hasCot ? 1 : 0)} paragraphs with NO headers or labels:\n\n` +
     `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index, and new 52W highs vs lows. Be specific with the numbers.\n` +
-    `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure?\n` +
-    `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n` +
+    `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure? ` +
+    `Also use breadth_cycle (our own 0-100 participation score and phase: Expansion / Distribution / Contraction / Repair, with its 5-session change) and say whether participation is improving or deteriorating.\n` +
+    `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. If pulse_breadth_divergence is not null, state that divergence in one sentence and let it temper the stance (e.g. index uptrend with narrow breadth = selective, not aggressive). State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n` +
     para4Instruction +
     cotInstruction +
     `\nBe direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\n` +
@@ -8218,7 +8272,7 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
   return geminiGenerateText(prompt);
 }
 
-const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
+const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot, onOpenBreadthCycle = null }) => {
   const [text, setText]           = useState(null);
   const [loading, setLoading]     = useState(false);
   const [failed, setFailed]       = useState(false);
@@ -8226,7 +8280,9 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
   const [marketMove, setMarketMove] = useState(null); // { direction, spy_pct, qqq_pct } | null
   const [cotBrief, setCotBrief]   = useState(null);     // CFTC COT summary (strip + Gemini paragraph)
   const cotPromise = useRef(null);
+  const [cycle, setCycle]         = useState(null);       // Breadth Cycle reading (strip + Gemini payload)
   const todayKey = new Date().toISOString().slice(0, 10);
+  useEffect(() => { let alive = true; loadBreadthCycle().then(c => { if (alive) setCycle(c); }); return () => { alive = false; }; }, []);
 
   // One COT load shared by the on-screen strip and the Gemini prompt (null if the file is unavailable).
   const getCot = useCallback(() => {
@@ -8240,7 +8296,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
     setLoading(true); setFailed(false);
 
     // Parallel: fetch news + compute market move trigger from today's SPY/QQQ change
-    const [newsItems, cot] = await Promise.all([fetchMajorMarketNews(), getCot()]);
+    const [newsItems, cot, cyc] = await Promise.all([fetchMajorMarketNews(), getCot(), loadBreadthCycle()]);
     setNewsCount(newsItems.length);
 
     const spyPct = mc.spy?.change_pct ?? 0;
@@ -8276,6 +8332,8 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
       spy_vs_sma200:    mc.spy?.sma200_pct,
       qqq_vs_sma50:     mc.qqq?.sma50_pct,
       qqq_vs_sma200:    mc.qqq?.sma200_pct,
+      breadth_cycle:    cyc ? { phase: cyc.phase, strength_0_100: +cyc.strength.toFixed(0), change_5_sessions: +cyc.change.toFixed(1), date: cyc.date } : null,
+      pulse_breadth_divergence: cyc ? (breadthDivergence(mc.signal, cyc)?.text ?? null) : null,
     };
     fetchMarketSituation(payload, newsItems, move, cot)
       .then(t => {
@@ -8376,6 +8434,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
       {!loading && !text && !failed && MARKET_SITUATION_GEMINI_KEY && (
         <p className="text-[12px] text-zinc-600 italic">Awaiting data…</p>
       )}
+      <BreadthBriefStrip cycle={cycle} signal={mc.signal} onOpen={onOpenBreadthCycle} />
       <CotBriefStrip brief={cotBrief} onOpen={onOpenCot} />
     </div>
   );
@@ -8622,7 +8681,271 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   );
 };
 
-const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [], onOpenCot }) => {
+// ─────────────────────────────────────────────────────────────────────────────
+// Breadth Cycle (Breadth → Breadth Cycle): a "time machine" read of how much of the market is participating, built entirely from
+// public/breadth_monitor.json (the Stockbee market-monitor sheet: ±4% movers, 5/10-day ratios, quarter/month/34-day counts, T2108,
+// S&P close). Nothing here needs new data.
+//   Strength / phase scoring (our own, not a published formula) lives in src/breadthCycle.js and is shared with the Market Pulse chip
+//   and the Market Situation brief.
+// ─────────────────────────────────────────────────────────────────────────────
+const BreadthGauge = ({ strength, phase }) => {
+  const cx = 110, cy = 110, R = 78, W = 26;
+  const arc = (a0, a1, color) => {
+    const p = a => [cx + R * Math.cos(a * Math.PI / 180), cy + R * Math.sin(a * Math.PI / 180)];
+    const [x0, y0] = p(a0), [x1, y1] = p(a1);
+    return <path d={`M${x0},${y0} A${R},${R} 0 0 1 ${x1},${y1}`} fill="none" stroke={color} strokeWidth={W} />;
+  };
+  // Quadrants: Expansion top-right, Distribution bottom-right, Contraction bottom-left, Repair top-left.
+  const centers = { Expansion: -45, Distribution: 45, Contraction: 135, Repair: 225 };
+  const ang = (centers[phase] ?? 135) + ((strength - 50) / 50) * 30 * (phase === "Contraction" || phase === "Repair" ? -1 : 1);
+  const mx = cx + R * Math.cos(ang * Math.PI / 180), my = cy + R * Math.sin(ang * Math.PI / 180);
+  return (
+    <svg viewBox="0 0 220 220" className="w-[220px] h-[220px] mx-auto">
+      <circle cx={cx} cy={cy} r={R + 24} fill="none" stroke="#3f3f46" strokeWidth="0.6" />
+      {arc(-88, -2, BREADTH_PHASES.Expansion.color)}
+      {arc(2, 88, BREADTH_PHASES.Distribution.color)}
+      {arc(92, 178, BREADTH_PHASES.Contraction.color)}
+      {arc(182, 268, BREADTH_PHASES.Repair.color)}
+      <circle cx={mx} cy={my} r="7" fill={BREADTH_PHASES[phase]?.color || "#fff"} stroke="#18181b" strokeWidth="3" />
+      <text x={cx} y={cy + 2} textAnchor="middle" fontSize="30" fontWeight="700" fill="#f4f4f5">{Math.round(strength)}</text>
+      <text x={cx} y={cy + 18} textAnchor="middle" fontSize="8" fill="#a1a1aa">BREADTH STRENGTH</text>
+      <text x="168" y="30" fontSize="8" fontWeight="700" fill="#e4e4e7">EXPANSION</text>
+      <text x="150" y="204" fontSize="8" fontWeight="700" fill="#e4e4e7">DISTRIBUTION</text>
+      <text x="14" y="204" fontSize="8" fontWeight="700" fill="#e4e4e7">CONTRACTION</text>
+      <text x="14" y="30" fontSize="8" fontWeight="700" fill="#e4e4e7">REPAIR</text>
+    </svg>
+  );
+};
+
+const BreadthLineChart = ({ dates, series, selIdx, height = 150, refLine = null, fmt = v => String(Math.round(v)) }) => {
+  const W = 640, H = height, L = 40, R = 70, T = 8, B = 18;
+  const all = series.flatMap(sr => sr.vals).filter(v => v != null);
+  if (!all.length || dates.length < 2) return <p className="text-xs text-zinc-600 italic py-4">Not enough history for this range.</p>;
+  let lo = Math.min(...all, refLine ?? Infinity), hi = Math.max(...all, refLine ?? -Infinity);
+  if (hi === lo) { hi += 1; lo -= 1; }
+  const pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+  const x = i => L + (i / (dates.length - 1)) * (W - L - R);
+  const y = v => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  const path = vals => vals.map((v, i) => v == null ? "" : `${i && vals[i - 1] != null ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const ticks = [lo + pad, (lo + hi) / 2, hi - pad];
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto">
+      {ticks.map((v, i) => <g key={i}><line x1={L} x2={W - R} y1={y(v)} y2={y(v)} stroke="#3f3f46" strokeWidth="0.5" strokeDasharray="2 3" /><text x={L - 5} y={y(v) + 3} textAnchor="end" fontSize="9" fill="#71717a">{fmt(v)}</text></g>)}
+      {refLine != null && <line x1={L} x2={W - R} y1={y(refLine)} y2={y(refLine)} stroke="#71717a" strokeWidth="0.8" />}
+      {series.map(sr => <path key={sr.label} d={path(sr.vals)} fill="none" stroke={sr.color} strokeWidth="1.6" />)}
+      {series.map(sr => { const v = sr.vals[sr.vals.length - 1]; return v == null ? null : <text key={sr.label} x={W - R + 6} y={y(v) + 3} fontSize="10" fontWeight="600" fill={sr.color}>{sr.label} {fmt(v)}</text>; })}
+      <line x1={x(selIdx)} x2={x(selIdx)} y1={T} y2={H - B} stroke="#52525b" strokeWidth="0.6" strokeDasharray="3 3" />
+      <text x={L} y={H - 4} fontSize="9" fill="#71717a">{dates[0]}</text>
+      <text x={W - R} y={H - 4} textAnchor="end" fontSize="9" fill="#71717a">{dates[dates.length - 1]}</text>
+    </svg>
+  );
+};
+
+const BREADTH_MEASURES = [
+  { key: "d4", label: "Daily ±4%", note: "Immediate buying versus selling pressure." },
+  { key: "ratio", label: "5D / 10D Ratios", note: "Rolling pressure: above 1 favors buyers." },
+  { key: "q", label: "Quarter ±25%", note: "Stocks ≥25% off a 65-day low versus ≥25% off a 65-day high." },
+  { key: "m25", label: "Month ±25%", note: "Strong one-month gainers versus decliners." },
+  { key: "m50", label: "Month ±50%", note: "Rare, high-velocity moves — useful for spotting extremes." },
+  { key: "d34", label: "34D ±13%", note: "Intermediate-momentum participation." },
+  { key: "t2108", label: "T2108", note: "Percentage of stocks above their 40-day moving average." },
+];
+const BREADTH_RANGES = [["1W", 5], ["1M", 21], ["3M", 63], ["6M", 126], ["YTD", "ytd"], ["1Y", 252]];
+
+const BreadthCycleTab = () => {
+  const [rows, setRows]   = React.useState(null);        // ascending by date
+  const [selDate, setSelDate] = React.useState(null);
+  const [measure, setMeasure] = React.useState("d4");
+  const [range, setRange] = React.useState("3M");
+  React.useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/breadth_monitor.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d?.rows?.length) return;
+      const asc = [...d.rows].filter(r => r.date).sort((a, b) => a.date.localeCompare(b.date));
+      setRows(asc); setSelDate(asc[asc.length - 1].date);
+    }).catch(() => {});
+  }, []);
+
+  const enriched = React.useMemo(() => computeBreadthCycle(rows), [rows]);
+  const selIdx = enriched.findIndex(r => r.date === selDate);
+  const sel = selIdx >= 0 ? enriched[selIdx] : null;
+
+  const windowRows = React.useMemo(() => {
+    if (!sel) return [];
+    const upTo = enriched.slice(0, selIdx + 1);
+    const n = BREADTH_RANGES.find(r => r[0] === range)?.[1];
+    if (n === "ytd") return upTo.filter(r => r.date.slice(0, 4) === sel.date.slice(0, 4));
+    return upTo.slice(-Math.min(n, upTo.length));
+  }, [enriched, selIdx, sel, range]);
+
+  const tableRows = React.useMemo(() => enriched.slice(0, selIdx + 1).map(r => ({
+    date: r.date, up: r.up_4_pct, down: r.down_4_pct, net: r.up_4_pct - r.down_4_pct, r5: r.ratio_5d, r10: r.ratio_10d,
+    qUp: r.up_25_q, qDown: r.down_25_q, t2108: r.t2108, spx: r.sp_index,
+  })), [enriched, selIdx]);
+  const sort = useTableSort(tableRows, "date", "desc");
+
+  if (!sel) return <p className="text-xs text-zinc-600 italic py-8 text-center">Loading breadth data…</p>;
+
+  const phase = BREADTH_PHASES[sel.phase];
+  const dates = windowRows.map(r => r.date);
+  const sIdx = windowRows.length - 1;
+  const d = key => windowRows.map(r => r[key]);
+  const chart = {
+    d4:    { series: [{ label: "Up", color: "#5fd4b0", vals: d("up_4_pct") }, { label: "Down", color: "#ff6b8b", vals: d("down_4_pct") }] },
+    ratio: { series: [{ label: "5D", color: "#6db0ff", vals: d("ratio_5d") }, { label: "10D", color: "#e5b567", vals: d("ratio_10d") }], refLine: 1, fmt: v => v.toFixed(2) },
+    q:     { series: [{ label: "Up", color: "#5fd4b0", vals: d("up_25_q") }, { label: "Down", color: "#ff6b8b", vals: d("down_25_q") }] },
+    m25:   { series: [{ label: "Up", color: "#5fd4b0", vals: d("up_25_m") }, { label: "Down", color: "#ff6b8b", vals: d("down_25_m") }] },
+    m50:   { series: [{ label: "Up", color: "#5fd4b0", vals: d("up_50_m") }, { label: "Down", color: "#ff6b8b", vals: d("down_50_m") }] },
+    d34:   { series: [{ label: "Up", color: "#5fd4b0", vals: d("up_13_34d") }, { label: "Down", color: "#ff6b8b", vals: d("down_13_34d") }] },
+    t2108: { series: [{ label: "T2108", color: "#c4a7ff", vals: d("t2108") }], refLine: 50, fmt: v => `${v.toFixed(0)}%` },
+  }[measure];
+  const net = sel.up_4_pct - sel.down_4_pct;
+  const read = (() => {
+    const dailyBuy = sel.up_4_pct > sel.down_4_pct * 1.5, dailySell = sel.down_4_pct > sel.up_4_pct * 1.5;
+    const rollBuy = sel.ratio_5d > 1.2 && sel.ratio_10d > 1.0, rollSell = sel.ratio_5d < 0.8 && sel.ratio_10d < 0.9;
+    if (dailyBuy && rollBuy) return ["Buying pressure", "Daily and rolling breadth both favor buyers."];
+    if (dailySell && rollSell) return ["Selling pressure", "Daily and rolling breadth both favor sellers."];
+    if (dailyBuy || rollBuy) return ["Improving", "Some buying pressure, but the daily and rolling measures are not fully aligned."];
+    if (dailySell || rollSell) return ["Weakening", "Some selling pressure, but the daily and rolling measures are not fully aligned."];
+    return ["Mixed / transition", "Daily and rolling breadth are not aligned yet."];
+  })();
+  const stat = (label, note, up, down) => (
+    <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 p-3">
+      <div className="text-[12px] font-semibold text-zinc-200">{label}</div>
+      <div className="text-[10px] text-zinc-600 mb-2">{note}</div>
+      <div className="flex justify-between text-[11px] text-zinc-500"><span>Up</span><span>Down</span></div>
+      <div className="flex justify-between font-mono text-[18px] font-bold"><span className="text-emerald-400">{up.toLocaleString()}</span><span className="text-rose-400">{down.toLocaleString()}</span></div>
+    </div>
+  );
+  const dateIdxStep = step => { const i = Math.max(0, Math.min(enriched.length - 1, selIdx + step)); setSelDate(enriched[i].date); };
+
+  return (
+    <div className="max-w-[1200px] mx-auto px-4 pt-4 pb-10 space-y-5">
+      <div className="flex items-end justify-between gap-3 flex-wrap">
+        <div>
+          <h2 className="text-xl font-bold text-zinc-100">Market Breadth</h2>
+          <p className="text-[12px] text-zinc-500">How much of the market is participating — not just what the index is doing.</p>
+        </div>
+        <div>
+          <div className="text-[10px] font-semibold tracking-wider text-zinc-500 mb-1">TIME MACHINE</div>
+          <div className="flex items-center gap-1">
+            <button onClick={() => dateIdxStep(-1)} disabled={selIdx <= 0} className="px-2.5 py-1 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800 disabled:opacity-30">‹</button>
+            <select value={selDate} onChange={e => setSelDate(e.target.value)} className="px-2 py-1 rounded border border-zinc-700 bg-zinc-900 text-zinc-100 text-[13px] font-mono">
+              {[...enriched].reverse().map(r => <option key={r.date} value={r.date}>{r.date}</option>)}
+            </select>
+            <button onClick={() => dateIdxStep(1)} disabled={selIdx >= enriched.length - 1} className="px-2.5 py-1 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800 disabled:opacity-30">›</button>
+          </div>
+          <div className="text-[10px] text-zinc-500 text-right mt-1">Market close</div>
+        </div>
+      </div>
+
+      <div className="rounded-xl border bg-zinc-900/60 p-5 grid gap-6 md:grid-cols-[260px_1fr]" style={{ borderTopColor: phase.color, borderTopWidth: 2, borderColor: "#27272a" }}>
+        <div><BreadthGauge strength={sel.strength} phase={sel.phase} /></div>
+        <div>
+          <div className="text-[11px] font-semibold tracking-wider text-zinc-500">BREADTH CYCLE · {sel.date}</div>
+          <div className="text-3xl font-bold mt-1" style={{ color: phase.color }}>{sel.phase}</div>
+          <p className="text-[13px] text-zinc-300 mt-1">{phase.text}</p>
+          <span className="inline-block mt-2 text-[11px] font-semibold px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200">
+            {sel.change >= 0 ? "↑ Improving" : "↓ Weakening"} versus five sessions ago
+          </span>
+          <div className="grid grid-cols-3 gap-3 mt-4">
+            <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">STRENGTH</div><div className="font-mono text-lg font-bold text-zinc-100">{Math.round(sel.strength)} / 100</div></div>
+            <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">5-SESSION CHANGE</div><div className={`font-mono text-lg font-bold ${sel.change >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{sel.change >= 0 ? "+" : ""}{sel.change.toFixed(1)} pts</div></div>
+            <div className="rounded-lg bg-zinc-900 border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">T2108</div><div className="font-mono text-lg font-bold text-zinc-100">{sel.t2108.toFixed(2)}%</div></div>
+          </div>
+          <p className="text-[10px] text-zinc-600 mt-3">The cycle estimate combines daily ±4% breadth, 5- and 10-day pressure, quarter and 34-day participation, and T2108 (equal weights). It is our own scoring — use it as context, not a mechanical signal.</p>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+        <div className="text-[11px] font-semibold tracking-wider text-zinc-500">READ ON {sel.date}</div>
+        <div className="text-lg font-bold text-zinc-100">{read[0]}</div>
+        <p className="text-[12px] text-zinc-400">{read[1]}</p>
+        <div className="grid gap-3 sm:grid-cols-3 mt-3">
+          <div className="rounded-lg border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">UP 4% / DOWN 4%</div><div className="font-mono text-xl font-bold text-zinc-100">{sel.up_4_pct} / {sel.down_4_pct}</div><div className="text-[11px] text-zinc-500">Net breadth: {net > 0 ? "+" : ""}{net}</div></div>
+          <div className="rounded-lg border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">5-DAY PRESSURE RATIO</div><div className="font-mono text-xl font-bold text-zinc-100">{sel.ratio_5d.toFixed(2)}</div><div className="text-[11px] text-zinc-500">5 sessions of up-4% events ÷ down-4% events</div></div>
+          <div className="rounded-lg border border-zinc-800 p-3"><div className="text-[10px] text-zinc-500 tracking-wide">10-DAY PRESSURE RATIO</div><div className="font-mono text-xl font-bold text-zinc-100">{sel.ratio_10d.toFixed(2)}</div><div className="text-[11px] text-zinc-500">10 sessions; smoother confirmation of the short-term tape</div></div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 mt-3">
+          {stat("Quarter ±25%", "Stocks ≥25% from a 65-day low vs ≤−25% from a 65-day high.", sel.up_25_q, sel.down_25_q)}
+          {stat("Month ±25%", "Strong one-month gainers versus decliners.", sel.up_25_m, sel.down_25_m)}
+          {stat("Month ±50%", "Rare, high-velocity one-month moves; useful for spotting extremes.", sel.up_50_m, sel.down_50_m)}
+          {stat("34 Days ±13%", "A broader intermediate-momentum participation measure.", sel.up_13_34d, sel.down_13_34d)}
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+        <div className="text-[11px] font-semibold tracking-wider text-zinc-500 mb-2">BEGINNER'S GUIDE</div>
+        <div className="grid gap-4 md:grid-cols-3 text-[12px] text-zinc-400">
+          <div><div className="font-semibold text-zinc-200 mb-0.5">1. Start With Today</div>The ±4% counts show immediate buying and selling pressure. A large gap indicates broad participation; similar counts mean a two-sided, mixed session.</div>
+          <div><div className="font-semibold text-zinc-200 mb-0.5">2. Check Persistence</div>The 5- and 10-day ratios total up-4% events and divide them by down-4% events. Above 1 favors buying pressure; below 1 favors selling pressure.</div>
+          <div><div className="font-semibold text-zinc-200 mb-0.5">3. Confirm The Regime</div>Quarter, month and 34-day counts show whether momentum is widespread. T2108 is the percentage of stocks above their 40-day moving average. Read multiple measures together.</div>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+        <div className="text-[11px] font-semibold tracking-wider text-zinc-500">HISTORICAL CONTEXT</div>
+        <div className="text-lg font-bold text-zinc-100">Breadth And Price Through Time</div>
+        <p className="text-[12px] text-zinc-500 mb-3">Compare participation measures with the S&amp;P 500 across the same window. The dashed line marks the Time Machine date.</p>
+        <div className="flex flex-wrap gap-1 mb-2">
+          {BREADTH_MEASURES.map(m => (
+            <button key={m.key} onClick={() => setMeasure(m.key)} title={m.note}
+              className={`px-2.5 py-1 text-[11px] font-medium rounded-md border transition-colors ${measure === m.key ? "bg-blue-500/20 text-blue-300 border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border-zinc-800"}`}>{m.label}</button>
+          ))}
+          <span className="ml-auto flex gap-1">
+            {BREADTH_RANGES.map(([l]) => (
+              <button key={l} onClick={() => setRange(l)}
+                className={`px-2 py-1 text-[11px] font-medium rounded-md border transition-colors ${range === l ? "bg-zinc-100 text-zinc-900 border-zinc-100" : "text-zinc-500 hover:text-zinc-300 border-zinc-800"}`}>{l}</button>
+            ))}
+          </span>
+        </div>
+        <div className="text-[11px] text-zinc-500 mb-1">{BREADTH_MEASURES.find(m => m.key === measure)?.note}</div>
+        <BreadthLineChart dates={dates} series={chart.series} selIdx={sIdx} refLine={chart.refLine ?? null} fmt={chart.fmt} />
+        <div className="text-[11px] font-semibold text-zinc-400 mt-4 mb-1">S&amp;P 500 close · {range} window</div>
+        <BreadthLineChart dates={dates} series={[{ label: "SPX", color: "#e4e4e7", vals: d("sp_index") }]} selIdx={sIdx} height={120} fmt={v => Math.round(v).toLocaleString()} />
+      </div>
+
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+        <div className="text-[11px] font-semibold tracking-wider text-zinc-500 mb-2">READINGS THROUGH SELECTED DATE</div>
+        <div className="overflow-auto max-h-[520px] rounded-lg border border-zinc-800">
+          <table className="w-full text-xs border-collapse">
+            <thead className="sticky top-0 bg-zinc-900">
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                <SortTh sort={sort} col="date" label="Date" textual align="left" />
+                <SortTh sort={sort} col="up" label="Up 4%" />
+                <SortTh sort={sort} col="down" label="Down 4%" />
+                <SortTh sort={sort} col="net" label="Net" />
+                <SortTh sort={sort} col="r5" label="5D" />
+                <SortTh sort={sort} col="r10" label="10D" />
+                <SortTh sort={sort} col="qUp" label="Quarter +25%" />
+                <SortTh sort={sort} col="qDown" label="Quarter −25%" />
+                <SortTh sort={sort} col="t2108" label="T2108" />
+                <SortTh sort={sort} col="spx" label="S&P" />
+              </tr>
+            </thead>
+            <tbody>
+              {sort.rows.map((r, i) => (
+                <tr key={r.date} onClick={() => setSelDate(r.date)} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${r.date === sel.date ? "bg-blue-500/10" : i % 2 ? "bg-zinc-900/20" : ""}`}>
+                  <td className="px-3 py-1.5 text-left font-mono text-zinc-300">{r.date}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{r.up}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-rose-400">{r.down}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono ${r.net >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{r.net > 0 ? "+" : ""}{r.net}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.r5.toFixed(2)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.r10.toFixed(2)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.qUp.toLocaleString()}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.qDown.toLocaleString()}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.t2108.toFixed(2)}%</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.spx.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [], onOpenCot, onOpenBreadthCycle = null }) => {
   const [miniChartsFor, setMiniChartsFor] = React.useState(null); // { title, tickers } for the Market Breadth drill-down's mini-chart grid
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
@@ -8877,7 +9200,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
         )}
 
         {/* ── Market Situation — Gemini thinking narrative ──────────────── */}
-        <MarketSituationBlock mc={mc} internalsData={internalsData} bmLatest={bmLatest} onOpenCot={onOpenCot} />
+        <MarketSituationBlock mc={mc} internalsData={internalsData} bmLatest={bmLatest} onOpenCot={onOpenCot} onOpenBreadthCycle={onOpenBreadthCycle} />
 
         {/* 8 metric chips — compact single row */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -14092,7 +14415,7 @@ const LEADER_PERF_LABEL = Object.fromEntries(LEADER_PERF_OPTIONS.map(o => [o.k, 
 
 // `mode` / `onModeChange` / `leadView` / `onLeadViewChange` are passed by the App-level menu (Stocks | Themes | Sectors | Breadth); when they
 // are present the in-page mode buttons are hidden because the menu's second row replaces them.
-const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, mode: modeProp = null, onModeChange = null, leadView = null, onLeadViewChange = null }) => {
+const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, mode: modeProp = null, onModeChange = null, leadView = null, onLeadViewChange = null, onOpenBreadth = null }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
@@ -14648,6 +14971,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
       {/* ── Market Pulse bar + Long/Short toggle ──────────── */}
       <div className="flex flex-wrap items-center gap-3">
         <span className={`px-3 py-1.5 rounded-lg border text-xs font-bold tracking-wide ${sigCls}`}>{sigLabel}</span>
+        <BreadthChip signal={signal} onOpen={onOpenBreadth} />
         {/* Mode toggle (only when the App menu is not driving the mode) */}
         {modeProp == null && (
         <div className="flex rounded-lg border border-zinc-700 overflow-hidden text-xs font-semibold">
@@ -17772,6 +18096,7 @@ const appScreenerMap = useMemo(() => {
               ] },
               { key: "breadth", label: "Breadth", items: [
                 { label: "Market Breadth", tab: "breadth" },
+                { label: "Breadth Cycle", tab: "breadthcycle" },
                 { label: "COT", tab: "cot" },
               ] },
               { key: "tools", label: "Tools", small: true, items: [
@@ -17889,7 +18214,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef} mode={watchMode} onModeChange={setWatchMode} leadView={leadView} onLeadViewChange={setLeadView}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")}/> : tab === "cot" ? <CotTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef} mode={watchMode} onModeChange={setWatchMode} leadView={leadView} onLeadViewChange={setLeadView} onOpenBreadth={() => setTab("breadthcycle")}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")} onOpenBreadthCycle={() => setTab("breadthcycle")}/> : tab === "cot" ? <CotTab/> : tab === "breadthcycle" ? <BreadthCycleTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
@@ -17918,7 +18243,7 @@ const appScreenerMap = useMemo(() => {
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
           <aside className="w-full lg:w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <MarketPulseCard vix={data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition}/>
+            <MarketPulseCard vix={data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition} onOpenBreadth={() => setTab("breadthcycle")}/>
             <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
           </aside>

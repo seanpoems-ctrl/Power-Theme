@@ -111,3 +111,93 @@ test("a flurry of remounts (the original 429 trigger) makes one request per tick
   }
   expect(calls).toHaveLength(tickers.length);          // before: 6 x 10 = 60 requests
 });
+
+// ── Finance Query fallback ───────────────────────────────────────────────────────────────────────────────────────
+import { createFinanceQueryFallback, COOLDOWN_MS } from "./finnhubQuote";
+
+function fallbackSetup({ finnhub = [], fq } = {}) {
+  let t = 5_000_000;
+  const finnhubCalls = [];
+  const fqCalls = [];
+  const queue = [...finnhub];
+  const fetchImpl = async (url) => {
+    finnhubCalls.push(url);
+    const next = queue.length ? queue.shift() : { ok: true, status: 200, body: { c: 100, pc: 99 } };
+    if (next instanceof Error) throw next;
+    return { ok: next.ok, status: next.status ?? (next.ok ? 200 : 500), json: async () => next.body };
+  };
+  const fqFetch = async (url) => {
+    fqCalls.push(url);
+    if (fq instanceof Error) throw fq;
+    const symbols = decodeURIComponent(new URL(url).searchParams.get("symbols")).split(",");
+    const quotes = symbols.map((s) => ({ symbol: s, regularMarketPrice: 50, regularMarketPreviousClose: 48, regularMarketChange: 2, regularMarketChangePercent: 4.17 }));
+    return { ok: fq ? fq.ok !== false : true, json: async () => ({ quotes }) };
+  };
+  const fallback = createFinanceQueryFallback({ fetchImpl: fqFetch, batchMs: 0 });
+  const fetchQuote = createQuoteFetcher({ apiKey: "k", fetchImpl, now: () => t, fallback });
+  return { fetchQuote, finnhubCalls, fqCalls, advance: (ms) => { t += ms; } };
+}
+
+test("fallback: a Finnhub 429 is answered by Finance Query, reshaped like a Finnhub quote", async () => {
+  const { fetchQuote, fqCalls } = fallbackSetup({ finnhub: [{ ok: false, status: 429, body: null }] });
+  const q = await fetchQuote("NVDA");
+  expect(q).toMatchObject({ c: 50, pc: 48, d: 2, dp: 4.17, _source: "finance-query" });
+  expect(fqCalls).toHaveLength(1);
+});
+
+test("fallback: after a 429 Finnhub is skipped for the cooldown, then used again", async () => {
+  const { fetchQuote, finnhubCalls, fqCalls, advance } = fallbackSetup({ finnhub: [{ ok: false, status: 429, body: null }] });
+  await fetchQuote("AAA");                       // 429 -> fallback
+  await fetchQuote("BBB");                       // inside the cooldown -> straight to fallback, no Finnhub call
+  expect(finnhubCalls).toHaveLength(1);
+  expect(fqCalls.length).toBeGreaterThanOrEqual(2);
+  advance(COOLDOWN_MS + 1);
+  const q = await fetchQuote("CCC");             // cooldown over -> Finnhub again
+  expect(finnhubCalls).toHaveLength(2);
+  expect(q).toEqual({ c: 100, pc: 99 });
+});
+
+test("fallback: lookups in the same tick are sent as ONE batched request (dots become dashes)", async () => {
+  const { fetchQuote, fqCalls } = fallbackSetup({ finnhub: Array(3).fill({ ok: false, status: 429, body: null }) });
+  const out = await Promise.all([fetchQuote("NVDA"), fetchQuote("BRK.B"), fetchQuote("AMD")]);
+  expect(out.every((q) => q && q.c === 50)).toBe(true);
+  expect(fqCalls).toHaveLength(1);
+  expect(decodeURIComponent(fqCalls[0])).toContain("symbols=NVDA,BRK-B,AMD");
+});
+
+test("fallback: not used when Finnhub answers", async () => {
+  const { fetchQuote, fqCalls } = fallbackSetup();
+  expect(await fetchQuote("MU")).toEqual({ c: 100, pc: 99 });
+  expect(fqCalls).toHaveLength(0);
+});
+
+test("fallback: Finnhub's all-zero reply (unknown symbol) is treated as a miss", async () => {
+  const { fetchQuote, fqCalls } = fallbackSetup({ finnhub: [{ ok: true, body: { c: 0, d: null, dp: null, h: 0, l: 0, o: 0, pc: 0, t: 0 } }] });
+  const q = await fetchQuote("PETR4");
+  expect(q).toMatchObject({ c: 50, _source: "finance-query" });
+  expect(fqCalls).toHaveLength(1);
+});
+
+test("fallback: works with no Finnhub key at all", async () => {
+  const fqCalls = [];
+  const fallback = createFinanceQueryFallback({
+    fetchImpl: async (u) => { fqCalls.push(u); return { ok: true, json: async () => ({ quotes: [{ symbol: "SPY", regularMarketPrice: 700, regularMarketPreviousClose: 695 }] }) }; },
+    batchMs: 0,
+  });
+  const fetchQuote = createQuoteFetcher({ apiKey: "", fetchImpl: async () => { throw new Error("must not call Finnhub"); }, fallback });
+  expect(await fetchQuote("SPY")).toMatchObject({ c: 700, pc: 695 });
+  expect(fqCalls).toHaveLength(1);
+});
+
+test("fallback: if Finance Query also fails the lookup resolves null (never rejects) and retries after 15s", async () => {
+  const { fetchQuote, fqCalls, advance } = fallbackSetup({ finnhub: [{ ok: false, status: 429, body: null }], fq: new Error("down") });
+  await expect(fetchQuote("XYZ")).resolves.toBeNull();
+  advance(5_000);
+  await expect(fetchQuote("XYZ")).resolves.toBeNull();     // still inside the failure window
+  expect(fqCalls).toHaveLength(1);
+});
+
+test("fallback: a symbol Finance Query doesn't return resolves null", async () => {
+  const fallback = createFinanceQueryFallback({ fetchImpl: async () => ({ ok: true, json: async () => ({ quotes: [] }) }), batchMs: 0 });
+  expect(await fallback("NOPE")).toBeNull();
+});
