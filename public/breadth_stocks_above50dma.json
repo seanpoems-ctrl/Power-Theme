@@ -2,76 +2,64 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 5,
+  "count": 4,
   "stocks": [
+    {
+      "ticker": "CD",
+      "company": "Chaince Digital Holdings Inc. - American",
+      "industry": "Information Technology Services",
+      "price": 10.15,
+      "change_pct": 22.0,
+      "adr_pct": 8.5,
+      "dollar_volume": "$2.2M",
+      "market_cap_b": 1.117,
+      "rs_ibd": 92,
+      "above50dma_pct": 152.4
+    },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 92.34,
-      "change_pct": -1.57,
-      "adr_pct": 8.1,
-      "dollar_volume": "$603.3M",
-      "market_cap_b": 5.804,
+      "price": 91.08,
+      "change_pct": -1.36,
+      "adr_pct": 7.9,
+      "dollar_volume": "$597.3M",
+      "market_cap_b": 5.724,
       "rs_ibd": 99,
-      "above50dma_pct": 102.0
+      "above50dma_pct": 94.9
     },
     {
       "ticker": "XP",
       "company": "XP Inc.",
       "industry": "Investment Banks/Brokers",
-      "price": 29.73,
-      "change_pct": 5.61,
-      "adr_pct": 4.4,
-      "dollar_volume": "$405.0M",
-      "market_cap_b": 15.371,
+      "price": 29.53,
+      "change_pct": -0.67,
+      "adr_pct": 4.3,
+      "dollar_volume": "$422.3M",
+      "market_cap_b": 15.267,
       "rs_ibd": 94,
-      "above50dma_pct": 58.2
+      "above50dma_pct": 55.0
     },
     {
       "ticker": "GRAL",
       "company": "GRAIL, Inc.",
       "industry": "Medical Specialties",
-      "price": 137.28,
-      "change_pct": -10.9,
-      "adr_pct": 7.9,
-      "dollar_volume": "$239.4M",
-      "market_cap_b": 6.132,
-      "rs_ibd": 95,
-      "above50dma_pct": 57.6
-    },
-    {
-      "ticker": "XRPN",
-      "company": "Armada Acquisition Corp. II",
-      "industry": "Financial Conglomerates",
-      "price": 19.2,
-      "change_pct": -50.32,
-      "adr_pct": 29.5,
-      "dollar_volume": "$47.3M",
-      "market_cap_b": 1.221,
+      "price": 132.9,
+      "change_pct": -3.19,
+      "adr_pct": 8.0,
+      "dollar_volume": "$201.6M",
+      "market_cap_b": 5.936,
       "rs_ibd": 93,
-      "above50dma_pct": 56.7
-    },
-    {
-      "ticker": "IOVA",
-      "company": "Iovance Biotherapeutics, Inc.",
-      "industry": "Biotechnology",
-      "price": 12.96,
-      "change_pct": -8.41,
-      "adr_pct": 6.7,
-      "dollar_volume": "$283.6M",
-      "market_cap_b": 5.871,
-      "rs_ibd": 98,
-      "above50dma_pct": 50.4
+      "above50dma_pct": 50.2
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.58,
-    "spx_1m": 1.89,
-    "spx_3m": 3.65,
-    "spx_34d": 1.44,
-    "spx_qtd": 1.99,
-    "spx_mtd": 1.99
+    "spx_1d": -0.22,
+    "spx_1m": 2.17,
+    "spx_3m": 2.99,
+    "spx_34d": 2.1,
+    "spx_qtd": 1.77,
+    "spx_mtd": 1.77
   },
-  "fetched_at_utc": "2026-10-07T02:17:03+00:00"
+  "fetched_at_utc": "2026-10-07T23:19:36+00:00"
 }

@@ -1,33 +1,6 @@
 {
-  "generated_at": "2026-10-07T02:17:03.522563+00:00",
+  "generated_at": "2026-10-07T23:19:36.380101+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 87.0,
-      "perf_1d": 5.9,
-      "leaders": [
-        {
-          "ticker": "CLF",
-          "price": 12.25,
-          "rs_52w": 87,
-          "adr_pct": 5.39,
-          "vol_surge": 0.65,
-          "mkt_cap": 6989115575,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
