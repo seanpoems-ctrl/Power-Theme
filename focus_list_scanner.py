@@ -42,7 +42,7 @@ TIGHTNESS_LABELS = {
     "ema5":        "within ±5% of EMA5",
     "compression": "above EMA20, below 1M high, ±3.5% from open",
 }
-TIGHTNESS_COLS = ['EMA5', 'EMA20', 'high', 'High.1M', 'open']
+TIGHTNESS_COLS = ['EMA5', 'EMA20', 'high', 'High.1M', 'open', 'SMA50']   # SMA50 feeds the Extension column
 OUTPUT_JSON = ROOT / "public" / "focus_list.json"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -495,6 +495,12 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
             if pd.notna(ema5) and pd.notna(close) and float(ema5):
                 ema5_pct = round((float(close) / float(ema5) - 1) * 100, 2)
 
+            # Extension (Jeff Sun): ATR% multiple from the 50-MA = (% above 50-MA) / ATR% — same as screener_builder.py.
+            sma50 = r.get("SMA50")
+            extension = None
+            if pd.notna(sma50) and pd.notna(atr) and pd.notna(close) and float(sma50) > 0 and float(atr) > 0:
+                extension = round(((float(close) / float(sma50)) - 1) / (float(atr) / float(close)), 2)
+
             row = {
                 "ticker":     r.get("name"),
                 "industry":   r.get("industry") if pd.notna(r.get("industry")) else None,
@@ -506,6 +512,7 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
                 "adr_pct":    adr_pct,
                 "adr_dvol":   adr_dvol,
                 "ema5_pct":   ema5_pct,
+                "extension":  extension,
             }
             if "Scans" in r.index:
                 row["scans"] = list(r["Scans"])

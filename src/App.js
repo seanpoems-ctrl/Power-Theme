@@ -8379,12 +8379,22 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot }) => {
   );
 };
 
+// Extension = ATR% multiple from the 50-MA (Jeff Sun): 4x+ stretched, 7x+ overextended. Shared by the Stock Screener and Focus List.
+const extensionCls = v => v == null ? "text-zinc-600"
+  : v >= 7 ? "text-rose-300 font-bold"
+  : v >= 4 ? "text-amber-300 font-semibold"
+  : v >= 0 ? "text-emerald-400"
+  : "text-zinc-400";
+const fmtExtension = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}x` : "—";
+const EXTENSION_TIP = "ATR% multiple from the 50-MA: (% above 50-MA) ÷ ATR%. 4x+ stretched, 7x+ overextended (Jeff Sun)";
+
 // ── Hot-Money Stock Screener (independent universe) ──────────────────────────
 const BreadthStockScreener = ({ data, compact = false }) => {
   const [sortCol, setSortCol] = useState("adr_dvol");
   const [sortDir, setSortDir] = useState("desc");
   const [search,  setSearch]  = useState("");
   const [rawStocks, setRawStocks] = useState([]);
+  const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the screener's mini-chart grid
 
   // Load screener_stocks.json — independent TradingView universe
   useEffect(() => {
@@ -8450,7 +8460,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
     { col: "adr_dvol",      label: "ADR×",      label2: "Avg$Vol",  tooltip: "ADR% × Avg Daily $Vol"        },
     { col: "pct_52w_range", label: "52W%",                          tooltip: "Price position in 52W range"  },
     { col: "adr_pct",       label: "ADR%"                                                                    },
-    { col: "extension",     label: "Extension",                     tooltip: "ATR% multiple from the 50-MA: (% above 50-MA) ÷ ATR%. 4x+ stretched, 7x+ overextended (Jeff Sun)" },
+    { col: "extension",     label: "Extension",                     tooltip: EXTENSION_TIP },
     { col: "perf_intraday", label: "Intra",                         tooltip: "% change from today's open"   },
     { col: "perf_1d",       label: "1D%"                                                                     },
     { col: "perf_1w",       label: "1W%"                                                                     },
@@ -8466,7 +8476,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   return (
     <div className={`p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0 ${compact ? "mb-4" : "max-w-[1560px] mx-auto mb-8"}`}>
       {/* Header */}
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
         <h3 className="text-[12px] font-bold text-zinc-300 uppercase tracking-widest">
           📊 Stock Screener · {sorted.length} stocks
         </h3>
@@ -8480,6 +8490,12 @@ const BreadthStockScreener = ({ data, compact = false }) => {
           />
           <span className="absolute left-2 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]">⌕</span>
         </div>
+        {sorted.length > 0 && (
+          <button onClick={() => setMiniChartsFor({ title: "Stock Screener", tickers: sorted.map(s => ({ ticker: s.ticker, category: s.industry })) })}
+            className="text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
       </div>
 
       <div className={`overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
@@ -8516,11 +8532,6 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                 return "text-rose-300 font-bold";
               };
               const fmtPerf = v => v != null ? `${v >= 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
-              const extCls = v => v == null ? "text-zinc-600"
-                : v >= 7 ? "text-rose-300 font-bold"
-                : v >= 4 ? "text-amber-300 font-semibold"
-                : v >= 0 ? "text-emerald-400"
-                : "text-zinc-400";
               const rs = s.rs_score ?? s.rs_52w;
               // RS% — position of today's score in 25-day min/max range (same as ETF RS table)
               const rsHist = s.rs_histogram;
@@ -8579,8 +8590,8 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </td>
                   {/* Extension — ATR% multiple from 50-MA */}
-                  <td className={`px-2 py-1.5 text-center text-[12px] font-mono ${extCls(s.extension)}`}>
-                    {s.extension != null ? `${s.extension > 0 ? "+" : ""}${s.extension.toFixed(1)}x` : "—"}
+                  <td className={`px-2 py-1.5 text-center text-[12px] font-mono ${extensionCls(s.extension)}`}>
+                    {fmtExtension(s.extension)}
                   </td>
                   {/* Intraday 1D 1W 1M 3M 6M 1YR */}
                   {[s.perf_intraday, p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (
@@ -8602,6 +8613,9 @@ const BreadthStockScreener = ({ data, compact = false }) => {
         </table>
       </div>
 
+      {miniChartsFor && (
+        <MiniChartGridModal title={miniChartsFor.title} tickers={miniChartsFor.tickers} onClose={() => setMiniChartsFor(null)} />
+      )}
     </div>
   );
 };
@@ -15380,6 +15394,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
     ...(hasPerf ? [{ key: "perf", label: scan.timeframe, align: "right" }] : []),
     { key: "ema5_pct",   label: "vs EMA5",    align: "right" },
     { key: "adr_pct",    label: "ADR%",       align: "right" },
+    { key: "extension",  label: "Extension",  align: "right", tip: EXTENSION_TIP },
     { key: "volume",     label: "Vol",        align: "right", hideSm: true },
     { key: "market_cap", label: "Mkt Cap",    align: "right", hideSm: true },
   ];
@@ -15429,9 +15444,10 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
           <table className="w-full text-xs border-collapse">
             <thead>
               <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                {COLS.map(({ key, label, align, hideSm }) => (
+                {COLS.map(({ key, label, align, hideSm, tip }) => (
                   <th key={key}
                       onClick={() => handleSort(key)}
+                      title={tip}
                       className={`sticky top-0 z-10 bg-zinc-900 px-3 py-1.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${hideSm ? "hidden sm:table-cell" : ""}`}>
                     {label}<SortIcon col={key}/>
                   </th>
@@ -15472,6 +15488,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
                   {hasPerf && <td className={`px-3 py-1.5 text-right font-mono font-semibold ${chgCls(s.perf)}`}>{fmtPct(s.perf)}</td>}
                   <td className={`px-3 py-1.5 text-right font-mono ${chgCls(s.ema5_pct)}`}>{fmtPct(s.ema5_pct)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtVol(s.volume)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.market_cap)}</td>
                 </tr>

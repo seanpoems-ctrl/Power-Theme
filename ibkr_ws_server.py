@@ -50,7 +50,7 @@ WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
 DATA_PATH   = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
 GAPPER_PATH = Path(os.getenv("GAPPER_JSON",   "public/gapper_data.json"))
 ETF_RS_PATH = Path(os.getenv("ETF_RS_JSON",   "public/etf_rs.json"))
-MAX_TICKERS = 40  # max stock ticker subscriptions
+MAX_TICKERS = 30  # max stock ticker subscriptions (30 + 8 ETF + 3 internals = 41 lines; TWS itself held ~52 when 40 stocks hit the 100-line cap at 103)
 # Theme Tracker tab (Theme Leaderboard) tickers get a small separate pool. IBKR's
 # ~100-line simultaneous market-data cap is shared with whatever TWS itself
 # has open (watchlists, other windows) — that overhead isn't fixed, so this
