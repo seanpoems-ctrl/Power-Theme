@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-07 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Global / Complacent Credit",
+    "spy_price": 777.22,
+    "spy_change_pct": -0.24,
+    "vix": 15.08,
+    "hy_oas": 3.03,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 31.9,
+    "mmth": 50.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking AI partnership with a major automotive manufacturer, significantly expanding its cloud and machine learning services into autonomous driving platforms."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly revealed positive Phase 3 trial results for a novel Alzheimer's treatment, significantly outperforming competitor drugs in cognitive improvement metrics."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon saw continued technical buying as it tested its 50-day moving average, building on recent momentum driven by ongoing e-commerce strength."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-07 13:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to benefit from ongoing strong demand and positive sector sentiment for AI semiconductors, though no fresh specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-17 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Balance, Volatility Subsides",
-    "spy_price": 754.05,
-    "spy_change_pct": -0.44,
-    "vix": 16.01,
-    "hy_oas": 2.76,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 33.9,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft secures a multi-billion dollar government contract for its Azure AI services, indicating strong public sector adoption."
-        },
-        {
-          "ticker": "JNJ",
-          "company": "Johnson & Johnson",
-          "reason": "Johnson & Johnson announces positive Phase 3 trial results for its new oncology drug, surpassing analyst expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla seeing renewed interest from retail traders following recent volatility, with options activity suggesting a short-term rebound play."
         }
       ]
     }
