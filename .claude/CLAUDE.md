@@ -301,6 +301,17 @@ Modelled on the Liquid Leadership / NEL layout (i-manage-risk.github.io/NEL): a 
 
 ---
 
+## Main menu (Stocks | Themes | Sectors | Breadth + Tools)
+
+The App header menu is driven by a `NAV` array in `App` (Row 3): each item is a (`tab`, watchlist `mode`, leadership `view`) combination, so no view was rewritten — the menu just sets `tab` / `watchMode` / `leadView` (state lifted into `App`; `DailyWatchlistTab` and `LeadershipScreen` run "controlled" via `mode`/`onModeChange` and `view`/`onViewChange` props and hide their own mode buttons when given them; with no props they still work standalone).
+
+- **Stocks**: Scanner, Long, Short, Focus List, Universe, Leadership (stocks). **Themes**: Theme Tracker, Group ETF, Leadership (themes). **Sectors**: Sector Leadership. **Breadth**: Market Breadth, COT. **Tools** (smaller, last): Pre-Market Gappers, Calendar, Earnings Report, Routine, Trade Journal.
+- Clicking a main tab returns to the last sub-item used in that section (`lastNavItem` ref). A sub-menu row shows only when a section has more than one item.
+- Programmatic jumps still work through the old state (`setTab("cot")` from the Breadth tab, `jumpToThemeLong/Short` inside the watchlist). To add a view: add an item to `NAV` with the right `tab`/`mode`/`view`.
+- The Routine checklist text uses the new paths ("Themes → Theme Tracker → …", "Stocks → Focus List").
+
+---
+
 ## Removed Features (2026-06-12 audit)
 
 - **News Hub tab** — folded into a collapsed-by-default `NewsHubFold` section at the bottom of the Scanner tab (open state in localStorage `news_hub_open`; content fetches only mount when expanded).

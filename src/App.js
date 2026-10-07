@@ -3778,7 +3778,7 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 2 — Find the Strongest Theme (10 min)",
         items: [
-          "Watchlist → 📊 Theme Tracker → Theme Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
+          "Themes → Theme Tracker → Theme Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
           "⚡ flip badge on a category = institutional money just accelerated into it vs its sector anchor — outranks a plain high score",
           "Click the top 2–3 rows to expand their top movers (same panel) — note the Leader ticker, that's your theme's flagship",
           "RS Flip Scanner below it: any new flip today = tomorrow's rotation candidate, screen it even if its category score is still low",
@@ -3856,8 +3856,8 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 2 — Find the Weakest Theme (10 min)",
         items: [
-          "Watchlist → ▼ Short mode → Laggard Themes panel: themes ranked by worst momentum — your short universe, same logic as Long's Leading Themes, inverted",
-          "Watchlist → 📊 Theme Tracker → Theme Leaderboard: sort by Score, then scroll to the BOTTOM rows — there's no ascending sort, the weakest categories are the last rows, not the first",
+          "Stocks → Short → Laggard Themes panel: themes ranked by worst momentum — your short universe, same logic as Long's Leading Themes, inverted",
+          "Themes → Theme Tracker → Theme Leaderboard: sort by Score, then scroll to the BOTTOM rows — there's no ascending sort, the weakest categories are the last rows, not the first",
           "Theme Leaderboard's Anchor column: the sector's own benchmark ETF red on 1M = the whole sector is breaking, not just one weak name inside it",
           "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — a theme with MULTIPLE red industry tiles (not just one) is broad-based weakness, the safer short",
           "RS Flip Scanner: an empty or thin flip list during a Red signal confirms broad risk-off — no theme is genuinely accelerating up right now",
@@ -3983,7 +3983,7 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 4 — Focus List Screening: Watchlist → 🎯 Focus List (15 min)",
+        section: "Step 4 — Focus List Screening: Stocks → Focus List (15 min)",
         items: [
           "Write one line on the market read first (Market Pulse + breadth). Risk-off → keep this step light and add no new stalks",
           "Scan Result → tap 'New only': these tickers were not on the previous scan — look at them before anything else",
@@ -4007,7 +4007,7 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 6 — RS Flip Scanner: Catch Institutional Rotation (5 min)",
         items: [
-          "Watchlist → 📊 Theme Tracker → RS Flip Scanner: any basket flipping RS vs its sector anchor is where money just started rotating in",
+          "Themes → Theme Tracker → RS Flip Scanner: any basket flipping RS vs its sector anchor is where money just started rotating in",
           "Weekly Scanning Checklist (same panel): work down the ▶ SCREEN NOW rows first — those are today's live flips, not yesterday's",
           "A flip inside a theme already in your Theme Leaderboard top 5 = highest-conviction setup of the day",
           "Add the flip's leader ticker to TradingView and set a price alert at the next pivot / breakout level",
@@ -14090,12 +14090,16 @@ const LEADER_PERF_OPTIONS = [
 ];
 const LEADER_PERF_LABEL = Object.fromEntries(LEADER_PERF_OPTIONS.map(o => [o.k, o.l]));
 
-const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }) => {
+// `mode` / `onModeChange` / `leadView` / `onLeadViewChange` are passed by the App-level menu (Stocks | Themes | Sectors | Breadth); when they
+// are present the in-page mode buttons are hidden because the menu's second row replaces them.
+const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, mode: modeProp = null, onModeChange = null, leadView = null, onLeadViewChange = null }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
   const [arsenalData, setArsenalData] = React.useState(null);
-  const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
+  const [modeLocal, setModeLocal]   = React.useState("long");   // "long" | "short" | "etf" ... (used only when not driven by the App menu)
+  const mode    = modeProp ?? modeLocal;
+  const setMode = onModeChange ?? setModeLocal;
   const [themeFilter, setThemeFilter] = React.useState(null);      // set by clicking a Theme Leaderboard row
   const jumpToThemeLong  = (theme) => { setThemeFilter(theme); setMode("long"); };
   const jumpToThemeShort = (theme) => { setThemeFilter(theme); setMode("short"); };
@@ -14644,7 +14648,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {/* ── Market Pulse bar + Long/Short toggle ──────────── */}
       <div className="flex flex-wrap items-center gap-3">
         <span className={`px-3 py-1.5 rounded-lg border text-xs font-bold tracking-wide ${sigCls}`}>{sigLabel}</span>
-        {/* Mode toggle */}
+        {/* Mode toggle (only when the App menu is not driving the mode) */}
+        {modeProp == null && (
         <div className="flex rounded-lg border border-zinc-700 overflow-hidden text-xs font-semibold">
           <button onClick={() => setMode("long")}
             className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "long" ? "bg-emerald-600/25 text-emerald-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
@@ -14678,6 +14683,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
             🏆 Leadership
           </button>
         </div>
+        )}
         {mc?.spy?.sma50_pct != null && (
           <span className="text-xs font-mono text-zinc-400">SPY vs SMA50: <span className={mc.spy.sma50_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{fmtPct(mc.spy.sma50_pct)}</span></span>
         )}
@@ -14791,7 +14797,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Focus List", tickers })} />}
 
       {/* ── LEADERSHIP (mode "leadership") ── */}
-      {mode === "leadership" && <LeadershipScreen etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Leadership", tickers })} />}
+      {mode === "leadership" && <LeadershipScreen view={leadView} onViewChange={onLeadViewChange} etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Leadership", tickers })} />}
 
       {/* ── UNIVERSE (mode "adrUniverse" — not to be confused with mode "universe" = Group ETF) ── */}
       {mode === "adrUniverse" && <UniverseScreen stocks={screenerStocks} tickerThemeMap={tickerThemeMap}
@@ -15531,7 +15537,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Universe — stocks that clear a liquidity + volatility screen (Watchlist → 🌐 Universe).
+// Universe — stocks that clear a liquidity + volatility screen (Stocks → Universe).
 // Built on the top-500 dollar-volume list in screener_stocks.json. Defaults: ADR > 5% (ATR ÷ price, same ADR as the rest
 // of the dashboard) · Avg $ Vol > $500M · Avg Vol > 1M shares. The three thresholds are editable and remembered per browser.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -15731,7 +15737,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Leadership — the LL → NEL → T-NEL ladder (Watchlist → 🏆 Leadership), built by leadership_builder.py.
+// Leadership — the LL → NEL → T-NEL ladder (Stocks / Themes / Sectors → Leadership), built by leadership_builder.py.
 //   LL    Liquid Leaders   top 20 performers per window (1M/3M/6M/1Y) among stocks with avg $ vol ≥ $40M
 //   NEL   Non-Extended     the LL whose Extension (ATR% multiple from the 50-MA) is below the cutoff (default 4×)
 //   T-NEL Tight NEL        the NEL that are also coiling: RMV at/below the cutoff and at least N contracting days
@@ -16538,17 +16544,19 @@ const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }
 };
 
 // Leadership page = Stocks (LL → NEL → T-NEL) | Themes (theme group leaders), mirroring a two-page leadership layout.
-const LeadershipScreen = ({ onMiniCharts = null, etfRsData = null, etfHoldings = {} }) => {
-  const [view, setView] = React.useState(() => { try { const v = localStorage.getItem("leadership_view"); return v === "themes" || v === "sectors" ? v : "stocks"; } catch { return "stocks"; } });
+const LeadershipScreen = ({ onMiniCharts = null, etfRsData = null, etfHoldings = {}, view: viewProp = null, onViewChange = null }) => {
+  const [viewLocal, setViewLocal] = React.useState(() => { try { const v = localStorage.getItem("leadership_view"); return v === "themes" || v === "sectors" ? v : "stocks"; } catch { return "stocks"; } });
+  const view    = viewProp ?? viewLocal;
+  const setView = onViewChange ?? setViewLocal;
   React.useEffect(() => { try { localStorage.setItem("leadership_view", view); } catch { /* ignore */ } }, [view]);
   return (
     <div className="space-y-4">
-      <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 w-fit">
+      {viewProp == null && <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 w-fit">
         {[["stocks", "Stocks"], ["themes", "Themes"], ["sectors", "Sectors"]].map(([k, l]) => (
           <button key={k} onClick={() => setView(k)}
             className={`px-4 py-1 text-[12px] font-medium rounded-md transition-all ${view === k ? "bg-orange-500/20 text-orange-300 border border-orange-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
         ))}
-      </div>
+      </div>}
       {view === "stocks" ? <LeadershipStocksView onMiniCharts={onMiniCharts} />
         : view === "themes" ? <ThemeLeadersView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />
         : <SectorsView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />}
@@ -17234,6 +17242,12 @@ export default function App() {
     return next;
   }), []);
   const [tab, setTab] = useState("scanner");
+  // Main menu: Stocks | Themes | Sectors | Breadth (+ Tools). Each item is a (tab, watchlist mode, leadership view) combination, so the
+  // existing views are untouched — the menu just drives them. The Watchlist mode buttons and the Leadership Stocks|Themes|Sectors switch
+  // are hidden while the menu is in charge.
+  const [watchMode, setWatchMode] = useState("long");
+  const [leadView, setLeadView]   = useState("stocks");
+  const lastNavItem = React.useRef({});
   const [pendingTheme, setPendingTheme] = useState(null); // theme to auto-open in ThemeHeatmap
   const [data, setData] = useState(null);
   const [appScreenerStocks, setAppScreenerStocks] = useState([]);
@@ -17737,63 +17751,98 @@ const appScreenerMap = useMemo(() => {
           })()}
 
 
-          {/* Row 3: Tabs + right-side actions */}
-          <div className="flex flex-wrap items-center gap-y-1 border-t border-zinc-800/50 pt-1 mt-0.5">
-            <div className="flex flex-wrap items-center gap-0 flex-1">
-              <button onClick={() => setTab("scanner")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "scanner" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                Thematic Scanner
-              </button>
-              <button onClick={() => setTab("gapper")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "gapper" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                Pre-Market Gappers
-              </button>
-              <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                Market Breadth
-              </button>
-              <button onClick={() => setTab("cot")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "cot" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                COT
-              </button>
-              <button onClick={() => setTab("watchlist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "watchlist" ? "border-amber-400 text-amber-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                ★ Watchlist
-              </button>
-
-              <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                Calendar
-              </button>
-              <button onClick={() => setTab("earnings")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "earnings" ? "border-green-400 text-green-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                📊 Earnings Report
-              </button>
-              <button onClick={() => setTab("checklist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "checklist" ? "border-emerald-400 text-emerald-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                ✓ Routine
-              </button>
-            </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => setTab("journal")} className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${tab === "journal" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300"}`}>
-                Trade Journal
-              </button>
-              <SearchBar data={data} search={search} setSearch={setSearch} categoryThemeMap={categoryThemeMap} categoryEtfMap={categoryEtfMap}/>
-              <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
-                {lang === 'zh' ? '中' : 'EN'}
-              </button>
-              <button onClick={() => setShowCalcModal(true)} className="px-2.5 py-1 text-[12px] font-medium rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-emerald-300 hover:border-emerald-700/50 transition-colors whitespace-nowrap">
-                ⊞ Calc
-              </button>
-              <button className="flex items-center gap-1 px-2.5 py-1 text-[12px] rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300 transition-colors whitespace-nowrap">
-                Alerts
-              </button>
-              {data && (
-                <div className="text-right leading-tight pl-1 border-l border-zinc-800 ml-1">
-                  <div className="text-[10px] text-zinc-500 whitespace-nowrap font-mono">
-                    {data.generated_at || data.last_updated}
+          {/* Row 3: Main menu (Stocks | Themes | Sectors | Breadth + Tools), sub-menu, and right-side actions */}
+          {(() => {
+            const NAV = [
+              { key: "stocks", label: "Stocks", items: [
+                { label: "Scanner", tab: "scanner" },
+                { label: "Long", tab: "watchlist", mode: "long" },
+                { label: "Short", tab: "watchlist", mode: "short" },
+                { label: "Focus List", tab: "watchlist", mode: "focus" },
+                { label: "Universe", tab: "watchlist", mode: "adrUniverse" },
+                { label: "Leadership", tab: "watchlist", mode: "leadership", view: "stocks" },
+              ] },
+              { key: "themes", label: "Themes", items: [
+                { label: "Theme Tracker", tab: "watchlist", mode: "etf" },
+                { label: "Group ETF", tab: "watchlist", mode: "universe" },
+                { label: "Leadership", tab: "watchlist", mode: "leadership", view: "themes" },
+              ] },
+              { key: "sectors", label: "Sectors", items: [
+                { label: "Sector Leadership", tab: "watchlist", mode: "leadership", view: "sectors" },
+              ] },
+              { key: "breadth", label: "Breadth", items: [
+                { label: "Market Breadth", tab: "breadth" },
+                { label: "COT", tab: "cot" },
+              ] },
+              { key: "tools", label: "Tools", small: true, items: [
+                { label: "Pre-Market Gappers", tab: "gapper" },
+                { label: "Calendar", tab: "news" },
+                { label: "Earnings Report", tab: "earnings" },
+                { label: "Routine", tab: "checklist" },
+                { label: "Trade Journal", tab: "journal" },
+              ] },
+            ];
+            const isActive = it => tab === it.tab && (!it.mode || watchMode === it.mode) && (!it.view || leadView === it.view);
+            const go = (sec, it) => {
+              lastNavItem.current[sec.key] = it.label + "|" + (it.mode || "") + "|" + (it.view || "");
+              setTab(it.tab);
+              if (it.mode) setWatchMode(it.mode);
+              if (it.view) setLeadView(it.view);
+            };
+            const section = NAV.find(sec => sec.items.some(isActive)) || NAV[0];
+            const openSection = sec => {
+              const last = lastNavItem.current[sec.key];
+              go(sec, sec.items.find(it => it.label + "|" + (it.mode || "") + "|" + (it.view || "") === last) || sec.items[0]);
+            };
+            return (
+              <>
+                <div className="flex flex-wrap items-center gap-y-1 border-t border-zinc-800/50 pt-1 mt-0.5">
+                  <div className="flex flex-wrap items-center gap-0 flex-1">
+                    {NAV.map(sec => (
+                      <button key={sec.key} onClick={() => openSection(sec)}
+                        className={`${sec.small ? "px-2.5 text-[12px] ml-3" : "px-4 text-[14px]"} py-1.5 font-semibold border-b-2 -mb-px transition-colors whitespace-nowrap ${section.key === sec.key ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                        {sec.label}
+                      </button>
+                    ))}
                   </div>
-                  {countdown != null && (
-                    <div className="text-[10px] text-zinc-600 font-mono">
-                      {countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s ago` : `${countdown}s ago`}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2">
+                    <SearchBar data={data} search={search} setSearch={setSearch} categoryThemeMap={categoryThemeMap} categoryEtfMap={categoryEtfMap}/>
+                    <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
+                      {lang === 'zh' ? '中' : 'EN'}
+                    </button>
+                    <button onClick={() => setShowCalcModal(true)} className="px-2.5 py-1 text-[12px] font-medium rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-emerald-300 hover:border-emerald-700/50 transition-colors whitespace-nowrap">
+                      ⊞ Calc
+                    </button>
+                    <button className="flex items-center gap-1 px-2.5 py-1 text-[12px] rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300 transition-colors whitespace-nowrap">
+                      Alerts
+                    </button>
+                    {data && (
+                      <div className="text-right leading-tight pl-1 border-l border-zinc-800 ml-1">
+                        <div className="text-[10px] text-zinc-500 whitespace-nowrap font-mono">
+                          {data.generated_at || data.last_updated}
+                        </div>
+                        {countdown != null && (
+                          <div className="text-[10px] text-zinc-600 font-mono">
+                            {countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s ago` : `${countdown}s ago`}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
+                {section.items.length > 1 && (
+                  <div className="flex flex-wrap items-center gap-1 py-1.5">
+                    {section.items.map(it => (
+                      <button key={it.label + (it.mode || "") + (it.view || "")} onClick={() => go(section, it)}
+                        className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${isActive(it) ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : "border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60"}`}>
+                        {it.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            );
+          })()}
 
           {tab === "scanner" && (
             <>
@@ -17840,7 +17889,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")}/> : tab === "cot" ? <CotTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef} mode={watchMode} onModeChange={setWatchMode} leadView={leadView} onLeadViewChange={setLeadView}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")}/> : tab === "cot" ? <CotTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
