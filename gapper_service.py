@@ -834,6 +834,74 @@ def fetch_finviz_data(ticker: str) -> dict:
         return result
 
 
+# ────────────────────────────────────────────────────────
+# Gapper fundamentals without Finviz: TradingView (float, daily %, prev close) + yfinance (short float)
+#
+# fetch_finviz_data() above now gets HTTP 403 (Cloudflare bot protection) from every IP, including a residential
+# one, so Float / Short Interest / Daily % / Prev Close were blank for every gapper. TradingView's screener is
+# the source the rest of the pipeline already relies on in CI; it has no short-interest field, so short float
+# comes from yfinance's quoteSummary (the same call scraper.py uses for the theme stocks).
+# ────────────────────────────────────────────────────────
+
+def _fmt_shares(n) -> str | None:
+    """12_345_678 -> '12.35M' (Finviz-style, since the UI shows the string as-is)."""
+    try:
+        n = float(n)
+    except (TypeError, ValueError):
+        return None
+    if n != n or n <= 0:
+        return None
+    for div, suffix in ((1e9, "B"), (1e6, "M"), (1e3, "K")):
+        if n >= div:
+            return f"{n / div:.2f}{suffix}"
+    return f"{n:.0f}"
+
+
+def fetch_tv_fundamentals(tickers: list[str]) -> dict[str, dict]:
+    """One batched TradingView call -> {ticker: {float_shares, daily_pct, prev_close}} (missing tickers omitted).
+
+    daily_pct is the last completed session's % change; prev_close is that session's close (what Finviz called
+    'Prev Close' before the open)."""
+    out: dict[str, dict] = {}
+    if not tickers:
+        return out
+    try:
+        from tradingview_screener import Query, col
+        _, df = (
+            Query()
+            .select("name", "close", "change", "float_shares_outstanding")
+            .where(col("name").isin(list(dict.fromkeys(tickers))))
+            .limit(len(tickers) + 50)
+            .get_scanner_data()
+        )
+        for _, row in df.iterrows():
+            def num(key):
+                try:
+                    v = float(row.get(key))
+                    return None if v != v else v
+                except (TypeError, ValueError):
+                    return None
+            close, chg = num("close"), num("change")
+            out[str(row["name"])] = {
+                "float_shares": _fmt_shares(num("float_shares_outstanding")),
+                "daily_pct": round(chg, 2) if chg is not None else None,
+                "prev_close": round(close, 2) if close else None,
+            }
+    except Exception as e:
+        logger.warning(f"  TradingView fundamentals failed: {e}")
+    return out
+
+
+def fetch_short_float(ticker: str) -> str | None:
+    """% of float sold short as a display string ('12.34%'), via yfinance; None when unavailable."""
+    try:
+        import yfinance as yf
+        pct = yf.Ticker(ticker).info.get("shortPercentOfFloat")
+        return f"{float(pct) * 100:.2f}%" if pct is not None else None
+    except Exception:
+        return None
+
+
 # ──────────────────────────────────────────────────────────────
 # Ticker Fundamentals: ADR% + Last Earnings Date (yfinance)
 # ──────────────────────────────────────────────────────────────
@@ -1619,6 +1687,9 @@ def main():
     # Uniform 5 headlines per ticker — quality analysis requires context
     stats = {"small_gap": 0, "large_gap": 0, "headlines_sent": 0}
 
+    tv_fund = fetch_tv_fundamentals([g["ticker"] for g in gappers])
+    logger.info(f"  TradingView fundamentals: {len(tv_fund)}/{len(gappers)} tickers")
+
     for stock in gappers:
         ticker = stock["ticker"]
         gap_pct = stock.get("gap_pct", 0)
@@ -1627,8 +1698,9 @@ def main():
 
         logger.info(f"  Analyzing {ticker} (gap={gap_pct:.1f}% rvol={stock['rvol']:.1f}x) → {headline_limit} headlines...")
 
-        # Finviz fundamentals (float, short interest, daily %)
-        fv = fetch_finviz_data(ticker)
+        # Fundamentals (float, short interest, daily %, prev close): TradingView + yfinance. Finviz is 403-blocked.
+        fv = dict(tv_fund.get(ticker, {}))
+        fv["short_float"] = fetch_short_float(ticker)
 
         # News headlines — keep sources separate for verification
         cutoff = datetime.now(timezone.utc) - dt.timedelta(hours=24)
