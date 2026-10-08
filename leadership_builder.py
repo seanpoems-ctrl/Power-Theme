@@ -9,6 +9,11 @@ Organizes the stock universe the way a leadership screen should be read, top to 
   NEL   Non-Extended        the LL that are NOT stretched above their 50-MA (Extension < NEL_MAX_EXTENSION)
   T-NEL Tight NEL           the NEL that are also coiling (low RMV and/or several contracting days)
 
+The same ladder is also built for a SUPER LIQUID tier (SLL -> S-NEL -> T-SNEL): the top SUPER_TOP_N performers per window among
+stocks with avg $ volume >= SUPER_MIN_DOLLAR_VOLUME. The reference page doesn't publish its cut-off; $1B/day is the level that
+reproduces its list (it includes CIEN / CRDO / ALAB / HPE and leaves out OKTA / TEAM / AXTI / SMTC). The Extension and RMV/Coil
+cut-offs are applied in the dashboard, so they are tunable there.
+
 plus a snapshot of which industries hold the most leaders in each window, with a daily history so the dashboard can
 chart leadership over time.
 
@@ -43,6 +48,9 @@ MIN_DOLLAR_VOLUME = 40_000_000
 MIN_AVG_VOLUME = 500_000
 MIN_PRICE = 2.0
 TOP_N = 20                    # leaders kept per window
+SUPER_MIN_DOLLAR_VOLUME = 1_000_000_000
+SUPER_TOP_N = 10
+LEV_ETF_PATH = ROOT / "public" / "leveraged_stock_etfs.json"
 HISTORY_DAYS = 60
 WINDOWS = [("1M", "Perf.1M"), ("3M", "Perf.3M"), ("6M", "Perf.6M"), ("1Y", "Perf.Y")]
 
@@ -89,6 +97,20 @@ def fetch_universe():
         })
     logger.info("Liquid universe: %d stocks (avg $ vol >= $%dM)", len(rows), MIN_DOLLAR_VOLUME // 1_000_000)
     return rows
+
+
+def leveraged_pairs() -> dict[str, str]:
+    """{stock ticker: its most liquid long leveraged ETF} from leveraged_etf_builder.py's file (empty if missing)."""
+    try:
+        etfs = json.loads(LEV_ETF_PATH.read_text(encoding="utf-8")).get("etfs", [])
+    except Exception:               # noqa: BLE001
+        return {}
+    best: dict[str, dict] = {}
+    for e in etfs:
+        u = e.get("underlying")
+        if u and e.get("direction") == "bull" and (u not in best or (e.get("avg_dollar_volume") or 0) > (best[u].get("avg_dollar_volume") or 0)):
+            best[u] = e
+    return {u: e["ticker"] for u, e in best.items()}
 
 
 def tightness(tickers: list[str]) -> dict[str, dict]:
@@ -143,24 +165,41 @@ def build() -> dict | None:
         ranked = sorted((s for s in universe if s.get(key) is not None), key=lambda s: -s[key])[:TOP_N]
         leaders[w] = [{**s, "perf": s[key]} for s in ranked]
 
-    union = sorted({s["ticker"] for lst in leaders.values() for s in lst})
-    tight = tightness(union)
-    logger.info("Tightness for %d / %d leaders", len(tight), len(union))
-    for lst in leaders.values():
-        for s in lst:
-            s.update(tight.get(s["ticker"], {"rmv": None, "coil": None}))
-            for k in ("perf_1m", "perf_3m", "perf_6m", "perf_1y"):
-                s.pop(k, None)
+    super_pool = [s for s in universe if (s.get("avg_dollar_volume") or 0) >= SUPER_MIN_DOLLAR_VOLUME]
+    super_leaders: dict[str, list[dict]] = {}
+    for w, _ in WINDOWS:
+        key = f"perf_{w.lower()}"
+        ranked = sorted((s for s in super_pool if s.get(key) is not None), key=lambda s: -s[key])[:SUPER_TOP_N]
+        super_leaders[w] = [{**s, "perf": s[key]} for s in ranked]
+    logger.info("Super liquid pool: %d stocks (avg $ vol >= $%dB)", len(super_pool), SUPER_MIN_DOLLAR_VOLUME // 1_000_000_000)
 
-    counts = {w: {} for w, _ in WINDOWS}
-    for w in counts:
-        for s in leaders[w]:
-            ind = s.get("industry") or "Other"
-            counts[w][ind] = counts[w].get(ind, 0) + 1
+    union = sorted({s["ticker"] for grp in (leaders, super_leaders) for lst in grp.values() for s in lst})
+    tight = tightness(union)
+    pairs = leveraged_pairs()
+    logger.info("Tightness for %d / %d leaders; %d leveraged-ETF pairs", len(tight), len(union), len(pairs))
+    for grp in (leaders, super_leaders):
+        for lst in grp.values():
+            for s in lst:
+                s.update(tight.get(s["ticker"], {"rmv": None, "coil": None}))
+                s["lev_etf"] = pairs.get(s["ticker"])
+                for k in ("perf_1m", "perf_3m", "perf_6m", "perf_1y"):
+                    s.pop(k, None)
+
+    def _counts(grp):
+        out = {w: {} for w, _ in WINDOWS}
+        for w in out:
+            for s in grp[w]:
+                ind = s.get("industry") or "Other"
+                out[w][ind] = out[w].get(ind, 0) + 1
+        return out
+    counts, super_counts = _counts(leaders), _counts(super_leaders)
     return {"generated_at": datetime.now(ET).strftime("%Y-%m-%d %H:%M ET"), "date": datetime.now(ET).strftime("%Y-%m-%d"),
             "universe_size": len(universe), "top_n": TOP_N,
-            "criteria": {"min_dollar_volume": MIN_DOLLAR_VOLUME, "min_avg_volume": MIN_AVG_VOLUME, "min_price": MIN_PRICE},
-            "leaders": leaders, "industry_counts": counts}
+            "criteria": {"min_dollar_volume": MIN_DOLLAR_VOLUME, "min_avg_volume": MIN_AVG_VOLUME, "min_price": MIN_PRICE,
+                         "super_min_dollar_volume": SUPER_MIN_DOLLAR_VOLUME},
+            "super_top_n": SUPER_TOP_N, "super_pool_size": len(super_pool),
+            "leaders": leaders, "industry_counts": counts,
+            "super_leaders": super_leaders, "super_industry_counts": super_counts}
 
 
 def update_history(payload: dict) -> None:
@@ -168,7 +207,7 @@ def update_history(payload: dict) -> None:
         hist = json.loads(HISTORY_PATH.read_text(encoding="utf-8")) if HISTORY_PATH.exists() else {}
     except Exception:               # noqa: BLE001
         hist = {}
-    hist[payload["date"]] = payload["industry_counts"]
+    hist[payload["date"]] = {**payload["industry_counts"], "super": payload["super_industry_counts"]}
     for d in sorted(hist)[:-HISTORY_DAYS]:
         hist.pop(d, None)
     HISTORY_PATH.write_text(json.dumps(hist, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")

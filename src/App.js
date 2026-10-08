@@ -7,11 +7,11 @@ import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
 import FlaggingStocksBox from "./FlaggingStocksBox";
-import CotTab from "./CotTab";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
 import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
 import { buildDataset, scenarioReport } from "./breadthScenario";
+const CotTab = React.lazy(() => import("./CotTab"));   // loaded only when the COT tab opens
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
 const LangCtx = React.createContext('en');
@@ -639,7 +639,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
                 const adrDolVol = (s.adr_pct != null && s.dollar_volume != null) ? (s.adr_pct / 100) * s.dollar_volume : null;
                 return (
                   <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
-                    <td className="px-2 py-1.5"><span className="text-[12px] font-mono font-semibold text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}>{s.ticker}</span></td>
+                    <td className="px-2 py-1.5"><span className="text-[12px] font-mono font-semibold text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}>{s.ticker}</span><LevEtfTag ticker={s.ticker} /></td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{fmtMktCap(s.mkt_cap_b)}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-amber-400 text-right">{adrDolVol != null ? fmtVol(adrDolVol) : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.price ? `$${Number(s.price).toFixed(2)}` : '—'}</td>
@@ -1170,15 +1170,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       return (
                         <tr key={`${s.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
                           <td className="px-4 py-2">
-                            <a
-                              href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="font-bold text-sky-400 hover:text-sky-300"
-                              onClick={e => e.stopPropagation()}
-                            >
-                              {s.ticker}
-                            </a>
+                            <StockCell ticker={s.ticker} />
                             {s.pure_play && <span className="ml-1 text-[11px] bg-violet-500/20 text-violet-300 px-1 rounded">PP</span>}
                           </td>
                           <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{s.company || '—'}</td>
@@ -1310,12 +1302,7 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
                   <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
                     {/* Ticker */}
                     <td className="px-3 py-2">
-                      <a href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`}
-                         target="_blank" rel="noreferrer"
-                         className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors"
-                         onClick={e => e.stopPropagation()}>
-                        {h.ticker || '—'}
-                      </a>
+                      <StockCell ticker={h.ticker} />
                     </td>
                     {/* Company — TradingView full name, ETF abbreviated name as fallback */}
                     <td className="px-3 py-2 text-zinc-300 truncate max-w-[200px]">{h.name || '—'}</td>
@@ -7775,8 +7762,7 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
            style={{ gridTemplateColumns: "90px 1fr 90px 90px 80px 80px 90px 90px 90px 90px" }}>
 
         {/* Ticker */}
-        <a href={`https://www.tradingview.com/chart/?symbol=${e.ticker}`} target="_blank" rel="noopener noreferrer"
-           className="text-[13px] font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">{e.ticker}</a>
+        <StockCell ticker={e.ticker} />
 
         {/* Company + theme tag + AI icon */}
         <div className="flex items-center gap-1.5 min-w-0 pr-2">
@@ -8653,7 +8639,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                   {/* Sym + price + SS-ETF badges */}
                   <td className="px-2 py-1.5">
                     <div className="flex items-center gap-1 flex-wrap">
-                      <span className="text-[12px] font-mono font-semibold text-blue-400">{s.ticker}</span>
+                      <TickerLink ticker={s.ticker} />
                       {s.price != null && <span className="text-[10px] font-mono text-zinc-500">${s.price.toFixed(2)}</span>}
                       {(s.ss_etfs || []).map(etf => {
                         const name = etf.ticker || etf;
@@ -9572,11 +9558,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
                   {ltSortedStocks.map(s => (
                     <tr key={s.ticker} className="hover:bg-zinc-800/30 transition-colors">
                       <td className="px-3 py-2">
-                        <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
-                           className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors"
-                           onClick={e => e.stopPropagation()}>
-                          {s.ticker}
-                        </a>
+                        <StockCell ticker={s.ticker} />
                       </td>
                       <td className="px-3 py-2 text-zinc-300 truncate max-w-[160px]">{s.company || '—'}</td>
                       <td className="px-3 py-2 text-right font-mono">${s.price != null ? s.price.toFixed(2) : '—'}</td>
@@ -10054,7 +10036,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                     onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}
                   >
                     {g.ticker}
-                  </span>
+                  </span><LevEtfTag ticker={g.ticker} />
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
@@ -12731,9 +12713,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                       className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
                     <td className="px-2 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
                     <td className="px-2 py-2 truncate">
-                      <a href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`} target="_blank" rel="noreferrer"
-                         onClick={e => e.stopPropagation()}
-                         className="font-mono font-bold text-cyan-400 hover:underline">{h.ticker}</a>
+                      <StockCell ticker={h.ticker} />
                     </td>
                     <td className="px-2 py-2 text-zinc-300 truncate">{h.name || "—"}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{fmt(h.mkt_cap)}</td>
@@ -14278,6 +14258,18 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
 // quick-glance scan across many tickers at once (e.g. every Clean Bases
 // name) instead of opening one full chart at a time.
 const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
+// Copy the list as comma-separated tickers (pastes straight into a TradingView watchlist). Lives in the Mini Charts grid so every list with a
+// Mini Charts button gets it.
+const CopyTickersButton = ({ tickers }) => {
+  const [done, setDone] = React.useState(false);
+  const txt = [...new Set(tickers)].join(",");
+  return (
+    <button onClick={() => { (navigator.clipboard?.writeText(txt) || Promise.reject()).then(() => { setDone(true); setTimeout(() => setDone(false), 1500); }).catch(() => {}); }}
+      title="Copy tickers (comma-separated, TradingView-importable)"
+      className="text-[12px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{done ? "Copied ✓" : `Copy ${new Set(tickers).size} tickers`}</button>
+  );
+};
+
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
   const [page, setPage] = React.useState(0);
   const [timeframe, setTimeframe] = React.useState("D");
@@ -14346,6 +14338,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                   className="px-2 py-1 rounded border border-zinc-700 hover:bg-zinc-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">›</button>
               </div>
             )}
+            <CopyTickersButton tickers={items.map(i => i.ticker)} />
             <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
           </div>
         </div>
@@ -14482,9 +14475,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
                   <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
                     <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
                     <td className="px-3 py-2">
-                      <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
-                         onClick={e => e.stopPropagation()}
-                         className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                      <StockCell ticker={s.ticker} />
                     </td>
                     <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate">{s.company || "—"}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{mktCap}</td>
@@ -14533,6 +14524,7 @@ const LEADER_PERF_LABEL = Object.fromEntries(LEADER_PERF_OPTIONS.map(o => [o.k, 
 // `mode` / `onModeChange` / `leadView` / `onLeadViewChange` are passed by the App-level menu (Stocks | Themes | Sectors | Breadth); when they
 // are present the in-page mode buttons are hidden because the menu's second row replaces them.
 const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, mode: modeProp = null, onModeChange = null, leadView = null, onLeadViewChange = null, onOpenBreadth = null }) => {
+  const openStock = useOpenStock();
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
@@ -14951,8 +14943,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
               {cleanBases.map((s, i) => (
                 <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
                   <td className="px-3 py-2">
-                    <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noopener noreferrer"
-                       className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                    <StockCell ticker={s.ticker} />
                   </td>
                   <td className="px-3 py-2 hidden md:table-cell">
                     <span className="text-zinc-400 max-w-[150px] truncate block">{s.company}</span>
@@ -15185,10 +15176,11 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
               return (
               <a key={s.ticker}
                  href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
+                 onClick={e => stockLinkClick(e, openStock, s.ticker)}
                  target="_blank" rel="noopener noreferrer"
                  className="block px-2.5 py-2 rounded-lg bg-zinc-800/60 border border-zinc-700/40 hover:border-cyan-500/40 hover:bg-zinc-800 transition-all">
                 <div className="flex items-center justify-between mb-0.5">
-                  <span className="font-mono font-bold text-cyan-400 text-sm">{s.ticker}</span>
+                  <span className="font-mono font-bold text-cyan-400 text-sm">{s.ticker}<LevEtfTag ticker={s.ticker} plain /></span>
                   <span className={`text-xs font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w}</span>
                 </div>
                 <div className="text-[9px] text-zinc-600 truncate mb-1">{s.theme}</div>
@@ -15410,10 +15402,11 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
                   return (
                   <a key={s.ticker}
                      href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
+                     onClick={e => stockLinkClick(e, openStock, s.ticker)}
                      target="_blank" rel="noopener noreferrer"
                      className="block px-2.5 py-2 rounded-lg bg-zinc-800/60 border border-zinc-700/40 hover:border-rose-500/40 hover:bg-zinc-800 transition-all">
                     <div className="flex items-center justify-between mb-0.5">
-                      <span className="font-mono font-bold text-rose-400 text-sm">{s.ticker}</span>
+                      <span className="font-mono font-bold text-rose-400 text-sm">{s.ticker}<LevEtfTag ticker={s.ticker} plain /></span>
                       <span className={`text-xs font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w}</span>
                     </div>
                     <div className="text-[9px] text-zinc-600 truncate mb-1">{s.theme}</div>
@@ -15484,8 +15477,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
                     {shortCandidates.map((s, i) => (
                       <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
                         <td className="px-3 py-2">
-                          <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noopener noreferrer"
-                             className="font-mono font-bold text-rose-400 hover:underline">{s.ticker}</a>
+                          <StockCell ticker={s.ticker} tone="rose" />
                         </td>
                         <td className="px-3 py-2 hidden md:table-cell">
                           <span className="text-zinc-400 max-w-[150px] truncate block">{s.company}</span>
@@ -15934,10 +15926,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
               {sorted.map((s, i) => (
                 <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                   <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                    <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
-                       className="font-mono font-bold text-cyan-400 hover:underline">
-                      {s.ticker}
-                    </a>
+                    <StockCell ticker={s.ticker} />
                     {s.is_new && <span className="ml-1.5 text-[9px] font-bold px-1 py-0.5 rounded bg-sky-500/15 text-sky-300 align-middle">NEW</span>}
                     {onMark && (
                       <span className="ml-2 inline-flex gap-0.5 align-middle">
@@ -16143,8 +16132,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
                 <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                   <td className="px-2 py-1.5 text-center text-zinc-600 text-[11px]">{i + 1}</td>
                   <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                    <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
-                       className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                    <TickerLink ticker={s.ticker} />
                     {s.price != null && <span className="ml-1.5 text-[10px] font-mono text-zinc-500">${s.price.toFixed(2)}</span>}
                     {s.levEtfs.map(e => (
                       <span key={e.ticker}
@@ -16207,11 +16195,192 @@ const SortTh = ({ sort, col, label, textual = false, align = "right", title, cla
   </th>
 );
 
+// ── Shared stock UI: leveraged-ETF tag, clickable ticker, one stock panel for the whole app ────────────────────────────────
+// "AMD / AMDL" = the most liquid LONG leveraged ETF on a stock, shown beside its symbol wherever stocks are listed. One shared fetch of
+// public/leveraged_stock_etfs.json for the whole app (leveraged_etf_builder.py); every <LevEtfTag> re-renders once when it lands.
+// `etf` overrides the lookup (Leadership rows carry their own); `plain` renders text only (rows already inside a link).
+let _levState = null, _levStarted = false;
+const _levSubs = new Set();
+const _loadLevMap = () => {
+  if (_levStarted) return;
+  _levStarted = true;
+  fetch(`${process.env.PUBLIC_URL}/leveraged_stock_etfs.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => {
+    if (!d?.etfs) return;
+    const all = {}, best = {};
+    for (const e of d.etfs) {
+      if (!e.underlying) continue;
+      (all[e.underlying] ||= []).push(e);
+      if (e.direction === "bull" && (!best[e.underlying] || (e.avg_dollar_volume || 0) > (best[e.underlying].avg_dollar_volume || 0))) best[e.underlying] = e.ticker;
+    }
+    for (const k of Object.keys(all)) all[k].sort((a, b) => (b.avg_dollar_volume || 0) - (a.avg_dollar_volume || 0));
+    _levState = { best, all };
+    _levSubs.forEach(f => f());
+  }).catch(() => {});
+};
+const _levSubscribe = cb => { _levSubs.add(cb); _loadLevMap(); return () => _levSubs.delete(cb); };
+const _levSnapshot = () => _levState;
+const useLevState = () => React.useSyncExternalStore(_levSubscribe, _levSnapshot);
+const LevEtfTag = ({ ticker, etf = null, plain = false }) => {
+  const st = useLevState();
+  const e = etf ?? st?.best?.[ticker];
+  if (!e) return null;
+  const inner = <><span className="text-zinc-600"> / </span>{e}</>;
+  const cls = "font-mono font-normal text-[11px] text-emerald-500/80";
+  return plain
+    ? <span className={cls} title={`Most liquid long leveraged ETF on ${ticker}`}>{inner}</span>
+    : <a href={`https://www.tradingview.com/chart/?symbol=${e}`} target="_blank" rel="noreferrer" onClick={ev => ev.stopPropagation()}
+         title={`Most liquid long leveraged ETF on ${ticker}`} className={`${cls} hover:underline`}>{inner}</a>;
+};
+
+// Click a ticker anywhere → the stock panel (right-hand drawer). Ctrl/⌘/Shift-click still goes straight to TradingView.
+const StockPanelCtx = React.createContext(null);
+const useOpenStock = () => React.useContext(StockPanelCtx) || (() => {});
+const stockLinkClick = (e, open, ticker) => {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+  e.preventDefault(); e.stopPropagation();
+  open(ticker);
+};
+const TickerLink = ({ ticker, tone = "cyan", children = null }) => {
+  const open = useOpenStock();
+  return (
+    <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer" title={`${ticker} — click for the stock panel (Ctrl-click: TradingView)`}
+       onClick={e => stockLinkClick(e, open, ticker)}
+       className={`font-mono font-bold hover:underline ${tone === "rose" ? "text-rose-400" : "text-cyan-400"}`}>{children ?? ticker}</a>
+  );
+};
+// The one way to show a stock symbol in a table: clickable ticker + its leveraged ETF.
+const StockCell = ({ ticker, etf = null, tone = "cyan" }) => <><TickerLink ticker={ticker} tone={tone} /><LevEtfTag ticker={ticker} etf={etf} /></>;
+
+const _pCls = v => v == null ? "text-zinc-600" : v >= 0 ? "text-emerald-400" : "text-rose-400";
+const _pFmt = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+const _dFmt = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap }) => {
+  const lev = useLevState();
+  const open = useOpenStock();
+  const [copied, setCopied] = React.useState(false);
+  const sc = screenerMap?.[ticker] || null;
+  const th = React.useMemo(() => {
+    let rec = null; const where = new Set();
+    for (const t of themeData?.themes || []) for (const sub of t.subthemes || []) for (const st of sub.stocks || [])
+      if (st.ticker === ticker) { rec ||= st; where.add(`${t.name} › ${sub.name}`); }
+    return { rec, where: [...where] };
+  }, [themeData, ticker]);
+  React.useEffect(() => {
+    const h = e => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose]);
+  const rec = th.rec;
+  const price = sc?.price ?? rec?.price ?? null;
+  const chg = sc?.change_pct ?? rec?.change_pct ?? null;
+  const perf = k => sc?.[k] ?? rec?.[k] ?? null;
+  const company = sc?.company || rec?.company || "";
+  const group = categoryThemeMap?.[ticker] || null;
+  const etfs = lev?.all?.[ticker] || [];
+  const stat = (label, val, cls = "text-zinc-200", tip) => (
+    <div className="rounded-lg bg-zinc-800/50 border border-zinc-700/40 px-2.5 py-1.5" title={tip}>
+      <div className="text-[10px] uppercase tracking-wide text-zinc-500">{label}</div>
+      <div className={`text-[13px] font-mono ${cls}`}>{val}</div>
+    </div>
+  );
+  const ext = sc?.extension ?? rec?.extension ?? null;
+  const rs = sc?.rs_score ?? rec?.rs_52w ?? null;
+  const adr = sc?.adr_pct ?? rec?.adr_pct ?? null;
+  const dvol = sc?.avg_dollar_volume ?? rec?.dollar_volume ?? null;
+  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? null;
+  return (
+    <div className="fixed inset-0 z-[70] flex justify-end" style={{ backgroundColor: "rgba(0,0,0,0.45)" }} onClick={onClose}>
+      <aside className="h-full w-full max-w-[440px] bg-zinc-900 border-l border-zinc-700 shadow-2xl overflow-y-auto" onClick={e => e.stopPropagation()}>
+        <div className="sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800 px-4 py-3">
+          <div className="flex items-start gap-2">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="text-xl font-bold font-mono text-zinc-100">{ticker}</span>
+                {price != null && <span className="text-sm font-mono text-zinc-300">${price.toFixed(2)}</span>}
+                {chg != null && <span className={`text-xs font-mono font-semibold ${_pCls(chg)}`}>{_pFmt(chg)}</span>}
+              </div>
+              <div className="text-[12px] text-zinc-500 truncate">{company || "—"}{sc?.industry ? ` · ${sc.industry}` : ""}</div>
+            </div>
+            <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 p-1 rounded flex-shrink-0" title="Close (Esc)"><X size={16} /></button>
+          </div>
+          <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+            {[["TradingView", `https://www.tradingview.com/chart/?symbol=${ticker}`], ["Finviz", `https://finviz.com/quote.ashx?t=${ticker}`], ["Yahoo", `https://finance.yahoo.com/quote/${ticker}`]].map(([l, u]) => (
+              <a key={l} href={u} target="_blank" rel="noreferrer" className="text-[11px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">{l} ↗</a>
+            ))}
+            <button onClick={() => { (navigator.clipboard?.writeText(ticker) || Promise.reject()).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1200); }).catch(() => {}); }}
+              className="text-[11px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : "Copy"}</button>
+          </div>
+        </div>
+        <div className="p-4 space-y-4">
+          <MiniChartCard key={ticker} ticker={ticker} category={group} timeframe="D" height={230} />
+          <div className="grid grid-cols-3 gap-2">
+            {stat("Extension", fmtExtension(ext), extensionCls(ext), EXTENSION_TIP)}
+            {stat("Avg $ Vol", _dFmt(dvol))}
+            {stat("ADR", adr != null ? `${adr.toFixed(1)}%` : "—")}
+            {stat("Mkt Cap", cap == null ? "—" : cap >= 1000 ? `$${(cap / 1000).toFixed(1)}T` : `$${cap.toFixed(0)}B`)}
+            {stat("RS", rs ?? "—", rs != null && rs >= 90 ? "text-emerald-400 font-bold" : rs != null && rs >= 70 ? "text-emerald-400" : "text-zinc-200")}
+            {stat("52W Range", sc?.pct_52w_range != null ? `${sc.pct_52w_range.toFixed(0)}%` : (rec?.dist_52w_high != null ? `${rec.dist_52w_high.toFixed(1)}% off` : "—"), "text-zinc-200", "Position within the 52-week range (or distance below the high)")}
+          </div>
+          <div>
+            <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide mb-1.5">Performance</div>
+            <div className="grid grid-cols-6 gap-1.5">
+              {[["1D", "perf_1d"], ["1W", "perf_1w"], ["1M", "perf_1m"], ["3M", "perf_3m"], ["6M", "perf_6m"], ["1Y", "perf_1y"]].map(([l, k]) => (
+                <div key={l} className="rounded bg-zinc-800/50 border border-zinc-700/40 px-1.5 py-1 text-center">
+                  <div className="text-[9px] text-zinc-500">{l}</div>
+                  <div className={`text-[11px] font-mono ${_pCls(perf(k))}`}>{_pFmt(perf(k))}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {rec?.earnings && <div className="text-[12px] text-zinc-400"><span className="text-zinc-500">Next earnings </span><span className="font-mono text-amber-300">{rec.earnings}</span></div>}
+          {etfs.length > 0 && (
+            <div>
+              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide mb-1.5">Leveraged ETFs</div>
+              <div className="flex flex-wrap gap-1.5">
+                {etfs.map(e => (
+                  <a key={e.ticker} href={`https://www.tradingview.com/chart/?symbol=${e.ticker}`} target="_blank" rel="noreferrer" title={`${e.description} · ADR ${e.adr_pct?.toFixed(1) ?? "—"}% · ${_dFmt(e.avg_dollar_volume)}/day`}
+                    className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded hover:brightness-125 ${e.direction === "inverse" ? "bg-rose-900/60 text-rose-300" : "bg-emerald-900/60 text-emerald-300"}`}>
+                    {e.ticker} {e.direction === "inverse" ? "−" : ""}{e.ratio}x <span className="opacity-60 font-normal">{_dFmt(e.avg_dollar_volume)}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+          {(group || th.where.length > 0) && (
+            <div>
+              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide mb-1.5">Themes</div>
+              <div className="flex flex-wrap gap-1.5">
+                {group && <span className="text-[11px] px-2 py-0.5 rounded bg-blue-500/15 text-blue-300 border border-blue-500/30">{group}</span>}
+                {th.where.map(w => <span key={w} className="text-[11px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700/60">{w}</span>)}
+              </div>
+            </div>
+          )}
+          {!sc && !rec && <p className="text-xs text-zinc-600 italic">No scanner data for {ticker} — it isn't in today's universe or themes.</p>}
+          <button onClick={() => open(null)} className="text-[11px] text-zinc-600 hover:text-zinc-300">Close</button>
+        </div>
+      </aside>
+    </div>
+  );
+};
+
+// "Updated … ago" — owns its own 1-second timer so the App doesn't re-render every second.
+const DataAgeCountdown = ({ nextFetchAt }) => {
+  const [c, setC] = React.useState(null);
+  React.useEffect(() => {
+    const tick = () => { if (nextFetchAt.current != null) setC(Math.max(0, Math.ceil((nextFetchAt.current - Date.now()) / 1000))); };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [nextFetchAt]);
+  if (c == null) return null;
+  return <div className="text-[10px] text-zinc-600 font-mono">{c >= 60 ? `${Math.floor(c / 60)}m ${c % 60}s ago` : `${c}s ago`}</div>;
+};
+
 const LEADERSHIP_WINDOWS = ["1M", "3M", "6M", "1Y"];
 const LEADERSHIP_DEFAULTS = { maxExt: 4, maxRmv: 20, minCoil: 0 };
 const LEADERSHIP_LS_KEY = "leadership_criteria_v1";
 // One LL / NEL / T-NEL table (module-level so its sort state survives the parent re-rendering).
-const LeadershipTier = ({ title, sub, showTight, rows, total, win, perWindow, copied, onCopy, onExport, onMini }) => {
+const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows, total, win, perWindow, copied, onCopy, onExport, onMini }) => {
   const sort = useTableSort(rows, "perf", "desc");
   const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
@@ -16231,7 +16400,7 @@ const LeadershipTier = ({ title, sub, showTight, rows, total, win, perWindow, co
       </div>
       <div className="text-[11px] text-zinc-500 mb-2">{win} · {rows.length} {rows.length === 1 ? "stock" : "stocks"}<span className="text-zinc-700"> · {perWindow}</span></div>
       {rows.length === 0 ? (
-        <p className="text-xs text-zinc-600 italic py-3">{showTight ? "No tight NEL setups." : "None in this window."}</p>
+        <p className="text-xs text-zinc-600 italic py-3">{showTight ? `No tight ${short} setups.` : "None in this window."}</p>
       ) : (
         <div className="overflow-x-auto rounded-lg border border-zinc-800">
           <table className="w-full text-xs border-collapse">
@@ -16250,7 +16419,7 @@ const LeadershipTier = ({ title, sub, showTight, rows, total, win, perWindow, co
               {sort.rows.map((x, i) => (
                 <tr key={x.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                   <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                    <a href={`https://www.tradingview.com/chart/?symbol=${x.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-cyan-400 hover:underline">{x.ticker}</a>
+                    <StockCell ticker={x.ticker} etf={x.lev_etf} />
                   </td>
                   <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[220px] truncate">{x.industry || "—"}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{fmtPf(x.perf)}</td>
@@ -16268,7 +16437,10 @@ const LeadershipTier = ({ title, sub, showTight, rows, total, win, perWindow, co
   );
 };
 
-const LeadershipStocksView = ({ onMiniCharts = null }) => {
+const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
+  const isSuper = pool === "super";
+  const P = isSuper ? { LL: "SLL", NEL: "S-NEL", TNEL: "T-SNEL", LLname: "Super Liquid Leaders", NELname: "Super Liquid Non-Extended Leaders", TNELname: "Tight Super Liquid Leaders", head: "Super Liquid Thematic Leadership" }
+                    : { LL: "LL", NEL: "NEL", TNEL: "T-NEL", LLname: "Liquid Leaders", NELname: "Non-Extended Leaders", TNELname: "Tight Non-Extended Leaders", head: "Thematic Leadership" };
   const [data, setData]       = React.useState(null);
   const [history, setHistory] = React.useState({});
   const [win, setWin]         = React.useState("1M");
@@ -16296,13 +16468,13 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
     const out = { LL: {}, NEL: {}, TNEL: {} };
     if (!data) return out;
     for (const w of LEADERSHIP_WINDOWS) {
-      const ll  = data.leaders?.[w] || [];
+      const ll  = (isSuper ? data.super_leaders : data.leaders)?.[w] || [];
       const nel = ll.filter(x => x.extension != null && x.extension < crit.maxExt);
       const tn  = nel.filter(x => x.rmv != null && x.rmv <= crit.maxRmv && (x.coil ?? 0) >= crit.minCoil);
       out.LL[w] = ll; out.NEL[w] = nel; out.TNEL[w] = tn;
     }
     return out;
-  }, [data, crit]);
+  }, [data, crit, isSuper]);
   const uniq = tier => [...new Set(LEADERSHIP_WINDOWS.flatMap(w => tiers[tier][w].map(x => x.ticker)))];
 
   const copyList = (tier) => {
@@ -16310,8 +16482,8 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
     (navigator.clipboard?.writeText(txt) || Promise.reject()).then(() => { setCopied(tier); setTimeout(() => setCopied(null), 1500); }).catch(() => {});
   };
   const exportList = (tier, label) => {
-    const rows = [["Window", "Symbol", "Industry", "Performance %", "Avg $ Vol", "Extension", "Coil", "RMV"]];
-    for (const w of LEADERSHIP_WINDOWS) for (const x of tiers[tier][w]) rows.push([w, x.ticker, x.industry || "", x.perf, x.avg_dollar_volume, x.extension ?? "", x.coil ?? "", x.rmv ?? ""]);
+    const rows = [["Window", "Symbol", "Leveraged ETF", "Industry", "Performance %", "Avg $ Vol", "Extension", "Coil", "RMV"]];
+    for (const w of LEADERSHIP_WINDOWS) for (const x of tiers[tier][w]) rows.push([w, x.ticker, x.lev_etf || "", x.industry || "", x.perf, x.avg_dollar_volume, x.extension ?? "", x.coil ?? "", x.rmv ?? ""]);
     const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
@@ -16321,7 +16493,8 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
   };
 
   // Count of leaders per industry per day, for the snapshot sparklines.
-  const histDays = React.useMemo(() => Object.keys(history).sort().slice(-30), [history]);
+  const histDays = React.useMemo(() => Object.keys(history).sort().filter(d => !isSuper || history[d]?.super).slice(-30), [history, isSuper]);
+  const histCount = (d, w, ind) => (isSuper ? history[d]?.super?.[w]?.[ind] : history[d]?.[w]?.[ind]) ?? 0;
   const Spark = ({ vals }) => {
     if (vals.length < 2) return null;
     const mx = Math.max(...vals, 1), W = 56, H = 14;
@@ -16339,7 +16512,7 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
   );
 
   const tierEl = (tier, title, short, sub, showTight = false) => (
-    <LeadershipTier title={title} sub={sub} showTight={showTight} rows={tiers[tier][win] || []} total={uniq(tier).length} win={win}
+    <LeadershipTier title={title} short={isSuper ? "S-NEL" : "NEL"} sub={sub} showTight={showTight} rows={tiers[tier][win] || []} total={uniq(tier).length} win={win}
       perWindow={LEADERSHIP_WINDOWS.map(w => `${w} ${tiers[tier][w].length}`).join(" · ")}
       copied={copied === tier} onCopy={() => copyList(tier)} onExport={() => exportList(tier, short)}
       onMini={onMiniCharts ? rows => onMiniCharts(rows.map(x => ({ ticker: x.ticker, category: x.industry })), `${short} · ${win}`) : null} />
@@ -16351,8 +16524,10 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
     <div className="space-y-4">
       <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
         <div className="flex items-center gap-3 flex-wrap">
-          <h3 className="text-sm font-semibold text-zinc-100">Thematic Leadership</h3>
-          <span className="text-[11px] text-zinc-600">top {data.top_n} per window of {data.universe_size} liquid stocks (avg $ vol ≥ ${((c.min_dollar_volume || 0) / 1e6).toFixed(0)}M) · {data.date}</span>
+          <h3 className="text-sm font-semibold text-zinc-100">{P.head}</h3>
+          <span className="text-[11px] text-zinc-600">{isSuper
+            ? `top ${data.super_top_n} per window of ${data.super_pool_size} super liquid stocks (avg $ vol ≥ $${((c.super_min_dollar_volume || 0) / 1e9).toFixed(0)}B) · ${data.date}`
+            : `top ${data.top_n} per window of ${data.universe_size} liquid stocks (avg $ vol ≥ $${((c.min_dollar_volume || 0) / 1e6).toFixed(0)}M) · ${data.date}`}</span>
           <div className="ml-auto flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
             {LEADERSHIP_WINDOWS.map(w => (
               <button key={w} onClick={() => setWin(w)}
@@ -16368,7 +16543,7 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
           {LEADERSHIP_WINDOWS.map(w => {
-            const top = Object.entries(data.industry_counts?.[w] || {}).sort((a, b) => b[1] - a[1]).slice(0, 5);
+            const top = Object.entries((isSuper ? data.super_industry_counts : data.industry_counts)?.[w] || {}).sort((a, b) => b[1] - a[1]).slice(0, 5);
             const mx = Math.max(...top.map(t => t[1]), 1);
             return (
               <div key={w} className={`rounded-lg border p-3 ${win === w ? "border-blue-500/30 bg-blue-500/5" : "border-zinc-800 bg-zinc-900/40"}`}>
@@ -16377,7 +16552,7 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
                   <div key={ind} className="mb-1">
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="text-zinc-300 truncate pr-2">{ind}</span>
-                      <span className="font-mono text-zinc-400 whitespace-nowrap">{n}<Spark vals={histDays.map(d => history[d]?.[w]?.[ind] ?? 0)} /></span>
+                      <span className="font-mono text-zinc-400 whitespace-nowrap">{n}<Spark vals={histDays.map(d => histCount(d, w, ind))} /></span>
                     </div>
                     <div className="h-1 rounded bg-zinc-800 overflow-hidden"><div className="h-full bg-blue-500/60" style={{ width: `${(n / mx) * 100}%` }} /></div>
                   </div>
@@ -16388,9 +16563,10 @@ const LeadershipStocksView = ({ onMiniCharts = null }) => {
         </div>
         {histDays.length < 2 && <p className="text-[10px] text-zinc-700 mt-2">Leadership-over-time sparklines appear once the nightly run has stored two or more days.</p>}
       </div>
-      {tierEl("LL",   "Liquid Leaders (LL)",                 "LL",    `top ${data.top_n} performers per window`)}
-      {tierEl("NEL",  "Non-Extended Leaders (NEL)",          "NEL",   `LL with Extension < ${crit.maxExt}×`)}
-      {tierEl("TNEL", "Tight Non-Extended Leaders (T-NEL)",  "T-NEL", `NEL with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`, true)}
+      {isSuper && !data.super_leaders && <p className="text-xs text-zinc-600 italic">Super liquid data arrives with the next nightly run.</p>}
+      {tierEl("LL",   `${P.LLname} (${P.LL})`,       P.LL,   `top ${isSuper ? data.super_top_n : data.top_n} performers per window`)}
+      {tierEl("NEL",  `${P.NELname} (${P.NEL})`,     P.NEL,  `${P.LL} with Extension < ${crit.maxExt}×`)}
+      {tierEl("TNEL", `${P.TNELname} (${P.TNEL})`,   P.TNEL, `${P.NEL} with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`, true)}
     </div>
   );
 };
@@ -16512,7 +16688,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                     <tbody>
                       {holdSort.rows.map(h => (
                         <tr key={h.ticker} className="border-t border-zinc-800/70">
-                          <td className="px-2 py-2"><a href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-zinc-100 hover:text-cyan-400">{h.ticker}</a></td>
+                          <td className="px-2 py-2"><StockCell ticker={h.ticker} /></td>
                           <td className="px-2 py-2 text-zinc-400 max-w-[260px] truncate">{h.name || "—"}</td>
                           <td className="px-2 py-2 text-right font-mono text-zinc-300">{h.weight != null ? `${h.weight.toFixed(1)}%` : "—"}</td>
                           <td className="px-2 py-2 text-right font-mono text-zinc-300">{fmtD(h.dvol)}</td>
@@ -16988,19 +17164,20 @@ const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }
 
 // Leadership page = Stocks (LL → NEL → T-NEL) | Themes (theme group leaders), mirroring a two-page leadership layout.
 const LeadershipScreen = ({ onMiniCharts = null, etfRsData = null, etfHoldings = {}, view: viewProp = null, onViewChange = null }) => {
-  const [viewLocal, setViewLocal] = React.useState(() => { try { const v = localStorage.getItem("leadership_view"); return v === "themes" || v === "sectors" ? v : "stocks"; } catch { return "stocks"; } });
+  const [viewLocal, setViewLocal] = React.useState(() => { try { const v = localStorage.getItem("leadership_view"); return v === "themes" || v === "sectors" || v === "super" ? v : "stocks"; } catch { return "stocks"; } });
   const view    = viewProp ?? viewLocal;
   const setView = onViewChange ?? setViewLocal;
   React.useEffect(() => { try { localStorage.setItem("leadership_view", view); } catch { /* ignore */ } }, [view]);
   return (
     <div className="space-y-4">
       {viewProp == null && <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 w-fit">
-        {[["stocks", "Stocks"], ["themes", "Themes"], ["sectors", "Sectors"]].map(([k, l]) => (
+        {[["stocks", "Liquid Leaders"], ["super", "Super Liquid Leaders"], ["themes", "Themes"], ["sectors", "Sectors"]].map(([k, l]) => (
           <button key={k} onClick={() => setView(k)}
             className={`px-4 py-1 text-[12px] font-medium rounded-md transition-all ${view === k ? "bg-orange-500/20 text-orange-300 border border-orange-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
         ))}
       </div>}
       {view === "stocks" ? <LeadershipStocksView onMiniCharts={onMiniCharts} />
+        : view === "super" ? <LeadershipStocksView pool="super" onMiniCharts={onMiniCharts} />
         : view === "themes" ? <ThemeLeadersView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />
         : <SectorsView etfRsData={etfRsData} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />}
     </div>
@@ -17535,8 +17712,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                     <td className="px-3 py-2 text-zinc-600 text-[11px]">{i+1}</td>
                     <td className="px-3 py-2">
                       <div className="flex items-center gap-1">
-                        <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
-                           className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                        <StockCell ticker={s.ticker} />
                         {isNew && <span className="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 rounded font-bold">NEW</span>}
                       </div>
                     </td>
@@ -17724,8 +17900,8 @@ export default function App() {
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [fetchedAt, setFetchedAt] = useState(null);
-  const [countdown, setCountdown] = useState(null);
   const nextFetchAt = useRef(null);
+  const [panelTicker, setPanelTicker] = useState(null);   // stock panel (click any ticker)
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
   const [ibkrData, setIbkrData] = useState(null);
@@ -17787,16 +17963,7 @@ export default function App() {
     return () => clearInterval(id);
   }, [updateFromIntel]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Countdown ticker — counts down to next actual data update
-  useEffect(() => {
-    const tick = () => {
-      if (nextFetchAt.current == null) return;
-      const remaining = Math.max(0, Math.ceil((nextFetchAt.current - Date.now()) / 1000));
-      setCountdown(remaining);
-    };
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
+  // (The "updated … ago" countdown lives in <DataAgeCountdown> so its 1-second timer doesn't re-render the whole App.)
 
   // Thematic data — poll every 5 min (matches scraper schedule)
   useEffect(() => {
@@ -18089,6 +18256,7 @@ const appScreenerMap = useMemo(() => {
 
   return (
     <LangCtx.Provider value={lang}>
+    <StockPanelCtx.Provider value={setPanelTicker}>
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <GlobalAlertBanner />
       <div id="app-navbar" className="border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
@@ -18204,6 +18372,7 @@ const appScreenerMap = useMemo(() => {
                 { label: "Focus List", tab: "watchlist", mode: "focus" },
                 { label: "Universe", tab: "watchlist", mode: "adrUniverse" },
                 { label: "Leadership", tab: "watchlist", mode: "leadership", view: "stocks" },
+                { label: "Super Liquid", tab: "watchlist", mode: "leadership", view: "super" },
               ] },
               { key: "themes", label: "Themes", items: [
                 { label: "Theme Tracker", tab: "watchlist", mode: "etf" },
@@ -18265,11 +18434,7 @@ const appScreenerMap = useMemo(() => {
                         <div className="text-[10px] text-zinc-500 whitespace-nowrap font-mono">
                           {data.generated_at || data.last_updated}
                         </div>
-                        {countdown != null && (
-                          <div className="text-[10px] text-zinc-600 font-mono">
-                            {countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s ago` : `${countdown}s ago`}
-                          </div>
-                        )}
+                        <DataAgeCountdown nextFetchAt={nextFetchAt} />
                       </div>
                     )}
                   </div>
@@ -18333,7 +18498,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef} mode={watchMode} onModeChange={setWatchMode} leadView={leadView} onLeadViewChange={setLeadView} onOpenBreadth={() => setTab("breadthcycle")}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")} onOpenBreadthCycle={() => setTab("breadthcycle")}/> : tab === "cot" ? <CotTab/> : tab === "breadthcycle" ? <BreadthCycleTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef} mode={watchMode} onModeChange={setWatchMode} leadView={leadView} onLeadViewChange={setLeadView} onOpenBreadth={() => setTab("breadthcycle")}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings} onOpenCot={() => setTab("cot")} onOpenBreadthCycle={() => setTab("breadthcycle")}/> : tab === "cot" ? <React.Suspense fallback={<p className="text-xs text-zinc-600 italic p-6">Loading COT…</p>}><CotTab/></React.Suspense> : tab === "breadthcycle" ? <BreadthCycleTab/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
@@ -18374,7 +18539,9 @@ const appScreenerMap = useMemo(() => {
       )}
       {showCalcModal && <CalcModal onClose={() => setShowCalcModal(false)} ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix} />}
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
+      {panelTicker && <StockPanel ticker={panelTicker} onClose={() => setPanelTicker(null)} screenerMap={appScreenerMap} themeData={data} categoryThemeMap={categoryThemeMap} />}
     </div>
+    </StockPanelCtx.Provider>
     </LangCtx.Provider>
   );
 }

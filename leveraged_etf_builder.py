@@ -30,8 +30,8 @@ OUTPUT_PATH = ROOT / "public" / "leveraged_stock_etfs.json"
 SCREENER_PATH = ROOT / "public" / "screener_stocks.json"
 ET = ZoneInfo("America/New_York")
 
-MIN_DOLLAR_VOLUME = 50_000_000     # light write floor; the page applies its own (default $500M)
-MIN_AVG_VOLUME = 300_000
+MIN_DOLLAR_VOLUME = 5_000_000      # light write floor; each page applies its own (Universe default $500M; Leadership just labels the pair)
+MIN_AVG_VOLUME = 100_000
 
 # Uppercase words in fund names that are never the underlying ticker.
 _TOKEN_STOP = {"FANG", "ETF", "ETN", "USD", "US", "USA", "AI", "ULTRA", "BULL", "BEAR", "LONG", "SHORT", "DAILY", "INDEX"}
