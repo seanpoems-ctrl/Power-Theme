@@ -1,0 +1,158 @@
+//@version=6
+// Power Theme Stats — the stats panel from the dashboard's enlarged chart, for TradingView.
+//
+//   Market Cap · ADR% · ATR · LoD dist. · industry · ATR% Mult. From MA      (plain text)
+//   RVOL · Vol vs Avg · Avg Vol · Avg $ Vol                                   (dark box underneath)
+//   optional: % Gain From MA · ATR %
+//
+// Definitions (all computed on DAILY bars via request.security, whatever timeframe the chart is on):
+//   ADR%            20-day mean of high/low − 1, in %
+//   ATR             Wilder ATR(14), in price units
+//   LoD dist.       (price − today's low) ÷ ATR, in %  — green when ≤ 40 %
+//   ATR% Mult.      ((price ÷ SMA50) − 1) ÷ (ATR ÷ price)  — amber ≥ 4, red ≥ 7
+//   RVOL            today's volume ÷ the average of the previous 50 days, shown as a %
+//   Vol vs Avg      RVOL − 100 %
+//   Avg Vol         mean volume of the previous 50 days
+//   Avg $ Vol       Avg Vol × the current price   (same as the original script)
+//   RVOL (Pacing)   while the regular US session is open, today's volume is divided by the share of a normal day that has traded so far
+//                   (an approximate U-shaped curve, t^0.7) so it reads as a full-day estimate.
+// Market cap needs the symbol's share count, so it shows "—" for ETFs and some foreign tickers.
+//
+// LAYOUT: Position puts the panel in any of 9 spots. Pine can't place a table by pixel, so "Vertical offset" (+ up / − down) and "Inset from the
+// side" add blank space (as % of the chart) to nudge it. A table can't leave its pane: Bottom positions are already at the floor (a negative
+// offset does nothing there) and Top positions are already at the ceiling (a positive offset does nothing). Use Middle to move freely both ways.
+indicator("Power Theme Stats", shorttitle = "PT Stats", overlay = true)
+
+string GRP = "Settings"
+int    atrLen   = input.int(14,  "ATR length",                 minval = 1,  group = GRP)
+int    adrLen   = input.int(20,  "ADR length",                 minval = 1,  group = GRP)
+int    maLen    = input.int(50,  "Moving average length",      minval = 2,  group = GRP)
+int    rvolLen  = input.int(50,  "RVOL / volume average length", minval = 5, group = GRP)
+bool   pacing   = input.bool(true, "Pace RVOL while the session is open", group = GRP)
+float  lodGreen = input.float(40, "LoD dist. green at or below (%)", group = GRP)
+
+string LAY = "Layout"
+string tblPos   = input.string("Bottom right", "Position", options = ["Bottom right", "Bottom center", "Bottom left", "Middle right", "Middle center", "Middle left", "Top right", "Top center", "Top left"], group = LAY)
+string tblSize  = input.string("Small", "Text size", options = ["Tiny", "Small", "Normal", "Large", "Huge"], group = LAY)
+float  vOffset  = input.float(0.0, "Vertical offset, % of chart height  (+ up, − down)", minval = -60, maxval = 60, step = 0.5, group = LAY)
+float  insetPct = input.float(0.0, "Inset from the left/right edge (% of chart width)", minval = 0, maxval = 60, step = 0.5, group = LAY)
+bool   showInd  = input.bool(true,  "Show industry", group = LAY)
+bool   showExtra = input.bool(false, "Show % Gain From MA and ATR %", group = LAY)
+
+string STY = "Style"
+color  txtCol   = input.color(#000000, "Text colour",              group = STY)
+color  boxBg    = input.color(color.new(#27272a, 5), "RVOL box background", group = STY)
+color  boxTxt   = input.color(#f4f4f5, "RVOL box text",            group = STY)
+
+sz = switch tblSize
+    "Tiny"   => size.tiny
+    "Normal" => size.normal
+    "Large"  => size.large
+    "Huge"   => size.huge
+    => size.small
+
+position_ = switch tblPos
+    "Bottom center" => position.bottom_center
+    "Bottom left"   => position.bottom_left
+    "Middle right"  => position.middle_right
+    "Middle center" => position.middle_center
+    "Middle left"   => position.middle_left
+    "Top right"     => position.top_right
+    "Top center"    => position.top_center
+    "Top left"      => position.top_left
+    => position.bottom_right
+
+fmtBig(float v) =>
+    na(v) ? "—" : v >= 1e12 ? str.tostring(v / 1e12, "#.##") + "T" : v >= 1e9 ? str.tostring(v / 1e9, "#.##") + "B" : v >= 1e6 ? str.tostring(v / 1e6, "#.##") + "M" : v >= 1e3 ? str.tostring(v / 1e3, "#.#") + "K" : str.tostring(v, "#")
+
+// one label / value row (value right-aligned), optional background
+fRow(table tbl, int c0, int r, string k, string v, color kc, color vc, color bg) =>
+    table.cell(tbl, c0,     r, k, text_color = kc, bgcolor = bg, text_halign = text.align_left,  text_size = sz)
+    table.cell(tbl, c0 + 1, r, v, text_color = vc, bgcolor = bg, text_halign = text.align_right, text_size = sz)
+
+// ── calculations (all on the DAILY timeframe) ────────────────────────────────────────────────────────────────────
+[atr, adr, ma, avgVol, lowD, volD] = request.security(syminfo.tickerid, "D",
+     [ta.atr(atrLen), (ta.sma(high / low, adrLen) - 1) * 100, ta.sma(close, maLen), ta.sma(volume[1], rvolLen), low, volume],
+     lookahead = barmerge.lookahead_off)
+float px      = close                                                 // current price (the chart's last close, live)
+float ext     = atr > 0 and ma > 0 ? ((px / ma) - 1) / (atr / px) : na
+float gainMa  = ma > 0 ? (px / ma - 1) * 100 : na
+float atrPct  = px > 0 ? atr / px * 100 : na
+float lod     = atr > 0 ? (px - lowD) / atr * 100 : na
+float mcap    = nz(syminfo.shares_outstanding_total) > 0 ? syminfo.shares_outstanding_total * px : na
+float avgDvol = avgVol * px
+
+// Share of a normal US session's volume that has traded so far (ET). 1 when the market is closed.
+float paceFrac = 1.0
+if pacing and barstate.islast and session.ismarket
+    int mins = hour(timenow, "America/New_York") * 60 + minute(timenow, "America/New_York")
+    if mins >= 570 and mins < 960 and dayofweek(timenow, "America/New_York") != dayofweek.saturday and dayofweek(timenow, "America/New_York") != dayofweek.sunday
+        paceFrac := math.max(0.05, math.pow((mins - 570) / 390.0, 0.7))
+bool  paced = paceFrac < 1.0
+float rvol  = avgVol > 0 ? (volD / paceFrac) / avgVol : na
+float vsAvg = na(rvol) ? na : (rvol - 1) * 100
+
+// ── table (rebuilt on the last bar so the row count follows the options) ──────────────────────────────────────────
+var table t = na
+
+if barstate.islast
+    if not na(t)
+        table.delete(t)
+
+    bool isTop    = str.startswith(tblPos, "Top")
+    bool isBottom = str.startswith(tblPos, "Bottom")
+    bool isLeft   = str.endswith(tblPos, "left")
+    bool isRight  = str.endswith(tblPos, "right")
+    bool addBelow = vOffset > 0 and not isTop        // blank row under the panel pushes it UP   (bottom / middle anchors)
+    bool addAbove = vOffset < 0 and not isBottom     // blank row over the panel pushes it DOWN  (top / middle anchors)
+    bool addInset = insetPct > 0 and (isLeft or isRight)
+    int  c0       = addInset and isLeft ? 1 : 0
+    int  cols     = 2 + (addInset ? 1 : 0)
+    int  r0       = addAbove ? 1 : 0
+    int  nRows    = 4 + (showInd ? 1 : 0) + 1 + (showExtra ? 2 : 0) + 1 + 4 + (addAbove ? 1 : 0) + (addBelow ? 1 : 0)
+
+    t := table.new(position_, cols, nRows, frame_width = 0, border_width = 0)
+
+    color extCol = na(ext) ? txtCol : ext >= 7 ? #991b1b : ext >= 4 ? #92400e : txtCol
+    color lodCol = not na(lod) and lod <= lodGreen ? #166534 : txtCol
+    color vsCol  = na(vsAvg) ? boxTxt : vsAvg >= 0 ? #4ade80 : #f87171
+
+    int r = r0
+    fRow(t, c0, r, "Market Cap", na(mcap) ? "—" : fmtBig(mcap), txtCol, txtCol, na)
+    r += 1
+    fRow(t, c0, r, "ADR%", str.tostring(adr, "#.##") + "%", txtCol, txtCol, na)
+    r += 1
+    fRow(t, c0, r, "ATR", str.tostring(atr, format.mintick), txtCol, txtCol, na)
+    r += 1
+    fRow(t, c0, r, "LoD dist.", na(lod) ? "—" : str.tostring(lod, "#") + "%", txtCol, lodCol, na)
+    r += 1
+    if showInd
+        table.cell(t, c0, r, syminfo.industry, text_color = txtCol, text_halign = text.align_right, text_size = sz)
+        table.merge_cells(t, c0, r, c0 + 1, r)
+        r += 1
+    fRow(t, c0, r, "ATR% Mult. From MA", na(ext) ? "—" : str.tostring(ext, "#.##"), txtCol, extCol, na)
+    r += 1
+    if showExtra
+        fRow(t, c0, r, "% Gain From MA", na(gainMa) ? "—" : str.tostring(gainMa, "#.##") + "%", txtCol, txtCol, na)
+        r += 1
+        fRow(t, c0, r, "ATR %", na(atrPct) ? "—" : str.tostring(atrPct, "#.##") + "%", txtCol, txtCol, na)
+        r += 1
+
+    table.cell(t, c0, r, " ", text_size = size.tiny)                                    // spacer
+    table.merge_cells(t, c0, r, c0 + 1, r)
+    r += 1
+    fRow(t, c0, r, paced ? "RVOL (Pacing)" : "RVOL", na(rvol) ? "—" : str.tostring(rvol * 100, "#.##") + "%", boxTxt, boxTxt, boxBg)
+    r += 1
+    fRow(t, c0, r, paced ? "Vol vs Avg (Est)" : "Vol vs Avg", na(vsAvg) ? "—" : (vsAvg > 0 ? "+" : "") + str.tostring(vsAvg, "#.##") + "%", boxTxt, vsCol, boxBg)
+    r += 1
+    fRow(t, c0, r, "Avg Vol", fmtBig(avgVol), boxTxt, boxTxt, boxBg)
+    r += 1
+    fRow(t, c0, r, "Avg $ Vol", "$" + fmtBig(avgDvol), boxTxt, boxTxt, boxBg)
+
+    // spacing cells: an empty cell with a % width / height pushes the panel away from the chart edge
+    if addInset
+        table.cell(t, isLeft ? 0 : 2, r0, "", width = insetPct)
+    if addAbove
+        table.cell(t, 0, 0, "", height = -vOffset)
+    if addBelow
+        table.cell(t, 0, nRows - 1, "", height = vOffset)
