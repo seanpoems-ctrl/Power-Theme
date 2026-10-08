@@ -14227,21 +14227,21 @@ const _chartStats = (data, marketCapB) => {
 };
 const _kFmt = v => v == null ? "—" : v >= 1e9 ? `${(v / 1e9).toFixed(2)}B` : v >= 1e6 ? `${(v / 1e6).toFixed(2)}M` : v >= 1e3 ? `${(v / 1e3).toFixed(1)}K` : v.toFixed(0);
 const ChartStatsOverlay = ({ st }) => {
-  const row = (k, v, cls = "") => <div className="flex justify-between gap-2"><span className="opacity-80">{k}</span><span className={`font-semibold tabular-nums ${cls}`}>{v}</span></div>;
+  const row = (k, v, cls = "") => <div className="flex justify-between gap-2"><span className="font-medium">{k}</span><span className={`font-bold tabular-nums ${cls}`}>{v}</span></div>;
   const num = (v, d = 2) => v == null ? "—" : v.toFixed(d);
   return (
-    <div className="hidden sm:block absolute top-0 bottom-0 left-0 pointer-events-none select-none text-[9px] leading-[12px]" style={{ right: 78, color: "#1f1f1f" }}>
+    <div className="hidden sm:block absolute top-0 bottom-0 left-0 pointer-events-none select-none text-[9px] leading-[12px]" style={{ right: 78, color: "#000000", zIndex: 20 }}>
       {/* One column, bottom-right: info lines, the ATR multiple, then the RVOL box */}
       <div className="absolute right-2 w-[132px] flex flex-col gap-1" style={{ bottom: 80 }}>
       <div className="w-full">
         {row("Market Cap", st.marketCapB != null ? `${st.marketCapB.toFixed(2)}B` : "—")}
         {row("ADR%", `${num(st.adr)}%`)}
         {row("ATR", num(st.atr))}
-        {row("LoD dist.", st.lod != null ? `${st.lod.toFixed(0)}%` : "—", st.lod != null && st.lod <= 40 ? "text-green-700" : "")}
-        {st.industry && <div className="opacity-80 text-right">{st.industry}</div>}
+        {row("LoD dist.", st.lod != null ? `${st.lod.toFixed(0)}%` : "—", st.lod != null && st.lod <= 40 ? "text-green-800" : "")}
+        {st.industry && <div className="font-medium text-right">{st.industry}</div>}
       </div>
       <div className="w-full">
-        {row("ATR% Mult. From MA", num(st.extension), st.extension != null && st.extension >= 7 ? "text-red-700" : st.extension != null && st.extension >= 4 ? "text-amber-700" : "")}
+        {row("ATR% Mult. From MA", num(st.extension), st.extension != null && st.extension >= 7 ? "text-red-800" : st.extension != null && st.extension >= 4 ? "text-amber-800" : "")}
       </div>
       <div className="w-full rounded border border-zinc-600 text-zinc-100 px-1.5 py-0.5" style={{ background: "#27272af2" }}>
         <div className="flex justify-between gap-2"><span className="text-zinc-300">{st.pacing ? "RVOL (Pace)" : "RVOL"}</span><span className="font-bold tabular-nums">{st.rvol != null ? `${(st.rvol * 100).toFixed(2)}%` : "—"}</span></div>
@@ -14484,7 +14484,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
         {status === "ready" && stats && <ChartStatsOverlay st={stats} />}
         {status === "ready" && strip.length > 0 && (
-          <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 30, height: 0 }}>
+          <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 30, height: 0, zIndex: 15 }}>
             {strip.map((m, i) => (
               <span key={`${m.kind}${m.date}${i}`} title={_evTitle(m)}
                 className="absolute pointer-events-auto flex items-center justify-center font-bold rounded"
