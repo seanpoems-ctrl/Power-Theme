@@ -2,64 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 4,
+  "count": 3,
   "stocks": [
     {
       "ticker": "CD",
       "company": "Chaince Digital Holdings Inc. - American",
       "industry": "Information Technology Services",
-      "price": 10.15,
-      "change_pct": 22.0,
-      "adr_pct": 8.5,
-      "dollar_volume": "$2.2M",
-      "market_cap_b": 1.117,
-      "rs_ibd": 92,
-      "above50dma_pct": 152.4
+      "price": 10.91,
+      "change_pct": 7.49,
+      "adr_pct": 9.6,
+      "dollar_volume": "$2.9M",
+      "market_cap_b": 1.2,
+      "rs_ibd": 95,
+      "above50dma_pct": 160.8
     },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 91.08,
-      "change_pct": -1.36,
-      "adr_pct": 7.9,
-      "dollar_volume": "$597.3M",
-      "market_cap_b": 5.724,
+      "price": 94.26,
+      "change_pct": 3.49,
+      "adr_pct": 7.5,
+      "dollar_volume": "$620.4M",
+      "market_cap_b": 5.924,
       "rs_ibd": 99,
-      "above50dma_pct": 94.9
+      "above50dma_pct": 97.2
     },
     {
       "ticker": "XP",
       "company": "XP Inc.",
       "industry": "Investment Banks/Brokers",
-      "price": 29.53,
-      "change_pct": -0.67,
+      "price": 30.21,
+      "change_pct": 2.3,
       "adr_pct": 4.3,
-      "dollar_volume": "$422.4M",
-      "market_cap_b": 15.267,
-      "rs_ibd": 94,
-      "above50dma_pct": 55.0
-    },
-    {
-      "ticker": "GRAL",
-      "company": "GRAIL, Inc.",
-      "industry": "Medical Specialties",
-      "price": 132.9,
-      "change_pct": -3.19,
-      "adr_pct": 8.0,
-      "dollar_volume": "$201.6M",
-      "market_cap_b": 5.936,
+      "dollar_volume": "$455.5M",
+      "market_cap_b": 15.619,
       "rs_ibd": 93,
-      "above50dma_pct": 50.2
+      "above50dma_pct": 56.3
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.22,
-    "spx_1m": 2.17,
-    "spx_3m": 2.99,
-    "spx_34d": 2.1,
-    "spx_qtd": 1.77,
-    "spx_mtd": 1.77
+    "spx_1d": -0.47,
+    "spx_1m": 2.29,
+    "spx_3m": 3.33,
+    "spx_34d": 1.19,
+    "spx_qtd": 1.29,
+    "spx_mtd": 1.29
   },
-  "fetched_at_utc": "2026-10-08T02:38:49+00:00"
+  "fetched_at_utc": "2026-10-08T23:17:40+00:00"
 }

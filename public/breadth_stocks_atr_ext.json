@@ -8,61 +8,49 @@
       "ticker": "CD",
       "company": "Chaince Digital Holdings Inc. - American",
       "industry": "Information Technology Services",
-      "price": 10.15,
-      "change_pct": 22.0,
-      "adr_pct": 8.5,
-      "dollar_volume": "$2.2M",
-      "market_cap_b": 1.117,
-      "rs_ibd": 92,
-      "atr_ext_val": 18.0
+      "price": 10.91,
+      "change_pct": 7.49,
+      "adr_pct": 9.6,
+      "dollar_volume": "$2.9M",
+      "market_cap_b": 1.2,
+      "rs_ibd": 95,
+      "atr_ext_val": 16.72
+    },
+    {
+      "ticker": "XP",
+      "company": "XP Inc.",
+      "industry": "Investment Banks/Brokers",
+      "price": 30.21,
+      "change_pct": 2.3,
+      "adr_pct": 4.3,
+      "dollar_volume": "$455.5M",
+      "market_cap_b": 15.619,
+      "rs_ibd": 93,
+      "atr_ext_val": 13.09
+    },
+    {
+      "ticker": "KOD",
+      "company": "Kodiak Sciences Inc",
+      "industry": "Biotechnology",
+      "price": 94.26,
+      "change_pct": 3.49,
+      "adr_pct": 7.5,
+      "dollar_volume": "$620.4M",
+      "market_cap_b": 5.924,
+      "rs_ibd": 99,
+      "atr_ext_val": 12.91
     },
     {
       "ticker": "ARX",
       "company": "Accelerant Holdings",
       "industry": "Property/Casualty Insurance",
       "price": 19.75,
-      "change_pct": 0.1,
+      "change_pct": 0.0,
       "adr_pct": 0.7,
-      "dollar_volume": "$35.2M",
+      "dollar_volume": "$35.3M",
       "market_cap_b": 4.289,
-      "rs_ibd": 82,
-      "atr_ext_val": 13.46
-    },
-    {
-      "ticker": "XP",
-      "company": "XP Inc.",
-      "industry": "Investment Banks/Brokers",
-      "price": 29.53,
-      "change_pct": -0.67,
-      "adr_pct": 4.3,
-      "dollar_volume": "$422.4M",
-      "market_cap_b": 15.267,
-      "rs_ibd": 94,
-      "atr_ext_val": 12.71
-    },
-    {
-      "ticker": "HZO",
-      "company": "MarineMax, Inc. (FL)",
-      "industry": "Specialty Stores",
-      "price": 52.47,
-      "change_pct": 0.15,
-      "adr_pct": 0.5,
-      "dollar_volume": "$37.0M",
-      "market_cap_b": 1.159,
-      "rs_ibd": 91,
-      "atr_ext_val": 12.22
-    },
-    {
-      "ticker": "KOD",
-      "company": "Kodiak Sciences Inc",
-      "industry": "Biotechnology",
-      "price": 91.08,
-      "change_pct": -1.36,
-      "adr_pct": 7.9,
-      "dollar_volume": "$597.3M",
-      "market_cap_b": 5.724,
-      "rs_ibd": 99,
-      "atr_ext_val": 11.97
+      "rs_ibd": 83,
+      "atr_ext_val": 12.82
     },
     {
       "ticker": "ACVA",
@@ -70,32 +58,44 @@
       "industry": "Internet Software/Services",
       "price": 10.44,
       "change_pct": 0.0,
-      "adr_pct": 1.9,
-      "dollar_volume": "$84.2M",
+      "adr_pct": 1.7,
+      "dollar_volume": "$82.1M",
       "market_cap_b": 1.773,
-      "rs_ibd": 73,
-      "atr_ext_val": 11.61
+      "rs_ibd": 72,
+      "atr_ext_val": 12.07
     },
     {
-      "ticker": "P",
-      "company": "Everpure, Inc.",
-      "industry": "Computer Peripherals",
-      "price": 152.66,
-      "change_pct": 3.71,
-      "adr_pct": 4.2,
-      "dollar_volume": "$816.5M",
-      "market_cap_b": 50.87,
+      "ticker": "HZO",
+      "company": "MarineMax, Inc. (FL)",
+      "industry": "Specialty Stores",
+      "price": 52.43,
+      "change_pct": -0.08,
+      "adr_pct": 0.5,
+      "dollar_volume": "$35.6M",
+      "market_cap_b": 1.158,
       "rs_ibd": 91,
-      "atr_ext_val": 10.27
+      "atr_ext_val": 11.0
+    },
+    {
+      "ticker": "PCRX",
+      "company": "Pacira BioSciences, Inc.",
+      "industry": "Pharmaceuticals: Major",
+      "price": 36.39,
+      "change_pct": 44.4,
+      "adr_pct": 4.3,
+      "dollar_volume": "$123.5M",
+      "market_cap_b": 1.451,
+      "rs_ibd": 84,
+      "atr_ext_val": 10.04
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.22,
-    "spx_1m": 2.17,
-    "spx_3m": 2.99,
-    "spx_34d": 2.1,
-    "spx_qtd": 1.77,
-    "spx_mtd": 1.77
+    "spx_1d": -0.47,
+    "spx_1m": 2.29,
+    "spx_3m": 3.33,
+    "spx_34d": 1.19,
+    "spx_qtd": 1.29,
+    "spx_mtd": 1.29
   },
-  "fetched_at_utc": "2026-10-08T02:38:49+00:00"
+  "fetched_at_utc": "2026-10-08T23:17:40+00:00"
 }
