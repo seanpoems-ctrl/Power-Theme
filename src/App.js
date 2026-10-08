@@ -14448,8 +14448,10 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
       <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden whitespace-nowrap">
         {onToggle && (
-          <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} title={selected ? `Deselect ${ticker}` : `Select ${ticker} (for Copy / Download)`} aria-label={`Select ${ticker}`}
-            className="self-center flex-shrink-0 w-5 h-5 cursor-pointer accent-blue-500" />
+          // 10px box (half the old size) inside a 24px tap area so it stays easy to hit on a phone
+          <label className="self-center flex-shrink-0 flex items-center justify-center w-6 h-6 cursor-pointer" title={selected ? `Deselect ${ticker}` : `Select ${ticker} (for Copy / Download)`}>
+            <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} aria-label={`Select ${ticker}`} className="w-2.5 h-2.5 cursor-pointer accent-blue-500" />
+          </label>
         )}
         {category && <span className="text-[15px] text-zinc-500 font-sans font-normal whitespace-nowrap flex-shrink-0">{category}</span>}
         {legend && status === "ready" ? (
@@ -14505,7 +14507,27 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
 // Grid of small real candlestick charts with 9/21/50 EMA overlays — a
 // quick-glance scan across many tickers at once (e.g. every Clean Bases
 // name) instead of opening one full chart at a time.
-const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
+// Every ticker in the list is shown (one scrolling grid, no paging). Charts mount as they scroll into view, so a 100+ name list doesn't
+// fire 100 data requests at once; once a chart has been seen it stays mounted.
+const LazyMiniChart = ({ height = 260, rootRef = null, children }) => {
+  const ref = React.useRef(null);
+  const [seen, setSeen] = React.useState(false);
+  React.useEffect(() => {
+    if (seen) return undefined;
+    const el = ref.current;
+    if (!el) return undefined;
+    if (typeof IntersectionObserver === "undefined") { setSeen(true); return undefined; }
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { setSeen(true); io.disconnect(); } },
+      { root: rootRef?.current || null, rootMargin: "700px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [seen, rootRef]);
+  return (
+    <div ref={ref}>
+      {seen ? children : <div className="rounded-lg border border-zinc-800/60 bg-zinc-900/40 flex items-center justify-center text-[12px] text-zinc-700" style={{ height: height + 52 }}>Loading…</div>}
+    </div>
+  );
+};
 // Copy the list as comma-separated tickers (pastes straight into a TradingView watchlist). Lives in the Mini Charts grid so every list with a
 // Mini Charts button gets it.
 // `selected` = ticked tickers: when any are ticked only those are copied / downloaded, otherwise the whole list.
@@ -14537,9 +14559,9 @@ const CopyTickersButton = ({ tickers, selected = [], fileName = "tickers" }) => 
 
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
   usePhoneViewport();
-  const [page, setPage] = React.useState(0);
+  const scrollRef = React.useRef(null);
   const [timeframe, setTimeframe] = React.useState("D");
-  // Index into `items` (not `pageItems`) of the currently-enlarged chart, or
+  // Index into `items` of the currently-enlarged chart, or
   // null when showing the grid. Kept as a global index (not page-relative)
   // so prev/next can carry across page boundaries.
   const [enlargedIdx, setEnlargedIdx] = React.useState(null);
@@ -14548,8 +14570,6 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
   // which groups/orders by category) — normalize once so the rest of this
   // component doesn't care which shape it got.
   const items = React.useMemo(() => tickers.map(t => typeof t === "string" ? { ticker: t, category: null } : t), [tickers]);
-  const pageCount = Math.ceil(items.length / MINI_CHART_PAGE_SIZE);
-  const pageItems = items.slice(page * MINI_CHART_PAGE_SIZE, page * MINI_CHART_PAGE_SIZE + MINI_CHART_PAGE_SIZE);
 
   React.useEffect(() => {
     const handler = e => {
@@ -14575,8 +14595,6 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
   const allTickers = React.useMemo(() => [...new Set(items.map(i => i.ticker))], [items]);
   const toggleSel = React.useCallback(t => setSel(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n; }), []);
   const selList = allTickers.filter(t => sel.has(t));                       // keeps list order
-  const pageTickers = pageItems.map(i => i.ticker);
-  const pageAllOn = pageTickers.length > 0 && pageTickers.every(t => sel.has(t));
   const allOn = allTickers.length > 0 && selList.length === allTickers.length;
 
   return (
@@ -14604,28 +14622,15 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            {pageCount > 1 && (
-              <div className="flex items-center gap-2 text-xs text-zinc-400">
-                <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
-                  className="px-2 py-1 rounded border border-zinc-700 hover:bg-zinc-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">‹</button>
-                <span>Page {page + 1} / {pageCount}</span>
-                <button onClick={() => setPage(p => Math.min(pageCount - 1, p + 1))} disabled={page === pageCount - 1}
-                  className="px-2 py-1 rounded border border-zinc-700 hover:bg-zinc-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">›</button>
-              </div>
-            )}
             <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
           </div>
         </div>
         <div className="flex items-center gap-2 flex-wrap px-4 py-2 border-b border-zinc-800 flex-shrink-0 text-[12px]">
           <label className="flex items-center gap-1.5 text-zinc-400 cursor-pointer select-none">
             <input type="checkbox" checked={allOn} ref={el => { if (el) el.indeterminate = selList.length > 0 && !allOn; }}
-              onChange={() => setSel(allOn ? new Set() : new Set(allTickers))} className="w-4 h-4 accent-blue-500 cursor-pointer" />
+              onChange={() => setSel(allOn ? new Set() : new Set(allTickers))} className="w-3 h-3 accent-blue-500 cursor-pointer" />
             Select all ({allTickers.length})
           </label>
-          {pageCount > 1 && (
-            <button onClick={() => setSel(prev => { const n = new Set(prev); pageTickers.forEach(t => pageAllOn ? n.delete(t) : n.add(t)); return n; })}
-              className="px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{pageAllOn ? "Unselect page" : "Select page"}</button>
-          )}
           {selList.length > 0 && (
             <button onClick={() => setSel(new Set())} className="px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Clear</button>
           )}
@@ -14634,15 +14639,14 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             <CopyTickersButton tickers={allTickers} selected={selList} fileName={title || "tickers"} />
           </div>
         </div>
-        <div className="overflow-y-auto p-3">
+        <div ref={scrollRef} className="overflow-y-auto p-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {pageItems.map((item, i) => {
-              const globalIdx = page * MINI_CHART_PAGE_SIZE + i;
-              return (
-                <MiniChartCard key={`${item.ticker}::${item.category || ""}::${i}`} ticker={item.ticker} category={item.category} timeframe={timeframe}
-                  onExpand={() => setEnlargedIdx(globalIdx)} selected={sel.has(item.ticker)} onToggle={toggleSel}/>
-              );
-            })}
+            {items.map((item, i) => (
+              <LazyMiniChart key={`${item.ticker}::${item.category || ""}::${i}`} rootRef={scrollRef}>
+                <MiniChartCard ticker={item.ticker} category={item.category} timeframe={timeframe}
+                  onExpand={() => setEnlargedIdx(i)} selected={sel.has(item.ticker)} onToggle={toggleSel}/>
+              </LazyMiniChart>
+            ))}
           </div>
         </div>
       </div>

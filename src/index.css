@@ -11,6 +11,12 @@ thead th {
   vertical-align: middle !important;
 }
 
+/* Dark canvas behind everything: when the phone viewport switches (usePhoneViewport) the page can briefly be narrower than the screen,
+   and the default white html background showed as a light strip beside the modal. */
+html {
+  background-color: #09090b;
+}
+
 body {
   zoom: 1.15;
 }
