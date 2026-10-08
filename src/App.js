@@ -11,6 +11,7 @@ import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
 import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
 import { buildDataset, scenarioReport } from "./breadthScenario";
+import { MINI_CHART_THEME, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from "./chartTheme";
 const CotTab = React.lazy(() => import("./CotTab"));   // loaded only when the COT tab opens
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
@@ -4741,10 +4742,10 @@ function _emaSeries(values, period) {
 // EMA overlay colors — matches a reference chart's convention (fast→slow:
 // teal, orange, blue, silver).
 const EMA_OVERLAY_CONFIG = [
-  { period: 9,   color: "#2dd4bf" },
-  { period: 21,  color: "#fb923c" },
-  { period: 50,  color: "#3b82f6" },
-  { period: 150, color: "#d4d4d8" },
+  { period: 9,   color: "#2e8b3a" },
+  { period: 21,  color: "#c9935f" },
+  { period: 50,  color: "#2f3fb0" },
+  { period: 150, color: "#a8856b" },
 ];
 const MACD_FAST = 6, MACD_SLOW = 20, MACD_SIGNAL = 9;
 const MACD_LINE_COLOR = "#22d3ee", MACD_SIGNAL_COLOR = "#f472b6";
@@ -4799,7 +4800,7 @@ const TradeChartModal = ({ trade, onClose }) => {
           const t = Math.floor(b.time / 1000); // Worker returns ms; Lightweight Charts wants unix seconds
           return {
             time: _isIntraday(timeframe) ? _utcToEtDisplaySec(t) : t,
-            open: b.open, high: b.high, low: b.low, close: b.close,
+            open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume || 0,
           };
         });
         // `data[].time` is display-shifted for intraday (see above), so
@@ -4809,22 +4810,24 @@ const TradeChartModal = ({ trade, onClose }) => {
         let oldestUtcSec = bars.length ? Math.floor(bars[0].time / 1000) : null;
 
         const chart = createChart(containerRef.current, {
-          layout: { background: { color: "#09090b" }, textColor: "#a1a1aa" },
-          grid: { vertLines: { color: "#27272a" }, horzLines: { color: "#27272a" } },
+          layout: { background: { color: MINI_CHART_THEME.bg }, textColor: MINI_CHART_THEME.text },
+          grid: { vertLines: { color: "transparent" }, horzLines: { color: "transparent" } },
           // Below 1D, tick labels are otherwise just the day number repeated
           // across every bar (unreadable for intraday) — timeVisible shows
           // HH:mm alongside the date on those resolutions.
-          timeScale: { borderColor: "#3f3f46", timeVisible: _isIntraday(timeframe), secondsVisible: false },
-          rightPriceScale: { borderColor: "#3f3f46" },
+          timeScale: { borderColor: MINI_CHART_THEME.axis, timeVisible: _isIntraday(timeframe), secondsVisible: false },
+          rightPriceScale: { borderColor: MINI_CHART_THEME.axis },
+          crosshair: { vertLine: { color: MINI_CHART_THEME.crosshair }, horzLine: { color: MINI_CHART_THEME.crosshair } },
           autoSize: true,
         });
         chartRef.current = chart;
 
-        const series = chart.addSeries(CandlestickSeries, {
-          upColor: "#22c55e", downColor: "#ef4444", borderVisible: false,
-          wickUpColor: "#22c55e", wickDownColor: "#ef4444",
-        });
-        series.setData(data);
+        // Same look as the Mini Charts: grey canvas, white / grey outlined candles, orange inside bars, RVOL instead of volume.
+        const series = chart.addSeries(CandlestickSeries, candleOptions());
+        series.setData(candleData(data));
+        const rvolSer = chart.addSeries(HistogramSeries, rvolSeriesOptions({ priceScaleId: "vol" }));
+        rvolSer.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+        rvolSer.createPriceLine({ price: 1, color: "#555555", lineWidth: 1, lineStyle: 2, axisLabelVisible: false });
 
         // EMA overlays (9/21/50/150) above 5m — at 1m/5m granularity they're
         // mostly noise. MACD(6,20,9) is the reverse: only meaningful at 5m,
@@ -4849,6 +4852,7 @@ const TradeChartModal = ({ trade, onClose }) => {
           return acc;
         }, []);
         const refreshIndicators = () => {
+          rvolSer.setData(rvolHistogram(data));
           const closes = data.map(b => b.close);
           emaLines.forEach(({ period, series: s }) => s.setData(buildLineData(_emaSeries(closes, period))));
           if (macd) {
@@ -4891,13 +4895,13 @@ const TradeChartModal = ({ trade, onClose }) => {
               const older = olderBars
                 .map(b => {
                   const t = Math.floor(b.time / 1000);
-                  return { time: _isIntraday(timeframe) ? _utcToEtDisplaySec(t) : t, open: b.open, high: b.high, low: b.low, close: b.close };
+                  return { time: _isIntraday(timeframe) ? _utcToEtDisplaySec(t) : t, open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume || 0 };
                 })
                 .filter(b => b.time < data[0].time);
               if (!older.length) { noMoreOlder = true; return; }
               oldestUtcSec = Math.floor(olderBars[0].time / 1000);
               data.unshift(...older);
-              series.setData(data);
+              series.setData(candleData(data));
               refreshIndicators();
             })
             .catch(() => { loadingOlder = false; if (!cancelled) setStatus(s => s === "loading-more" ? "ready" : s); });
@@ -5008,7 +5012,7 @@ const TradeChartModal = ({ trade, onClose }) => {
 
         setStatus("ready");
       })
-      .catch(() => { if (!cancelled) setStatus("error"); });
+      .catch((err) => { console.error("[TradeChartModal]", err); if (!cancelled) setStatus("error"); });
 
     return () => {
       cancelled = true;
@@ -14088,10 +14092,13 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
 // user's explicit ask (distinct from TradeChartModal's own teal/orange/blue
 // EMA_OVERLAY_CONFIG convention).
 const MINI_EMA_CONFIG = [
-  { period: 9,  color: "#22c55e" },
-  { period: 21, color: "#f97316" },
-  { period: 50, color: "#3b82f6" },
+  { period: 9,   color: "#2e8b3a" },
+  { period: 21,  color: "#c9935f" },
+  { period: 50,  color: "#2f3fb0" },
+  { period: 200, color: "#a8856b", sma: true },
 ];
+// Chart palette + inside-bar / RVOL helpers live in ./chartTheme (shared with the Trade Journal and trendline charts).
+
 
 // Mini-chart-grid-only interval list (separate from TradeChartModal's own
 // TIMEFRAME_OPTS so adding Monthly here can't affect that component). "M" is
@@ -14149,21 +14156,91 @@ const _evBarTime = (bars, bdates, date, tf) => {
   if (lo >= bdates.length) return (Date.parse(date) - Date.parse(bdates[bdates.length - 1])) / 864e5 <= 3 ? bars[bars.length - 1].time : null;
   return lo === 0 && bdates[0] > date ? null : bars[lo].time;
 };
-const EV_STYLE = { E: "#a1a1aa", D: "#60a5fa", S: "#f59e0b" };
-const _evColor = ev => ev.kind === "E" ? (ev.sp == null ? EV_STYLE.E : ev.sp > 0 ? "#22c55e" : ev.sp < 0 ? "#ef4444" : EV_STYLE.E) : EV_STYLE[ev.kind];
+const EV_STYLE = { E: "#6b7280", D: "#2962ff", S: "#d97706" };
+const _evColor = ev => ev.kind === "E" ? (ev.sp == null ? EV_STYLE.E : ev.sp > 0 ? "#089981" : ev.sp < 0 ? "#f23645" : EV_STYLE.E) : EV_STYLE[ev.kind];
 const _evTitle = ev => ev.kind === "E"
   ? `Earnings ${ev.date}${ev.tod === "b" ? " · before open" : ev.tod === "a" ? " · after close" : ""}${ev.sp != null ? ` · EPS surprise ${ev.sp > 0 ? "+" : ""}${ev.sp.toFixed(1)}%` : ""}`
   : ev.kind === "D" ? `Dividend ${ev.date} · $${ev.amount} (ex-date)` : `Split ${ev.date} · ${ev.ratio} (prices are split-adjusted)`;
 
-const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = null }) => {
+// ── Stats overlay on the enlarged chart (Market Cap / ADR% / ATR / LoD distance, ATR% multiple from the 50-MA, RVOL box) ──────────
+// All computed from the chart's own daily bars, except Market Cap (screener_stocks.json via ScreenerCtx).
+const ScreenerCtx = React.createContext(null);
+// Fraction of a normal session's volume that has traded so far (US market hours, ET) — a U-shaped curve approximated by t^0.7.
+// 1 when the last bar is not today's open session, so finished days use their full volume.
+const _pacingFraction = lastBarIso => {
+  try {
+    const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false, weekday: "short" })
+      .formatToParts(new Date()).map(x => [x.type, x.value]));
+    const iso = `${p.year}-${p.month}-${p.day}`;
+    const mins = (parseInt(p.hour, 10) % 24) * 60 + parseInt(p.minute, 10);
+    if (iso !== lastBarIso || p.weekday === "Sat" || p.weekday === "Sun" || mins < 570 || mins >= 960) return 1;
+    return Math.max(0.05, Math.pow((mins - 570) / 390, 0.7));
+  } catch { return 1; }
+};
+const _chartStats = (data, marketCapB) => {
+  const n = data.length;
+  if (n < 60) return null;
+  const last = data[n - 1], c = last.close;
+  // ATR(14), Wilder smoothing (same convention as TradingView's ATR)
+  const tr = data.map((b, i) => i === 0 ? b.high - b.low : Math.max(b.high - b.low, Math.abs(b.high - data[i - 1].close), Math.abs(b.low - data[i - 1].close)));
+  let atr = tr.slice(1, 15).reduce((a, b) => a + b, 0) / 14;
+  for (let i = 15; i < n; i++) atr = (atr * 13 + tr[i]) / 14;
+  const adr = (data.slice(-20).reduce((a, b) => a + b.high / b.low, 0) / 20 - 1) * 100;
+  const sma50 = data.slice(-50).reduce((a, b) => a + b.close, 0) / 50;
+  const prev = data.slice(-51, -1);
+  const avgVol = prev.reduce((a, b) => a + (b.volume || 0), 0) / prev.length;
+  const avgDvol = prev.reduce((a, b) => a + (b.volume || 0) * b.close, 0) / prev.length;
+  const frac = _pacingFraction(_isoDay(last.time));
+  const rvol = avgVol > 0 ? ((last.volume || 0) / frac) / avgVol : null;   // 1.0 = average
+  return {
+    marketCapB, adr, atr, lod: atr > 0 ? (c - last.low) / atr * 100 : null,
+    extension: atr > 0 && sma50 > 0 ? ((c / sma50) - 1) / (atr / c) : null,
+    rvol, volVsAvg: rvol != null ? (rvol - 1) * 100 : null, pacing: frac < 1, avgVol, avgDvol,
+  };
+};
+const _kFmt = v => v == null ? "—" : v >= 1e9 ? `${(v / 1e9).toFixed(2)}B` : v >= 1e6 ? `${(v / 1e6).toFixed(2)}M` : v >= 1e3 ? `${(v / 1e3).toFixed(1)}K` : v.toFixed(0);
+const ChartStatsOverlay = ({ st }) => {
+  const row = (k, v, cls = "") => <div className="flex justify-between gap-2"><span className="opacity-80">{k}</span><span className={`font-semibold tabular-nums ${cls}`}>{v}</span></div>;
+  const num = (v, d = 2) => v == null ? "—" : v.toFixed(d);
+  return (
+    <div className="hidden sm:block absolute top-0 bottom-0 left-0 pointer-events-none select-none text-[9px] leading-[12px]" style={{ right: 78, color: "#1f1f1f" }}>
+      {/* One column, bottom-right: info lines, the ATR multiple, then the RVOL box */}
+      <div className="absolute right-2 w-[132px] flex flex-col gap-1" style={{ bottom: 80 }}>
+      <div className="w-full">
+        {row("Market Cap", st.marketCapB != null ? `${st.marketCapB.toFixed(2)}B` : "—")}
+        {row("ADR%", `${num(st.adr)}%`)}
+        {row("ATR", num(st.atr))}
+        {row("LoD dist.", st.lod != null ? `${st.lod.toFixed(0)}%` : "—", st.lod != null && st.lod <= 40 ? "text-green-700" : "")}
+        {st.industry && <div className="opacity-80 text-right">{st.industry}</div>}
+      </div>
+      <div className="w-full">
+        {row("ATR% Mult. From MA", num(st.extension), st.extension != null && st.extension >= 7 ? "text-red-700" : st.extension != null && st.extension >= 4 ? "text-amber-700" : "")}
+      </div>
+      <div className="w-full rounded border border-zinc-600 text-zinc-100 px-1.5 py-0.5" style={{ background: "#27272af2" }}>
+        <div className="flex justify-between gap-2"><span className="text-zinc-300">{st.pacing ? "RVOL (Pace)" : "RVOL"}</span><span className="font-bold tabular-nums">{st.rvol != null ? `${(st.rvol * 100).toFixed(2)}%` : "—"}</span></div>
+        <div className="flex justify-between gap-2"><span className="text-zinc-300">{st.pacing ? "Vol vs Avg (Est)" : "Vol vs Avg"}</span><span className={`font-semibold tabular-nums ${st.volVsAvg == null ? "" : st.volVsAvg >= 0 ? "text-emerald-400" : "text-red-400"}`}>{st.volVsAvg != null ? `${st.volVsAvg > 0 ? "+" : ""}${st.volVsAvg.toFixed(2)}%` : "—"}</span></div>
+        <div className="flex justify-between gap-2"><span className="text-zinc-300">Avg Vol</span><span className="font-semibold tabular-nums">{_kFmt(st.avgVol)}</span></div>
+        <div className="flex justify-between gap-2"><span className="text-zinc-300">Avg $ Vol</span><span className="font-semibold tabular-nums">${_kFmt(st.avgDvol)}</span></div>
+      </div>
+      </div>
+    </div>
+  );
+};
+
+const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = null, showStats = false, selected = false, onToggle = null }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
   const [legend, setLegend] = useState(null); // { o,h,l,c,vol,chg,time } — crosshair bar, or latest bar when idle
-  // Lightweight Charts handles touch itself (and cancels the browser's synthetic click), so a tap on the canvas never reaches the wrapper's
-  // onClick on a phone. Expand is therefore wired through the chart's own click event (fires for taps too) plus an explicit ⤢ button.
+  // Double-click (mouse) or double-tap (touch) enlarges. Lightweight Charts swallows the browser's synthetic click on touch and turns a mouse
+  // double-click into its own "reset scale" gesture, so the wrapper listens for dblclick and for two quick touchends itself.
   const onExpandRef = useRef(onExpand);
   onExpandRef.current = onExpand;
+  const lastTapRef = useRef(0);
+  const screenerMap = React.useContext(ScreenerCtx);
+  const screenerRef = useRef(screenerMap);
+  screenerRef.current = screenerMap;
+  const [stats, setStats] = useState(null);   // enlarged-chart stats overlay (daily bars only)
   const evRef = useRef([]);          // raw events [{kind, date, ...}]
   const layoutRef = useRef(null);    // recomputes marker x-positions for the current visible range
   const [strip, setStrip] = useState([]);   // positioned markers [{..., x, row}]
@@ -14181,7 +14258,8 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
     setStatus("loading");
 
     const today = new Date().toISOString().slice(0, 10);
-    const fetchDays = _miniIsIntraday(timeframe) ? 10 : timeframe === "M" ? 2600 : timeframe === "W" ? 600 : 260;
+    // Daily fetches ~2 years so the 200-day average has history; the view below still opens on the last ~190 bars.
+    const fetchDays = _miniIsIntraday(timeframe) ? 10 : timeframe === "M" ? 2600 : timeframe === "W" ? 600 : 520;
     const from = _dateToUnixSec(_addDays(today, -fetchDays));
     const to = _dateToUnixSec(_addDays(today, 1));
 
@@ -14201,27 +14279,34 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         });
 
         const chart = createChart(containerRef.current, {
-          layout: { background: { color: "transparent" }, textColor: "#71717a", fontSize: 14 },
-          grid: { vertLines: { color: "#ffffff08" }, horzLines: { color: "#ffffff08" } },
-          timeScale: { borderColor: "#3f3f46", timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20 },
-          rightPriceScale: { borderColor: "#3f3f46" },
-          crosshair: { mode: 0 },
+          layout: { background: { color: "transparent" }, textColor: MINI_CHART_THEME.text, fontSize: 14 },
+          grid: { vertLines: { color: "transparent" }, horzLines: { color: "transparent" } },
+          timeScale: { borderColor: MINI_CHART_THEME.axis, timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20 },
+          rightPriceScale: { borderColor: MINI_CHART_THEME.axis },
+          crosshair: { mode: 0, vertLine: { color: "#444444" }, horzLine: { color: "#444444" } },
           // In a scrollable grid (cards that expand on tap) a vertical swipe on a chart must scroll the page, not drag the chart.
           ...(onExpandRef.current ? { handleScroll: { vertTouchDrag: false } } : {}),
           autoSize: true,
         });
         chartRef.current = chart;
-        chart.subscribeClick(() => onExpandRef.current?.());
 
-        const series = chart.addSeries(CandlestickSeries, {
-          upColor: "#22c55e", downColor: "#ef4444", borderVisible: false,
-          wickUpColor: "#22c55e", wickDownColor: "#ef4444",
+        const T = MINI_CHART_THEME;
+        const series = chart.addSeries(CandlestickSeries, candleOptions());
+        // Inside bars (range within the previous bar's range) are painted orange.
+        series.setData(candleData(data));
+
+        // Relative volume (bar volume ÷ 50-bar average) instead of raw volume; dashed line at 1× = average.
+        const rvol = _rvolSeries(data);
+        const volSeries = chart.addSeries(HistogramSeries, {
+          priceFormat: { type: "custom", minMove: 0.01, formatter: v => `${v.toFixed(2)}x` },
+          priceScaleId: "vol", priceLineVisible: false, lastValueVisible: false,
         });
-        series.setData(data);
-
-        const volSeries = chart.addSeries(HistogramSeries, { priceFormat: { type: "volume" }, priceScaleId: "vol", priceLineVisible: false, lastValueVisible: false });
-        volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
-        volSeries.setData(data.map(b => ({ time: b.time, value: b.volume, color: b.close >= b.open ? "#22c55e40" : "#ef444440" })));
+        volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+        volSeries.setData(data.reduce((acc, b, i) => {
+          if (rvol[i] != null) acc.push({ time: b.time, value: rvol[i], color: b.close >= b.open ? T.rvolUp : T.rvolDown });
+          return acc;
+        }, []));
+        volSeries.createPriceLine({ price: 1, color: "#555555", lineWidth: 1, lineStyle: 2, axisLabelVisible: false });
 
         const closes = data.map(b => b.close);
         const buildLineData = values => data.reduce((acc, b, i) => {
@@ -14232,7 +14317,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           const s = chart.addSeries(LineSeries, {
             color: cfg.color, lineWidth: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false,
           });
-          s.setData(buildLineData(_emaSeries(closes, cfg.period)));
+          s.setData(buildLineData(cfg.sma ? _smaSeries(closes, cfg.period) : _emaSeries(closes, cfg.period)));
         });
 
         // OHLC + %chg legend: shows the hovered bar while the crosshair is
@@ -14244,7 +14329,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           const b = data[i];
           const prevClose = i > 0 ? data[i - 1].close : null;
           return {
-            o: b.open, h: b.high, l: b.low, c: b.close, vol: b.volume, time: b.time,
+            o: b.open, h: b.high, l: b.low, c: b.close, vol: b.volume, rvol: rvol[i], time: b.time,
             chg: prevClose ? ((b.close - prevClose) / prevClose) * 100 : null,
           };
         };
@@ -14255,7 +14340,11 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           if (i != null) setLegend(legendFor(i));
         });
 
-        chart.timeScale().fitContent();
+        const scRow = screenerRef.current?.[ticker];
+        const cs = showStats && timeframe === "D" ? _chartStats(data, scRow?.market_cap_b ?? null) : null;
+        setStats(cs ? { ...cs, industry: scRow?.industry || null } : null);
+        if (timeframe === "D" && data.length > 200) chart.timeScale().setVisibleLogicalRange({ from: data.length - 190, to: data.length + 8 });
+        else chart.timeScale().fitContent();
 
         // Event marker layout (earnings / dividends / splits): x from the time scale, stacked into rows when they would overlap.
         const bdates = _miniIsIntraday(timeframe) ? [] : data.map(b => _isoDay(b.time));
@@ -14283,6 +14372,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
       cancelled = true;
       layoutRef.current = null;
       setStrip([]);
+      setStats(null);
       if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
       setLegend(null);
     };
@@ -14310,9 +14400,9 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
       <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden whitespace-nowrap">
-        {onExpand && (
-          <button onClick={e => { e.stopPropagation(); onExpand(); }} title="Enlarge chart" aria-label="Enlarge chart"
-            className="self-center flex-shrink-0 w-7 h-7 flex items-center justify-center rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 text-[15px] leading-none">⤢</button>
+        {onToggle && (
+          <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} title={selected ? `Deselect ${ticker}` : `Select ${ticker} (for Copy / Download)`} aria-label={`Select ${ticker}`}
+            className="self-center flex-shrink-0 w-5 h-5 cursor-pointer accent-blue-500" />
         )}
         {category && <span className="text-[15px] text-zinc-500 font-sans font-normal whitespace-nowrap flex-shrink-0">{category}</span>}
         {legend && status === "ready" ? (
@@ -14328,26 +14418,34 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
                 {legend.chg >= 0 ? "+" : ""}{legend.chg.toFixed(2)}%
               </span>
             )}
+            {legend.rvol != null && (
+              <span title="Relative volume: this bar's volume ÷ the previous 50-bar average" className={legend.rvol >= 1.5 ? "text-amber-300" : "text-zinc-400"}>
+                <span className="text-zinc-500"> RVOL </span>{legend.rvol.toFixed(2)}x
+              </span>
+            )}
           </div>
         ) : (
           <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
             className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
         )}
       </div>
-      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }}>
+      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom, background: MINI_CHART_THEME.bg }}
+        onDoubleClick={onExpand ? () => onExpand() : undefined}
+        onTouchEnd={onExpand ? () => { const now = Date.now(); if (now - lastTapRef.current < 350) { lastTapRef.current = 0; onExpand(); } else lastTapRef.current = now; } : undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
+        {status === "ready" && stats && <ChartStatsOverlay st={stats} />}
         {status === "ready" && strip.length > 0 && (
           <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 30, height: 0 }}>
             {strip.map((m, i) => (
               <span key={`${m.kind}${m.date}${i}`} title={_evTitle(m)}
                 className="absolute pointer-events-auto flex items-center justify-center font-bold rounded"
-                style={{ left: m.x - 8, bottom: m.row * 19, width: 16, height: 16, fontSize: 10, lineHeight: 1, color: _evColor(m), background: "#18181bd9", border: `1.5px solid ${_evColor(m)}` }}>
+                style={{ left: m.x - 8, bottom: m.row * 19, width: 16, height: 16, fontSize: 10, lineHeight: 1, color: _evColor(m), background: "#ffffffee", border: `1.5px solid ${_evColor(m)}` }}>
                 {m.kind}
               </span>
             ))}
           </div>
         )}
-        {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Loading…</div>}
+        {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-700 text-[14px]">Loading…</div>}
         {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">No data for this range</div>}
         {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Failed to load</div>}
         {status === "no-proxy" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px] px-3 text-center">Bar-data proxy not configured</div>}
@@ -14362,13 +14460,30 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
 const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
 // Copy the list as comma-separated tickers (pastes straight into a TradingView watchlist). Lives in the Mini Charts grid so every list with a
 // Mini Charts button gets it.
-const CopyTickersButton = ({ tickers }) => {
+// `selected` = ticked tickers: when any are ticked only those are copied / downloaded, otherwise the whole list.
+const CopyTickersButton = ({ tickers, selected = [], fileName = "tickers" }) => {
   const [done, setDone] = React.useState(false);
-  const txt = [...new Set(tickers)].join(",");
+  const picked = selected.length > 0;
+  const list = [...new Set(picked ? selected : tickers)];
+  const txt = list.join(",");
+  const download = () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([txt], { type: "text/plain" }));
+    a.download = `${fileName.replace(/[^A-Za-z0-9_-]+/g, "_")}.txt`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+  const btn = "text-[12px] px-2 py-1 rounded border transition-colors";
   return (
-    <button onClick={() => { (navigator.clipboard?.writeText(txt) || Promise.reject()).then(() => { setDone(true); setTimeout(() => setDone(false), 1500); }).catch(() => {}); }}
-      title="Copy tickers (comma-separated, TradingView-importable)"
-      className="text-[12px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{done ? "Copied ✓" : `Copy ${new Set(tickers).size} tickers`}</button>
+    <>
+      <button onClick={() => { (navigator.clipboard?.writeText(txt) || Promise.reject()).then(() => { setDone(true); setTimeout(() => setDone(false), 1500); }).catch(() => {}); }}
+        title="Copy tickers, comma-separated — paste into TradingView's watchlist (Import list) or the symbol search"
+        className={`${btn} ${picked ? "border-blue-500/50 bg-blue-500/15 text-blue-300 hover:bg-blue-500/25" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>
+        {done ? "Copied ✓" : picked ? `Copy ${list.length} selected` : `Copy all ${list.length}`}
+      </button>
+      <button onClick={download} title="Download as a .txt file (TradingView → Watchlist → Import list)"
+        className={`${btn} border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800`}>⬇ .txt</button>
+    </>
   );
 };
 
@@ -14406,6 +14521,15 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
 
   const enlargedItem = enlargedIdx != null ? items[enlargedIdx] : null;
 
+  // Tick boxes: selection is by ticker and survives paging, timeframe changes and the enlarged view.
+  const [sel, setSel] = React.useState(() => new Set());
+  const allTickers = React.useMemo(() => [...new Set(items.map(i => i.ticker))], [items]);
+  const toggleSel = React.useCallback(t => setSel(prev => { const n = new Set(prev); if (n.has(t)) n.delete(t); else n.add(t); return n; }), []);
+  const selList = allTickers.filter(t => sel.has(t));                       // keeps list order
+  const pageTickers = pageItems.map(i => i.ticker);
+  const pageAllOn = pageTickers.length > 0 && pageTickers.every(t => sel.has(t));
+  const allOn = allTickers.length > 0 && selList.length === allTickers.length;
+
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8"
       style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
@@ -14425,7 +14549,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
               {MINI_EMA_CONFIG.map(cfg => (
                 <span key={cfg.period} className="flex items-center gap-1">
                   <span className="w-2 h-0.5 inline-block" style={{ backgroundColor: cfg.color }}/>
-                  EMA{cfg.period}
+                  {cfg.sma ? "SMA" : "EMA"}{cfg.period}
                 </span>
               ))}
             </div>
@@ -14440,8 +14564,25 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                   className="px-2 py-1 rounded border border-zinc-700 hover:bg-zinc-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">›</button>
               </div>
             )}
-            <CopyTickersButton tickers={items.map(i => i.ticker)} />
             <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 flex-wrap px-4 py-2 border-b border-zinc-800 flex-shrink-0 text-[12px]">
+          <label className="flex items-center gap-1.5 text-zinc-400 cursor-pointer select-none">
+            <input type="checkbox" checked={allOn} ref={el => { if (el) el.indeterminate = selList.length > 0 && !allOn; }}
+              onChange={() => setSel(allOn ? new Set() : new Set(allTickers))} className="w-4 h-4 accent-blue-500 cursor-pointer" />
+            Select all ({allTickers.length})
+          </label>
+          {pageCount > 1 && (
+            <button onClick={() => setSel(prev => { const n = new Set(prev); pageTickers.forEach(t => pageAllOn ? n.delete(t) : n.add(t)); return n; })}
+              className="px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{pageAllOn ? "Unselect page" : "Select page"}</button>
+          )}
+          {selList.length > 0 && (
+            <button onClick={() => setSel(new Set())} className="px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Clear</button>
+          )}
+          <span className="text-zinc-500">{selList.length > 0 ? `${selList.length} selected` : "tick charts to pick tickers"}<span className="text-zinc-600"> · double-click a chart to enlarge</span></span>
+          <div className="ml-auto flex items-center gap-2">
+            <CopyTickersButton tickers={allTickers} selected={selList} fileName={title || "tickers"} />
           </div>
         </div>
         <div className="overflow-y-auto p-3">
@@ -14450,7 +14591,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
               const globalIdx = page * MINI_CHART_PAGE_SIZE + i;
               return (
                 <MiniChartCard key={`${item.ticker}::${item.category || ""}::${i}`} ticker={item.ticker} category={item.category} timeframe={timeframe}
-                  onExpand={() => setEnlargedIdx(globalIdx)}/>
+                  onExpand={() => setEnlargedIdx(globalIdx)} selected={sel.has(item.ticker)} onToggle={toggleSel}/>
               );
             })}
           </div>
@@ -14472,7 +14613,8 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                 className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">›</button>
             )}
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
-              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height="min(840px, 75vh)"/>
+              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height="min(840px, 75vh)" showStats
+              selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}/>
             <div className="text-center text-[15px] text-zinc-500 mt-2">
               {enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid
             </div>
@@ -18359,6 +18501,7 @@ const appScreenerMap = useMemo(() => {
   return (
     <LangCtx.Provider value={lang}>
     <StockPanelCtx.Provider value={setPanelTicker}>
+    <ScreenerCtx.Provider value={appScreenerMap}>
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <GlobalAlertBanner />
       <div id="app-navbar" className="border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
@@ -18643,6 +18786,7 @@ const appScreenerMap = useMemo(() => {
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
       {panelTicker && <StockPanel ticker={panelTicker} onClose={() => setPanelTicker(null)} screenerMap={appScreenerMap} themeData={data} categoryThemeMap={categoryThemeMap} />}
     </div>
+    </ScreenerCtx.Provider>
     </StockPanelCtx.Provider>
     </LangCtx.Provider>
   );

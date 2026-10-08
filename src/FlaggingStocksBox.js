@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom';
 import { createChart, ColorType, CandlestickSeries, LineSeries, HistogramSeries } from 'lightweight-charts';
 import { X, BarChart2 } from 'lucide-react';
+import { MINI_CHART_THEME, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from './chartTheme';
 
 // ─── Triangle / Pennant Detection ─────────────────────────────────────────────
 
@@ -311,23 +312,20 @@ function TriangleChartModal({ stock, onClose }) {
     timesRef.current = chartBars.map(b => b.t);
 
     const chart = createChart(containerRef.current, {
-      layout: { background: { type: ColorType.Solid, color: '#18181b' }, textColor: '#a1a1aa' },
-      grid: { vertLines: { color: '#27272a' }, horzLines: { color: '#27272a' } },
+      layout: { background: { type: ColorType.Solid, color: MINI_CHART_THEME.bg }, textColor: MINI_CHART_THEME.text },
+      grid: { vertLines: { color: 'transparent' }, horzLines: { color: 'transparent' } },
       width: containerRef.current.clientWidth,
       height: 440,
-      rightPriceScale: { borderColor: '#3f3f46' },
-      timeScale: { borderColor: '#3f3f46', timeVisible: true, secondsVisible: false },
+      rightPriceScale: { borderColor: MINI_CHART_THEME.axis },
+      timeScale: { borderColor: MINI_CHART_THEME.axis, timeVisible: true, secondsVisible: false },
+      crosshair: { vertLine: { color: MINI_CHART_THEME.crosshair }, horzLine: { color: MINI_CHART_THEME.crosshair } },
     });
     chartRef.current = chart;
 
-    const cSeries = chart.addSeries(CandlestickSeries, {
-      upColor: '#22c55e', downColor: '#ef4444',
-      borderUpColor: '#22c55e', borderDownColor: '#ef4444',
-      wickUpColor: '#22c55e', wickDownColor: '#ef4444',
-    });
-    cSeries.setData(chartBars.map(b => ({
-      time: b.t, open: b.o, high: b.h, low: b.l, close: b.c,
-    })));
+    // Same look as the Mini Charts: grey canvas, white / grey outlined candles, orange inside bars, RVOL instead of volume.
+    const cSeries = chart.addSeries(CandlestickSeries, candleOptions());
+    const ohlcv = chartBars.map(b => ({ time: b.t, open: b.o, high: b.h, low: b.l, close: b.c, volume: b.v ?? 0 }));
+    cSeries.setData(candleData(ohlcv));
 
     const lastBarTime = timesRef.current[chartBars.length - 1] ?? BASE_TIME + (chartBars.length - 1) * 86400;
 
@@ -364,18 +362,10 @@ function TriangleChartModal({ stock, onClose }) {
     // Volume histogram (pane 1) — pane separator locked
     const hasVolume = chartBars.some(b => (b.v ?? 0) > 0);
     if (hasVolume) {
-      const volSer = chart.addSeries(HistogramSeries, {
-        priceFormat: { type: 'volume' },
-        priceScaleId: 'vol',
-        lastValueVisible: false,
-        priceLineVisible: false,
-      }, 1);
+      const volSer = chart.addSeries(HistogramSeries, rvolSeriesOptions({ priceScaleId: 'vol' }), 1);
       volSer.priceScale().applyOptions({ scaleMargins: { top: 0.1, bottom: 0 } });
-      volSer.setData(chartBars.map(b => ({
-        time: b.t,
-        value: b.v ?? 0,
-        color: (b.c >= b.o) ? 'rgba(34,197,94,0.45)' : 'rgba(239,68,68,0.45)',
-      })));
+      volSer.setData(rvolHistogram(ohlcv));    // relative volume (÷ previous-50-bar average), white = up bar, grey = down bar
+      volSer.createPriceLine({ price: 1, color: '#555555', lineWidth: 1, lineStyle: 2, axisLabelVisible: false });
       const panes = chart.panes();
       if (panes.length >= 2) {
         panes[0].setHeight(350);
