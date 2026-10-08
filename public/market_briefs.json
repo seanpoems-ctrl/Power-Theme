@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-08 13:49 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Global Weakness",
+    "spy_price": 771.71,
+    "spy_change_pct": -0.71,
+    "vix": 16.04,
+    "hy_oas": 3.09,
+    "yield_curve": 0.51,
+    "credit_status": "Complacent",
+    "s5fi": 32.0,
+    "mmth": 50.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "WOLF",
+          "company": "Wolfspeed, Inc.",
+          "reason": "A conditional loan commitment from the U.S. Department of War provides significant long-term contract visibility and capital, driving strong investor interest."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Positive late-stage clinical trial results for its novel oncology drug exceeded expectations, significantly boosting future revenue projections and market confidence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "The stock experienced a technical rebound today after hitting short-term oversold levels, lacking new fundamental news to sustain broader momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-08 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla's recent price action appears largely driven by technical momentum and retail sentiment, rather than fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-17 19:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Rally",
-    "spy_price": 762.6,
-    "spy_change_pct": 1.13,
-    "vix": 15.44,
-    "hy_oas": 2.7,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 36.2,
-    "mmth": 54.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CLSK",
-          "company": "CleanSpark Inc.",
-          "reason": "CleanSpark Inc. (CLSK) surged on news of a significant AI data center lease with Meta and a substantial $2.23 billion financing deal, solidifying its position in the AI infrastructure boom."
-        },
-        {
-          "ticker": "BTDR",
-          "company": "Bitdeer Technologies Group",
-          "reason": "Bitdeer Technologies Group (BTDR) was a top gapper, securing a major $4.7 billion AI data center lease that underscores the escalating demand for computational infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation (NVDA) showed continued strong performance within the AI infrastructure sector, but without any fresh fundamental catalysts today beyond the broader sector momentum."
         }
       ]
     }
