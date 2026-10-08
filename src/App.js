@@ -14116,11 +14116,57 @@ const _miniIsIntraday = tf => tf !== "D" && tf !== "W" && tf !== "M";
 // own comment). This gets real green/orange/blue EMAs at the cost of losing
 // the iframe's free interval-switcher chrome — replaced by the
 // MINI_TIMEFRAME_OPTS row in MiniChartGridModal's header, applied to every card.
+// ── Event markers under the chart (earnings / dividend / split), TradingView-style ────────────────────────────────────────────
+// Earnings come from public/earnings_history.json (earnings_history_builder.py — yfinance; colour = EPS beat / miss); dividends and splits are
+// fetched live from Finance Query (CORS-open, Yahoo-backed) and cached per ticker. Daily/weekly/monthly charts only.
+let _earnHistP = null;
+const loadEarningsHistory = () => (_earnHistP ||= fetch(`${process.env.PUBLIC_URL}/earnings_history.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null));
+const _fqEvents = new Map();
+const _isoDay = ts => new Date(ts * 1000).toISOString().slice(0, 10);
+const loadFqEvents = tk => {
+  if (!_fqEvents.has(tk)) {
+    const sym = encodeURIComponent(tk.replace(".", "-"));
+    const get = path => fetch(`https://finance-query.com/v2/${path}/${sym}?range=5y`).then(r => r.ok ? r.json() : null).catch(() => null);
+    _fqEvents.set(tk, Promise.all([get("dividends"), get("splits")]).then(([d, sp]) => ({
+      div: (d?.dividends || []).map(x => ({ date: _isoDay(x.timestamp), amount: x.amount })),
+      splits: (Array.isArray(sp) ? sp : sp?.splits || []).map(x => ({ date: _isoDay(x.timestamp), ratio: x.ratio || `${x.numerator}:${x.denominator}` })),
+    })));
+  }
+  return _fqEvents.get(tk);
+};
+// Bar to attach an event to: daily → first bar on/after the date; weekly/monthly → the bar that contains it. null when outside the chart.
+const _evBarTime = (bars, bdates, date, tf) => {
+  if (!bars.length) return null;
+  if (tf === "W" || tf === "M") {
+    let k = -1;
+    for (let i = 0; i < bdates.length; i++) { if (bdates[i] <= date) k = i; else break; }
+    if (k < 0) return null;
+    const slack = tf === "W" ? 7 : 31;
+    return (Date.parse(date) - Date.parse(bdates[k])) / 864e5 <= slack ? bars[k].time : null;
+  }
+  let lo = 0, hi = bdates.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (bdates[m] < date) lo = m + 1; else hi = m; }
+  if (lo >= bdates.length) return (Date.parse(date) - Date.parse(bdates[bdates.length - 1])) / 864e5 <= 3 ? bars[bars.length - 1].time : null;
+  return lo === 0 && bdates[0] > date ? null : bars[lo].time;
+};
+const EV_STYLE = { E: "#a1a1aa", D: "#60a5fa", S: "#f59e0b" };
+const _evColor = ev => ev.kind === "E" ? (ev.sp == null ? EV_STYLE.E : ev.sp > 0 ? "#22c55e" : ev.sp < 0 ? "#ef4444" : EV_STYLE.E) : EV_STYLE[ev.kind];
+const _evTitle = ev => ev.kind === "E"
+  ? `Earnings ${ev.date}${ev.tod === "b" ? " · before open" : ev.tod === "a" ? " · after close" : ""}${ev.sp != null ? ` · EPS surprise ${ev.sp > 0 ? "+" : ""}${ev.sp.toFixed(1)}%` : ""}`
+  : ev.kind === "D" ? `Dividend ${ev.date} · $${ev.amount} (ex-date)` : `Split ${ev.date} · ${ev.ratio} (prices are split-adjusted)`;
+
 const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = null }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
   const [legend, setLegend] = useState(null); // { o,h,l,c,vol,chg,time } — crosshair bar, or latest bar when idle
+  // Lightweight Charts handles touch itself (and cancels the browser's synthetic click), so a tap on the canvas never reaches the wrapper's
+  // onClick on a phone. Expand is therefore wired through the chart's own click event (fires for taps too) plus an explicit ⤢ button.
+  const onExpandRef = useRef(onExpand);
+  onExpandRef.current = onExpand;
+  const evRef = useRef([]);          // raw events [{kind, date, ...}]
+  const layoutRef = useRef(null);    // recomputes marker x-positions for the current visible range
+  const [strip, setStrip] = useState([]);   // positioned markers [{..., x, row}]
 
   // body { zoom: 1.15 } (index.css) causes Lightweight Charts to read mouse
   // coordinates in post-zoom visual px while its canvas coordinate space is
@@ -14160,9 +14206,12 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           timeScale: { borderColor: "#3f3f46", timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20 },
           rightPriceScale: { borderColor: "#3f3f46" },
           crosshair: { mode: 0 },
+          // In a scrollable grid (cards that expand on tap) a vertical swipe on a chart must scroll the page, not drag the chart.
+          ...(onExpandRef.current ? { handleScroll: { vertTouchDrag: false } } : {}),
           autoSize: true,
         });
         chartRef.current = chart;
+        chart.subscribeClick(() => onExpandRef.current?.());
 
         const series = chart.addSeries(CandlestickSeries, {
           upColor: "#22c55e", downColor: "#ef4444", borderVisible: false,
@@ -14207,22 +14256,64 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         });
 
         chart.timeScale().fitContent();
+
+        // Event marker layout (earnings / dividends / splits): x from the time scale, stacked into rows when they would overlap.
+        const bdates = _miniIsIntraday(timeframe) ? [] : data.map(b => _isoDay(b.time));
+        layoutRef.current = () => {
+          const ch = chartRef.current, evs = evRef.current;
+          if (!ch || !evs.length || !bdates.length) { setStrip(p => p.length ? [] : p); return; }
+          const ts = ch.timeScale(), w = ts.width?.() ?? Infinity;
+          const pts = [];
+          for (const ev of evs) {
+            const bt = _evBarTime(data, bdates, ev.date, timeframe);
+            const x = bt == null ? null : ts.timeToCoordinate(bt);
+            if (x != null && x >= 6 && x <= w - 6) pts.push({ ...ev, x });
+          }
+          pts.sort((a, b) => a.x - b.x);
+          const last = [-99, -99, -99];
+          for (const p of pts) { let r = 0; while (r < 2 && p.x - last[r] < 18) r++; p.row = r; last[r] = p.x; }
+          setStrip(pts);
+        };
+        chart.timeScale().subscribeVisibleLogicalRangeChange(() => layoutRef.current?.());
         setStatus("ready");
       })
       .catch(() => { if (!cancelled) setStatus("error"); });
 
     return () => {
       cancelled = true;
+      layoutRef.current = null;
+      setStrip([]);
       if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
       setLegend(null);
     };
   }, [ticker, timeframe]);
+
+  // Load the events once the chart is drawn, then position them.
+  useEffect(() => {
+    evRef.current = [];
+    if (status !== "ready" || _miniIsIntraday(timeframe)) return;
+    let dead = false;
+    Promise.all([loadEarningsHistory(), loadFqEvents(ticker)]).then(([eh, fq]) => {
+      if (dead) return;
+      const evs = [];
+      for (const [date, tod, sp] of eh?.tickers?.[ticker]?.e || []) evs.push({ kind: "E", date, tod, sp });
+      for (const d of fq?.div || []) evs.push({ kind: "D", ...d });
+      for (const x of fq?.splits || []) evs.push({ kind: "S", ...x });
+      evRef.current = evs;
+      layoutRef.current?.();
+    });
+    return () => { dead = true; };
+  }, [ticker, timeframe, status]);
 
   const fmtPx = v => v == null ? "—" : v.toFixed(v >= 1000 ? 0 : 2);
 
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
       <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden whitespace-nowrap">
+        {onExpand && (
+          <button onClick={e => { e.stopPropagation(); onExpand(); }} title="Enlarge chart" aria-label="Enlarge chart"
+            className="self-center flex-shrink-0 w-7 h-7 flex items-center justify-center rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 text-[15px] leading-none">⤢</button>
+        )}
         {category && <span className="text-[15px] text-zinc-500 font-sans font-normal whitespace-nowrap flex-shrink-0">{category}</span>}
         {legend && status === "ready" ? (
           <div className="flex items-baseline gap-1 text-[14px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
@@ -14243,8 +14334,19 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
             className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
         )}
       </div>
-      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }} onClick={onExpand || undefined}>
+      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
+        {status === "ready" && strip.length > 0 && (
+          <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 30, height: 0 }}>
+            {strip.map((m, i) => (
+              <span key={`${m.kind}${m.date}${i}`} title={_evTitle(m)}
+                className="absolute pointer-events-auto flex items-center justify-center font-bold rounded"
+                style={{ left: m.x - 8, bottom: m.row * 19, width: 16, height: 16, fontSize: 10, lineHeight: 1, color: _evColor(m), background: "#18181bd9", border: `1.5px solid ${_evColor(m)}` }}>
+                {m.kind}
+              </span>
+            ))}
+          </div>
+        )}
         {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Loading…</div>}
         {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">No data for this range</div>}
         {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Failed to load</div>}
@@ -18420,8 +18522,8 @@ const appScreenerMap = useMemo(() => {
                   </div>
                   <div className="flex items-center gap-2">
                     <SearchBar data={data} search={search} setSearch={setSearch} categoryThemeMap={categoryThemeMap} categoryEtfMap={categoryEtfMap}/>
-                    <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
-                      {lang === 'zh' ? '中' : 'EN'}
+                    <button onClick={toggleLang} title={lang === 'zh' ? "Switch to English" : "切換至中文 (Switch to Chinese)"} className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
+                      {lang === 'zh' ? 'EN' : '中'}
                     </button>
                     <button onClick={() => setShowCalcModal(true)} className="px-2.5 py-1 text-[12px] font-medium rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-emerald-300 hover:border-emerald-700/50 transition-colors whitespace-nowrap">
                       ⊞ Calc
