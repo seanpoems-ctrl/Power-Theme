@@ -53,15 +53,21 @@ jobs:
           # jobs 1-3h late, so a tight window gets missed every day.
           in_window = 1020 <= et_minutes <= 1439  # 5:00 PM – 11:59 PM ET
 
-          # Only scan once per trading day. scan_time in focus_list.json is a UTC
-          # ISO string; a run started the same ET evening but after UTC midnight
-          # would carry the next calendar date, so accept either.
+          # Only scan once per trading day. Compare the ET trading day the scanner
+          # recorded (scan_day) with today's ET date. scan_time is a UTC string, so
+          # a late scan that crossed UTC midnight carries the NEXT calendar date and
+          # used to make the following evening's scan look already done.
           already_scanned = False
           try:
               with open("public/focus_list.json") as f:
-                  prev_date = (json.load(f).get("scan_time", "") or "")[:10]
-              utc_date = datetime.now(ZoneInfo("UTC")).strftime("%Y-%m-%d")
-              already_scanned = prev_date in (et_date, utc_date)
+                  prev = json.load(f)
+              prev_day = prev.get("scan_day")
+              if prev_day:
+                  already_scanned = prev_day == et_date
+              else:  # older file without scan_day: fall back to the UTC-date check
+                  prev_date = (prev.get("scan_time", "") or "")[:10]
+                  utc_date = datetime.now(ZoneInfo("UTC")).strftime("%Y-%m-%d")
+                  already_scanned = prev_date in (et_date, utc_date)
           except Exception:
               pass
 
