@@ -3834,9 +3834,9 @@ const CHECKLIST_SECTIONS = [
           "Themes → Theme Tracker → Theme Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
           "⚡ flip badge on a category = institutional money just accelerated into it vs its sector anchor — outranks a plain high score",
           "Click the top 2–3 rows to expand their top movers (same panel) — note the Leader ticker, that's your theme's flagship",
-          "Themes → Leadership: a theme in the top 10 on BOTH 1M and 3M with Confirmed n/n is durable leadership; top 10 on 1M only = early or a blip. Click the row for its holdings (Extension per stock)",
-          "Themes → Leadership → ETF NEL: confirmed ETFs with Extension under 4× — the ETF to watch or trade for that theme, not the one that already ran",
-          "Before the open: ETF Performance (bottom of Themes → Leadership) → Premarket — what is actually moving before 9:30",
+          "Themes → Theme Leaders: a theme in the top 10 on BOTH 1M and 3M with Confirmed n/n is durable leadership; top 10 on 1M only = early or a blip. Click the row for its holdings (Extension per stock)",
+          "Themes → Theme Leaders → ETF NEL: confirmed ETFs with Extension under 4× — the ETF to watch or trade for that theme, not the one that already ran",
+          "Before the open: ETF Performance (bottom of Themes → Theme Leaders) → Premarket — what is actually moving before 9:30",
           "RS Flip Scanner below it: any new flip today = tomorrow's rotation candidate, screen it even if its category score is still low",
           "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — does the raw % agree with the RS Score leader, or is it a one-day blip? Agreement across both = higher conviction",
           "Leaderboard tab (Thematic Scanner): confirm the same theme shows up in the stock-level RS top 5 with a positive ROT (rotation rank) — this is your final theme pick",
@@ -3847,7 +3847,7 @@ const CHECKLIST_SECTIONS = [
         section: "Step 3 — Stock Selection in Leading Themes (10 min)",
         items: [
           "Open the #1–#3 RS themes plus every ⚡ accelerating theme from Step 2",
-          "Cross-check Stocks → Leadership: names that sit in T-NEL (tight AND non-extended leaders) for the window matching your theme go first; Stocks → Universe (ADR > 5%, Avg $ Vol > $500M) is the liquid pool, incl. stocks whose leveraged ETF (MUU, TSLL…) qualifies",
+          "Cross-check Stocks → Liquid Leaders: names that sit in T-NEL (tight AND non-extended leaders) for the window matching your theme go first; Stocks → Universe (ADR > 5%, Avg $ Vol > $500M) is the liquid pool, incl. stocks whose leveraged ETF (MUU, TSLL…) qualifies",
           "Extension column (Scanner, Focus List, Universe, Leadership): < 4× actionable · 4–7× stretched, wait for a pullback · 7×+ overextended, never chase",
           "Filters are ON at your criteria (ADR ≥5%, $Vol ≥$300M, RS ≥85) — never loosen them to 'find more'",
           "Tradeable names float to the top of every table by design — the first rows ARE your universe",
@@ -4036,8 +4036,8 @@ const CHECKLIST_SECTIONS = [
         section: "Step 3 — Scanner Refresh: Theme Leaderboard + Leaderboard RS/ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
         items: [
           "Reload after the nightly scrape lands — fresh theme rankings, RS scores, and rotation deltas",
-          "Themes → Leadership: did the 1M/3M top 10 change? A new theme entering the top 10 with Confirmed n/n = rotation confirming. Sectors → Sector Leadership: did the top-3 sectors change, and does the Leadership Over Time chart show a flip?",
-          "Stocks → Leadership (LL → NEL → T-NEL): new T-NEL names today go on the list for tomorrow — Copy the tickers into TradingView",
+          "Themes → Theme Leaders: did the 1M/3M top 10 change? A new theme entering the top 10 with Confirmed n/n = rotation confirming. Sectors → Sector Leadership: did the top-3 sectors change, and does the Leadership Over Time chart show a flip?",
+          "Stocks → Liquid Leaders (LL → NEL → T-NEL): new T-NEL names today go on the list for tomorrow — Copy the tickers into TradingView",
           "Theme Leaderboard: did the #1 row by Score change? New theme entering with a ⚡ flip = rotation confirming — build tomorrow's list from it",
           "Track ⚡ flips day over day: accelerating 2–3 sessions in a row = real rotation; one-day blips fade",
           "Leaderboard tab: did the RS top 5 change, and does ROT agree with the Theme Leaderboard move?",
@@ -4122,8 +4122,8 @@ const CHECKLIST_SECTIONS = [
       {
         section: "Step 3 — Leadership & Breadth Review (15 min)",
         items: [
-          "Stocks → Leadership: which industries hold the most leaders on 1M / 3M / 6M / 1Y (snapshot cards)? An industry that appears on all four is the market's real leadership",
-          "Themes → Leadership → ETF Performance: switch 1 Week → 1 Month → 3 Months — is leadership broadening (many themes green) or narrowing (a handful of themes carrying it)?",
+          "Stocks → Liquid Leaders: which industries hold the most leaders on 1M / 3M / 6M / 1Y (snapshot cards)? An industry that appears on all four is the market's real leadership",
+          "Themes → Theme Leaders → ETF Performance: switch 1 Week → 1 Month → 3 Months — is leadership broadening (many themes green) or narrowing (a handful of themes carrying it)?",
           "Sectors → Sector Leadership: Leadership Over Time lines — has the top-3 sector set changed in the last month?",
           "Breadth → Breadth Cycle: pick Max range for Strength vs S&P — where are we in the cycle, and what do the 3M/6M odds say compared with the base rate?",
           "Re-check the Narrow / Fading flag history this week: how many days did green Pulse and weak breadth disagree, and did that cost you on entries?",
@@ -4147,7 +4147,7 @@ const CORE_RULES = [
   { rule: "Only trade your wired-in universe", detail: "ADR ≥5%, $Vol ≥$300M, RS ≥85 are baked into the scanner and the default filters. If a trade needs the filters loosened, it is not your trade." },
   { rule: "Every trade gets logged", detail: "No log = no review = no improvement. Journal is mandatory, not optional." },
   { rule: "Breadth has to back the trend", detail: "A green Market Pulse with a ⚠ Narrow / Fading breadth flag means the index is carried by a few names — size down 50% and trade RS leaders only. Stocks → Scanner sidebar or Breadth → Breadth Cycle." },
-  { rule: "Don't buy extended", detail: "Extension (ATR multiple from the 50-MA): under 4× is actionable, 4–7× is stretched — wait for the pullback, 7×+ is overextended. Start from Stocks → Leadership → T-NEL (tight AND non-extended)." },
+  { rule: "Don't buy extended", detail: "Extension (ATR multiple from the 50-MA): under 4× is actionable, 4–7× is stretched — wait for the pullback, 7×+ is overextended. Start from Stocks → Liquid Leaders → T-NEL (tight AND non-extended)." },
 ];
 
 const COLOR_MAP = {
@@ -16681,12 +16681,47 @@ const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows, total, win
   );
 };
 
+const LEADERSHIP_WINDOW_LABEL = { "1M": "1 month", "3M": "3 months", "6M": "6 months", "1Y": "1 year" };
+const LEADERSHIP_WINDOW_COLOR = { "1M": "#f59e0b", "3M": "#22d3ee", "6M": "#a78bfa", "1Y": "#4ade80" };
+const LEADERSHIP_PALETTE = ["#6366f1", "#eab308", "#ef4444", "#14b8a6", "#c084fc"];
+// Leaders per industry from a list of leader rows (used for past-day snapshots, which store only the leader lists).
+const leadershipCounts = grp => Object.fromEntries(Object.entries(grp || {}).map(([w, rows]) => {
+  const c = {};
+  for (const s of rows) { const k = s.industry || "Other"; c[k] = (c[k] || 0) + 1; }
+  return [w, c];
+}));
+// "Leadership over time": one line per industry (the window's current top 5) showing how many leaders it has had each stored day.
+const LeadershipOverTime = ({ history, win, isSuper, upTo, industries }) => {
+  const days = Object.keys(history).sort().filter(d => d <= upTo && (!isSuper || history[d]?.super)).slice(-30);
+  if (days.length < 2) return <p className="text-[11px] text-zinc-600 italic py-5 text-center">Add future daily snapshots to see industry leadership trends.</p>;
+  const val = (d, ind) => (isSuper ? history[d]?.super?.[win]?.[ind] : history[d]?.[win]?.[ind]) ?? 0;
+  const mx = Math.max(1, ...industries.flatMap(ind => days.map(d => val(d, ind))));
+  const W = 320, H = 110, padL = 22, padB = 16, padT = 6, padR = 6;
+  const x = i => padL + (i / (days.length - 1)) * (W - padL - padR);
+  const y = v => padT + (1 - v / mx) * (H - padT - padB);
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Leadership over time">
+      {[0, 0.5, 1].map(f => <g key={f}><line x1={padL} x2={W - padR} y1={y(mx * f)} y2={y(mx * f)} stroke="#3f3f46" strokeWidth="0.5" /><text x={padL - 4} y={y(mx * f) + 3} fontSize="8" fill="#71717a" textAnchor="end">{Math.round(mx * f)}</text></g>)}
+      {industries.map((ind, k) => (
+        <polyline key={ind} fill="none" stroke={LEADERSHIP_PALETTE[k % LEADERSHIP_PALETTE.length]} strokeWidth="1.6" strokeLinejoin="round"
+          points={days.map((d, i) => `${x(i)},${y(val(d, ind))}`).join(" ")} />
+      ))}
+      <text x={padL} y={H - 3} fontSize="8" fill="#71717a">{days[0].slice(5)}</text>
+      <text x={W - padR} y={H - 3} fontSize="8" fill="#71717a" textAnchor="end">{days[days.length - 1].slice(5)}</text>
+    </svg>
+  );
+};
+
 const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
   const isSuper = pool === "super";
   const P = isSuper ? { LL: "SLL", NEL: "S-NEL", TNEL: "T-SNEL", LLname: "Super Liquid Leaders", NELname: "Super Liquid Non-Extended Leaders", TNELname: "Tight Super Liquid Leaders", head: "Super Liquid Thematic Leadership" }
                     : { LL: "LL", NEL: "NEL", TNEL: "T-NEL", LLname: "Liquid Leaders", NELname: "Non-Extended Leaders", TNELname: "Tight Non-Extended Leaders", head: "Thematic Leadership" };
-  const [data, setData]       = React.useState(null);
+  const [latest, setLatest]   = React.useState(null);      // public/leadership.json (tonight's run)
   const [history, setHistory] = React.useState({});
+  const [dates, setDates]     = React.useState([]);        // stored snapshot days, newest first (public/leadership_snapshots/index.json)
+  const [asOf, setAsOf]       = React.useState(null);      // null = latest; otherwise a past day
+  const [snap, setSnap]       = React.useState(null);
+  const snapRef               = React.useRef(null);
   const [win, setWin]         = React.useState("1M");
   const [crit, setCrit]       = React.useState(() => {
     try {
@@ -16699,9 +16734,32 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
   const [copied, setCopied]   = React.useState(null);
   React.useEffect(() => {
     const v = Date.now();
-    fetch(`${process.env.PUBLIC_URL}/leadership.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.leaders) setData(d); }).catch(() => {});
+    fetch(`${process.env.PUBLIC_URL}/leadership.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.leaders) setLatest(d); }).catch(() => {});
     fetch(`${process.env.PUBLIC_URL}/leadership_history.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d) setHistory(d); }).catch(() => {});
+    fetch(`${process.env.PUBLIC_URL}/leadership_snapshots/index.json?v=${v}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.dates) setDates([...d.dates].sort().reverse()); }).catch(() => {});
   }, []);
+  React.useEffect(() => {
+    if (!asOf) { setSnap(null); return; }
+    let dead = false;
+    fetch(`${process.env.PUBLIC_URL}/leadership_snapshots/${asOf}.json`).then(r => r.ok ? r.json() : null).then(d => { if (!dead) setSnap(d); }).catch(() => {});
+    return () => { dead = true; };
+  }, [asOf]);
+  // What the page shows: tonight's file, or a stored past day laid over its metadata.
+  const data = React.useMemo(() => (latest && snap && asOf
+    ? { ...latest, ...snap, industry_counts: leadershipCounts(snap.leaders), super_industry_counts: leadershipCounts(snap.super_leaders) }
+    : latest), [latest, snap, asOf]);
+  const shownDate = data?.date || "";
+  const saveSnapshot = async () => {
+    if (!snapRef.current) return;
+    try {
+      const html2canvas = (await import("html2canvas")).default;
+      const canvas = await html2canvas(snapRef.current, { backgroundColor: "#09090b", scale: 2, useCORS: true });
+      const a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = `${P.LL}-snapshot-${shownDate || "latest"}.png`;
+      a.click();
+    } catch { /* ignore — nothing to save */ }
+  };
 
   const fmtD   = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
   const fmtPf  = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
@@ -16736,16 +16794,6 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
     setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   };
 
-  // Count of leaders per industry per day, for the snapshot sparklines.
-  const histDays = React.useMemo(() => Object.keys(history).sort().filter(d => !isSuper || history[d]?.super).slice(-30), [history, isSuper]);
-  const histCount = (d, w, ind) => (isSuper ? history[d]?.super?.[w]?.[ind] : history[d]?.[w]?.[ind]) ?? 0;
-  const Spark = ({ vals }) => {
-    if (vals.length < 2) return null;
-    const mx = Math.max(...vals, 1), W = 56, H = 14;
-    const pts = vals.map((v, i) => `${(i / (vals.length - 1)) * W},${H - (v / mx) * (H - 2) - 1}`).join(" ");
-    return <svg width={W} height={H} className="inline-block ml-2 align-middle"><polyline points={pts} fill="none" stroke="#60a5fa" strokeWidth="1.2" /></svg>;
-  };
-
   const numInput = (label, key, step, suffix) => (
     <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">
       {label}
@@ -16772,7 +16820,15 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
           <span className="text-[11px] text-zinc-600">{isSuper
             ? `top ${data.super_top_n} per window of ${data.super_pool_size} super liquid stocks (avg $ vol ≥ $${((c.super_min_dollar_volume || 0) / 1e9).toFixed(0)}B) · ${data.date}`
             : `top ${data.top_n} per window of ${data.universe_size} liquid stocks (avg $ vol ≥ $${((c.min_dollar_volume || 0) / 1e6).toFixed(0)}M) · ${data.date}`}</span>
-          <div className="ml-auto flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+          {dates.length > 0 && (
+            <select value={asOf || dates[0]} onChange={e => setAsOf(e.target.value === dates[0] ? null : e.target.value)} title="View a past day's leaders"
+              className="ml-auto px-2 py-1 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50">
+              {dates.map(d => <option key={d} value={d}>{d}</option>)}
+            </select>
+          )}
+          <button onClick={saveSnapshot} title="Save the leadership cards as a PNG image"
+            className={`${dates.length > 0 ? "" : "ml-auto "}px-3 py-1 text-[12px] font-medium rounded border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors`}>Snapshot</button>
+          <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
             {LEADERSHIP_WINDOWS.map(w => (
               <button key={w} onClick={() => setWin(w)}
                 className={`px-3 py-0.5 text-[11px] font-medium rounded-md transition-all ${win === w ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{w}</button>
@@ -16785,27 +16841,33 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
           {numInput("Coil ≥", "minCoil", 1, "days")}
           {!isDefault && <button onClick={() => setCrit(LEADERSHIP_DEFAULTS)} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
-          {LEADERSHIP_WINDOWS.map(w => {
-            const top = Object.entries((isSuper ? data.super_industry_counts : data.industry_counts)?.[w] || {}).sort((a, b) => b[1] - a[1]).slice(0, 5);
-            const mx = Math.max(...top.map(t => t[1]), 1);
-            return (
-              <div key={w} className={`rounded-lg border p-3 ${win === w ? "border-blue-500/30 bg-blue-500/5" : "border-zinc-800 bg-zinc-900/40"}`}>
-                <div className="text-[11px] font-semibold text-zinc-400 mb-1.5">{w} Leadership</div>
-                {top.map(([ind, n]) => (
-                  <div key={ind} className="mb-1">
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-zinc-300 truncate pr-2">{ind}</span>
-                      <span className="font-mono text-zinc-400 whitespace-nowrap">{n}<Spark vals={histDays.map(d => histCount(d, w, ind))} /></span>
+        <div ref={snapRef} className="mt-3 rounded-lg" style={{ background: "#09090b" }}>
+          <div className="flex items-baseline gap-2 px-1 pb-2 pt-1">
+            <span className="text-[13px] font-semibold text-zinc-100">{P.head}</span>
+            <span className="text-[11px] text-zinc-500">{shownDate}</span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            {LEADERSHIP_WINDOWS.map(w => {
+              const top = Object.entries((isSuper ? data.super_industry_counts : data.industry_counts)?.[w] || {}).sort((a, b) => b[1] - a[1]).slice(0, 5);
+              const mx = Math.max(...top.map(t => t[1]), 1);
+              return (
+                <div key={w} className={`rounded-lg border border-zinc-800 p-3 ${win === w ? "bg-blue-500/5" : "bg-zinc-900/60"}`} style={{ borderTop: `2px solid ${LEADERSHIP_WINDOW_COLOR[w]}` }}>
+                  <div className="text-[13px] font-semibold mb-2" style={{ color: LEADERSHIP_WINDOW_COLOR[w] }}>{LEADERSHIP_WINDOW_LABEL[w]} leadership</div>
+                  {top.length === 0 && <p className="text-[11px] text-zinc-600 italic">No leaders in this window.</p>}
+                  {top.map(([ind, n], k) => (
+                    <div key={ind} className="flex items-center gap-2 mb-1.5 text-[11px]">
+                      <span className="w-[42%] truncate" style={{ color: LEADERSHIP_PALETTE[k % LEADERSHIP_PALETTE.length] }} title={ind}>{ind}</span>
+                      <div className="flex-1 h-1.5 rounded bg-zinc-800 overflow-hidden"><div className="h-full rounded" style={{ width: `${(n / mx) * 100}%`, background: LEADERSHIP_PALETTE[k % LEADERSHIP_PALETTE.length] }} /></div>
+                      <span className="font-mono text-zinc-300 w-5 text-right">{n}</span>
                     </div>
-                    <div className="h-1 rounded bg-zinc-800 overflow-hidden"><div className="h-full bg-blue-500/60" style={{ width: `${(n / mx) * 100}%` }} /></div>
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+                  ))}
+                  <div className="text-[12px] font-semibold text-zinc-300 mt-3 mb-1">Leadership over time</div>
+                  <LeadershipOverTime history={history} win={w} isSuper={isSuper} upTo={shownDate} industries={top.map(t => t[0])} />
+                </div>
+              );
+            })}
+          </div>
         </div>
-        {histDays.length < 2 && <p className="text-[10px] text-zinc-700 mt-2">Leadership-over-time sparklines appear once the nightly run has stored two or more days.</p>}
       </div>
       {isSuper && !data.super_leaders && <p className="text-xs text-zinc-600 italic">Super liquid data arrives with the next nightly run.</p>}
       {tierEl("LL",   `${P.LLname} (${P.LL})`,       P.LL,   `top ${isSuper ? data.super_top_n : data.top_n} performers per window`)}
@@ -18616,13 +18678,13 @@ const appScreenerMap = useMemo(() => {
                 { label: "Short", tab: "watchlist", mode: "short" },
                 { label: "Focus List", tab: "watchlist", mode: "focus" },
                 { label: "Universe", tab: "watchlist", mode: "adrUniverse" },
-                { label: "Leadership", tab: "watchlist", mode: "leadership", view: "stocks" },
-                { label: "Super Liquid", tab: "watchlist", mode: "leadership", view: "super" },
+                { label: "Liquid Leaders", tab: "watchlist", mode: "leadership", view: "stocks" },
+                { label: "Super Liquid Leaders", tab: "watchlist", mode: "leadership", view: "super" },
               ] },
               { key: "themes", label: "Themes", items: [
                 { label: "Theme Tracker", tab: "watchlist", mode: "etf" },
                 { label: "Group ETF", tab: "watchlist", mode: "universe" },
-                { label: "Leadership", tab: "watchlist", mode: "leadership", view: "themes" },
+                { label: "Theme Leaders", tab: "watchlist", mode: "leadership", view: "themes" },
               ] },
               { key: "sectors", label: "Sectors", items: [
                 { label: "Sector Leadership", tab: "watchlist", mode: "leadership", view: "sectors" },

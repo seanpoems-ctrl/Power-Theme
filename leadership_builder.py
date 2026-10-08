@@ -42,6 +42,9 @@ logger = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parent
 OUTPUT_PATH = ROOT / "public" / "leadership.json"
 HISTORY_PATH = ROOT / "public" / "leadership_history.json"
+SNAP_DIR = ROOT / "public" / "leadership_snapshots"     # one slim file per trading day + index.json, for the dashboard's date picker
+SNAP_KEEP_DAYS = 120
+SNAP_FIELDS = ("ticker", "industry", "perf", "avg_dollar_volume", "extension", "rmv", "coil", "lev_etf")
 ET = ZoneInfo("America/New_York")
 
 MIN_DOLLAR_VOLUME = 40_000_000
@@ -213,6 +216,24 @@ def update_history(payload: dict) -> None:
     HISTORY_PATH.write_text(json.dumps(hist, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
 
 
+def write_snapshot(payload: dict) -> None:
+    """public/leadership_snapshots/<date>.json (weekdays only) + index.json — lets the dashboard show any past day's leaders."""
+    d = payload["date"]
+    if datetime.strptime(d, "%Y-%m-%d").weekday() >= 5:
+        return
+    def slim(grp):
+        return {w: [{k: s.get(k) for k in SNAP_FIELDS} for s in rows] for w, rows in grp.items()}
+    snap = {"date": d, "generated_at": payload["generated_at"], "top_n": payload["top_n"], "super_top_n": payload["super_top_n"],
+            "universe_size": payload["universe_size"], "super_pool_size": payload["super_pool_size"], "criteria": payload["criteria"],
+            "leaders": slim(payload["leaders"]), "super_leaders": slim(payload["super_leaders"])}
+    SNAP_DIR.mkdir(parents=True, exist_ok=True)
+    (SNAP_DIR / f"{d}.json").write_text(json.dumps(snap, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    dates = sorted(p.stem for p in SNAP_DIR.glob("20??-??-??.json"))
+    for old in dates[:-SNAP_KEEP_DAYS]:
+        (SNAP_DIR / f"{old}.json").unlink(missing_ok=True)
+    (SNAP_DIR / "index.json").write_text(json.dumps({"dates": dates[-SNAP_KEEP_DAYS:]}), encoding="utf-8")
+
+
 def main() -> None:
     payload = build()
     if not payload:
@@ -221,6 +242,7 @@ def main() -> None:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
     update_history(payload)
+    write_snapshot(payload)
     logger.info("Written %s", OUTPUT_PATH)
     for w, _ in WINDOWS:
         ll = payload["leaders"][w]
