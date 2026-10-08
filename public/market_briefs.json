@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-07 20:24 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Market / Cautious Optimism",
+    "spy_price": 779.09,
+    "spy_change_pct": 0.55,
+    "vix": 15.08,
+    "hy_oas": 3.03,
+    "yield_curve": 0.51,
+    "credit_status": "Complacent",
+    "s5fi": 31.9,
+    "mmth": 50.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft announced a significant new partnership with a leading automotive manufacturer to integrate its Azure AI services into next-gen autonomous driving platforms."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly reported positive Phase 3 trial results for its new obesity drug, showing superior efficacy and safety profiles compared to existing treatments."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA shares saw continued buying interest driven by ongoing institutional rotation into semiconductor names, despite no fresh company-specific news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-07 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to benefit from general AI tailwinds, but today's positive flow appears to be driven by broader market sentiment rather than a fresh, specific company catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-17 11:30 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On / Growth Acceleration",
-    "spy_price": 761.66,
-    "spy_change_pct": 1.01,
-    "vix": 15.86,
-    "hy_oas": 2.7,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 35.3,
-    "mmth": 54.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CLSK",
-          "company": "CleanSpark, Inc.",
-          "reason": "A significant Meta AI data center lease and a substantial $2.23 billion financing package provide a strong boost to its AI infrastructure expansion."
-        },
-        {
-          "ticker": "BTDR",
-          "company": "Bitdeer Technologies Group",
-          "reason": "A massive $4.7 billion AI data center lease agreement positions the company as a key player in the booming AI infrastructure sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to benefit from ongoing strong demand and positive sector sentiment for AI semiconductors, though no fresh specific catalyst today."
         }
       ]
     }
