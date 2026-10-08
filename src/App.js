@@ -14162,6 +14162,33 @@ const _evTitle = ev => ev.kind === "E"
   ? `Earnings ${ev.date}${ev.tod === "b" ? " · before open" : ev.tod === "a" ? " · after close" : ""}${ev.sp != null ? ` · EPS surprise ${ev.sp > 0 ? "+" : ""}${ev.sp.toFixed(1)}%` : ""}`
   : ev.kind === "D" ? `Dividend ${ev.date} · $${ev.amount} (ex-date)` : `Split ${ev.date} · ${ev.ratio} (prices are split-adjusted)`;
 
+// ── Phones: the page itself is locked to a 1600px-wide desktop layout (public/index.html viewport), which makes full-screen modals tiny.
+// While a full-screen modal is open on a touch phone, switch the viewport meta to the device width so the modal lays out natively
+// (its own responsive classes then apply), and restore the desktop viewport + scroll position when the last modal closes.
+let _phoneModalCount = 0, _phoneSavedScroll = 0, _origViewport = null;
+const _isPhone = () => {
+  try { return window.matchMedia("(pointer: coarse)").matches && Math.min(window.screen.width, window.screen.height) < 600; } catch { return false; }
+};
+const _viewportMeta = () => document.querySelector('meta[name="viewport"]');
+const usePhoneViewport = () => {
+  React.useEffect(() => {
+    if (!_isPhone()) return undefined;
+    const meta = _viewportMeta();
+    if (!meta) return undefined;
+    if (_phoneModalCount++ === 0) {
+      _origViewport = meta.getAttribute("content");
+      _phoneSavedScroll = window.scrollY;
+      meta.setAttribute("content", "width=device-width, initial-scale=1");
+    }
+    return () => {
+      if (--_phoneModalCount === 0) {
+        meta.setAttribute("content", _origViewport || "width=1600, shrink-to-fit=no");
+        setTimeout(() => window.scrollTo(0, _phoneSavedScroll), 80);
+      }
+    };
+  }, []);
+};
+
 // ── Stats overlay on the enlarged chart (Market Cap / ADR% / ATR / LoD distance, ATR% multiple from the 50-MA, RVOL box) ──────────
 // All computed from the chart's own daily bars, except Market Cap (screener_stocks.json via ScreenerCtx).
 const ScreenerCtx = React.createContext(null);
@@ -14223,6 +14250,26 @@ const ChartStatsOverlay = ({ st }) => {
         <div className="flex justify-between gap-2"><span className="text-zinc-300">Avg $ Vol</span><span className="font-semibold tabular-nums">${_kFmt(st.avgDvol)}</span></div>
       </div>
       </div>
+    </div>
+  );
+};
+
+// Same numbers as the corner overlay, laid out as a compact grid under the chart on narrow screens.
+const ChartStatsStrip = ({ st }) => {
+  const num = (v, d = 2) => v == null ? "—" : v.toFixed(d);
+  const cell = (k, v, cls = "") => <div className="flex justify-between gap-2 px-2 py-0.5"><span className="text-zinc-500">{k}</span><span className={`font-mono font-semibold ${cls}`}>{v}</span></div>;
+  return (
+    <div className="sm:hidden grid grid-cols-2 gap-x-2 text-[12px] text-zinc-200 border-t border-zinc-800 py-1.5 bg-zinc-900/60">
+      {cell("Mkt Cap", st.marketCapB != null ? `${st.marketCapB.toFixed(2)}B` : "—")}
+      {cell("ADR%", `${num(st.adr)}%`)}
+      {cell("ATR", num(st.atr))}
+      {cell("LoD dist.", st.lod != null ? `${st.lod.toFixed(0)}%` : "—", st.lod != null && st.lod <= 40 ? "text-green-400" : "")}
+      {cell("ATR% Mult.", num(st.extension), st.extension != null && st.extension >= 7 ? "text-red-400" : st.extension != null && st.extension >= 4 ? "text-amber-400" : "")}
+      {cell(st.pacing ? "RVOL (Pace)" : "RVOL", st.rvol != null ? `${(st.rvol * 100).toFixed(0)}%` : "—")}
+      {cell("Vol vs Avg", st.volVsAvg != null ? `${st.volVsAvg > 0 ? "+" : ""}${st.volVsAvg.toFixed(1)}%` : "—", st.volVsAvg == null ? "" : st.volVsAvg >= 0 ? "text-emerald-400" : "text-red-400")}
+      {cell("Avg Vol", _kFmt(st.avgVol))}
+      {cell("Avg $ Vol", `$${_kFmt(st.avgDvol)}`)}
+      {st.industry && cell("Industry", st.industry)}
     </div>
   );
 };
@@ -14450,6 +14497,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Failed to load</div>}
         {status === "no-proxy" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px] px-3 text-center">Bar-data proxy not configured</div>}
       </div>
+      {status === "ready" && stats && <ChartStatsStrip st={stats} />}
     </div>
   );
 };
@@ -14488,6 +14536,7 @@ const CopyTickersButton = ({ tickers, selected = [], fileName = "tickers" }) => 
 };
 
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
+  usePhoneViewport();
   const [page, setPage] = React.useState(0);
   const [timeframe, setTimeframe] = React.useState("D");
   // Index into `items` (not `pageItems`) of the currently-enlarged chart, or
@@ -14599,7 +14648,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
       </div>
 
       {enlargedItem && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-10"
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-10 overflow-y-auto"
           style={{ backgroundColor: "rgba(0,0,0,0.85)" }} onClick={e => { e.stopPropagation(); setEnlargedIdx(null); }}>
           <div className="relative w-full max-w-6xl" onClick={e => e.stopPropagation()}>
             <button onClick={() => setEnlargedIdx(null)}
@@ -14613,7 +14662,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                 className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">›</button>
             )}
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
-              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height="min(840px, 75vh)" showStats
+              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height={_isPhone() ? "min(840px, 50vh)" : "min(840px, 75vh)"} showStats
               selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}/>
             <div className="text-center text-[15px] text-zinc-500 mt-2">
               {enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid
@@ -16498,8 +16547,26 @@ const StockCell = ({ ticker, etf = null, tone = "cyan" }) => <><TickerLink ticke
 const _pCls = v => v == null ? "text-zinc-600" : v >= 0 ? "text-emerald-400" : "text-rose-400";
 const _pFmt = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
 const _dFmt = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+// Leader-list row for a ticker (public/leadership.json) — fills the panel for stocks that aren't in screener_stocks.json.
+let _leadP = null;
+const loadLeadershipFile = () => (_leadP ||= fetch(`${process.env.PUBLIC_URL}/leadership.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null));
+const _leaderRow = (file, ticker) => {
+  if (!file) return null;
+  let row = null;
+  const perf = {};
+  for (const key of ["leaders", "super_leaders"]) for (const [w, rows] of Object.entries(file[key] || {})) {
+    const r = rows.find(x => x.ticker === ticker);
+    if (r) { row ||= r; perf[`perf_${w.toLowerCase()}`] = r.perf; }
+  }
+  return row ? { ...row, perfs: perf } : null;
+};
+
 const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap }) => {
+  usePhoneViewport();
   const lev = useLevState();
+  const [leadFile, setLeadFile] = React.useState(null);
+  React.useEffect(() => { let dead = false; loadLeadershipFile().then(f => { if (!dead) setLeadFile(f); }); return () => { dead = true; }; }, []);
+  const lead = React.useMemo(() => _leaderRow(leadFile, ticker), [leadFile, ticker]);
   const open = useOpenStock();
   const [copied, setCopied] = React.useState(false);
   const sc = screenerMap?.[ticker] || null;
@@ -16515,10 +16582,11 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
   const rec = th.rec;
-  const price = sc?.price ?? rec?.price ?? null;
+  const price = sc?.price ?? rec?.price ?? lead?.price ?? null;
   const chg = sc?.change_pct ?? rec?.change_pct ?? null;
-  const perf = k => sc?.[k] ?? rec?.[k] ?? null;
-  const company = sc?.company || rec?.company || "";
+  const perf = k => sc?.[k] ?? rec?.[k] ?? lead?.perfs?.[k] ?? null;
+  const company = sc?.company || rec?.company || lead?.company || "";
+  const industry = sc?.industry || lead?.industry || "";
   const group = categoryThemeMap?.[ticker] || null;
   const etfs = lev?.all?.[ticker] || [];
   const stat = (label, val, cls = "text-zinc-200", tip) => (
@@ -16527,15 +16595,15 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
       <div className={`text-[13px] font-mono ${cls}`}>{val}</div>
     </div>
   );
-  const ext = sc?.extension ?? rec?.extension ?? null;
+  const ext = sc?.extension ?? rec?.extension ?? lead?.extension ?? null;
   const rs = sc?.rs_score ?? rec?.rs_52w ?? null;
   const adr = sc?.adr_pct ?? rec?.adr_pct ?? null;
-  const dvol = sc?.avg_dollar_volume ?? rec?.dollar_volume ?? null;
-  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? null;
+  const dvol = sc?.avg_dollar_volume ?? rec?.dollar_volume ?? lead?.avg_dollar_volume ?? null;
+  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? (lead?.market_cap != null ? lead.market_cap / 1e9 : null);
   return (
-    <div className="fixed inset-0 z-[70] flex justify-end" style={{ backgroundColor: "rgba(0,0,0,0.45)" }} onClick={onClose}>
-      <aside className="h-full w-full max-w-[440px] bg-zinc-900 border-l border-zinc-700 shadow-2xl overflow-y-auto" onClick={e => e.stopPropagation()}>
-        <div className="sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800 px-4 py-3">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.6)", backdropFilter: "blur(3px)" }} onClick={onClose}>
+      <aside className="w-full max-w-[520px] max-h-[92vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl overflow-y-auto" onClick={e => e.stopPropagation()}>
+        <div className="sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800 px-4 py-3 rounded-t-xl">
           <div className="flex items-start gap-2">
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline gap-2 flex-wrap">
@@ -16543,14 +16611,12 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
                 {price != null && <span className="text-sm font-mono text-zinc-300">${price.toFixed(2)}</span>}
                 {chg != null && <span className={`text-xs font-mono font-semibold ${_pCls(chg)}`}>{_pFmt(chg)}</span>}
               </div>
-              <div className="text-[12px] text-zinc-500 truncate">{company || "—"}{sc?.industry ? ` · ${sc.industry}` : ""}</div>
+              <div className="text-[12px] text-zinc-500 truncate">{company || "—"}{industry ? ` · ${industry}` : ""}</div>
             </div>
             <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 p-1 rounded flex-shrink-0" title="Close (Esc)"><X size={16} /></button>
           </div>
           <div className="flex items-center gap-1.5 mt-2 flex-wrap">
-            {[["TradingView", `https://www.tradingview.com/chart/?symbol=${ticker}`], ["Finviz", `https://finviz.com/quote.ashx?t=${ticker}`], ["Yahoo", `https://finance.yahoo.com/quote/${ticker}`]].map(([l, u]) => (
-              <a key={l} href={u} target="_blank" rel="noreferrer" className="text-[11px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">{l} ↗</a>
-            ))}
+            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer" className="text-[11px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">TradingView ↗</a>
             <button onClick={() => { (navigator.clipboard?.writeText(ticker) || Promise.reject()).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1200); }).catch(() => {}); }}
               className="text-[11px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : "Copy"}</button>
           </div>
@@ -16561,7 +16627,7 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
             {stat("Extension", fmtExtension(ext), extensionCls(ext), EXTENSION_TIP)}
             {stat("Avg $ Vol", _dFmt(dvol))}
             {stat("ADR", adr != null ? `${adr.toFixed(1)}%` : "—")}
-            {stat("Mkt Cap", cap == null ? "—" : cap >= 1000 ? `$${(cap / 1000).toFixed(1)}T` : `$${cap.toFixed(0)}B`)}
+            {stat("Mkt Cap", cap == null ? "—" : cap >= 1000 ? `$${(cap / 1000).toFixed(1)}T` : cap >= 1 ? `$${cap.toFixed(0)}B` : `$${(cap * 1000).toFixed(0)}M`)}
             {stat("RS", rs ?? "—", rs != null && rs >= 90 ? "text-emerald-400 font-bold" : rs != null && rs >= 70 ? "text-emerald-400" : "text-zinc-200")}
             {stat("52W Range", sc?.pct_52w_range != null ? `${sc.pct_52w_range.toFixed(0)}%` : (rec?.dist_52w_high != null ? `${rec.dist_52w_high.toFixed(1)}% off` : "—"), "text-zinc-200", "Position within the 52-week range (or distance below the high)")}
           </div>
@@ -16599,7 +16665,7 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
               </div>
             </div>
           )}
-          {!sc && !rec && <p className="text-xs text-zinc-600 italic">No scanner data for {ticker} — it isn't in today's universe or themes.</p>}
+          {!sc && !rec && !lead && <p className="text-xs text-zinc-600 italic">No scanner data for {ticker} — it isn't in today's universe or themes.</p>}
           <button onClick={() => open(null)} className="text-[11px] text-zinc-600 hover:text-zinc-300">Close</button>
         </div>
       </aside>
