@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-09 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On / Broad Market Strength",
+    "spy_price": 778.57,
+    "spy_change_pct": 0.6,
+    "vix": 14.84,
+    "hy_oas": 3.15,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 38.1,
+    "mmth": 52.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LITE",
+          "company": "Lumentum Holdings Inc.",
+          "reason": "Bolstered by a significant surge in optics sector demand, Lumentum Holdings Inc. is positioned for continued upside momentum."
+        },
+        {
+          "ticker": "ACHR",
+          "company": "Archer Aviation Inc.",
+          "reason": "Archer Aviation Inc. received a strong conviction boost from Barclays' upgrade to Overweight, signaling renewed institutional interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corporation exhibited pure technical flow today, with its established trend continuing without specific new fundamental catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-09 13:24 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "ExxonMobil Corporation",
           "reason": "ExxonMobil is vulnerable to today's significant crude oil price plunge, facing potential headwinds to its revenue and profit outlook, warranting caution despite broader market strength."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-21 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Divergent Flows, Underlying Caution",
-    "spy_price": 761.69,
-    "spy_change_pct": 0.13,
-    "vix": 14.89,
-    "hy_oas": 2.7,
-    "yield_curve": 0.25,
-    "credit_status": "Complacent",
-    "s5fi": 33.3,
-    "mmth": 54.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Announces breakthrough AI chip for data centers, significantly boosting revenue projections and market leadership expectations."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Major investment bank confirms strategic acquisition, expanding its market share in a key wealth management segment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Continues to face pressure from falling crude oil prices and general sector outflows, driven purely by commodity and flow dynamics."
         }
       ]
     }
