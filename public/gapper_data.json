@@ -1,154 +1,123 @@
 {
-  "scan_time": "2026-10-08 08:55 ET",
+  "scan_time": "2026-10-09 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "PCRX",
-      "price": 36.34,
-      "gap_pct": 44.21,
-      "pm_volume": 3434497,
-      "avg_vol_10d": 576098,
-      "avg_dollar_vol": 20935401,
-      "mkt_cap": 1004519534,
-      "rvol": 2.3,
-      "adr_pct": 3.35,
+      "ticker": "NN",
+      "price": 13.01,
+      "gap_pct": 12.14,
+      "pm_volume": 74348,
+      "avg_vol_10d": 3376145,
+      "avg_dollar_vol": 43923646,
+      "mkt_cap": 1958194974,
+      "rvol": 3.07,
+      "adr_pct": 6.72,
       "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "Moving in sympathy with M&A activity in the non-opioid pain market, as **Viatris** pursues a **$1.65 billion deal**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 60,
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
       "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
       "analysis_detail": {
-        "catalyst": "Sector Tailwinds",
-        "impact": "Secondary. No company-specific news regarding PCRX; move is correlated to broader activity within the non-opioid pain medicine industry."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **What Happened**\nNews emerged of a **$1.65 billion deal** where **Viatris** would acquire **two non-opioid pain medicines**. This significant transaction signals strong M&A activity and potential valuation benchmarks within the specialized non-opioid pain management sector.\n\n• **Key Consideration**\nWhile PCRX is not directly involved in this acquisition, the substantial deal value of **$1.65 billion** could indicate increased investor interest and potential re-rating for companies focused on non-opioid pain solutions. This external M&A event might reflect positively on the perceived value of PCRX's own non-opioid offerings.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Incorrect alert on Pacira BioSciences' share movement withdrawn - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOLUM0V24xOU5HM1ZUc0hXeERTUm11UTNreklKS0xtbXlPNmpaNWpDTDRjUDNpdHM5R2ZZc2Nsd25jcGtQdHVHTHNiQU9sYXB5NjNBM21wNDZucDNuUmRiRjJ3OVR2bzNmUHFiZkEyV0QxU1JQZGh3dEtQREo1Vi1IQ1ZtTThNSUxITTVCMmZKUTByV1gtT3ZobDk0aWJ1UkZhSDNlNGM2YV9YNWUxbHVxVEZGZGxjQQ?oc=5"
-        },
-        {
-          "title": "A $1.65 billion deal would put two non-opioid pain medicines under Viatris. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPNGNZb21xZFpFelFralRVMmJDMG0yMUZBbFdqTTZXVFFJUHBoVHh1ME91QzU4aU9JNS1uQWhuS250SDJOM0R5VVVNZl91NGxiSGYwNWV4MUxlZUV1WXpoOXh3VXRDUGZhS1VnV2x6dXJ5M0FpTkk3dXhnOHJST1A5dmEtZFlrVjNtSnNIcEYtc09uWjBzaDh0cHlTb2pYMkY3RVpzX2VOYXJxUmhpMzNMektYQjU?oc=5"
-        }
-      ],
+      "headlines": [],
       "edgar_filing": null,
-      "float_shares": "38.18M",
-      "short_float": "27.27%",
-      "daily_pct": 1.78,
-      "prev_close": 25.2,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $21M < $100M, ADR 3.4% < 4%)",
+      "float_shares": "107.03M",
+      "short_float": "13.26%",
+      "daily_pct": -8.73,
+      "prev_close": 11.6,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $44M < $100M)",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 60,
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Viatris pursuing a $1.65 billion deal",
-        "discrepancy_note": "Source A (Finviz News) has no information. Source B (Google News) [1] mentions 'A $1.65 billion deal would put two non-opioid pain medicines under Viatris', directly matching the dollar amount and company. However, since only one of the two main sources (Finviz and Google News) provides corroborating detail, the claim cannot be marked as 'Verified' by *both* sources."
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
-        "gate_adr": false
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
     },
     {
-      "ticker": "WOLF",
-      "price": 36.21,
-      "gap_pct": 15.43,
-      "pm_volume": 812199,
-      "avg_vol_10d": 3522336,
-      "avg_dollar_vol": 127543787,
-      "mkt_cap": 1660431984,
-      "rvol": 0.9,
-      "adr_pct": 7.07,
-      "category": "New Contract/Partnership",
-      "theme": "Conditional Loan Commitment from U.S. Department of War",
-      "reasoning": "Wolfspeed secured a conditional $1.5 billion loan from the U.S. Department of War to advance its domestic wide bandgap supply chain.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A+",
-      "finviz_theme": "Semiconductors - Foundries",
+      "ticker": "CLOV",
+      "price": 5.07,
+      "gap_pct": 10.59,
+      "pm_volume": 225461,
+      "avg_vol_10d": 4154949,
+      "avg_dollar_vol": 21065591,
+      "mkt_cap": 2432699940,
+      "rvol": 1.04,
+      "adr_pct": 4.76,
+      "category": "Government Policy",
+      "theme": "CMS Star Rating Upgrade",
+      "reasoning": "Clover Health's Medicare Advantage PPO plans received the highest possible 5-star rating from CMS for 2027, allowing year-round enrollment.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Digital Health",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Wolfspeed (WOLF) announced a **conditional 30-year, $1.5 billion loan commitment** from the U.S. Department of War (Defense Department). This financing is pledged to support the development of materials described as key to national security and to advance the domestic wide bandgap supply chain. Wolfspeed stock reacted by **surging 20%** in after-hours trading following the news.",
-        "impact": "This substantial government funding significantly de-risks Wolfspeed's long-term growth initiatives, particularly in critical wide bandgap semiconductor manufacturing, and enhances its strategic importance for national defense, potentially attracting further institutional interest."
+        "catalyst": "Clover Health's **PPO Medicare Advantage plans** were awarded the **highest possible five-star rating** for **2027** by the Centers for Medicare and Medicaid Services (**CMS**). This significant regulatory approval enables Clover's wide-network Medicare plans to **enroll people year-round**, a major competitive advantage.",
+        "impact": "This rating is expected to enhance Clover's market penetration and membership growth, directly influencing future revenue streams and competitive standing."
       },
-      "analysis_details": "• **Impact**\nWolfspeed Inc. secured a **conditional 30-year loan commitment** for **$1.5 billion** from the U.S. Department of War, aimed at supporting the development of critical materials and advancing the domestic wide bandgap supply chain. The news prompted Wolfspeed stock to **surge 20%** in after-hours trading on Wednesday.\n\n• **Strategic Value**\nThis **$1.5 billion loan** significantly boosts Wolfspeed's capabilities and competitive positioning in the semiconductor industry, particularly in wide bandgap technology crucial for national security. It addresses the strategic objective of building a robust domestic supply chain, providing substantial capital for long-term growth and operational expansion.",
-      "peer_tickers": [
-        "NVTS",
-        "STM",
-        "ON"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
+      "analysis_details": "• **The Policy**\nClover Health's **Medicare Advantage PPO plans** have achieved the **highest possible five-star rating** for **2027** from the Centers for Medicare and Medicaid Services (**CMS**). This **5-star rating** specifically allows Clover's wide-network Medicare plans to enroll new members **year-round**, an advantage not available to lower-rated plans. Another company, Humana, also saw its Medicare Advantage contract's Star Ratings raised to **four stars** from **3.5 stars**.\n\n• **Direct Impact**\nThe **5-star rating** is a pivotal achievement for Clover, as it significantly enhances its market competitiveness and growth potential by enabling **year-round enrollment**. This regulatory validation of quality from **CMS** is likely to attract more beneficiaries, translating into increased membership and potentially better reimbursement rates for **2027**. This should bolster Clover Health's fundamental outlook and provide a strong tailwind for the business.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Wolfspeed Stock Soars on Financing Deal with Pentagon",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/wolfspeed-stock-pentagon-semiconductors-011e06ba?mod=bar_FV"
+          "title": "A 5-star rating lets Clover’s wide-network Medicare plans enroll people year-round - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPSFlScUhKd3lFMlV4a3BETHdLUEtrYmRFY3R6Ny1JT0c1V1BfdnY2STd4RUoyZ2V0MlhaWTRlSUpCdC1zT1pwcE9MUk1nOXAxeGtUOUo2aEJuek11N1VpaHAzcnNBdEFWeV8walpRVVRwUHNheUhNZFprYUNadHN5UUQ1OW1XazdNM1ktMXBKalhXeTVyZ1ptZmlfbGRkcXJSV2IzX1ZhUDczZ1hYN2pub09uMVpTWnJsVkY2Zg?oc=5"
         },
         {
-          "title": "US Agrees to Loan for Chipmaker That Went Bankrupt Last Year",
+          "title": "Clover Health Medicare Advantage PPO Plans Earn 5 Star Rating for 2027",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/us-agrees-loan-chipmaker-went-205955844.html"
+          "url": "/news/400720/clover-health-medicare-advantage-ppo-plans-earn-5-star-rating-for-2027"
         },
         {
-          "title": "Wolfspeed stock surges 20% on $1.5 billion defense loan",
+          "title": "Humana Soars On Medicare Advantage Star Rating",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/wolfspeed-stock-surges-20-1-204306051.html"
-        },
-        {
-          "title": "Wolfspeed Announces Conditional 30-Year, $1.5 Billion Loan Commitment from U.S. Department of War to Advance Domestic Wide Bandgap Supply Chain",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20261007217564/en/"
+          "url": "https://www.investors.com/news/humana-stock-soars-on-medicare-advantage-star-rating?mod=IBD_FV"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-10-07",
+        "filing_date": "2026-10-09",
         "form": "8-K",
         "items": [
           "7.01",
-          "8.01",
           "9.01"
         ],
         "category": "Others",
         "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/895419/000119312526416987/d122407d8k.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1801170/000180117026000250/clov-20261008.htm"
       },
-      "float_shares": "34.88M",
-      "short_float": null,
-      "daily_pct": -1.45,
-      "prev_close": 31.37,
-      "industry": "Semiconductors - Foundries",
-      "technical_status": "Pass",
+      "float_shares": "410.33M",
+      "short_float": "5.58%",
+      "daily_pct": 0.44,
+      "prev_close": 4.58,
+      "industry": "Digital Health",
+      "technical_status": "Fail (Avg $Vol $21M < $100M)",
       "verification": {
         "status": "Verified",
         "confidence_score": 95,
@@ -156,29 +125,424 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Wolfspeed secured a conditional $1.5 billion loan from the U.S. Department of War",
+        "primary_claim": "Clover Health's Medicare Advantage PPO plans received a 5-star rating for 2027.",
         "discrepancy_note": ""
       },
-      "gates_passed": 4,
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BRUN",
+      "price": 13.1,
+      "gap_pct": 8.26,
+      "pm_volume": 61861,
+      "avg_vol_10d": 2768218,
+      "avg_dollar_vol": 36263656,
+      "mkt_cap": 1014526230,
+      "rvol": 2.7,
+      "adr_pct": 8.72,
+      "category": "Others",
+      "theme": "Share Resale Amendment",
+      "reasoning": "Boost Run (BRUN) filed a resale amendment for up to 58.7M shares, clarifying no additional securities are being registered.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 62,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Boost Run (BRUN) announced a resale amendment covering up to **58.7M** shares, explicitly stating it is **registering no additional securities**. This clarifies that the filing pertains to the resale of existing shares, not the issuance of new ones.",
+        "impact": "This event impacts the company's share float and potentially creates a technical overhang or resolves uncertainty regarding future dilution, depending on market interpretation of the existing shares becoming tradable."
+      },
+      "analysis_details": "• **What Happened**\nBoost Run (BRUN) has filed a resale amendment covering up to **58.7M** of its shares. The key detail in this filing is the explicit statement that it is **registering no additional securities**. This means the amendment facilitates the resale of existing shares by certain holders, rather than issuing new shares that would dilute current shareholders.\n\n• **Key Consideration**\nWhile this filing does not result in immediate dilution through new share issuance, it could increase the tradable float as up to **58.7M** existing shares become eligible for resale. This may introduce potential selling pressure if large holders choose to divest, though the lack of new dilution could also be interpreted positively by removing uncertainty regarding future capital raises. Given the high RVOL of **2.7x**, the market is actively processing this share flow event.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Up to 58.7M Boost Run (BRUN) shares are covered by a resale amendment registering no additional securities. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPQWxrQlcyTk96Snk1bTdEMjEyeWp4anZQZ1NyZFVCbDZSS0tkWEtsaU80N3FZOWR2SEo5Z2FVM3ZraFM3NTBrVHRLTkluelNSa1k3MW1yLUQxVGtxanFfdjE1VERWNFJsNFpiT0hZd3lianFHLW92aXk0WGtaV29rSnJlOVBkQmY5b3JPZ3o0MkhXLXR0cTFfNA?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "37.08M",
+      "short_float": null,
+      "daily_pct": -12.0,
+      "prev_close": 12.1,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $36M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Boost Run (BRUN) filed a resale amendment for up to 58.7M shares, clarifying no additional securities are being registered.",
+        "discrepancy_note": "Finviz News (Source A) has no relevant articles. Google News (Source B) article [2] confirms the claim with matching specifics ('Up to 58.7M Boost Run (BRUN) shares are covered by a resale amendment registering no additional securities.'), but since Source A provides no confirmation, the claim cannot be 'Verified' by both sources."
+      },
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "KOPN",
+      "price": 4.51,
+      "gap_pct": 7.38,
+      "pm_volume": 134981,
+      "avg_vol_10d": 3200875,
+      "avg_dollar_vol": 14435946,
+      "mkt_cap": 780664903,
+      "rvol": 1.25,
+      "adr_pct": 5.27,
+      "category": "New Contract/Partnership",
+      "theme": "Government Contract Award",
+      "reasoning": "Kopin secured an additional $18.6 million U.S. Army IBAS award, bringing total government funding to $34 million.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Defense & Aerospace",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Kopin secured an **additional $18.6 million** award from the **U.S. Army IBAS** for its **Color MicroLED Technology**. This latest award increases **U.S. government funding** for Kopin's military display technology to a total of **$34 million**.",
+        "impact": "This contract solidifies Kopin's position in advanced military display technology, providing a stable revenue stream and potentially expanding its market presence within the defense sector."
+      },
+      "analysis_details": "• **Impact**\nKopin has secured an **additional $18.6 million** U.S. Army IBAS Award for its **Color MicroLED Technology**, a significant development in military applications. This new funding brings the total **U.S. government funding** for Kopin's military display technology to **$34 million**. Stifel has reiterated its stock rating on Kopin, specifically referencing this defense contract win.\n\n• **Strategic Value**\nThis contract underscores the strategic importance of Kopin's **Color MicroLED Technology** for defense applications, specifically with the **U.S. Army IBAS**. The increased government funding and the reiteration of a positive stock rating by Stifel highlight the growing confidence in Kopin's technological capabilities and its potential for continued expansion in the defense sector, reinforcing its competitive positioning.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Stifel reiterates Kopin stock rating on defense contract win - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOOGlFMG5HamdfZ1JiMDVFRFhQblQySXFQczMzdFVENE9jajZhQVZfSGYydHFWTFpBRWdOd1V5VUI5MkJsR05QdTFHbkVTUklGOUk2S1BqR2lhWFpXWjdZdG1mR2g3TVNhT3F4NlFweW94bWdxZUJHMjlNQ3VPaG8wRWJrdnpQT0hSZktuR2R1Q2g1empnemZfS25RUzV0WnBudDhUUExwQWhVNDdSX09LOUduNlJZR2FJcmR3Wg?oc=5"
+        },
+        {
+          "title": "U.S. government funding for Kopin's military display technology now totals $34 million. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQOVBUZU9objJjdWs1dk1uYlFOMHlzdThDTGhjc1lmcjl1RXp0ei1pZlZtMkdNQWowY2pqclJjdmxjXzhlOF9Oakg5YU9mQ0RrYlZmYnJzWEh0ZnJtZlZnRkNqeG1KUENncmFNX0hhX3BuTUFqZ01fMm1Xc0dNRVhQeXU0bHFQSnhpRy1MQ2kybGlKVUdKMmljNFd3LXcxU25Iam5aTi1LUks3eFpSWDYxWms4Z0lTWlVzZENPVzFNZw?oc=5"
+        },
+        {
+          "title": "Kopin Secures Additional $18.6 Million U.S. Army IBAS Award for Color MicroLED Technology",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20261008414035/en/"
+        },
+        {
+          "title": "Kopin to Introduce Expanded FirstPerson Viewer Evaluation Kit Lineup at AUSA 2026",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20261008592467/en/"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "176.89M",
+      "short_float": "14.48%",
+      "daily_pct": -8.1,
+      "prev_close": 4.2,
+      "industry": "Defense & Aerospace",
+      "technical_status": "Fail (Avg $Vol $14M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Kopin secured an additional $18.6 million U.S. Army IBAS award, bringing total government funding to $34 million.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "AAOI",
+      "price": 113.2,
+      "gap_pct": 6.89,
+      "pm_volume": 530918,
+      "avg_vol_10d": 10125962,
+      "avg_dollar_vol": 1146258898,
+      "mkt_cap": 8991576044,
+      "rvol": 2.31,
+      "adr_pct": 6.93,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "80.53M",
+      "short_float": "15.02%",
+      "daily_pct": -13.58,
+      "prev_close": 105.9,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": "The primary catalyst claim states 'No immediate fundamental catalyst found'. However, both Finviz and Google News provide a clear, specific fundamental catalyst: 'Lumentum CEO Says Optical Parts Are Completely Sold Out Through Early 2029' (Finviz [1], Google News [1], [4]), directly impacting the sector including AAOI. This specific news contradicts the summary's assertion of no fundamental catalyst, making the summary inaccurate based on the provided sources."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "FSLY",
+      "price": 27.03,
+      "gap_pct": 6.89,
+      "pm_volume": 226793,
+      "avg_vol_10d": 4609129,
+      "avg_dollar_vol": 124584757,
+      "mkt_cap": 4028697223,
+      "rvol": 0.86,
+      "adr_pct": 8.7,
+      "category": "Others",
+      "theme": "Upcoming Earnings Announcement",
+      "reasoning": "Fastly announced it will report Q3 2026 financial results, which is a timing update rather than a performance catalyst.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Cloud Data Centers",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Fastly announced it will **announce Third Quarter 2026 Financial Results** for the period ending September 30, 2026.",
+        "impact": "This announcement sets expectations for an upcoming event but does not provide immediate fundamental data to drive price action, potentially leading to speculative interest or minor positioning."
+      },
+      "analysis_details": "• **What Happened**\nFastly released a headline indicating its upcoming **Third Quarter 2026 Financial Results** announcement. This is a procedural update, signaling that the company will report its performance for the quarter ending September 30, 2026, at a future date.\n\n• **Key Consideration**\nThe announcement of an upcoming earnings report, without any pre-release of results or guidance, typically serves as a calendar event rather than a direct catalyst for significant price movement. Any move is likely driven by broader sector sentiment or speculative positioning ahead of the actual earnings call, or an unknown catalyst not provided in the headlines.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "What Sent Cloudflare Stock Higher?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/sent-cloudflare-stock-higher-001213040.html"
+        },
+        {
+          "title": "Fastly to Announce Third Quarter 2026 Financial Results",
+          "source": "Finviz",
+          "url": "/news/400697/fastly-to-announce-third-quarter-2026-financial-results"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "149.01M",
+      "short_float": "15.74%",
+      "daily_pct": 0.04,
+      "prev_close": 25.29,
+      "industry": "Cloud Data Centers",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Fastly announced it will report Q3 2026 financial results",
+        "discrepancy_note": "Source A (Finviz) explicitly states 'Fastly to Announce Third Quarter 2026 Financial Results'. Source B (Google News) does not contain any news regarding Fastly's Q3 2026 financial results announcement; its articles focus on an Oppenheimer upgrade or option contracts."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "LITE",
+      "price": 1113.65,
+      "gap_pct": 6.2,
+      "pm_volume": 155038,
+      "avg_vol_10d": 4618358,
+      "avg_dollar_vol": 5143234387,
+      "mkt_cap": 94985187777,
+      "rvol": 1.14,
+      "adr_pct": 5.88,
+      "category": "Thematic Narratives",
+      "theme": "Optics Sector Demand Surge",
+      "reasoning": "Optics stocks, including Lumentum, rallied after news of sold-out optical capacity through early 2029, signaling robust demand.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Wireless",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Optics stocks, including **Lumentum**, surged by **7%** after reports highlighted **sold-out optical capacity through early 2029**. This strong market demand is driving a rally across the sector, with Applied Optoelectronics also surging **7%** and Coherent climbing **5%**.",
+        "impact": "The confirmed long-term capacity bookings suggest sustained revenue visibility and strong pricing power for optical component manufacturers like Lumentum, potentially leading to upward revisions in future guidance."
+      },
+      "analysis_details": "• **The Narrative**\nOptics stocks, including **Lumentum (LITE)**, experienced a significant rally, with LITE surging **7%** following reports of **sold-out optical capacity through early 2029**. This widespread demand is impacting the entire sector, with **Applied Optoelectronics** also up **7%** and **Coherent** climbing **5%**, indicating strong industry-wide tailwinds.\n\n• **Explosiveness**\nThe news of optical capacity being **sold out through early 2029** provides substantial long-term visibility and fundamental strength for Lumentum. This strong demand narrative could drive sustained momentum, as it suggests robust revenue streams and potential for margin expansion over the next several years, reinforcing the stock's upward trajectory.",
+      "peer_tickers": [
+        "COHR",
+        "AXTI",
+        "GLW"
+      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Optics Stocks Rally on Sold-Out Optical Capacity Through Early 2029: Applied Optoelectronics and Lumentum Surge 7%, Coherent Climbs 5% - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxNYk9Ib0EwcHJTTjl6SC12dXo1eTI0eE9UMmlHOHlRMUZBa2E4NDhIQ0IzZHZ5c016bHJUQnFibHRUU1E1VWl2NXhnMk13cDc1QlF3M2w2RnVSRlo5VU1tT0tadWllUTFHZXh1VEZZbEl1OW9xSzZPNi1WYThaS2U1eEVqaHJqTm1fdWdlbzNwZUk3TE9UZVdtT19jNk1OZUVtT0djaUVCeDFNakVQTnRHQXJVVnlEZ1A4aUY2SWIxLWFCWmVMMWpRQzlLVzBOdkZCV3JVWU9UV3JOaVF2TTVKczYwcTNLSzZWMy1NMVF4aElUb1BhbkVoZ2tiSXBzTk91QjhSSw?oc=5"
+        },
+        {
+          "title": "What Is The True Hidden Price Of Lumentum Stock?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/true-hidden-price-lumentum-stock-002434918.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "88.28M",
+      "short_float": "7.86%",
+      "daily_pct": -5.62,
+      "prev_close": 1048.6,
+      "industry": "Semiconductors - Wireless",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "sold-out optical capacity through early 2029",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ACHR",
+      "price": 4.96,
+      "gap_pct": 5.08,
+      "pm_volume": 821768,
+      "avg_vol_10d": 23984865,
+      "avg_dollar_vol": 118964930,
+      "mkt_cap": 3634512192,
+      "rvol": 0.99,
+      "adr_pct": 4.8,
+      "category": "Upgrade",
+      "theme": "Barclays Upgrade to Overweight",
+      "reasoning": "Barclays upgraded Archer Aviation to **Overweight** with an **$8 price target**, signaling strong institutional confidence in the company's trajectory.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "A",
+      "finviz_theme": "Defense & Aerospace",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**Barclays** upgraded **Archer Aviation** to **Overweight** and set a **$8 price target**, signaling a renewed positive outlook from the sell-side.",
+        "impact": "This upgrade could attract new institutional interest and short-term buying momentum, as the market re-evaluates the company's prospects."
+      },
+      "analysis_details": "• **The Firm & Rating**\n**Barclays** has upgraded **Archer Aviation** to **Overweight** and established a new price target of **$8**. This move reflects a significant positive shift in the firm's outlook on the company's future performance.\n\n• **The Thesis**\nThis re-rating suggests that **Barclays** sees strong potential for **Archer Aviation**, likely driven by factors such as accelerating regulatory progress, partnership developments, or upcoming production milestones. The new **$8 price target** could serve as a short-term benchmark for investors, potentially attracting increased buying interest and positive momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Barclays Upgrades Archer Aviation to Overweight with $8 Price Target - Intellectia AI",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNd1dWRE5tRVRuT3AyRDBMMjIwWDJTSmY0UGNVQUhYckZTcEtxNWxuNGIxRy1kQ1cxUm9ydWU2T2xMRnpNeS10WjdoTU1NRENjeG5yWGIwWkF1cTBzZ1dmRWpieTBRRWVXMUs5dUhyNnNMUFN4cmRwUnpYaWN1U2NHakVtYWVoYi1SREVmdV9aM01WcWJKRTg2QWVrLWRwZWo5dFFV?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "644.61M",
+      "short_float": "14.10%",
+      "daily_pct": 1.07,
+      "prev_close": 4.72,
+      "industry": "Defense & Aerospace",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Barclays upgraded Archer Aviation to Overweight with an $8 price target",
+        "discrepancy_note": "Finviz News (Source A) provides no information regarding the upgrade or price target. While one article within Google News (Source B, Intellectia AI) explicitly confirms the Overweight rating and $8 price target, the requirement is for *BOTH* sources to confirm with matching specifics, and Source A is silent."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 0,
-    "large_gaps": 2,
-    "total_headlines": 6,
+    "small_gaps": 8,
+    "large_gaps": 0,
+    "total_headlines": 13,
     "monthly_cost_usd": 0.01
   }
 }
