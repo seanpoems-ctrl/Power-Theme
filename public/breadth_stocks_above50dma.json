@@ -2,52 +2,88 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 6,
   "stocks": [
-    {
-      "ticker": "CD",
-      "company": "Chaince Digital Holdings Inc. - American",
-      "industry": "Information Technology Services",
-      "price": 10.91,
-      "change_pct": 7.49,
-      "adr_pct": 9.6,
-      "dollar_volume": "$2.9M",
-      "market_cap_b": 1.2,
-      "rs_ibd": 95,
-      "above50dma_pct": 160.8
-    },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 94.26,
-      "change_pct": 3.49,
-      "adr_pct": 7.5,
-      "dollar_volume": "$620.4M",
-      "market_cap_b": 5.924,
+      "price": 99.87,
+      "change_pct": 5.95,
+      "adr_pct": 7.1,
+      "dollar_volume": "$651.9M",
+      "market_cap_b": 6.277,
       "rs_ibd": 99,
-      "above50dma_pct": 97.2
+      "above50dma_pct": 104.0
     },
     {
       "ticker": "XP",
       "company": "XP Inc.",
       "industry": "Investment Banks/Brokers",
-      "price": 30.21,
-      "change_pct": 2.3,
-      "adr_pct": 4.3,
-      "dollar_volume": "$455.5M",
-      "market_cap_b": 15.619,
-      "rs_ibd": 93,
-      "above50dma_pct": 56.3
+      "price": 32.22,
+      "change_pct": 6.65,
+      "adr_pct": 4.2,
+      "dollar_volume": "$505.1M",
+      "market_cap_b": 16.658,
+      "rs_ibd": 95,
+      "above50dma_pct": 64.2
+    },
+    {
+      "ticker": "MRNA",
+      "company": "Moderna, Inc.",
+      "industry": "Biotechnology",
+      "price": 225.0,
+      "change_pct": 14.21,
+      "adr_pct": 6.8,
+      "dollar_volume": "$4.32B",
+      "market_cap_b": 89.828,
+      "rs_ibd": 98,
+      "above50dma_pct": 62.7
+    },
+    {
+      "ticker": "IOVA",
+      "company": "Iovance Biotherapeutics, Inc.",
+      "industry": "Biotechnology",
+      "price": 14.62,
+      "change_pct": 9.84,
+      "adr_pct": 6.3,
+      "dollar_volume": "$328.5M",
+      "market_cap_b": 6.622,
+      "rs_ibd": 98,
+      "above50dma_pct": 59.7
+    },
+    {
+      "ticker": "GRAL",
+      "company": "GRAIL, Inc.",
+      "industry": "Medical Specialties",
+      "price": 140.58,
+      "change_pct": 6.01,
+      "adr_pct": 7.4,
+      "dollar_volume": "$176.0M",
+      "market_cap_b": 6.279,
+      "rs_ibd": 92,
+      "above50dma_pct": 53.9
+    },
+    {
+      "ticker": "SECZ",
+      "company": "Securitize Corp.",
+      "industry": "Packaged Software",
+      "price": 13.82,
+      "change_pct": 9.16,
+      "adr_pct": 10.5,
+      "dollar_volume": "$59.1M",
+      "market_cap_b": 2.256,
+      "rs_ibd": 91,
+      "above50dma_pct": 50.4
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.47,
-    "spx_1m": 2.29,
-    "spx_3m": 3.33,
-    "spx_34d": 1.19,
-    "spx_qtd": 1.29,
-    "spx_mtd": 1.29
+    "spx_1d": 0.59,
+    "spx_1m": 2.02,
+    "spx_3m": 3.55,
+    "spx_34d": 2.07,
+    "spx_qtd": 1.89,
+    "spx_mtd": 1.89
   },
-  "fetched_at_utc": "2026-10-09T03:07:20+00:00"
+  "fetched_at_utc": "2026-10-09T23:15:06+00:00"
 }

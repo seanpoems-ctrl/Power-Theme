@@ -1,6 +1,52 @@
 {
-  "generated_at": "2026-10-09T03:07:19.388291+00:00",
+  "generated_at": "2026-10-09T23:15:05.839720+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 97.5,
+      "perf_1d": 12.48,
+      "leaders": [
+        {
+          "ticker": "PENG",
+          "price": 76.28,
+          "rs_52w": 98,
+          "adr_pct": 6.04,
+          "vol_surge": 2.0,
+          "mkt_cap": 3908793017,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "HUM",
+          "price": 431.87,
+          "rs_52w": 97,
+          "adr_pct": 4.3,
+          "vol_surge": 3.96,
+          "mkt_cap": 51859082029,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }

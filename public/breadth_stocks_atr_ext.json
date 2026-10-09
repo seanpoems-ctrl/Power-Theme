@@ -2,55 +2,31 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 7,
+  "count": 5,
   "stocks": [
-    {
-      "ticker": "CD",
-      "company": "Chaince Digital Holdings Inc. - American",
-      "industry": "Information Technology Services",
-      "price": 10.91,
-      "change_pct": 7.49,
-      "adr_pct": 9.6,
-      "dollar_volume": "$2.9M",
-      "market_cap_b": 1.2,
-      "rs_ibd": 95,
-      "atr_ext_val": 16.72
-    },
     {
       "ticker": "XP",
       "company": "XP Inc.",
       "industry": "Investment Banks/Brokers",
-      "price": 30.21,
-      "change_pct": 2.3,
-      "adr_pct": 4.3,
-      "dollar_volume": "$455.5M",
-      "market_cap_b": 15.619,
-      "rs_ibd": 93,
-      "atr_ext_val": 13.09
+      "price": 32.22,
+      "change_pct": 6.65,
+      "adr_pct": 4.2,
+      "dollar_volume": "$505.1M",
+      "market_cap_b": 16.658,
+      "rs_ibd": 95,
+      "atr_ext_val": 15.25
     },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 94.26,
-      "change_pct": 3.49,
-      "adr_pct": 7.5,
-      "dollar_volume": "$620.4M",
-      "market_cap_b": 5.924,
+      "price": 99.87,
+      "change_pct": 5.95,
+      "adr_pct": 7.1,
+      "dollar_volume": "$651.9M",
+      "market_cap_b": 6.277,
       "rs_ibd": 99,
-      "atr_ext_val": 12.91
-    },
-    {
-      "ticker": "ARX",
-      "company": "Accelerant Holdings",
-      "industry": "Property/Casualty Insurance",
-      "price": 19.75,
-      "change_pct": 0.0,
-      "adr_pct": 0.7,
-      "dollar_volume": "$35.3M",
-      "market_cap_b": 4.289,
-      "rs_ibd": 83,
-      "atr_ext_val": 12.82
+      "atr_ext_val": 14.71
     },
     {
       "ticker": "ACVA",
@@ -58,44 +34,44 @@
       "industry": "Internet Software/Services",
       "price": 10.44,
       "change_pct": 0.0,
-      "adr_pct": 1.7,
-      "dollar_volume": "$82.1M",
+      "adr_pct": 1.6,
+      "dollar_volume": "$79.5M",
       "market_cap_b": 1.773,
-      "rs_ibd": 72,
-      "atr_ext_val": 12.07
+      "rs_ibd": 73,
+      "atr_ext_val": 12.48
     },
     {
-      "ticker": "HZO",
-      "company": "MarineMax, Inc. (FL)",
-      "industry": "Specialty Stores",
-      "price": 52.43,
-      "change_pct": -0.08,
-      "adr_pct": 0.5,
-      "dollar_volume": "$35.6M",
-      "market_cap_b": 1.158,
-      "rs_ibd": 91,
-      "atr_ext_val": 11.0
+      "ticker": "ARX",
+      "company": "Accelerant Holdings",
+      "industry": "Property/Casualty Insurance",
+      "price": 19.8,
+      "change_pct": 0.25,
+      "adr_pct": 0.6,
+      "dollar_volume": "$37.1M",
+      "market_cap_b": 4.3,
+      "rs_ibd": 82,
+      "atr_ext_val": 12.18
     },
     {
       "ticker": "PCRX",
       "company": "Pacira BioSciences, Inc.",
       "industry": "Pharmaceuticals: Major",
-      "price": 36.39,
-      "change_pct": 44.4,
-      "adr_pct": 4.3,
-      "dollar_volume": "$123.5M",
-      "market_cap_b": 1.451,
+      "price": 36.31,
+      "change_pct": -0.22,
+      "adr_pct": 4.0,
+      "dollar_volume": "$138.6M",
+      "market_cap_b": 1.447,
       "rs_ibd": 84,
-      "atr_ext_val": 10.04
+      "atr_ext_val": 10.41
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.47,
-    "spx_1m": 2.29,
-    "spx_3m": 3.33,
-    "spx_34d": 1.19,
-    "spx_qtd": 1.29,
-    "spx_mtd": 1.29
+    "spx_1d": 0.59,
+    "spx_1m": 2.02,
+    "spx_3m": 3.55,
+    "spx_34d": 2.07,
+    "spx_qtd": 1.89,
+    "spx_mtd": 1.89
   },
-  "fetched_at_utc": "2026-10-09T03:07:20+00:00"
+  "fetched_at_utc": "2026-10-09T23:15:06+00:00"
 }
