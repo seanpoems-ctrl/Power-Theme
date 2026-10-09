@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-09 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious / Divergent Flows",
+    "spy_price": 773.93,
+    "spy_change_pct": -0.42,
+    "vix": 15.31,
+    "hy_oas": 3.09,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 34.4,
+    "mmth": 51.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Reports suggest Apple is nearing a significant AI integration announcement for its iOS ecosystem, potentially boosting future service revenue projections."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet is trending after a leaked internal memo outlined aggressive new cost-cutting measures expected to significantly improve operating margins in Q4."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon is a recycled candidate showing consolidation, with traders watching for a potential technical breakout or breakdown on current flow-driven dynamics."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-08 20:38 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corp.",
           "reason": "Exxon Mobil Corp. experienced renewed selling pressure as crude oil prices plummeted, underscoring commodity-driven weakness in the energy sector."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-18 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Flows, Oil Plummets",
-    "spy_price": 761.69,
-    "spy_change_pct": -0.12,
-    "vix": 14.81,
-    "hy_oas": 2.7,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 33.3,
-    "mmth": 54.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced promising late-stage clinical trial results for its new Alzheimer's drug, driving investor optimism regarding future revenue growth."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a groundbreaking AI integration across its enterprise software suite, signaling continued market leadership and boosting growth outlooks."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil saw selling pressure today on the back of plunging crude oil prices, continuing a recent trend of sensitivity to commodity market swings."
         }
       ]
     }
