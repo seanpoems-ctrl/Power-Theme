@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-08 20:38 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Risk-Off, Oil Driven",
+    "spy_price": 777.22,
+    "spy_change_pct": -0.24,
+    "vix": 15.41,
+    "hy_oas": 3.09,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 34.4,
+    "mmth": 51.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "WOLF",
+          "company": "Wolfspeed, Inc.",
+          "reason": "Wolfspeed (WOLF) confirmed a conditional loan commitment from the U.S. Department of War, signaling significant government backing for its advanced semiconductor manufacturing capabilities."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) announced a strategic partnership with a major defense contractor, aiming to integrate its AI and cloud solutions into next-generation national security platforms."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon (AMZN) exhibited range-bound trading today, attributed to persistent technical resistance near recent highs and ongoing consolidation after last week's holiday sales update."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-08 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil saw selling pressure today on the back of plunging crude oil prices, continuing a recent trend of sensitivity to commodity market swings."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-18 10:54 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Divergence, Oil Slump",
-    "spy_price": 759.79,
-    "spy_change_pct": -0.37,
-    "vix": 15.35,
-    "hy_oas": 2.7,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 33.6,
-    "mmth": 53.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announces a strategic acquisition of a leading AI-powered cybersecurity firm, expanding its enterprise security offerings and cloud solutions."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly's new Alzheimer's drug shows highly positive results in Phase 3 trials, setting it up for expedited regulatory review and significant market potential."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil faces continued pressure from the significant global crude oil price decline, driving bearish sentiment without specific new company developments."
         }
       ]
     }
