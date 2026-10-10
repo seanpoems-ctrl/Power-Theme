@@ -1,31 +1,31 @@
 {
-  "generated_at": "2026-10-09 16:45 ET",
+  "generated_at": "2026-10-09 20:18 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 778.57,
-      "open": 776.24,
-      "high": 779.42,
-      "low": 775.14,
-      "close": 778.57,
-      "prev_open": 774.86,
-      "prev_close": 773.93,
-      "volume": 21433834,
-      "change_pct": 0.6
+      "price": 773.93,
+      "open": 774.86,
+      "high": 777.09,
+      "low": 770.44,
+      "close": 773.93,
+      "prev_open": 775.77,
+      "prev_close": 777.22,
+      "volume": 40431100,
+      "change_pct": -0.42
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 751.27,
-      "open": 752.55,
-      "high": 752.86,
-      "low": 748.36,
-      "close": 751.27,
-      "prev_open": 753.97,
-      "prev_close": 747.58,
-      "volume": 20134184,
-      "change_pct": 0.49
+      "price": 747.58,
+      "open": 753.97,
+      "high": 757.18,
+      "low": 743.23,
+      "close": 747.58,
+      "prev_open": 753.79,
+      "prev_close": 757.73,
+      "volume": 49694800,
+      "change_pct": -1.34
     },
     "^VIX": {
       "label": "VIX",
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 91.7,
+      "price": 91.66,
       "open": 91.29,
       "high": 92.16,
       "low": 90.01,
-      "close": 91.7,
+      "close": 91.66,
       "prev_open": 89.0,
       "prev_close": 91.49,
-      "volume": 200612,
-      "change_pct": 0.23
+      "volume": 202262,
+      "change_pct": 0.19
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25087.27,
-      "open": 24976.97,
-      "high": 25164.74,
-      "low": 24955.71,
-      "close": 25087.27,
-      "prev_open": 24884.62,
-      "prev_close": 24806.97,
-      "volume": 0,
-      "change_pct": 1.13
+      "price": 24806.97,
+      "open": 24884.62,
+      "high": 24997.26,
+      "low": 24792.79,
+      "close": 24806.97,
+      "prev_open": 25280.67,
+      "prev_close": 25104.36,
+      "volume": 49785000,
+      "change_pct": -1.18
     }
   },
   "fred": {
     "hy_oas": 3.15,
-    "yield_curve": 0.47,
+    "yield_curve": 0.44,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: October 09, 2026",
-    "mood_emoji": "💪",
-    "mood": "Risk-On / Broad Market Strength",
-    "narrative": "US and European equities advanced today, propelled by falling volatility and positive macro indicators. Despite weakness in Asian markets, a complacent credit environment suggests continued institutional risk appetite.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 778.57 | +0.60% | 📈 |\n| Nasdaq 100 ETF | 751.27 | +0.49% | ➡️ |\n| VIX | 14.84 | -3.70% | 📉 |\n| Crude Oil | 91.70 | +0.23% | ➡️ |\n| Nikkei 225 | 69042.11 | -1.42% | 📉 |\n| DAX | 25087.27 | +1.13% | 📈 |",
-    "macro_section": "High Yield Credit Spreads remain at a complacent 3.15%, indicating low perceived risk in corporate credit markets. Concurrently, the 10-Year minus 2-Year Yield Curve measures a healthy +0.470, signalling a normal to steepening regime and reinforcing institutional comfort with capital deployment.",
-    "analysis_para1": "Today's global tape presented a bifurcated picture, with the Nikkei 225 retreating by -1.42% while the DAX surged +1.13%. Despite this Asian deceleration, Crude Oil edged up +0.23% and critically, US High Yield Credit Spreads held firm at a complacent 3.15%. This divergence suggests a contained regional risk-off event in Asia rather than a broad flight to safety, implying US risk appetite remains robust, unperturbed by overseas tremors.",
-    "analysis_para2": "The primary driver behind today's positive flow was a continuation of broad risk-on sentiment, likely amplified by positioning dynamics rather than a singular macro event. With the VIX declining sharply by -3.70% to 14.84, institutional investors likely capitalized on perceived stability, leading to short covering and renewed accumulation. This mechanical catalyst suggests a market comfortable with current valuations, lacking immediate triggers for significant downside.",
-    "analysis_para3": "Traders should monitor the S&P 500 ETF for a sustained hold above the 775.00 level, which now acts as immediate support following today's close at 778.57. Key triggers for long entries would involve confirmation of improved market breadth, specifically if the percentage of S&P 500 stocks above SMA50 begins to climb towards 50%. A definitive risk-off threshold would be a break below 770.00 for the S&P 500 ETF, alongside a sharp spike in the VIX above 16.00, signaling a potential sentiment shift. For today, maintain existing long positions and be prepared for potential profit-taking should momentum wane.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF closed higher, with the VIX falling, but market breadth, indicated by only 38.1% of S&P 500 stocks above SMA50, suggests underlying divergence. Watch for either a significant improvement in breadth or a sharp uptick in volatility to signal a potential shift in the current upward trajectory.",
+    "mood_emoji": "🤔",
+    "mood": "Tech Weakness, Global Caution",
+    "narrative": "US equities closed lower, primarily driven by a significant pullback in technology stocks, reflecting broader global market weakness. Despite the decline, the Volatility Index moved lower, indicating a lack of widespread panic among investors.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 773.93 | -0.42% | ➡️ |\n| Nasdaq 100 ETF | 747.58 | -1.34% | 📉 |\n| VIX | 14.84 | -3.70% | 📉 |\n| Crude Oil | 91.66 | +0.19% | ➡️ |\n| Nikkei 225 | 69042.11 | -1.42% | 📉 |\n| DAX | 24806.97 | -1.18% | 📉 |",
+    "macro_section": "High-yield credit spreads remain at a complacent 3.15%, signaling investor comfort with risk despite today's market action. Concurrently, the 10-year minus 2-year yield curve stands at a normal and steepening +0.440, typically indicative of a healthy economic outlook or expectations of future growth. This combination generally supports institutional risk appetite, albeit with a watchful eye on equity performance.",
+    "analysis_para1": "Global equity markets exhibited notable weakness today, with the Nikkei 225 declining a significant 1.42% to 69042.11 and the DAX falling 1.18% to 24806.97. Despite this widespread risk-off sentiment across international bourses, the US high-yield credit spread holds at a complacent 3.15%. While crude oil saw a marginal gain of 0.19% to 91.66, the overall global tape, particularly the equity declines, suggests a cautious undercurrent that could challenge this current institutional complacency if sustained, potentially impacting US risk appetite in the coming sessions.",
+    "analysis_para2": "Today's primary market flow, characterized by broad equity declines led by technology, appears driven by a mechanical catalyst of sector rebalancing and profit-taking. Despite fresh positive catalysts for select names, the significant -1.34% drop in the Nasdaq 100 ETF suggests institutional investors are rotating out of richly valued growth sectors. The accompanying -3.70% decline in the Volatility Index further supports this narrative, indicating an orderly unwinding of positions rather than a panic-driven sell-off, as participants adjust exposures ahead of anticipated shifts.",
+    "analysis_para3": "With the S&P 500 ETF currently at 773.93, traders should establish 770 as a crucial near-term support level. A breach below 770 could trigger further downside towards 765, signaling a potential short entry for momentum continuation. Conversely, a sustained bounce above 775, coupled with increased volume, could provide a speculative long opportunity for a retest of today's highs. Risk-off thresholds should be set tightly, with a clear stop-loss if the S&P 500 ETF closes below 768, as this would indicate a stronger bearish impulse developing. Today, focus on observing volume profiles around these key levels to confirm conviction.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 stands at 38.1% and S&P stocks above SMA200 at 52.0%, suggesting a mixed technical picture with slightly more than half of stocks maintaining long-term bullish trends despite today's weakness. Watch for a definitive close above resistance or below support on increased volume to signal the next directional move.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "LITE",
           "company": "Lumentum Holdings Inc.",
-          "reason": "Bolstered by a significant surge in optics sector demand, Lumentum Holdings Inc. is positioned for continued upside momentum."
+          "reason": "Lumentum Holdings Inc. is experiencing strong upward momentum driven by a significant surge in demand across the optics sector, indicating robust fundamental tailwinds."
         },
         {
           "ticker": "ACHR",
           "company": "Archer Aviation Inc.",
-          "reason": "Archer Aviation Inc. received a strong conviction boost from Barclays' upgrade to Overweight, signaling renewed institutional interest."
+          "reason": "Archer Aviation Inc. received a notable upgrade to Overweight from Barclays, signaling increased analyst confidence and potential for future upside."
         }
       ],
       "c_grade": [
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft Corporation exhibited pure technical flow today, with its established trend continuing without specific new fundamental catalysts."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) showed continued technical pressure today, reflecting broader sector rebalancing and profit-taking after recent strong performance."
         }
       ]
     }

@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-09 20:18 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech Weakness, Global Caution",
+    "spy_price": 773.93,
+    "spy_change_pct": -0.42,
+    "vix": 14.84,
+    "hy_oas": 3.15,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 38.1,
+    "mmth": 52.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LITE",
+          "company": "Lumentum Holdings Inc.",
+          "reason": "Lumentum Holdings Inc. is experiencing strong upward momentum driven by a significant surge in demand across the optics sector, indicating robust fundamental tailwinds."
+        },
+        {
+          "ticker": "ACHR",
+          "company": "Archer Aviation Inc.",
+          "reason": "Archer Aviation Inc. received a notable upgrade to Overweight from Barclays, signaling increased analyst confidence and potential for future upside."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) showed continued technical pressure today, reflecting broader sector rebalancing and profit-taking after recent strong performance."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-09 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to see strong flow-driven momentum, likely a continuation of interest in AI and semiconductor trends rather than a fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-21 12:57 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Equity Rally, Oil Plunge",
-    "spy_price": 772.12,
-    "spy_change_pct": 1.37,
-    "vix": 15.1,
-    "hy_oas": 2.68,
-    "yield_curve": 0.25,
-    "credit_status": "Complacent",
-    "s5fi": 36.3,
-    "mmth": 54.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSTR",
-          "company": "MicroStrategy, Inc.",
-          "reason": "MicroStrategy's reiterated Bitcoin Treasury Strategy amidst today's market conditions signals continued aggressive capital allocation towards digital assets, resonating with investors bullish on cryptocurrency exposure."
-        },
-        {
-          "ticker": "BMNR",
-          "company": "Binary Minerals Corp.",
-          "reason": "BMNR's disclosure of significant crypto and cash holdings positions it as a key beneficiary of digital asset enthusiasm, offering a unique blend of stability and growth potential in a volatile market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "ExxonMobil Corporation",
-          "reason": "ExxonMobil is vulnerable to today's significant crude oil price plunge, facing potential headwinds to its revenue and profit outlook, warranting caution despite broader market strength."
         }
       ]
     }
