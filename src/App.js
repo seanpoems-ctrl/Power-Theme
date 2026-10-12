@@ -16404,52 +16404,55 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
       </div>
       <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
         {rows.length === 0 ? <p className="text-xs text-zinc-600 italic py-3">No stocks pass these rules today — widen the support distance or the pullback range.</p> : (
-          <div className="overflow-x-auto rounded-lg border border-zinc-800">
-            <table className="w-full text-xs border-collapse">
+          // Fixed layout with percentage column widths: the table always fits its card (no horizontal scroll). Two-line cells merge related numbers.
+          <div className="rounded-lg border border-zinc-800 overflow-hidden">
+            <table className="w-full text-[11px] border-collapse table-fixed">
+              <colgroup>
+                {[4, 14, 10, 10, 8, 8, 9, 5, 7, 6, 7, 5, 7].map((w, i) => <col key={i} style={{ width: `${w}%` }} />)}
+              </colgroup>
               <thead>
                 <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-                  <SortTh sort={sort} col="score" label="Score" title="Ranking score (higher = closer to the ideal setup)" />
-                  <SortTh sort={sort} col="ticker" label="Symbol" textual align="left" />
-                  <SortTh sort={sort} col="sources" label="Lists" textual align="left" title="F Focus List · U Universe · L Liquid Leaders · S Super Liquid Leaders" />
-                  <SortTh sort={sort} col="industry" label="Industry" textual align="left" />
-                  <SortTh sort={sort} col="status" label="Status" textual align="left" title="Trigger = green day closing above the prior high, or an EMA10 reclaim (daily proxy)" />
-                  <SortTh sort={sort} col="leg_pct" label="Up-leg" title="Swing low → swing high over the last 60 sessions" />
-                  <SortTh sort={sort} col="pullback_pct" label="Pullback" title="Distance below that swing high" />
-                  <SortTh sort={sort} col="support_dist_atr" label="To support" title="ATRs above the nearest of EMA21 / SMA50 (negative = just under it)" />
-                  <SortTh sort={sort} col="adr_pct" label="ADR" />
-                  <SortTh sort={sort} col="stop" label="Stop" title="Lowest low of the last 5 sessions" />
-                  <SortTh sort={sort} col="risk_pct" label="Risk" title="Distance from the last price to that stop" />
-                  <SortTh sort={sort} col="risk_adr" label="Risk÷ADR" title="≤ 1 = stop within one normal day's range" />
-                  <SortTh sort={sort} col="ret_1m" label="1M" />
-                  <SortTh sort={sort} col="ret_3m" label="3M" />
-                  <SortTh sort={sort} col="extension" label="Extension" title={EXTENSION_TIP} />
-                  <SortTh sort={sort} col="avg_dollar_volume" label="Avg $ Vol" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="score" label="Score" title="Ranking score (higher = closer to the ideal setup)" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="ticker" label="Symbol" textual align="left" title="Under the symbol: F Focus List · U Universe · L Liquid Leaders · S Super Liquid Leaders" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="industry" label="Industry" textual align="left" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="status" label="Status" textual align="left" title="Trigger = green day closing above the prior high, or an EMA10 reclaim (daily proxy)" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="leg_pct" label="Up-leg" title="Swing low → swing high over the last 60 sessions" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="pullback_pct" label="Pullback" title="Distance below that swing high" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="support_dist_atr" label="To support" title="ATRs above the nearest of EMA21 / SMA50 (negative = just under it)" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="adr_pct" label="ADR" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="risk_pct" label="Stop · Risk" title="Stop = lowest low of the last 5 sessions; Risk = distance from the last price to it" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="risk_adr" label="Risk÷ADR" title="≤ 1 = stop within one normal day's range" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="ret_1m" label="1M · 3M" title="Price change over 1 and 3 months" />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="extension" label="Ext." title={EXTENSION_TIP} />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="avg_dollar_volume" label="$ Vol" title="Average dollar volume" />
                 </tr>
               </thead>
               <tbody>
                 {sort.rows.map((r, i) => (
                   <tr key={r.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.score}</td>
-                    <td className="px-3 py-1.5 text-left whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
-                    <td className="px-3 py-1.5 text-left whitespace-nowrap">{r.sources.split("").map(k => <span key={k} title={PULLBACK_SRC[k][0]} className={`mr-0.5 text-[9px] font-mono font-bold px-1 py-0.5 rounded border ${PULLBACK_SRC[k][1]}`}>{k}</span>)}</td>
-                    <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[180px] truncate">{r.industry || "—"}</td>
-                    <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${r.status === "Trigger" ? "bg-emerald-500/20 text-emerald-300" : "bg-zinc-700/40 text-zinc-300"}`}>{r.status}</span>
-                      {r.reclaim_ema10 && <span className="ml-1 text-[9px] text-emerald-400" title="Reclaimed the 10-day EMA today">EMA10↑</span>}
-                      {(r.tight || r.inside_bar) && <span className="ml-1 text-[9px] text-amber-300" title="Coiling: tight 3-day range / inside day">{r.inside_bar ? "ID" : "Tight"}</span>}
-                      {r.vol_dry != null && r.vol_dry < 0.9 && <span className="ml-1 text-[9px] text-sky-300" title="Volume drying up on the pullback">Dry</span>}
+                    <td className="px-1.5 py-1.5 text-center font-mono text-zinc-300">{r.score}</td>
+                    <td className="px-1.5 py-1.5 text-left">
+                      <div className="truncate"><StockCell ticker={r.ticker} /></div>
+                      <div className="mt-0.5">{r.sources.split("").map(k => <span key={k} title={PULLBACK_SRC[k][0]} className={`mr-0.5 text-[8px] font-mono font-bold px-1 rounded border ${PULLBACK_SRC[k][1]}`}>{k}</span>)}</div>
                     </td>
-                    <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{pf(r.leg_pct)}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-rose-300">−{r.pullback_pct.toFixed(1)}%</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300 whitespace-nowrap">{r.support} <span className={r.support_dist_atr < 0 ? "text-rose-300" : "text-zinc-500"}>{r.support_dist_atr > 0 ? "+" : ""}{r.support_dist_atr.toFixed(2)}</span></td>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr_pct.toFixed(1)}%</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">${r.stop.toFixed(2)}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.risk_pct.toFixed(1)}%</td>
-                    <td className={`px-3 py-1.5 text-right font-mono ${r.risk_adr != null && r.risk_adr <= 1 ? "text-emerald-400" : "text-zinc-400"}`}>{r.risk_adr != null ? r.risk_adr.toFixed(2) : "—"}</td>
-                    <td className={`px-3 py-1.5 text-right font-mono ${r.ret_1m >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{pf(r.ret_1m)}</td>
-                    <td className={`px-3 py-1.5 text-right font-mono ${r.ret_3m >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{pf(r.ret_3m)}</td>
-                    <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.extension)}`}>{fmtExtension(r.extension)}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.avg_dollar_volume)}</td>
+                    <td className="px-1.5 py-1.5 text-left text-zinc-400"><div className="truncate" title={r.industry || ""}>{r.industry || "—"}</div></td>
+                    <td className="px-1.5 py-1.5 text-left">
+                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${r.status === "Trigger" ? "bg-emerald-500/20 text-emerald-300" : "bg-zinc-700/40 text-zinc-300"}`}>{r.status}</span>
+                      <div className="mt-0.5 leading-none">
+                        {r.reclaim_ema10 && <span className="mr-1 text-[9px] text-emerald-400" title="Reclaimed the 10-day EMA today">EMA10↑</span>}
+                        {(r.tight || r.inside_bar) && <span className="mr-1 text-[9px] text-amber-300" title="Coiling: tight 3-day range / inside day">{r.inside_bar ? "ID" : "Tight"}</span>}
+                        {r.vol_dry != null && r.vol_dry < 0.9 && <span className="text-[9px] text-sky-300" title="Volume drying up on the pullback">Dry</span>}
+                      </div>
+                    </td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-emerald-400">{pf(r.leg_pct)}</td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-rose-300">−{r.pullback_pct.toFixed(1)}%</td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-zinc-300"><div>{r.support}</div><div className={r.support_dist_atr < 0 ? "text-rose-300" : "text-zinc-500"}>{r.support_dist_atr > 0 ? "+" : ""}{r.support_dist_atr.toFixed(2)} ATR</div></td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-zinc-300">{r.adr_pct.toFixed(1)}%</td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-zinc-300"><div>${r.stop.toFixed(2)}</div><div className="text-zinc-500">{r.risk_pct.toFixed(1)}%</div></td>
+                    <td className={`px-1.5 py-1.5 text-right font-mono ${r.risk_adr != null && r.risk_adr <= 1 ? "text-emerald-400" : "text-zinc-400"}`}>{r.risk_adr != null ? r.risk_adr.toFixed(2) : "—"}</td>
+                    <td className="px-1.5 py-1.5 text-right font-mono"><div className={r.ret_1m >= 0 ? "text-emerald-400" : "text-rose-400"}>{pf(r.ret_1m)}</div><div className={r.ret_3m >= 0 ? "text-emerald-400/70" : "text-rose-400/70"}>{pf(r.ret_3m)}</div></td>
+                    <td className={`px-1.5 py-1.5 text-right font-mono ${extensionCls(r.extension)}`}>{fmtExtension(r.extension)}</td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.avg_dollar_volume)}</td>
                   </tr>
                 ))}
               </tbody>
