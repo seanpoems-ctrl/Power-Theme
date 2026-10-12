@@ -15529,6 +15529,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
       {/* ── LEADERSHIP (mode "leadership") ── */}
       {mode === "leadership" && <LeadershipScreen view={leadView} onViewChange={onLeadViewChange} etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Leadership", tickers })} />}
 
+      {/* ── PULLBACK WATCHLIST (mode "pullback") — Martin Luk method across Focus List / Universe / Liquid / Super Liquid ── */}
+      {mode === "pullback" && <PullbackScreen onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Pullback Watchlist", tickers })} />}
+
       {/* ── UNIVERSE (mode "adrUniverse" — not to be confused with mode "universe" = Group ETF) ── */}
       {mode === "adrUniverse" && <UniverseScreen stocks={screenerStocks} tickerThemeMap={tickerThemeMap}
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Universe", tickers })} />}
@@ -16272,6 +16275,192 @@ const UNIVERSE_DEFAULTS = { adr: 5, dvolM: 500, volM: 1, etfOn: true, etfAdr: 3 
 const UNIVERSE_LS_KEY = "universe_criteria_v1";
 // Tickers whose TradingView data is known-bad and would pass the screen by accident (CTVA: unadjusted spin-off price → ADR 40.9%).
 const UNIVERSE_EXCLUDE = new Set(["CTVA"]);
+// ─────────────────────────────────────────────────────────────────────────────
+// Pullback Watchlist (Stocks → Pullback Watchlist) — Martin Luk's pullback-buy method on the stocks from Focus List, Universe, Liquid Leaders and
+// Super Liquid Leaders. Built nightly by pullback_builder.py (public/pullback_watchlist.json); every cut-off below is editable here.
+//   1  a strong stock has made an up-leg         → Up-leg % (swing low → swing high of the last 60 sessions), ADR %, above the 50-day
+//   2  it comes back to support on the daily      → Pullback % from that high, and the distance (in ATRs) to the nearest of EMA21 / SMA50
+//   3  buy when it turns back up (minute trigger) → Status: Trigger = a green day closing above the prior high, or an EMA10 reclaim (DAILY proxy
+//                                                   only — the entry itself is still taken on the intraday chart)
+//   4  hold the stop, scale out into strength     → Stop = lowest low of the last 5 sessions, Risk % to it, and Risk ÷ ADR (≤ 1 = stop within a day's range)
+// ─────────────────────────────────────────────────────────────────────────────
+const PULLBACK_DEFAULTS = { adr: 4, leg: 25, pbMin: 4, pbMax: 30, supMin: -1, supMax: 1.5, dvolM: 20, needSma50: true, src: { F: true, U: true, L: true, S: true }, status: "all" };
+const PULLBACK_LS_KEY = "pullback_criteria_v1";
+const PULLBACK_SRC = { F: ["Focus List", "text-amber-300 bg-amber-500/15 border-amber-500/30"], U: ["Universe", "text-cyan-300 bg-cyan-500/15 border-cyan-500/30"],
+  L: ["Liquid Leaders", "text-orange-300 bg-orange-500/15 border-orange-500/30"], S: ["Super Liquid Leaders", "text-fuchsia-300 bg-fuchsia-500/15 border-fuchsia-500/30"] };
+const pullbackStatus = r => (r.turn_up || r.reclaim_ema10) ? "Trigger" : "Watch";
+// Ranking score: closer to support, bigger prior leg, daily trigger, coiling, quiet volume, on several lists, stop within a day's range.
+const pullbackScore = r => {
+  let sc = 0;
+  if (pullbackStatus(r) === "Trigger") sc += 20;
+  sc += Math.max(0, 20 - 12 * Math.abs(r.support_dist_atr ?? 2));
+  sc += Math.min(20, (r.leg_pct ?? 0) / 5);
+  if (r.tight || r.inside_bar) sc += 8;
+  if (r.vol_dry != null && r.vol_dry < 0.9) sc += 8;
+  sc += Math.min(2, (r.sources || "").length - 1) * 5;
+  if (r.risk_adr != null && r.risk_adr <= 1) sc += 10;
+  return Math.round(sc);
+};
+const PullbackScreen = ({ onMiniCharts = null }) => {
+  const [file, setFile] = React.useState(null);
+  const [crit, setCrit] = React.useState(() => {
+    try {
+      const v = JSON.parse(localStorage.getItem(PULLBACK_LS_KEY) || "null");
+      if (v) return { ...PULLBACK_DEFAULTS, ...v, src: { ...PULLBACK_DEFAULTS.src, ...(v.src || {}) } };
+    } catch { /* defaults */ }
+    return PULLBACK_DEFAULTS;
+  });
+  React.useEffect(() => { try { localStorage.setItem(PULLBACK_LS_KEY, JSON.stringify(crit)); } catch { /* ignore */ } }, [crit]);
+  const [copied, setCopied] = React.useState(false);
+  React.useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/pullback_watchlist.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.rows) setFile(d); }).catch(() => {});
+  }, []);
+  const set = (k, v) => setCrit(c => ({ ...c, [k]: v }));
+  const num = (k, v) => set(k, Number.isFinite(v) ? v : 0);
+  const isDefault = JSON.stringify(crit) === JSON.stringify(PULLBACK_DEFAULTS);
+
+  const all = React.useMemo(() => (file?.rows || []).map(r => ({ ...r, status: pullbackStatus(r), score: pullbackScore(r), srcCount: (r.sources || "").length })), [file]);
+  const rows = React.useMemo(() => all.filter(r => {
+    if (!(r.sources || "").split("").some(k => crit.src[k])) return false;
+    if (crit.status !== "all" && r.status !== crit.status) return false;
+    if ((r.adr_pct ?? 0) < crit.adr) return false;
+    if ((r.leg_pct ?? 0) < crit.leg) return false;
+    if (crit.needSma50 && !r.above_sma50) return false;
+    if (r.pullback_pct < crit.pbMin || r.pullback_pct > crit.pbMax) return false;
+    if (r.support_dist_atr < crit.supMin || r.support_dist_atr > crit.supMax) return false;
+    if (r.avg_dollar_volume != null && r.avg_dollar_volume < crit.dvolM * 1e6) return false;
+    return true;
+  }), [all, crit]);
+  const sort = useTableSort(rows, "score", "desc");
+  const fmtD = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
+  const pf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  const tickers = sort.rows.map(r => r.ticker);
+
+  const copy = () => { (navigator.clipboard?.writeText(tickers.join(",")) || Promise.reject()).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {}); };
+  const exportCsv = () => {
+    const head = ["Symbol", "Lists", "Industry", "Status", "Score", "Up-leg %", "Pullback %", "Support", "Dist (ATR)", "ADR %", "Stop", "Risk %", "Risk/ADR", "1M %", "3M %", "Extension", "Avg $ Vol"];
+    const lines = [head, ...sort.rows.map(r => [r.ticker, r.sources, r.industry || "", r.status, r.score, r.leg_pct, r.pullback_pct, r.support, r.support_dist_atr, r.adr_pct, r.stop, r.risk_pct, r.risk_adr, r.ret_1m, r.ret_3m, r.extension ?? "", r.avg_dollar_volume ?? ""])];
+    const csv = lines.map(l => l.map(c => `"${String(c ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = `pullback-watchlist-${file?.date || "latest"}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+  const input = (label, key, step, suffix) => (
+    <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">{label}
+      <input type="number" step={step} value={crit[key]} onChange={e => num(key, parseFloat(e.target.value))}
+        className="w-14 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" />
+      <span className="text-zinc-600">{suffix}</span>
+    </label>
+  );
+  if (!file) return <p className="text-xs text-zinc-600 italic py-6">Loading the pullback watchlist… (built nightly)</p>;
+  const triggerN = rows.filter(r => r.status === "Trigger").length;
+  return (
+    <div className="space-y-4">
+      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+        <div className="flex items-center gap-3 flex-wrap">
+          <h3 className="text-sm font-semibold text-zinc-100">Pullback Watchlist</h3>
+          <span className="text-[11px] text-zinc-500">Martin Luk's pullback-buy method · {rows.length} of {all.length} stocks pass · {triggerN} with a daily trigger · data {file.date}</span>
+          <div className="ml-auto flex items-center gap-2">
+            <button onClick={copy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : `Copy ${tickers.length}`}</button>
+            <button onClick={exportCsv} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
+            {onMiniCharts && rows.length > 0 && <button onClick={() => onMiniCharts(sort.rows.map(r => ({ ticker: r.ticker, category: r.industry })), "Pullback Watchlist")}
+              className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>}
+          </div>
+        </div>
+        <details className="mt-2 text-[11px] text-zinc-500">
+          <summary className="cursor-pointer text-zinc-400 hover:text-zinc-200">How this maps to the method (4 steps)</summary>
+          <ol className="mt-2 space-y-1 list-decimal pl-5 leading-snug">
+            <li><b className="text-zinc-300">A strong stock has already made an up-leg</b> — Up-leg % (swing low → swing high over the last 60 sessions), ADR %, and the 50-day still intact.</li>
+            <li><b className="text-zinc-300">It comes back to daily support</b> — Pullback % from that high, and how many ATRs price sits above the nearest of EMA21 / SMA50 (negative = just under it).</li>
+            <li><b className="text-zinc-300">Buy when it turns back up</b> — <span className="text-emerald-400">Trigger</span> = a green day closing above the prior day's high, or a reclaim of the EMA10. This is only the DAILY proxy; the real entry is the intraday trigger (e.g. opening-range break / VWAP reclaim) on your minute chart.</li>
+            <li><b className="text-zinc-300">Hold the stop, scale out into strength</b> — Stop = lowest low of the last 5 sessions; Risk % to it; Risk ÷ ADR ≤ 1 means the stop is within one normal day's range (the entry sits right next to the stop).</li>
+          </ol>
+          <p className="mt-2 text-zinc-600">Lists: <b className="text-amber-300">F</b> Focus List · <b className="text-cyan-300">U</b> Universe (ADR &gt; 5 %, $ vol &gt; $500M, vol &gt; 1M) · <b className="text-orange-300">L</b> Liquid Leaders · <b className="text-fuchsia-300">S</b> Super Liquid Leaders. Score ranks closeness to support, size of the prior leg, a daily trigger, coiling, quiet pullback volume, appearing on several lists, and a stop inside one ADR. It is a screen, not advice.</p>
+        </details>
+        <div className="flex items-center gap-4 flex-wrap mt-3 pt-3 border-t border-zinc-800/60">
+          {input("ADR ≥", "adr", 0.5, "%")}
+          {input("Up-leg ≥", "leg", 5, "%")}
+          {input("Pullback", "pbMin", 1, "%")}{input("to", "pbMax", 1, "%")}
+          {input("Support dist.", "supMin", 0.25, "ATR")}{input("to", "supMax", 0.25, "ATR")}
+          {input("Avg $ Vol ≥", "dvolM", 5, "M")}
+          <label className="flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer"><input type="checkbox" checked={crit.needSma50} onChange={e => set("needSma50", e.target.checked)} className="accent-blue-500" />Above 50-day</label>
+          {!isDefault && <button onClick={() => setCrit(PULLBACK_DEFAULTS)} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>}
+        </div>
+        <div className="flex items-center gap-2 flex-wrap mt-3">
+          <span className="text-[11px] text-zinc-600">Lists:</span>
+          {Object.entries(PULLBACK_SRC).map(([k, [name, cls]]) => (
+            <button key={k} onClick={() => setCrit(c => ({ ...c, src: { ...c.src, [k]: !c.src[k] } }))} title={name}
+              className={`text-[11px] px-2 py-0.5 rounded border font-mono font-semibold transition-opacity ${cls} ${crit.src[k] ? "" : "opacity-30"}`}>{k} · {name} <span className="opacity-70">{file.sources?.[k] ?? 0}</span></button>
+          ))}
+          <div className="ml-auto flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+            {[["all", "All"], ["Trigger", "Trigger"], ["Watch", "Watch"]].map(([k, l]) => (
+              <button key={k} onClick={() => set("status", k)}
+                className={`px-3 py-0.5 text-[11px] font-medium rounded-md transition-all ${crit.status === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+        {rows.length === 0 ? <p className="text-xs text-zinc-600 italic py-3">No stocks pass these rules today — widen the support distance or the pullback range.</p> : (
+          <div className="overflow-x-auto rounded-lg border border-zinc-800">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                  <SortTh sort={sort} col="score" label="Score" title="Ranking score (higher = closer to the ideal setup)" />
+                  <SortTh sort={sort} col="ticker" label="Symbol" textual align="left" />
+                  <SortTh sort={sort} col="sources" label="Lists" textual align="left" title="F Focus List · U Universe · L Liquid Leaders · S Super Liquid Leaders" />
+                  <SortTh sort={sort} col="industry" label="Industry" textual align="left" />
+                  <SortTh sort={sort} col="status" label="Status" textual align="left" title="Trigger = green day closing above the prior high, or an EMA10 reclaim (daily proxy)" />
+                  <SortTh sort={sort} col="leg_pct" label="Up-leg" title="Swing low → swing high over the last 60 sessions" />
+                  <SortTh sort={sort} col="pullback_pct" label="Pullback" title="Distance below that swing high" />
+                  <SortTh sort={sort} col="support_dist_atr" label="To support" title="ATRs above the nearest of EMA21 / SMA50 (negative = just under it)" />
+                  <SortTh sort={sort} col="adr_pct" label="ADR" />
+                  <SortTh sort={sort} col="stop" label="Stop" title="Lowest low of the last 5 sessions" />
+                  <SortTh sort={sort} col="risk_pct" label="Risk" title="Distance from the last price to that stop" />
+                  <SortTh sort={sort} col="risk_adr" label="Risk÷ADR" title="≤ 1 = stop within one normal day's range" />
+                  <SortTh sort={sort} col="ret_1m" label="1M" />
+                  <SortTh sort={sort} col="ret_3m" label="3M" />
+                  <SortTh sort={sort} col="extension" label="Extension" title={EXTENSION_TIP} />
+                  <SortTh sort={sort} col="avg_dollar_volume" label="Avg $ Vol" />
+                </tr>
+              </thead>
+              <tbody>
+                {sort.rows.map((r, i) => (
+                  <tr key={r.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.score}</td>
+                    <td className="px-3 py-1.5 text-left whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
+                    <td className="px-3 py-1.5 text-left whitespace-nowrap">{r.sources.split("").map(k => <span key={k} title={PULLBACK_SRC[k][0]} className={`mr-0.5 text-[9px] font-mono font-bold px-1 py-0.5 rounded border ${PULLBACK_SRC[k][1]}`}>{k}</span>)}</td>
+                    <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[180px] truncate">{r.industry || "—"}</td>
+                    <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${r.status === "Trigger" ? "bg-emerald-500/20 text-emerald-300" : "bg-zinc-700/40 text-zinc-300"}`}>{r.status}</span>
+                      {r.reclaim_ema10 && <span className="ml-1 text-[9px] text-emerald-400" title="Reclaimed the 10-day EMA today">EMA10↑</span>}
+                      {(r.tight || r.inside_bar) && <span className="ml-1 text-[9px] text-amber-300" title="Coiling: tight 3-day range / inside day">{r.inside_bar ? "ID" : "Tight"}</span>}
+                      {r.vol_dry != null && r.vol_dry < 0.9 && <span className="ml-1 text-[9px] text-sky-300" title="Volume drying up on the pullback">Dry</span>}
+                    </td>
+                    <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{pf(r.leg_pct)}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-rose-300">−{r.pullback_pct.toFixed(1)}%</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300 whitespace-nowrap">{r.support} <span className={r.support_dist_atr < 0 ? "text-rose-300" : "text-zinc-500"}>{r.support_dist_atr > 0 ? "+" : ""}{r.support_dist_atr.toFixed(2)}</span></td>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr_pct.toFixed(1)}%</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">${r.stop.toFixed(2)}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.risk_pct.toFixed(1)}%</td>
+                    <td className={`px-3 py-1.5 text-right font-mono ${r.risk_adr != null && r.risk_adr <= 1 ? "text-emerald-400" : "text-zinc-400"}`}>{r.risk_adr != null ? r.risk_adr.toFixed(2) : "—"}</td>
+                    <td className={`px-3 py-1.5 text-right font-mono ${r.ret_1m >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{pf(r.ret_1m)}</td>
+                    <td className={`px-3 py-1.5 text-right font-mono ${r.ret_3m >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{pf(r.ret_3m)}</td>
+                    <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.extension)}`}>{fmtExtension(r.extension)}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.avg_dollar_volume)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null }) => {
   const [crit, setCrit] = React.useState(() => {
     try {
@@ -18750,6 +18939,7 @@ const appScreenerMap = useMemo(() => {
                 { label: "Universe", tab: "watchlist", mode: "adrUniverse" },
                 { label: "Liquid Leaders", tab: "watchlist", mode: "leadership", view: "stocks" },
                 { label: "Super Liquid Leaders", tab: "watchlist", mode: "leadership", view: "super" },
+                { label: "Pullback Watchlist", tab: "watchlist", mode: "pullback" },
               ] },
               { key: "themes", label: "Themes", items: [
                 { label: "Theme Tracker", tab: "watchlist", mode: "etf" },
