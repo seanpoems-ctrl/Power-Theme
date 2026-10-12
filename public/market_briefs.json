@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-12 16:13 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows, Underlying Caution",
+    "spy_price": 778.07,
+    "spy_change_pct": -0.06,
+    "vix": 15.22,
+    "hy_oas": 3.15,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 38.7,
+    "mmth": 53.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a significant new partnership to supply next-generation AI accelerators for a major cloud provider, boosting its data center segment outlook."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly reported positive Phase 3 clinical trial results for its novel obesity and metabolic disorder treatment, exceeding efficacy expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continued debate over Q4 production and delivery targets, coupled with CEO Elon Musk's social media activity, fueled significant intraday volatility."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-12 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSTR",
           "company": "MicroStrategy Incorporated",
           "reason": "MicroStrategy's exposure to Bitcoin's recent price appreciation continues to draw speculative interest, leading to volatile trading patterns."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-21 19:36 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Growth-Driven Optimism",
-    "spy_price": 773.5,
-    "spy_change_pct": 1.55,
-    "vix": 14.87,
-    "hy_oas": 2.68,
-    "yield_curve": 0.2,
-    "credit_status": "Complacent",
-    "s5fi": 36.5,
-    "mmth": 55.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSTR",
-          "company": "MicroStrategy Inc.",
-          "reason": "The company's reiterated Bitcoin treasury strategy and capital structure focus continue to attract significant speculative interest, driving strong price action."
-        },
-        {
-          "ticker": "BMNR",
-          "company": "Brightpoint Mining Resources Corp.",
-          "reason": "Disclosure of significant crypto and cash holdings has positioned the company as a key play for investors seeking exposure to the digital asset economy."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Today's movements were primarily driven by broader financial sector flows and technical positioning rather than fresh fundamental news."
         }
       ]
     }
