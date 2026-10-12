@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T02:14:27.576575+00:00",
+  "generated_at": "2026-10-12T23:10:28.640698+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3705,11 +3705,31 @@
     {
       "date": "2026-10-15",
       "time_et": "08:30",
+      "event": "Retail Sales Ex Gas/Autos MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "1.2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-15",
+      "time_et": "08:30",
       "event": "Core PPI YoY",
       "impact": "Low",
       "actual": null,
       "forecast": "4.4",
       "previous": "4.6",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-15",
+      "time_et": "08:30",
+      "event": "Retail Sales YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "6",
       "currency": "USD"
     },
     {
@@ -3765,6 +3785,16 @@
     {
       "date": "2026-10-15",
       "time_et": "08:30",
+      "event": "Retail Sales Ex Autos MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "0.5",
+      "previous": "1.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-15",
+      "time_et": "08:30",
       "event": "Philadelphia Fed Manufacturing Index",
       "impact": "Low",
       "actual": null,
@@ -3804,37 +3834,7 @@
     },
     {
       "date": "2026-10-15",
-      "time_et": "09:30",
-      "event": "Retail Sales Ex Gas/Autos MoM",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "1.2",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-15",
-      "time_et": "09:30",
-      "event": "Retail Sales YoY",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "6",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-15",
-      "time_et": "09:30",
-      "event": "Retail Sales Ex Autos MoM",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "0.5",
-      "previous": "1.4",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-15",
-      "time_et": "09:30",
+      "time_et": "08:30",
       "event": "Retail Sales MoM",
       "impact": "Low",
       "actual": null,
@@ -4279,7 +4279,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "1.403",
       "currency": "USD"
     },
     {
@@ -4305,21 +4305,21 @@
     {
       "date": "2026-10-20",
       "time_et": "10:00",
-      "event": "Pending Home Sales YoY",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "-4.7",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-20",
-      "time_et": "10:00",
       "event": "Pending Home Sales MoM",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "0.3",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-20",
+      "time_et": "10:00",
+      "event": "Pending Home Sales YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-4.7",
       "currency": "USD"
     },
     {
@@ -4509,7 +4509,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "5.42",
       "currency": "USD"
     },
     {
@@ -4549,7 +4549,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "-0.1",
       "currency": "USD"
     },
     {
@@ -4565,21 +4565,21 @@
     {
       "date": "2026-10-22",
       "time_et": "11:00",
-      "event": "Kansas Fed Composite Index",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "14",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-22",
-      "time_et": "11:00",
       "event": "Kansas Fed Manufacturing Index",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "20",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-22",
+      "time_et": "11:00",
+      "event": "Kansas Fed Composite Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "14",
       "currency": "USD"
     },
     {
@@ -4629,7 +4629,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "1.955",
       "currency": "USD"
     },
     {
@@ -4655,21 +4655,21 @@
     {
       "date": "2026-10-23",
       "time_et": "09:45",
-      "event": "S&P Global Services PMI Flash",
+      "event": "S&P Global Composite PMI Flash",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": "58.8",
+      "previous": "58.4",
       "currency": "USD"
     },
     {
       "date": "2026-10-23",
       "time_et": "09:45",
-      "event": "S&P Global Composite PMI Flash",
+      "event": "S&P Global Services PMI Flash",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "58.8",
       "currency": "USD"
     },
     {
@@ -4750,6 +4750,56 @@
       "actual": null,
       "forecast": null,
       "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-26",
+      "time_et": "08:30",
+      "event": "Chicago Fed National Activity Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-0.04",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-26",
+      "time_et": "10:30",
+      "event": "Dallas Fed Manufacturing Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "9.8",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-26",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-26",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-26",
+      "time_et": "13:00",
+      "event": "2-Year Note Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "4.787",
       "currency": "USD"
     }
   ]
