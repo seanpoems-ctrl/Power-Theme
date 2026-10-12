@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-12 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Divergence, Tech Pullback",
+    "spy_price": 778.1,
+    "spy_change_pct": -0.06,
+    "vix": 15.21,
+    "hy_oas": 3.15,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 39.4,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet's shares surged after the company announced a significant breakthrough in generative AI integration across its cloud services, securing a major enterprise client contract for its new platform."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "UnitedHealth Group received a favorable regulatory decision regarding its latest acquisition, paving the way for expanded market share in the growing healthcare services sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla experienced elevated trading volume driven by ongoing speculation about its Q4 production outlook and technical price action after breaking a short-term resistance level."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-12 16:13 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Despite lacking fresh news, Microsoft sees continued momentum in Azure cloud services, with analysts reiterating strong growth projections, making it a beneficiary of broader tech rotation."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-22 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Strong Equities / Risk-On",
-    "spy_price": 773.5,
-    "spy_change_pct": 1.55,
-    "vix": 14.8,
-    "hy_oas": 2.68,
-    "yield_curve": 0.2,
-    "credit_status": "Complacent",
-    "s5fi": 36.5,
-    "mmth": 55.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "New iOS AI features and robust hardware upgrade cycle are expected to drive stronger-than-anticipated Q4 revenue growth."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Strategic partnerships in cloud computing and enterprise AI solutions are positioning Microsoft for continued market share expansion."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSTR",
-          "company": "MicroStrategy Incorporated",
-          "reason": "MicroStrategy's exposure to Bitcoin's recent price appreciation continues to draw speculative interest, leading to volatile trading patterns."
         }
       ]
     }
