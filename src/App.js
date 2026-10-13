@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useRef, useId } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
-import { ChevronDown, ChevronRight, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronRight, Activity, RefreshCw, Search, SlidersHorizontal, X, Zap, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import { createChart, CandlestickSeries, LineSeries, HistogramSeries, createSeriesMarkers } from "lightweight-charts";
 import useMarketStore from "./useMarketStore";
@@ -58,15 +58,6 @@ const MOCK_DATA = {
 };
 
 const PERF_KEYS = [
-  { key: "perf_1d", label: "1D" },
-  { key: "perf_1w", label: "1W" },
-  { key: "perf_1m", label: "1M" },
-  { key: "perf_3m", label: "3M" },
-  { key: "perf_6m", label: "6M" },
-];
-
-const LB_KEYS = [
-  { key: "perf_intraday", label: "Intraday" },
   { key: "perf_1d", label: "1D" },
   { key: "perf_1w", label: "1W" },
   { key: "perf_1m", label: "1M" },
@@ -447,227 +438,6 @@ const MarketWarnings = ({ themes }) => {
   );
 };
 
-
-const PerfCellLB = ({ val }) => {
-  if (val == null) return <td className="px-1 py-1.5 align-middle text-center text-[11px] text-zinc-600">—</td>;
-  const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
-  const bg = val > 5 ? 'bg-emerald-500/10' : val < -5 ? 'bg-red-500/10' : '';
-  return (
-    <td className="px-1 py-1.5 align-middle text-center">
-      <span className={`inline-block rounded-md px-1 py-0.5 text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
-    </td>
-  );
-};
-
-const LB_PERF_COLS = new Set(['perf_intraday','perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
-
-// Rotation/acceleration cell — rank delta between the 1W and 3M leaderboards.
-// Positive = theme's short-term rank jumped ahead of its long-term rank
-// (early rotation in); ⚡ marks a jump ≥25% of the universe with positive 1W.
-const RotCellLB = ({ row }) => {
-  const d = row?.rotation_delta;
-  if (d == null) return <td className="px-1 py-1.5 align-middle text-center text-[11px] text-zinc-600">—</td>;
-  const color = d > 0 ? 'text-emerald-400' : d < 0 ? 'text-red-400' : 'text-zinc-500';
-  return (
-    <td className="px-1 py-1.5 align-middle text-center"
-      title={`1W rank #${row.rank_1w} vs 3M rank #${row.rank_3m} — ${d > 0 ? 'climbing' : d < 0 ? 'fading' : 'steady'}`}>
-      <span className={`inline-flex items-center gap-0.5 rounded-md px-1 py-0.5 text-[11px] font-mono font-medium ${color} ${row.accelerating ? 'bg-emerald-500/10' : ''}`}>
-        {row.accelerating && <span className="text-[10px]">⚡</span>}
-        {d > 0 ? '+' : ''}{d}
-      </span>
-    </td>
-  );
-};
-
-
-
-const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, stockFilter = null, fineThemeRankings = [], etfHoldings = {} }) => {
-  const [hovered, setHovered] = useState(null);
-  const fmtMktCap = (v) => {
-    if (v == null) return '—';
-    if (v >= 1000) return `$${(v/1000).toFixed(1)}T`;
-    if (v >= 1)    return `$${v.toFixed(1)}B`;
-    return `$${(v*1000).toFixed(0)}M`;
-  };
-  const setupCls = (label) => {
-    if (label === 'Flag') return 'text-amber-400 bg-amber-500/10 border-amber-500/30';
-    if (label === 'Base') return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30';
-    if (label === 'Watch') return 'text-blue-400 bg-blue-500/10 border-blue-500/30';
-    return 'text-zinc-500 bg-zinc-800/60 border-zinc-700/40';
-  };
-
-  const { themeName, stocks, themeRS, analysis } = useMemo(() => {
-    // Rows built from ETF holdings / IBKR leaders carry no short interest of their own, but the scanner's theme data has it
-    // for nearly every stock — look it up by ticker instead of leaving the SHORT% column blank.
-    const shortPctByTicker = {};
-    for (const grp of [data?.themes, data?.heatmap_themes]) {
-      for (const t of grp || []) for (const sub of t.subthemes || []) for (const st of sub.stocks || []) {
-        if (st.short_pct != null && shortPctByTicker[st.ticker] == null) shortPctByTicker[st.ticker] = st.short_pct;
-      }
-    }
-    const buildFromScannedTheme = (name) => {
-      const theme = (data?.themes || []).find(t => t.name === name);
-      if (!theme) return null;
-      const allStocks = (theme.subthemes || []).flatMap(s => s.stocks || []);
-      const pool = stockFilter ? allStocks.filter(stockFilter) : allStocks;
-      const sorted = [...pool].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 10);
-      const avgRS = sorted.length ? Math.round(sorted.reduce((s, x) => s + (x.rs_52w || 0), 0) / sorted.length) : null;
-      const topAnalysis = sorted[0]?.analysis_details || sorted[0]?.reasoning || null;
-      return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
-    };
-
-    // Union holdings across every ETF in the fine_theme bucket (not just the
-    // leader) — some individual ETFs (e.g. BUG) come back with 0 scraped
-    // holdings while a sibling in the same bucket (e.g. HACK) has real data,
-    // so trying only the leader ticker under-reports far too often.
-    const buildFromEtfHoldings = (name, tickers, score) => {
-      const list = Array.isArray(tickers) ? tickers : [tickers].filter(Boolean);
-      const seen = new Set();
-      const mapped = [];
-      for (const tkr of list) {
-        for (const h of (etfHoldings[tkr] || [])) {
-          if (seen.has(h.ticker)) continue;
-          seen.add(h.ticker);
-          mapped.push({
-            ticker: h.ticker, company: h.name, price: h.price,
-            mkt_cap_b: h.mkt_cap != null ? h.mkt_cap / 1e9 : null,
-            adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs, rvol: h.rvol, setup_label: h.setup_label,
-            short_pct: shortPctByTicker[h.ticker] ?? null,
-          });
-        }
-      }
-      mapped.sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
-      return { themeName: name, stocks: mapped.slice(0, 10), themeRS: score != null ? Math.round(score) : null, analysis: null };
-    };
-
-    // Explicit pick (user clicked a Leaderboard/heatmap row) always wins.
-    if (spotlightThemeName) {
-      const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === spotlightThemeName);
-      if (pt) {
-        return {
-          themeName: spotlightThemeName,
-          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: l.short_pct ?? shortPctByTicker[l.ticker] ?? null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
-          themeRS: pt.theme_rs,
-          analysis: null,
-        };
-      }
-      return buildFromScannedTheme(spotlightThemeName)
-        || buildFromEtfHoldings(spotlightThemeName, THEME_ETF_MAP[spotlightThemeName], null)
-        || { themeName: spotlightThemeName, stocks: [], themeRS: null, analysis: null };
-    }
-
-    if (lbView === 'ibkr') {
-      const pt = ibkrThemesData?.power_themes?.[0];
-      if (pt) {
-        return {
-          themeName: pt.name,
-          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: l.short_pct ?? shortPctByTicker[l.ticker] ?? null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
-          themeRS: pt.theme_rs,
-          analysis: null,
-        };
-      }
-    }
-
-    // Default: Theme Leaderboard's #1 fine_theme — the one "what's hot"
-    // signal shared across the whole dashboard. Prefer a theme we actually
-    // drilled into for real per-stock detail; when the top fine_theme wasn't
-    // one of the drilled themes (common — only 5 of ~29 get drilled nightly),
-    // fall back to that fine_theme's own ETF holdings so the highlighted
-    // name still matches Theme Leaderboard instead of silently reverting
-    // to a different, weaker-scoring theme that happened to get scanned.
-    const topFine = fineThemeRankings[0];
-    if (topFine) {
-      const scannedMatch = (data?.themes || []).find(t => (t.fine_theme || t.name) === topFine.name);
-      const built = scannedMatch
-        ? buildFromScannedTheme(scannedMatch.name)
-        : buildFromEtfHoldings(topFine.name, topFine.member_tickers || topFine.leader_ticker, topFine.score);
-      if (built) return built;
-    }
-
-    // Last resort — no etf_rs data yet (e.g. first paint) — old behavior.
-    const name = data?.themes?.[0]?.name || null;
-    if (!name) return { themeName: null, stocks: [], themeRS: null, analysis: null };
-    return buildFromScannedTheme(name) || { themeName: name, stocks: [], themeRS: null, analysis: null };
-  }, [spotlightThemeName, lbView, data, ibkrThemesData, stockFilter, fineThemeRankings, etfHoldings]);
-
-  if (!themeName) return null;
-
-  return (
-    <div className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-[13px] font-semibold text-emerald-400">
-          ✦ Thematic Spotlight — {themeName}{themeRS != null ? ` · RS ${themeRS}` : ''}
-        </span>
-        {lbView === 'ibkr' && (
-          <span className={`px-1.5 py-0.5 text-[11px] font-bold rounded border font-mono ${ibkrThemesData?.data_source === 'ibkr' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40' : 'bg-orange-500/15 text-orange-400 border-orange-500/40'}`}>
-            {ibkrThemesData?.data_source === 'ibkr' ? '● LIVE' : '◐ DELAYED'}
-          </span>
-        )}
-      </div>
-
-      {analysis && (
-        <div className="mb-3 border border-zinc-700/40 bg-zinc-800/20 rounded-lg p-3">
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">✦ GEMINI CATALYST</span>
-          </div>
-          <p className="text-[12px] text-zinc-300 leading-relaxed">{analysis}</p>
-        </div>
-      )}
-
-      {stocks.length > 0 ? (
-        <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
-          <table className="text-left" style={{ width: '100%', minWidth: '600px', tableLayout: 'fixed' }}>
-            <colgroup>
-              {Array(9).fill(0).map((_, i) => <col key={i} style={{ width: '11.11%' }} />)}
-            </colgroup>
-            <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
-              <tr className="border-b border-zinc-800/60">
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Ticker</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Mkt Cap</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR×$Vol</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR%</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">RS</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Vol Surge</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Short%</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Setup</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stocks.map(s => {
-                const rsCls = (s.rs_52w || 0) >= 85 ? 'text-emerald-400' : (s.rs_52w || 0) >= 70 ? 'text-yellow-400' : 'text-red-400';
-                const fmtVol = (v) => { if (v == null) return '—'; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return `$${(v/1e3).toFixed(0)}K`; };
-                const adrDolVol = (s.adr_pct != null && s.dollar_volume != null) ? (s.adr_pct / 100) * s.dollar_volume : null;
-                return (
-                  <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
-                    <td className="px-2 py-1.5"><span className="text-[12px] font-mono font-semibold text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}>{s.ticker}</span><LevEtfTag ticker={s.ticker} /></td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{fmtMktCap(s.mkt_cap_b)}</td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-amber-400 text-right">{adrDolVol != null ? fmtVol(adrDolVol) : '—'}</td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.price ? `$${Number(s.price).toFixed(2)}` : '—'}</td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.adr_pct ? `${Number(s.adr_pct).toFixed(1)}%` : '—'}</td>
-                    <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-right ${rsCls}`}>{s.rs_52w ?? '—'}</td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">
-                      {(s.vol_surge || s.rvol) ? `${Number(s.vol_surge || s.rvol).toFixed(1)}x` : '—'}
-                    </td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.short_pct != null ? `${Number(s.short_pct).toFixed(1)}%` : '—'}</td>
-                    <td className="px-2 py-1.5 text-center">
-                      {s.setup_label
-                        ? <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border ${setupCls(s.setup_label)}`}>{s.setup_label}</span>
-                        : '—'}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <div className="text-center py-6 text-zinc-600 text-[12px]">No stocks found for this theme</div>
-      )}
-      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
-    </div>
-  );
-};
 
 // ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
 const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
@@ -1239,482 +1009,6 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
 };
 
 
-const RS_MODES = [
-  { key: '1d',  label: '1D',  perfKey: 'perf_1d',  spyKey: null       },
-  { key: '1w',  label: '1W',  perfKey: 'perf_1w',  spyKey: 'perf_1w'  },
-  { key: '1m',  label: '1M',  perfKey: 'perf_1m',  spyKey: 'perf_1m'  },
-  { key: '3m',  label: '3M',  perfKey: 'perf_3m',  spyKey: 'perf_3m'  },
-  { key: '6m',  label: '6M',  perfKey: 'perf_6m',  spyKey: 'perf_6m'  },
-  { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
-];
-
-const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
-  const holdings = holdingsData[etfTicker] ?? null;
-  const [sort, setSort] = useState({ col: 'weight', dir: 'desc' });
-
-  useEffect(() => {
-    const handler = e => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, [onClose]);
-
-  const handleSort = col => setSort(prev =>
-    prev.col === col ? { col, dir: prev.dir === 'desc' ? 'asc' : 'desc' } : { col, dir: 'desc' }
-  );
-
-  const sorted = useMemo(() => {
-    if (!holdings?.length) return [];
-    const { col, dir } = sort;
-    return [...holdings].sort((a, b) => {
-      const av = a[col], bv = b[col];
-      if (av == null && bv == null) return 0;
-      if (av == null) return 1;
-      if (bv == null) return -1;
-      if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
-      return dir === 'asc' ? av - bv : bv - av;
-    });
-  }, [holdings, sort]);
-
-  const SortHdr = ({ col, label, align = 'right' }) => (
-    <th
-      className={`px-3 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap text-${align} text-[11px] uppercase tracking-wider`}
-      onClick={() => handleSort(col)}
-    >
-      {label}{sort.col === col ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
-    </th>
-  );
-
-  return (
-    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative w-full max-w-5xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
-
-        {/* ── Header ── */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-zinc-100">{etfTicker} · Top Holdings</span>
-            {holdings && (
-              <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
-                {holdings.length} holdings · sorted by weight
-              </span>
-            )}
-          </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
-          </button>
-        </div>
-
-        {/* ── Table ── */}
-        <div className="overflow-y-auto flex-1">
-          {!holdings || holdings.length === 0 ? (
-            <div className="text-[12px] text-zinc-500 text-center py-10 px-6">
-              {NO_HOLDINGS_ETFS[etfTicker] ? (
-                <>
-                  <div className="text-zinc-400">{NO_HOLDINGS_ETFS[etfTicker]} — no company stock holdings apply</div>
-                  <div className="text-zinc-600 text-[11px] mt-1">Structural to how {etfTicker} is built, not a data gap.</div>
-                </>
-              ) : "No holdings data"}
-            </div>
-          ) : (
-            <table className="w-full border-collapse text-xs">
-              <thead className="sticky top-0 bg-zinc-900 z-10 border-b border-zinc-800 text-zinc-500">
-                <tr>
-                  <SortHdr col="ticker"        label="Ticker"   align="left" />
-                  <SortHdr col="name"          label="Company"  align="left" />
-                  <SortHdr col="price"         label="Price"    />
-                  <SortHdr col="perf_1d"       label="1D"       />
-                  <SortHdr col="perf_1w"       label="1W"       />
-                  <SortHdr col="perf_1m"       label="1M"       />
-                  <SortHdr col="dollar_volume" label="$Vol"     />
-                  <SortHdr col="rs"            label="RS"       />
-                  <SortHdr col="adr_pct"       label="ADR%"     />
-                  <SortHdr col="weight"        label="Weight %"  />
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-800/40">
-                {sorted.map((h, i) => (
-                  <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
-                    {/* Ticker */}
-                    <td className="px-3 py-2">
-                      <StockCell ticker={h.ticker} />
-                    </td>
-                    {/* Company — TradingView full name, ETF abbreviated name as fallback */}
-                    <td className="px-3 py-2 text-zinc-300 truncate max-w-[200px]">{h.name || '—'}</td>
-                    {/* Price */}
-                    <td className="px-3 py-2 text-right font-mono text-zinc-200">
-                      {h.price != null ? `$${h.price.toFixed(2)}` : '—'}
-                    </td>
-                    {/* 1D */}
-                    <td className={`px-3 py-2 text-right font-mono font-bold ${(h.perf_1d ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {h.perf_1d != null ? `${h.perf_1d >= 0 ? '+' : ''}${h.perf_1d.toFixed(1)}%` : '—'}
-                    </td>
-                    {/* 1W */}
-                    <td className={`px-3 py-2 text-right font-mono ${(h.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {h.perf_1w != null ? `${h.perf_1w >= 0 ? '+' : ''}${h.perf_1w.toFixed(1)}%` : '—'}
-                    </td>
-                    {/* 1M */}
-                    <td className={`px-3 py-2 text-right font-mono ${(h.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {h.perf_1m != null ? `${h.perf_1m >= 0 ? '+' : ''}${h.perf_1m.toFixed(1)}%` : '—'}
-                    </td>
-                    {/* $Vol */}
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">
-                      {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
-                    </td>
-                    {/* RS — 4-tier colouring */}
-                    <td className="px-3 py-2 text-right font-mono">
-                      {h.rs != null
-                        ? <span className={`font-bold ${h.rs >= 90 ? 'text-emerald-300' : h.rs >= 70 ? 'text-emerald-500' : h.rs >= 50 ? 'text-zinc-300' : 'text-zinc-500'}`}>
-                            {h.rs}
-                          </span>
-                        : '—'}
-                    </td>
-                    {/* ADR% */}
-                    <td className="px-3 py-2 text-right font-mono text-zinc-300">
-                      {h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}
-                    </td>
-                    {/* Weight % */}
-                    <td className="px-3 py-2 text-right font-mono text-emerald-400 font-semibold">
-                      {h.weight != null ? `${h.weight.toFixed(2)}%` : '—'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fineThemeRankings = [], themes = [], heatmapThemes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
-  const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
-  const [expanded, setExpanded] = useState(null);
-  const [view, setView] = useState("finetheme"); // "finetheme" (Theme Leaderboard ranking) or "industry" (Finviz industry detail)
-  const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
-  const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
-  const [rsMode, setRsMode] = useState('52w');
-  const [etfPopup, setEtfPopup] = useState(null); // { etf, anchorRect }
-
-  // "finetheme" — Theme Leaderboard's own ranking (fine_theme_rankings),
-  // so this leaderboard's default #1 always agrees with Theme Leaderboard
-  // and Thematic Spotlight instead of running an independent Finviz score.
-  // "industry" stays a distinct drill-down lens into raw Finviz industry
-  // detail, not a second competing "what's hot" claim.
-  // Falls back to themeRankings if fine_theme_rankings hasn't been generated
-  // yet (e.g. right after this feature deploys, before the next etf_rs_builder.py
-  // run) so the leaderboard is never silently empty.
-  const activeData = view === "finetheme" ? (fineThemeRankings.length > 0 ? fineThemeRankings : themeRankings) : themeRankings;
-
-  const handleLBSort = (key, isShift) => {
-    if (isShift) {
-      const primary = sortPriority[0];
-      if (primary && LB_PERF_COLS.has(primary.key) && LB_PERF_COLS.has(key)) return;
-      setSortPriority(prev => {
-        const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
-        if (existing > 0) return prev.map((p, i) => i === existing ? { ...p, direction: p.direction === 'desc' ? 'asc' : 'desc' } : p);
-        return [prev[0], { key, direction: 'desc' }];
-      });
-    } else {
-      setSortPriority(prev => {
-        const cur = prev.find(p => p.key === key);
-        if (cur && prev[0].key === key) return [{ key, direction: cur.direction === 'desc' ? 'asc' : 'desc' }, ...prev.slice(1)];
-        return [{ key, direction: 'desc' }];
-      });
-    }
-  };
-
-  const primaryKey = sortPriority[0]?.key;
-  const secondaryKey = sortPriority[1]?.key;
-
-  // Build theme name → IBD-style RS rank (1–99) from actual stock data.
-  // 52W: average of each stock's rs_52w (already a 1–99 TradingView score).
-  // 1D/1W/1M/3M/6M: compute each theme's avg perf for that period, then
-  //   percentile-rank ALL themes against each other → 1–99 (IBD methodology).
-  const themeAvgRS = useMemo(() => {
-    const map = {};
-    const mode = RS_MODES.find(m => m.key === rsMode) ?? RS_MODES[RS_MODES.length - 1];
-
-    // Step 1 — raw score per theme (merge top-5 themes + all heatmap themes)
-    const allThemeSources = [...(themes || []), ...(heatmapThemes || [])];
-    const seenTheme = new Set();
-    const rawScores = {}; // name.toLowerCase() → number | null
-    for (const theme of allThemeSources) {
-      const norm = normalizeTheme(theme);
-      const key = norm.name.toLowerCase();
-      if (seenTheme.has(key)) continue; // top-5 themes take priority
-      seenTheme.add(key);
-      const stocks = norm.subthemes.flatMap(s => s.stocks);
-      if (rsMode === '52w') {
-        const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-        rawScores[norm.name.toLowerCase()] = vals.length
-          ? vals.reduce((a, v) => a + v, 0) / vals.length
-          : null;
-      } else {
-        const vals = stocks.map(s => s[mode.perfKey]).filter(v => v != null);
-        rawScores[norm.name.toLowerCase()] = vals.length
-          ? vals.reduce((a, v) => a + v, 0) / vals.length
-          : null;
-      }
-    }
-
-    if (rsMode === '52w') {
-      // 52W: already on a 1–99 scale — just round
-      for (const [k, v] of Object.entries(rawScores)) {
-        map[k] = v != null ? Math.round(v) : null;
-      }
-    } else {
-      // Non-52W: percentile-rank themes 1–99 (IBD style)
-      const valid = Object.entries(rawScores).filter(([, v]) => v != null);
-      const n = valid.length;
-      if (n > 0) {
-        const sorted = [...valid].sort((a, b) => a[1] - b[1]); // ascending
-        sorted.forEach(([key], i) => {
-          // rank: 1 (worst) … 99 (best)
-          map[key] = Math.round(1 + (i / Math.max(n - 1, 1)) * 98);
-        });
-      }
-      // themes with null score stay absent from map → rendered as '—'
-    }
-    return map;
-  }, [themes, rsMode]);
-
-  const ranked = useMemo(() => {
-    if (!activeData || !activeData.length) return [];
-    return [...activeData].sort((a, b) => {
-      for (let i = 0; i < sortPriority.length; i++) {
-        const { key, direction } = sortPriority[i];
-        // String sort for name column
-        if (key === 'name') {
-          const sa = (a.name ?? '').toLowerCase();
-          const sb = (b.name ?? '').toLowerCase();
-          if (sa === sb) continue;
-          const cmp = sa < sb ? -1 : 1;
-          return direction === 'asc' ? cmp : -cmp;
-        }
-        // rs_score sorts by Theme Leaderboard's own score when the row has
-        // one (fine_theme_rankings rows — the "finetheme" view, so the default
-        // #1 always matches Theme Leaderboard), falling back to the
-        // stock-level RS average (themeAvgRS) for theme_rankings rows, which
-        // don't carry a comparable composite score of their own.
-        let va = key === 'rs_score' ? (a.score ?? themeAvgRS[a.name?.toLowerCase()] ?? 0) : (a[key] ?? 0);
-        let vb = key === 'rs_score' ? (b.score ?? themeAvgRS[b.name?.toLowerCase()] ?? 0) : (b[key] ?? 0);
-        if (i === 0 && LB_PERF_COLS.has(key)) {
-          va = Math.round(va * 10) / 10;
-          vb = Math.round(vb * 10) / 10;
-        }
-        if (va === vb) continue;
-        const cmp = va > vb ? 1 : -1;
-        return direction === 'desc' ? -cmp : cmp;
-      }
-      return 0;
-    });
-  }, [activeData, sortPriority, themeAvgRS]);
-
-
-  const industryMap = useMemo(() => {
-    if (!industryRankings) return {};
-    const m = {};
-    for (const ind of industryRankings) {
-      const p = ind.parent_theme;
-      if (!m[p]) m[p] = [];
-      m[p].push(ind);
-    }
-    for (const k of Object.keys(m)) {
-      m[k].sort((a, b) => {
-        const sa = (a.perf_1w||0)*0.2 + (a.perf_1m||0)*0.3 + (a.perf_3m||0)*0.3 + (a.perf_6m||0)*0.2;
-        const sb = (b.perf_1w||0)*0.2 + (b.perf_1m||0)*0.3 + (b.perf_3m||0)*0.3 + (b.perf_6m||0)*0.2;
-        return sb - sa;
-      });
-    }
-    return m;
-  }, [industryRankings]);
-
-  const LBSortHeader = ({ k, label, w, align = 'center' }) => {
-    const priIdx = sortPriority.findIndex(p => p.key === k);
-    const isActive = priIdx >= 0;
-    const dir = isActive ? sortPriority[priIdx].direction : null;
-    const isPrimary = priIdx === 0;
-    const isSecondary = priIdx === 1;
-    const isBlocked = LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
-    const textAlign = align === 'left' ? 'text-left' : 'text-center';
-    return (
-      <th onClick={e => handleLBSort(k, e.shiftKey)}
-        className={`px-1 py-2 ${textAlign} cursor-pointer select-none ${w || 'w-12'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
-        <span className={`inline-flex items-center ${align === 'left' ? 'justify-start' : 'justify-center'} gap-0.5 text-[11px] font-semibold uppercase tracking-wider`}>
-          {label}
-          {isPrimary   ? <span className="text-[11px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>
-          : isSecondary ? <span className="text-[11px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>
-          : !isBlocked  ? <span className="text-[10px] opacity-30">⬍</span>
-          : null}
-        </span>
-      </th>
-    );
-  };
-
-  return (
-    <>
-    <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0">
-      <div className="flex items-center mb-3 gap-2">
-        <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
-        <span className="text-[13px] font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
-        <span className="text-[11px] text-zinc-600">Top 5 of {ranked.length} themes</span>
-        <UpdatedAt ts={generatedAt}/>
-        {(secondaryKey || primaryKey !== 'rs_score') && (
-          <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
-            className="text-[11px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
-            ✕ Reset
-          </button>
-        )}
-        <div className="flex-1"></div>
-        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
-          {[{k:"finetheme",l:"Theme Leaderboard"},{k:"industry",l:"Industry Detail"}].map(v => (
-            <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); onViewChange && onViewChange(v.k); }}
-              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
-              {v.l}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '497px' }}>
-        <table className="w-full text-left">
-          <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
-            <tr className="border-b border-zinc-800/60">
-              <th
-                title="Reset to default sort"
-                onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
-                className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap cursor-pointer hover:text-zinc-400 transition-colors">#</th>
-              <LBSortHeader k="name" label="Theme" w="min-w-[120px]" align="left" />
-              {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
-              <LBSortHeader k="rotation_delta" label="ROT" />
-              <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
-                className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
-                <div className="flex flex-col items-center gap-0.5">
-                  <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
-                    RS
-                    {sortPriority[0]?.key === 'rs_score'
-                      ? <span className="text-[11px] text-blue-400/70">①{sortPriority[0].direction === 'desc' ? '▼' : '▲'}</span>
-                      : <span className="text-[10px] opacity-30">⬍</span>}
-                  </span>
-                  <div className="flex gap-0.5" onClick={e => e.stopPropagation()}>
-                    {RS_MODES.map(m => (
-                      <button key={m.key}
-                        onClick={() => { setRsMode(m.key); setSortPriority([{ key: 'rs_score', direction: 'desc' }]); }}
-                        className={`text-[11px] px-0.5 py-px rounded leading-none transition-colors ${rsMode === m.key ? 'bg-blue-500/30 text-blue-300' : 'text-zinc-600 hover:text-zinc-400'}`}>
-                        {m.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {ranked.slice(0, 5).map((t, i) => {
-              const isIndustryView = view === "industry";
-              const isExpanded = isIndustryView && expanded === t.name;
-              const industries = isIndustryView ? (industryMap[t.name] || []) : [];
-
-              // In the Theme Leaderboard view, prefer the row's own leader_ticker
-              // (the same leader Theme Leaderboard itself picked for this bucket)
-              // over the static THEME_ETF_MAP lookup.
-              const etfTicker = view === "finetheme" ? (t.leader_ticker || THEME_ETF_MAP[t.name] || null) : null;
-
-              return (<React.Fragment key={`lb-${t.name}`}>
-                <tr
-                  onClick={e => {
-                    if (isIndustryView) { setExpanded(isExpanded ? null : t.name); return; }
-                    onThemeSelect && onThemeSelect(t.name);
-                  }}
-                  className={`h-14 border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                  <td className={`px-1 py-2 align-middle text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
-                  <td className="px-2 py-2 align-middle min-w-0">
-                    <div className="flex items-center gap-1.5 flex-nowrap min-w-0">
-                      <span
-                        className="text-[12px] font-semibold text-zinc-200 hover:text-blue-400 transition-colors cursor-pointer truncate"
-                        onClick={e => {
-                          e.stopPropagation();
-                          const row = e.currentTarget.closest('tr');
-                          const rect = row ? row.getBoundingClientRect() : e.currentTarget.getBoundingClientRect();
-                          const sameTheme = themeStats?.themeName === t.name;
-                          if (sameTheme) {
-                            setThemeStats(null);
-                            setThemeHover(null);
-                          } else {
-                            setThemeStats({ themeName: t.name, anchorRect: rect });
-                            const etf = THEME_ETF_MAP[t.name];
-                            if (etf) {
-                              // Pin the chart's left edge flush to the right side of the
-                              // clicked theme name — the stats popup will stack directly
-                              // BELOW the chart so they never overlap.
-                              const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
-                              const nameRight = e.currentTarget.getBoundingClientRect().right;
-                              const pinLeft = nameRight / zoomVal + 8;
-                              setThemeHover({ ticker: etf, rect: {
-                                left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                                width: rect.width, height: rect.height, pinLeft,
-                              }});
-                            } else {
-                              setThemeHover(null);
-                            }
-                          }
-                          onThemeSelect && onThemeSelect(t.name);
-                        }}
-                      >{t.name}</span>
-                      {etfTicker && (
-                        <button
-                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-colors whitespace-nowrap flex-shrink-0 ${etfPopup?.etf === etfTicker ? 'text-emerald-300 bg-emerald-500/25 border-emerald-400/40' : 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20'}`}
-                          onClick={e => {
-                            e.stopPropagation();
-                            setEtfPopup(prev => prev?.etf === etfTicker ? null : { etf: etfTicker });
-                          }}
-                        >{etfTicker}</button>
-                      )}
-                      {t.n_industries && <span className="text-[11px] text-zinc-600">{t.n_industries} ind</span>}
-                    </div>
-                  </td>
-                  {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <RotCellLB row={t}/>
-                  {(() => {
-                    // Theme Leaderboard's own score fills in when no scanned
-                    // stocks exist for this fine_theme (themeAvgRS needs real
-                    // per-stock data, which most fine_theme buckets don't have).
-                    const rsVal = themeAvgRS[t.name?.toLowerCase()] ?? (view === "finetheme" && t.score != null ? Math.round(t.score) : null);
-                    // All modes now return a 1–99 IBD-style percentile rank
-                    const cls = rsVal == null ? 'text-zinc-600'
-                      : rsVal >= 90 ? 'text-emerald-300'
-                      : rsVal >= 70 ? 'text-emerald-500'
-                      : rsVal >= 50 ? 'text-zinc-300'
-                      : rsVal >= 30 ? 'text-orange-400'
-                      : 'text-red-400';
-                    const display = rsVal == null ? '—' : rsVal;
-                    return <td className={`px-1 py-1.5 align-middle text-center text-[11px] font-mono font-bold ${cls}`}>{display}</td>;
-                  })()}
-                </tr>
-                {isExpanded && industries.map(ind => (
-                  <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
-                    <td className="px-2 py-1.5"></td>
-                    <td className="px-2 py-1.5 pl-4 whitespace-nowrap">
-                      <span className="text-[11px] text-zinc-400">{ind.name}</span>
-                    </td>
-                    {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
-                    <RotCellLB row={ind}/>
-                    <td className="px-2 py-1.5"></td>
-                  </tr>
-                ))}
-              </React.Fragment>);
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
-    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} heatmapThemes={heatmapThemes} etfHoldings={etfHoldings} fineThemeRankings={fineThemeRankings} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
-    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={etfHoldings} onClose={() => setEtfPopup(null)}/>}
-    </>
-  );
-};
-
 function computeTVPopupRect(anchorRect, opts = {}) {
   if (!anchorRect) return null;
   const MAX_W = 600, MAX_H = 200;
@@ -1817,208 +1111,6 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
     </>
   );
 };
-
-const ThemeStatsPopup = ({ themeName, themes, heatmapThemes, etfHoldings = {}, fineThemeRankings = [], anchorRect, chartAnchor, onClose }) => {
-  const stocks = useMemo(() => {
-    if (!themeName) return [];
-    const allSources = [...(themes || []), ...(heatmapThemes || [])];
-    const theme = allSources.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
-    if (theme) {
-      const norm = normalizeTheme(theme);
-      const all = norm.subthemes.flatMap(s => s.stocks);
-      const seen = new Set();
-      return all.filter(s => { if (seen.has(s.ticker)) return false; seen.add(s.ticker); return true; });
-    }
-    // Not a scanned/heatmap theme (e.g. "Insurance" — an industry rollup, not
-    // one of Finviz's own theme-map categories) — fall back to the union of
-    // holdings across every ETF in its fine_theme bucket, same as Thematic
-    // Spotlight, instead of showing an empty "0 stocks" popup.
-    const ft = fineThemeRankings.find(r => r.name?.toLowerCase() === themeName.toLowerCase());
-    const tickers = ft?.member_tickers || [];
-    const seen = new Set();
-    const mapped = [];
-    for (const tkr of tickers) {
-      for (const h of (etfHoldings[tkr] || [])) {
-        if (seen.has(h.ticker)) continue;
-        seen.add(h.ticker);
-        mapped.push({ ticker: h.ticker, price: h.price, perf_1m: h.perf_1m, perf_1d: h.perf_1d, rs_52w: h.rs });
-      }
-    }
-    return mapped;
-  }, [themeName, themes, heatmapThemes, etfHoldings, fineThemeRankings]);
-
-  const mean = (arr) => arr.length ? arr.reduce((a, v) => a + v, 0) / arr.length : 0;
-  const avgPrice  = mean(stocks.map(s => s.price).filter(v => v != null));
-  const avg1m     = mean(stocks.map(s => s.perf_1m).filter(v => v != null));
-  const avgRS     = Math.round(mean(stocks.map(s => s.rs_52w).filter(v => v != null)));
-  const avg1d     = mean(stocks.map(s => s.perf_1d).filter(v => v != null));
-  const sorted    = [...stocks].sort((a, b) => (b.perf_1d ?? 0) - (a.perf_1d ?? 0));
-  const best      = sorted.filter(s => (s.perf_1d ?? 0) > 0).slice(0, 3);
-  const worst     = sorted.filter(s => (s.perf_1d ?? 0) < 0).slice(-3).reverse();
-
-  const popupRef = useRef(null);
-  const [stacked, setStacked] = useState(null); // { top, left } in CSS px (matches chart popup's inline coords)
-
-  // When the chart popup is also open, place this popup directly BELOW the chart
-  // (chart on top, stats data beneath) with a small gap so the two never overlap.
-  // All math is done in pre-zoom CSS px (same coord space as the inline left/top
-  // styles we set below). When body { zoom: N } is in effect, getBoundingClientRect
-  // and innerWidth/innerHeight report visual (post-zoom) px, so we divide by zoom.
-  useLayoutEffect(() => {
-    if (!chartAnchor || !popupRef.current) { setStacked(null); return; }
-    const chartEl = document.getElementById("tv-popup-chart");
-    if (!chartEl) { setStacked(null); return; }
-    const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
-    const chartBoundV = chartEl.getBoundingClientRect();
-    const popupBoundV = popupRef.current.getBoundingClientRect();
-    const chartLeft   = chartBoundV.left   / zoom;
-    const chartBottom = chartBoundV.bottom / zoom;
-    const popupW = popupBoundV.width  / zoom;
-    const popupH = popupBoundV.height / zoom;
-    const gap = 8;
-    const edgeX = 8;
-    const navEl = document.getElementById("app-navbar");
-    const minTop = navEl ? (navEl.getBoundingClientRect().bottom / zoom + gap) : 80;
-    const vw = window.innerWidth  / zoom;
-    const vh = window.innerHeight / zoom;
-
-    // Align the stats popup's left edge with the chart's left edge (keeps them
-    // in the same column). Place it directly below the chart's bottom edge.
-    let desiredLeft = chartLeft;
-    let desiredTop  = chartBottom + gap;
-
-    // Clamp vertically to the viewport — if it doesn't fit below, fall back to
-    // placing above. This should rarely happen unless the chart sits near the
-    // bottom of the viewport.
-    if (desiredTop + popupH > vh - 8) {
-      const aboveTop = (chartBoundV.top / zoom) - gap - popupH;
-      if (aboveTop >= minTop) {
-        desiredTop = aboveTop;
-      } else {
-        desiredTop = Math.max(minTop, vh - popupH - 8);
-      }
-    }
-    // Clamp horizontally inside the viewport.
-    desiredLeft = Math.max(edgeX, Math.min(desiredLeft, vw - popupW - edgeX));
-    setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
-  }, [chartAnchor, themeName, stocks.length]);
-
-  if (!anchorRect) return null;
-  const MAX_W = 420, EDGE = 12;
-  // Inline styles below are pre-zoom CSS px; convert visual-px sources to match.
-  const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
-  const vw = window.innerWidth  / zoom;
-  const vh = window.innerHeight / zoom;
-  const aLeft  = anchorRect.left  / zoom;
-  const aRight = anchorRect.right / zoom;
-  const aTop   = anchorRect.top   / zoom;
-  const navEl = document.getElementById("app-navbar");
-  const edgeTop = navEl ? navEl.getBoundingClientRect().bottom / zoom + 8 : 72;
-
-  let left;
-  if (stacked) {
-    left = stacked.left;
-  } else {
-    const spaceRight = vw - aRight - EDGE;
-    const spaceLeft  = aLeft - EDGE;
-    if (spaceRight >= MAX_W) {
-      left = aRight + 8;
-    } else if (spaceLeft >= MAX_W) {
-      left = aLeft - MAX_W - 8;
-    } else {
-      left = Math.max(EDGE, Math.min(aLeft, vw - MAX_W - EDGE));
-    }
-  }
-  const top = stacked
-    ? stacked.top
-    : Math.max(edgeTop, Math.min(aTop, vh - EDGE - 300));
-
-  const rsColor = avgRS >= 70 ? 'text-emerald-400' : avgRS >= 50 ? 'text-yellow-400' : 'text-red-400';
-  const perfColor = (v) => v >= 0 ? 'text-emerald-400' : 'text-red-400';
-  const fmt = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
-
-  // Use an all-sided shadow when placed next to the chart so it doesn't paint a
-  // dark band onto the chart on whichever side they're adjacent.
-  const popupShadow = stacked
-    ? '0 0 32px rgba(0,0,0,0.7)'
-    : '0 24px 64px rgba(0,0,0,0.85)';
-
-  return (
-    <>
-      <div style={{ position:'fixed', inset:0, zIndex:9998 }} onClick={onClose}/>
-      <div ref={popupRef} style={{ position:'fixed', left, top, width:MAX_W, zIndex:9999, borderRadius:10, border:'1px solid rgba(63,63,70,0.7)', boxShadow:popupShadow, background:'#18181b', overflow:'hidden' }}
-        onClick={e => e.stopPropagation()}>
-        {/* Header */}
-        <div style={{ background: avg1d >= 0 ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', borderBottom:'1px solid rgba(63,63,70,0.5)' }}
-          className="px-4 py-3 flex items-start justify-between gap-2">
-          <div>
-            <div className="text-[13px] font-bold text-zinc-100 leading-tight">{themeName}</div>
-            <div className={`text-[18px] font-bold font-mono mt-0.5 ${avg1d >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-              {avg1d >= 0 ? '▲' : '▼'} {fmt(avg1d)}
-            </div>
-          </div>
-          <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-[11px] text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded font-mono">{stocks.length} stocks</span>
-            <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors"><X size={14}/></button>
-          </div>
-        </div>
-        {/* Stats row */}
-        <div className="grid grid-cols-3 divide-x divide-zinc-700/50 border-b border-zinc-700/50">
-          {[
-            { label:'AVG PRICE',   val:`$${avgPrice.toFixed(2)}`,          cls:'text-zinc-200' },
-            { label:'AVG 1-MONTH', val:fmt(avg1m),                         cls:perfColor(avg1m) },
-            { label:'AVG RS',      val:String(avgRS || '—'),                cls:rsColor },
-          ].map(({ label, val, cls }) => (
-            <div key={label} className="px-3 py-2.5 text-center">
-              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">{label}</div>
-              <div className={`text-[15px] font-bold font-mono ${cls}`}>{val}</div>
-            </div>
-          ))}
-        </div>
-        {/* Movers */}
-        <div className="px-4 py-3 border-b border-zinc-700/50">
-          <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest mb-2">TODAY'S MOVERS</div>
-          <div className="flex flex-col gap-1.5">
-            <div className="flex items-center gap-2">
-              <TrendingUp size={11} className="text-emerald-400 flex-shrink-0"/>
-              <span className="text-[11px] text-zinc-500 w-9 flex-shrink-0">Best</span>
-              <div className="flex gap-1.5 flex-wrap">
-                {best.length ? best.map(s => (
-                  <span key={s.ticker} className="text-[11px] font-mono font-semibold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
-                    {s.ticker} {fmt(s.perf_1d)}
-                  </span>
-                )) : <span className="text-[11px] text-zinc-600">—</span>}
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <TrendingUp size={11} className="text-red-400 flex-shrink-0 rotate-180"/>
-              <span className="text-[11px] text-zinc-500 w-9 flex-shrink-0">Worst</span>
-              <div className="flex gap-1.5 flex-wrap">
-                {worst.length ? worst.map(s => (
-                  <span key={s.ticker} className="text-[11px] font-mono font-semibold text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded">
-                    {s.ticker} {fmt(s.perf_1d)}
-                  </span>
-                )) : <span className="text-[11px] text-zinc-600">—</span>}
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Ticker pills */}
-        <div className="px-4 py-3">
-          <div className="flex flex-wrap gap-1.5">
-            {stocks.map(s => (
-              <span key={s.ticker} className="text-[11px] font-mono px-2 py-0.5 bg-zinc-700/60 text-zinc-300 rounded cursor-default hover:bg-zinc-600/60 transition-colors">
-                {s.ticker}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-
 
 function normalizeTheme(t) {
   if (t.subthemes) return t;
@@ -3871,7 +2963,7 @@ const CHECKLIST_SECTIONS = [
           "Before the open: ETF Performance (bottom of Themes → Theme Leaders) → Premarket — what is actually moving before 9:30",
           "RS Flip Scanner below it: any new flip today = tomorrow's rotation candidate, screen it even if its category score is still low",
           "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — does the raw % agree with the RS Score leader, or is it a one-day blip? Agreement across both = higher conviction",
-          "Leaderboard tab (Thematic Scanner): confirm the same theme shows up in the stock-level RS top 5 with a positive ROT (rotation rank) — this is your final theme pick",
+          "Industry Matrix (Scanner tab): confirm the same theme's industries are green on 1W and 1M — this is your final theme pick",
           "Correlation warning (top-3 >0.80) → treat those themes as ONE position when sizing",
         ],
       },
@@ -4065,14 +3157,14 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 3 — Scanner Refresh: Theme Leaderboard + Leaderboard RS/ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
+        section: "Step 3 — Scanner Refresh: Theme Leaderboard + Industry Matrix (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
         items: [
           "Reload after the nightly scrape lands — fresh theme rankings, RS scores, and rotation deltas",
           "Themes → Theme Leaders: did the 1M/3M top 10 change? A new theme entering the top 10 with Confirmed n/n = rotation confirming. Sectors → Sector Leadership: did the top-3 sectors change, and does the Leadership Over Time chart show a flip?",
           "Stocks → Liquid Leaders (LL → NEL → T-NEL): new T-NEL names today go on the list for tomorrow — Copy the tickers into TradingView",
           "Theme Leaderboard: did the #1 row by Score change? New theme entering with a ⚡ flip = rotation confirming — build tomorrow's list from it",
           "Track ⚡ flips day over day: accelerating 2–3 sessions in a row = real rotation; one-day blips fade",
-          "Leaderboard tab: did the RS top 5 change, and does ROT agree with the Theme Leaderboard move?",
+          "Industry Matrix (Scanner): set it to 1W — did the top groups change, and do they agree with the Theme Leaderboard move?",
           "Your open positions' themes: fell out of the top half of BOTH leaderboards AND position below SMA20 → write the exit plan now",
         ],
       },
@@ -4095,7 +3187,7 @@ const CHECKLIST_SECTIONS = [
           "Remove stocks that closed below SMA20 on above-average volume (distribution)",
           "Update each candidate's entry trigger and stop based on today's close",
           "VCP Tightening flag on any stock → top of tomorrow's focus list",
-          "Theme Leaderboard: theme jumped into the top 5 by Score → cross-check Leaderboard tab (Thematic Scanner) for its strongest stocks",
+          "Theme Leaderboard: theme jumped into the top 5 by Score → cross-check the Industry Matrix (Scanner) and open its stocks",
         ],
       },
       {
@@ -4175,7 +3267,7 @@ const CHECKLIST_SECTIONS = [
 
 const CORE_RULES = [
   { rule: "Never fight the Market Signal", detail: "Red means stop — no new entries, no exceptions. Close swings, protect capital." },
-  { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Theme Leaderboard Score + Leaderboard RS/ROT before every entry — rising theme, rising stock." },
+  { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Theme Leaderboard Score + the Industry Matrix before every entry — rising theme, rising stock." },
   { rule: "Only trade your wired-in universe", detail: "ADR ≥5%, $Vol ≥$300M, RS ≥85 are baked into the scanner and the default filters. If a trade needs the filters loosened, it is not your trade." },
   { rule: "Every trade gets logged", detail: "No log = no review = no improvement. Journal is mandatory, not optional." },
   { rule: "Breadth has to back the trend", detail: "A green Market Pulse with a ⚠ Narrow / Fading breadth flag means the index is carried by a few names — size down 50% and trade RS leaders only. Stocks → Scanner sidebar or Breadth → Breadth Cycle." },
@@ -15147,8 +14239,6 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
         }],
       }));
   }, [data, screenerMap]);
-  const topThemes = displayThemes.slice(0, 5);
-
   // Worst-momentum themes for the Short tab. displayThemes only holds the top-5
   // leaders, so reversing it just re-orders those same leaders — instead, rank
   // the FULL theme_rankings list ascending and pull real stock detail from
@@ -15492,7 +14582,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
             <div className="text-[12px] text-zinc-500 italic py-6 text-center border border-dashed border-zinc-800 rounded-lg mb-2">
               No qualifying Market Leaders (RS≥90 · $10B+ cap · $100M+ vol) tagged to "{themeFilter}" right now.
               This can happen when {themeFilter} wasn't in today's scanned top-5 themes —
-              check the Leaderboard tab or Industry Matrix directly for its full stock list.
+              check the Industry Matrix directly for its full stock list.
             </div>
           )}
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
@@ -15565,67 +14655,11 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
       {mode === "adrUniverse" && <UniverseScreen stocks={screenerStocks} tickerThemeMap={tickerThemeMap}
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Universe", tickers })} />}
 
-      {/* ── GROUP ETF (mode "universe", formerly "Archive") ── Leading Themes
-          mini-list, the full flat ETF RS table, and the Universe tab's sector
-          heatmap + ETF rotation + daily stock universe. Each duplicates a
-          primary-flow tool (Theme Leaderboard, Leaderboard tab) in a
-          rawer or differently-scored form — parked here instead of deleted. */}
+      {/* ── GROUP ETF (mode "universe", formerly "Archive") ── the full flat ETF RS table and the Universe tab's sector
+          heatmap + ETF rotation + daily stock universe. Parked here instead of deleted. (The "Leading Themes" mini-list was removed
+          2026-10-13 — Theme Tracker / Theme Leaders cover it.) */}
       {mode === "universe" && (
         <div className="space-y-6">
-          <div>
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
-              <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
-                <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
-                  {PERF_MODES.map(({k,l}) => (
-                    <button key={k} onClick={() => setPerfMode(k)}
-                      className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
-                      {l}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  onClick={() => setMiniChartsFor({ title: "Leading Themes", tickers: topThemes.flatMap(theme =>
-                    [...(theme.subthemes?.flatMap(sub => sub.stocks || []) ?? [])]
-                      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)).slice(0, 3)
-                      .map(st => ({ ticker: st.ticker, category: theme.name }))) })}
-                  title="Mini charts of each leading theme's top 3 stocks by RS"
-                  className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
-                  ▦ Mini Charts
-                </button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
-              {topThemes.map((theme, i) => {
-                const rawStocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
-                const stocks = rawStocks.map(s => {
-                  const sc = screenerMap[s.ticker];
-                  if (!sc) return s;
-                  return { ...s, perf_intraday: sc.perf_intraday ?? s.perf_intraday, perf_ytd: sc.perf_ytd ?? s.perf_ytd, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
-                });
-                const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
-                const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-                const perfKey = PERF_KEY_BY_MODE[perfMode] ?? "perf_3m";
-                const perf = topS?.[perfKey] ?? theme[perfKey] ?? null;
-                return (
-                  <div key={theme.name}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
-                    onClick={() => setSelectedThemeModal({ name: theme.name, stocks: [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)) })}>
-                    <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
-                      <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
-                    </div>
-                    {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
-                    <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf == null ? "text-zinc-600" : perf > 0 ? "text-emerald-400" : "text-rose-400"}`}
-                      title={perf == null ? `No ${PERF_MODES.find(m => m.k === perfMode)?.l ?? ""} figure for ${topS?.ticker ?? "this theme"} in the data` : undefined}>
-                      {perf == null ? "—" : `${perf > 0 ? "+" : ""}${perf.toFixed(1)}%`}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
             onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF RS", tickers })} />
           <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData}
@@ -18591,8 +17625,6 @@ export default function App() {
   const [econData, setEconData]             = useState(null);
   const [appEtfRsData, setAppEtfRsData]     = useState(null);
   const [internalsData, setInternalsData]   = useState(null);
-  const [lbView, setLbView]                 = useState("finetheme");
-  const [spotlightThemeName, setSpotlightThemeName] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   // Swing criteria defaults (ADR ≥5%, $Vol ≥$300M) — persisted across sessions
@@ -19222,22 +18254,7 @@ const appScreenerMap = useMemo(() => {
           <main className="flex-1 min-w-0 w-full flex flex-col gap-3">
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} fineThemeRankings={fineThemeRankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
-            {data && <Leaderboard
-              themeRankings={data.theme_rankings}
-              industryRankings={data.industry_rankings}
-              finvizThemeRankings={data.finviz_theme_rankings}
-              fineThemeRankings={fineThemeRankings}
-              themes={data.themes}
-              heatmapThemes={data.heatmap_themes || []}
-              spyBenchmarks={data.spy_benchmarks}
-              ibkrThemesData={ibkrThemesData}
-              generatedAt={data.generated_at}
-              etfHoldings={data.etf_holdings || {}}
-              onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }}
-              onThemeSelect={name => setSpotlightThemeName(name)}
-            />}
             {data && <MarketWarnings themes={data.themes}/>}
-            <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData} stockFilter={stockFilter} fineThemeRankings={fineThemeRankings} etfHoldings={data?.etf_holdings || {}}/>
             <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
             <NewsHubFold newsData={newsData}/>
           </main>
