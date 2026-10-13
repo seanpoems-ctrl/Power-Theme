@@ -1,179 +1,66 @@
 {
-  "scan_time": "2026-10-12 08:55 ET",
+  "scan_time": "2026-10-13 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "TRAX",
-      "price": 40.22,
-      "gap_pct": 26.29,
-      "pm_volume": 574985,
-      "avg_vol_10d": 763886,
-      "avg_dollar_vol": 30723495,
-      "mkt_cap": 1138027350,
-      "rvol": 1.4,
-      "adr_pct": 7.44,
-      "category": "Thematic Narratives",
-      "theme": "Biopharma Clinical Trial Data",
-      "reasoning": "First Tracks Biotherapeutics stock surged **20%** following positive clinical **trial data** for its **celiac** treatment.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "**First Tracks Biotherapeutics** announced positive clinical **trial data** for its **celiac** treatment, leading to a **20% surge** in its stock price today. This data provides significant validation for the company's pipeline asset.",
-        "impact": "This positive trial data can significantly de-risk the development pathway for the celiac treatment, potentially expanding the company's total addressable market and attracting further investor interest, leading to a re-rating of the stock."
-      },
-      "analysis_details": "• **The Narrative**\n**First Tracks Biotherapeutics** witnessed its stock surge **20%** following the release of positive clinical **trial data**. The data specifically pertains to the company's ongoing efforts in developing a treatment for **celiac** disease, marking a significant advancement in its pipeline.\n\n• **Explosiveness**\nThe positive **celiac trial data** significantly de-risks **First Tracks Biotherapeutics'** pipeline, implying a stronger probability of success for this therapeutic candidate. This could attract substantial investor capital, driving sustained momentum as the market re-evaluates the company's future revenue potential and competitive positioning in the immunology space.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "First Tracks Biotherapeutics stock surges 20% on celiac trial data - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOT0hpYzBaRG94LTRxa0tHckdGUWxIaHpIR2ZvVUZvRWo0Ui03ZTMwaGsyYnl6RVZUY2ZBcjFSRWFEb2V5Sjc0WTdIQlZjeEdzRjhQdEdyRExZRUJGT3Z5bmtEWlIwX201QXdlUWVub1ZDWFAzMnpHTUhSMWo5aWJhc0NtMEVXbXVkZEs2X1prenZCcnA1ZnpNbWVCVDdGN2dBQTdtQTN6dnpmMFdIUGp1c19zZnlRRjFUOHNoZkdEcw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "30.36M",
-      "short_float": null,
-      "daily_pct": -0.5,
-      "prev_close": 31.85,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (Avg $Vol $31M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "stock surged 20%",
-        "discrepancy_note": "Google News [2] (Investing.com) states the stock surged 20%. However, Finviz News [1] does not mention any stock surge percentage."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ENVX",
-      "price": 2.84,
-      "gap_pct": 15.45,
-      "pm_volume": 255813,
-      "avg_vol_10d": 7948475,
-      "avg_dollar_vol": 22573669,
-      "mkt_cap": 539843396,
-      "rvol": 0.88,
-      "adr_pct": 6.12,
+      "ticker": "FRMI",
+      "price": 3.69,
+      "gap_pct": 13.52,
+      "pm_volume": 8818408,
+      "avg_vol_10d": 16025754,
+      "avg_dollar_vol": 59135032,
+      "mkt_cap": 2084094040,
+      "rvol": 0.93,
+      "adr_pct": 6.14,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "189.86M",
-      "short_float": "27.09%",
-      "daily_pct": -1.6,
-      "prev_close": 2.46,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $23M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "Source A (Finviz) has no news, which is consistent with no fundamental catalyst. However, Source B (Google News) with the headline 'Why is Enovix stock surging today?' implies there might be a catalyst or at least an attempt to identify one, and does not confirm the absence of a fundamental catalyst. Without the article content, this claim cannot be confirmed by Source B."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CCC",
-      "price": 7.78,
-      "gap_pct": 10.83,
-      "pm_volume": 851306,
-      "avg_vol_10d": 9895050,
-      "avg_dollar_vol": 76983489,
-      "mkt_cap": 4134742712,
-      "rvol": 2.6,
-      "adr_pct": 4.14,
-      "category": "Others",
-      "theme": "Record Sales Update",
-      "reasoning": "CCC announced positive operational news, reporting record sales, which drove investor interest and likely contributed to the stock's activity.",
+      "theme": "Upcoming Earnings Date Announcement",
+      "reasoning": "Fermi announced its Q3 2026 earnings release and call date, providing a future catalyst for investors to anticipate.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 61,
+      "conviction": 56,
       "grade": "C",
-      "finviz_theme": "Consumer - E-Commerce",
+      "finviz_theme": "Others",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "CCC reported **record sales** today.",
-        "impact": "This operational update suggests strong underlying business performance, potentially leading to increased investor confidence and upward momentum."
+        "catalyst": "Fermi announced its **Third Quarter 2026 Earnings Release and Call Date** on **2026-10-12**. This follows market concerns about **cash burn** and the stock looking **overvalued** despite an **89% one year slide**.",
+        "impact": "The announcement sets a future date for a potential re-evaluation of the company's fundamentals, but the immediate impact is overshadowed by existing negative sentiment regarding cash burn and valuation."
       },
-      "analysis_details": "• **What Happened**\nCCC announced today that it has **reported record sales**, with its stock trading at **EUR 21.35**. Separately, the company's market value was stated at **PLN 9.8 billion**, with the stock at **EUR 21.21**.\n\n• **Key Consideration**\nThe announcement of **record sales** indicates strong business momentum and positive operational execution, even outside of a full earnings report. This specific positive update can attract momentum investors, but the lack of detailed financial context beyond sales figures means the impact should be monitored for sustained follow-through.",
+      "analysis_details": "• **What Happened**\nFermi announced the date for its **Third Quarter 2026 Earnings Release and Call**. This news comes as the stock has been **sliding**, with traders eyeing **cash burn** and investor **support** levels. The company's stock also **looks overvalued** according to recent analysis, despite experiencing an **89% one year slide**.\n\n• **Key Consideration**\nThe announcement of an upcoming earnings date provides a defined timeline for investors to anticipate a formal update on the company's financial health. However, current momentum is negative, driven by concerns over **cash burn** and perceived **overvaluation**, which could heighten anxiety leading into the report.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "CCC stock at EUR 21.21 with PLN 9.8 billion market value - ad-hoc-news.de",
+          "title": "FRMI Stock Slides As Traders Eye Cash Burn And Support - www.timothysykes.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOQUJ6VWlWNnV4bUJ4cy1Od2U0bXRGTjVQbGlDN1pIeEpZV1pEZWF6b3VpS0RMa2VPOXpoSzRkSE41dzdXRG5lR0xnQVlQTGEwY29Mc0VkR0lzeXVxMUVTNGVPdS0yLU96UTZwd3pBa3NaYkhZR2VNQ0pZdFN1UzVhNklkS253bzQtemtxc0JBX2JJQ2c2SHpIanZXN1Qwd0M2VXVoMzRjVnVHdmVSLWItSzFxNHVWWVBoU1c0?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5TekFKVlF2REVtU1FiR3pkZWZYR1NvVzlkU3BJQU1EcU4wUmE3SGtSUzAyTWxNcVU1d1YzZzk3dkgyTFZ4WGd6VnlKdXc3OXJfZkVOS0FqS0RJR2FTbEdPdzlJS1RsbTZacmFfa1cxcDNEaVU?oc=5"
         },
         {
-          "title": "CCC reported record sales while CCC stock traded at EUR 21.35 - ad-hoc-news.de",
+          "title": "Fermi (FRMI) Stock Looks Overvalued Despite Its 89% One Year Slide - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOY0JIZjJ0QmVIN1FMM05oajVHdE0wREpuSEFVVEJSVUx4dWJxWFRzeF9DZ0ZxdmY4alMwVlpuNEg4V19iREkwNFJhX0RHLWc5X2gtVFBheWctOTZzVTQzMjllcko2WmtwSkt5WGcyNUxnRDRHUm1QclNVZVFWS09GTnBsc1ZSYkY3dGxFWHAtb2VjS2o5b1BtcWFpc3QzU0gyLTJ3Y1l3RnJ3RC1JbmZVOW15OWhoQjNCb1RTTHhFMTlkUQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNYk1JNFBDWHo0M002TlFKUEVfVWVILWxzaGphcTc3S2hFNUhKcm45TEpPc281bWk0UE8xRHA4MjJWdUR4ZlRFTzMxVXJwQWlIQVN1dkJURzM2T0xlNE1aaFpjMFc5TUx4bjZQWXEyQlRyemRVS2RVVndZanltUVJobnNFTTJNempyTzZGUDBwTFRNQjE0ajFscnR2V05Db3M?oc=5"
+        },
+        {
+          "title": "Fermi Announces Third Quarter 2026 Earnings Release and Call Date",
+          "source": "Finviz",
+          "url": "/news/401377/fermi-announces-third-quarter-2026-earnings-release-and-call-date"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "551.83M",
-      "short_float": "10.92%",
-      "daily_pct": 6.85,
-      "prev_close": 7.02,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (Avg $Vol $77M < $100M)",
+      "float_shares": "340.66M",
+      "short_float": "13.66%",
+      "daily_pct": -5.25,
+      "prev_close": 3.25,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $59M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
+        "status": "Discrepancy",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "record sales",
-        "discrepancy_note": "Finviz News provides no information to confirm or deny the claim of 'record sales'. Google News [4] mentions 'CCC reported record sales', but since Finviz has no data, both sources do not confirm it."
+        "primary_claim": "Q3 2026 earnings release and call date",
+        "discrepancy_note": "Source A (Finviz) directly confirms 'Fermi Announces Third Quarter 2026 Earnings Release and Call Date'. Source B (Google News) does not contain any headlines confirming a Q3 2026 earnings release and call date. One headline in Source B mentions 'Q2' as the next real test, which is a different quarter."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -193,7 +80,7 @@
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
     "small_gaps": 1,
-    "large_gaps": 2,
+    "large_gaps": 0,
     "total_headlines": 3,
     "monthly_cost_usd": 0.01
   }
