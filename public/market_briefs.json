@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-13 19:52 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows / Watchful Consolidation",
+    "spy_price": 778.01,
+    "spy_change_pct": -0.01,
+    "vix": 15.27,
+    "hy_oas": 3.11,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 39.9,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Reported better-than-expected Q3 earnings, fueled by strong net interest income growth and disciplined expense management, driving optimism for the financial sector."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group",
+          "reason": "Announced a strategic partnership to expand its virtual care services, signaling aggressive growth in healthcare technology and potentially boosting its market share."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Experienced volatility today attributed to technical trading patterns and speculative option flows, lacking any fresh fundamental news to drive its price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-13 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Exhibits strong technical momentum as investors continue to flock to leading AI infrastructure plays despite broader market weakness."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-23 11:24 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Signals, Complacent Credit",
-    "spy_price": 769.78,
-    "spy_change_pct": -0.48,
-    "vix": 14.56,
-    "hy_oas": 2.68,
-    "yield_curve": 0.25,
-    "credit_status": "Complacent",
-    "s5fi": 34.4,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "IONQ",
-          "company": "IonQ, Inc.",
-          "reason": "IonQ is gapping higher following a breakthrough in Quantum Error Correction combined with a significant new deal in South Korea."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is surging on news of a strategic partnership with a major cloud provider to integrate its new Blackwell Ultra AI chips, significantly expanding its data center market reach."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla faces continued pressure amid ongoing concerns over global EV price wars and margin compression, without fresh fundamental catalysts today."
         }
       ]
     }
