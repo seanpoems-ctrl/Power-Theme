@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-13 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Risk-Off Tone",
+    "spy_price": 778.1,
+    "spy_change_pct": -0.06,
+    "vix": 15.55,
+    "hy_oas": 3.15,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 39.4,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a strategic partnership with a leading AI research firm to integrate advanced large language models directly into its enterprise cloud offerings, promising significant competitive advantages."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA unveiled a new chip architecture specifically designed for quantum computing integration, signaling expansion into future computing frontiers and generating analyst excitement."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla shares are exhibiting heightened intraday swings, as market participants digest recent production updates and ongoing competitive pressures, without any new significant fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-12 22:14 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation continued its ascent today, riding the broader tailwind for technology stocks and extending gains based on previous positive sentiment around AI infrastructure demand."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-22 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech-Led Optimism Amidst Mixed Signals",
-    "spy_price": 773.38,
-    "spy_change_pct": -0.02,
-    "vix": 14.21,
-    "hy_oas": 2.68,
-    "yield_curve": 0.2,
-    "credit_status": "Complacent",
-    "s5fi": 34.9,
-    "mmth": 53.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corp. announced a strategic partnership with a major hyperscaler to develop next-generation AI data center infrastructure, signaling strong future demand for its GPU technology."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft Corp. secured a multi-year, multi-billion dollar contract with a global financial institution to modernize its entire cloud infrastructure on Azure, reinforcing enterprise growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil Corp. experienced headwinds from the sharp 6.05% decline in crude oil prices, reflecting broader commodity weakness rather than company-specific news."
         }
       ]
     }
