@@ -18,7 +18,7 @@ Output: public/industry_intraday.json  { generated_at, date, count, values: { "<
 
 The same TradingView call also feeds public/industry_stocks.json — the industry's real stocks (largest TOP_STOCKS by market cap) for the Industry
 Matrix drill-down, so an industry tile that isn't one of the scanned top-5 themes shows its own companies instead of its parent theme's proxy ETF
-(Apparel Manufacturing used to list XLY's AMZN / TSLA).  { generated_at, date, industries: { "<industry>": [ {t, n, p, i, d, w, m, dv, adr, cap}, … ] } }
+(Apparel Manufacturing used to list XLY's AMZN / TSLA).  { generated_at, date, industries: { "<industry>": [ {t, n, p, i, d, w, m, m3, m6, y, dv, adr, cap, ext, rng}, … ] } }
 """
 import json
 import logging
@@ -66,7 +66,8 @@ def build() -> dict | None:
     company_of = {r["ticker"]: r.get("company") for r in db if r.get("ticker")}
 
     q = (Query().set_markets("america")
-         .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "ATR")
+         .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y", "ATR", "SMA50",
+                 "price_52_week_high", "price_52_week_low")
          .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
          .order_by("market_cap_basic", ascending=False).limit(5000))
@@ -84,10 +85,14 @@ def build() -> dict | None:
             continue
         intra = (c / o - 1) * 100
         groups.setdefault(ind, []).append((intra, cap))
-        vol, atr = _num(r.get("average_volume_10d_calc")), _num(r.get("ATR"))
+        vol, atr, sma50 = _num(r.get("average_volume_10d_calc")), _num(r.get("ATR")), _num(r.get("SMA50"))
+        hi, lo = _num(r.get("price_52_week_high")), _num(r.get("price_52_week_low"))
         stocks.setdefault(ind, []).append({
             "t": t, "n": company_of.get(t) or "", "p": round(c, 2), "i": round(intra, 2),
             "d": _r(_num(r.get("change"))), "w": _r(_num(r.get("Perf.W"))), "m": _r(_num(r.get("Perf.1M"))),
+            "m3": _r(_num(r.get("Perf.3M"))), "m6": _r(_num(r.get("Perf.6M"))), "y": _r(_num(r.get("Perf.Y"))),
+            "ext": round(((c / sma50) - 1) / (atr / c), 2) if sma50 and atr else None,
+            "rng": round((c - lo) / (hi - lo) * 100) if hi and lo and hi > lo else None,
             "dv": round(c * vol) if vol else None, "adr": round(atr / c * 100, 1) if atr else None, "cap": round(cap),
         })
 

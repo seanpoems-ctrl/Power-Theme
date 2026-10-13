@@ -728,10 +728,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       .then(d => { if (d?.values) setIntraMap(Object.fromEntries(Object.entries(d.values).map(([k, v]) => [k, v.intra]))); }).catch(() => {});
   }, []);
   const [indStocks, setIndStocks] = useState({});   // { industry: [stock rows] } from public/industry_stocks.json — an industry's own companies for the drill-down
-  React.useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/industry_stocks.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null)
-      .then(d => { if (d?.industries) setIndStocks(d.industries); }).catch(() => {});
-  }, []);
+  React.useEffect(() => { loadIndustryStocks().then(f => { if (f) setIndStocks(f.byIndustry); }); }, []);
   const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the theme drill-down's mini-chart grid
 
   // Reset sort whenever a new theme is opened
@@ -16853,6 +16850,21 @@ const LevEtfTag = ({ ticker, etf = null, plain = false }) => {
 };
 
 // Click a ticker anywhere → the stock panel (right-hand drawer). Ctrl/⌘/Shift-click still goes straight to TradingView.
+// public/industry_stocks.json (industry_intraday_builder.py): every US stock ≥ $300M by industry. One shared fetch for the Industry Matrix drill-down
+// and as the stock panel's last-resort data source (small caps that aren't in the 500-name screener, the theme scan or the leader lists).
+let _industryStocksP = null;
+const loadIndustryStocks = () => {
+  if (!_industryStocksP) {
+    _industryStocksP = fetch(`${process.env.PUBLIC_URL}/industry_stocks.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d?.industries) return null;
+      const byTicker = {};
+      for (const [industry, rows] of Object.entries(d.industries)) for (const r of rows) byTicker[r.t] ||= { ...r, industry };
+      return { byIndustry: d.industries, byTicker };
+    }).catch(() => null);
+  }
+  return _industryStocksP;
+};
+
 const StockPanelCtx = React.createContext(null);
 const useOpenStock = () => React.useContext(StockPanelCtx) || (() => {});
 const stockLinkClick = (e, open, ticker) => {
@@ -16894,6 +16906,9 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
   const [leadFile, setLeadFile] = React.useState(null);
   React.useEffect(() => { let dead = false; loadLeadershipFile().then(f => { if (!dead) setLeadFile(f); }); return () => { dead = true; }; }, []);
   const lead = React.useMemo(() => _leaderRow(leadFile, ticker), [leadFile, ticker]);
+  const [indFile, setIndFile] = React.useState(null);
+  React.useEffect(() => { let dead = false; loadIndustryStocks().then(f => { if (!dead) setIndFile(f); }); return () => { dead = true; }; }, []);
+  const ind = indFile?.byTicker?.[ticker] || null;     // last resort: industry_stocks.json row
   const open = useOpenStock();
   const [copied, setCopied] = React.useState(false);
   const sc = screenerMap?.[ticker] || null;
@@ -16909,11 +16924,12 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
   const rec = th.rec;
-  const price = sc?.price ?? rec?.price ?? lead?.price ?? null;
-  const chg = sc?.change_pct ?? rec?.change_pct ?? null;
-  const perf = k => sc?.[k] ?? rec?.[k] ?? lead?.perfs?.[k] ?? null;
-  const company = sc?.company || rec?.company || lead?.company || "";
-  const industry = sc?.industry || lead?.industry || "";
+  const indPerf = { perf_1d: ind?.d, perf_1w: ind?.w, perf_1m: ind?.m, perf_3m: ind?.m3, perf_6m: ind?.m6, perf_1y: ind?.y };
+  const price = sc?.price ?? rec?.price ?? lead?.price ?? ind?.p ?? null;
+  const chg = sc?.change_pct ?? rec?.change_pct ?? ind?.d ?? null;
+  const perf = k => sc?.[k] ?? rec?.[k] ?? lead?.perfs?.[k] ?? indPerf[k] ?? null;
+  const company = sc?.company || rec?.company || lead?.company || ind?.n || "";
+  const industry = sc?.industry || lead?.industry || ind?.industry || "";
   const group = categoryThemeMap?.[ticker] || null;
   const etfs = lev?.all?.[ticker] || [];
   const stat = (label, val, cls = "text-zinc-200", tip) => (
@@ -16922,11 +16938,11 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
       <div className={`text-[13px] font-mono ${cls}`}>{val}</div>
     </div>
   );
-  const ext = sc?.extension ?? rec?.extension ?? lead?.extension ?? null;
+  const ext = sc?.extension ?? rec?.extension ?? lead?.extension ?? ind?.ext ?? null;
   const rs = sc?.rs_score ?? rec?.rs_52w ?? null;
-  const adr = sc?.adr_pct ?? rec?.adr_pct ?? null;
-  const dvol = sc?.avg_dollar_volume ?? rec?.dollar_volume ?? lead?.avg_dollar_volume ?? null;
-  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? (lead?.market_cap != null ? lead.market_cap / 1e9 : null);
+  const adr = sc?.adr_pct ?? rec?.adr_pct ?? ind?.adr ?? null;
+  const dvol = sc?.avg_dollar_volume ?? rec?.dollar_volume ?? lead?.avg_dollar_volume ?? ind?.dv ?? null;
+  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? (lead?.market_cap != null ? lead.market_cap / 1e9 : (ind?.cap != null ? ind.cap / 1e9 : null));
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.6)", backdropFilter: "blur(3px)" }} onClick={onClose}>
       <aside className="w-full max-w-[520px] max-h-[92vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl overflow-y-auto" onClick={e => e.stopPropagation()}>
@@ -16956,7 +16972,7 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
             {stat("ADR", adr != null ? `${adr.toFixed(1)}%` : "—")}
             {stat("Mkt Cap", cap == null ? "—" : cap >= 1000 ? `$${(cap / 1000).toFixed(1)}T` : cap >= 1 ? `$${cap.toFixed(0)}B` : `$${(cap * 1000).toFixed(0)}M`)}
             {stat("RS", rs ?? "—", rs != null && rs >= 90 ? "text-emerald-400 font-bold" : rs != null && rs >= 70 ? "text-emerald-400" : "text-zinc-200")}
-            {stat("52W Range", sc?.pct_52w_range != null ? `${sc.pct_52w_range.toFixed(0)}%` : (rec?.dist_52w_high != null ? `${rec.dist_52w_high.toFixed(1)}% off` : "—"), "text-zinc-200", "Position within the 52-week range (or distance below the high)")}
+            {stat("52W Range", sc?.pct_52w_range != null ? `${sc.pct_52w_range.toFixed(0)}%` : (rec?.dist_52w_high != null ? `${rec.dist_52w_high.toFixed(1)}% off` : (ind?.rng != null ? `${ind.rng}%` : "—")), "text-zinc-200", "Position within the 52-week range (or distance below the high)")}
           </div>
           <div>
             <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide mb-1.5">Performance</div>
@@ -16992,7 +17008,7 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
               </div>
             </div>
           )}
-          {!sc && !rec && !lead && <p className="text-xs text-zinc-600 italic">No scanner data for {ticker} — it isn't in today's universe or themes.</p>}
+          {!sc && !rec && !lead && !ind && <p className="text-xs text-zinc-600 italic">No scanner data for {ticker} — it isn't in today's universe or themes.</p>}
           <button onClick={() => open(null)} className="text-[11px] text-zinc-600 hover:text-zinc-300">Close</button>
         </div>
       </aside>
