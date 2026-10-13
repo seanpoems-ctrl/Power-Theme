@@ -3089,6 +3089,9 @@ def _tv_perf_from_row(row) -> dict:
     return out
 
 
+ETF_HOLDING_MIN_CAP = 500e6   # ETF holdings below this market cap are dropped in enrich_etf_holdings
+
+
 def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
     """
     Enrich all ETF holdings with price, 1D/1W/1M perf, ADR%, and RS score.
@@ -3309,6 +3312,9 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             new_h["dollar_volume"] = tv_dollar_volumes.get(h["ticker"]) or s.get("dollar_volume")
             new_h["rs"]            = rs_lookup.get(h["ticker"])
             new_h["mkt_cap"]       = tv_mkt_caps.get(h["ticker"])
+            # Under $500M market cap is not tradable for this dashboard (and has no panel data): drop the line. Unknown caps (failed lookup) stay.
+            if new_h["mkt_cap"] is not None and new_h["mkt_cap"] < ETF_HOLDING_MIN_CAP:
+                continue
             # Full company name: TradingView description (primary),
             # ETF holding name as fallback for foreign/unlisted tickers.
             new_h["name"] = company_names.get(h["ticker"]) or h.get("name", "")
