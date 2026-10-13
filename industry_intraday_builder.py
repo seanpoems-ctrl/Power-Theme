@@ -35,7 +35,7 @@ OUT = ROOT / "public" / "industry_intraday.json"
 DB = ROOT / "public" / "stock_db.json"
 ET = ZoneInfo("America/New_York")
 
-MIN_CAP = 300e6            # ignore micro-caps
+MIN_CAP = 500e6            # ignore small caps - not traded, and keeps every listed stock inside the stock panel's data sources
 MIN_AVG_VOL = 100_000
 MIN_STOCKS = 3
 MAX_WEIGHT_SHARE = 0.35    # one stock can carry at most 35 % of an industry's weight

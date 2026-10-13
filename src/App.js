@@ -1050,7 +1050,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                   </span>
                 )}
                 {selectedTheme.fromIndustry && (
-                  <span title="Largest US-listed stocks in this industry (market cap ≥ $300M), straight from the industry classification — not an ETF proxy"
+                  <span title="Largest US-listed stocks in this industry (market cap ≥ $500M), straight from the industry classification — not an ETF proxy"
                     className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
                     {lang === 'zh' ? '產業成分股' : 'INDUSTRY STOCKS'}
                   </span>
@@ -16850,7 +16850,7 @@ const LevEtfTag = ({ ticker, etf = null, plain = false }) => {
 };
 
 // Click a ticker anywhere → the stock panel (right-hand drawer). Ctrl/⌘/Shift-click still goes straight to TradingView.
-// public/industry_stocks.json (industry_intraday_builder.py): every US stock ≥ $300M by industry. One shared fetch for the Industry Matrix drill-down
+// public/industry_stocks.json (industry_intraday_builder.py): every US stock ≥ $500M by industry. One shared fetch for the Industry Matrix drill-down
 // and as the stock panel's last-resort data source (small caps that aren't in the 500-name screener, the theme scan or the leader lists).
 let _industryStocksP = null;
 const loadIndustryStocks = () => {
