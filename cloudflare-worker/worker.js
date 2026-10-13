@@ -19,6 +19,15 @@
  *
  * resolution follows TradingView's convention: "1","5","15","30","60","D",
  * "W","M" (minutes, or D/W/M).
+ *
+ * BLANK LATEST DAILY CANDLE (patched 2026-10-13): for some tickers Yahoo returns
+ * the newest daily row with null open/high/low/close for hours after the close
+ * (the session isn't consolidated yet — seen on ABCL and LITE for Oct 12 while MSTR
+ * was fine). Those null rows are dropped below, so the chart silently ended a day
+ * early. For daily requests the Worker now rebuilds that one candle from the
+ * day's 5-minute regular-session bars (open = first open, high = max, low = min,
+ * close = last close, volume = sum). It's an approximation of the official
+ * closing-auction print, and it only kicks in when Yahoo's own row is blank.
  */
 
 const TV_RESOLUTION_TO_YAHOO_INTERVAL = {
@@ -94,6 +103,18 @@ export default {
 
     const timestamps = result.timestamp || [];
     const quote = result.indicators?.quote?.[0] || {};
+
+    // Fill a blank newest daily candle from intraday data (daily resolution only).
+    if (interval === "1d" && timestamps.length) {
+      const i = timestamps.length - 1;
+      if (quote.close?.[i] == null) {
+        const day = await dayFromIntraday(symbol, timestamps[i]);
+        if (day) {
+          quote.open[i] = day.open; quote.high[i] = day.high; quote.low[i] = day.low;
+          quote.close[i] = day.close; quote.volume[i] = day.volume;
+        }
+      }
+    }
     const bars = timestamps
       .map((t, i) => ({
         time: t * 1000, // TradingView bar.time is ms since epoch
@@ -111,6 +132,34 @@ export default {
     return withCors(response);
   },
 };
+
+// One session's OHLCV from Yahoo's 5-minute bars. `dayStartSec` is the daily candle's timestamp (the session open). Returns null when there
+// are no regular-session bars for that day (e.g. before the open, a holiday, or a symbol Yahoo has no intraday data for).
+async function dayFromIntraday(symbol, dayStartSec) {
+  try {
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}` +
+      `?interval=5m&period1=${dayStartSec - 3600}&period2=${dayStartSec + 86400}&includePrePost=false`;
+    const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; PowerThemeProxy/1.0)" } });
+    if (!res.ok) return null;
+    const r = (await res.json())?.chart?.result?.[0];
+    const ts = r?.timestamp || [];
+    const q = r?.indicators?.quote?.[0] || {};
+    let open = null, high = -Infinity, low = Infinity, close = null, volume = 0, n = 0;
+    for (let k = 0; k < ts.length; k++) {
+      if (ts[k] < dayStartSec - 60 || ts[k] > dayStartSec + 7 * 3600) continue;     // this session only (regular hours are 6.5 h)
+      if (q.open?.[k] == null || q.high?.[k] == null || q.low?.[k] == null || q.close?.[k] == null) continue;
+      if (open == null) open = q.open[k];
+      high = Math.max(high, q.high[k]);
+      low = Math.min(low, q.low[k]);
+      close = q.close[k];
+      volume += q.volume?.[k] ?? 0;
+      n++;
+    }
+    return n ? { open, high, low, close, volume } : null;
+  } catch {
+    return null;
+  }
+}
 
 function json(obj, status = 200) {
   return new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json" } });

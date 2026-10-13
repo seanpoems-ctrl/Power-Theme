@@ -706,6 +706,8 @@ const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
 };
 
 const MATRIX_METRICS = [
+  // Intra = today's open → close/last, market-cap-weighted per industry (industry_intraday_builder.py → public/industry_intraday.json)
+  { key: 'perf_intraday', label: 'Intra', thresholds: [2, 1, 0.3] },
   { key: 'perf_1d',  label: '1D',  thresholds: [3, 1.5, 0.5] },
   { key: 'perf_1w',  label: '1W',  thresholds: [5, 2.5, 1] },
   { key: 'perf_1m',  label: '1M',  thresholds: [10, 5, 2] },
@@ -720,6 +722,11 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
   const [matrixMetric, setMatrixMetric] = useState('perf_1d');
+  const [intraMap, setIntraMap] = useState({});   // { industry: intraday % } from public/industry_intraday.json
+  React.useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/industry_intraday.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.values) setIntraMap(Object.fromEntries(Object.entries(d.values).map(([k, v]) => [k, v.intra]))); }).catch(() => {});
+  }, []);
   const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the theme drill-down's mini-chart grid
 
   // Reset sort whenever a new theme is opened
@@ -828,7 +835,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   // Rows = industries grouped by parent theme (Finviz "Matrix" layout: a grid of
   // color tiles, not the circle-packing "Clusters" mode). Grouping + within-group
   // order both follow the currently selected metric so the strongest theme/industry
-  // rises to the top whenever the metric changes.
+  // rises to the top whenever the metric changes (group order = mean of its industries).
   // Grouped by fine_theme — the same Theme Leaderboard bucket Category
   // Leaderboard, Theme Leaderboard and Thematic Spotlight all use — instead
   // of the old parent_theme (a separate Finviz-industry-composite grouping
@@ -841,7 +848,8 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
 
   const groupedIndustries = useMemo(() => {
     const groups = new Map();
-    for (const ind of industryRankings || []) {
+    for (const ind0 of industryRankings || []) {
+      const ind = { ...ind0, perf_intraday: intraMap[ind0.name] ?? null };
       const key = ind.fine_theme || ind.parent_theme || 'Other';
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(ind);
@@ -852,12 +860,12 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       const sorted = [...inds].sort((a, b) => (b[matrixMetric] ?? -999) - (a[matrixMetric] ?? -999));
       return { theme, avg, score: fineThemeScore[theme] ?? null, industries: sorted };
     });
-    // Theme Leaderboard's score orders the groups when available (matches
-    // the rest of the dashboard); groups with no fine_theme score (e.g.
-    // "Other") fall back to the metric-local average.
-    arr.sort((a, b) => (b.score ?? b.avg ?? -999) - (a.score ?? a.avg ?? -999));
+    // Groups follow the SELECTED metric (Intra/1D/1W/1M/3M/6M/YTD/1Y): ranked by the average of their industries' value for it, best first, so
+    // the strongest group for that window sits on top and the order changes when you switch metric. (Until 2026-10-13 they were ordered by the
+    // Theme Leaderboard score, which doesn't change with the metric.) That score is only the tie-break now.
+    arr.sort((a, b) => ((b.avg ?? -999) - (a.avg ?? -999)) || ((b.score ?? -999) - (a.score ?? -999)));
     return arr;
-  }, [industryRankings, matrixMetric, fineThemeScore]);
+  }, [industryRankings, matrixMetric, fineThemeScore, intraMap]);
 
   const handleCardClick = (itemName) => {
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
@@ -16301,6 +16309,101 @@ const pullbackScore = r => {
   if (r.risk_adr != null && r.risk_adr <= 1) sc += 10;
   return Math.round(sc);
 };
+// Full guide + glossary for the Pullback Watchlist (opened from the page's "Guide" button).
+const PullbackGuide = ({ onClose }) => {
+  React.useEffect(() => {
+    const h = e => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose]);
+  usePhoneViewport();
+  const H = ({ children }) => <h4 className="text-[13px] font-semibold text-zinc-100 mt-5 mb-1.5">{children}</h4>;
+  const Term = ({ t, children }) => <div className="py-1.5 border-b border-zinc-800/60 last:border-0"><span className="font-semibold text-zinc-200">{t}</span><span className="text-zinc-400"> — {children}</span></div>;
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(3px)" }} onClick={onClose}>
+      <div className="w-full max-w-[820px] max-h-[92vh] overflow-y-auto bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl" onClick={e => e.stopPropagation()}>
+        <div className="sticky top-0 z-10 bg-zinc-900 border-b border-zinc-800 px-5 py-3 flex items-center gap-2 rounded-t-xl">
+          <h3 className="text-base font-bold text-zinc-100">Pullback Watchlist — Guide</h3>
+          <span className="text-[11px] text-zinc-500">Martin Luk's pullback-buy method</span>
+          <button onClick={onClose} className="ml-auto text-zinc-500 hover:text-zinc-200 p-1 rounded" title="Close (Esc)"><X size={16} /></button>
+        </div>
+        <div className="px-5 pb-6 text-[12px] leading-relaxed text-zinc-400">
+          <H>1 · The idea in one minute</H>
+          <p>Martin Luk (2025 US Investing Championship stock division, +969.8 %) mostly buys <b className="text-zinc-200">pullbacks in strong stocks</b>: a stock has already run, it comes back to a support level, holds it, and turns up again. Because he buys right after the turn, his entry sits just above his stop — a small loss if wrong, a big move if right. He finds the support on the <b className="text-zinc-200">daily</b> chart and waits for the trigger on a <b className="text-zinc-200">minute</b> chart.</p>
+          <p className="mt-1.5">This page does the daily-chart half for you: it scans every stock on your <b className="text-amber-300">Focus List</b>, <b className="text-cyan-300">Universe</b>, <b className="text-orange-300">Liquid Leaders</b> and <b className="text-fuchsia-300">Super Liquid Leaders</b>, and shows which ones have pulled back to support. <b className="text-zinc-200">The entry itself is still yours to take on the intraday chart.</b> It is a screen, not advice.</p>
+
+          <H>2 · The four steps, and where each shows in the table</H>
+          <div className="overflow-hidden rounded-lg border border-zinc-800">
+            <table className="w-full text-[11px]">
+              <thead><tr className="text-zinc-500 text-left bg-zinc-950/40"><th className="px-3 py-1.5 font-medium w-[34%]">Step</th><th className="px-3 py-1.5 font-medium">What to look for → columns</th></tr></thead>
+              <tbody className="divide-y divide-zinc-800/60">
+                <tr><td className="px-3 py-1.5 text-zinc-200">1. A strong stock has already made an up-leg</td><td className="px-3 py-1.5"><b className="text-zinc-300">Up-leg</b> (big, +25 % or more), <b className="text-zinc-300">ADR</b> (moves enough to be worth trading, 4 %+), <b className="text-zinc-300">1M · 3M</b> (positive), still above its 50-day.</td></tr>
+                <tr><td className="px-3 py-1.5 text-zinc-200">2. It comes back to daily support</td><td className="px-3 py-1.5"><b className="text-zinc-300">Pullback</b> (a normal dip, 4–30 %), <b className="text-zinc-300">To support</b> (close to 0 ATR above the EMA21 or SMA50), <b className="text-zinc-300">Dry</b> (selling volume fading), <b className="text-zinc-300">Ext.</b> (not stretched).</td></tr>
+                <tr><td className="px-3 py-1.5 text-zinc-200">3. Buy when it turns back up</td><td className="px-3 py-1.5"><b className="text-zinc-300">Status</b> = <span className="text-emerald-300">Trigger</span> (a green day that closed above the prior day's high, or reclaimed the EMA10). That is only the <i>daily</i> version — you still take the real entry on the minute chart (opening-range break, VWAP reclaim…).</td></tr>
+                <tr><td className="px-3 py-1.5 text-zinc-200">4. Hold the stop, sell into strength</td><td className="px-3 py-1.5"><b className="text-zinc-300">Stop · Risk</b> and <b className="text-zinc-300">Risk÷ADR</b> show how tight the stop would be. Selling in pieces as it works is up to you.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <H>3 · A simple daily routine</H>
+          <ol className="list-decimal pl-5 space-y-1">
+            <li><b className="text-zinc-300">Check the data date</b> next to the page title — the list is rebuilt every night after the close.</li>
+            <li>Leave all four list chips on. Stocks on <b className="text-zinc-300">two or more lists</b> are the strongest (they show more than one badge under the symbol).</li>
+            <li>Click <b className="text-zinc-300">Trigger</b> in the All / Trigger / Watch switch for names that already turned up, or keep <b className="text-zinc-300">All</b> and sort by Score.</li>
+            <li>Prefer rows with <b className="text-zinc-300">Dry</b>, <b className="text-zinc-300">Inside</b> or <b className="text-zinc-300">Tight</b> next to the status, and a <b className="text-emerald-400">green Risk÷ADR (1.0 or less)</b>.</li>
+            <li>Skip anything with <b className="text-zinc-300">Ext. 4× or more</b> (stretched), a very deep pullback, or <b className="text-zinc-300">To support</b> well below zero (broke support).</li>
+            <li>Click <b className="text-zinc-300">▦ Mini Charts</b> and look: is the pullback orderly, holding the EMA21 / 50-day, on shrinking volume? Tick the ones you like and <b className="text-zinc-300">Copy</b> them into a TradingView watchlist.</li>
+            <li>Next session, wait for the intraday trigger on those names; put the stop under the low of the day / support and size the position so the loss is a fixed small amount.</li>
+          </ol>
+
+          <H>4 · Glossary — every column and tag</H>
+          <div>
+            <Term t="Score">a 0–100-ish ranking number. Points for: a daily Trigger (+20), being close to support (up to +20), a bigger up-leg (up to +20), coiling (Inside/Tight +8), quiet volume (Dry +8), appearing on several lists (+5 each extra, max +10) and a stop within one ADR (+10). Higher = closer to the textbook setup. It sorts the table by default.</Term>
+            <Term t="Symbol / lists (F U L S)">the ticker (with its most liquid leveraged ETF if it has one, e.g. MSTR / MSTW). The badges underneath say which of your lists it is on: <b className="text-amber-300">F</b> Focus List, <b className="text-cyan-300">U</b> Universe, <b className="text-orange-300">L</b> Liquid Leaders, <b className="text-fuchsia-300">S</b> Super Liquid Leaders.</Term>
+            <Term t="Industry">the stock's industry.</Term>
+            <Term t="Status — Trigger / Watch"><span className="text-emerald-300">Trigger</span> = the latest day was green and closed above the prior day's high (a turn-up), or it reclaimed the 10-day EMA. <b className="text-zinc-300">Watch</b> = it has pulled back to support but hasn't turned up yet.</Term>
+            <Term t="EMA10↑">reclaimed the 10-day exponential moving average today (closed above it after closing at or below it yesterday).</Term>
+            <Term t="Inside">an inside day: today's high-to-low range sits inside yesterday's. The stock is coiling.</Term>
+            <Term t="Tight">the last 3 days' total range is under 0.8 × ADR — a narrow, quiet stretch.</Term>
+            <Term t="Dry">volume has dried up: the last 3 days averaged under 90 % of the stock's 50-day average volume. On a pullback that means sellers are running out.</Term>
+            <Term t="Up-leg">the rise from the swing low to the swing high of the last 60 sessions (the swing low is searched in the 60 sessions before that high). It measures how strong the prior run was.</Term>
+            <Term t="Pullback">how far the price is now below that swing high, in %.</Term>
+            <Term t="To support">the nearest support, EMA21 (21-day exponential average) or SMA50 (50-day simple average), and the distance to it in <b className="text-zinc-300">ATRs</b>. +0.3 means 0.3 ATR above it; <span className="text-rose-300">negative</span> means just under it; 0 means right on it. Between −1 and +1.5 is the default window.</Term>
+            <Term t="ATR">average true range — the stock's typical daily move in dollars (14-day, smoothed). Distances in ATRs make stocks of any price comparable.</Term>
+            <Term t="ADR">average daily range % — the average (high ÷ low − 1) over 20 days. 4 %+ means it moves enough to be worth trading.</Term>
+            <Term t="Stop · Risk">Stop = the lowest low of the last 5 sessions (the pullback's swing low) — a planning stop, not an order. Risk = the % distance from the last price down to it.</Term>
+            <Term t="Risk÷ADR">that risk divided by the ADR. 1.0 or less (shown green) means the stop is within one normal day's range, so a stop-out costs about a day's move at most.</Term>
+            <Term t="1M · 3M">price change over the last month (top) and 3 months (bottom).</Term>
+            <Term t="Ext. (extension)">how stretched the price is above its 50-day average, in ATRs: ((price ÷ SMA50) − 1) ÷ (ATR ÷ price). Under 4× is fine; 4×+ is stretched; 7×+ is overextended.</Term>
+            <Term t="$ Vol">average daily dollar volume (price × shares). Higher = easier to trade.</Term>
+            <Term t="Swing high / low">the highest high / lowest low of a move. <b className="text-zinc-300">Reclaim</b> = closing back above a level it had fallen below. <b className="text-zinc-300">Support</b> = a level where buyers have been stepping in (moving averages, prior base).</Term>
+          </div>
+
+          <H>5 · The filter bar</H>
+          <div>
+            <Term t="ADR ≥">drops stocks that don't move enough (default 4 %).</Term>
+            <Term t="Up-leg ≥">minimum size of the prior run (default 25 %).</Term>
+            <Term t="Pullback … to …">the allowed pullback depth from the high (default 4–30 %). Raise the first number to ignore tiny dips; lower the second to avoid deep ones.</Term>
+            <Term t="Support dist. … to …">allowed distance to the support in ATRs (default −1 to +1.5). Narrow it (for example 0 to 1) for stocks sitting right on support.</Term>
+            <Term t="Avg $ Vol ≥">minimum liquidity in $M (default 20).</Term>
+            <Term t="Above 50-day">keeps only stocks still above their 50-day average — support intact.</Term>
+            <Term t="List chips / All · Trigger · Watch">show or hide each list's stocks, and filter by status. Your choices are remembered in this browser. <b className="text-zinc-300">Reset</b> restores the defaults.</Term>
+          </div>
+
+          <H>6 · Limits to keep in mind</H>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>The list is built once a night from <b className="text-zinc-300">daily</b> data. It can't see today's intraday action.</li>
+            <li>“Trigger” is a daily proxy. Martin's real trigger is on the minute chart, so a Trigger row isn't a buy signal by itself.</li>
+            <li>The cut-offs are our reading of the method, not a published formula — change them in the filter bar.</li>
+            <li>The planning stop is a rough guide; where you really put it depends on your entry candle.</li>
+            <li>This is a screening tool, not investment advice.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const PullbackScreen = ({ onMiniCharts = null }) => {
   const [file, setFile] = React.useState(null);
   const [crit, setCrit] = React.useState(() => {
@@ -16312,6 +16415,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
   });
   React.useEffect(() => { try { localStorage.setItem(PULLBACK_LS_KEY, JSON.stringify(crit)); } catch { /* ignore */ } }, [crit]);
   const [copied, setCopied] = React.useState(false);
+  const [guideOpen, setGuideOpen] = React.useState(false);
   React.useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/pullback_watchlist.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => { if (d?.rows) setFile(d); }).catch(() => {});
   }, []);
@@ -16358,11 +16462,13 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
   const triggerN = rows.filter(r => r.status === "Trigger").length;
   return (
     <div className="space-y-4">
+      {guideOpen && <PullbackGuide onClose={() => setGuideOpen(false)} />}
       <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
         <div className="flex items-center gap-3 flex-wrap">
           <h3 className="text-sm font-semibold text-zinc-100">Pullback Watchlist</h3>
           <span className="text-[11px] text-zinc-500">Martin Luk's pullback-buy method · {rows.length} of {all.length} stocks pass · {triggerN} with a daily trigger · data {file.date}</span>
           <div className="ml-auto flex items-center gap-2">
+            <button onClick={() => setGuideOpen(true)} className="text-[11px] font-medium px-2 py-1 rounded border border-blue-500/40 text-blue-300 hover:bg-blue-500/10 transition-colors">📖 Guide</button>
             <button onClick={copy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : `Copy ${tickers.length}`}</button>
             <button onClick={exportCsv} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
             {onMiniCharts && rows.length > 0 && <button onClick={() => onMiniCharts(sort.rows.map(r => ({ ticker: r.ticker, category: r.industry })), "Pullback Watchlist")}
@@ -16377,6 +16483,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
             <li><b className="text-zinc-300">Buy when it turns back up</b> — <span className="text-emerald-400">Trigger</span> = a green day closing above the prior day's high, or a reclaim of the EMA10. This is only the DAILY proxy; the real entry is the intraday trigger (e.g. opening-range break / VWAP reclaim) on your minute chart.</li>
             <li><b className="text-zinc-300">Hold the stop, scale out into strength</b> — Stop = lowest low of the last 5 sessions; Risk % to it; Risk ÷ ADR ≤ 1 means the stop is within one normal day's range (the entry sits right next to the stop).</li>
           </ol>
+          <p className="mt-2"><button onClick={() => setGuideOpen(true)} className="text-blue-400 hover:text-blue-300 underline">Open the full guide with every term explained →</button></p>
           <p className="mt-2 text-zinc-600">Lists: <b className="text-amber-300">F</b> Focus List · <b className="text-cyan-300">U</b> Universe (ADR &gt; 5 %, $ vol &gt; $500M, vol &gt; 1M) · <b className="text-orange-300">L</b> Liquid Leaders · <b className="text-fuchsia-300">S</b> Super Liquid Leaders. Score ranks closeness to support, size of the prior leg, a daily trigger, coiling, quiet pullback volume, appearing on several lists, and a stop inside one ADR. It is a screen, not advice.</p>
         </details>
         <div className="flex items-center gap-4 flex-wrap mt-3 pt-3 border-t border-zinc-800/60">
@@ -16440,7 +16547,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
                       <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${r.status === "Trigger" ? "bg-emerald-500/20 text-emerald-300" : "bg-zinc-700/40 text-zinc-300"}`}>{r.status}</span>
                       <div className="mt-0.5 leading-none">
                         {r.reclaim_ema10 && <span className="mr-1 text-[9px] text-emerald-400" title="Reclaimed the 10-day EMA today">EMA10↑</span>}
-                        {(r.tight || r.inside_bar) && <span className="mr-1 text-[9px] text-amber-300" title="Coiling: tight 3-day range / inside day">{r.inside_bar ? "ID" : "Tight"}</span>}
+                        {(r.tight || r.inside_bar) && <span className="mr-1 text-[9px] text-amber-300" title="Coiling: Inside = inside day (today's range sits inside yesterday's); Tight = the last 3 days' range is under 0.8 × ADR">{r.inside_bar ? "Inside" : "Tight"}</span>}
                         {r.vol_dry != null && r.vol_dry < 0.9 && <span className="text-[9px] text-sky-300" title="Volume drying up on the pullback">Dry</span>}
                       </div>
                     </td>
