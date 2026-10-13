@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-13 14:06 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Consolidation",
+    "spy_price": 777.9,
+    "spy_change_pct": -0.03,
+    "vix": 15.54,
+    "hy_oas": 3.11,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 37.9,
+    "mmth": 53.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MRK",
+          "company": "Merck & Co.",
+          "reason": "Merck & Co. announced highly anticipated positive Phase 3 trial results for its new oncology drug, significantly exceeding efficacy expectations."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce",
+          "reason": "Salesforce secured a transformative multi-year cloud services contract with a major government agency, projected to substantially boost recurring revenue."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla",
+          "reason": "Tesla traded on renewed speculation regarding upcoming production figures, alongside ongoing concerns about increasing competition in the EV market."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-13 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to see strong buying interest on general artificial intelligence sector optimism and momentum-driven flow, lacking a fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-22 19:15 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Selective Risk-On",
-    "spy_price": 773.38,
-    "spy_change_pct": -0.02,
-    "vix": 14.21,
-    "hy_oas": 2.66,
-    "yield_curve": 0.25,
-    "credit_status": "Complacent",
-    "s5fi": 34.9,
-    "mmth": 53.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon.com, Inc. announced a strategic partnership with a major global logistics firm, expected to significantly reduce its shipping costs and boost profit margins."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company received fast-track designation from the FDA for its new Alzheimer's drug candidate, accelerating its path to market and potential revenue generation."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation continued its ascent today, riding the broader tailwind for technology stocks and extending gains based on previous positive sentiment around AI infrastructure demand."
         }
       ]
     }
