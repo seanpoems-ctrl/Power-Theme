@@ -221,7 +221,7 @@ A stock is `pure_play: true` if it appears in **only one** sub-theme across the 
 - `rotation_delta` — `rank_3m − rank_1w`; positive = short-term rank jumped ahead of long-term rank (early rotation in)
 - `accelerating` — `true` when delta ≥ 25% of universe size (min 3) and 1W perf > 0
 
-Was surfaced in the Scanner Leaderboard's sortable **ROT** column (⚡ badge = accelerating); that component was removed 2026-10-13, so the fields are currently computed but not displayed.
+Was surfaced in the Scanner Leaderboard's sortable **ROT** column (⚡ badge = accelerating); that component was removed 2026-10-13. **ROT now lives in Themes → Theme Leaders** (`buildRotation` in `App.js`, computed client-side over the ~64 `leadership_theme` groups from each group's median 1W vs 3M return, same formula/threshold; window-independent so every table shows the same value; sortable ROT column in `ThemeTopTable`, hidden for the Sectors tables). The scraper's `rotation_delta` fields for the Finviz themes are computed but no longer displayed.
 
 ---
 
@@ -353,7 +353,7 @@ All browser-side live prices go through `src/finnhubQuote.js` (`fetchFinnhubQuot
 
 Removed from the Scanner tab as duplicates of Themes → Theme Tracker / Theme Leaders and the Industry Matrix (Scanner is now Industry Matrix → Stock Screener → News Hub):
 
-- **Theme Leaderboard (Scanner) + its Industry Detail toggle, and Thematic Spotlight** (components `Leaderboard`, `ThematicSpotlight`, `ThemeStatsPopup`, `EtfHoldingsPopup`). **This was the only place the ROT (rotation / ⚡ accelerating) column was shown** — `_add_rotation_ranks()` in `scraper.py` still writes `rank_1w` / `rank_3m` / `rotation_delta` / `accelerating` into `thematic_data.json`, nothing renders them now. The Themes → Theme Tracker "Theme Leaderboard" is a different component and stays.
+- **Theme Leaderboard (Scanner) + its Industry Detail toggle, and Thematic Spotlight** (components `Leaderboard`, `ThematicSpotlight`, `ThemeStatsPopup`, `EtfHoldingsPopup`). **This was the only place the ROT (rotation / ⚡ accelerating) column was shown** — it was re-added the same day to Themes → Theme Leaders (computed client-side over the leadership groups); `_add_rotation_ranks()` in `scraper.py` still writes `rank_1w` / `rank_3m` / `rotation_delta` / `accelerating` into `thematic_data.json` but nothing renders those. The Themes → Theme Tracker "Theme Leaderboard" is a different component and stays.
 - **Group ETF's "Leading Themes" mini-list** (the page keeps the flat ETF RS table + Daily Stock Universe).
 - **Flagging box and ETF Trendline Scanner** (`HeroZone`, `FlaggingStocksBox.js`, `EtfTrendlinePanel`). The nightly `etf_trendline_service.py` step and its `data_health_check.py` entry were removed too; `etf_trendline_service.py` and `public/etf_trendline.json` are left in the repo, unused. Restore via git history (the cleanup commits are 2026-10-13).
 

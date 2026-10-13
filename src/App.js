@@ -16198,6 +16198,24 @@ const buildLeadershipGroups = etfs => {
     ...Object.fromEntries(LEADERSHIP_PERF_KEYS.map(k => [k, med(ms.map(m => m[k]))])),
   }));
 };
+// ROT (rotation / acceleration rank) — same definition as scraper.py's _add_rotation_ranks, applied to the leadership groups:
+// rank every group by its median 1W and by its median 3M return (1 = best); delta = rank_3m − rank_1w (positive = the short-term rank has
+// jumped ahead of the long-term rank, i.e. early rotation in); ⚡ accelerating = delta ≥ 25% of the group count (min 3) and 1W > 0.
+// Window-independent, so a group shows the same ROT in all four tables.
+const buildRotation = groups => {
+  const g = groups.filter(x => x.perf_1w != null && x.perf_3m != null);
+  const n = g.length;
+  if (n < 2) return {};
+  const r1 = new Map([...g].sort((a, b) => b.perf_1w - a.perf_1w).map((x, i) => [x.name, i + 1]));
+  const r3 = new Map([...g].sort((a, b) => b.perf_3m - a.perf_3m).map((x, i) => [x.name, i + 1]));
+  const threshold = Math.max(3, Math.round(n * 0.25));
+  const out = {};
+  for (const x of g) {
+    const delta = r3.get(x.name) - r1.get(x.name);
+    out[x.name] = { rank_1w: r1.get(x.name), rank_3m: r3.get(x.name), rotation_delta: delta, accelerating: delta >= threshold && x.perf_1w > 0 };
+  }
+  return out;
+};
 const HEAT_PERIODS = [["Premarket", "perf_pre"], ["After Hours", "perf_post"], ["Intraday", "perf_intraday"], ["1 Day", "perf_1d"],
   ["1 Week", "perf_1w"], ["1 Month", "perf_1m"], ["3 Months", "perf_3m"], ["6 Months", "perf_6m"], ["1 Year", "perf_12m"]];
 const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf, sectorNames = null }) => {
@@ -16299,6 +16317,7 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf, 
 const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", titleSuffix = "Top 10", footer = null }) => {
   const rows = React.useMemo(() => top.map(r => ({ ...r, ratio: r.total ? r.confirmed / r.total : null })), [top]);
   const sort = useTableSort(rows, "rank", "asc");
+  const hasRot = rows.some(r => r.rotation_delta != null);   // Theme Leaders rows carry ROT; the Sectors tables don't
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
   return (
     <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
@@ -16319,6 +16338,7 @@ const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", t
               <SortTh sort={sort} col="median" label="Median" />
               <SortTh sort={sort} col="leader" label="Leader" textual align="left" />
               <SortTh sort={sort} col="ratio" label="Confirmed" />
+              {hasRot && <SortTh sort={sort} col="rotation_delta" label="ROT" title="Rotation: rank by 3M return − rank by 1W return, across all themes. Positive = the short-term rank has jumped ahead of the long-term rank (early rotation in). ⚡ = jump of 25%+ of the themes, with 1W up." />}
             </tr>
           </thead>
           <tbody>
@@ -16335,6 +16355,17 @@ const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", t
                     : "—"}
                 </td>
                 <td className={`px-3 py-1.5 text-right font-mono ${r.total && r.confirmed === r.total ? "text-emerald-400" : r.confirmed === 0 ? "text-zinc-600" : "text-zinc-300"}`}>{r.confirmed}/{r.total}</td>
+                {hasRot && (
+                  <td className="px-3 py-1.5 text-right"
+                      title={r.rotation_delta == null ? "" : `1W rank #${r.rank_1w} vs 3M rank #${r.rank_3m} — ${r.rotation_delta > 0 ? "climbing" : r.rotation_delta < 0 ? "fading" : "steady"}`}>
+                    {r.rotation_delta == null ? <span className="text-zinc-600">—</span> : (
+                      <span className={`inline-flex items-center gap-0.5 rounded-md px-1 py-0.5 text-[11px] font-mono font-medium ${r.rotation_delta > 0 ? "text-emerald-400" : r.rotation_delta < 0 ? "text-red-400" : "text-zinc-500"} ${r.accelerating ? "bg-emerald-500/10" : ""}`}>
+                        {r.accelerating && <span className="text-[10px]">⚡</span>}
+                        {r.rotation_delta > 0 ? "+" : ""}{r.rotation_delta}
+                      </span>
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -16412,6 +16443,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
     const g = groups.find(x => x.name === (e && themeOf(e))) || { name: e?.label || ticker, member_tickers: [ticker] };
     setSel({ group: g, win, only: ticker });
   };
+  const rot = React.useMemo(() => buildRotation(groups), [groups]);
   const tables = React.useMemo(() => {
     const byTicker = Object.fromEntries(etfs.map(e => [e.ticker, e]));
     return THEME_WINDOWS.map(([w, k]) => {
@@ -16430,11 +16462,12 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
             median: g[k], leader: leader?.ticker || null, leaderPerf: leader?.[k] ?? null,
             confirmed: members.filter(m => m[k] > 0 && m[k] >= med).length, total: members.length,
             members: members.map(m => m.ticker),
+            ...(rot[g.name] || {}),
           };
         }),
       };
     });
-  }, [etfs, groups]);
+  }, [etfs, groups, rot]);
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
 
   // Non-Extended ETF Leaders (NEL): ETFs inside that window's top-10 groups whose Extension is below the cutoff and that clear a
@@ -16480,7 +16513,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
       <div className="flex items-baseline gap-2 flex-wrap">
         <h3 className="text-sm font-semibold text-zinc-100">Theme Leaders</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{groups.length} themes</span>
-        <span className="text-[11px] text-zinc-600">top 10 per window · Strength = percentile of the group's median ETF return · Confirmed = member ETFs up and above the all-ETF median</span>
+        <span className="text-[11px] text-zinc-600">top 10 per window · Strength = percentile of the group's median ETF return · Confirmed = member ETFs up and above the all-ETF median · ROT = 3M rank − 1W rank (⚡ accelerating)</span>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {tables.map(t => (
