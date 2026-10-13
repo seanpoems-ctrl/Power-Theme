@@ -3897,6 +3897,8 @@ const TradeChartModal = ({ trade, onClose }) => {
         // Same look as the Mini Charts: grey canvas, white / grey outlined candles, orange inside bars, RVOL instead of volume.
         const series = chart.addSeries(CandlestickSeries, candleOptions());
         series.setData(candleData(data));
+        // Keep the candles in the upper part of the pane, clear of the RVOL bars (bottom 18 %), instead of letting lows run into them.
+        series.priceScale().applyOptions({ scaleMargins: { top: 0.08, bottom: 0.22 } });
         const rvolSer = chart.addSeries(HistogramSeries, rvolSeriesOptions({ priceScaleId: "vol" }));
         rvolSer.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
         rvolSer.createPriceLine({ price: 1, color: "#555555", lineWidth: 1, lineStyle: 2, axisLabelVisible: false });
@@ -13189,6 +13191,8 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         const series = chart.addSeries(CandlestickSeries, candleOptions());
         // Inside bars (range within the previous bar's range) are painted orange.
         series.setData(candleData(data));
+        // Keep the candles in the upper part of the pane, clear of the RVOL bars (bottom 20 %) and the stats box beside them.
+        series.priceScale().applyOptions({ scaleMargins: { top: 0.08, bottom: 0.25 } });
 
         // Relative volume (bar volume ÷ 50-bar average) instead of raw volume; dashed line at 1× = average.
         const rvol = _rvolSeries(data);
