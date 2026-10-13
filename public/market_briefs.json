@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-12 22:14 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Sentiment / Global Caution",
+    "spy_price": 778.1,
+    "spy_change_pct": -0.06,
+    "vix": 15.21,
+    "hy_oas": 3.15,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 39.4,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon announced a groundbreaking new cloud computing service, promising significant cost reductions and enhanced AI capabilities for enterprise clients, sparking analyst upgrades."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil secured a major long-term liquefied natural gas supply deal with a key European utility, bolstering its future revenue outlook amid rising global energy demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla shares exhibited volatility today, bouncing off a critical technical support level as investors continued to digest prior production and delivery reports."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-12 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil Corp. experienced headwinds from the sharp 6.05% decline in crude oil prices, reflecting broader commodity weakness rather than company-specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-22 11:28 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Risk-On, Tech Leading",
-    "spy_price": 773.35,
-    "spy_change_pct": -0.02,
-    "vix": 14.32,
-    "hy_oas": 2.68,
-    "yield_curve": 0.2,
-    "credit_status": "Complacent",
-    "s5fi": 34.2,
-    "mmth": 53.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple announces breakthrough AI integration for iOS, leveraging on-device processing to enhance privacy and user experience, which is expected to drive a significant upgrade cycle and reinforce ecosystem lock-in."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA secures a massive multi-year cloud data center contract with a major hyperscaler, significantly expanding its market dominance in AI infrastructure and promising robust revenue growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Despite lacking fresh news, Microsoft sees continued momentum in Azure cloud services, with analysts reiterating strong growth projections, making it a beneficiary of broader tech rotation."
         }
       ]
     }
