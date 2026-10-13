@@ -6,7 +6,6 @@ import { createChart, CandlestickSeries, LineSeries, HistogramSeries, createSeri
 import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
-import FlaggingStocksBox from "./FlaggingStocksBox";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
 import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
@@ -243,21 +242,6 @@ const GradeBadge = ({ grade }) => {
 // signals this used to check client-side, now a single source of truth
 // covering both scanned stocks and ETF-holdings-fallback stocks.
 
-function getEliteGrade(s) {
-  const sp = s.sparkline;
-  const aboveSMA10 = sp && sp.length >= 5
-    ? s.price > sp.reduce((a, b) => a + b, 0) / sp.length
-    : null;
-  const above20  = s.sma20_pct  != null ? s.sma20_pct  > 0 : null;
-  const above50  = s.sma50_pct  != null ? s.sma50_pct  > 0 : null;
-  const above200 = s.sma200_pct != null ? s.sma200_pct > 0 : null;
-  if (s.rs_52w >= 90 && above200 && above50 && above20 && aboveSMA10) return "A+";
-  if (s.rs_52w >= 80 && above200 && above50) return "A";
-  if (above200) return "B";
-  return null;
-}
-
-
 // ── Helpers ──
 function pearson(a, b) {
   const n = Math.min(a.length, b.length);
@@ -438,42 +422,6 @@ const MarketWarnings = ({ themes }) => {
   );
 };
 
-
-// ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
-const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
-  const flagInnerRef = React.useRef(null);
-  const col2Ref      = React.useRef(null);
-  const dataLoaded   = !!data;
-
-  React.useEffect(() => {
-    const src = flagInnerRef.current;
-    const dst = col2Ref.current;
-    if (!src || !dst) return;
-    // Use offsetHeight (layout px, zoom-independent) to sync col2 height to Flagging content
-    const sync = () => {
-      const h = src.offsetHeight;
-      if (h > 0) dst.style.height = h + 'px';
-    };
-    sync(); // immediate sync on data load
-    const ro = new ResizeObserver(sync); // keep syncing if Flagging resizes
-    ro.observe(src);
-    return () => ro.disconnect();
-  }, [dataLoaded]); // re-run when data transitions null → loaded
-
-  return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
-      {/* ── Col 1: Flagging ── */}
-      <div>
-        <div ref={flagInnerRef}><FlaggingStocksBox data={data}/></div>
-      </div>
-
-      {/* ── Col 2: ETF 趨勢線掃描 — height DOM-synced to Flagging content height ── */}
-      <div ref={col2Ref} style={{ display: 'flex', flexDirection: 'column' }}>
-        <EtfTrendlinePanel etfData={etfTrendlineData}/>
-      </div>
-    </div>
-  );
-};
 
 const MATRIX_METRICS = [
   // Intra = today's open → close/last, market-cap-weighted per industry (industry_intraday_builder.py → public/industry_intraday.json)
@@ -11359,230 +11307,6 @@ const MomentumCockpit = () => {
   );
 };
 
-// ── ETF Trendline Panel ───────────────────────────────────────────────────────
-const PATTERN_ZH = {
-  channel_up:           "上升通道",
-  channel_down:         "下降通道",
-  triangle_converging:  "三角收斂",
-  triangle_expanding:   "三角擴張",
-  resistance_only:      "單邊阻力",
-  support_only:         "單邊支撐",
-};
-
-const PATTERN_EN = {
-  channel_up:           "Rising Channel",
-  channel_down:         "Descending Channel",
-  triangle_converging:  "Converging Triangle",
-  triangle_expanding:   "Expanding Triangle",
-  resistance_only:      "Resistance Only",
-  support_only:         "Support Only",
-};
-
-const ETF_T = {
-  zh: {
-    title:      "ETF 趨勢線掃描",
-    loading:    "載入中…",
-    breakout:   "已突破可追",
-    nearRes:    "接近阻力可關注",
-    nearSup:    "接近支撐可布局",
-    noSignal:   "目前無訊號",
-    footer:     (n, s, d) => `掃描 ${n} 支主題 ETF · ${s} 個訊號 · 更新 ${d}`,
-  },
-  en: {
-    title:      "ETF Trendline Scanner",
-    loading:    "Loading…",
-    breakout:   "Breakout — Follow",
-    nearRes:    "Near Resistance — Watch",
-    nearSup:    "Near Support — Accumulate",
-    noSignal:   "No signals",
-    footer:     (n, s, d) => `Scanned ${n} thematic ETFs · ${s} signals · Updated ${d}`,
-  },
-};
-
-const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
-  const closes = (sparkline || []).slice(-60);
-  const n = closes.length;
-  if (n < 3) return <div style={{ width: 180, height: 60 }}/>;
-
-  const avgMove = closes.reduce((s, c, i) => i === 0 ? 0 : s + Math.abs(c - closes[i-1]), 0) / (n - 1);
-  const wick = (atr || avgMove * 1.5) * 0.3;
-
-  // Collect all price points for Y range
-  const allPts = [];
-  closes.forEach((c, i) => {
-    const prev = i > 0 ? closes[i - 1] : c;
-    allPts.push(Math.max(c, prev) + wick, Math.min(c, prev) - wick);
-  });
-  [...(resistanceLines || []), ...(supportLines || [])].forEach(l => {
-    allPts.push(l.spark_start_val, l.today_value);
-  });
-  const minP = Math.min(...allPts);
-  const maxP = Math.max(...allPts);
-  const range = maxP - minP || 1;
-
-  const VW = 180, VH = 60, PAD = 2;
-  const barW = 2, barGap = 1;
-  const toY = p => PAD + (1 - (p - minP) / range) * (VH - 2 * PAD);
-  const toX = i => i * (barW + barGap);
-
-  const bars = closes.map((c, i) => {
-    const prev = i > 0 ? closes[i - 1] : c;
-    const isUp = c >= prev;
-    return {
-      x: toX(i),
-      wickTop:    toY(Math.max(c, prev) + wick),
-      wickBot:    toY(Math.min(c, prev) - wick),
-      bodyTop:    toY(Math.max(c, prev)),
-      bodyBot:    toY(Math.min(c, prev)),
-      bodyH:      Math.max(0.6, Math.abs(toY(prev) - toY(c))),
-      isUp,
-    };
-  });
-
-  const lines = [
-    ...(resistanceLines || []).slice(0, 2).map((l, i) => ({
-      x1: toX(l.p1_spark_bar), y1: toY(l.spark_start_val),
-      x2: toX(n - 1),          y2: toY(l.today_value),
-      stroke: i === 0 ? '#ef4444' : '#f97316',
-      dash: i === 0 ? '4,3' : '3,3',
-      sw: i === 0 ? 1.3 : 1.0,
-    })),
-    ...(supportLines || []).slice(0, 2).map((l, i) => ({
-      x1: toX(l.p1_spark_bar), y1: toY(l.spark_start_val),
-      x2: toX(n - 1),          y2: toY(l.today_value),
-      stroke: i === 0 ? '#4ade80' : '#60a5fa',
-      dash: i === 0 ? '4,3' : '3,3',
-      sw: i === 0 ? 1.3 : 1.0,
-    })),
-  ];
-
-  return (
-    <svg viewBox={`0 0 ${VW} ${VH}`} width="180" height="60" style={{ display: 'block', flexShrink: 0 }}>
-      {bars.map((b, i) => (
-        <g key={i}>
-          <line x1={b.x + 1} y1={b.wickTop} x2={b.x + 1} y2={b.wickBot} stroke="#666" strokeWidth="0.7"/>
-          <rect x={b.x} y={b.bodyTop} width={barW} height={b.bodyH} fill={b.isUp ? '#4ade80' : '#f87171'}/>
-        </g>
-      ))}
-      {lines.map((l, i) => (
-        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
-          stroke={l.stroke} strokeWidth={l.sw} strokeDasharray={l.dash} strokeLinecap="round"/>
-      ))}
-    </svg>
-  );
-};
-
-const EtfTrendlineRow = ({ etf, onTvClick, lang = 'zh' }) => {
-  const dotColor = { breakout: '#4ade80', near_resistance: '#fbbf24', near_support: '#60a5fa' }[etf.signal] || '#71717a';
-  const distColor = etf.signal === 'near_resistance' ? '#f87171' : '#4ade80';
-  const distStr   = etf.dist_pct != null
-    ? `${etf.dist_pct >= 0 ? '+' : ''}${etf.dist_pct.toFixed(2)}%`
-    : '—';
-  const PMAP      = lang === 'en' ? PATTERN_EN : PATTERN_ZH;
-  const patternZh = PMAP[etf.pattern] || etf.pattern || '—';
-
-  return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: 6,
-      padding: '10px 14px', borderRadius: 10,
-      background: 'transparent',
-      transition: 'background 0.15s',
-    }}
-      onMouseEnter={e => e.currentTarget.style.background = 'rgba(39,39,42,0.7)'}
-      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-    >
-      {/* Signal dot */}
-      <div style={{ width: 8, height: 8, borderRadius: '50%', background: dotColor, flexShrink: 0 }}/>
-
-      {/* Ticker */}
-      <button
-        onClick={e => onTvClick({ ticker: etf.ticker, rect: e.currentTarget.getBoundingClientRect() })}
-        style={{ fontSize: 14, fontWeight: 600, color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}
-      >{etf.ticker}</button>
-
-      {/* Theme tag */}
-      <span style={{
-        fontSize: 10, padding: '1px 5px', borderRadius: 4,
-        background: 'rgba(113,113,122,0.2)', color: '#a1a1aa',
-        flexShrink: 0, whiteSpace: 'nowrap',
-      }}>{etf.theme}</span>
-
-      {/* Pattern */}
-      <span style={{ flex: 1, fontSize: 12, color: '#71717a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-        {patternZh}
-      </span>
-
-      {/* Mini chart */}
-      <EtfMiniChart
-        sparkline={etf.sparkline}
-        resistanceLines={etf.resistance_lines}
-        supportLines={etf.support_lines}
-        atr={etf.atr}
-      />
-
-      {/* Price */}
-      <span style={{ fontSize: 14, color: '#d4d4d8', textAlign: 'right', flexShrink: 0, minWidth: 44, fontVariantNumeric: 'tabular-nums' }}>
-        {etf.close != null ? etf.close.toFixed(2) : '—'}
-      </span>
-
-      {/* Dist % */}
-      <span style={{ fontSize: 13, color: distColor, textAlign: 'right', flexShrink: 0, minWidth: 46, fontVariantNumeric: 'tabular-nums' }}>
-        {distStr}
-      </span>
-    </div>
-  );
-};
-
-const EtfTrendlineGroup = ({ icon, title, items, onTvClick, lang = 'zh' }) => (
-  <div style={{ marginBottom: 6 }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px 4px', borderBottom: '1px solid rgba(63,63,70,0.5)' }}>
-      <span style={{ fontSize: 13 }}>{icon}</span>
-      <span style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{title}</span>
-    </div>
-    {items.length === 0
-      ? <div style={{ padding: '6px 14px', fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>{ETF_T[lang].noSignal}</div>
-      : items.map(e => <EtfTrendlineRow key={e.ticker} etf={e} onTvClick={onTvClick} lang={lang}/>)
-    }
-  </div>
-);
-
-const EtfTrendlinePanel = ({ etfData }) => {
-  const [tvPopup, setTvPopup] = useState(null);
-  const lang = useLang();   // follows the global EN / 中文 toggle in the nav bar
-  const t    = ETF_T[lang] ?? ETF_T.zh;
-
-  if (!etfData) return (
-    <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3">
-      <div style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>{t.title}</div>
-      <div style={{ fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>{t.loading}</div>
-    </div>
-  );
-
-  const etfs = etfData.etfs || [];
-  const breakouts = etfs.filter(e => e.signal === 'breakout');
-  const nearRes   = etfs.filter(e => e.signal === 'near_resistance');
-  const nearSup   = etfs.filter(e => e.signal === 'near_support');
-
-  return (
-    <>
-    <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ padding: '10px 14px 6px', fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', flexShrink: 0 }}>
-        {t.title}
-      </div>
-      <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: '#52525b transparent', minHeight: 0 }}>
-        <EtfTrendlineGroup icon="🚀" title={t.breakout} items={breakouts} onTvClick={setTvPopup} lang={lang}/>
-        <EtfTrendlineGroup icon="👀" title={t.nearRes}  items={nearRes}   onTvClick={setTvPopup} lang={lang}/>
-        <EtfTrendlineGroup icon="🎯" title={t.nearSup}  items={nearSup}   onTvClick={setTvPopup} lang={lang}/>
-      </div>
-      <div style={{ padding: '5px 14px 8px', fontSize: 11, color: '#52525b', borderTop: '1px solid rgba(63,63,70,0.4)', flexShrink: 0 }}>
-        {t.footer(etfData.total_scanned, etfData.total_signals, etfData.last_updated)}
-      </div>
-    </div>
-    {tvPopup && <TVPopup ticker={tvPopup.ticker} anchorRect={tvPopup.rect} onClose={() => setTvPopup(null)}/>}
-    </>
-  );
-};
-
 // ─────────────────────────────────────────────────────────────────────────────
 // ETF RS Table — matches Stockbee-style layout exactly
 // Columns: Group | Group (name) | RS% | 1-Mth Chart | 1-Mth RS | % Intraday | % 1D | % 1-Mth | % Off 52W H
@@ -17652,7 +17376,6 @@ export default function App() {
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
   const [ibkrData, setIbkrData] = useState(null);
-  const [etfTrendlineData, setEtfTrendlineData] = useState(null);
   const [showCalcModal, setShowCalcModal] = useState(false);
 
   // ── IBKR WebSocket live price stream ──────────────────────────────────────
@@ -17667,7 +17390,6 @@ export default function App() {
   // ── Market store (global macro alerts + reversal) ─────────────────────────
   // Use separate selectors — object selectors create new refs every render → infinite loop
   const updateFromIntel = useMarketStore((s) => s.updateFromIntel);
-  const creditRegime    = useMarketStore((s) => s.creditRegime);
   const prevReversal = useRef(false);
 
   // Poll market_intelligence.json every 60 seconds to keep the store fresh.
@@ -17812,14 +17534,6 @@ export default function App() {
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ETF trendline — fetch once on mount (refreshed by nightly workflow)
-  useEffect(() => {
-    fetch(process.env.PUBLIC_URL + "/etf_trendline.json?v=" + Date.now())
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d) setEtfTrendlineData(d); })
-      .catch(() => {});
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   // ── IBKR TWS WebSocket price stream (ibkr_ws_server.py on port 5003) ──────
   // Receives live prices every ~1 second and patches the DOM directly for zero
   // re-render overhead. Falls back silently if the server is not running.
@@ -17946,56 +17660,6 @@ const appScreenerMap = useMemo(() => {
       (s.dist_52w_high == null || s.dist_52w_high >= -maxDist);
   }, [filtersOn, filterDolVol, filterADR, filterRS, filterDist52w]);
 
-  const filtered = useMemo(() => {
-    if (!data) return [];
-    return data.themes.map(t => {
-      const norm = normalizeTheme(t);
-      const filteredSubs = norm.subthemes.map(sub => {
-        // Enrich stocks with TradingView rolling-30d perf (overrides Finviz calendar-month)
-        let st = sub.stocks.map(s => {
-          const sc = appScreenerMap[s.ticker];
-          if (!sc) return s;
-          return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
-        });
-        if (search) {
-          const q = search.toLowerCase();
-          st = st.filter(s => s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q));
-        }
-        if (stockFilter) {
-          st = st.filter(stockFilter);
-        }
-        // In Stress regime: only show A/A+ grade stocks to reduce noise
-        if (creditRegime === "Stress") {
-          st = st.filter(s => {
-            const g = getEliteGrade(s);
-            return g === "A+" || g === "A";
-          });
-        }
-        return { ...sub, stocks: st };
-      }).filter(sub => sub.stocks.length > 0);
-      return { ...norm, subthemes: filteredSubs };
-    }).filter(t => t.subthemes.length > 0)
-    .sort((a, b) => {
-      const getRankingRS = (theme) => {
-        const name = theme.name.toLowerCase();
-        // Theme Leaderboard's fine_theme score first — same ranking as
-        // everywhere else on the dashboard — then the older Finviz scores,
-        // then raw stock RS as a last resort.
-        const ftEntry = fineThemeRankings.find(r => r.name?.toLowerCase() === (theme.fine_theme || "").toLowerCase());
-        if (ftEntry?.score != null) return ftEntry.score;
-        const entry =
-          data.finviz_theme_rankings?.find(r => r.name?.toLowerCase() === name) ||
-          data.theme_rankings?.find(r => r.name?.toLowerCase() === name);
-        if (entry?.rs_score != null) return entry.rs_score;
-        const stocks = theme.subthemes.flatMap(s => s.stocks);
-        const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-        return vals.length ? vals.reduce((s, v) => s + v, 0) / vals.length : 0;
-      };
-      return getRankingRS(b) - getRankingRS(a);
-    });
-  }, [data, search, stockFilter, creditRegime, fineThemeRankings]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const unique = [...new Set(filtered.flatMap(t => t.subthemes.flatMap(s => s.stocks.map(st => st.ticker))))];
 
 
 
@@ -18255,7 +17919,6 @@ const appScreenerMap = useMemo(() => {
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} fineThemeRankings={fineThemeRankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
             {data && <MarketWarnings themes={data.themes}/>}
-            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
             <NewsHubFold newsData={newsData}/>
           </main>
 

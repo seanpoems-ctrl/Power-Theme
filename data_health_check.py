@@ -41,7 +41,6 @@ CHECKS = [
     ("gapper_data.json",            ["scan_time"],                       30,   [],                          True),
     ("breadth_monitor.json",        ["rows.0.date"],                     60,   [("rows", 1)],               True),
     ("etf_rs.json",                 ["generated_at"],                    30,   [("etfs", 50)],              True),
-    ("etf_trendline.json",          ["generated_at", "last_updated"],    30,   [],                          True),
     ("universe.json",               ["generated_at", "last_updated"],    30,   [],                          True),
     ("market_internals.json",       ["generated_at", "date"],            48,   [],                          True),
     ("econ_calendar.json",          ["generated_at", "last_updated"],    72,   [],                          False),

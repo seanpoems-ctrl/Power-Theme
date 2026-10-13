@@ -221,7 +221,7 @@ A stock is `pure_play: true` if it appears in **only one** sub-theme across the 
 - `rotation_delta` — `rank_3m − rank_1w`; positive = short-term rank jumped ahead of long-term rank (early rotation in)
 - `accelerating` — `true` when delta ≥ 25% of universe size (min 3) and 1W perf > 0
 
-Surfaced in the frontend Leaderboard as the sortable **ROT** column (⚡ badge = accelerating).
+Was surfaced in the Scanner Leaderboard's sortable **ROT** column (⚡ badge = accelerating); that component was removed 2026-10-13, so the fields are currently computed but not displayed.
 
 ---
 
@@ -346,6 +346,16 @@ The App header menu is driven by a `NAV` array in `App` (Row 3): each item is a 
 ## Live quote fallback (Finnhub → Finance Query)
 
 All browser-side live prices go through `src/finnhubQuote.js` (`fetchFinnhubQuote(sym, { maxAgeMs })`, cached 60 s). If Finnhub has no answer — HTTP 429, any error, no `REACT_APP_FINNHUB_KEY`, or its all-zero reply for symbols it doesn't carry — the lookup falls back to **Finance Query** (`https://finance-query.com/v2/quotes?symbols=…&fields=…`; public Yahoo-backed API, MIT-licensed project, CORS-open, no key). Fallback lookups issued in the same tick are sent as one batched request (dots → dashes: `BRK.B` → `BRK-B`); after a 429 Finnhub is skipped for 30 s. Quotes are reshaped to Finnhub's `{c, pc, d, dp, h, l, o}` (plus `_source: "finance-query"`) so no caller changed. It is a third-party hobby service with no SLA and unspecified rate limits — keep it a *fallback*, never the primary. Tests: `src/finnhubQuote.test.js` (18). Other endpoints probed on that server (not used): `/v2/chart/{sym}` bars, `/v2/fred/series/{ID}` (FRED passthrough), `/v2/fear-and-greed` (alternative.me **crypto** index, not CNN's), `/v2/news` (its own 10-item feed).
+
+---
+
+## Removed Features (2026-10-13 cleanup)
+
+Removed from the Scanner tab as duplicates of Themes → Theme Tracker / Theme Leaders and the Industry Matrix (Scanner is now Industry Matrix → Stock Screener → News Hub):
+
+- **Theme Leaderboard (Scanner) + its Industry Detail toggle, and Thematic Spotlight** (components `Leaderboard`, `ThematicSpotlight`, `ThemeStatsPopup`, `EtfHoldingsPopup`). **This was the only place the ROT (rotation / ⚡ accelerating) column was shown** — `_add_rotation_ranks()` in `scraper.py` still writes `rank_1w` / `rank_3m` / `rotation_delta` / `accelerating` into `thematic_data.json`, nothing renders them now. The Themes → Theme Tracker "Theme Leaderboard" is a different component and stays.
+- **Group ETF's "Leading Themes" mini-list** (the page keeps the flat ETF RS table + Daily Stock Universe).
+- **Flagging box and ETF Trendline Scanner** (`HeroZone`, `FlaggingStocksBox.js`, `EtfTrendlinePanel`). The nightly `etf_trendline_service.py` step and its `data_health_check.py` entry were removed too; `etf_trendline_service.py` and `public/etf_trendline.json` are left in the repo, unused. Restore via git history (the cleanup commits are 2026-10-13).
 
 ---
 
