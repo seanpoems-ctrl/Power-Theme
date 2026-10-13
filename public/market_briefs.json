@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-13 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Cues / Energy Bid",
+    "spy_price": 778.01,
+    "spy_change_pct": -0.01,
+    "vix": 15.27,
+    "hy_oas": 3.11,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 39.9,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "PG",
+          "company": "Procter & Gamble",
+          "reason": "Procter & Gamble announces a new share buyback program and increases quarterly dividend, boosting investor confidence in consumer staples amid economic uncertainty."
+        },
+        {
+          "ticker": "BA",
+          "company": "Boeing",
+          "reason": "Boeing secures a significant new order for 50 737 MAX aircraft from a major international carrier, signaling a strong rebound in air travel demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft",
+          "reason": "Microsoft shares see an uptick in institutional buying following technical breakout signals above its 50-day moving average."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-13 14:06 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla faces continued pressure amid ongoing concerns over global EV price wars and margin compression, without fresh fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-23 07:06 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Strong Risk Appetite / Growth Surge",
-    "spy_price": 773.5,
-    "spy_change_pct": 1.55,
-    "vix": 14.18,
-    "hy_oas": 2.66,
-    "yield_curve": 0.25,
-    "credit_status": "Complacent",
-    "s5fi": 34.9,
-    "mmth": 53.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Shares rally after the company unveils a significant breakthrough in battery technology, promising extended range and lower production costs."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Stock gains following a major 'Outperform' analyst upgrade with an increased price target, citing robust artificial intelligence monetization opportunities."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to see strong buying interest on general artificial intelligence sector optimism and momentum-driven flow, lacking a fresh catalyst today."
         }
       ]
     }
