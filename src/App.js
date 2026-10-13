@@ -16070,7 +16070,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
   const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
   const holdings = React.useMemo(() => {
     const ext = stats?.holdings_extension || {};
-    const row = (h, weight) => ({ ticker: h.ticker, name: h.name, weight, dvol: h.dollar_volume ?? null, ext: ext[h.ticker] ?? null });
+    const row = (h, weight) => ({ ticker: h.ticker, name: h.name, weight, adr: h.adr_pct ?? null, dvol: h.dollar_volume ?? null, ext: ext[h.ticker] ?? null });
     if (tab !== "Combined") return (etfHoldings[tab] || []).map(h => row(h, h.weight ?? null)).sort((a, b) => (b.weight ?? -1) - (a.weight ?? -1));
     const acc = {};
     for (const m of members) for (const h of etfHoldings[m.ticker] || []) {
@@ -16158,6 +16158,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                         <SortTh sort={holdSort} col="ticker" label="Ticker" textual align="left" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="name" label="Company" textual align="left" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="weight" label="Weight" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="adr" label="ADR%" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="dvol" label="Avg $ Vol" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="ext" label="Extension" title={EXTENSION_TIP} className="px-2 py-2" />
                       </tr>
@@ -16168,6 +16169,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                           <td className="px-2 py-2"><StockCell ticker={h.ticker} /></td>
                           <td className="px-2 py-2 text-zinc-400 max-w-[260px] truncate">{h.name || "—"}</td>
                           <td className="px-2 py-2 text-right font-mono text-zinc-300">{h.weight != null ? `${h.weight.toFixed(1)}%` : "—"}</td>
+                          <td className="px-2 py-2 text-right font-mono text-zinc-300">{h.adr != null ? `${h.adr.toFixed(1)}%` : "—"}</td>
                           <td className="px-2 py-2 text-right font-mono text-zinc-300">{fmtD(h.dvol)}</td>
                           <td className={`px-2 py-2 text-right font-mono ${extensionCls(h.ext)}`}>{fmtExtension(h.ext)}</td>
                         </tr>
