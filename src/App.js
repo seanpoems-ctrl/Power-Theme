@@ -14665,19 +14665,16 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
           <div className="relative w-full max-w-6xl" onClick={e => e.stopPropagation()}>
             <button onClick={() => setEnlargedIdx(null)}
               className="absolute -top-9 right-0 text-zinc-400 hover:text-zinc-100 transition-colors"><X size={20}/></button>
-            {enlargedIdx > 0 && (
-              <button onClick={() => setEnlargedIdx(i => i - 1)}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">‹</button>
-            )}
-            {enlargedIdx < items.length - 1 && (
-              <button onClick={() => setEnlargedIdx(i => i + 1)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">›</button>
-            )}
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
               ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height={_isPhone() ? "min(840px, 50vh)" : "min(840px, 75vh)"} showStats
               selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}/>
-            <div className="text-center text-[15px] text-zinc-500 mt-2">
-              {enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid
+            {/* Previous / next sit BELOW the chart (not on top of it, where they covered candles and the price scale) */}
+            <div className="flex items-center justify-center gap-4 mt-2 text-[15px] text-zinc-500">
+              <button onClick={() => setEnlargedIdx(i => Math.max(0, i - 1))} disabled={enlargedIdx <= 0} title="Previous chart (←)" aria-label="Previous chart"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-25 disabled:hover:bg-zinc-900/80 transition-colors">‹</button>
+              <span>{enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid</span>
+              <button onClick={() => setEnlargedIdx(i => Math.min(items.length - 1, i + 1))} disabled={enlargedIdx >= items.length - 1} title="Next chart (→)" aria-label="Next chart"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-25 disabled:hover:bg-zinc-900/80 transition-colors">›</button>
             </div>
           </div>
         </div>
