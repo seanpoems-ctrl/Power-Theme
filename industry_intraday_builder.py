@@ -15,6 +15,10 @@ This builds one: for every industry, the market-cap-weighted average of (close �
 
 Run after the close it is the day's open→close move ("Intra" = what the day's candle body did); during the session it is open→last.
 Output: public/industry_intraday.json  { generated_at, date, count, values: { "<industry>": { "intra": 0.42, "n": 17 } } }
+
+The same TradingView call also feeds public/industry_stocks.json — the industry's real stocks (largest TOP_STOCKS by market cap) for the Industry
+Matrix drill-down, so an industry tile that isn't one of the scanned top-5 themes shows its own companies instead of its parent theme's proxy ETF
+(Apparel Manufacturing used to list XLY's AMZN / TSLA).  { generated_at, date, industries: { "<industry>": [ {t, n, p, i, d, w, m, dv, adr, cap}, … ] } }
 """
 import json
 import logging
@@ -35,6 +39,8 @@ MIN_CAP = 300e6            # ignore micro-caps
 MIN_AVG_VOL = 100_000
 MIN_STOCKS = 3
 MAX_WEIGHT_SHARE = 0.35    # one stock can carry at most 35 % of an industry's weight
+TOP_STOCKS = 30            # stocks kept per industry in industry_stocks.json
+OUT_STOCKS = ROOT / "public" / "industry_stocks.json"
 
 
 def _num(v):
@@ -45,6 +51,10 @@ def _num(v):
         return None
 
 
+def _r(v):
+    return round(v, 2) if v is not None else None
+
+
 def build() -> dict | None:
     from tradingview_screener import Query, col
     try:
@@ -53,9 +63,10 @@ def build() -> dict | None:
         logger.error("stock_db.json unreadable: %s", exc)
         return None
     industry_of = {r["ticker"]: r.get("industry") for r in db if r.get("ticker") and r.get("industry")}
+    company_of = {r["ticker"]: r.get("company") for r in db if r.get("ticker")}
 
     q = (Query().set_markets("america")
-         .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc")
+         .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "ATR")
          .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
          .order_by("market_cap_basic", ascending=False).limit(5000))
@@ -64,13 +75,21 @@ def build() -> dict | None:
     logger.info("TradingView: %d stocks above $%dM", len(df), MIN_CAP // 1_000_000)
 
     groups: dict[str, list[tuple[float, float]]] = {}
+    stocks: dict[str, list[dict]] = {}
     for _, r in df.iterrows():
         t = str(r["name"])
         ind = industry_of.get(t)
         o, c, cap = _num(r.get("open")), _num(r.get("close")), _num(r.get("market_cap_basic"))
         if not ind or not o or not c or not cap or o <= 0:
             continue
-        groups.setdefault(ind, []).append(((c / o - 1) * 100, cap))
+        intra = (c / o - 1) * 100
+        groups.setdefault(ind, []).append((intra, cap))
+        vol, atr = _num(r.get("average_volume_10d_calc")), _num(r.get("ATR"))
+        stocks.setdefault(ind, []).append({
+            "t": t, "n": company_of.get(t) or "", "p": round(c, 2), "i": round(intra, 2),
+            "d": _r(_num(r.get("change"))), "w": _r(_num(r.get("Perf.W"))), "m": _r(_num(r.get("Perf.1M"))),
+            "dv": round(c * vol) if vol else None, "adr": round(atr / c * 100, 1) if atr else None, "cap": round(cap),
+        })
 
     values = {}
     for ind, rows in groups.items():
@@ -85,7 +104,10 @@ def build() -> dict | None:
         logger.error("Only %d industries - refusing to publish", len(values))
         return None
     now = datetime.now(ET)
-    return {"generated_at": now.strftime("%Y-%m-%d %H:%M ET"), "date": now.strftime("%Y-%m-%d"), "count": len(values), "values": values}
+    industries = {ind: sorted(rows, key=lambda x: -x["cap"])[:TOP_STOCKS] for ind, rows in stocks.items()}
+    stamp = now.strftime("%Y-%m-%d %H:%M ET")
+    return {"generated_at": stamp, "date": now.strftime("%Y-%m-%d"), "count": len(values), "values": values,
+            "_stocks": {"generated_at": stamp, "date": now.strftime("%Y-%m-%d"), "industries": industries}}
 
 
 def main() -> None:
@@ -93,6 +115,9 @@ def main() -> None:
     if not payload:
         logger.error("Industry intraday build failed - leaving the existing file untouched")
         return
+    stocks_payload = payload.pop("_stocks")
+    OUT_STOCKS.write_text(json.dumps(stocks_payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True), encoding="utf-8")
+    logger.info("Written %s (%d industries)", OUT_STOCKS, len(stocks_payload["industries"]))
     OUT.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True), encoding="utf-8")
     logger.info("Written %s (%d industries)", OUT, payload["count"])
     top = sorted(payload["values"].items(), key=lambda kv: -kv[1]["intra"])

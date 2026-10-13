@@ -727,6 +727,11 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
     fetch(`${process.env.PUBLIC_URL}/industry_intraday.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null)
       .then(d => { if (d?.values) setIntraMap(Object.fromEntries(Object.entries(d.values).map(([k, v]) => [k, v.intra]))); }).catch(() => {});
   }, []);
+  const [indStocks, setIndStocks] = useState({});   // { industry: [stock rows] } from public/industry_stocks.json — an industry's own companies for the drill-down
+  React.useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/industry_stocks.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.industries) setIndStocks(d.industries); }).catch(() => {});
+  }, []);
   const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the theme drill-down's mini-chart grid
 
   // Reset sort whenever a new theme is opened
@@ -749,7 +754,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
     if (!selectedTheme?.stocks?.length) return [];
     // ETF holdings rows have a different shape (rs / no rs_52w) — only scanner
     // stocks go through the global Filters predicate.
-    const base = (stockFilter && !selectedTheme.fromEtf)
+    const base = (stockFilter && !selectedTheme.fromEtf && !selectedTheme.fromIndustry)
       ? selectedTheme.stocks.filter(stockFilter)
       : selectedTheme.stocks;
     const { col, dir } = tblSort;
@@ -871,7 +876,18 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
     const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
     if (!norm) {
-      // Not in top-5 themes — try ETF holdings fallback, first on the exact name
+      // Not a scanned top-5 theme. First choice: the industry's own stocks (industry_stocks.json — largest by market cap, same Yahoo industry
+      // names as the matrix tiles). Only when the industry has none do we fall back to a proxy ETF's holdings, below.
+      const own = indStocks[itemName];
+      if (own?.length) {
+        const rows = own.map(r => ({
+          ticker: r.t, name: r.n, price: r.p, perf_intraday: r.i, perf_1d: r.d, perf_1w: r.w, perf_1m: r.m,
+          dollar_volume: r.dv, adr_pct: r.adr, market_cap: r.cap,
+        }));
+        setSelectedTheme({ name: itemName, stocks: rows, inTop5: false, fromEtf: null, fromEtfProxyTheme: null, fromIndustry: true });
+        return;
+      }
+      // Try ETF holdings fallback, first on the exact name
       // (industry or theme), then on the industry's parent theme (e.g. "Communication
       // Equipment" isn't in THEME_ETF_MAP but its parent "Telecommunications" is
       // close enough to have a sector ETF, giving the tile a proxy drill-down).
@@ -1036,6 +1052,12 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                     {selectedTheme.fromEtf} ETF
                   </span>
                 )}
+                {selectedTheme.fromIndustry && (
+                  <span title="Largest US-listed stocks in this industry (market cap ≥ $300M), straight from the industry classification — not an ETF proxy"
+                    className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+                    {lang === 'zh' ? '產業成分股' : 'INDUSTRY STOCKS'}
+                  </span>
+                )}
               </div>
               <div className="flex items-center gap-3">
                 {sortedStocks.length > 0 && (
@@ -1099,8 +1121,8 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                     </>
                   )}
                 </div>
-              ) : selectedTheme.fromEtf ? (
-                /* ETF holdings table — same columns as stock table, sub-theme = theme name */
+              ) : (selectedTheme.fromEtf || selectedTheme.fromIndustry) ? (
+                /* ETF holdings table (also used for an industry's own stocks) — same columns as stock table, sub-theme = theme name */
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
@@ -1112,7 +1134,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
                       <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
-                      <SortTh col="rs"       label="RS"                               align="right" />
+                      {selectedTheme.fromIndustry
+                        ? <SortTh col="market_cap" label={lang === 'zh' ? '市值' : 'Mkt Cap'} align="right" />
+                        : <SortTh col="rs"       label="RS"                               align="right" />}
                       <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
                     </tr>
                   </thead>
@@ -1124,6 +1148,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       return (
                         <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
                           <td className="px-4 py-2">
+                            {selectedTheme.fromIndustry ? <StockCell ticker={h.ticker} /> : (
                             <a
                               href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`}
                               target="_blank"
@@ -1132,7 +1157,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                               onClick={e => e.stopPropagation()}
                             >
                               {h.ticker}
-                            </a>
+                            </a>)}
                           </td>
                           <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{h.name || '—'}</td>
                           <td className="px-3 py-2 text-right text-zinc-200 font-mono">{h.price != null ? `$${h.price.toFixed(2)}` : '—'}</td>
@@ -1144,7 +1169,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                             {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
                           </td>
                           <td className="px-3 py-2 text-right font-mono">
-                            {h.rs != null
+                            {selectedTheme.fromIndustry
+                              ? <span className="text-zinc-400">{h.market_cap != null ? fmtVol(h.market_cap) : '—'}</span>
+                              : h.rs != null
                               ? <span className={h.rs >= 80 ? 'text-emerald-400 font-bold' : h.rs >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{h.rs}</span>
                               : <span className="text-zinc-600">—</span>}
                           </td>
