@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-14 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Balance / Commodity Lift",
+    "spy_price": 778.01,
+    "spy_change_pct": -0.01,
+    "vix": 15.31,
+    "hy_oas": 3.11,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 39.9,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil shares are poised for gains following news of a significant new drilling discovery in the Guyana region, exceeding initial estimates and boosting future production forecasts."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly is in focus after receiving accelerated FDA approval for its new Alzheimer's treatment, expanding its market potential significantly earlier than anticipated."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA shares show renewed algorithmic buying interest as investors rotate into high-beta names on perceived short-term technical support, despite lack of fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-13 19:52 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA experienced continued selling pressure, reflecting broader market profit-taking in high-valuation technology names, despite no specific fundamental news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-23 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off Sentiment Persists",
-    "spy_price": 767.81,
-    "spy_change_pct": -0.72,
-    "vix": 15.18,
-    "hy_oas": 2.68,
-    "yield_curve": 0.25,
-    "credit_status": "Complacent",
-    "s5fi": 33.4,
-    "mmth": 52.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "IONQ",
-          "company": "IonQ, Inc.",
-          "reason": "The company announced a significant quantum error correction breakthrough alongside a new strategic deal in South Korea, driving strong pre-market momentum."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "The company secured a landmark enterprise cloud agreement, boosting its Azure AI services growth outlook amid broader market weakness."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Exhibits strong technical momentum as investors continue to flock to leading AI infrastructure plays despite broader market weakness."
         }
       ]
     }
