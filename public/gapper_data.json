@@ -1,87 +1,325 @@
 {
-  "scan_time": "2026-10-13 08:55 ET",
+  "scan_time": "2026-10-14 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "FRMI",
-      "price": 3.69,
-      "gap_pct": 13.52,
-      "pm_volume": 8818408,
-      "avg_vol_10d": 16025754,
-      "avg_dollar_vol": 59135032,
-      "mkt_cap": 2084094040,
-      "rvol": 0.93,
-      "adr_pct": 6.14,
-      "category": "Others",
-      "theme": "Upcoming Earnings Date Announcement",
-      "reasoning": "Fermi announced its Q3 2026 earnings release and call date, providing a future catalyst for investors to anticipate.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
+      "ticker": "LQDA",
+      "price": 36.51,
+      "gap_pct": 36.18,
+      "pm_volume": 2022332,
+      "avg_vol_10d": 9393480,
+      "avg_dollar_vol": 342955955,
+      "mkt_cap": 2399733246,
+      "rvol": 0.32,
+      "adr_pct": 14.32,
+      "category": "New Contract/Partnership",
+      "theme": "Litigation Settlement & Continued Commercialization",
+      "reasoning": "Liquidia settled its patent litigation with United Therapeutics for $380.7 million, ensuring continued commercialization of YUTREPIA.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 74,
+      "grade": "A+",
+      "finviz_theme": "Biotech - Rare Disease",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Fermi announced its **Third Quarter 2026 Earnings Release and Call Date** on **2026-10-12**. This follows market concerns about **cash burn** and the stock looking **overvalued** despite an **89% one year slide**.",
-        "impact": "The announcement sets a future date for a potential re-evaluation of the company's fundamentals, but the immediate impact is overshadowed by existing negative sentiment regarding cash burn and valuation."
+        "catalyst": "Liquidia Corporation entered a global settlement agreement with **United Therapeutics Corporation (UTHR)** for **$380.7 million**, resolving all pending litigation and patent disputes.",
+        "impact": "This eliminates significant legal and commercial uncertainty, securing the market for its key product YUTREPIA and enabling its continued commercialization for PAH patients."
       },
-      "analysis_details": "• **What Happened**\nFermi announced the date for its **Third Quarter 2026 Earnings Release and Call**. This news comes as the stock has been **sliding**, with traders eyeing **cash burn** and investor **support** levels. The company's stock also **looks overvalued** according to recent analysis, despite experiencing an **89% one year slide**.\n\n• **Key Consideration**\nThe announcement of an upcoming earnings date provides a defined timeline for investors to anticipate a formal update on the company's financial health. However, current momentum is negative, driven by concerns over **cash burn** and perceived **overvaluation**, which could heighten anxiety leading into the report.",
+      "analysis_details": "• **Impact**\nLiquidia Corporation (LQDA) announced a global settlement agreement with **United Therapeutics Corporation (UTHR)**, resolving **six lawsuits** and **years of patent fight**. The agreement ensures the continued commercialization of LQDA's drug **YUTREPIA** for **PAH patients** without interruption. Liquidia will make net payments of **$380.7 million** in installments.\n\n• **Strategic Value**\nThis settlement removes a major overhang and legal risk for Liquidia, allowing the company to focus on the commercialization of **YUTREPIA**. The market reacted positively, with LQDA stock **surging 40%** in after-hours trading, reflecting the enhanced clarity and stability for the company's core product and revenue stream.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "FRMI Stock Slides As Traders Eye Cash Burn And Support - www.timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5TekFKVlF2REVtU1FiR3pkZWZYR1NvVzlkU3BJQU1EcU4wUmE3SGtSUzAyTWxNcVU1d1YzZzk3dkgyTFZ4WGd6VnlKdXc3OXJfZkVOS0FqS0RJR2FTbEdPdzlJS1RsbTZacmFfa1cxcDNEaVU?oc=5"
-        },
-        {
-          "title": "Fermi (FRMI) Stock Looks Overvalued Despite Its 89% One Year Slide - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNYk1JNFBDWHo0M002TlFKUEVfVWVILWxzaGphcTc3S2hFNUhKcm45TEpPc281bWk0UE8xRHA4MjJWdUR4ZlRFTzMxVXJwQWlIQVN1dkJURzM2T0xlNE1aaFpjMFc5TUx4bjZQWXEyQlRyemRVS2RVVndZanltUVJobnNFTTJNempyTzZGUDBwTFRNQjE0ajFscnR2V05Db3M?oc=5"
-        },
-        {
-          "title": "Fermi Announces Third Quarter 2026 Earnings Release and Call Date",
+          "title": "LQDA Explodes After Hours On Deal Ending Years Of Patent Fight, Keeping YUTREPIA On Market",
           "source": "Finviz",
-          "url": "/news/401377/fermi-announces-third-quarter-2026-earnings-release-and-call-date"
+          "url": "https://finance.yahoo.com/healthcare/articles/lqda-explodes-hours-deal-ending-233953516.html"
+        },
+        {
+          "title": "Patients with high blood pressure in the lungs will keep access to YUTREPIA as Liquidia settles six lawsuits. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOUVFwTVpjeVM0QW5xUXhiMlhBaTNNX19LQVZrWkpWUzNDTFFMY1B1NmlUeWJEaDFVVTNrV0RibUxpTXhPVkphV2VvMVFYU2FPVkJaY3R4QkNJTHBwNnJtRXJTQk5IVkVVdjktZTY4ZFBzWEVLSW94OHRFU1pHXzRaU3FwWmxfakFMUXlBSk9maFBPS0lOOUxKOG0xQ1VNMkRjZjExeExtQzlfM0dDWmtDVlliYw?oc=5"
+        },
+        {
+          "title": "Liquidia stock surges 40% on $380.7M litigation settlement with UTHR",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/liquidia-stock-surges-40-380-222658498.html"
+        },
+        {
+          "title": "Liquidia Announces Global Settlement Resolving All Pending Litigation with United Therapeutics, Ensuring Continued Commercialization of YUTREPIA in PAH",
+          "source": "Finviz",
+          "url": "/news/402136/liquidia-announces-global-settlement-resolving-all-pending-litigation-with-united-therapeutics-ensuring-continued-commercialization-of-yutrepia-in-pah"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "340.66M",
-      "short_float": "13.66%",
-      "daily_pct": -5.25,
-      "prev_close": 3.25,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $59M < $100M)",
+      "edgar_filing": {
+        "filing_date": "2026-10-14",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "1.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1819576/000110465926115672/tm2627557d1_8k.htm"
+      },
+      "float_shares": "77.45M",
+      "short_float": "17.52%",
+      "daily_pct": -3.11,
+      "prev_close": 26.81,
+      "industry": "Biotech - Rare Disease",
+      "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 50,
+        "status": "Verified",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Q3 2026 earnings release and call date",
-        "discrepancy_note": "Source A (Finviz) directly confirms 'Fermi Announces Third Quarter 2026 Earnings Release and Call Date'. Source B (Google News) does not contain any headlines confirming a Q3 2026 earnings release and call date. One headline in Source B mentions 'Q2' as the next real test, which is a different quarter."
+        "primary_claim": "Liquidia settled its patent litigation with United Therapeutics for $380.7 million",
+        "discrepancy_note": ""
       },
-      "gates_passed": 3,
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "ENVX",
+      "price": 2.72,
+      "gap_pct": 8.37,
+      "pm_volume": 322739,
+      "avg_vol_10d": 7157361,
+      "avg_dollar_vol": 19468022,
+      "mkt_cap": 550815813,
+      "rvol": 0.79,
+      "adr_pct": 6.79,
+      "category": "New Contract/Partnership",
+      "theme": "Significant Drone Battery Order",
+      "reasoning": "Enovix secured a **100,000-battery order** for drone applications, signaling a key expansion in its addressable market.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "C",
+      "finviz_theme": "EV Batteries",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Enovix (ENVX) announced it **received an order for 100,000 batteries** specifically for drone applications, indicating a substantial new business win.",
+        "impact": "This contract signals strong product adoption and market expansion into the drone sector, which could drive future revenue growth and re-rate the stock."
+      },
+      "analysis_details": "• **Impact**\nEnovix **received a significant order for 100,000 batteries**, specifically targeted for use in **drone applications**. This substantial contract highlights the company's product viability and growing market traction within emerging technology sectors.\n\n• **Strategic Value**\nThis new contract represents a strategic entry or expansion into the **drone market**, diversifying Enovix's revenue streams beyond traditional EV or consumer electronics batteries. Securing such a large order for a specific application underscores the potential for future contracts and bolsters the company's competitive positioning in high-performance battery solutions.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "symbol__ Stock Quote Price and Forecast - CNN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5RY1R6a1p2bTZlN085LWlMM1l5OVJGSjh2UG5NbHF4SHFxa0JGd2luc091WG9rcGo2NFlsd0Y4Umw0V3JYU1pMNjAzODEwUXdn?oc=5"
+        },
+        {
+          "title": "Enovix Receives 100,000-Battery Drone Order",
+          "source": "Finviz",
+          "url": "/news/402123/enovix-receives-100000-battery-drone-order"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-13",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1828318/000182831826000058/envx-20261012.htm"
+      },
+      "float_shares": "189.86M",
+      "short_float": "27.09%",
+      "daily_pct": -3.09,
+      "prev_close": 2.51,
+      "industry": "EV Batteries",
+      "technical_status": "Fail (Avg $Vol $19M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "100,000-battery order",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
+    },
+    {
+      "ticker": "VSTM",
+      "price": 8.0,
+      "gap_pct": 7.38,
+      "pm_volume": 2494414,
+      "avg_vol_10d": 2909599,
+      "avg_dollar_vol": 23276792,
+      "mkt_cap": 674697598,
+      "rvol": 1.27,
+      "adr_pct": 6.33,
+      "category": "Thematic Narratives",
+      "theme": "Oncology Data Readout",
+      "reasoning": "VSTM stock draws bulls following an 8-K disclosure, driven by positive **oncology data** and rising analyst **targets**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Biotech - Oncology",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Catalyst: VSTM filed an 8-K on **2026-10-14**, coinciding with news that **Oncology Data** for the company has risen, attracting investor interest. The filing included Item 7.01 (Regulation FD Disclosure), suggesting the release of material non-public information. Impact: The positive oncology data potentially expands the total addressable market or improves the competitive profile of VSTM's pipeline, leading to a re-evaluation of the stock's intrinsic value and prompting analyst target increases.",
+        "impact": ""
+      },
+      "analysis_details": "• **The Narrative**\nVSTM's stock is experiencing bullish sentiment, as indicated by the headline **'VSTM Stock Draws Bulls'**, following the disclosure of positive **Oncology Data**. This clinical development suggests favorable progress in its therapeutic pipeline, a critical driver for biotech valuations.\n\n• **Explosiveness**\nThe catalyst, coupled with rising **Targets**, implies that analysts are upgrading their outlooks and price objectives for VSTM. This combination of strong clinical data and subsequent analyst re-ratings can create significant upward momentum, as it validates the company's long-term potential in the **oncology** space.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "VSTM Stock Draws Bulls As Oncology Data And Targets Rise - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9pUkUxUS13QVdaVEx1V0E2ajBMMHB3NVVlc0NJODdVZlBxcGdPeHRyY1Rfd3RwVE9SeDhPeWZYLXVtRGFfeGdWR3pxMGthSGQxeUxxYThTSkN2MDVtSl9GLV9RSlg1R3ludms4UXNtbXpUbnM?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-14",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "5.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1526119/000110465926115687/tm2627537d4_8k.htm"
+      },
+      "float_shares": "82.00M",
+      "short_float": "16.62%",
+      "daily_pct": -9.7,
+      "prev_close": 7.45,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Fail (Avg $Vol $23M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Two complete responses out of 22 pancreatic cancer patients, with one being unconfirmed.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "GFS",
+      "price": 49.24,
+      "gap_pct": 5.44,
+      "pm_volume": 212152,
+      "avg_vol_10d": 4721560,
+      "avg_dollar_vol": 232489614,
+      "mkt_cap": 25626673874,
+      "rvol": 1.15,
+      "adr_pct": 3.95,
+      "category": "New Contract/Partnership",
+      "theme": "TSMC Interposer Deal for US AI Supply Chain",
+      "reasoning": "GlobalFoundries (GF) partners with **TSMC** on an **interposer deal** to reshape the **US AI supply chain**, focusing on **CoWoS to HBM**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Semiconductors - Foundries",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "GlobalFoundries (GF) announced a **partnership with TSMC** for an **interposer deal**, explicitly designed to **reshape the US AI supply chain** from **CoWoS to HBM**. Separately, GF is reviving its **7nm-class ambitions** with an **EUV-free FD-SOI bet** focused on **physical AI**.",
+        "impact": "This strategic collaboration with a Tier-1 foundry partner like TSMC significantly enhances GF's competitive positioning in the high-growth AI segment and validates its advanced manufacturing strategy."
+      },
+      "analysis_details": "• **Impact**\nGlobalFoundries (GF) has forged a **significant interposer deal with TSMC**, aiming to **reshape the US AI supply chain** by extending capabilities from **CoWoS to HBM**. This partnership is complemented by GF's strategic move to revive **7nm-class ambitions** through an **EUV-free FD-SOI bet** targeting the burgeoning **physical AI** market. These developments highlight GF's commitment to advanced manufacturing and critical AI infrastructure.\n\n• **Strategic Value**\nThe **TSMC-GF interposer deal** signals a structural change in the **US AI supply chain**, positioning GF as a key player in high-demand areas like **HBM integration**. The **EUV-free FD-SOI approach** for **7nm-class chips** for **physical AI** further diversifies GF's technology roadmap, potentially expanding its Total Addressable Market and reducing reliance on traditional EUV lithography for advanced nodes. This move could attract more high-value AI design wins.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "GlobalFoundries revives 7nm-class ambitions with an EUV-free FD-SOI bet on physical AI",
+          "source": "Finviz",
+          "url": "https://www.digitimes.com/news/a20261014VL203/globalfoundries-fd-soi-euv-2025-esmc.html"
+        },
+        {
+          "title": "TSMC-GF interposer deal reshapes US AI supply chain, from CoWoS to HBM",
+          "source": "Finviz",
+          "url": "https://www.digitimes.com/news/a20261013PD248/tsmc-globalfoundries-packaging-capacity-silicon.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "148.47M",
+      "short_float": "13.57%",
+      "daily_pct": -3.39,
+      "prev_close": 46.7,
+      "industry": "Semiconductors - Foundries",
+      "technical_status": "Fail (ADR 4.0% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "GlobalFoundries (GF) partners with TSMC on an interposer deal",
+        "discrepancy_note": "Only Source A (Finviz News, item [2]) explicitly mentions a 'TSMC-GF interposer deal'. Source A, item [1] and both items from Source B (Google News) do not contain any information confirming this specific partnership or deal."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 1,
-    "large_gaps": 0,
-    "total_headlines": 3,
+    "small_gaps": 3,
+    "large_gaps": 1,
+    "total_headlines": 9,
     "monthly_cost_usd": 0.01
   }
 }
