@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-10-14T01:47:11.073129+00:00",
+  "generated_at": "2026-10-14T23:18:47.681590+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 87.0,
+      "perf_1d": 32.33,
+      "leaders": [
+        {
+          "ticker": "BSP",
+          "price": 53.46,
+          "rs_52w": 87,
+          "adr_pct": 7.74,
+          "vol_surge": 8.4,
+          "mkt_cap": 33958823731,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }

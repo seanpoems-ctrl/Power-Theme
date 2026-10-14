@@ -3,49 +3,33 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 2,
+  "count": 1,
   "stocks": [
-    {
-      "ticker": "LQDA",
-      "company": "Liquidia Corporation",
-      "industry": "Pharmaceuticals: Major",
-      "market_cap_b": 2.4,
-      "price": 26.81,
-      "change_pct": -3.11,
-      "dollar_volume": "$251.8M",
-      "adr_pct": 17.7,
-      "perf_1m": -60.95,
-      "perf_3m": -64.2,
-      "perf_34d": null,
-      "perf_qtd": -64.2,
-      "perf_mtd": -60.95,
-      "rs_ibd": 84
-    },
     {
       "ticker": "QURE",
       "company": "uniQure N.V.",
       "industry": "Biotechnology",
-      "market_cap_b": 1.476,
-      "price": 21.28,
-      "change_pct": -2.56,
-      "dollar_volume": "$59.6M",
-      "adr_pct": 10.9,
-      "perf_1m": -52.35,
-      "perf_3m": -48.25,
+      "market_cap_b": 1.455,
+      "price": 20.97,
+      "change_pct": -1.46,
+      "dollar_volume": "$50.1M",
+      "adr_pct": 10.7,
+      "perf_1m": -52.63,
+      "perf_3m": -47.58,
       "perf_34d": null,
-      "perf_qtd": -48.25,
-      "perf_mtd": -52.35,
-      "rs_ibd": 10
+      "perf_qtd": -47.58,
+      "perf_mtd": -52.63,
+      "rs_ibd": 9
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.02,
-    "spx_1m": 2.9,
-    "spx_3m": 3.61,
-    "spx_34d": 1.69,
-    "spx_qtd": 1.81,
-    "spx_mtd": 1.81
+    "spx_1d": -1.11,
+    "spx_1m": 2.21,
+    "spx_3m": 3.5,
+    "spx_34d": -0.16,
+    "spx_qtd": 0.68,
+    "spx_mtd": 0.68
   },
-  "fetched_at_utc": "2026-10-14T01:47:23+00:00",
+  "fetched_at_utc": "2026-10-14T23:19:01+00:00",
   "source": "tv_fallback"
 }
