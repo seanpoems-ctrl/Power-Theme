@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-14 11:47 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off Sentiment / Elevated Volatility",
+    "spy_price": 770.59,
+    "spy_change_pct": -0.95,
+    "vix": 15.88,
+    "hy_oas": 3.16,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 35.0,
+    "mmth": 50.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LQDA",
+          "company": "Liquidia Technologies",
+          "reason": "The stock is gapping higher following news of a significant litigation settlement and positive updates on its commercialization efforts for key drug candidates."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Reported pre-market that it secured a major contract for its next-generation AI accelerators with a leading cloud provider, significantly boosting Q4 revenue guidance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Continues to be a key focus for institutional rebalancing flows, with price action driven primarily by broad market sentiment and options activity rather than fresh company-specific news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-14 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA (NVDA) remains a focus for institutional flows as investors continue to rotate within the semiconductor sector, with no fresh fundamental news today but sustained technical interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-23 19:08 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Global / US Weakness",
-    "spy_price": 767.81,
-    "spy_change_pct": -0.72,
-    "vix": 15.18,
-    "hy_oas": 2.68,
-    "yield_curve": 0.26,
-    "credit_status": "Complacent",
-    "s5fi": 33.4,
-    "mmth": 52.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "IONQ",
-          "company": "IonQ, Inc.",
-          "reason": "Quantum computing leader IonQ surged today on news of a significant breakthrough in error correction and a strategic expansion deal in South Korea, signaling accelerated commercialization."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly rallied after receiving expedited FDA approval for its new oncology drug, significantly expanding its market share in a critical therapeutic area."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experienced continued selling pressure, reflecting broader market profit-taking in high-valuation technology names, despite no specific fundamental news today."
         }
       ]
     }
