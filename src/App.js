@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
-import StageAnalysisCard, { loadStageAnalysis, buildStageBrief } from "./StageAnalysis";
+import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
 import { ChevronDown, ChevronRight, Activity, RefreshCw, Search, SlidersHorizontal, X, Zap, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import { createChart, CandlestickSeries, LineSeries, HistogramSeries, createSeriesMarkers } from "lightweight-charts";
@@ -7226,7 +7226,7 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v12"; // v12 2026-10-14 (stages now also need the 200-day MA); v11 range-position hint; v10 first stage_analysis version: brief now uses the Weinstein stage_analysis. Earlier: bumped 2026-10-07 (v9: v8 briefs quoted raw field names like pulse_breadth_divergence; v8 added the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v13"; // v13 2026-10-14 (recent stage-change counts); v12 stages also need the 200-day MA; v11 range-position hint; v10 first stage_analysis version: brief now uses the Weinstein stage_analysis. Earlier: bumped 2026-10-07 (v9: v8 briefs quoted raw field names like pulse_breadth_divergence; v8 added the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
                                                                      // (v6 note, 2026-09-22: invalidate briefs
                                                                      // cached before the extra manual re-scrapes
                                                                      // (today's SPX/NDX/DJI fix) — v5 briefs cite
@@ -7361,7 +7361,7 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
     `Also use breadth_cycle (our own 0-100 participation score and phase: Expansion / Distribution / Contraction / Repair, with its 5-session change) and say whether participation is improving or deteriorating. ` +
     `If stage_analysis is not null, also use it (Weinstein stages across the US stocks above $500M: S2 = advancing above rising 30-week and 200-day MAs, S4 = declining below falling ones, S1 = basing, S3 = topping): ` +
     `give the share of stocks in S2 and in S4, whether they are rising or falling over the last week and four weeks (the *_pts fields are percentage-point changes), where S2 sits in its historical range (use current_position_0_to_100: 0 = the low of the period, 100 = the high; under 25 is near the low, over 75 near the high, otherwise mid-range), ` +
-    `and name the strongest and weakest sectors by S2 share. It is a slow weekly trend-structure view, so say whether it confirms or contradicts the daily breadth readings above; keep it to about 2 sentences. ` +
+    `and name the strongest and weakest sectors by S2 share; if recent_stage_changes is present, add the count of stocks that entered Stage 2 in the last four weeks and how many of those did so on at least twice average volume (a high-volume breakout is the better-quality signal), plus the count that entered Stage 4. It is a slow weekly trend-structure view, so say whether it confirms or contradicts the daily breadth readings above; keep it to about 2 sentences. ` +
     `Never quote JSON field names (breadth_cycle, pulse_breadth_divergence, stage_analysis, s2_pct, up4_pct ...) in the text - say "the breadth cycle", "the breadth divergence" or "the stage analysis" in plain English.\n` +
     `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. If pulse_breadth_divergence is not null, state that divergence in one sentence and let it temper the stance (e.g. index uptrend with narrow breadth = selective, not aggressive). State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n` +
     para4Instruction +
@@ -7398,7 +7398,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot, onOpenBr
     setLoading(true); setFailed(false);
 
     // Parallel: fetch news + compute market move trigger from today's SPY/QQQ change
-    const [newsItems, cot, cyc, stageRaw] = await Promise.all([fetchMajorMarketNews(), getCot(), loadBreadthCycle(), loadStageAnalysis()]);
+    const [newsItems, cot, cyc, stageRaw, stageStocks] = await Promise.all([fetchMajorMarketNews(), getCot(), loadBreadthCycle(), loadStageAnalysis(), loadStageStocks()]);
     setNewsCount(newsItems.length);
 
     const spyPct = mc.spy?.change_pct ?? 0;
@@ -7436,7 +7436,7 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest, onOpenCot, onOpenBr
       qqq_vs_sma200:    mc.qqq?.sma200_pct,
       breadth_cycle:    cyc ? { phase: cyc.phase, strength_0_100: +cyc.strength.toFixed(0), change_5_sessions: +cyc.change.toFixed(1), date: cyc.date } : null,
       pulse_breadth_divergence: cyc ? (breadthDivergence(mc.signal, cyc)?.text ?? null) : null,
-      stage_analysis:   buildStageBrief(stageRaw),
+      stage_analysis:   (() => { const b = buildStageBrief(stageRaw); return b ? { ...b, recent_stage_changes: buildMoversBrief(stageStocks) } : null; })(),
     };
     fetchMarketSituation(payload, newsItems, move, cot)
       .then(t => {
@@ -8465,7 +8465,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
         )}
 
         {/* ── Weinstein stage analysis (stage_analysis_builder.py → public/stage_analysis.json) ── */}
-        <StageAnalysisCard />
+        <StageAnalysisCard StockCell={StockCell} onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Stage Movers", tickers })} />
 
         {/* ── Stockbee Market Monitor table ─────────────────────────────── */}
         <div className="mt-5">

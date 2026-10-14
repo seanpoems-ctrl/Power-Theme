@@ -21,6 +21,12 @@ Stage rules (a rules-based reading of Weinstein, following TraderLion's "Complet
 
 Output: public/stage_analysis.json
   { generated_at, as_of, universe, weeks: ["2024-10-18", …], groups: { "All": {n, s1:[…counts per week], s2, s3, s4}, "<Sector>": {…} } }
+        public/stage_stocks.json — the stocks behind the counts (for the card's "Stage Movers" table):
+  { as_of, cols: [...], stocks: [[ticker, company, sector, stage, weeks_in_stage, prev_stage, price, pct_vs_30w_ma, breakout_vol_x, avg_dollar_vol], …] }
+  weeks_in_stage = consecutive weeks in the current stage (1 = entered this week); prev_stage = the stage before that (0 = unknown / start of history).
+  breakout_vol_x (only for stage changes in the last 12 weeks) = the highest DAILY volume since the entry week began ÷ the average daily volume of the
+  30 trading days before it — TraderLion's "breakout on at least twice average volume" test (≥ 2 is a high-volume breakout; the same number on a
+  move into S4 / S3 is a high-volume breakdown).
 """
 import json
 import logging
@@ -38,6 +44,7 @@ logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "public" / "stage_analysis.json"
+OUT_STOCKS = ROOT / "public" / "stage_stocks.json"
 DB = ROOT / "public" / "stock_db.json"
 ET = ZoneInfo("America/New_York")
 
@@ -49,6 +56,8 @@ SLOPE_WEEKS = 5
 FLAT = 0.005            # ±0.5 % change of the MA over SLOPE_WEEKS counts as "flat"
 HISTORY_WEEKS = 104     # weeks written to the file
 CHUNK = 400
+VOL_BASE_DAYS = 30      # baseline for the breakout-volume ratio
+VOL_MAX_WEEKS = 12      # compute it only for stage changes this recent
 MIN_COVERAGE = 0.7      # refuse to publish if fewer than this share of the universe downloaded
 
 
@@ -66,25 +75,29 @@ def universe() -> list[str]:
     return tickers
 
 
-def download_closes(tickers: list[str]) -> pd.DataFrame:
+def download_prices(tickers: list[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
     import yfinance as yf
-    frames = []
+    frames, vframes = [], []
     for i in range(0, len(tickers), CHUNK):
         chunk = tickers[i:i + CHUNK]
         t0 = time.time()
         for attempt in range(3):
             try:
                 raw = yf.download(chunk, period="3y", interval="1d", auto_adjust=True, progress=False, group_by="column", threads=True)
-                close = raw["Close"] if isinstance(raw.columns, pd.MultiIndex) else raw[["Close"]].rename(columns={"Close": chunk[0]})
+                if isinstance(raw.columns, pd.MultiIndex):
+                    close, vol = raw["Close"], raw["Volume"]
+                else:
+                    close, vol = raw[["Close"]].rename(columns={"Close": chunk[0]}), raw[["Volume"]].rename(columns={"Volume": chunk[0]})
                 frames.append(close.dropna(axis=1, how="all"))
+                vframes.append(vol)
                 break
             except Exception as exc:        # noqa: BLE001
                 logger.warning("chunk %d attempt %d failed: %s", i // CHUNK, attempt + 1, exc)
                 time.sleep(5)
         logger.info("downloaded %d/%d (%.0fs)", min(i + CHUNK, len(tickers)), len(tickers), time.time() - t0)
     if not frames:
-        return pd.DataFrame()
-    return pd.concat(frames, axis=1).sort_index()
+        return pd.DataFrame(), pd.DataFrame()
+    return pd.concat(frames, axis=1).sort_index(), pd.concat(vframes, axis=1).sort_index()
 
 
 def weekly(close: pd.DataFrame) -> pd.DataFrame:
@@ -120,12 +133,53 @@ def stages(wk: pd.DataFrame) -> np.ndarray:
     return out
 
 
+STOCK_COLS = ["ticker", "company", "sector", "stage", "weeks_in_stage", "prev_stage", "price", "pct_vs_30w_ma", "breakout_vol_x", "avg_dollar_vol"]
+
+
+def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd.DataFrame, db: list) -> list:
+    """One row per classified stock: current stage, how long, where from, price vs the 30-week MA, breakout volume, liquidity."""
+    info = {r["ticker"]: r for r in db if r.get("ticker")}
+    cols = list(wk.columns)
+    ma30 = wk.rolling(MA_WEEKS, min_periods=MA_WEEKS).mean().iloc[-1].to_numpy()
+    vol = volume.reindex(index=close.index, columns=cols)
+    vol_a = vol.to_numpy(dtype=float)
+    days = close.index.values
+    week_ends = wk.index.values
+    n_weeks = st.shape[0]
+    last_px = wk.iloc[-1].to_numpy(dtype=float)
+    rows = []
+    for j, t in enumerate(cols):
+        cur = int(st[-1, j])
+        if cur == 0 or not np.isfinite(last_px[j]):
+            continue
+        w = 1
+        while w < n_weeks and st[-1 - w, j] == cur:
+            w += 1
+        prev = int(st[-1 - w, j]) if w < n_weeks else 0
+        vx = None
+        if w <= VOL_MAX_WEEKS and prev:
+            # daily rows since the entry week began (the Friday before it)
+            start = np.searchsorted(days, week_ends[n_weeks - 1 - w], side="right")
+            seg = vol_a[start:, j]
+            base = vol_a[max(0, start - VOL_BASE_DAYS):start, j]
+            seg, base = seg[np.isfinite(seg)], base[np.isfinite(base)]
+            if len(seg) and len(base) >= 15 and base.mean() > 0:
+                vx = round(float(seg.max() / base.mean()), 2)
+        recent = vol_a[-VOL_BASE_DAYS:, j]
+        recent = recent[np.isfinite(recent)]
+        dv = int(last_px[j] * recent.mean()) if len(recent) else None
+        d = round((last_px[j] / ma30[j] - 1) * 100, 1) if np.isfinite(ma30[j]) and ma30[j] > 0 else None
+        r = info.get(t, {})
+        rows.append([t, r.get("company") or "", r.get("sector") or "", cur, w, prev, round(float(last_px[j]), 2), d, vx, dv])
+    return rows
+
+
 def build() -> dict | None:
     tickers = universe()
     if len(tickers) < 1500:
         logger.error("Universe too small (%d) - refusing to publish", len(tickers))
         return None
-    close = download_closes(tickers)
+    close, volume = download_prices(tickers)
     if close.empty or close.shape[1] < MIN_COVERAGE * len(tickers):
         logger.error("Only %d of %d tickers downloaded - refusing to publish", close.shape[1] if not close.empty else 0, len(tickers))
         return None
@@ -156,10 +210,14 @@ def build() -> dict | None:
     for sec in sorted({s for s in sectors if s}):
         add(sec, np.array([s == sec for s in sectors]))
 
+    stocks = stock_rows(wk, st, close, volume, db)
+    logger.info("stage_stocks rows: %d", len(stocks))
+
     now = datetime.now(ET)
     last = groups["All"]
     logger.info("latest week %s — S1 %d  S2 %d  S3 %d  S4 %d (n=%d)", weeks[-1], last["s1"][-1], last["s2"][-1], last["s3"][-1], last["s4"][-1], last["n"])
-    return {"generated_at": now.strftime("%Y-%m-%d %H:%M ET"), "as_of": weeks[-1], "universe": len(tickers), "weeks": weeks, "groups": groups}
+    return {"generated_at": now.strftime("%Y-%m-%d %H:%M ET"), "as_of": weeks[-1], "universe": len(tickers), "weeks": weeks, "groups": groups,
+            "_stocks": {"as_of": weeks[-1], "cols": STOCK_COLS, "stocks": stocks}}
 
 
 def main() -> None:
@@ -167,6 +225,9 @@ def main() -> None:
     if not payload:
         logger.error("Stage analysis build failed - leaving the existing file untouched")
         return
+    stocks_payload = payload.pop("_stocks")
+    OUT_STOCKS.write_text(json.dumps(stocks_payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    logger.info("Written %s (%d stocks)", OUT_STOCKS, len(stocks_payload["stocks"]))
     OUT.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     logger.info("Written %s (%d groups, %d weeks)", OUT, len(payload["groups"]), len(payload["weeks"]))
     for name, g in payload["groups"].items():
