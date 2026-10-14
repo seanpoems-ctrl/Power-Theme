@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-14 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Volatility Surges, Equities Retreat",
+    "spy_price": 769.6,
+    "spy_change_pct": -1.08,
+    "vix": 16.87,
+    "hy_oas": 3.16,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 35.9,
+    "mmth": 51.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LQDA",
+          "company": "Liquidia Corporation",
+          "reason": "Shares gapped up today following news of a litigation settlement and continued commercialization efforts for its key product."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "A strategic partnership announced today in advanced computing and AI boosted future revenue projections and market position for the semiconductor giant."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Continued consolidation after recent gains, with flow indicating technical profit-taking rather than new fundamental developments."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-14 11:47 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA shows signs of technical consolidation following yesterday's broad tech sell-off, with options activity suggesting a short-term bottom may be forming."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-24 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Credit Concerns",
-    "spy_price": 767.81,
-    "spy_change_pct": -0.72,
-    "vix": 16.11,
-    "hy_oas": 2.68,
-    "yield_curve": 0.26,
-    "credit_status": "Complacent",
-    "s5fi": 33.4,
-    "mmth": 52.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) is reportedly signing a landmark multi-year cloud computing deal with a major defense contractor, signaling robust enterprise AI adoption."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) announced positive Phase 3 trial results for a new obesity treatment, exceeding analyst expectations for efficacy and safety."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) remains a focus for institutional flows as investors continue to rotate within the semiconductor sector, with no fresh fundamental news today but sustained technical interest."
         }
       ]
     }
