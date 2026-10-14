@@ -13138,6 +13138,15 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   const screenerRef = useRef(screenerMap);
   screenerRef.current = screenerMap;
   const [stats, setStats] = useState(null);   // enlarged-chart stats overlay (daily bars only)
+  // Company name beside the select box on the enlarged chart: screener row first, then the industry list (stocks ≥ $500M the screener lacks).
+  const [indName, setIndName] = useState(null);
+  useEffect(() => {
+    if (!showStats) return undefined;
+    let dead = false;
+    loadIndustryStocks().then(f => { if (!dead) setIndName(f?.byTicker?.[ticker]?.n || null); });
+    return () => { dead = true; };
+  }, [ticker, showStats]);
+  const companyName = showStats ? (screenerMap?.[ticker]?.company || indName || null) : null;
   const evRef = useRef([]);          // raw events [{kind, date, ...}]
   const layoutRef = useRef(null);    // recomputes marker x-positions for the current visible range
   const [strip, setStrip] = useState([]);   // positioned markers [{..., x, row}]
@@ -13305,6 +13314,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
             <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} aria-label={`Select ${ticker}`} className="w-2.5 h-2.5 cursor-pointer accent-blue-500" />
           </label>
         )}
+        {companyName && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={companyName}>{companyName}</span>}
         {category && <span className="text-[15px] text-zinc-500 font-sans font-normal whitespace-nowrap flex-shrink-0">{category}</span>}
         {legend && status === "ready" ? (
           <div className="flex items-baseline gap-1 text-[14px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
@@ -13507,8 +13517,19 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
         <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-10 overflow-y-auto"
           style={{ backgroundColor: "rgba(0,0,0,0.85)" }} onClick={e => { e.stopPropagation(); setEnlargedIdx(null); }}>
           <div className="relative w-full max-w-6xl" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setEnlargedIdx(null)}
-              className="absolute -top-9 right-0 text-zinc-400 hover:text-zinc-100 transition-colors"><X size={20}/></button>
+            {/* Timeframe switcher for the enlarged chart (shares the grid's timeframe, so the grid follows when you go back) + close */}
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex bg-zinc-900/80 rounded-lg p-0.5 border border-zinc-700/60">
+                {MINI_TIMEFRAME_OPTS.map(o => (
+                  <button key={o.key} onClick={() => setTimeframe(o.key)}
+                    className={`px-2.5 py-0.5 text-[15px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                    {o.label}
+                  </button>
+                ))}
+              </div>
+              <button onClick={() => setEnlargedIdx(null)} title="Back to the grid (Esc)"
+                className="text-zinc-400 hover:text-zinc-100 transition-colors p-1"><X size={20}/></button>
+            </div>
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
               ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height={_isPhone() ? "min(840px, 50vh)" : "min(840px, 75vh)"} showStats
               selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}/>
