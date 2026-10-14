@@ -359,6 +359,12 @@ All browser-side live prices go through `src/finnhubQuote.js` (`fetchFinnhubQuot
 
 ---
 
+## If the site looks stale after the nightly run
+
+Check the "Daily scrape & deploy" run's steps before assuming the scrape failed. **2026-10-15:** the scrape ran on time (22:45 UTC) and committed fresh data (`data: thematic_data …`), but the last step `actions/deploy-pages` failed with a transient `Failed to create deployment (status: 500) … is githubstatus.com reporting a Pages outage?` — so the live site kept the previous day's data while the repo had the new one. Fix = redeploy: re-run the failed job in the Actions UI, run "Deploy to GitHub Pages" via Run workflow (`workflow_dispatch`), or push any non-data file change (data files are `paths-ignore`d, empty commits don't trigger it). The build reads the data already committed to `main`, so no re-scrape is needed.
+
+---
+
 ## Removed Features (2026-10-13 cleanup)
 
 Removed from the Scanner tab as duplicates of Themes → Theme Tracker / Theme Leaders and the Industry Matrix (Scanner is now Industry Matrix → Stock Screener → News Hub):
