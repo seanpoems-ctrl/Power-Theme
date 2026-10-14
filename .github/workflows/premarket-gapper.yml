@@ -29,7 +29,7 @@ jobs:
       issues: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy3.outputs.page_url || steps.deploy2.outputs.page_url || steps.deploy1.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
 
@@ -215,8 +215,29 @@ jobs:
         with:
           path: ./build
 
-      - id: deployment
+      # GitHub's deploy API occasionally answers HTTP 500 ("Failed to create deployment ... Pages outage?"): 2026-10-15 that cost the
+      # nightly run its deploy although the scrape had succeeded. Try up to 3 times (waits of 60 s and 180 s); the last attempt is the
+      # one allowed to fail the job, so a real outage still fails loudly and triggers the notify step.
+      - id: deploy1
         if: steps.trading_day.outputs.is_trading_day == 'true'
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+
+      - name: Deploy retry 1 - wait 60 s
+        if: steps.trading_day.outputs.is_trading_day == 'true' && steps.deploy1.outcome == 'failure'
+        run: sleep 60
+
+      - id: deploy2
+        if: steps.trading_day.outputs.is_trading_day == 'true' && steps.deploy1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+
+      - name: Deploy retry 2 - wait 180 s
+        if: steps.trading_day.outputs.is_trading_day == 'true' && steps.deploy2.outcome == 'failure'
+        run: sleep 180
+
+      - id: deploy3
+        if: steps.trading_day.outputs.is_trading_day == 'true' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v5
 
       - name: Notify on failure
