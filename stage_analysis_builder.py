@@ -10,14 +10,14 @@ Universe: NASDAQ / NYSE / AMEX stocks + ADRs, market cap ≥ $500M, 10-day avg v
 Prices:   3 years of daily closes from Yahoo (yfinance, batched), resampled to weekly (Friday close; the newest, possibly partial week uses the
           latest close, so the current reading updates every night).
 
-Stage rules (the usual rules-based reading of Weinstein; his own are by eye on a weekly chart):
-  MA    = 30-week simple moving average of the weekly close.
-  slope = MA now ÷ MA 5 weeks ago − 1;  flat = |slope| ≤ FLAT (0.5 %).
-  S2 advancing = close above the MA and the MA rising.     S4 declining = close below the MA and the MA falling.
+Stage rules (a rules-based reading of Weinstein, following TraderLion's "Complete Guide to Stan Weinstein's Stage Analysis"; his own are by eye on a weekly chart):
+  MA30  = 30-week simple moving average of the weekly close (≈ the 150-day);  MA40 = 40-week SMA (≈ the 200-day).
+  slope = MA now ÷ MA 5 weeks ago − 1;  flat = |MA30 slope| ≤ FLAT (0.5 %).
+  S2 advancing = close above BOTH averages, MA30 rising and MA40 not falling.   S4 declining = close below BOTH averages, MA30 falling and MA40 falling.
   Anything else is a transition and takes its meaning from the last trend the stock was in:
   S3 topping   = flat / mixed after an S2 advance.          S1 basing = flat / mixed after an S4 decline.
   (A stock with no earlier trend in the window is S3 when above its MA, S1 when below.)
-  Stocks need ≥ 30 weekly closes (+5 for the slope), so recent IPOs only count once they have that history.
+  Stocks need ≥ 40 weekly closes (+5 for the slope), so recent IPOs only count once they have that history.
 
 Output: public/stage_analysis.json
   { generated_at, as_of, universe, weeks: ["2024-10-18", …], groups: { "All": {n, s1:[…counts per week], s2, s3, s4}, "<Sector>": {…} } }
@@ -44,6 +44,7 @@ ET = ZoneInfo("America/New_York")
 MIN_CAP = 500e6
 MIN_AVG_VOL = 100_000
 MA_WEEKS = 30
+LONG_MA_WEEKS = 40      # 200-day equivalent
 SLOPE_WEEKS = 5
 FLAT = 0.005            # ±0.5 % change of the MA over SLOPE_WEEKS counts as "flat"
 HISTORY_WEEKS = 104     # weeks written to the file
@@ -99,12 +100,15 @@ def stages(wk: pd.DataFrame) -> np.ndarray:
     """(weeks × stocks) array: 0 = not enough history, else 1-4."""
     c = wk.to_numpy(dtype=float)
     ma = wk.rolling(MA_WEEKS, min_periods=MA_WEEKS).mean().to_numpy()
+    ma40 = wk.rolling(LONG_MA_WEEKS, min_periods=LONG_MA_WEEKS).mean().to_numpy()
     slope = ma / np.roll(ma, SLOPE_WEEKS, axis=0) - 1
+    slope40 = ma40 / np.roll(ma40, SLOPE_WEEKS, axis=0) - 1
     slope[:SLOPE_WEEKS] = np.nan
-    valid = np.isfinite(c) & np.isfinite(ma) & np.isfinite(slope)
+    slope40[:SLOPE_WEEKS] = np.nan
+    valid = np.isfinite(c) & np.isfinite(ma) & np.isfinite(slope) & np.isfinite(ma40) & np.isfinite(slope40)
     above = c > ma
-    up = valid & above & (slope > FLAT)
-    down = valid & ~above & (slope < -FLAT)
+    up = valid & above & (c > ma40) & (slope > FLAT) & (slope40 >= 0)
+    down = valid & ~above & (c < ma40) & (slope < -FLAT) & (slope40 < 0)
     out = np.zeros(c.shape, dtype=np.int8)
     trend = np.zeros(c.shape[1], dtype=np.int8)          # +1 last in an advance, -1 last in a decline
     for t in range(c.shape[0]):

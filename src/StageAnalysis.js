@@ -7,10 +7,10 @@ import React from "react";
 // Stage colours follow the reference layout (grey / blue / amber / pink). S1 is deliberately neutral — it is the "base" stage — so it is always
 // identified by its label and legend, never by colour alone.
 export const STAGES = [
-  { k: 1, key: "s1", label: "S1", name: "Basing",    color: "#8b93a1", tip: "Stage 1 — basing: after a decline the 30-week MA has flattened and price chops around it." },
-  { k: 2, key: "s2", label: "S2", name: "Advancing", color: "#3b82f6", tip: "Stage 2 — advancing: price above a rising 30-week MA. The only stage Weinstein buys." },
-  { k: 3, key: "s3", label: "S3", name: "Topping",   color: "#bf8a0b", tip: "Stage 3 — topping: after an advance the MA has flattened and price churns around it." },
-  { k: 4, key: "s4", label: "S4", name: "Declining", color: "#ec4899", tip: "Stage 4 — declining: price below a falling 30-week MA." },
+  { k: 1, key: "s1", label: "S1", name: "Basing",    color: "#8b93a1", tip: "Stage 1 — basing: after a decline the 30-week MA flattens and price chops sideways around it; volume dries up." },
+  { k: 2, key: "s2", label: "S2", name: "Advancing", color: "#3b82f6", tip: "Stage 2 — advancing: price above BOTH the 30-week and 200-day MAs, with the 30-week rising and the 200-day not falling. The stage to buy; it starts with a high-volume breakout from the base." },
+  { k: 3, key: "s3", label: "S3", name: "Topping",   color: "#bf8a0b", tip: "Stage 3 — topping: after an advance the 30-week / 200-day MAs flatten and price churns around them (erratic swings, failed breakouts, slicing below the 10-week MA)." },
+  { k: 4, key: "s4", label: "S4", name: "Declining", color: "#ec4899", tip: "Stage 4 — declining: price below BOTH the 30-week and 200-day MAs, both falling, with lower highs and lower lows. Avoid longs." },
 ];
 
 let _stageP = null;
@@ -243,8 +243,8 @@ const StageAnalysisCard = () => {
             <StageChart weeks={view.weeks} series={view.series} hidden={hidden} onToggle={toggle} />
           </div>
           <p className="mt-2 text-[11px] text-zinc-600 leading-snug">
-            S2 = price above a rising 30-week MA · S4 = below a falling MA · S1 / S3 = flat MA after a decline / after an advance. Rules-based reading of Weinstein
-            (his own is by eye); stocks need 35 weeks of history. The universe is today's list, so earlier weeks cover the same names, not delisted ones.
+            S2 = price above rising 30-week and 200-day MAs · S4 = below falling ones · S1 / S3 = transition after a decline / after an advance (flat MAs, price chopping around them).
+            Rules-based reading of Weinstein following TraderLion's stage guide (the stages are really read by eye); stocks need 45 weeks of history. The universe is today's list, so earlier weeks cover the same names, not delisted ones.
           </p>
         </div>
       )}

@@ -7226,7 +7226,7 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v11"; // v11 2026-10-14 (range-position hint); v10 same day: brief now uses the Weinstein stage_analysis. Earlier: bumped 2026-10-07 (v9: v8 briefs quoted raw field names like pulse_breadth_divergence; v8 added the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v12"; // v12 2026-10-14 (stages now also need the 200-day MA); v11 range-position hint; v10 first stage_analysis version: brief now uses the Weinstein stage_analysis. Earlier: bumped 2026-10-07 (v9: v8 briefs quoted raw field names like pulse_breadth_divergence; v8 added the breadth-cycle / divergence read (v6→v7 2026-10-02: COT paragraph)
                                                                      // (v6 note, 2026-09-22: invalidate briefs
                                                                      // cached before the extra manual re-scrapes
                                                                      // (today's SPX/NDX/DJI fix) — v5 briefs cite
@@ -7359,7 +7359,7 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null, 
     `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index, and new 52W highs vs lows. Be specific with the numbers.\n` +
     `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure? ` +
     `Also use breadth_cycle (our own 0-100 participation score and phase: Expansion / Distribution / Contraction / Repair, with its 5-session change) and say whether participation is improving or deteriorating. ` +
-    `If stage_analysis is not null, also use it (Weinstein stages across the US stocks above $500M: S2 = advancing above a rising 30-week MA, S4 = declining below a falling one, S1 = basing, S3 = topping): ` +
+    `If stage_analysis is not null, also use it (Weinstein stages across the US stocks above $500M: S2 = advancing above rising 30-week and 200-day MAs, S4 = declining below falling ones, S1 = basing, S3 = topping): ` +
     `give the share of stocks in S2 and in S4, whether they are rising or falling over the last week and four weeks (the *_pts fields are percentage-point changes), where S2 sits in its historical range (use current_position_0_to_100: 0 = the low of the period, 100 = the high; under 25 is near the low, over 75 near the high, otherwise mid-range), ` +
     `and name the strongest and weakest sectors by S2 share. It is a slow weekly trend-structure view, so say whether it confirms or contradicts the daily breadth readings above; keep it to about 2 sentences. ` +
     `Never quote JSON field names (breadth_cycle, pulse_breadth_divergence, stage_analysis, s2_pct, up4_pct ...) in the text - say "the breadth cycle", "the breadth divergence" or "the stage analysis" in plain English.\n` +
