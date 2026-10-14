@@ -13469,7 +13469,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
               {MINI_TIMEFRAME_OPTS.map(o => (
                 <button key={o.key} onClick={() => setTimeframe(o.key)}
-                  className={`px-2 py-0.5 text-[15px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                  className={`px-[5.6px] py-[1.4px] text-[10.5px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
                   {o.label}
                 </button>
               ))}
@@ -13522,7 +13522,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
               <div className="flex bg-zinc-900/80 rounded-lg p-0.5 border border-zinc-700/60">
                 {MINI_TIMEFRAME_OPTS.map(o => (
                   <button key={o.key} onClick={() => setTimeframe(o.key)}
-                    className={`px-2.5 py-0.5 text-[15px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                    className={`px-[7px] py-[1.4px] text-[10.5px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
                     {o.label}
                   </button>
                 ))}
