@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-15 19:17 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Balanced Trading, Complacent Risk",
+    "spy_price": 771.79,
+    "spy_change_pct": 0.28,
+    "vix": 16.46,
+    "hy_oas": 3.25,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 44.0,
+    "mmth": 54.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group",
+          "reason": "UnitedHealth Group announced a significant new contract win for its Optum division, expanding its services to a major hospital network and boosting future revenue outlook."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled a breakthrough in quantum computing research during a keynote, promising accelerated AI development and new commercial applications."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced a technical bounce today after several sessions of profit-taking, driven by short-term traders covering positions and an oversold condition."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-15 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla experienced another day of speculative trading driven by technical support levels and general market sentiment regarding electric vehicle demand, lacking a fresh specific fundamental catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-24 23:14 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Signals / Defensive Posture",
-    "spy_price": 767.18,
-    "spy_change_pct": -0.08,
-    "vix": 15.67,
-    "hy_oas": 2.73,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 31.2,
-    "mmth": 50.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant breakthrough in quantum computing integration for its Azure cloud services, promising substantial enterprise efficiency gains."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon Web Services (AWS) secured a multi-billion dollar government cloud computing contract, significantly boosting its public sector revenue outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to benefit from the sustained, broad-based demand for AI chips and data center infrastructure, driving consistent institutional flows."
         }
       ]
     }
