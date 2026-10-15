@@ -2,40 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 2,
+  "count": 3,
   "stocks": [
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 81.09,
-      "change_pct": -11.5,
-      "adr_pct": 9.1,
-      "dollar_volume": "$170.5M",
-      "market_cap_b": 5.096,
+      "price": 88.12,
+      "change_pct": 8.67,
+      "adr_pct": 8.6,
+      "dollar_volume": "$164.2M",
+      "market_cap_b": 5.538,
       "rs_ibd": 99,
-      "above50dma_pct": 56.2
+      "above50dma_pct": 66.9
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 226.3,
-      "change_pct": 4.65,
+      "price": 236.5,
+      "change_pct": 4.51,
       "adr_pct": 6.7,
-      "dollar_volume": "$4.25B",
-      "market_cap_b": 90.347,
+      "dollar_volume": "$4.48B",
+      "market_cap_b": 94.419,
       "rs_ibd": 99,
-      "above50dma_pct": 52.9
+      "above50dma_pct": 56.0
+    },
+    {
+      "ticker": "RGC",
+      "company": "Regencell Bioscience Holdings Limited",
+      "industry": "Pharmaceuticals: Major",
+      "price": 9.52,
+      "change_pct": 17.39,
+      "adr_pct": 9.3,
+      "dollar_volume": "$4.5M",
+      "market_cap_b": 4.721,
+      "rs_ibd": 97,
+      "above50dma_pct": 55.1
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -1.11,
-    "spx_1m": 2.21,
-    "spx_3m": 3.5,
-    "spx_34d": -0.16,
-    "spx_qtd": 0.68,
-    "spx_mtd": 0.68
+    "spx_1d": 0.33,
+    "spx_1m": 1.39,
+    "spx_3m": 4.04,
+    "spx_34d": 0.42,
+    "spx_qtd": 1.01,
+    "spx_mtd": 1.01
   },
-  "fetched_at_utc": "2026-10-15T01:22:46+00:00"
+  "fetched_at_utc": "2026-10-15T23:13:29+00:00"
 }
