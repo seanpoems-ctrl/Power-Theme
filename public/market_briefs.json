@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-15 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Resilience, Complacent Credit",
+    "spy_price": 771.79,
+    "spy_change_pct": 0.28,
+    "vix": 16.46,
+    "hy_oas": 3.25,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 44.0,
+    "mmth": 54.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a landmark partnership with a major government agency for its Azure AI services, projecting significant revenue growth in the coming quarters."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon Web Services secured a multi-year deal with a global financial institution, reinforcing its market dominance in enterprise cloud solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla experienced strong short-covering activity driven by positive technical indicators and broader sector optimism."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-15 11:33 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to benefit from the sustained, broad-based demand for AI chips and data center infrastructure, driving consistent institutional flows."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-24 22:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Flows, Underlying Caution",
-    "spy_price": 767.18,
-    "spy_change_pct": -0.08,
-    "vix": 15.67,
-    "hy_oas": 2.73,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 31.2,
-    "mmth": 50.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon announced a significant expansion of its AWS AI computing infrastructure, boosting sentiment for cloud and artificial intelligence investment."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Salesforce reported stronger-than-expected preliminary Q3 results and raised its full-year guidance, driven by robust enterprise software demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to attract speculative interest ahead of an upcoming AI conference, driven by technical momentum rather than fresh fundamental news today."
         }
       ]
     }
