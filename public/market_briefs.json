@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-16 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 763.25,
+    "spy_change_pct": -1.11,
+    "vix": 19.99,
+    "hy_oas": 3.23,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 43.4,
+    "mmth": 54.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Announced highly positive Phase 3 trial results for its novel Alzheimer's treatment, exceeding efficacy expectations and significantly boosting future revenue projections."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Unveiled a strategic partnership with a leading AI hardware manufacturer, signaling a major expansion of its cloud computing AI capabilities."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued to experience profit-taking after its recent significant run-up, with no new fundamental catalyst today to stem the selling pressure."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-16 11:20 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Trading remains driven by ongoing debates around production targets, competitive pricing, and technical chart patterns, rather than fresh, fundamental catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-25 11:47 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Sectoral Tailwinds Drive Focus",
-    "spy_price": 768.07,
-    "spy_change_pct": 0.12,
-    "vix": 15.25,
-    "hy_oas": 2.8,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 31.5,
-    "mmth": 51.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AKAM",
-          "company": "Akamai Technologies",
-          "reason": "Akamai signs major AI Cloud deal with Anthropic, positioning it favorably in the rapidly expanding AI infrastructure market."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Market sentiment suggests increased demand for NVIDIA's AI-enabling GPUs, driven by accelerating AI cloud deployments following key industry partnerships."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Continues to track broader market performance on technical flows, without a fresh fundamental catalyst specific to today's session."
         }
       ]
     }
