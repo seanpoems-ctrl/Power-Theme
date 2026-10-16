@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-16 19:00 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-Off / Volatility Spike",
+    "spy_price": 763.25,
+    "spy_change_pct": -1.11,
+    "vix": 19.99,
+    "hy_oas": 3.23,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 43.4,
+    "mmth": 54.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "BA",
+          "company": "The Boeing Company",
+          "reason": "Boeing surged on news of a multi-billion dollar aircraft order from a major international airline and positive updates regarding regulatory progress for its 737 MAX fleet."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce rallied after announcing a strategic partnership with a leading AI firm, positioning the company for significant expansion into enterprise artificial intelligence solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA faced selling pressure today following the broader tech sector downturn, continuing a trend of profit-taking from recent highs amidst general market risk aversion."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-16 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Trading activity suggests continuation of recent momentum or technical flows, as no fresh fundamental catalysts were reported today to drive conviction."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-25 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Calm Accumulation Continues",
-    "spy_price": 771.35,
-    "spy_change_pct": 0.54,
-    "vix": 14.87,
-    "hy_oas": 2.8,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 31.9,
-    "mmth": 51.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AKAM",
-          "company": "Akamai Technologies",
-          "reason": "Fresh news of a major AI Cloud deal with Anthropic fueled significant investor interest, positioning Akamai as a key player in the expanding AI infrastructure space."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Strong market momentum and continued analyst optimism around Azure AI capabilities and new Copilot integrations today underscore its leadership in cloud-based artificial intelligence."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Trading remains driven by ongoing debates around production targets, competitive pricing, and technical chart patterns, rather than fresh, fundamental catalysts."
         }
       ]
     }

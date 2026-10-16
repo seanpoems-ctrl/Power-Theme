@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16 16:45 ET",
+  "generated_at": "2026-10-16 19:00 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,7 +12,7 @@
       "close": 763.25,
       "prev_open": 766.25,
       "prev_close": 771.79,
-      "volume": 59151744,
+      "volume": 63538029,
       "change_pct": -1.11
     },
     "QQQ": {
@@ -24,7 +24,7 @@
       "close": 709.8,
       "prev_open": 718.55,
       "prev_close": 728.0,
-      "volume": 64121463,
+      "volume": 66250770,
       "change_pct": -2.5
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 98.96,
+      "price": 99.04,
       "open": 96.14,
       "high": 99.34,
       "low": 95.29,
-      "close": 98.96,
+      "close": 99.04,
       "prev_open": 95.19,
       "prev_close": 97.97,
-      "volume": 301402,
-      "change_pct": 1.01
+      "volume": 304249,
+      "change_pct": 1.09
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25622.61,
-      "open": 25495.28,
-      "high": 25693.89,
-      "low": 25466.09,
-      "close": 25622.61,
-      "prev_open": 25145.07,
-      "prev_close": 25382.62,
-      "volume": 0,
-      "change_pct": 0.95
+      "price": 25382.62,
+      "open": 25145.07,
+      "high": 25420.62,
+      "low": 25133.71,
+      "close": 25382.62,
+      "prev_open": 25322.08,
+      "prev_close": 25298.61,
+      "volume": 69491000,
+      "change_pct": 0.33
     }
   },
   "fred": {
     "hy_oas": 3.23,
-    "yield_curve": 0.33,
+    "yield_curve": 0.35,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: October 16, 2026",
-    "mood_emoji": "⚠️",
-    "mood": "Risk-Off / Volatility Spike",
-    "narrative": "Equities experienced a sharp sell-off today, particularly in technology, as market sentiment shifted abruptly towards risk aversion. This significant de-risking was underscored by a substantial surge in volatility, despite some macro indicators appearing relatively benign.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 763.25 | -1.11% | 📉 |\n| Nasdaq 100 ETF | 709.80 | -2.50% | 📉 |\n| VIX | 19.99 | +21.45% | 📈 |\n| Crude Oil | 98.96 | +1.01% | 📈 |\n| Nikkei 225 | 64425.95 | -4.90% | 📉 |\n| DAX | 25622.61 | +0.95% | 📈 |",
-    "macro_section": "High-yield credit spreads (BAMLH0A0HYM2) remained complacent at 3.23%, suggesting a lack of immediate distress in corporate credit markets. Concurrently, the 10-year minus 2-year yield curve (T10Y2Y) maintained a normal/steepening posture at +0.330, which typically signals a healthy economic outlook. Despite these 'green light' macro signals, institutional risk appetite clearly contracted today, as evidenced by the sharp equity sell-off.",
-    "analysis_para1": "The global tape presented a stark contrast today, with the Nikkei 225 plummeting by 4.90%, signaling significant risk aversion in Asian markets. Conversely, the DAX posted a modest gain of 0.95% and Crude Oil climbed by 1.01%, suggesting pockets of regional resilience or specific commodity demand. Despite this mixed international picture and a substantial sell-off in US equities, high-yield credit spreads remained remarkably complacent at 3.23%, implying that the equity weakness has not yet translated into broader systemic credit concerns for US institutions.",
-    "analysis_para2": "Today's primary flow was dominated by a sharp **positioning unwind** across technology and growth names, exacerbated by a sudden shift in market sentiment. With the Nasdaq 100 ETF plunging 2.50% and the S&P 500 ETF down 1.11%, investors aggressively de-risked their portfolios, triggering a substantial 21.45% surge in the VIX. This appears to be a mechanical response to eroding confidence, forcing algorithmic sell programs and creating a self-reinforcing downward spiral as participants reduced exposure to perceived risky assets.",
-    "analysis_para3": "For traders, the immediate plan is to respect the nascent risk-off tone until clear signs of stabilization emerge. Watch the S&P 500 ETF (SPY) for a potential retest of 760 as initial support, with a break below 755 serving as a confirmed risk-off threshold signaling further downside. For aggressive short entries, a failed bounce towards 770 on the S&P 500 ETF could be a trigger, maintaining tight stops above today's open. Today, the priority should be capital preservation and observing price action for capitulation rather than initiating new long positions.",
-    "technical_signal": "No reversal pattern confirmed yet. The sharp sell-off today pushed the S&P 500 ETF below key short-term moving averages, and market breadth is deteriorating with only 43.4% of S&P 500 stocks above their 50-day Simple Moving Average. Watch for a potential capitulation wick or a higher low on an intraday chart, coupled with an uptick in market breadth (percentage of S&P 500 stocks above SMA50) to signal a potential turning point.",
+    "mood_emoji": "⛈️",
+    "mood": "Broad Risk-Off / Volatility Spike",
+    "narrative": "US equities faced significant selling pressure today, particularly in technology, as global markets experienced renewed risk aversion. The VIX surged, reflecting a sharp increase in market uncertainty and a broad flight from risk assets.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 763.25 | -1.11% | 📉 |\n| Nasdaq 100 ETF | 709.80 | -2.50% | 📉 |\n| VIX | 19.99 | +21.45% | 📈 |\n| Crude Oil | 99.04 | +1.09% | 📈 |\n| Nikkei 225 | 64425.95 | -4.90% | 📉 |\n| DAX | 25382.62 | +0.33% | ➡️ |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains 'Complacent' at 3.23%, indicating no immediate stress within the corporate credit market. Similarly, the 10Y-2Y Yield Curve (T10Y2Y) is 'Normal / Steepening' at +0.350, typically a healthy signal. However, today's significant equity sell-off suggests institutional risk appetite is significantly waning, despite these ostensibly favorable credit and rates signals, pointing to a potential disconnect or a forward-looking deterioration in sentiment.",
+    "analysis_para1": "Global markets presented a stark picture of diverging sentiment today, with the Nikkei 225 plummeting by a significant -4.90%, signaling pronounced risk aversion originating from Asia. In contrast, the DAX managed a slight gain of +0.33%, showing some regional resilience amidst global turmoil. Despite Crude Oil prices rising +1.09% to $99.04, often a sign of demand or inflationary pressures, the dominant global signal from the sharp Nikkei decline implies a broader flight from risk. This global sentiment stands in contrast to the US High Yield Credit Spread (BAMLH0A0HYM2) which remains at a 'Complacent' 3.23%, suggesting the credit market has yet to fully price in the mounting equity distress and its potential implications for US risk appetite.",
+    "analysis_para2": "Today's pronounced equity sell-off, particularly in technology stocks, appears driven by a sudden and aggressive re-pricing of risk, acting as the primary mechanical catalyst. While no singular headline or policy decision was immediately identifiable, the sharp +21.45% surge in the VIX to 19.99, coupled with the Nasdaq 100 ETF's -2.50% decline, strongly indicates a significant deleveraging and unwinding of previously crowded long positions in growth assets. This broad-based capitulation reflects a mechanical shift in institutional risk appetite, forcing systematic strategies to reduce exposure and amplifying downward momentum across the board.",
+    "analysis_para3": "Traders should prioritize defense and capital preservation heading into tomorrow, watching for follow-through selling. The immediate focus is on whether the S&P 500 ETF can hold above 760 as a critical psychological and technical support level; a sustained break below this would signal further downside. For aggressive short entries, look for rejections at prior intraday support levels, now acting as resistance, particularly if the Nasdaq 100 ETF struggles to regain 715. Risk-off thresholds are clearly defined by a VIX above 20 and a sustained break of 760 on the S&P 500 ETF, demanding immediate reduction in risk exposure and a defensive stance.",
+    "technical_signal": "No reversal pattern confirmed yet. The current technical context shows deteriorating breadth, with S&P 500 stocks above SMA50 at 43.4%, signaling weakness in the intermediate term. While S&P stocks above SMA200 remain at 54.7%, indicating longer-term resilience, today's sharp decline warrants vigilance for a potential washout bottom, which would typically be marked by extreme selling volume and a capitulatory intraday reversal.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Announced highly positive Phase 3 trial results for its novel Alzheimer's treatment, exceeding efficacy expectations and significantly boosting future revenue projections."
+          "ticker": "BA",
+          "company": "The Boeing Company",
+          "reason": "Boeing surged on news of a multi-billion dollar aircraft order from a major international airline and positive updates regarding regulatory progress for its 737 MAX fleet."
         },
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Unveiled a strategic partnership with a leading AI hardware manufacturer, signaling a major expansion of its cloud computing AI capabilities."
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce rallied after announcing a strategic partnership with a leading AI firm, positioning the company for significant expansion into enterprise artificial intelligence solutions."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "Continued to experience profit-taking after its recent significant run-up, with no new fundamental catalyst today to stem the selling pressure."
+          "reason": "NVIDIA faced selling pressure today following the broader tech sector downturn, continuing a trend of profit-taking from recent highs amidst general market risk aversion."
         }
       ]
     }
