@@ -22,7 +22,7 @@ let _stocksP = null;
 export const loadStageStocks = () => {
   if (!_stocksP) {
     _stocksP = fetch(`${process.env.PUBLIC_URL}/stage_stocks.json?v=${Date.now()}`).then(r => (r.ok ? r.json() : null))
-      .then(d => (d?.stocks ? { asOf: d.as_of, rows: d.stocks.map(([t, n, sec, st, w, pv, px, d30, vx, dv]) => ({ t, n, sec, st, w, pv, px, d30, vx, dv })) } : null))
+      .then(d => (d?.stocks ? { asOf: d.as_of, rows: d.stocks.map(([t, n, sec, st, w, pv, px, d30, vx, dv, d10, bw, bvx]) => ({ t, n, sec, st, w, pv, px, d30, vx, dv, d10, bw: bw ?? 0, bvx })) } : null))
       .catch(() => null);
   }
   return _stocksP;
@@ -40,5 +40,7 @@ export function buildMoversBrief(stk, sector = null) {
     stage2_to_stage3_last_4w: c(r => r.st === 3 && r.pv === 2 && r.w <= 4),
     entered_stage4_last_4w: c(r => r.st === 4 && r.w <= 4),
     entered_stage4_last_4w_on_2x_volume: c(r => r.st === 4 && r.w <= 4 && (r.vx ?? 0) >= 2),
+    stage2_stocks_that_slipped_below_10w_ma_last_4w: c(r => r.st === 2 && r.bw >= 1 && r.bw <= 4),
+    of_those_on_1_5x_volume_or_more: c(r => r.st === 2 && r.bw >= 1 && r.bw <= 4 && (r.bvx ?? 0) >= 1.5),
   };
 }

@@ -22,11 +22,15 @@ Stage rules (a rules-based reading of Weinstein, following TraderLion's "Complet
 Output: public/stage_analysis.json
   { generated_at, as_of, universe, weeks: ["2024-10-18", …], groups: { "All": {n, s1:[…counts per week], s2, s3, s4}, "<Sector>": {…} } }
         public/stage_stocks.json — the stocks behind the counts (for the card's "Stage Movers" table):
-  { as_of, cols: [...], stocks: [[ticker, company, sector, stage, weeks_in_stage, prev_stage, price, pct_vs_30w_ma, breakout_vol_x, avg_dollar_vol], …] }
+  { as_of, cols: [...], stocks: [[ticker, company, sector, stage, weeks_in_stage, prev_stage, price, pct_vs_30w_ma, breakout_vol_x, avg_dollar_vol,
+                                                   pct_vs_10w_ma, weeks_below_10w_ma, break_vol_x], …] }
   weeks_in_stage = consecutive weeks in the current stage (1 = entered this week); prev_stage = the stage before that (0 = unknown / start of history).
   breakout_vol_x (only for stage changes in the last 12 weeks) = the highest DAILY volume since the entry week began ÷ the average daily volume of the
   30 trading days before it — TraderLion's "breakout on at least twice average volume" test (≥ 2 is a high-volume breakout; the same number on a
   move into S4 / S3 is a high-volume breakdown).
+  10-week MA warning (Stage 3 early warning in TraderLion's guide: "slices below the 10-week MA on heavy volume"): pct_vs_10w_ma = close vs the 10-week
+  SMA (≈ 50-day); weeks_below_10w_ma = consecutive weeks the weekly close has been under it (0 = above); break_vol_x = the same volume ratio measured
+  from the first week below it.
 """
 import json
 import logging
@@ -52,6 +56,7 @@ MIN_CAP = 500e6
 MIN_AVG_VOL = 100_000
 MA_WEEKS = 30
 LONG_MA_WEEKS = 40      # 200-day equivalent
+SHORT_MA_WEEKS = 10     # 50-day equivalent — the "10-week MA" Stage 3 warning
 SLOPE_WEEKS = 5
 FLAT = 0.005            # ±0.5 % change of the MA over SLOPE_WEEKS counts as "flat"
 HISTORY_WEEKS = 104     # weeks written to the file
@@ -133,7 +138,8 @@ def stages(wk: pd.DataFrame) -> np.ndarray:
     return out
 
 
-STOCK_COLS = ["ticker", "company", "sector", "stage", "weeks_in_stage", "prev_stage", "price", "pct_vs_30w_ma", "breakout_vol_x", "avg_dollar_vol"]
+STOCK_COLS = ["ticker", "company", "sector", "stage", "weeks_in_stage", "prev_stage", "price", "pct_vs_30w_ma", "breakout_vol_x", "avg_dollar_vol",
+              "pct_vs_10w_ma", "weeks_below_10w_ma", "break_vol_x"]
 
 
 def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd.DataFrame, db: list) -> list:
@@ -141,12 +147,25 @@ def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd
     info = {r["ticker"]: r for r in db if r.get("ticker")}
     cols = list(wk.columns)
     ma30 = wk.rolling(MA_WEEKS, min_periods=MA_WEEKS).mean().iloc[-1].to_numpy()
+    ma10_all = wk.rolling(SHORT_MA_WEEKS, min_periods=SHORT_MA_WEEKS).mean().to_numpy()
+    close_a = wk.to_numpy(dtype=float)
+    below10 = np.isfinite(close_a) & np.isfinite(ma10_all) & (close_a < ma10_all)       # weekly close under the 10-week MA
     vol = volume.reindex(index=close.index, columns=cols)
     vol_a = vol.to_numpy(dtype=float)
     days = close.index.values
     week_ends = wk.index.values
     n_weeks = st.shape[0]
     last_px = wk.iloc[-1].to_numpy(dtype=float)
+    def vol_ratio(j: int, weeks_back: int):
+        """Highest daily volume since the week that began `weeks_back` weeks ago ÷ the average daily volume of the 30 trading days before it."""
+        start = np.searchsorted(days, week_ends[n_weeks - 1 - weeks_back], side="right")
+        seg = vol_a[start:, j]
+        base = vol_a[max(0, start - VOL_BASE_DAYS):start, j]
+        seg, base = seg[np.isfinite(seg)], base[np.isfinite(base)]
+        if len(seg) and len(base) >= 15 and base.mean() > 0:
+            return round(float(seg.max() / base.mean()), 2)
+        return None
+
     rows = []
     for j, t in enumerate(cols):
         cur = int(st[-1, j])
@@ -156,21 +175,19 @@ def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd
         while w < n_weeks and st[-1 - w, j] == cur:
             w += 1
         prev = int(st[-1 - w, j]) if w < n_weeks else 0
-        vx = None
-        if w <= VOL_MAX_WEEKS and prev:
-            # daily rows since the entry week began (the Friday before it)
-            start = np.searchsorted(days, week_ends[n_weeks - 1 - w], side="right")
-            seg = vol_a[start:, j]
-            base = vol_a[max(0, start - VOL_BASE_DAYS):start, j]
-            seg, base = seg[np.isfinite(seg)], base[np.isfinite(base)]
-            if len(seg) and len(base) >= 15 and base.mean() > 0:
-                vx = round(float(seg.max() / base.mean()), 2)
+        vx = vol_ratio(j, w) if (w <= VOL_MAX_WEEKS and prev) else None
+        # 10-week MA warning: consecutive weeks (incl. this one) the weekly close has been below the 10-week MA, and the volume of that break
+        bw = 0
+        while bw < n_weeks and below10[-1 - bw, j]:
+            bw += 1
+        bvx = vol_ratio(j, bw) if (0 < bw <= VOL_MAX_WEEKS) else None
+        d10 = round((last_px[j] / ma10_all[-1, j] - 1) * 100, 1) if np.isfinite(ma10_all[-1, j]) and ma10_all[-1, j] > 0 else None
         recent = vol_a[-VOL_BASE_DAYS:, j]
         recent = recent[np.isfinite(recent)]
         dv = int(last_px[j] * recent.mean()) if len(recent) else None
         d = round((last_px[j] / ma30[j] - 1) * 100, 1) if np.isfinite(ma30[j]) and ma30[j] > 0 else None
         r = info.get(t, {})
-        rows.append([t, r.get("company") or "", r.get("sector") or "", cur, w, prev, round(float(last_px[j]), 2), d, vx, dv])
+        rows.append([t, r.get("company") or "", r.get("sector") or "", cur, w, prev, round(float(last_px[j]), 2), d, vx, dv, d10, bw, bvx])
     return rows
 
 

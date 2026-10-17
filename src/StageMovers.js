@@ -10,11 +10,12 @@ const StageChip = ({ k }) => (k && STAGE_BY[k]
   : <span className="text-zinc-600">—</span>);
 
 const PRESETS = [
-  { id: "new2", label: "New Stage 2", stage: 2, within: 4, minVx: 0, from: 0, tip: "Entered Stage 2 in the last 4 weeks" },
-  { id: "brk", label: "Breakouts on volume", stage: 2, within: 4, minVx: 2, from: 0, tip: "Entered Stage 2 in the last 4 weeks with a day of at least 2× the prior 30-day average volume" },
-  { id: "top", label: "Topping (S2 → S3)", stage: 3, within: 4, minVx: 0, from: 2, tip: "Slipped from Stage 2 into Stage 3 in the last 4 weeks" },
-  { id: "new4", label: "New Stage 4", stage: 4, within: 4, minVx: 0, from: 0, tip: "Entered Stage 4 in the last 4 weeks" },
-  { id: "base", label: "Basing (S1)", stage: 1, within: 0, minVx: 0, from: 0, tip: "Everything currently in Stage 1, longest bases first" },
+  { id: "new2", label: "New Stage 2", stage: 2, within: 4, minVx: 0, from: 0, below: 0, tip: "Entered Stage 2 in the last 4 weeks" },
+  { id: "brk", label: "Breakouts on volume", stage: 2, within: 4, minVx: 2, from: 0, below: 0, tip: "Entered Stage 2 in the last 4 weeks with a day of at least 2× the prior 30-day average volume" },
+  { id: "top", label: "Topping (S2 → S3)", stage: 3, within: 4, minVx: 0, from: 2, below: 0, tip: "Slipped from Stage 2 into Stage 3 in the last 4 weeks" },
+  { id: "warn", label: "⚠ 10W MA break (S2)", stage: 2, within: 0, minVx: 1.5, from: 0, below: 4, tip: "Stage 2 stocks whose weekly close slipped below the 10-week MA in the last 4 weeks, on at least 1.5× volume — TraderLion's first warning that an advance is rolling into Stage 3" },
+  { id: "new4", label: "New Stage 4", stage: 4, within: 4, minVx: 0, from: 0, below: 0, tip: "Entered Stage 4 in the last 4 weeks" },
+  { id: "base", label: "Basing (S1)", stage: 1, within: 0, minVx: 0, from: 0, below: 0, tip: "Everything currently in Stage 1, longest bases first" },
 ];
 
 const num = (v, d = 1) => (v == null ? "—" : v.toFixed(d));
@@ -24,10 +25,10 @@ const field = "text-[12px] bg-zinc-800/60 border border-zinc-700/50 rounded-md p
 export default function StageMovers({ group, StockCell = null, onMiniCharts = null }) {
   const [stk, setStk] = React.useState(null);
   React.useEffect(() => { let dead = false; loadStageStocks().then(d => { if (!dead) setStk(d); }); return () => { dead = true; }; }, []);
-  const [f, setF] = React.useState({ preset: "new2", stage: 2, within: 4, minVx: 0, from: 0, minDvM: 10 });
+  const [f, setF] = React.useState({ preset: "new2", stage: 2, within: 4, minVx: 0, from: 0, below: 0, minDvM: 10 });
   const [sort, setSort] = React.useState({ col: null, dir: "desc" });
   const [copied, setCopied] = React.useState(false);
-  const pick = p => { setF(prev => ({ ...prev, preset: p.id, stage: p.stage, within: p.within, minVx: p.minVx, from: p.from })); setSort({ col: null, dir: "desc" }); };
+  const pick = p => { setF(prev => ({ ...prev, preset: p.id, stage: p.stage, within: p.within, minVx: p.minVx, from: p.from, below: p.below })); setSort({ col: null, dir: "desc" }); };
   const set = patch => setF(prev => ({ ...prev, preset: "custom", ...patch }));
 
   const rows = React.useMemo(() => {
@@ -36,10 +37,11 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
       && (group === "All" || r.sec === group)
       && (!f.within || r.w <= f.within)
       && (!f.from || r.pv === f.from)
-      && (!f.minVx || (r.vx ?? 0) >= f.minVx)
+      && (!f.below || (r.bw >= 1 && r.bw <= f.below))
+      && (!f.minVx || ((f.below ? r.bvx : r.vx) ?? 0) >= f.minVx)
       && (f.minDvM <= 0 || (r.dv ?? 0) >= f.minDvM * 1e6));
     // default order: breakout volume for fresh S2/S4 entries, longest base first for S1, otherwise newest first
-    const col = sort.col || (f.stage === 1 ? "w" : f.stage === 3 ? "w" : "vx");
+    const col = sort.col || (f.below ? "bvx" : f.stage === 1 ? "w" : f.stage === 3 ? "w" : "vx");
     const dir = sort.col ? sort.dir : (col === "w" && f.stage === 3 ? "asc" : "desc");
     return [...out].sort((a, b) => {
       const av = a[col], bv = b[col];
@@ -52,6 +54,7 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
   }, [stk, f, group, sort]);
 
   if (!stk) return null;
+  const warn = f.below > 0;     // 10-week MA warning mode: show weeks-below and the break volume instead of stage age / entry volume
   const th = (col, label, align = "right", tip) => (
     <th onClick={() => setSort(p => ({ col, dir: p.col === col && p.dir === "desc" ? "asc" : "desc" }))} title={tip}
       className={`px-2 py-1.5 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap ${align === "left" ? "text-left" : "text-right"} ${sort.col === col ? "text-zinc-200" : ""}`}>
@@ -86,7 +89,10 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
         <label className="flex items-center gap-1.5">Entered within
           <select value={f.within} onChange={e => set({ within: +e.target.value })} className={field}>
             <option value={1}>1 week</option><option value={2}>2 weeks</option><option value={4}>4 weeks</option><option value={8}>8 weeks</option><option value={12}>12 weeks</option><option value={0}>any time</option></select></label>
-        <label className="flex items-center gap-1.5" title="Highest daily volume since the stage began ÷ the 30-day average before it">Volume ≥
+        <label className="flex items-center gap-1.5" title="Weekly close under the 10-week MA (≈ 50-day) — Stage 3 early warning. Volume ≥ then measures the break">Below 10W MA
+          <select value={f.below} onChange={e => set({ below: +e.target.value })} className={field}>
+            <option value={0}>any</option><option value={1}>1 week</option><option value={2}>≤ 2 weeks</option><option value={4}>≤ 4 weeks</option><option value={8}>≤ 8 weeks</option></select></label>
+        <label className="flex items-center gap-1.5" title={warn ? "Highest daily volume since the stock slipped below the 10-week MA ÷ the 30-day average before it" : "Highest daily volume since the stage began ÷ the 30-day average before it"}>Volume ≥
           <input type="number" min="0" step="0.5" value={f.minVx} onChange={e => set({ minVx: Math.max(0, parseFloat(e.target.value) || 0) })} className={`${field} w-14 text-right`} /><span className="text-zinc-600">×</span></label>
         <label className="flex items-center gap-1.5">Avg $ Vol ≥
           <input type="number" min="0" step="5" value={f.minDvM} onChange={e => set({ minDvM: Math.max(0, parseFloat(e.target.value) || 0) })} className={`${field} w-14 text-right`} /><span className="text-zinc-600">M</span></label>
@@ -101,11 +107,16 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
                 {th("t", "Ticker", "left")}
                 {th("n", "Company", "left")}
                 {th("sec", "Sector", "left")}
-                {th("w", "Wks in stage", "right", "Consecutive weeks in this stage (1 = entered this week)")}
-                {th("pv", "From", "right", "The stage it came from")}
+                {warn
+                  ? th("bw", "Wks below 10W", "right", "Consecutive weeks the weekly close has been under the 10-week moving average")
+                  : th("w", "Wks in stage", "right", "Consecutive weeks in this stage (1 = entered this week)")}
+                {!warn && th("pv", "From", "right", "The stage it came from")}
                 {th("px", "Price")}
+                {th("d10", "vs 10W MA", "right", "Close vs the 10-week moving average (≈ 50-day). Negative = below it.")}
                 {th("d30", "vs 30W MA", "right", "Close vs the 30-week moving average")}
-                {th("vx", "Volume ×", "right", "Highest daily volume since the stage began ÷ average daily volume of the 30 days before (only for changes in the last 12 weeks). 2×+ = a high-volume break.")}
+                {warn
+                  ? th("bvx", "Break volume ×", "right", "Highest daily volume since the stock slipped below the 10-week MA ÷ average daily volume of the 30 days before. Heavy volume (1.5×+) on the break is the warning TraderLion describes.")
+                  : th("vx", "Volume ×", "right", "Highest daily volume since the stage began ÷ average daily volume of the 30 days before (only for changes in the last 12 weeks). 2×+ = a high-volume break.")}
                 {th("dv", "Avg $ Vol")}
               </tr>
             </thead>
@@ -115,11 +126,12 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
                   <td className="px-2 py-1 text-left">{StockCell ? <StockCell ticker={r.t} /> : <span className="font-mono font-bold text-cyan-400">{r.t}</span>}</td>
                   <td className="px-2 py-1 text-left text-zinc-400 max-w-[200px] truncate" title={r.n}>{r.n || "—"}</td>
                   <td className="px-2 py-1 text-left text-zinc-500 whitespace-nowrap">{r.sec || "—"}</td>
-                  <td className="px-2 py-1 text-right font-mono text-zinc-300">{r.w}</td>
-                  <td className="px-2 py-1 text-right"><StageChip k={r.pv} /></td>
+                  <td className="px-2 py-1 text-right font-mono text-zinc-300">{warn ? r.bw : r.w}</td>
+                  {!warn && <td className="px-2 py-1 text-right"><StageChip k={r.pv} /></td>}
                   <td className="px-2 py-1 text-right font-mono text-zinc-300">${num(r.px, 2)}</td>
+                  <td className={`px-2 py-1 text-right font-mono ${r.d10 == null ? "text-zinc-600" : r.d10 >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{r.d10 == null ? "—" : `${r.d10 > 0 ? "+" : ""}${r.d10.toFixed(1)}%`}</td>
                   <td className={`px-2 py-1 text-right font-mono ${r.d30 == null ? "text-zinc-600" : r.d30 >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{r.d30 == null ? "—" : `${r.d30 > 0 ? "+" : ""}${r.d30.toFixed(1)}%`}</td>
-                  <td className={`px-2 py-1 text-right font-mono ${r.vx == null ? "text-zinc-600" : r.vx >= 3 ? "text-amber-300 font-bold" : r.vx >= 2 ? "text-amber-300" : "text-zinc-400"}`}>{r.vx == null ? "—" : `${r.vx.toFixed(1)}×`}</td>
+                  <td className={`px-2 py-1 text-right font-mono ${(warn ? r.bvx : r.vx) == null ? "text-zinc-600" : (warn ? r.bvx : r.vx) >= 3 ? "text-amber-300 font-bold" : (warn ? r.bvx : r.vx) >= 1.5 + (warn ? 0 : 0.5) ? "text-amber-300" : "text-zinc-400"}`}>{(warn ? r.bvx : r.vx) == null ? "—" : `${(warn ? r.bvx : r.vx).toFixed(1)}×`}</td>
                   <td className="px-2 py-1 text-right font-mono text-zinc-400">{money(r.dv)}</td>
                 </tr>
               ))}
@@ -128,7 +140,7 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
         </div>
       )}
       <p className="mt-1.5 text-[11px] text-zinc-600 leading-snug">Per TraderLion's guide, the best Stage 2 entries break out on at least twice average volume and sit in strong sectors (use the scope menu above).
-        Volume × needs a stage change in the last 12 weeks. Stage 2 entries come from the base (S1) or a re-acceleration (S3).</p>
+        Volume × needs a stage change in the last 12 weeks. Stage 2 entries come from the base (S1) or a re-acceleration (S3). The ⚠ 10W MA break preset lists Stage 2 stocks that have slipped under the 10-week average (≈ 50-day) — the guide's first warning that an advance is losing steam; it is a prompt to tighten stops or trim, not a sell signal on its own.</p>
     </div>
   );
 }
