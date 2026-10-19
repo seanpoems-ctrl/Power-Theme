@@ -1,4 +1,4 @@
-import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide } from "./breadthCycle";
+import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide, regimeBefore } from "./breadthCycle";
 
 const row = (date, over = {}) => ({
   date, up_4_pct: 200, down_4_pct: 200, ratio_5d: 1, ratio_10d: 1, up_25_q: 1000, down_25_q: 1000,
@@ -93,4 +93,16 @@ test("exposure guide pairs the confirmed regime with QQQ's trend and T2108", () 
   expect(exposureGuide({ confirmed: "Contraction", t2108: 35, qqq: { ...up, e50: 120 } }).key).toBe("defensive");
   expect(exposureGuide({ confirmed: "Contraction", t2108: 35, qqq: up }).key).toBe("reduce");                          // Risk-off but QQQ holds its 50-day
   expect(exposureGuide({ confirmed: "Contraction", t2108: 12, qqq: { ...up, e50: 120 } }).key).toBe("bounce");         // washed out
+});
+
+test("regimeBefore returns the confirmed regime at the last session strictly before the date (no look-ahead)", () => {
+  const phases = ["Expansion", "Expansion", "Expansion", "Contraction", "Contraction", "Contraction"];
+  const rows = addConfirmedPhase(phases.map((phase, i) => ({ date: `2026-03-0${i + 2}`, phase, strength: 50 })));
+  const cal = { rows, dates: rows.map(r => r.date) };
+  expect(regimeBefore(cal, "2026-03-05").date).toBe("2026-03-04");        // entry on the 5th sees the 4th's close
+  expect(regimeBefore(cal, "2026-03-02")).toBeNull();                     // nothing earlier than the first session
+  expect(regimeBefore(cal, "2026-03-09").date).toBe("2026-03-07");        // after the last session -> latest row
+  expect(regimeBefore(cal, "2026-03-06").confirmed).toBe("Expansion");    // 2nd Contraction day: not confirmed yet
+  expect(regimeBefore(cal, "2026-03-08").confirmed).toBe("Contraction");  // confirmed on the 3rd
+  expect(regimeBefore(cal, "")).toBeNull();
 });

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
-import BreadthRegime from "./BreadthRegime";
+import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import BreadthStatus from "./BreadthStatus";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
 import { ChevronDown, ChevronRight, Activity, RefreshCw, Search, SlidersHorizontal, X, Zap, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
@@ -11,7 +11,7 @@ import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
-import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle, addConfirmedPhase } from "./breadthCycle";
+import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle, addConfirmedPhase, rowsFromLongHistory, loadRegimeCalendar, regimeBefore } from "./breadthCycle";
 import { buildDataset, scenarioReport } from "./breadthScenario";
 import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from "./chartTheme";
 const CotTab = React.lazy(() => import("./CotTab"));   // loaded only when the COT tab opens
@@ -4198,7 +4198,7 @@ const TradeChartModal = ({ trade, onClose }) => {
 
 // Win/loss/P&L breakdown table — same shape reused for Theme, Setup, and Day
 // of Week grouping, so all three stay visually and numerically consistent.
-const PerfTable = ({ title, rows, labelHeader, bare = false }) => {
+const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, footer = null }) => {
   if (!rows.length) return null;
   return (
     <div className={`bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden ${bare ? "" : "mb-5"}`}>
@@ -4209,7 +4209,7 @@ const PerfTable = ({ title, rows, labelHeader, bare = false }) => {
         <table className="w-full text-left">
           <thead className="border-b border-zinc-800/40">
             <tr>
-              {[labelHeader, "Trades", "Wins", "Win %", "Total P&L", "Avg P&L"].map(h => (
+              {[labelHeader, "Trades", "Wins", "Win %", "Total P&L", "Avg P&L", ...(showR ? ["Avg R"] : [])].map(h => (
                 <th key={h} className="px-3 py-2 text-[11px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
               ))}
             </tr>
@@ -4227,11 +4227,18 @@ const PerfTable = ({ title, rows, labelHeader, bare = false }) => {
                 <td className={`px-3 py-2 text-[12px] font-mono ${s.count ? (s.pnl / s.count >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-500"}`}>
                   {s.count ? `${s.pnl / s.count >= 0 ? "+" : ""}$${(s.pnl / s.count).toFixed(0)}` : "—"}
                 </td>
+                {showR && (
+                  <td className={`px-3 py-2 text-[12px] font-mono ${s.rCount ? (s.rSum / s.rCount >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-600"}`}
+                    title={s.rCount ? `${s.rCount} trades with a stop (R multiple)` : "no trades with a stop price"}>
+                    {s.rCount ? `${s.rSum / s.rCount >= 0 ? "+" : ""}${(s.rSum / s.rCount).toFixed(2)}R` : "—"}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {footer}
     </div>
   );
 };
@@ -4265,6 +4272,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [showFilters, setShowFilters] = useState(false);
   const [fTicker, setFTicker]       = useState("");
   const [fSetup, setFSetup]         = useState("");
+  const [fRegime, setFRegime]       = useState("");
+  const [regimeCal, setRegimeCal]   = useState(null);   // every session since 2009 with its confirmed breadth regime (for the auto regime tag)
+  React.useEffect(() => { let dead = false; loadRegimeCalendar().then(c => { if (!dead) setRegimeCal(c); }); return () => { dead = true; }; }, []);
   const [fGrade, setFGrade]         = useState("");
   const [fSide, setFSide]           = useState("");
   const [fFrom, setFFrom]           = useState("");
@@ -4915,6 +4925,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   };
 
   // ── Filtered trades ──────────────────────────────────────────────────────────
+  // Auto regime tag: the confirmed breadth regime at the close BEFORE the entry date (what you could see when you entered). Computed, not stored,
+  // so it covers old and imported trades and follows any later change to the regime rules.
+  const regimeOf = t => (regimeCal && t.date ? regimeBefore(regimeCal, t.date) : null);
+  const regimeLabel = t => { const r = regimeOf(t); return r ? REGIMES[r.confirmed].label : null; };
+
   const visible = trades.filter(t => {
     if (filter === "winners" && !tradeIsWin(t)) return false;
     if (filter === "losers"  && !tradeIsLoss(t)) return false;
@@ -4922,14 +4937,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     if (calSelectedDay && t.exit_date !== calSelectedDay) return false;
     if (fTicker && !t.ticker?.toUpperCase().includes(fTicker.toUpperCase())) return false;
     if (fSetup && t.setup !== fSetup) return false;
+    if (fRegime && (regimeLabel(t) || "No data") !== fRegime) return false;
     if (fGrade && t.grade !== fGrade) return false;
     if (fSide && t.side !== fSide) return false;
     if (fFrom && (!t.date || t.date < fFrom)) return false;
     if (fTo && (!t.date || t.date > fTo)) return false;
     return true;
   });
-  const advancedFiltersActive = !!(fTicker || fSetup || fGrade || fSide || fFrom || fTo);
-  const clearAdvancedFilters = () => { setFTicker(""); setFSetup(""); setFGrade(""); setFSide(""); setFFrom(""); setFTo(""); };
+  const advancedFiltersActive = !!(fTicker || fSetup || fRegime || fGrade || fSide || fFrom || fTo);
+  const clearAdvancedFilters = () => { setFTicker(""); setFSetup(""); setFRegime(""); setFGrade(""); setFSide(""); setFFrom(""); setFTo(""); };
 
   // Sortable columns — numeric ones compare as numbers (blanks always sort
   // last regardless of direction); everything else compares as text. Date
@@ -5007,6 +5023,22 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     }
     return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
   }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Closed trades grouped by the confirmed breadth regime at the prior close (plus average R). Order follows the regime cycle.
+  const byRegime = useMemo(() => {
+    const m = {};
+    for (const t of closed) {
+      const label = regimeLabel(t) || "No data";
+      if (!m[label]) m[label] = { pnl: 0, count: 0, wins: 0, rSum: 0, rCount: 0 };
+      m[label].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[label].count += 1;
+      if (tradeIsWin(t)) m[label].wins += 1;
+      const r = parseFloat(t.r_multiple);
+      if (Number.isFinite(r)) { m[label].rSum += r; m[label].rCount += 1; }
+    }
+    const order = ["Risk-on", "Recovery", "Caution", "Risk-off", "No data"];
+    return order.filter(k => m[k]).map(k => [k, m[k]]);
+  }, [trades, regimeCal]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Grouped by the day of week the trade was CLOSED (exit_date) — same shape
   // as Performance by Theme, answering "which weekday am I actually good on."
@@ -5322,6 +5354,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             <option value="">Any setup</option>
             {SETUP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
           </select>
+          <select value={fRegime} onChange={e => setFRegime(e.target.value)} title="Confirmed breadth regime at the close before entry"
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none">
+            <option value="">Any regime</option>
+            {["Risk-on", "Recovery", "Caution", "Risk-off", "No data"].map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
           <select value={fGrade} onChange={e => setFGrade(e.target.value)}
             className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none">
             <option value="">Any grade</option>
@@ -5516,6 +5553,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                       <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
                       <InlineSelect value={t.setup} options={SETUP_OPTS} onChange={v => updateField(t.id, "setup", v)} placeholder="Setup"
                         cls="text-[10px] font-medium px-1.5 py-0.5 rounded border text-violet-400 bg-violet-500/10 border-violet-500/20"/>
+                      {(() => {
+                        const r = regimeOf(t);
+                        if (!r) return null;
+                        const reg = REGIMES[r.confirmed];
+                        return (
+                          <span title={`Breadth regime when you entered: ${reg.label} (${r.confirmed}), day ${r.days}, strength ${r.strength != null ? r.strength.toFixed(0) : "—"} — confirmed regime at the ${r.date} close, the last session before ${t.date}`}
+                            className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded border whitespace-nowrap"
+                            style={{ color: reg.color, borderColor: `${reg.color}66`, background: `${reg.color}1a` }}>
+                            {reg.label}<span className="opacity-60">d{r.days}</span>
+                          </span>
+                        );
+                      })()}
                     </div>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
@@ -5605,6 +5654,10 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         <PerfTable title="Performance by Setup" rows={bySetup} labelHeader="Setup" bare/>
         <PerfTable title="Performance by Day of Week" rows={byDayOfWeek} labelHeader="Day" bare/>
       </div>
+      <PerfTable title="Performance by Market Regime (confirmed breadth regime at the close before entry)" rows={byRegime} labelHeader="Regime" showR
+        footer={<p className="px-4 py-2 text-[11px] text-zinc-600 leading-snug border-t border-zinc-800/40">
+          Auto-tagged from each trade's entry date (see the Breadth Cycle page). Under about 30 trades per regime these are hints, not conclusions — and log skipped or early-exit trades too, or the edge looks bigger than it is.
+        </p>}/>
 
       {/* ── Trading Notebook ─────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
@@ -7864,18 +7917,7 @@ const BreadthCycleTab = React.memo(function BreadthCycleTab() {
   }, []);
   // Long history -> the same row shape the sheet gives (ratios recomputed as sum(up 4%)/sum(down 4%), S&P from Yahoo).
   const ds = React.useMemo(() => (hist ? buildDataset(hist) : null), [hist]);
-  const rows = React.useMemo(() => {
-    if (!hist) return shortRows;
-    const c = hist.cols, spxJ = new Map(hist.spx_dates.map((d, j) => [d, j]));
-    const cu = [0], cd = [0];
-    hist.dates.forEach((_, i) => { cu.push(cu[i] + (c.up_4_pct[i] || 0)); cd.push(cd[i] + (c.down_4_pct[i] || 0)); });
-    const ratio = (i, k) => cd[i + 1] - cd[i + 1 - k] > 0 ? (cu[i + 1] - cu[i + 1 - k]) / (cd[i + 1] - cd[i + 1 - k]) : 1;
-    return hist.dates.map((date, i) => ({
-      date, up_4_pct: c.up_4_pct[i], down_4_pct: c.down_4_pct[i], ratio_5d: i >= 4 ? ratio(i, 5) : 1, ratio_10d: i >= 9 ? ratio(i, 10) : 1,
-      up_25_q: c.up_25_q[i], down_25_q: c.down_25_q[i], up_25_m: c.up_25_m[i], down_25_m: c.down_25_m[i], up_50_m: c.up_50_m[i], down_50_m: c.down_50_m[i],
-      up_13_34d: c.up_13_34d[i], down_13_34d: c.down_13_34d[i], t2108: c.t2108[i], sp_index: spxJ.has(date) ? hist.spx[spxJ.get(date)] : null,
-    })).slice(10);       // the first days have no 10-day ratio
-  }, [hist, shortRows]);
+  const rows = React.useMemo(() => (hist ? rowsFromLongHistory(hist) : shortRows), [hist, shortRows]);
   const dsIndex = React.useMemo(() => (ds ? new Map(ds.dates.map((d, i) => [d, i])) : null), [ds]);
 
   const enriched = React.useMemo(() => addConfirmedPhase(computeBreadthCycle(rows)), [rows]);     // + confirmed regime (3 sessions in a row), days in regime

@@ -95,6 +95,48 @@ export function exposureGuide({ confirmed, t2108, qqq } = {}) {
   return res("reduce", "No read", "warn", "Not enough data for a regime read.", []);
 }
 
+// Rows (ascending) in the Stockbee sheet's shape, built from public/breadth_long_history.json: the 5 / 10-day ratios are recomputed as
+// sum(up 4 %) / sum(down 4 %), the S&P close comes from Yahoo. Shared by the Breadth Cycle page and the Trade Journal's regime tag.
+export function rowsFromLongHistory(hist) {
+  const c = hist.cols, spxJ = new Map(hist.spx_dates.map((d, i) => [d, i]));
+  const cu = [0], cd = [0];
+  hist.dates.forEach((_, i) => { cu.push(cu[i] + (c.up_4_pct[i] || 0)); cd.push(cd[i] + (c.down_4_pct[i] || 0)); });
+  const ratio = (i, k) => (cd[i + 1] - cd[i + 1 - k] > 0 ? (cu[i + 1] - cu[i + 1 - k]) / (cd[i + 1] - cd[i + 1 - k]) : 1);
+  return hist.dates.map((date, i) => ({
+    date, up_4_pct: c.up_4_pct[i], down_4_pct: c.down_4_pct[i], ratio_5d: i >= 4 ? ratio(i, 5) : 1, ratio_10d: i >= 9 ? ratio(i, 10) : 1,
+    up_25_q: c.up_25_q[i], down_25_q: c.down_25_q[i], up_25_m: c.up_25_m[i], down_25_m: c.down_25_m[i], up_50_m: c.up_50_m[i], down_50_m: c.down_50_m[i],
+    up_13_34d: c.up_13_34d[i], down_13_34d: c.down_13_34d[i], t2108: c.t2108[i], sp_index: spxJ.has(date) ? hist.spx[spxJ.get(date)] : null,
+  })).slice(10);       // the first days have no 10-day ratio
+}
+
+// Regime calendar for the Trade Journal: every session since 2009 with its confirmed regime (3 sessions in a row). One shared load.
+let _calP = null;
+export function loadRegimeCalendar() {
+  if (!_calP) {
+    _calP = fetch(`${process.env.PUBLIC_URL || ""}/breadth_long_history.json?v=${new Date().toISOString().slice(0, 13)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((h) => {
+        if (!h?.dates?.length) return null;
+        const rows = addConfirmedPhase(computeBreadthCycle(rowsFromLongHistory(h)));
+        return { rows, dates: rows.map((r) => r.date) };
+      })
+      .catch(() => null);
+    _calP.then((v) => { if (!v) _calP = null; });
+  }
+  return _calP;
+}
+
+// The regime a trader could SEE when entering on `iso` (YYYY-MM-DD): the confirmed regime at the close of the last session strictly BEFORE that
+// date — the entry day's own breadth is only known after the close, so using it would be look-ahead. Null when there is no earlier session.
+export function regimeBefore(cal, iso) {
+  if (!cal?.dates?.length || !iso) return null;
+  const d = cal.dates;
+  let lo = 0, hi = d.length;                       // first index with date >= iso
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (d[mid] < iso) lo = mid + 1; else hi = mid; }
+  const r = cal.rows[lo - 1];
+  return r && r.confirmed ? { date: r.date, confirmed: r.confirmed, raw: r.phase, strength: r.strength, days: r.daysInRegime } : null;
+}
+
 // The most recent session's cycle reading (or null).
 export function latestBreadthCycle(rows) {
   const all = computeBreadthCycle(rows);
