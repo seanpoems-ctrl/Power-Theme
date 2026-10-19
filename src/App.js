@@ -3,6 +3,7 @@ import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
 import { parseOrderLog, isEntryRecord, matchOrderLog, loadOrderLog, saveOrderLog, recordKey } from "./orderLog";
+import { withEstimatedR, fixedRiskDollars, loadFixedRisk, saveFixedRisk } from "./fixedRisk";
 import BreadthStatus from "./BreadthStatus";
 import BreadthBacktest from "./BreadthBacktest";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
@@ -4265,7 +4266,7 @@ const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, show
                 )}
                 {showR && (
                   <td className={`px-3 py-2 text-[12px] font-mono ${s.rCount ? (s.rSum / s.rCount >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-600"}`}
-                    title={s.rCount ? `${s.rCount} trades with a stop (R multiple)` : "no trades with a stop price"}>
+                    title={s.rCount ? `${s.rCount} trades with an R multiple (a stop on record, or estimated when the fixed-risk estimate is on)` : "no trades with a stop price"}>
                     {s.rCount ? `${s.rSum / s.rCount >= 0 ? "+" : ""}${(s.rSum / s.rCount).toFixed(2)}R` : "—"}
                   </td>
                 )}
@@ -4281,6 +4282,13 @@ const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, show
 
 const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [trades, setTrades]         = useState(() => loadTrades());
+  // Fixed-risk R estimate (fixedRisk.js): trades with no stop get R = P&L ÷ (equity × risk %). `viewTrades` is what every read-only stat / table uses;
+  // `trades` stays the stored list that edits and imports work on, so an estimate is never saved onto a trade.
+  const [fixedRisk, setFixedRisk] = useState(() => loadFixedRisk());
+  const [showFixedRisk, setShowFixedRisk] = useState(false);
+  const updateFixedRisk = patch => setFixedRisk(prev => { const next = { ...prev, ...patch }; saveFixedRisk(next); return next; });
+  const riskDollars = fixedRiskDollars(fixedRisk);
+  const viewTrades = useMemo(() => withEstimatedR(trades, riskDollars, pnlOf), [trades, riskDollars]);
   const [filter, setFilter]         = useState("all");
   const [sortCol, setSortCol]       = useState(null);
   const [sortDir, setSortDir]       = useState("desc");
@@ -4926,7 +4934,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // Scoped to the active date-range filter (fFrom/fTo) instead of always
   // pulling from the whole journal, so these numbers match whatever period
   // the user has selected rather than all-time history.
-  const statsBase = trades.filter(t => {
+  const statsBase = viewTrades.filter(t => {
     if (fFrom && (!t.date || t.date < fFrom)) return false;
     if (fTo && (!t.date || t.date > fTo)) return false;
     return true;
@@ -5010,7 +5018,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     );
   };
 
-  const visible = trades.filter(t => {
+  const visible = viewTrades.filter(t => {
     if (filter === "winners" && !tradeIsWin(t)) return false;
     if (filter === "losers"  && !tradeIsLoss(t)) return false;
     if (filter === "open"    && t.exit_price) return false;
@@ -5097,7 +5105,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (tradeIsWin(t)) m[th].wins += 1;
     }
     return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
-  }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [viewTrades]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const bySetup = useMemo(() => {
     const m = {};
@@ -5109,7 +5117,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (tradeIsWin(t)) m[s].wins += 1;
     }
     return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
-  }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [viewTrades]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Closed trades grouped by the confirmed breadth regime at the prior close (plus average R). Order follows the regime cycle.
   const byRegime = useMemo(() => {
@@ -5127,7 +5135,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     }
     const order = ["Risk-on", "Recovery", "Caution", "Risk-off", "No data"];
     return order.filter(k => m[k]).map(k => [k, m[k]]);
-  }, [trades, regimeCal]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [viewTrades, regimeCal]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Grouped by the day of week the trade was CLOSED (exit_date) — same shape
   // as Performance by Theme, answering "which weekday am I actually good on."
@@ -5142,7 +5150,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (tradeIsWin(t)) m[dow].wins += 1;
     }
     return DAY_NAMES.slice(1, 6).map(d => [d, m[d]]).filter(([, v]) => v); // Mon-Fri only, trading days
-  }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [viewTrades]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Gemini analysis ──────────────────────────────────────────────────────────
   const runAI = async () => {
@@ -5202,7 +5210,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         {[
           { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}` : "—", cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
           { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${statsBase.length} total trades` },
-          { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R` },
+          { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R${closed.some(t => t.r_est) ? ` (${closed.filter(t => t.r_est && Number(t.r_multiple) !== 0).length} estimated)` : ""}` },
           { label: "Avg Hold", custom: (
               <>
                 <div className="text-[15px] font-bold font-mono leading-tight text-emerald-400">W {fmtHold(avgHoldWin)}</div>
@@ -5271,6 +5279,41 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       )}
 
       {/* ── Stock splits ─────────────────────────────────────────────────── */}
+      {/* ── Fixed-risk R estimate ───────────────────────────────────────── */}
+      {showFixedRisk && (
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl mb-5 px-4 py-3">
+          <div className="text-[12px] font-semibold text-zinc-300 mb-1">Estimated R for trades without a stop</div>
+          <div className="text-[11px] text-zinc-500 mb-3">
+            R needs a stop, and IBKR's statement doesn't list a stop that never executed. If every trade risks about the same fraction of your account, R ≈ P&amp;L ÷ (equity × risk %).
+            Real stop-based R is never replaced; estimates show as <span className="italic opacity-70">~1.8R</span> and are not saved on the trade.
+          </div>
+          <div className="flex items-end gap-3 flex-wrap">
+            <label className="flex items-center gap-2 text-[12px] text-zinc-300 cursor-pointer select-none">
+              <input type="checkbox" checked={fixedRisk.on} onChange={e => updateFixedRisk({ on: e.target.checked })}/>
+              Estimate R
+            </label>
+            <div>
+              <div className="text-[10px] text-zinc-600 mb-1">Account equity ($)</div>
+              <input type="text" inputMode="decimal" value={fixedRisk.equity} placeholder="e.g. 200000" onChange={e => updateFixedRisk({ equity: e.target.value })}
+                className="text-[12px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60 w-32 font-mono"/>
+            </div>
+            <div>
+              <div className="text-[10px] text-zinc-600 mb-1">Risk per trade (%)</div>
+              <input type="text" inputMode="decimal" value={fixedRisk.pct} onChange={e => updateFixedRisk({ pct: e.target.value })}
+                className="text-[12px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60 w-20 font-mono"/>
+            </div>
+            <div className="text-[12px] text-zinc-400 pb-1">
+              {riskDollars > 0
+                ? <>= <span className="font-mono text-zinc-200">${riskDollars.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span> per trade · <span className="font-mono text-zinc-200">{viewTrades.filter(t => t.r_est).length}</span> closed trade{viewTrades.filter(t => t.r_est).length === 1 ? "" : "s"} estimated</>
+                : <span className="text-zinc-600">{fixedRisk.on ? "Enter your account equity to switch it on." : "Off — trades without a stop show no R."}</span>}
+            </div>
+          </div>
+          <div className="text-[10.5px] text-zinc-600 mt-2">
+            One equity figure is used for every trade, so trades from long ago (when the account was a different size) are scaled to today's number. Trades where you risked more or less than this % will be off by the same ratio.
+          </div>
+        </div>
+      )}
+
       {showSplits && (
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl mb-5 overflow-hidden">
           <div className="px-4 py-3 border-b border-zinc-800/60">
@@ -5424,6 +5467,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           title="Pick order_log.jsonl written by the IB Order Panel (IBKR Order Panel / Order Logs folder). Fills in each trade's Stop from the stop orders the panel sent — IBKR's statement doesn't list a stop that never executed — so R/R can be computed. Only trades without a stop are filled; run it before or after the IBKR import."
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
           ⬆ Import Order Log
+        </button>
+        <button onClick={() => setShowFixedRisk(v => !v)}
+          title="Estimate R for trades that have no stop on record, assuming each risked a fixed % of your account"
+          className={`flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium rounded-lg border transition-colors ${riskDollars > 0 ? "bg-blue-500/15 text-blue-400 border-blue-500/30" : showFixedRisk ? "bg-zinc-700/60 text-zinc-200 border-zinc-600" : "bg-zinc-800 text-zinc-300 border-zinc-700/60 hover:bg-zinc-700/60"}`}>
+          ≈ Estimated R{riskDollars > 0 ? ` (${fixedRisk.pct}%)` : ""}
         </button>
         <button onClick={handleExportJournal}
           title="Download your journal (trades + notebook) as a JSON file — use this to move it to another laptop"
@@ -5707,8 +5755,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     <InlineText value={t.fees} onChange={v => updateField(t.id, "fees", v)} placeholder="Fees" mono
                       cls="text-zinc-500"/>
                   </td>
-                  <td className={`px-2 py-1.5 text-[12px] font-mono font-bold ${rCls(t.r_multiple)}`}>
-                    {t.r_multiple ? `${parseFloat(t.r_multiple) >= 0 ? "+" : ""}${t.r_multiple}R` : "—"}
+                  <td className={`px-2 py-1.5 text-[12px] font-mono font-bold ${rCls(t.r_multiple)} ${t.r_est ? "opacity-60 italic" : ""}`}
+                    title={t.r_est ? `Estimated: P&L ÷ ${fixedRisk.pct}% of $${fixedRisk.equity} (no stop on record). Add a stop to get the real R.` : undefined}>
+                    {t.r_multiple ? `${t.r_est ? "~" : ""}${parseFloat(t.r_multiple) >= 0 ? "+" : ""}${t.r_multiple}R` : "—"}
                   </td>
                   <td className="px-2 py-1.5">
                     <InlineSelect value={t.grade} options={GRADE_OPTS} onChange={v => updateField(t.id, "grade", v)}
