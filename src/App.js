@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from 
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
+import { parseOrderLog, isEntryRecord, matchOrderLog, loadOrderLog, saveOrderLog, recordKey } from "./orderLog";
 import BreadthStatus from "./BreadthStatus";
 import BreadthBacktest from "./BreadthBacktest";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
@@ -2458,6 +2459,25 @@ function calcDerived(t) {
   return out;
 }
 
+// Fill in trade stops from IB Order Panel order-log records (orderLog.js). Only trades without a stop are touched; stop_used becomes "Panel". Only R is
+// recomputed (same formula as reconcileFromLedger) — not through calcDerived, which would re-derive P&L from the rounded prices.
+function applyOrderLog(trades, records) {
+  const m = matchOrderLog(trades, records);
+  if (!m.updates.size) return { ...m, trades, applied: 0 };
+  const out = trades.map(t => {
+    if (!m.updates.has(t.id)) return t;
+    const stop_price = _normalizePriceStr(m.updates.get(t.id));
+    const entryN = parseFloat(t.entry_price), stopN = _avgStop(stop_price), pnlN = parseFloat(t.pnl_dollars), shN = parseFloat(t.shares);
+    const next = { ...t, stop_price, stop_used: "Panel" };
+    if (!isNaN(entryN) && !isNaN(stopN) && Math.abs(entryN - stopN) > 0 && !isNaN(pnlN)) {
+      const risk = Math.abs(entryN - stopN) * (isNaN(shN) ? 1 : shN);
+      if (risk > 0) next.r_multiple = (pnlN / risk).toFixed(2);
+    }
+    return next;
+  });
+  return { ...m, trades: out, applied: m.updates.size };
+}
+
 // Dollar P&L of a trade. Stored pnl_dollars is (exit − entry) × contracts — right for stocks, but a futures contract moves dollars per POINT, so
 // micro / standard futures (MNQ, M6B, MGC...) are scaled by their contract multiplier here at display / aggregation time (futuresMultipliers.js).
 // NaN when the trade has no P&L yet. R multiples and P&L % are unaffected (risk and profit scale together).
@@ -2826,7 +2846,7 @@ function deriveIbkrTrades(execs, categoryThemeMap = {}) {
   return trades.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 }
 
-const STOP_OPTS = ["ATR", "LOD", "Manual"];
+const STOP_OPTS = ["ATR", "LOD", "Manual", "Panel"];
 const GRADE_OPTS = ["A", "B", "C", "D"];
 const GRADE_CLS = { A: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30", B: "text-blue-400 bg-blue-500/10 border-blue-500/30", C: "text-amber-400 bg-amber-500/10 border-amber-500/30", D: "text-red-400 bg-red-500/10 border-red-500/30" };
 
@@ -4270,6 +4290,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [lodBackfillLoading, setLodBackfillLoading] = useState(false);
   const fileInputRef                = useRef(null);
   const journalFileInputRef         = useRef(null);
+  const orderLogInputRef = useRef(null);
   const [aiResult, setAiResult]     = useState(null);
   const [aiLoading, setAiLoading]   = useState(false);
   const [allTickers, setAllTickers] = useState([]);
@@ -4466,8 +4487,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         removed++;
       }
     }
-    persist([...byId.values()]);
-    return { added, closed, updated, removed };
+    const logged = applyOrderLog([...byId.values()], loadOrderLog());
+    persist(logged.trades);
+    return { added, closed, updated, removed, stops: logged.applied };
   };
 
   const _splitMsg = (stats, prefix) => {
@@ -4476,6 +4498,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     if (stats.closed) parts.push(`${stats.closed} newly closed`);
     if (stats.updated) parts.push(`${stats.updated} updated`);
     if (stats.removed) parts.push(`${stats.removed} stale duplicate${stats.removed === 1 ? "" : "s"} removed`);
+    if (stats.stops) parts.push(`${stats.stops} stop${stats.stops === 1 ? "" : "s"} filled in from the order log`);
     setImportMsg(`${prefix}${parts.length ? " " + parts.join(", ") + "." : " No trades affected."}`);
   };
 
@@ -4725,7 +4748,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       // trade the user manually closed stays closed, and phantom trades
       // left behind by an earlier partial import get cleaned up — see
       // reconcileFromLedger for the full details of each of those steps.
-      const { added, closed, updated, removed } = reconcileFromLedger(mergedExecs);
+      const { added, closed, updated, removed, stops } = reconcileFromLedger(mergedExecs);
 
       const parts = [];
       if (newExecCount) parts.push(`${newExecCount} new execution${newExecCount === 1 ? "" : "s"} synced`);
@@ -4733,6 +4756,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (closed) parts.push(`${closed} newly closed`);
       if (updated) parts.push(`${updated} updated`);
       if (removed) parts.push(`${removed} stale duplicate${removed === 1 ? "" : "s"} removed`);
+      if (stops) parts.push(`${stops} stop${stops === 1 ? "" : "s"} filled in from the order log`);
       if (newIncomeCount) parts.push(`${newIncomeCount} new dividend/securities-lending record${newIncomeCount === 1 ? "" : "s"}`);
       setImportMsg(parts.length ? `${parts.join(", ")}.` : "No changes — this file's executions are already fully reconciled.");
     };
@@ -4785,6 +4809,32 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  // Import order_log.jsonl from the IB Order Panel: fills each matching trade's Stop (so R can be computed). Records are also kept in the browser, so a
+  // log imported before the matching IBKR statement is applied when that statement is imported.
+  const handleImportOrderLog = async (e) => {
+    const files = Array.from(e.target.files || []);
+    e.target.value = ""; // allow re-selecting the same file
+    if (!files.length) return;
+    let records = [];
+    try { for (const f of files) records = records.concat(parseOrderLog(await f.text())); }
+    catch { setImportMsg("Couldn't read that file."); return; }
+    if (!records.length) { setImportMsg("No orders found in that file — expected order_log.jsonl from the IB Order Panel."); return; }
+    const res = applyOrderLog(trades, saveOrderLog(records));
+    if (res.applied) persist(res.trades);
+    const thisFile = new Set(records.map(recordKey));
+    const waiting = res.unmatched.filter(u => thisFile.has(recordKey(u.rec)));
+    const noStop = records.length - records.filter(isEntryRecord).length;
+    const parts = [];
+    if (res.applied) {
+      const names = [...new Set(res.matched.map(x => x.trade.ticker))];
+      parts.push(`${res.applied} stop${res.applied === 1 ? "" : "s"} filled in (${names.slice(0, 6).join(", ")}${names.length > 6 ? ", …" : ""})`);
+    }
+    if (waiting.length) parts.push(`${waiting.length} order${waiting.length === 1 ? "" : "s"} saved with no matching trade yet — applied when that trade is imported`);
+    if (res.skippedHasStop) parts.push(`${res.skippedHasStop} trade${res.skippedHasStop === 1 ? " already has" : "s already have"} a stop — left alone`);
+    if (noStop) parts.push(`${noStop} logged order${noStop === 1 ? " has" : "s have"} no entry stop`);
+    setImportMsg(parts.length ? `Order log: ${parts.join("; ")}.` : "Order log: nothing new to apply.");
   };
 
   const handleImportJournalFile = (e) => {
@@ -5328,6 +5378,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         <div className="flex-1"/>
         <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImportFile} className="hidden"/>
         <input ref={journalFileInputRef} type="file" accept=".json,application/json" onChange={handleImportJournalFile} className="hidden"/>
+        <input ref={orderLogInputRef} type="file" multiple accept=".jsonl,.json,.txt,.log" onChange={handleImportOrderLog} className="hidden"/>
         {trades.some(t => !t.theme) && (
           <button onClick={fillMissingThemes}
             className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
@@ -5368,6 +5419,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
           ⬆ Import IBKR CSV
+        </button>
+        <button onClick={() => { setImportMsg(null); orderLogInputRef.current?.click(); }}
+          title="Pick order_log.jsonl written by the IB Order Panel (IBKR Order Panel / Order Logs folder). Fills in each trade's Stop from the stop orders the panel sent — IBKR's statement doesn't list a stop that never executed — so R/R can be computed. Only trades without a stop are filled; run it before or after the IBKR import."
+          className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
+          ⬆ Import Order Log
         </button>
         <button onClick={handleExportJournal}
           title="Download your journal (trades + notebook) as a JSON file — use this to move it to another laptop"
