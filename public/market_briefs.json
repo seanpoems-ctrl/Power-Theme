@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-19 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech-Led US Outperformance",
+    "spy_price": 766.48,
+    "spy_change_pct": 0.42,
+    "vix": 18.44,
+    "hy_oas": 3.31,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 42.2,
+    "mmth": 52.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CLF",
+          "company": "Cleveland-Cliffs Inc.",
+          "reason": "Anticipation of strong Q3 profitability, driven by favorable commodity prices and operational efficiency, positions the stock for continued upside."
+        },
+        {
+          "ticker": "CRWV",
+          "company": "CrowdWave Technologies Inc.",
+          "reason": "Goldman Sachs' upgrade to Buy today signals strong institutional confidence in the company's growth trajectory and valuation."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Continued focus on its pharmaceutical pipeline and consumer health spin-off implications drive steady, but largely priced-in, investor interest."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-19 13:25 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Price action driven by continued speculative interest and options flow following recent AI-related product announcements, rather than fresh fundamental news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-28 14:34 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Caution Spreads / Volatility Rises",
-    "spy_price": 766.74,
-    "spy_change_pct": -0.6,
-    "vix": 15.88,
-    "hy_oas": 2.93,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 28.1,
-    "mmth": 49.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple Inc. saw strong gains today following an analyst upgrade highlighting robust demand for its latest iPhone lineup ahead of the holiday season."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon.com Inc. climbed after announcing a significant expansion of its AWS cloud infrastructure in a key international market, pointing to strong future growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA Corp. experienced continued interest, primarily driven by persistent technical buying and momentum from thematic AI-focused funds rather than any fresh fundamental news."
         }
       ]
     }
