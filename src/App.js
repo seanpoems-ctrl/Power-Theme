@@ -4295,6 +4295,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [fSide, setFSide]           = useState("");
   const [fFrom, setFFrom]           = useState("");
   const [fTo, setFTo]               = useState("");
+  const [fExitFrom, setFExitFrom]   = useState("");   // sold-date range (the From / To above filter the BUY date)
+  const [fExitTo, setFExitTo]       = useState("");
   const [selectedIds, setSelectedIds] = useState(() => new Set());
 
   // Same stock_db.json the search bar reads, so a ticker resolves to the same
@@ -4970,10 +4972,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     if (fSide && t.side !== fSide) return false;
     if (fFrom && (!t.date || t.date < fFrom)) return false;
     if (fTo && (!t.date || t.date > fTo)) return false;
+    if (fExitFrom && (!t.exit_date || t.exit_date < fExitFrom)) return false;      // open trades have no sell date -> hidden while a sold-date filter is set
+    if (fExitTo && (!t.exit_date || t.exit_date > fExitTo)) return false;
     return true;
   });
-  const advancedFiltersActive = !!(fTicker || fSetup || fRegime || fGrade || fSide || fFrom || fTo);
-  const clearAdvancedFilters = () => { setFTicker(""); setFSetup(""); setFRegime(""); setFGrade(""); setFSide(""); setFFrom(""); setFTo(""); };
+  const advancedFiltersActive = !!(fTicker || fSetup || fRegime || fGrade || fSide || fFrom || fTo || fExitFrom || fExitTo);
+  const clearAdvancedFilters = () => { setFTicker(""); setFSetup(""); setFRegime(""); setFGrade(""); setFSide(""); setFFrom(""); setFTo(""); setFExitFrom(""); setFExitTo(""); };
 
   // Sortable columns — numeric ones compare as numbers (blanks always sort
   // last regardless of direction); everything else compares as text. Date
@@ -4984,7 +4988,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const handleSort = (col) => {
     if (sortCol === col) { setSortDir(d => d === "asc" ? "desc" : "asc"); return; }
     setSortCol(col);
-    setSortDir(NUMERIC_SORT_COLS.has(col) ? "desc" : "asc");
+    setSortDir(NUMERIC_SORT_COLS.has(col) || col === "exit_date" ? "desc" : "asc");      // sell date: newest first
   };
   const sortedVisible = useMemo(() => {
     if (!sortCol) return visible;
@@ -4995,6 +4999,10 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (sortCol === "date") {
         av = `${a.date || ""} ${a.entry_time || ""}`.trim();
         bv = `${b.date || ""} ${b.entry_time || ""}`.trim();
+      }
+      if (sortCol === "exit_date") {          // sell date + time; open trades (no sell date) always sort last
+        av = a.exit_date ? `${a.exit_date} ${a.exit_time || ""}`.trim() : "";
+        bv = b.exit_date ? `${b.exit_date} ${b.exit_time || ""}`.trim() : "";
       }
       if (numeric) {
         // stop_price can hold a comma-separated scaled stop-out — sort by
@@ -5402,10 +5410,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             <option value="short">Short only</option>
           </select>
           <span className="text-[11px] text-zinc-600">Entered</span>
+          <span className="text-[10px] text-zinc-500 ml-1" title="Filters by the date you bought (entry date)">Bought</span>
           <input type="date" value={fFrom} onChange={e => setFFrom(e.target.value)}
             className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none"/>
           <span className="text-[11px] text-zinc-600">–</span>
           <input type="date" value={fTo} onChange={e => setFTo(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none"/>
+          <span className="text-[10px] text-zinc-500 ml-2" title="Filters by the date you sold (exit date); trades still open are hidden while this is set">Sold</span>
+          <input type="date" value={fExitFrom} onChange={e => setFExitFrom(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none"/>
+          <span className="text-[11px] text-zinc-600">–</span>
+          <input type="date" value={fExitTo} onChange={e => setFExitTo(e.target.value)}
             className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none"/>
           {advancedFiltersActive && (
             <button onClick={clearAdvancedFilters} className="text-[11px] text-zinc-500 hover:text-zinc-300 ml-1">Clear</button>
@@ -5440,7 +5455,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                 <TH col="ticker">Ticker</TH>
                 <TH col="theme">Theme</TH>
                 <TH col="entry_price">Entry</TH>
-                <TH col="exit_price">Exit</TH>
+                <th className="px-2 py-2 text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap select-none text-zinc-500">
+                  {[["exit_price", "Exit", "Sort by exit price"], ["exit_date", "Sold", "Sort by the date you sold"]].map(([c, label, tip], k) => (
+                    <React.Fragment key={c}>
+                      {k > 0 && <span className="mx-1 text-zinc-700">·</span>}
+                      <span onClick={() => handleSort(c)} title={tip}
+                        className={`cursor-pointer hover:text-zinc-300 ${sortCol === c ? "text-blue-400" : ""}`}>
+                        {label}{sortCol === c ? <span className="ml-0.5">{sortDir === "asc" ? "↑" : "↓"}</span> : <span className="ml-0.5 text-zinc-700">⇅</span>}
+                      </span>
+                    </React.Fragment>
+                  ))}
+                </th>
                 <TH col="shares">Shares</TH>
                 <TH col="stop_price">Stop</TH>
                 <TH col="pnl_dollars">P&L $</TH>
