@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-19 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Orderly De-risking, Growth Concerns",
+    "spy_price": 763.25,
+    "spy_change_pct": -1.11,
+    "vix": 18.52,
+    "hy_oas": 3.23,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 43.4,
+    "mmth": 54.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Announced a groundbreaking AI chip partnership, providing a strong counter-narrative to broader tech sector weakness."
+        },
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Reported robust clinical trial results for a new therapeutic, bolstering future growth prospects in a risk-off environment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Continues to face headwinds from falling crude oil prices, reflecting ongoing concerns about global demand dynamics."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-16 19:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil is seeing continued momentum from the significant overnight rally in crude oil prices, reflecting broader sector strength without a specific new company catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-25 19:32 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Accumulation",
-    "spy_price": 771.35,
-    "spy_change_pct": 0.54,
-    "vix": 14.87,
-    "hy_oas": 2.8,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 31.9,
-    "mmth": 51.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AKAM",
-          "company": "Akamai Technologies",
-          "reason": "The company rallied following news of a significant AI Cloud deal signed with Anthropic, positioning it as a key beneficiary in the expanding AI infrastructure landscape."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp",
-          "reason": "Microsoft stands to benefit from increasing enterprise spending on AI infrastructure and cloud services, a trend underscored by today's sector-specific AI cloud deal news."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Trading activity suggests continuation of recent momentum or technical flows, as no fresh fundamental catalysts were reported today to drive conviction."
         }
       ]
     }
