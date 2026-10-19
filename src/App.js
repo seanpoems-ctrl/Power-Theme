@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
+import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
 import BreadthStatus from "./BreadthStatus";
 import BreadthBacktest from "./BreadthBacktest";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
@@ -2457,19 +2458,27 @@ function calcDerived(t) {
   return out;
 }
 
+// Dollar P&L of a trade. Stored pnl_dollars is (exit − entry) × contracts — right for stocks, but a futures contract moves dollars per POINT, so
+// micro / standard futures (MNQ, M6B, MGC...) are scaled by their contract multiplier here at display / aggregation time (futuresMultipliers.js).
+// NaN when the trade has no P&L yet. R multiples and P&L % are unaffected (risk and profit scale together).
+function pnlOf(t) {
+  const p = parseFloat(t.pnl_dollars);
+  return Number.isFinite(p) ? p * futuresMultiplier(t.ticker) : NaN;
+}
+
 // Win/loss for a closed trade: prefer R-multiple (risk-adjusted) when a stop
 // was recorded, otherwise fall back to raw P&L — imported trades (no stop
 // data) would otherwise never count as a win/loss anywhere in the journal.
 function tradeIsWin(t) {
   const r = parseFloat(t.r_multiple);
   if (!isNaN(r)) return r > 0;
-  const p = parseFloat(t.pnl_dollars);
+  const p = pnlOf(t);
   return !isNaN(p) && p > 0;
 }
 function tradeIsLoss(t) {
   const r = parseFloat(t.r_multiple);
   if (!isNaN(r)) return r < 0;
-  const p = parseFloat(t.pnl_dollars);
+  const p = pnlOf(t);
   return !isNaN(p) && p < 0;
 }
 
@@ -3397,7 +3406,7 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
     const pts = [];
     const agg = {};
     for (const t of closedSorted) {
-      const pnl = parseFloat(t.pnl_dollars) || 0;
+      const pnl = pnlOf(t) || 0;
       running += pnl;
       pts.push({ date: t.exit_date, cum: running });
       const bucket = (agg[t.exit_date] ||= { pnl: 0, trades: [] });
@@ -3652,7 +3661,7 @@ const TradeCalendarView = ({ trades, month, onMonthChange, onDayClick, selectedD
 
   let monthPnl = 0, monthTradeCount = 0;
   for (let d = 1; d <= daysInMonth; d++) {
-    for (const t of (byDay[`${y}-${pad2(m + 1)}-${pad2(d)}`] || [])) { monthPnl += parseFloat(t.pnl_dollars) || 0; monthTradeCount++; }
+    for (const t of (byDay[`${y}-${pad2(m + 1)}-${pad2(d)}`] || [])) { monthPnl += pnlOf(t) || 0; monthTradeCount++; }
   }
 
   return (
@@ -3690,7 +3699,7 @@ const TradeCalendarView = ({ trades, month, onMonthChange, onDayClick, selectedD
           if (d == null) return <div key={i}/>;
           const key = `${y}-${pad2(m + 1)}-${pad2(d)}`;
           const dayTrades = byDay[key] || [];
-          const pnl = dayTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0);
+          const pnl = dayTrades.reduce((s, t) => s + (pnlOf(t) || 0), 0);
           const hasTrades = dayTrades.length > 0;
           const isSelected = selectedDay === key;
           const bg = !hasTrades ? "bg-zinc-800/20" : pnl > 0 ? "bg-emerald-500/20" : pnl < 0 ? "bg-red-500/20" : "bg-zinc-700/30";
@@ -4110,8 +4119,8 @@ const TradeChartModal = ({ trade, onClose }) => {
               {trade.exit_fills?.length > 1 && <span className="text-zinc-600"> (avg of {trade.exit_fills.length} fills)</span>}
             </span>
             {trade.pnl_dollars !== "" && trade.pnl_dollars != null && (
-              <span className={`text-[12px] font-mono font-bold ${parseFloat(trade.pnl_dollars) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                {parseFloat(trade.pnl_dollars) >= 0 ? "+" : ""}${parseFloat(trade.pnl_dollars).toFixed(0)}
+              <span className={`text-[12px] font-mono font-bold ${pnlOf(trade) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                {pnlOf(trade) >= 0 ? "+" : ""}${pnlOf(trade).toFixed(0)}
               </span>
             )}
             <a href={`https://www.tradingview.com/chart/?symbol=${trade.ticker}`} target="_blank" rel="noreferrer"
@@ -4199,7 +4208,7 @@ const TradeChartModal = ({ trade, onClose }) => {
 
 // Win/loss/P&L breakdown table — same shape reused for Theme, Setup, and Day
 // of Week grouping, so all three stay visually and numerically consistent.
-const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, footer = null }) => {
+const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, showPct = false, footer = null }) => {
   if (!rows.length) return null;
   return (
     <div className={`bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden ${bare ? "" : "mb-5"}`}>
@@ -4210,7 +4219,7 @@ const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, foot
         <table className="w-full text-left">
           <thead className="border-b border-zinc-800/40">
             <tr>
-              {[labelHeader, "Trades", "Wins", "Win %", "Total P&L", "Avg P&L", ...(showR ? ["Avg R"] : [])].map(h => (
+              {[labelHeader, "Trades", "Wins", "Win %", "Total P&L", "Avg P&L", ...(showPct ? ["Avg %"] : []), ...(showR ? ["Avg R"] : [])].map(h => (
                 <th key={h} className="px-3 py-2 text-[11px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
               ))}
             </tr>
@@ -4228,6 +4237,12 @@ const PerfTable = ({ title, rows, labelHeader, bare = false, showR = false, foot
                 <td className={`px-3 py-2 text-[12px] font-mono ${s.count ? (s.pnl / s.count >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-500"}`}>
                   {s.count ? `${s.pnl / s.count >= 0 ? "+" : ""}$${(s.pnl / s.count).toFixed(0)}` : "—"}
                 </td>
+                {showPct && (
+                  <td className={`px-3 py-2 text-[12px] font-mono ${s.pctCount ? (s.pctSum / s.pctCount >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-600"}`}
+                    title="Average percent move per trade — comparable across stocks and futures, unlike dollars">
+                    {s.pctCount ? `${s.pctSum / s.pctCount >= 0 ? "+" : ""}${(s.pctSum / s.pctCount).toFixed(2)}%` : "—"}
+                  </td>
+                )}
                 {showR && (
                   <td className={`px-3 py-2 text-[12px] font-mono ${s.rCount ? (s.rSum / s.rCount >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-600"}`}
                     title={s.rCount ? `${s.rCount} trades with a stop (R multiple)` : "no trades with a stop price"}>
@@ -4883,7 +4898,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const d = new Date(t.date);
     return d.getFullYear() === today.getFullYear() && d.getMonth() === today.getMonth();
   });
-  const pnlMTD   = mtd.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0);
+  const pnlMTD   = mtd.reduce((s, t) => s + (pnlOf(t) || 0), 0);
   const rMults   = closed.map(t => parseFloat(t.r_multiple)).filter(v => !isNaN(v) && v !== 0);
   const avgR     = rMults.length ? (rMults.reduce((a, v) => a + v, 0) / rMults.length) : null;
 
@@ -4891,8 +4906,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // one-number "is this system profitable per trade" stat.
   const winTrades  = closed.filter(tradeIsWin);
   const lossTrades = closed.filter(tradeIsLoss);
-  const avgWin  = winTrades.length  ? winTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / winTrades.length : 0;
-  const avgLoss = lossTrades.length ? Math.abs(lossTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / lossTrades.length) : 0;
+  const avgWin  = winTrades.length  ? winTrades.reduce((s, t) => s + (pnlOf(t) || 0), 0) / winTrades.length : 0;
+  const avgLoss = lossTrades.length ? Math.abs(lossTrades.reduce((s, t) => s + (pnlOf(t) || 0), 0) / lossTrades.length) : 0;
   const winRate = closed.length ? winTrades.length / closed.length : 0;
   const lossRate = closed.length ? lossTrades.length / closed.length : 0;
   const expectancy = closed.length ? (winRate * avgWin) - ((1 - winRate) * avgLoss) : null;
@@ -4930,6 +4945,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // so it covers old and imported trades and follows any later change to the regime rules.
   const regimeOf = t => (regimeCal && t.date ? regimeBefore(regimeCal, t.date) : null);
   const regimeLabel = t => { const r = regimeOf(t); return r ? REGIMES[r.confirmed].label : null; };
+  const regimeChip = t => {
+    const r = regimeOf(t);
+    if (!r) return null;
+    const reg = REGIMES[r.confirmed];
+    return (
+      <span title={`Breadth regime when you entered: ${reg.label} (${r.confirmed}), day ${r.days}, strength ${r.strength != null ? r.strength.toFixed(0) : "—"} — confirmed regime at the ${r.date} close, the last session before ${t.date}`}
+        className="inline-flex items-center gap-1 text-[9px] font-medium px-1.5 py-px rounded border whitespace-nowrap leading-tight"
+        style={{ color: reg.color, borderColor: `${reg.color}66`, background: `${reg.color}1a` }}>
+        {reg.label}<span className="opacity-60">d{r.days}</span>
+      </span>
+    );
+  };
 
   const visible = trades.filter(t => {
     if (filter === "winners" && !tradeIsWin(t)) return false;
@@ -4964,6 +4991,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const numeric = NUMERIC_SORT_COLS.has(sortCol);
     return [...visible].sort((a, b) => {
       let av = a[sortCol], bv = b[sortCol];
+      if (sortCol === "pnl_dollars") { av = pnlOf(a); bv = pnlOf(b); }      // futures scaled by contract multiplier
       if (sortCol === "date") {
         av = `${a.date || ""} ${a.entry_time || ""}`.trim();
         bv = `${b.date || ""} ${b.entry_time || ""}`.trim();
@@ -5006,7 +5034,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     for (const t of closed) {
       const th = t.theme || "Unthemed";
       if (!m[th]) m[th] = { pnl: 0, count: 0, wins: 0 };
-      m[th].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[th].pnl   += pnlOf(t) || 0;
       m[th].count += 1;
       if (tradeIsWin(t)) m[th].wins += 1;
     }
@@ -5018,7 +5046,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     for (const t of closed) {
       const s = t.setup || "Untagged";
       if (!m[s]) m[s] = { pnl: 0, count: 0, wins: 0 };
-      m[s].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[s].pnl   += pnlOf(t) || 0;
       m[s].count += 1;
       if (tradeIsWin(t)) m[s].wins += 1;
     }
@@ -5030,12 +5058,14 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const m = {};
     for (const t of closed) {
       const label = regimeLabel(t) || "No data";
-      if (!m[label]) m[label] = { pnl: 0, count: 0, wins: 0, rSum: 0, rCount: 0 };
-      m[label].pnl   += parseFloat(t.pnl_dollars) || 0;
+      if (!m[label]) m[label] = { pnl: 0, count: 0, wins: 0, rSum: 0, rCount: 0, pctSum: 0, pctCount: 0 };
+      m[label].pnl   += pnlOf(t) || 0;
       m[label].count += 1;
       if (tradeIsWin(t)) m[label].wins += 1;
       const r = parseFloat(t.r_multiple);
       if (Number.isFinite(r)) { m[label].rSum += r; m[label].rCount += 1; }
+      const pc = parseFloat(t.pnl_pct);
+      if (Number.isFinite(pc)) { m[label].pctSum += pc; m[label].pctCount += 1; }
     }
     const order = ["Risk-on", "Recovery", "Caution", "Risk-off", "No data"];
     return order.filter(k => m[k]).map(k => [k, m[k]]);
@@ -5049,7 +5079,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (!t.exit_date) continue;
       const dow = DAY_NAMES[new Date(t.exit_date + "T00:00:00").getDay()];
       if (!m[dow]) m[dow] = { pnl: 0, count: 0, wins: 0 };
-      m[dow].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[dow].pnl   += pnlOf(t) || 0;
       m[dow].count += 1;
       if (tradeIsWin(t)) m[dow].wins += 1;
     }
@@ -5063,7 +5093,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     try {
       const last20 = trades.slice(0, 20).map(t => ({
         ticker: t.ticker, theme: t.theme, stop_used: t.stop_used,
-        pnl_dollars: t.pnl_dollars, r_multiple: t.r_multiple, grade: t.grade,
+        pnl_dollars: Number.isFinite(pnlOf(t)) ? pnlOf(t).toFixed(2) : t.pnl_dollars, r_multiple: t.r_multiple, grade: t.grade,
       }));
       const prompt = `You are a trading coach analysing a trader's journal. Given the last 20 trades as JSON, provide: (1) Win rate and avg R-multiple by theme, (2) avg R-multiple by stop mode (ATR / LOD / Manual), (3) a concise one-paragraph actionable recommendation. Be specific. Do not repeat or restate the input data in your response — respond only with the numbered analysis, no preamble, no code blocks.\n\nTrades:\n${JSON.stringify(last20, null, 2)}`;
       // Shared with Market Situation / ETF Rotation Brief (geminiGenerateText)
@@ -5529,6 +5559,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">
                     {t.date || "—"}{" "}
                     <InlineText value={t.entry_time} onChange={v => updateField(t.id, "entry_time", v)} placeholder="hh:mm" cls="text-zinc-600"/>
+                    <div className="mt-0.5">{regimeChip(t)}</div>
                   </td>
                   <td className="px-2 py-1.5 text-[12px] font-mono font-semibold whitespace-nowrap">
                     {t.ticker
@@ -5554,18 +5585,6 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                       <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
                       <InlineSelect value={t.setup} options={SETUP_OPTS} onChange={v => updateField(t.id, "setup", v)} placeholder="Setup"
                         cls="text-[10px] font-medium px-1.5 py-0.5 rounded border text-violet-400 bg-violet-500/10 border-violet-500/20"/>
-                      {(() => {
-                        const r = regimeOf(t);
-                        if (!r) return null;
-                        const reg = REGIMES[r.confirmed];
-                        return (
-                          <span title={`Breadth regime when you entered: ${reg.label} (${r.confirmed}), day ${r.days}, strength ${r.strength != null ? r.strength.toFixed(0) : "—"} — confirmed regime at the ${r.date} close, the last session before ${t.date}`}
-                            className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded border whitespace-nowrap"
-                            style={{ color: reg.color, borderColor: `${reg.color}66`, background: `${reg.color}1a` }}>
-                            {reg.label}<span className="opacity-60">d{r.days}</span>
-                          </span>
-                        );
-                      })()}
                     </div>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
@@ -5596,8 +5615,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                         cls="text-zinc-400"/>
                     </div>
                   </td>
-                  <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_dollars)}`}>
-                    {t.pnl_dollars ? `${parseFloat(t.pnl_dollars) >= 0 ? "+" : ""}$${parseFloat(t.pnl_dollars).toFixed(0)}` : "—"}
+                  <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_dollars)}`}
+                    title={futuresInfo(t.ticker) ? `${futuresInfo(t.ticker).name}: dollar P&L uses the contract multiplier ×${futuresInfo(t.ticker).mult} (price move × contracts × ${futuresInfo(t.ticker).mult})` : undefined}>
+                    {t.pnl_dollars ? `${pnlOf(t) >= 0 ? "+" : ""}$${pnlOf(t).toFixed(0)}` : "—"}
                   </td>
                   <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_pct)}`}>
                     {t.pnl_pct ? `${parseFloat(t.pnl_pct) >= 0 ? "+" : ""}${parseFloat(t.pnl_pct).toFixed(2)}%` : "—"}
@@ -5655,7 +5675,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         <PerfTable title="Performance by Setup" rows={bySetup} labelHeader="Setup" bare/>
         <PerfTable title="Performance by Day of Week" rows={byDayOfWeek} labelHeader="Day" bare/>
       </div>
-      <PerfTable title="Performance by Market Regime (confirmed breadth regime at the close before entry)" rows={byRegime} labelHeader="Regime" showR
+      <PerfTable title="Performance by Market Regime (confirmed breadth regime at the close before entry)" rows={byRegime} labelHeader="Regime" showR showPct
         footer={<p className="px-4 py-2 text-[11px] text-zinc-600 leading-snug border-t border-zinc-800/40">
           Auto-tagged from each trade's entry date (see the Breadth Cycle page). Under about 30 trades per regime these are hints, not conclusions — and log skipped or early-exit trades too, or the edge looks bigger than it is.
         </p>}/>
