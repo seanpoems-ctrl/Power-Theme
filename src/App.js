@@ -12953,6 +12953,10 @@ const MINI_TIMEFRAME_OPTS = [
   { key: "M",  label: "1M" },
 ];
 const _miniIsIntraday = tf => tf !== "D" && tf !== "W" && tf !== "M";
+// How far back Yahoo (via the bar proxy) will serve each timeframe, and how much one "load older" request asks for. Intraday has a hard
+// lookback (1m ≈ 30 days and ≤ 8 days per request, 5/15/30m ≈ 60 days, 1H ≈ 2 years); daily / weekly / monthly go back to the listing date.
+const MINI_MAX_BACK_DAYS = { "1": 29, "5": 59, "15": 59, "30": 59, "60": 725 };           // missing = unlimited
+const MINI_CHUNK_DAYS    = { "1": 7, "5": 30, "15": 30, "30": 30, "60": 180, D: 1825, W: 3650, M: 10000 };
 
 // One card's own Lightweight Charts instance (same unrestricted library +
 // cloudflare-worker proxy as TradeChartModal). The TradingView public embed
@@ -13123,6 +13127,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   const onExpandRef = useRef(onExpand);
   onExpandRef.current = onExpand;
   const lastTapRef = useRef(0);
+  const touchedRef = useRef(false);   // true once the user has scrolled / zoomed / dragged this chart — only then are older bars fetched (grid cards stay light)
   const screenerMap = React.useContext(ScreenerCtx);
   const screenerRef = useRef(screenerMap);
   screenerRef.current = screenerMap;
@@ -13151,6 +13156,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
     if (!TV_PROXY_URL || !containerRef.current) return;
     let cancelled = false;
     setStatus("loading");
+    touchedRef.current = false;
 
     const today = new Date().toISOString().slice(0, 10);
     // Daily fetches ~2 years so the 200-day average has history; the view below still opens on the last ~190 bars.
@@ -13176,7 +13182,8 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         const chart = createChart(containerRef.current, {
           layout: { background: { color: "transparent" }, textColor: MINI_CHART_THEME.text, fontSize: 14 },
           grid: { vertLines: { color: "transparent" }, horzLines: { color: "transparent" } },
-          timeScale: { borderColor: MINI_CHART_THEME.axis, timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20 },
+          // minBarSpacing: the default (0.5 px/bar) stops zooming out at ~1,400 candles in a 700 px chart — lower it so all loaded history can be shown.
+          timeScale: { borderColor: MINI_CHART_THEME.axis, timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20, minBarSpacing: 0.02 },
           rightPriceScale: { borderColor: MINI_CHART_THEME.axis },
           crosshair: { mode: 0, vertLine: { color: "#444444" }, horzLine: { color: "#444444" } },
           // In a scrollable grid (cards that expand on tap) a vertical swipe on a chart must scroll the page, not drag the chart.
@@ -13193,7 +13200,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         series.priceScale().applyOptions({ scaleMargins: { top: 0.08, bottom: 0.25 } });
 
         // Relative volume (bar volume ÷ 50-bar average) instead of raw volume; dashed line at 1× = average.
-        const rvol = _rvolSeries(data);
+        let rvol = _rvolSeries(data);
         const volSeries = chart.addSeries(HistogramSeries, {
           priceFormat: { type: "custom", minMove: 0.01, formatter: v => `${v.toFixed(2)}x` },
           priceScaleId: "vol", priceLineVisible: false, lastValueVisible: false,
@@ -13210,17 +13217,18 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           if (values[i] != null) acc.push({ time: b.time, value: values[i] });
           return acc;
         }, []);
-        MINI_EMA_CONFIG.forEach(cfg => {
+        const emaSeries = MINI_EMA_CONFIG.map(cfg => {
           const s = chart.addSeries(LineSeries, {
             color: cfg.color, lineWidth: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false,
           });
           s.setData(buildLineData(cfg.sma ? _smaSeries(closes, cfg.period) : _emaSeries(closes, cfg.period)));
+          return s;
         });
 
         // OHLC + %chg legend: shows the hovered bar while the crosshair is
         // over the chart, falls back to the latest bar otherwise (%chg vs
         // the prior bar's close, same convention as the rest of the app).
-        const byTime = new Map(data.map((b, i) => [b.time, i]));
+        let byTime = new Map(data.map((b, i) => [b.time, i]));
         const legendFor = i => {
           if (i < 0) return null;
           const b = data[i];
@@ -13244,7 +13252,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         else chart.timeScale().fitContent();
 
         // Event marker layout (earnings / dividends / splits): x from the time scale, stacked into rows when they would overlap.
-        const bdates = _miniIsIntraday(timeframe) ? [] : data.map(b => _isoDay(b.time));
+        let bdates = _miniIsIntraday(timeframe) ? [] : data.map(b => _isoDay(b.time));
         layoutRef.current = () => {
           const ch = chartRef.current, evs = evRef.current;
           if (!ch || !evs.length || !bdates.length) { setStrip(p => p.length ? [] : p); return; }
@@ -13260,7 +13268,61 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           for (const p of pts) { let r = 0; while (r < 2 && p.x - last[r] < 18) r++; p.row = r; last[r] = p.x; }
           setStrip(pts);
         };
-        chart.timeScale().subscribeVisibleLogicalRangeChange(() => layoutRef.current?.());
+
+        // Re-draw every series from `data` (after older bars were prepended).
+        const applyData = () => {
+          series.setData(candleData(data));
+          rvol = _rvolSeries(data);
+          volSeries.setData(data.reduce((acc, b, i) => {
+            if (rvol[i] != null) acc.push({ time: b.time, value: rvol[i], color: b.close >= b.open ? T.rvolUp : T.rvolDown });
+            return acc;
+          }, []));
+          const cl = data.map(b => b.close);
+          MINI_EMA_CONFIG.forEach((cfg, k) => {
+            const vals = cfg.sma ? _smaSeries(cl, cfg.period) : _emaSeries(cl, cfg.period);
+            emaSeries[k].setData(data.reduce((acc, b, i) => { if (vals[i] != null) acc.push({ time: b.time, value: vals[i] }); return acc; }, []));
+          });
+          byTime = new Map(data.map((b, i) => [b.time, i]));
+          bdates = _miniIsIntraday(timeframe) ? [] : data.map(b => _isoDay(b.time));
+        };
+        // Back-fill: scroll / zoom left to the first loaded bar and the next older chunk is fetched, until the provider has nothing older
+        // ("allowable history": 1m ≈ 30 days, 5–30m ≈ 60 days, 1H ≈ 2 years, daily / weekly / monthly back to the listing date).
+        const nowSec = Math.floor(Date.now() / 1000);
+        const maxBackSec = MINI_MAX_BACK_DAYS[timeframe] != null ? MINI_MAX_BACK_DAYS[timeframe] * 86400 : Infinity;
+        const chunkSec = (MINI_CHUNK_DAYS[timeframe] || 1825) * 86400;
+        let oldestUtc = Math.floor(bars[0].time / 1000);
+        let exhausted = false, loadingMore = false;
+        // The enlarged weekly / monthly chart shows everything the provider has: it keeps loading older chunks by itself (and re-fits the view) until
+        // the history is exhausted. Every other chart waits until the user scrolls or zooms toward the left edge.
+        const autoFit = !!showStats && (timeframe === "W" || timeframe === "M");
+        const loadOlder = async () => {
+          if (exhausted || loadingMore || cancelled) return;
+          loadingMore = true;
+          try {
+            const to = oldestUtc - 1;
+            const from = Math.max(to - chunkSec, Number.isFinite(maxBackSec) ? nowSec - maxBackSec : 0);
+            if (from >= to) { exhausted = true; return; }
+            const res = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=${timeframe}&from=${from}&to=${to}`);
+            if (!res.ok) { exhausted = true; return; }          // Yahoo answers 4xx for ranges it no longer keeps
+            const { bars: older } = await res.json();
+            if (cancelled || !chartRef.current) return;
+            const fresh = (older || []).filter(b => Math.floor(b.time / 1000) < oldestUtc);
+            if (!fresh.length) { exhausted = true; return; }
+            const mapped = fresh.map(b => {
+              const t = Math.floor(b.time / 1000);
+              return { time: _miniIsIntraday(timeframe) ? _utcToEtDisplaySec(t) : t, open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume || 0 };
+            });
+            const range = chart.timeScale().getVisibleLogicalRange();
+            data.splice(0, 0, ...mapped);
+            oldestUtc = Math.floor(fresh[0].time / 1000);
+            applyData();
+            // new bars sit to the LEFT: shift the visible window by their count so the view doesn't jump
+            if (autoFit && !touchedRef.current) chart.timeScale().fitContent();
+            else if (range) chart.timeScale().setVisibleLogicalRange({ from: range.from + mapped.length, to: range.to + mapped.length });
+            layoutRef.current?.();
+          } catch { exhausted = true; } finally { loadingMore = false; }
+        };
+        chart.timeScale().subscribeVisibleLogicalRangeChange(r => { if (r && r.from < 20 && (autoFit || touchedRef.current)) void loadOlder(); layoutRef.current?.(); });
         setStatus("ready");
       })
       .catch(() => { if (!cancelled) setStatus("error"); });
@@ -13331,6 +13393,8 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
       </div>
       <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom, background: MINI_CHART_THEME.bg }}
         onDoubleClick={onExpand ? () => onExpand() : undefined}
+        onWheel={() => { touchedRef.current = true; }}
+        onPointerDown={() => { touchedRef.current = true; }}
         onTouchEnd={onExpand ? () => { const now = Date.now(); if (now - lastTapRef.current < 350) { lastTapRef.current = 0; onExpand(); } else lastTapRef.current = now; } : undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
         {status === "ready" && stats && <ChartStatsOverlay st={stats} />}

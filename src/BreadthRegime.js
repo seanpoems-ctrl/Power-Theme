@@ -24,8 +24,12 @@ const fullDate = iso => new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", 
 const pct = (v, d = 1) => (v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(d)}%`);
 const px = v => (v == null ? "—" : v.toFixed(2));
 
-export default function BreadthRegime({ enriched, hist, selDate }) {
-  const [range, setRange] = React.useState("1Y");
+// variant "card" = the panel on the Breadth Cycle page; "modal" = the same chart enlarged in an overlay (opened from the card's ⤢ button or by
+// double-clicking the chart, like the Mini Charts).
+export default function BreadthRegime({ enriched, hist, selDate, variant = "card", onClose = null, initialRange = "1Y" }) {
+  const isModal = variant === "modal";
+  const [open, setOpen] = React.useState(false);
+  const [range, setRange] = React.useState(initialRange);
   const [hoverDate, setHoverDate] = React.useState(null);
   const containerRef = React.useRef(null);
   const chartRef = React.useRef(null);
@@ -75,6 +79,13 @@ export default function BreadthRegime({ enriched, hist, selDate }) {
       allAnn: nTot ? (totRet / nTot) * 252 * 100 : null, from: series[0].date, to: series[series.length - 1].date,
     };
   }, [series]);
+
+  React.useEffect(() => {
+    if (!isModal) return undefined;
+    const h = e => { if (e.key === "Escape") { e.stopPropagation(); onClose?.(); } };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [isModal, onClose]);
 
   // candles up to the Time Machine date
   const upTo = React.useMemo(() => (bars ? bars.filter(b => b.time <= (selDate || "9999")) : []), [bars, selDate]);
@@ -146,18 +157,27 @@ export default function BreadthRegime({ enriched, hist, selDate }) {
   const cur = regimeByDate.get(lastBar.time);
   const curReg = cur ? REGIMES[cur.phase] : null;
 
-  return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+  const panelCls = isModal
+    ? "w-full max-w-[1700px] rounded-xl border border-zinc-700 bg-zinc-900 p-4 shadow-2xl"
+    : "rounded-xl border border-zinc-800 bg-zinc-900/60 p-5";
+  const content = (
+    <div className={panelCls} onClick={isModal ? (e => e.stopPropagation()) : undefined}>
       <div className="flex items-center gap-3 flex-wrap mb-1">
         <div>
           <div className="text-[11px] font-semibold tracking-wider text-zinc-500">MARKET REGIME VS QQQ</div>
           {curReg && <div className="text-lg font-bold" style={{ color: curReg.color }}>{curReg.label} <span className="text-[12px] font-normal text-zinc-500">· {cur.phase} on {fullDate(lastBar.time)}</span></div>}
         </div>
-        <div className="ml-auto flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
-          {RANGES.map(([l]) => (
-            <button key={l} onClick={() => setRange(l)}
-              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${range === l ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
-          ))}
+        <div className="ml-auto flex items-center gap-2">
+          <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+            {RANGES.map(([l]) => (
+              <button key={l} onClick={() => setRange(l)}
+                className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${range === l ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
+            ))}
+          </div>
+          {isModal
+            ? <button onClick={onClose} title="Close (Esc)" aria-label="Close" className="text-zinc-400 hover:text-zinc-100 text-lg leading-none px-2 py-1">✕</button>
+            : <button onClick={() => setOpen(true)} title="Enlarge the chart (or double-click it)" aria-label="Enlarge"
+                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">⤢ Enlarge</button>}
         </div>
       </div>
       <div className="flex flex-wrap gap-x-4 gap-y-1 mb-2" role="list" aria-label="Regime legend">
@@ -188,12 +208,13 @@ export default function BreadthRegime({ enriched, hist, selDate }) {
             </span>
           )}
         </div>
-        <div style={{ height: 400, zoom: 1 / bodyZoom, background: MINI_CHART_THEME.bg }}>
+        <div style={{ height: isModal ? `calc((100vh - 270px) * ${bodyZoom})` : 400, zoom: 1 / bodyZoom, background: MINI_CHART_THEME.bg, cursor: isModal ? "default" : "zoom-in" }}
+          onDoubleClick={isModal ? undefined : () => setOpen(true)} title={isModal ? undefined : "Double-click to enlarge"}>
           <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
 
-      {stats && (
+      {stats && !isModal && (
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-[12px] border-collapse">
             <thead>
@@ -234,5 +255,18 @@ export default function BreadthRegime({ enriched, hist, selDate }) {
         </div>
       )}
     </div>
+  );
+  if (isModal) {
+    return (
+      <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 overflow-y-auto" style={{ backgroundColor: "rgba(0,0,0,0.85)" }} onClick={onClose}>
+        {content}
+      </div>
+    );
+  }
+  return (
+    <>
+      {content}
+      {open && <BreadthRegime enriched={enriched} hist={hist} selDate={selDate} variant="modal" initialRange={range} onClose={() => setOpen(false)} />}
+    </>
   );
 }
