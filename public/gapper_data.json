@@ -1,47 +1,1201 @@
 {
-  "scan_time": "2026-10-16 08:55 ET",
+  "scan_time": "2026-10-19 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "ZETA",
-      "price": 35.54,
-      "gap_pct": 5.93,
-      "pm_volume": 209961,
-      "avg_vol_10d": 6185527,
-      "avg_dollar_vol": 219833630,
-      "mkt_cap": 8421505882,
-      "rvol": 0.88,
-      "adr_pct": 4.82,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technicals or options market interest.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
+      "ticker": "IRON",
+      "price": 80.0,
+      "gap_pct": 40.75,
+      "pm_volume": 655224,
+      "avg_vol_10d": 693965,
+      "avg_dollar_vol": 55517200,
+      "mkt_cap": 2182249324,
+      "rvol": 0.92,
+      "adr_pct": 4.37,
+      "category": "FDA",
+      "theme": "Positive Phase 3 Trial Results",
+      "reasoning": "Disc Medicine announced positive **topline results** from its **APOLLO Phase 3 trial** of **Bitopertin** in **Erythropoietic Protoporphyria (EPP)**.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 21,
       "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
+      "finviz_theme": "Biotech - Rare Disease",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Options activity",
-        "impact": "Speculative. The appearance of the **ZETA Nov 2026 33.500 call** on Google News suggests heightened options market interest, potentially signaling a technical move rather than a fundamental change."
+        "catalyst": "IRON filed an 8-K, coinciding with news that Disc Medicine will host a webcast to discuss **topline results** from the **APOLLO Phase 3 Trial** of **Bitopertin** in **Erythropoietic Protoporphyria (EPP)**. Patients on the trial drug had **12.2 more pain-free hours in sunlight** than the comparison group in month six.",
+        "impact": "This positive Phase 3 data significantly de-risks **Bitopertin**, paving the way for potential regulatory submission and approval, which could unlock a new revenue stream for the company in the rare disease space."
       },
-      "analysis_details": "• **What Happened**\nNews highlighted the **ZETA Nov 2026 33.500 call (ZETA261106C00033500)**, indicating specific interest in a particular options contract expiring in **November 2026** at a strike price of **$33.500**. This observation points to increased activity or attention in ZETA's options market.\n\n• **Key Consideration**\nThe focus on a specific call option typically suggests bullish sentiment or anticipation of an upward price movement among options traders. However, without any accompanying fundamental news, this remains a **speculative driver**, potentially influenced by technical breakouts or institutional flow rather than company-specific developments. High options activity carries the risk of a gap and trap scenario if underlying fundamentals do not materialize.",
+      "analysis_details": "• **The Drug**\nThe company is discussing positive **topline results** from the **APOLLO Phase 3 trial** of **Bitopertin**, a drug developed for **Erythropoietic Protoporphyria (EPP)**. A key finding from the trial indicates that patients receiving the drug experienced **12.2 more pain-free hours in sunlight** compared to a comparison group by the sixth month.\n\n• **The Significance**\nPositive Phase 3 trial results are a critical milestone for any drug, particularly in the **rare disease** segment where treatment options may be limited. This data suggests **Bitopertin** could offer a meaningful therapeutic benefit to patients suffering from **EPP**, significantly enhancing their quality of life by increasing their tolerance to sunlight. This outcome positions the drug for future regulatory filings and potential market authorization, which could be a substantial value driver for IRON.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "ZETA Nov 2026 33.500 call (ZETA261106C00033500) Interactive Stock Chart - Yahoo! Finance Canada",
+          "title": "In month six, patients on a trial drug had 12.2 more pain-free hours in sunlight than the comparison group - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9JOWJfcUVqVlRCY1VfanJrbVZZZjBNek9ucXU3NEx5dVNUMDNlWmVrTTBIaTNDczFFeXoybENfUHRHY2czREI4WVcxVFYwZEtjSHNnSFVSLVhEekpXUGdkYmpXb0xFSC1rTEIzbHRn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNeldiVEU2Njc3M2dMOEFGX2dwWkg3Z0ItLVRjSF9YTVZTbFN6MEFoTk5ybFZOMmlJS0QyUEo1YWFzSjA1a1BRUHBEd2M5TjFwdnBISUN4ZE5BV2w0SUtHYmVnUW84NXowZUQ4amZqbEVxZ0VhMnh1dXQ4QmhBWmx1ZXI4VFRzLUpnMS12YmRSLWJZTDhrMFI3Q0NfYXhKN0otelBiVUhOMTg5THAyVDcyXzFaRnE0QQ?oc=5"
+        },
+        {
+          "title": "A drug's late-stage trial results will be discussed Monday. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNX1dvNlFXOGtPRkwtTVFJdDV3dTduZ0NxRFNWNWZzbmdOcFBmVmM3ejk5VXAtNHpmWlJvUldVMWZjZjA1Y0ItR0FTWW5tV2xiZXI4bG9sT1lxYm0yS280WW1RYVBUcjdCdXpRY2JIdlk4SnNfbGtXWllMZGNMWndDclFGQzR6cWpNczBDbUt4MjNjYkZCblZHZFdXcHZTTDlBV0t2eDhXLTF2UTJlZy03TlF5MkpvNTN4NWluZzJR?oc=5"
+        },
+        {
+          "title": "Disc Medicine to Host Corporate Webcast to Discuss Topline Results from the APOLLO Phase 3 Trial of Bitopertin in Erythropoietic Protoporphyria (EPP)",
+          "source": "Finviz",
+          "url": "/news/403730/disc-medicine-to-host-corporate-webcast-to-discuss-topline-results-from-the-apollo-phase-3-trial-of-bitopertin-in-erythropoietic-protoporphyria-epp"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-19",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1816736/000119312526424649/d156263d8k.htm"
+      },
+      "float_shares": "28.15M",
+      "short_float": "22.08%",
+      "daily_pct": 0.34,
+      "prev_close": 56.84,
+      "industry": "Biotech - Rare Disease",
+      "technical_status": "Fail (Avg $Vol $56M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "patients on a trial drug had 12.2 more pain-free hours in sunlight than the comparison group",
+        "discrepancy_note": "Source A (Finviz) mentions 'topline results' but does not provide any specific quantitative detail like '12.2 more pain-free hours'. Only Source B (Google News/Stock Titan) provides this specific numerical claim."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CLF",
+      "price": 13.85,
+      "gap_pct": 14.27,
+      "pm_volume": 1177552,
+      "avg_vol_10d": 19484037,
+      "avg_dollar_vol": 269853912,
+      "mkt_cap": 6914945207,
+      "rvol": 1.17,
+      "adr_pct": 5.16,
+      "category": "Earnings",
+      "theme": "Q3 Profitability",
+      "reasoning": "Cleveland-Cliffs (CLF) released Q3 earnings today, reporting a return to profit after a $234M year-earlier loss.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "A",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Cleveland-Cliffs (CLF) reported its **Q3 financial results today**, disclosing a **return to profit** for the quarter, a significant turnaround from a **$234M loss** in the year-earlier period.",
+        "impact": "This fundamental shift from loss to profit should provide strong positive momentum, potentially signaling improved operational efficiency or market conditions for the company."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nCleveland-Cliffs (CLF) has announced its Q3 earnings, marking a significant positive shift by returning to **profit in Q3**. This stands in stark contrast to the **$234 million loss** reported in the year-earlier period.\n\n• **The Growth (Momentum)**\nThe return to profitability suggests a strong rebound in CLF's core business, potentially indicating favorable market conditions or successful internal strategic initiatives. This fundamental improvement from a substantial loss to a profit could drive sustained investor interest and upward price momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "After a $234M year-earlier loss, Cleveland-Cliffs (CLF) returns to profit in Q3 - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQdTlXTV9yYTFRUHVGblA0UEs0LXN0Y0MwUHYxbXoyUzBQVjR6dkVwV1hleXNrdmRreVpiRGV4RGRKdTVNNUdoUXAzelYxRHF3Tm5sTmxvMm8ybllTQ3lWWEl4SlNCeWNCcV9jekJHNk92MUtZcGsxcjEzQkJValZhc3dqblFsV2ZncEVpei1nVDJZa2EwS1pwZUtkN1ZRaEU3TGw4UFM3UnA2VXl6?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-19",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/764065/000076406526000112/clf-20261019.htm"
+      },
+      "float_shares": "560.59M",
+      "short_float": "13.89%",
+      "daily_pct": -0.25,
+      "prev_close": 12.12,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "a $234M year-earlier loss",
+        "discrepancy_note": "Source A (Finviz) is empty and does not provide any details to confirm the claim. Source B (Google News, headline [4]) confirms the specific number of the year-earlier loss and the return to profit, but 'Unconfirmed' is chosen as *both* sources do not confirm it."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "XE",
+      "price": 11.35,
+      "gap_pct": 9.55,
+      "pm_volume": 306738,
+      "avg_vol_10d": 6546552,
+      "avg_dollar_vol": 74303365,
+      "mkt_cap": 4209952487,
+      "rvol": 1.42,
+      "adr_pct": 5.72,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst identified; price action is attributed to technical reactions and broader macro strategies.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nThe recent price action in XE is attributed to **Technical Reactions** based on internal trends and broader **Macro Strategies**. This suggests that the stock's movement is likely driven by quantitative models, algorithmic trading, or chart patterns rather than specific company-centric news.\n\n• **Key Consideration**\nAs the catalyst points to **Technical Reactions** within **Macro Strategies**, the sustainability of any current momentum for XE is questionable without fundamental backing. Investors should exercise caution as such moves can be short-lived, implying a higher risk profile for continuation without new fundamental drivers.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Technical Reactions to XE Trends in Macro Strategies - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPR3NXZnR5RFZuT3VTT3ppZ25STUw0enlQYzRJS2xnVTRvTW9GVlM2YW43ZWxCWlZCeFJnV3lDZTRLeUdGRXNqRmRDSDllVDdscjFPU1JmQzZVSlA0M0U4TWNNSGE4ZnRWNlEyWHM5cll6RDViOG1lcXU0Y2wxNi04NU9IdXBPdWlvQ056WERxb2FrdkZqa1BJbXBvTHo0RkF3V0FsMldrd1I0cUtDVlcyZkJsUUZkN2pMbE5jb0dyTVlzRGxuZnNnMktDNmo?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "223.52M",
-      "short_float": "6.20%",
-      "daily_pct": 3.97,
-      "prev_close": 33.55,
+      "float_shares": "160.76M",
+      "short_float": "12.28%",
+      "daily_pct": -9.52,
+      "prev_close": 10.36,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $74M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Price action is attributed to technical reactions and broader macro strategies due to no immediate fundamental catalyst.",
+        "discrepancy_note": "Source A (Finviz) provides no information to confirm or deny the claim. While Source B (Google News [2]) supports the attribution to 'Technical Reactions' and 'Macro Strategies', the requirement for *both* sources to confirm is not met. Additionally, neither source explicitly states 'no immediate fundamental catalyst identified'."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "MANE",
+      "price": 118.94,
+      "gap_pct": 9.3,
+      "pm_volume": 53536,
+      "avg_vol_10d": 1021896,
+      "avg_dollar_vol": 121544310,
+      "mkt_cap": 4546514399,
+      "rvol": 0.7,
+      "adr_pct": 6.75,
+      "category": "Thematic Narratives",
+      "theme": "Hair Loss Treatment Efficacy",
+      "reasoning": "Positive Phase 3 trial results for Veradermics' hair-loss pill boost sentiment for the broader hair loss treatment market.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Biotech - Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Veradermics announced positive **Topline Results** from its **Phase 3 '304' Clinical Trial** of **VDPHL01**, a **twice-daily hair-loss pill**. The trial showed **85% of men** reported **better coverage**, significantly outperforming the **35.3%** on placebo.",
+        "impact": "These strong clinical trial results enhance the investability and growth prospects of the hair loss treatment sector, potentially signaling broader market opportunities for related companies."
+      },
+      "analysis_details": "• **The Narrative**\nVeradermics released compelling **Phase 3 clinical trial results** for its hair-loss treatment, **VDPHL01**. The data indicates that **85% of men** experienced **better coverage**, a substantial improvement compared to **35.3%** in the placebo group. This strong efficacy, involving a **twice-daily pill**, suggests a significant advancement in the hair loss market.\n\n• **Explosiveness**\nWhile the news is specific to Veradermics, highly successful **Phase 3 trial results** for a treatment in a large consumer market like hair loss can create a positive halo effect across the entire sector. This outcome validates the potential for new, effective treatments, attracting investor attention and capital flows to related biotech and pharmaceutical companies operating in the hair regeneration or aesthetic medicine space.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "85% of men in a trial reported better coverage on a twice-daily hair-loss pill, versus 35.3% on placebo. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPNWhGQmRMMVg3OGJndzN2cFptdUZIZXU0UDhwR1F0SXNDS05HakJJaHZ4X3JzcDNNVWxjQVJvM0NscnFpVjR6TTFSNXdfYVFLc1dIWTVGN1dtSXFuMjgyaE9yRGdoRGk5Tnc0MExyYmI3S1p5MTRPT2hweEVmMjZ4MXF3bjU1VGRfVDRKQXFKRnIwX0h3MVdiS3c0SVZjajFoX19LRkY5cU00blVxMm82WG9TRXZHXzA3WW1HZ25B?oc=5"
+        },
+        {
+          "title": "Veradermics to Hold Conference Call to Discuss Topline Results from Phase 3 '304' Clinical Trial of VDPHL01 in Males with Mild-to-Moderate Pattern Hair Loss",
+          "source": "Finviz",
+          "url": "/news/403732/veradermics-to-hold-conference-call-to-discuss-topline-results-from-phase-3-304-clinical-trial-of-vdphl01-in-males-with-mild-to-moderate-pattern-hair-loss"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "29.86M",
+      "short_float": "15.60%",
+      "daily_pct": -5.43,
+      "prev_close": 108.82,
+      "industry": "Biotech - Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "85% of men in a trial reported better coverage on a twice-daily hair-loss pill, versus 35.3% on placebo.",
+        "discrepancy_note": "Source B [2] provides specific percentages (85% vs 35.3%) related to the trial outcome, directly supporting the 'positive' nature of the results. Source A [1] mentions a conference call to discuss 'Topline Results from Phase 3', confirming the existence of the trial and impending discussion of results, but does not provide any specific numbers or details about the *positivity* or outcomes themselves. Therefore, only one source confirms the specific factual claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "APLD",
+      "price": 19.58,
+      "gap_pct": 8.5,
+      "pm_volume": 1443446,
+      "avg_vol_10d": 31921558,
+      "avg_dollar_vol": 625024106,
+      "mkt_cap": 5458087204,
+      "rvol": 1.23,
+      "adr_pct": 6.17,
+      "category": "Insider Buying",
+      "theme": "CEO Share Purchase",
+      "reasoning": "APLD CEO Wes Cummins purchased **55,803 shares** on October 16, signaling strong insider conviction and driving investor interest in the stock.",
+      "hypothesis": "Medium Conviction (RS Hold) — Insider conviction signal; look for base breakout.",
+      "conviction": 57,
+      "grade": "B",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Applied Digital's CEO, **Wes Cummins**, executed a significant open-market purchase, acquiring **55,803 shares** of **APLD** on **October 16**. This insider transaction was directly cited as the reason the stock **jumped**.",
+        "impact": "This insider buying event signals strong management conviction in the company's future prospects, potentially alleviating concerns regarding **surging interest costs** and future **profitability** in its **AI growth** strategy."
+      },
+      "analysis_details": "• **The Buyer**\nApplied Digital CEO **Wes Cummins** purchased **55,803 shares** of **APLD** on **October 16**. This significant insider transaction immediately preceded the stock's jump, with news reports directly linking the share price movement to these **insider purchases**.\n\n• **Conviction Signal**\nThe CEO's purchase indicates strong management confidence in the company, despite recent headlines pointing to **surging interest costs**. This move suggests an expectation that **AI growth** initiatives will successfully restore **profitability**, potentially mitigating negative sentiment and attracting further investor attention.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "APLD's Interest Costs Surge: Can AI Growth Restore Profitability? - Zacks Investment Research",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPdG4yQWEwWFFaMVctX1M4RVpWWHNXZTZyYmR2VXpITHl6Qmd6Ti1IZE1Xd2Y1ZHJkc2x3QnFOeDBLTzh0SG1fbjFNYmpzemphazVFZ0JHaldpQ3p1bDdnSDM3ZnliLWtPYzFZdVlyMnlyVUFvSDVZMU55UzVzZy1paThJSlhWd2c4SVdTVzExRG01UUhGSzBfeGVMTGhuM2pXUUtMTUx3?oc=5"
+        },
+        {
+          "title": "CEO Wes Cummins buys 55,803 Applied Digital (APLD) shares on October 16. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQckZPQmJ3QTM3SkZzVWMzNE53cGQyMFNUSXZucXZXZ2dJOU9Dd0l1alhBWUZVV2s5YUJHWWFZa05Ba21YV2c3SHBzaU03TzRjeHc2dlBjTDdlZGhTQkh2cEdlLUZORFJlMWFHYkFhakRJQTN2VGl4dmdDMGNMamJJZWk3SXcwM3BYR0gyS09YQUNIVGxQTjJ6Zk50ZDN4RDZ5TVpHOThoSy1KdHFHYWJ0VXlqaVg?oc=5"
+        },
+        {
+          "title": "Applied Digital stock jumps on insider share purchases - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOOVBBaVY3X1BhMExjVldxbzVicFFRZ2RUeEwtWDI4YVAxbjE4bW9GUGViM3h3dDY5cXA5cUtRM25SenFCVzNIUTRHTy1BdUFfR3RmY29BdkY4TEtJRzM5bkRJWWVKSHU5NG1rRXYyV2RWaGw1eVZ0UTh4NnJGajZDb2N4N29BRmNlQTIzWk9VVVd2ZVp2MGJiR3lJMzRXcGZRX0VlRldfNmFESnZNaVlhVg?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "272.65M",
+      "short_float": "20.47%",
+      "daily_pct": -11.48,
+      "prev_close": 18.05,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "APLD CEO Wes Cummins purchased 55,803 shares on October 16.",
+        "discrepancy_note": "Finviz News (Source A) has no mention of the claim. Google News (Source B) contains one article (Stock Titan) that explicitly confirms 'CEO Wes Cummins buys 55,803 Applied Digital (APLD) shares on October 16.' However, other articles in Google News mention general insider purchases or dollar amounts without confirming the specific share count (55,803) by the CEO on October 16. Since only one of the two main sources (Google News, through a specific article) confirms the precise claim, and the other (Finviz) does not, it cannot be marked as 'Verified' based on the requirement for *both* sources to confirm. Per instructions, 'If only ONE source mentions the claim... mark as Discrepancy'."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "RCAT",
+      "price": 5.1,
+      "gap_pct": 8.13,
+      "pm_volume": 291607,
+      "avg_vol_10d": 6904455,
+      "avg_dollar_vol": 35212720,
+      "mkt_cap": 720811726,
+      "rvol": 1.21,
+      "adr_pct": 5.11,
+      "category": "New Contract/Partnership",
+      "theme": "Proposed Acquisition Offer",
+      "reasoning": "Drone maker Red Cat proposed an offer to acquire Steyr shares, signaling a significant strategic move and potential for market re-evaluation.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Drones",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Drone maker **Red Cat** made a **proposed offer** for **Steyr shares**, causing **Steyr shares** to trade **55.8% above their 52-week low**, indicating a substantial premium.",
+        "impact": "This potential acquisition signals a significant strategic expansion for Red Cat, with potential for revenue growth and market share consolidation in the drone industry."
+      },
+      "analysis_details": "• **Impact**\nDrone maker **Red Cat** has extended a **proposed offer** for **Steyr shares**, which has caused **Steyr shares** to trade **55.8% above their 52-week low**. This indicates a significant valuation premium being placed on Steyr by Red Cat's offer.\n\n• **Strategic Value**\nThis move represents a potential structural change and strategic expansion for Red Cat, positioning the company for potential market share gains or synergistic benefits within the drone industry. A successful acquisition could enhance RCAT's competitive standing and future growth trajectory.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "A proposed offer from drone maker Red Cat puts Steyr shares 55.8% above their 52-week low. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPR01VNDhueXlmQjdpcVFtUmVZMktqbW5IUWl3MzBaa3hIZGM0T0xHUmlpanE1dG55YVRRY2NqM3pVREFNTWE0MlZqRHFoN2dlSms1NXRhS1ZKNU1GWFNkbzJNVlpGSmlnTFhnTUpmWm9hd1JxSF80ZG9LSzZsSXlIQ1NYdnBQZmY1YjBzNHV2UmlZZUVIeTcwNE13aUJpSm1ETXBTSGhkS2lEYVMxTWE2WlFkUU4yazNPWlVqaVEwY3g?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "139.54M",
+      "short_float": "25.75%",
+      "daily_pct": -3.67,
+      "prev_close": 4.72,
+      "industry": "Drones",
+      "technical_status": "Fail (Avg $Vol $35M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Red Cat proposed an offer to acquire Steyr shares at €39 per share.",
+        "discrepancy_note": "Finviz (Source A) provides no news items and thus does not confirm the offer price. Google News (Source B) articles [4] and [5] confirm the €39 per share offer, but the claim is not confirmed by *both* primary sources."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "NBIS",
+      "price": 177.52,
+      "gap_pct": 7.28,
+      "pm_volume": 937275,
+      "avg_vol_10d": 23474275,
+      "avg_dollar_vol": 4167153298,
+      "mkt_cap": 44983885240,
+      "rvol": 1.73,
+      "adr_pct": 6.61,
+      "category": "Thematic Narratives",
+      "theme": "AI Cloud Momentum",
+      "reasoning": "Nebius Group surged as the market repriced cloud providers with strong backlogs amid broader positive AI cloud momentum.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
+      "grade": "B",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "NBIS stock surged on general **AI Cloud Momentum** according to Google News. Truist analysts noted the quality of **digital platforms and IT services** will become clear, identifying **two cloud providers with backlogs** amid financing concerns.",
+        "impact": "The surge suggests a positive re-evaluation of NBIS's positioning within the expanding AI cloud sector, indicating potential for continued thematic-driven momentum."
+      },
+      "analysis_details": "• **The Narrative**\nNebius Group (**NBIS**) stock surged today, primarily attributed to broader **AI Cloud Momentum**. This follows recent market sentiment where analysts are highlighting the quality of **digital platforms and IT services**. The article mentioned Truist analysts identifying **two cloud providers with backlogs**, suggesting a renewed focus on companies with fundamental strength in the sector.\n\n• **Explosiveness**\nThe catalyst reflects a shift in market attention towards specific areas of the AI cloud sector, potentially indicating strong buying interest in companies perceived to benefit from this thematic tailwind. This move suggests that investors are capitalizing on the general positive momentum within the AI cloud space, potentially leading to further upside as the narrative strengthens and institutional flows follow.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "NEBX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Nebius Group NBIS Stock Surges On AI Cloud Momentum - Timothy Sykes",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5lNHM5TEFJNnRucl9yREJqSnA1OGd5SUlfTkNkUnNXTGROYklRbG5YVThTTHNyc2dhdUVnWkhQa2JQYVdiSGRpUkdxOEtnN1NrUXRsaFBKV3ptRzZwV2NJZVNLQk11Zm5sMWV5cXRULUk0U2JfRkE?oc=5"
+        },
+        {
+          "title": "A director sold 7,260 Nebius Group (NBIS) shares in 19 transactions under a preset trading plan. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPcG5NNHA0NHYxOTIyaGJCNGlPLWNrZUdTa3RTNHl4N0Z4WDJRUDJJdnFkZnlzUWJDeUxBajk4LWxTamlwLW9oZ1UzLUZqWTNpTWYwRFE2b1RtYmRPbVFNQ09ZbUZOYTMwQjV1RDMxem1QNnFnYVBzWmlDUlFNbXJ4WnVtNkhvamZWSzNhUWhPTU9TdmNYclRaRnl5STRfUU9FMHhPZGZSNWhFbEdPRW1z?oc=5"
+        },
+        {
+          "title": "Buy these 2 stocks amid AI financing concerns: Analyst",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/buy-2-stocks-amid-ai-124635934.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "222.55M",
+      "short_float": "18.93%",
+      "daily_pct": -12.18,
+      "prev_close": 165.47,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Nebius Group surged as the market repriced cloud providers with strong backlogs amid broader positive AI cloud momentum.",
+        "discrepancy_note": "The primary catalyst claim is a qualitative statement about NBIS's price movement ('surged') and the underlying reasons ('repriced cloud providers with strong backlogs amid broader positive AI cloud momentum'). While sources confirm NBIS 'bounced' or 'surged' on 'AI Cloud Momentum', neither source provides specific quantitative details (e.g., a percentage increase for the surge, or specific figures for 'strong backlogs' or how the market 'repriced' cloud providers) to fully verify the nuanced details of the claim. There are also no specific numbers in the claim itself to match."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AEHR",
+      "price": 65.0,
+      "gap_pct": 7.26,
+      "pm_volume": 55303,
+      "avg_vol_10d": 3142636,
+      "avg_dollar_vol": 204271340,
+      "mkt_cap": 1979168432,
+      "rvol": 1.2,
+      "adr_pct": 8.6,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "AEHR: AEHR Oct 2026 109.000 put (AEHR261023P00109000) stock historical prices and data - Yahoo F",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: AEHR Oct 2026 109.000 put (AEHR261023P00109000) stock historical prices and data - Yahoo Finance Australia | AEHR Oct 2026 59.000 call (AEHR261023C00059000) interactive stock chart - Yahoo Finance UK | AEHR Oct 2026 87.000 put (AEHR261023P00087000) interactive stock chart - Yahoo Finance Australia",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: AEHR Oct 2026 109.000 put (AEHR261023P00109000) stock historical prices and data - Yahoo Finance Australia | AEHR Oct 2026 59.000 call (AEHR261023C00059000) interactive stock chart - Yahoo Finance UK | AEHR Oct 2026 87.000 put (AEHR261023P00087000) interactive stock chart - Yahoo Finance Australia\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "COHU",
+        "ONTO",
+        "MKSI"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "AEHR Oct 2026 109.000 put (AEHR261023P00109000) stock historical prices and data - Yahoo Finance Australia",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1IUmhQRzIzaTFHSWw3a2haUU1TSC1sc3d6cFZIdFQ0czJqUGxfeGtpN0NfT3NERkhSTFJsUmNTS3JySXU2ZDlZYm5pSnVTLThTYVM4X2RiTXhXUVEwUWd3ZG9BT2ZUbk1IYi16dVRCQTY?oc=5"
+        },
+        {
+          "title": "AEHR Oct 2026 59.000 call (AEHR261023C00059000) interactive stock chart - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE56MDlNRV9EeHZLaEtWTFFRcG4zV1ctWC1sUnB5Q3hYc2c1eE1zQmQ5X29lV3J1ODNsYm5mTmxveWU4TEtoczNhdUowTVRPUkl0OGlpR0JLQllNa3FrM1BUYmd1TkJPTTlDekpKMjJn?oc=5"
+        },
+        {
+          "title": "AEHR Oct 2026 87.000 put (AEHR261023P00087000) interactive stock chart - Yahoo Finance Australia",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFByVkdvaWRweVhibE5YV2Iyc1FqSHpmUjNHTGdRdXFLTFJ4a1Y5Z0tKYjF5MUlqb2xrd2NPZTRNaGJjYzJLOENBVU5rNEN1WE53S2JzTTNQOGUyOEZhRzdYc0V0N2cyQnJsNzBJS25n?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "31.07M",
+      "short_float": "16.75%",
+      "daily_pct": -12.44,
+      "prev_close": 60.6,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AEHR Oct 2026 109.000 put (AEHR261023P00109000) stock historical prices and data",
+        "discrepancy_note": "Source A (Finviz News) has no mention of this specific options contract. Source B (Google News) link [4] directly mentions 'AEHR Oct 2026 109.000 put (AEHR261023P00109000) stock historical prices and data - Yahoo Finance Australia', confirming the claim from one source but not both."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AXTI",
+      "price": 55.07,
+      "gap_pct": 7.0,
+      "pm_volume": 206643,
+      "avg_vol_10d": 9166229,
+      "avg_dollar_vol": 504784231,
+      "mkt_cap": 3375053284,
+      "rvol": 1.35,
+      "adr_pct": 8.38,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow from options data.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Foundries",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Headlines show historical prices for AXTI **Nov 2026 70.000 call** and **Dec 2027 30.000 put**, indicating options activity but no fundamental news. A significant move on no explicit news suggests a potential low-float squeeze. This carries a high risk of being a Gap and Trap scenario."
+      },
+      "analysis_details": "• **What Happened**\nNews headlines primarily referenced historical pricing and data for AXTI options, specifically a **Nov 2026 70.000 call** and a **Dec 2027 30.000 put**. There are no specific fundamental developments such as earnings, upgrades, new contracts, or policy changes reported in the last **24 hours**. This suggests market movement is driven by factors other than publicly disclosed company-specific news.\n\n• **Key Consideration**\nWithout a clear fundamental catalyst, the stock's movement is likely due to technical breakout patterns or significant institutional order flow, potentially amplified by options activity. This creates a speculative environment where the risk of a sharp reversal (Gap and Trap) is elevated, especially for momentum traders seeking strong narratives.",
+      "peer_tickers": [
+        "COHR",
+        "LITE",
+        "MRVL"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "AXTI Nov 2026 70.000 call (AXTI261113C00070000) Stock Historical Prices & Data - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9lU0tldGF6eWZDNVRJel9iRVZyNlNoY2xuQmlYT2tPcVZlWXl0R21SSVR0RlBmSjAySTBWb2czaFZneTRrT0h5WUZWakFHMHVEYnVWbm41TExTTTlXWWcxTXd5X1FLVGJwTExOOFFwalU?oc=5"
+        },
+        {
+          "title": "AXTI Dec 2027 30.000 put (AXTI271217P00030000) interactive stock chart - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFAyVXB3cHY4TTRhNGJ3WFNsbVhPSW9WcXpKaTN1UWhHZjU0NjU0MzRreDRzRXJDUmgzSzV2WW1fcGhNTzdCX3Fza24tY25feEIweDFwRXJJN2c5NFJXZGswVTFydlhrWXJvN1pGU0h3?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "62.84M",
+      "short_float": "17.19%",
+      "daily_pct": -11.12,
+      "prev_close": 51.47,
+      "industry": "Semiconductors - Foundries",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found, with market movement potentially driven by options data.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CRWV",
+      "price": 65.39,
+      "gap_pct": 6.52,
+      "pm_volume": 3473220,
+      "avg_vol_10d": 52297201,
+      "avg_dollar_vol": 3419713973,
+      "mkt_cap": 33858830652,
+      "rvol": 2.28,
+      "adr_pct": 6.01,
+      "category": "Upgrade",
+      "theme": "Goldman Sachs Upgrade to Buy",
+      "reasoning": "CoreWeave shares rebound after Goldman Sachs upgraded the stock to Buy, shifting analyst sentiment amidst prior selling pressure.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 35,
+      "grade": "A",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Goldman Sachs initiated an upgrade for CoreWeave to **Buy**, leading to a stock rebound today, **2026-10-19**. This positive re-rating follows a period where the stock saw a **-48%** price change in the last **6 months** and recent news of its CEO selling nearly **$1 billion** in stock since IPO.",
+        "impact": "The upgrade provides a strong counter-narrative to recent negative sentiment and insider selling, potentially signaling a new floor and renewed institutional interest."
+      },
+      "analysis_details": "• **The Firm & Rating**\nGoldman Sachs upgraded CoreWeave stock to **Buy** on **October 19, 2026**, triggering a rebound in shares. This follows a period of significant underperformance, with the stock experiencing a **-48%** price change over the last **6 months** and trading at **$61** as of Oct. 16, well below its **52-Week High of $142**.\n\n• **The Thesis**\nThe upgrade by Goldman Sachs provides a pivotal counterweight to recent bearish news, specifically the CoreWeave CEO's sale of nearly **$1 billion** in stock since IPO. The previous day, **Truist analysts** also identified CoreWeave as one of two stocks to buy amid **AI financing concerns**, highlighting its backlog as a key strength. This combined analyst support suggests a belief in CoreWeave's fundamental value despite recent insider selling and broader market anxieties.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "CoreWeave stock rebounds on Goldman Sachs upgrade to Buy - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOVzA3d0dBT2NiOW5BMjJTbEwyVkVJbE9uaTFGUDUxblEwY1pGaXNkVm9XNVlkdTNlWk8zMXRMYjlzZmR2aHNkSlNlNVdQa29NazYxOU5KOFZ1a1RERnFFb0FnQTRqNnJTbUhYd3RzaWRYdlp6d29YMk0xTWpPbFpUaWxRVVRIandqNDBHZTFNYUwyY2Y4MXM0cHZRMlpKcnVkdUlnOTV6enVXY2JjMVBwZ3F1OEV3SUJUUDlVQQ?oc=5"
+        },
+        {
+          "title": "CoreWeave CEO Sells Nearly $1 Billion In Stock Since IPO",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/coreweave-ceo-sells-nearly-1-132841441.html"
+        },
+        {
+          "title": "Buy these 2 stocks amid AI financing concerns: Analyst",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/buy-2-stocks-amid-ai-124635934.html"
+        },
+        {
+          "title": "Microsoft pulls out of UK data centre deal with Nscale, Telegraph reports",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/microsoft-pulls-uk-data-centre-095253878.html"
+        },
+        {
+          "title": "CoreWeave CEO Sells Nearly $1 Billion In Stock Since IPO - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxON1dJZ0RxNWpyR2tacmtMV0RWWjhSSk5IVVRVOEJIaTFYdEFxNExFNTM1MEJuNGhKbWpfc2VOX2pwY19IQzRjNHZzQnU3YUtlZ0ItSkpjVEFvbHRiLTIteDRBOVYxdnNaMVFlVFcwQlRHalp5dTFHbE9PNHNnVkhxMFQ3UEJhNVYzQnlheVRsOXpDczV0Y1cyYg?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "349.31M",
+      "short_float": "19.24%",
+      "daily_pct": -11.91,
+      "prev_close": 61.39,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Goldman Sachs upgraded CoreWeave stock to Buy",
+        "discrepancy_note": "Source B (Google News [4]) explicitly states 'CoreWeave stock rebounds on Goldman Sachs upgrade to Buy'. Source A (Finviz) does not contain this specific information, only generic 'CRWV, NBIS, IREN Bounce Overnight' or 'Buy these 2 stocks amid AI financing concerns: Analyst' without specific mention of Goldman Sachs upgrading CRWV to Buy."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "KEEL",
+      "price": 2.46,
+      "gap_pct": 6.47,
+      "pm_volume": 671180,
+      "avg_vol_10d": 30743120,
+      "avg_dollar_vol": 75628075,
+      "mkt_cap": 1426594012,
+      "rvol": 1.06,
+      "adr_pct": 6.17,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; any stock movement is likely due to technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nThe only available news is a Google News headline mentioning **KEEL Oct 2026 6.500 call (KEEL261030C00006500) stock historical prices and data**. This indicates that interest in the **options chain** for KEEL is being tracked, but it does not constitute a fundamental news catalyst for a stock move. No specific corporate announcements, upgrades, or contracts have been reported in the last **24 hours**.\n\n• **Key Consideration**\nGiven the absence of specific fundamental news, any significant price movement in KEEL would likely be attributed to **technical factors** or **institutional flow**. With an RVOL of **1.1x**, there's some elevated volume, potentially indicating a **technical breakout** or **short squeeze** if the float is low, but the absence of a clear driver means high risk of volatility and a potential **gap and trap** scenario. Investors should exercise caution without a fundamental re-rating event.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "KEEL Oct 2026 6.500 call (KEEL261030C00006500) stock historical prices and data - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE14SjJPbGpiUUpWTjcySmdKc0ItbWd0RUNKT0psUzhkaEFjZmZaYTFFZFZ0dk5vTlpVYVI1ZzdGd2dsdVg2OFc0UEVEbEJEVUt6WGdzVndfMVpJUXo2Mzd0b2N2NEh1RzVqcThvS1BRYWc?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "601.23M",
+      "short_float": "19.41%",
+      "daily_pct": -10.12,
+      "prev_close": 2.31,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $76M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "WULF",
+      "price": 12.38,
+      "gap_pct": 5.99,
+      "pm_volume": 912510,
+      "avg_vol_10d": 42391366,
+      "avg_dollar_vol": 524805111,
+      "mkt_cap": 5827954439,
+      "rvol": 1.4,
+      "adr_pct": 6.7,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; the stock's move likely driven by options activity or technical momentum.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "The only recent public information points to interest in the **WULF Oct 2026 8.000 call options** (**WULF261030C00008000**) expiring on **October 30, 2026**. No specific company news or fundamental events were reported.",
+        "impact": "Speculative. The trading action is likely driven by **options flow** or **technical breakout**, which carries a high risk of volatility and reversal."
+      },
+      "analysis_details": "• **What Happened**\nThe provided headline highlights activity around the **WULF Oct 2026 8.000 call option** (**WULF261030C00008000**), indicating potential options market interest or a focus on the stock's chart. There has been no specific company-level fundamental news, such as earnings, partnerships, or analyst upgrades, reported in the last 24 hours. The stock's movement is thus occurring without a clear, identifiable corporate catalyst.\n\n• **Key Consideration**\nThis surge, potentially influenced by **options market interest** or **technical trading signals**, lacks the backing of fundamental company news, posing increased risk for momentum traders. The absence of a specific catalyst suggests the move could be susceptible to rapid reversals if underlying **technical support levels** fail or associated **options contracts** expire out-of-the-money.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "WULF Oct 2026 8.000 call (WULF261030C00008000) Interactive Stock Chart - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5DMWNvbkFienowZmxsWUhmZzM5SDFkaWw4VUJZMkNRZU5saFVCczZEQmppVS1JTzRKUGczSDN1bWlHVUE2YVJRaHNMNVMzcVVpS21rejhSaVhybUdTSEJ5Y1pJLWJaTS1aNzZtanZB?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "348.79M",
+      "short_float": "28.13%",
+      "daily_pct": -7.45,
+      "prev_close": 11.68,
       "industry": "Others",
       "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; the stock's move likely driven by options activity or technical momentum.",
+        "discrepancy_note": "Google News [1] reports TeraWulf CEO discussing an 'Anthropic Deal' as the 'tip of the iceberg' for AI infrastructure, which constitutes a potential fundamental catalyst, directly contradicting the claim 'No immediate fundamental catalyst found'. However, Google News [2] and [3] do mention WULF call options, supporting the 'options activity' part of the claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "BTDR",
+      "price": 8.18,
+      "gap_pct": 5.96,
+      "pm_volume": 156744,
+      "avg_vol_10d": 9802909,
+      "avg_dollar_vol": 80187796,
+      "mkt_cap": 2098158883,
+      "rvol": 1.47,
+      "adr_pct": 7.26,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found for BTDR; price action likely driven by technical factors or institutional options flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "No specific company-specific **news** or fundamental **catalyst** was reported for BTDR in the last **24 hours**.",
+        "impact": "The observed price movement is speculative, potentially indicating a **low float squeeze** or **institutional options flow**, carrying a high risk of a **gap and trap** scenario."
+      },
+      "analysis_details": "• **What Happened**\nNo specific fundamental **news** catalyst for BTDR was released in the last **24 hours**. The available headlines only reference various **Oct 2026** and **Nov 2026** put and call options activity, including a **14.500 put**, **12.000 call**, **3.000 call**, **14.000 call**, and **10.500 call**. This suggests potential options interest or hedging rather than a core business event.\n\n• **Key Consideration**\nWithout a clear fundamental driver, the current price action is highly speculative, possibly driven by **technical factors** or **institutional options flow** leading to short-term volatility. The **Avg $ Vol (20d)** of **$80M** and **ADR% (20d)** of **7.3%** indicate existing liquidity and volatility, while **RVOL: 1.5x** suggests elevated trading volume today.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "BTDR Oct 2026 14.500 put (BTDR261030P00014500) interactive stock chart - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5CYjJSU3FjdXNPX2NGeFpibDJNVkJ5eXhEa21HNFZDcGFvUTdSZGVFSkx2bG9mdDF0YTRQQW01VklBenhsWkpYNjZleEJZTXltZWxxTm9UeGxjVnlhcFM1czRWWGF2aV9UNXJrY1NR?oc=5"
+        },
+        {
+          "title": "BTDR Oct 2026 12.000 call (BTDR261030C00012000) stock historical prices and data - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBnYUhNVUZzNFlVT1BwTjJzX19XeXh6VDBFZlFJcHVQTDMyUmVxczVnREZYTnl0Y1h6NzhqempYNVV3ZnRoaFZ1UlB5TTZ1SW9QX1UtX1FadEpPTlZXcDRwQXVaaHlrZ3RLa2dRd0ZMcjE?oc=5"
+        },
+        {
+          "title": "BTDR Oct 2026 3.000 call (BTDR261023C00003000) interactive stock chart - Yahoo Finance Australia",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1pNVBweThadlE4bzJNNWtTZ1lCX3pEaXBuTXpXaDJaUTJ5cFFpYXVGVEd5V3NfaDNBZHVnTnNnUGczRklKcHgtT1pHZHJTTkJvcG1wOXUxZTI5YnVaYWhIU0NDN09aY1R4SXBUR3Fn?oc=5"
+        },
+        {
+          "title": "BTDR Nov 2026 14.000 call (BTDR261120C00014000) stock historical prices and data - Yahoo Finance Australia",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9UMmRmZnMxMUhadmNaeXM0UXFQT2I3dVlveDFHRTZFZTdTMWpUa1p2Q2RQZUJ6NFBneUpnaldLS011YjFUTDM1a3ZKRjl2dTNOUUsyc2xXSEk2MzZVckV3V3lmbGhTM3hwcElHMk5aZzM?oc=5"
+        },
+        {
+          "title": "BTDR Oct 2026 10.500 call (BTDR261030C00010500) stock historical prices and data - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9KOG9Ha21WRkxGSFFmVk1xbkNRYkJQVDU0N3RTbUJQZDZlWnJqSkV4Z0REamNIOGk0blB0ODZfOXhRTEVlQVZHZ3FIS1RqYzlkbEZ3RS1uZjFmd1FHN1BZVjU2dDhweS1xdzc2RDhYcHk?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "155.73M",
+      "short_float": "33.37%",
+      "daily_pct": -8.04,
+      "prev_close": 7.72,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $80M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "price action likely driven by technical factors or institutional options flow",
+        "discrepancy_note": null
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CIFR",
+      "price": 9.51,
+      "gap_pct": 5.9,
+      "pm_volume": 910290,
+      "avg_vol_10d": 53229179,
+      "avg_dollar_vol": 506209492,
+      "mkt_cap": 3726975776,
+      "rvol": 0.93,
+      "adr_pct": 7.43,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No specific fundamental catalyst identified; likely technical breakout or institutional flow driving market action.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "AI Compute",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. No immediate company-specific news explains a significant price movement, suggesting a **low float squeeze** or **technical breakout**. This carries a **high risk of a gap and trap** scenario."
+      },
+      "analysis_details": "• **What Happened**\nNo specific fundamental news event directly impacting CIFR was reported in the last 24 hours. The only mention is a comparative analysis asking \"**CIFR Stock Or APLDStock: Which AI Stock Actually Makes Money?**\", indicating general investor interest in AI profitability without disclosing a specific company catalyst.\n\n• **Key Consideration**\nWith an average daily volume of **$506M** and a current RVOL of **0.9x**, any significant price movement without an explicit catalyst suggests technical factors or broader market sentiment around **AI stocks**. The article's focus on **making money** in AI hints at a potential speculative surge rather than a fundamental re-rating, increasing the volatility risk.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "CIFR Stock Or APLDStock: Which AI Stock Actually Makes Money? Landry Shamet (vHEAKLA2gO) - Unisba Media",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFA4dXdhWXExd00zSnkwTEN4Y3BSNml0eVZkU09WVjJ2NkhiV1A5aFI0LTB3Z2M5a0dRZ1FUTkdRQzU3VjNVOTdpSkprdUhsajVpYi12VDFQb2ZIR1NTbVJOVFFhbEFJMlkyMndkWg?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "344.56M",
+      "short_float": "22.03%",
+      "daily_pct": -10.56,
+      "prev_close": 8.98,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No specific fundamental catalyst identified",
+        "discrepancy_note": "The primary catalyst claim states 'No specific fundamental catalyst identified'. However, Google News [4] mentions a specific fundamental event: 'Cipher Digital Delivers AI Data Center Early'. This constitutes a specific fundamental event, even if the stock is down, contradicting the claim that no such catalyst was identified."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "IREN",
+      "price": 28.58,
+      "gap_pct": 5.89,
+      "pm_volume": 2421864,
+      "avg_vol_10d": 57142425,
+      "avg_dollar_vol": 1633130506,
+      "mkt_cap": 10906452385,
+      "rvol": 1.29,
+      "adr_pct": 6.33,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "IREX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "345.29M",
+      "short_float": "21.34%",
+      "daily_pct": -11.19,
+      "prev_close": 26.99,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for IREN's price action.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "NVTS",
+      "price": 8.82,
+      "gap_pct": 5.72,
+      "pm_volume": 412601,
+      "avg_vol_10d": 17914975,
+      "avg_dollar_vol": 158010080,
+      "mkt_cap": 2177519624,
+      "rvol": 1.06,
+      "adr_pct": 6.55,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow driving momentum.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "The headlines feature an interactive stock chart for an **NVTS Oct 2026 14.000 call** and a trading commentary titled **\"Trading the Move, Not the Narrative: (NVTS) Edition\"**. These point to options activity and a potential price movement driven by technical factors rather than specific fundamental news.",
+        "impact": "Speculative. A significant move on no clear news suggests a potential technical squeeze or flow-driven activity, carrying a high risk of being a Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nNews headlines indicate notable activity around an **NVTS Oct 2026 14.000 call**, suggesting heightened options interest in the stock. Concurrently, commentary advising to focus on **\"Trading the Move, Not the Narrative\"** implies the stock's recent price action may not be tied to specific fundamental news, but rather to technical or flow dynamics.\n\n• **Key Consideration**\nWith no specific company-level fundamental catalyst identified, any price momentum is likely driven by short-term technical factors, options gamma hedging, or institutional flow. This type of move carries elevated risk as it lacks a clear fundamental basis for sustained appreciation, making it susceptible to quick reversals.",
+      "peer_tickers": [
+        "ON",
+        "STM",
+        "WOLF"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "NVTS Oct 2026 14.000 call (NVTS261030C00014000) interactive stock chart - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5zLWVHdElCMHJkek5jZWE0dnhGTF9ldUJReF9YOEVXbkNYRjVLdHBCSk9FclU0NWRjYUduWTV4RXhQWjEtNkVERnFuckdhT25fOXNySXFHcW5JcWNXZFptWE5UeWtNbk4yTXdrWHNB?oc=5"
+        },
+        {
+          "title": "Trading the Move, Not the Narrative: (NVTS) Edition - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQenRjQlV3QnVoOVFKd0dRZ1NpeG9ERE81QTdXS0xUUnV2aW5RNzlUTXNUaWRYb1hWNFZjRWQ4dFlwVFJaLWREUDdGUTk5cjlvMExzX2ZCYXc5UVlCaGRKNjJ2VUJaSXFGTmlfVFI4Q2FRSmM2YzdhTUtybkRGaS13UGF6LTBWRmJqUlk0dnY4R0xsa2lmYnNtdGlsbm4wT19tUU54Rjd3LWt0V3BJNmxBWEk4WDN4bFJtLVl4eXU4QXJkaVNFbW5pNA?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "225.74M",
+      "short_float": "20.34%",
+      "daily_pct": -9.64,
+      "prev_close": 8.34,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The initial analysis claims 'No immediate fundamental catalyst found'. However, Source B [1] clearly states a fundamental catalyst: 'Navitas To Buy Power Equipment Firm Claros In $233M Deal', directly contradicting the initial analysis."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "POET",
+      "price": 5.73,
+      "gap_pct": 5.52,
+      "pm_volume": 210982,
+      "avg_vol_10d": 10013254,
+      "avg_dollar_vol": 57375945,
+      "mkt_cap": 939705400,
+      "rvol": 1.21,
+      "adr_pct": 5.81,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical buying or institutional flow influencing POET shares.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "AI Networking",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown. The provided news headline refers to **historical options prices** for **POET Nov 2026 10.000 call (POET261127C00010000)**, not a fundamental company announcement.",
+        "impact": "Speculative. A significant move without company-specific news often suggests a low-float squeeze or technical breakout, carrying high risk of a gap and trap."
+      },
+      "analysis_details": "• **What Happened**\nThe only recent information is a **Google News** item from **2026-10-18 20:52 UTC** detailing **historical prices and data** for a **POET Nov 2026 10.000 call option**. There is no fundamental company news, such as an earnings report, contract announcement, or analyst upgrade, available within the last **24 hours** to explain any potential stock movement.\n\n• **Key Consideration**\nWith no identifiable fundamental catalyst, any significant price action in POET is likely driven by **technical factors** or **institutional order flow**. Given an **Average Daily Range (ADR%)** of **5.8%** and a **Relative Volume (RVOL)** of **1.2x**, the stock already exhibits decent volatility and above-average trading interest, which could exacerbate technical moves. Without new information, any momentum could be transient and is often associated with higher risk, suggesting potential for a rapid reversal.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "POET Nov 2026 10.000 call (POET261127C00010000) Stock Historical Prices & Data - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBTcEl6QVZmTDl3ajU0MmFKV2ppalN5YWdyQ2xuZVMxbkU5UWV2WEloQmFkNkw2ZHZMNU0yYXNhSGZDZmhaLXh5V2U5YTlqcnZpT25UeFhEaWc5b1FoRmlXY3ZUOFJCUjl6YXFqZFRxcDY?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "90.39M",
+      "short_float": "14.03%",
+      "daily_pct": -9.65,
+      "prev_close": 5.43,
+      "industry": "AI Networking",
+      "technical_status": "Fail (Avg $Vol $57M < $100M)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 70,
@@ -49,7 +1203,283 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technicals or options market interest.",
+        "primary_claim": "No immediate fundamental catalyst found; likely technical buying or institutional flow influencing POET shares.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BRUN",
+      "price": 9.37,
+      "gap_pct": 5.4,
+      "pm_volume": 69799,
+      "avg_vol_10d": 4309296,
+      "avg_dollar_vol": 40378104,
+      "mkt_cap": 745383326,
+      "rvol": 1.07,
+      "adr_pct": 9.29,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow driven by recent options activity.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nNews headlines indicate recent interest in BRUN's options contracts, specifically highlighting data for the **BRUN Oct 2026 24.000 call** as well as the **BRUN Oct 2026 15.500 put** and **BRUN Oct 2026 16.500 put** options. These headlines report on historical prices and interactive charts for these specific options.\n\n• **Key Consideration**\nThe absence of any fundamental company news, such as earnings, analyst upgrades, or strategic developments, suggests any significant price movement is likely driven by technical factors or options-related flow. The observed activity around these specific call and put options could indicate speculative interest or hedging strategies, but without an underlying fundamental catalyst, the move carries elevated risk.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "BRUN Oct 2026 24.000 call (BRUN261023C00024000) Stock Historical Prices & Data - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9xYmZlTXJRZDd3bjRoTEpGSEItYWxlWWpfTzN2a2Fyam1OTElkQlhSbUtTcU9teWRLRlhCWWV0RHppdHpKZ2tuX3BWazNfU3ljTTZHY1U0b1FfM1YwWmFubFdTWWRsTDdjWFBwZXRWM2s?oc=5"
+        },
+        {
+          "title": "BRUN261030P00015500 Interactive Stock Chart | BRUN Oct 2026 15.500 put Stock - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5odGFua1VxQ0JmS1p3V0Y5OTlhc3ZEVVdfdW1GaTJXRmhkanBoRnRUcnJQa1VCdDU1S01ja0tFaE9ncU1zZlVnOGsxQmxlYTlpN0o4eWNEbUxGXzhUcmtYYg?oc=5"
+        },
+        {
+          "title": "BRUN Oct 2026 16.500 put (BRUN261030P00016500) stock historical prices and data - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE0wcUpncG1mRzBkNWJicDdoYVF5enBkaTB5eVJGbVRxaDNyS1FoR0ItbkUyVGoxWDUtMjRfYXlFdENqeUJKYklpdVU3SlUyY0ZEZ3B5eXh2VDdjMU8tY21vMlBRa3dBNGp4ZnczaERQeXQ?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "34.44M",
+      "short_float": null,
+      "daily_pct": -11.81,
+      "prev_close": 8.89,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $40M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BRUN's market movement is driven by recent options activity.",
+        "discrepancy_note": "Source A (Finviz News) contains no information, while Source B (Google News) shows multiple headlines related to BRUN options activity (calls and puts with 2026 expiry). Since both sources are required for verification and Source A is empty, the claim cannot be confirmed by both."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "AAOI",
+      "price": 79.65,
+      "gap_pct": 5.4,
+      "pm_volume": 296066,
+      "avg_vol_10d": 13530126,
+      "avg_dollar_vol": 1077674536,
+      "mkt_cap": 6416368169,
+      "rvol": 1.06,
+      "adr_pct": 7.9,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; the move is likely driven by technical factors, options activity, or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "The only visible 'news' relates to interactive stock charts for **AAOI Nov 2026 135.000 call** and **AAOI Dec 2026 50.000 call**, alongside a mention of '**Killua Capital**'. No specific fundamental event, upgrade, or contract has been reported.",
+        "impact": "This suggests the move is driven by speculative options activity or institutional interest without a clear public rationale, making it highly susceptible to technical reversals."
+      },
+      "analysis_details": "• **What Happened**\nGoogle News headlines point to interactive stock charts for **AAOI Nov 2026 135.000 call** and **AAOI Dec 2026 50.000 call**. An additional headline mentions **Killua Capital** (@killuacapital) without further context. No specific fundamental news, such as earnings, analyst ratings, or contract wins, has been disclosed.\n\n• **Key Consideration**\nThe absence of a specific fundamental catalyst indicates the stock's movement is likely driven by technical factors, unusual options flow related to the **135.000 call** and **50.000 call** options, or an undisclosed institutional accumulation by entities like **Killua Capital**. Such moves without clear news carry a high risk of being a short-term squeeze or 'gap and trap' scenario, lacking long-term momentum drivers.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "AAOI Nov 2026 135.000 call (AAOI261120C00135000) interactive stock chart - Yahoo Finance Australia",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBXdk9VVXFTZmp1WHJkRExCRTdQbXV6NWE0UmthVklraUZMRTdmM2R2QThFM1c4LWpqVG4talBKTlFlMEU0UVJVVGtWX0tHN0FUQ0xrZWNJc1ZwZUs3d2Z6RVFUTzVqT3BjM0QzeFR3?oc=5"
+        },
+        {
+          "title": "AAOI Dec 2026 50.000 call (AAOI261218C00050000) interactive stock chart - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9DbGtGVDAtTHBISUhpd0xOTl9WbGhKUlh4RjdNenEtcW5sbmU5Q1IzYTBVbE9zaF80X3NGS0JqU3lpVHBsVWQydVdrWWhkb2FER0NJYjJqbHNNcnVpZHY4QVVBZ21EanhpQTlZWGNR?oc=5"
+        },
+        {
+          "title": "Killua Capital (@killuacapital) - Substack",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4zMUplSlJsNHZmYVN4d3IzV1VONXBaNW9XRzZvNDV1Z1VHRUJ6U2t1b1d1ckV0M3Z6SFRrWUpjWEQwS2s0dHI3VE1vcFR0RUdXZVhiV093STFUN09vUldRcWJ3?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "80.53M",
+      "short_float": "16.92%",
+      "daily_pct": -9.75,
+      "prev_close": 75.57,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; the move is likely driven by technical factors, options activity, or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AMKR",
+      "price": 44.05,
+      "gap_pct": 5.33,
+      "pm_volume": 55682,
+      "avg_vol_10d": 3447042,
+      "avg_dollar_vol": 151842200,
+      "mkt_cap": 10390282172,
+      "rvol": 0.87,
+      "adr_pct": 4.27,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "60.36M",
+      "short_float": "17.32%",
+      "daily_pct": -5.06,
+      "prev_close": 41.82,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source B identifies two potential fundamental catalysts: 'Shares Newly Purchased by Vontobel Holding Ltd.' (institutional flow, a fundamental driver) and 'Expected to Post Earnings on Monday' (a significant upcoming fundamental event), which directly contradicts the claim of 'No immediate fundamental catalyst found'."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "PENG",
+      "price": 60.05,
+      "gap_pct": 5.17,
+      "pm_volume": 87558,
+      "avg_vol_10d": 7671560,
+      "avg_dollar_vol": 460677178,
+      "mkt_cap": 2925958016,
+      "rvol": 0.51,
+      "adr_pct": 7.34,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow driving price action.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "No specific fundamental news catalysts were observed for PENG in the last 24 hours, with the only headline referencing an **interactive stock chart** for a **May 2027 45.000 put option** (**PENG270521P00045000**).",
+        "impact": "Speculative. A significant price move without specific news suggests potential **technical breakout** or **institutional flow**, increasing the risk of a **gap and trap** scenario."
+      },
+      "analysis_details": "• **What Happened**\nNo specific fundamental news catalyst was identified for PENG within the last **24 hours**. The only notable mention was an article displaying an **interactive stock chart** for the **PENG May 2027 45.000 put option** (**PENG270521P00045000**), which is not a direct price driver. The stock's average daily volume over **20 days** is **$461 million**, with an **ADR%** of **7.3%** and an **RVOL** of **0.5x**.\n\n• **Key Consideration**\nGiven the absence of a discernible news catalyst, the price action is likely attributable to **technical factors** or **institutional order flow**. Without a clear fundamental driver, such moves carry a higher risk of being a **gap and trap**, making the current momentum highly speculative and vulnerable to reversal.",
+      "peer_tickers": [
+        "SMCI",
+        "NVDA",
+        "ANET"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "PENG May 2027 45.000 put (PENG270521P00045000) interactive stock chart - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5WZmo4LXBNeUtyeEdtN1JHSmNfWWhPVFA4ZzlTZi02RkFKSVdSYWk2bktOd3EySk5Ed3lTVWM2b1RSeGMzVXN2S3BwTnVfSlpHOUZKZkxwaEZhVE5WMnZDbTQyLW45emlualdOUE9B?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "48.85M",
+      "short_float": "18.70%",
+      "daily_pct": -7.69,
+      "prev_close": 57.1,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for PENG, with price action likely driven by technical breakout or institutional flow.",
         "discrepancy_note": null
       },
       "gates_passed": 5,
@@ -63,15 +1493,87 @@
       "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "MARA",
+      "price": 7.92,
+      "gap_pct": 5.16,
+      "pm_volume": 701507,
+      "avg_vol_10d": 35976711,
+      "avg_dollar_vol": 284935551,
+      "mkt_cap": 2908833934,
+      "rvol": 1.15,
+      "adr_pct": 6.3,
+      "category": "Thematic Narratives",
+      "theme": "MARA Bitcoin Holdings Strategy",
+      "reasoning": "MARA sent **1,000 BTC** to exchanges, sparking speculation about a potential sale and a shift in its Bitcoin holding strategy.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "MARA is under watch after **1,000 BTC** were deposited to exchanges, raising questions about whether the major Bitcoin miner is selling its holdings.",
+        "impact": "The move introduces significant uncertainty regarding MARA's asset management strategy and its commitment to holding mined Bitcoin, potentially influencing investor sentiment."
+      },
+      "analysis_details": "• **The Narrative**\nNews headlines indicate that MARA has sent **1,000 BTC** to exchanges, leading to speculation and putting the company under watch. This action prompts questions about whether the 'Biggest Miner' is **selling** its Bitcoin assets, contrasting with hints from other market participants about potential buys.\n\n• **Explosiveness**\nThe market reaction to MARA's transfer of **1,000 BTC** to exchanges is likely driven by a shift in narrative regarding miners' holding strategies. The speculative nature of whether MARA is **selling** or simply rebalancing creates short-term volatility and uncertainty, making its impact highly dependent on clarification regarding the company's intentions.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "MRAL",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "MARA Selling Bitcoin? Exchange Deposits Put 1,000 BTC Under Watch - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNWjRPdExYWnEzQWFLbmp3RG1JYWFqT3hQaG13R25jMFlXbDlDb0pjRWVjQWJBTTJrdkw5bGdxOFRnTkNMNnV4ZzA5SWNzV2pOYjc1Nlo3NEJna1V4WXUwQVgySmpWVXpIVmJNR0Fpem9GR1ZINV9UWlc5RWtTTUEyX0RFS2FWXzNibkRvcVQwcTJsdVhtaEdIVHlQOWxZR1BSRXZLNnJR?oc=5"
+        },
+        {
+          "title": "Bitcoin News: MARA Sent 1,000 BTC to Exchanges as Saylor Hints at Another Buy. Is the Biggest Miner Selling? - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxQdFZsejRWX3htS1F2THR1MjAzVjZzd2otLU8tVmVMZW9zTjdFZDJUSDVCZGdYT3FkdEN3ZFpwUlpsT1VFbHNhVXpCRllydGdXbWxpc044Qkx6V3FpN3VJNlcwTGRjQWxJZnRaNUo4Rm5yVzZFUWR0Rno3Z05YQUxpUG5WdUkwRDNreU1TcUtmWEI2Q042a3V5QloycXRIV05HbjhrSGRMNF90MjJuYk5zbzBiNV8zWlRraTFvc0c5ajh3U3ZKV016c2pqQlpZdVBNY2NYM2pURTFSM1NlRTM5MnRTeGJoT0lBcEtWNmxhU1IxZzVIRmc?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "378.12M",
+      "short_float": "29.84%",
+      "daily_pct": -9.6,
+      "prev_close": 7.53,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "MARA sent 1,000 BTC to exchanges",
+        "discrepancy_note": "Source B (Google News) reports '1,000 BTC' across multiple articles ([1], [2], [3]), but Source A (Finviz News) has no mention of this claim."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 1,
-    "large_gaps": 0,
-    "total_headlines": 1,
+    "small_gaps": 21,
+    "large_gaps": 1,
+    "total_headlines": 44,
     "monthly_cost_usd": 0.01
   }
 }
