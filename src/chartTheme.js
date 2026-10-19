@@ -24,6 +24,28 @@ export const _isInsideBar = (data, i) => i > 0 && data[i].high <= data[i - 1].hi
 export const candleData = data => data.map((b, i) => _isInsideBar(data, i)
   ? { ...b, color: MINI_CHART_THEME.inside, borderColor: MINI_CHART_THEME.outline, wickColor: MINI_CHART_THEME.outline } : b);
 
+// Moving averages drawn on every daily candle chart: EMA 9 / 21 / 50 (green / tan / blue) + SMA 200 (brown).
+export const MINI_EMA_CONFIG = [
+  { period: 9,   color: "#2e8b3a" },
+  { period: 21,  color: "#c9935f" },
+  { period: 50,  color: "#2f3fb0" },
+  { period: 200, color: "#a8856b", sma: true },
+];
+
+export const _emaSeries = (values, period) => {
+  const out = new Array(values.length).fill(null);
+  const start = values.findIndex(v => v != null);
+  if (start === -1 || values.length - start < period) return out;
+  const k = 2 / (period + 1);
+  let seed = 0;
+  for (let i = start; i < start + period; i++) seed += values[i];
+  seed /= period;
+  out[start + period - 1] = seed;
+  let prev = seed;
+  for (let i = start + period; i < values.length; i++) { prev = values[i] * k + prev * (1 - k); out[i] = prev; }
+  return out;
+};
+
 export const _smaSeries = (values, period) => values.map((_, i) => {
   if (i < period - 1) return null;
   let sum = 0;

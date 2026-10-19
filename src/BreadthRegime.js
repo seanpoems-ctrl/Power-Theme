@@ -1,9 +1,12 @@
 import React from "react";
+import { createChart, CandlestickSeries, LineSeries, HistogramSeries } from "lightweight-charts";
 import { BREADTH_PHASES } from "./breadthCycle";
+import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, candleOptions, candleData } from "./chartTheme";
 
-// "Market regime vs QQQ" (Breadth → Breadth Cycle): QQQ's price drawn over the breadth-cycle phase of every session, so you can see when
-// breadth said risk-on / risk-off. Phases are our own breadth-cycle scoring (breadthCycle.js); QQQ closes come from breadth_long_history.json
-// (`qqq_dates` / `qqq`, written by breadth_history_builder.py).
+// "Market regime vs QQQ" (Breadth → Breadth Cycle): QQQ's daily candles — same look as the Mini / enlarged charts (grey canvas, white / grey outlined
+// candles, orange inside bars, EMA 9 / 21 / 50 + SMA 200) — over the breadth-cycle phase of every session, so you can see when breadth said
+// risk-on / risk-off. Phases are our own breadth-cycle scoring (breadthCycle.js); QQQ candles come from breadth_long_history.json
+// (`qqq_dates` / `qqq_o` / `qqq_h` / `qqq_l` / `qqq`, written by breadth_history_builder.py).
 
 // Breadth-cycle phase -> the risk mode it implies. Expansion = broad participation, not fading; Repair = recovering from weakness (early
 // risk-on, not yet confirmed); Distribution = still decent but fading (take care); Contraction = downside participation dominant.
@@ -16,44 +19,38 @@ export const REGIMES = {
 const ORDER = ["Expansion", "Repair", "Distribution", "Contraction"];
 const RANGES = [["6M", 126], ["1Y", 252], ["3Y", 756], ["5Y", 1260], ["10Y", 2520], ["Max", Infinity]];
 
-const useWidth = () => {
-  const ref = React.useRef(null);
-  const [w, setW] = React.useState(760);
-  React.useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const set = () => setW(Math.max(300, Math.round(el.getBoundingClientRect().width)));
-    set();
-    if (typeof ResizeObserver === "undefined") return undefined;
-    const ro = new ResizeObserver(set);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-  return [ref, w];
-};
-
+const hexA = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16}, ${(n >> 8) & 255}, ${n & 255}, ${a})`; };
 const fullDate = iso => new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 const pct = (v, d = 1) => (v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(d)}%`);
+const px = v => (v == null ? "—" : v.toFixed(2));
 
 export default function BreadthRegime({ enriched, hist, selDate }) {
   const [range, setRange] = React.useState("1Y");
-  const [hover, setHover] = React.useState(null);
-  const [wrapRef, W] = useWidth();
+  const [hoverDate, setHoverDate] = React.useState(null);
+  const containerRef = React.useRef(null);
+  const chartRef = React.useRef(null);
+  const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;      // same wrapper fix as MiniChartCard (body { zoom } skews the crosshair)
 
-  // QQQ close per breadth date (ascending), only where both exist
+  // phase + strength per breadth date
+  const regimeByDate = React.useMemo(() => new Map((enriched || []).filter(r => r.strength != null).map(r => [r.date, { phase: r.phase, strength: r.strength }])), [enriched]);
+
+  // QQQ candles (all dates, ascending)
+  const bars = React.useMemo(() => {
+    if (!hist?.qqq?.length || !hist.qqq_o?.length) return null;
+    return hist.qqq_dates.map((d, i) => ({ time: d, open: hist.qqq_o[i], high: hist.qqq_h[i], low: hist.qqq_l[i], close: hist.qqq[i] }));
+  }, [hist]);
+
+  // series with both a QQQ close and a regime (for the statistics table)
   const series = React.useMemo(() => {
-    if (!hist?.qqq?.length || !enriched?.length) return null;
-    const q = new Map(hist.qqq_dates.map((d, i) => [d, hist.qqq[i]]));
+    if (!bars) return null;
     const out = [];
-    for (const r of enriched) {
-      const c = q.get(r.date);
-      if (c != null && r.strength != null) out.push({ date: r.date, close: c, phase: r.phase, strength: r.strength });
-    }
+    for (const b of bars) { const r = regimeByDate.get(b.time); if (r) out.push({ date: b.time, close: b.close, phase: r.phase, strength: r.strength }); }
     return out.length > 60 ? out : null;
-  }, [hist, enriched]);
+  }, [bars, regimeByDate]);
 
   // What QQQ did in each regime, over the whole history: share of sessions, annualised return when holding QQQ only in that regime
-  // (the return of session i is credited to the regime known at the close of session i−1 — no look-ahead), and the average 21-session forward return.
+  // (the return of session i is credited to the regime known at the close of session i−1 — no look-ahead), volatility, worst day, and the
+  // average 21-session forward return.
   const stats = React.useMemo(() => {
     if (!series) return null;
     const agg = Object.fromEntries(ORDER.map(p => [p, { n: 0, sumRet: 0, sumSq: 0, nRet: 0, worst: 0, sumFwd: 0, nFwd: 0, win: 0 }]));
@@ -79,62 +76,82 @@ export default function BreadthRegime({ enriched, hist, selDate }) {
     };
   }, [series]);
 
-  const view = React.useMemo(() => {
-    if (!series) return null;
-    const upTo = series.filter(r => r.date <= (selDate || "9999"));
-    const n = RANGES.find(r => r[0] === range)?.[1] ?? 252;
-    return upTo.slice(-Math.min(n, upTo.length));
-  }, [series, range, selDate]);
+  // candles up to the Time Machine date
+  const upTo = React.useMemo(() => (bars ? bars.filter(b => b.time <= (selDate || "9999")) : []), [bars, selDate]);
+  const barIdx = React.useMemo(() => new Map(upTo.map((b, i) => [b.time, i])), [upTo]);
 
-  if (!series || !view || view.length < 2) {
+  // Build the chart. Rebuilt when the data (or Time Machine date) changes; the range buttons only move the visible window.
+  React.useEffect(() => {
+    if (!containerRef.current || upTo.length < 2) return undefined;
+    const T = MINI_CHART_THEME;
+    const chart = createChart(containerRef.current, {
+      layout: { background: { color: "transparent" }, textColor: T.text, fontSize: 13 },
+      grid: { vertLines: { color: "transparent" }, horzLines: { color: "transparent" } },
+      // minBarSpacing: Lightweight Charts won't zoom out past 0.5 px per bar by default (≈ 1,400 candles in a 700 px chart); QQQ has ~6,900 daily bars since 1999.
+      timeScale: { borderColor: T.axis, rightOffset: 4, minBarSpacing: 0.02 },
+      rightPriceScale: { borderColor: T.axis },
+      crosshair: { mode: 0, vertLine: { color: T.crosshair }, horzLine: { color: T.crosshair } },
+      autoSize: true,
+    });
+    chartRef.current = chart;
+
+    // Regime bands: a full-height histogram on its own hidden scale (drawn first, so the candles sit on top), plus a solid strip along the bottom.
+    const bands = chart.addSeries(HistogramSeries, { priceScaleId: "regime", priceLineVisible: false, lastValueVisible: false, base: 0 });
+    bands.priceScale().applyOptions({ scaleMargins: { top: 0, bottom: 0 }, visible: false });
+    bands.setData(upTo.map(b => { const r = regimeByDate.get(b.time); return r ? { time: b.time, value: 1, color: hexA(REGIMES[r.phase].color, 0.3) } : { time: b.time, value: 0 }; }));
+    const strip = chart.addSeries(HistogramSeries, { priceScaleId: "regimeStrip", priceLineVisible: false, lastValueVisible: false, base: 0 });
+    strip.priceScale().applyOptions({ scaleMargins: { top: 0.955, bottom: 0 }, visible: false });
+    strip.setData(upTo.map(b => { const r = regimeByDate.get(b.time); return r ? { time: b.time, value: 1, color: REGIMES[r.phase].color } : { time: b.time, value: 0 }; }));
+
+    const candles = chart.addSeries(CandlestickSeries, candleOptions());
+    candles.priceScale().applyOptions({ scaleMargins: { top: 0.06, bottom: 0.08 } });
+    candles.setData(candleData(upTo.map(b => ({ time: b.time, open: b.open, high: b.high, low: b.low, close: b.close }))));
+
+    const closes = upTo.map(b => b.close);
+    MINI_EMA_CONFIG.forEach(cfg => {
+      const s = chart.addSeries(LineSeries, { color: cfg.color, lineWidth: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
+      const vals = cfg.sma ? _smaSeries(closes, cfg.period) : _emaSeries(closes, cfg.period);
+      s.setData(upTo.reduce((acc, b, i) => { if (vals[i] != null) acc.push({ time: b.time, value: vals[i] }); return acc; }, []));
+    });
+
+    chart.subscribeCrosshairMove(param => setHoverDate(param.time ? String(param.time) : null));
+    return () => { chart.remove(); chartRef.current = null; };
+  }, [upTo, regimeByDate]);
+
+  // Visible window + log axis for long ranges (QQQ in 2009 would be a flat line next to today's price)
+  React.useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart || upTo.length < 2) return;
+    const n = RANGES.find(r => r[0] === range)?.[1] ?? 252;
+    chart.priceScale("right").applyOptions({ mode: n > 600 ? 1 : 0 });
+    if (!Number.isFinite(n) || n >= upTo.length) chart.timeScale().fitContent();
+    else chart.timeScale().setVisibleLogicalRange({ from: upTo.length - n, to: upTo.length + 4 });
+  }, [range, upTo]);
+
+  if (!bars || !series || upTo.length < 2) {
     return (
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
         <div className="text-[11px] font-semibold tracking-wider text-zinc-500">MARKET REGIME VS QQQ</div>
-        <p className="text-[12px] text-zinc-600 italic mt-1">QQQ history isn't in the data file yet — it is added by the next nightly run (breadth_history_builder.py).</p>
+        <p className="text-[12px] text-zinc-600 italic mt-1">QQQ candle history isn't in the data file yet — it is added by the next nightly run (breadth_history_builder.py).</p>
       </div>
     );
   }
 
-  const H = 280, L = 52, R = 12, T = 12, B = 24;
-  const n = view.length;
-  const x = i => L + (n <= 1 ? 0 : (i / (n - 1)) * (W - L - R));
-  const closes = view.map(r => r.close);
-  const lo = Math.min(...closes), hi = Math.max(...closes);
-  const pad = (hi - lo) * 0.06 || 1;
-  const logScale = n > 600;                       // long ranges: log axis, so 2009's QQQ isn't a flat line next to today's
-  const f = v => (logScale ? Math.log(v) : v);
-  const fLo = f(lo - pad > 0 ? lo - pad : lo), fHi = f(hi + pad);
-  const y = v => T + (1 - (f(v) - fLo) / (fHi - fLo)) * (H - T - B);
-
-  // consecutive same-phase runs -> background bands and coloured line segments
-  const runs = [];
-  view.forEach((r, i) => {
-    const last = runs[runs.length - 1];
-    if (last && last.phase === r.phase) last.end = i; else runs.push({ phase: r.phase, start: i, end: i });
-  });
-  const segPath = run => { const from = Math.max(0, run.start - 1); let d = ""; for (let i = from; i <= run.end; i++) d += `${i === from ? "M" : "L"}${x(i).toFixed(1)},${y(view[i].close).toFixed(1)}`; return d; };
-  const tickVals = (() => { const t = []; const steps = 5; for (let k = 0; k <= steps; k++) { const v = logScale ? Math.exp(fLo + ((fHi - fLo) * k) / steps) : lo - pad + ((hi + pad - (lo - pad)) * k) / steps; t.push(v); } return t; })();
-  const monthIdx = []; let prevKey = "";
-  const yearly = n > 400;
-  view.forEach((r, i) => { const key = yearly ? r.date.slice(0, 4) : r.date.slice(0, 7); if (key !== prevKey) { monthIdx.push(i); prevKey = key; } });
-  const thin = monthIdx.length > 12 ? Math.ceil(monthIdx.length / 10) : 1;
-  const lab = i => (yearly ? view[i].date.slice(0, 4) : new Date(`${view[i].date}T00:00:00`).toLocaleDateString("en-US", { month: "short" }));
-  const onMove = e => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const i = Math.round(((e.clientX - rect.left - L) / (W - L - R)) * (n - 1));
-    setHover(Math.max(0, Math.min(n - 1, i)));
-  };
-  const cur = view[n - 1];
-  const curReg = REGIMES[cur.phase];
-  const h = hover != null ? view[hover] : null;
-  const tipRight = hover != null && x(hover) > W * 0.62;
+  const lastBar = upTo[upTo.length - 1];
+  const shown = (hoverDate && barIdx.has(hoverDate)) ? hoverDate : lastBar.time;
+  const i = barIdx.get(shown);
+  const b = upTo[i], prev = upTo[i - 1];
+  const chg = prev ? (b.close / prev.close - 1) * 100 : null;
+  const reg = regimeByDate.get(shown);
+  const cur = regimeByDate.get(lastBar.time);
+  const curReg = cur ? REGIMES[cur.phase] : null;
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
       <div className="flex items-center gap-3 flex-wrap mb-1">
         <div>
           <div className="text-[11px] font-semibold tracking-wider text-zinc-500">MARKET REGIME VS QQQ</div>
-          <div className="text-lg font-bold" style={{ color: curReg.color }}>{curReg.label} <span className="text-[12px] font-normal text-zinc-500">· {cur.phase} on {fullDate(cur.date)}</span></div>
+          {curReg && <div className="text-lg font-bold" style={{ color: curReg.color }}>{curReg.label} <span className="text-[12px] font-normal text-zinc-500">· {cur.phase} on {fullDate(lastBar.time)}</span></div>}
         </div>
         <div className="ml-auto flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
           {RANGES.map(([l]) => (
@@ -153,41 +170,27 @@ export default function BreadthRegime({ enriched, hist, selDate }) {
         ))}
       </div>
 
-      <div ref={wrapRef} className="relative">
-        <svg width={W} height={H} role="img" aria-label="QQQ price coloured by breadth-cycle regime" onMouseMove={onMove} onMouseLeave={() => setHover(null)} className="block">
-          {runs.map((run, k) => (
-            <rect key={k} x={x(Math.max(0, run.start - 0.5))} y={T} width={Math.max(0.6, x(Math.min(n - 1, run.end + 0.5)) - x(Math.max(0, run.start - 0.5)))} height={H - T - B}
-              fill={REGIMES[run.phase].color} opacity="0.13" />
-          ))}
-          {tickVals.map((v, k) => (
-            <g key={k}>
-              <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} stroke="#3f3f46" strokeOpacity="0.35" />
-              <text x={L - 6} y={y(v) + 3.5} textAnchor="end" fontSize="10" fill="#71717a" fontFamily="ui-monospace, monospace">{v >= 100 ? v.toFixed(0) : v.toFixed(1)}</text>
-            </g>
-          ))}
-          {monthIdx.filter((_, j) => j % thin === 0).map(i => (
-            <text key={i} x={x(i)} y={H - 7} textAnchor="middle" fontSize="10" fill="#71717a">{lab(i)}</text>
-          ))}
-          {runs.map((run, k) => (
-            <path key={k} d={segPath(run)} fill="none" stroke={REGIMES[run.phase].color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-          ))}
-          {h && (
-            <g pointerEvents="none">
-              <line x1={x(hover)} x2={x(hover)} y1={T} y2={H - B} stroke="#a1a1aa" strokeOpacity="0.5" />
-              <circle cx={x(hover)} cy={y(h.close)} r="4.5" fill={REGIMES[h.phase].color} stroke="#18181b" strokeWidth="2" />
-            </g>
+      <div className="rounded-lg overflow-hidden border border-zinc-800/60">
+        {/* OHLC legend in the same style as the Mini Chart header: hovered bar, or the latest bar when idle */}
+        <div className="flex items-baseline gap-1.5 px-3 py-2 bg-zinc-900/80 text-[13px] font-mono whitespace-nowrap overflow-x-auto">
+          <span className="text-[14px] font-bold text-cyan-400 mr-1">QQQ</span>
+          <span className="text-zinc-500">{fullDate(shown)}</span>
+          <span className="text-zinc-500 ml-2">O</span><span className="text-zinc-300">{px(b.open)}</span>
+          <span className="text-zinc-500">H</span><span className="text-zinc-300">{px(b.high)}</span>
+          <span className="text-zinc-500">L</span><span className="text-zinc-300">{px(b.low)}</span>
+          <span className="text-zinc-500">C</span><span className="text-zinc-300">{px(b.close)}</span>
+          {chg != null && <span className={chg >= 0 ? "text-emerald-400" : "text-red-400"}>{pct(chg, 2)}</span>}
+          {reg && (
+            <span className="ml-auto flex items-center gap-1.5 font-sans">
+              <span className="w-2 h-2 rounded-full" style={{ background: REGIMES[reg.phase].color }} />
+              <span className="font-bold text-zinc-100">{REGIMES[reg.phase].label}</span>
+              <span className="text-zinc-500">{reg.phase} · strength {reg.strength.toFixed(0)}</span>
+            </span>
           )}
-          <rect x={L} y={T} width={Math.max(0, W - L - R)} height={H - T - B} fill="transparent" />
-        </svg>
-        {h && (
-          <div className="absolute pointer-events-none rounded-lg border border-zinc-700 bg-zinc-900/95 px-3 py-2 text-[12px] shadow-xl"
-            style={{ top: 28, ...(tipRight ? { right: W - x(hover) + 12 } : { left: x(hover) + 12 }) }}>
-            <div className="text-zinc-400 mb-1">{fullDate(h.date)}</div>
-            <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full" style={{ background: REGIMES[h.phase].color }} /><span className="font-bold text-zinc-100">{REGIMES[h.phase].label}</span><span className="text-zinc-500">{h.phase}</span></div>
-            <div className="text-zinc-300 tabular-nums">QQQ <span className="font-bold text-zinc-100">{h.close.toFixed(2)}</span></div>
-            <div className="text-zinc-300 tabular-nums">Breadth strength <span className="font-bold text-zinc-100">{h.strength.toFixed(0)}</span> / 100</div>
-          </div>
-        )}
+        </div>
+        <div style={{ height: 400, zoom: 1 / bodyZoom, background: MINI_CHART_THEME.bg }}>
+          <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
+        </div>
       </div>
 
       {stats && (

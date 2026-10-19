@@ -139,6 +139,21 @@ def fetch_spx(start: str, symbol: str = "^GSPC"):
     return [d.strftime("%Y-%m-%d") for d in close.index], [round(float(v), 2) for v in close.values]
 
 
+def fetch_ohlc(symbol: str, start: str):
+    """Price-only daily candles: (dates, open, high, low, close)."""
+    import yfinance as yf
+    df = yf.download(symbol, start=start, auto_adjust=False, progress=False)
+    cols = {}
+    for k in ("Open", "High", "Low", "Close"):
+        c = df[k]
+        if hasattr(c, "columns"):
+            c = c.iloc[:, 0]
+        cols[k] = c
+    ok = cols["Close"].dropna().index
+    dates = [d.strftime("%Y-%m-%d") for d in ok]
+    return (dates, *[[round(float(v), 2) for v in cols[k].loc[ok].values] for k in ("Open", "High", "Low", "Close")])
+
+
 def main() -> None:
     full = "--full" in sys.argv
     by_date = {} if full else load_existing()
@@ -166,13 +181,14 @@ def main() -> None:
         return
     # QQQ closes (price-only) for the "Market regime vs QQQ" chart on the Breadth Cycle page. Optional: a failure keeps the previous QQQ arrays.
     try:
-        qqq_dates, qqq = fetch_spx("2008-01-01", "QQQ")
+        qqq_dates, qqq_o, qqq_h, qqq_l, qqq = fetch_ohlc("QQQ", "1999-01-01")     # QQQ launched 1999-03-10; breadth data (the shading) only starts 2009
     except Exception as exc:  # noqa: BLE001
         logger.warning("QQQ download failed (%s) - keeping any existing QQQ series", exc)
-        qqq_dates, qqq = [], []
+        qqq_dates, qqq_o, qqq_h, qqq_l, qqq = [], [], [], [], []
         try:
             old = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
             qqq_dates, qqq = old.get("qqq_dates", []), old.get("qqq", [])
+            qqq_o, qqq_h, qqq_l = old.get("qqq_o", []), old.get("qqq_h", []), old.get("qqq_l", [])
         except Exception:  # noqa: BLE001
             pass
     # Typo dates (weekends/holidays) have no S&P close — drop them so every breadth row aligns with a trading session.
@@ -185,7 +201,10 @@ def main() -> None:
         "cols": {k: [by_date[d].get(k) for d in dates] for k in FIELDS},
         "spx_dates": spx_dates,
         "spx": spx,
-        "qqq_dates": qqq_dates,
+        "qqq_dates": qqq_dates,       # QQQ daily candles (price-only): open / high / low / close
+        "qqq_o": qqq_o,
+        "qqq_h": qqq_h,
+        "qqq_l": qqq_l,
         "qqq": qqq,
     }
     OUTPUT_PATH.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")

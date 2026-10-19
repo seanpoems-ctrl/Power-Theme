@@ -12,7 +12,7 @@ import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
 import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
 import { buildDataset, scenarioReport } from "./breadthScenario";
-import { MINI_CHART_THEME, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from "./chartTheme";
+import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from "./chartTheme";
 const CotTab = React.lazy(() => import("./CotTab"));   // loaded only when the COT tab opens
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
@@ -3796,22 +3796,6 @@ const _isIntraday = tf => tf !== "D" && tf !== "W";
 // seeded). Skips leading nulls, seeds with a simple average over the first
 // `period` values, then continues recursively. Returns an array the same
 // length as `values`, with nulls wherever there isn't enough history yet.
-function _emaSeries(values, period) {
-  const out = new Array(values.length).fill(null);
-  const start = values.findIndex(v => v != null);
-  if (start === -1 || values.length - start < period) return out;
-  const k = 2 / (period + 1);
-  let seed = 0;
-  for (let i = start; i < start + period; i++) seed += values[i];
-  seed /= period;
-  out[start + period - 1] = seed;
-  let prev = seed;
-  for (let i = start + period; i < values.length; i++) {
-    prev = values[i] * k + prev * (1 - k);
-    out[i] = prev;
-  }
-  return out;
-}
 
 // EMA overlay colors — matches a reference chart's convention (fast→slow:
 // teal, orange, blue, silver).
@@ -12952,12 +12936,6 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
 // EMA overlay colors for the mini chart grid — green/orange/blue per the
 // user's explicit ask (distinct from TradeChartModal's own teal/orange/blue
 // EMA_OVERLAY_CONFIG convention).
-const MINI_EMA_CONFIG = [
-  { period: 9,   color: "#2e8b3a" },
-  { period: 21,  color: "#c9935f" },
-  { period: 50,  color: "#2f3fb0" },
-  { period: 200, color: "#a8856b", sma: true },
-];
 // Chart palette + inside-bar / RVOL helpers live in ./chartTheme (shared with the Trade Journal and trendline charts).
 
 
