@@ -1104,6 +1104,8 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor({ onMiniCharts }
           onClose={closeModal}
           onAddToClipboard={addToClipboard}
           onMiniCharts={onMiniCharts}
+          dates={rows.map((r) => r.date)}
+          onNavigate={(d) => setModal((m) => (m ? { ...m, date: d, isLatest: d === latestDate } : m))}
         />
       )}
     </div>

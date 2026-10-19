@@ -129,9 +129,9 @@ def load_existing() -> dict[str, dict]:
         return {}
 
 
-def fetch_spx(start: str):
+def fetch_spx(start: str, symbol: str = "^GSPC"):
     import yfinance as yf
-    df = yf.download("^GSPC", start=start, auto_adjust=False, progress=False)
+    df = yf.download(symbol, start=start, auto_adjust=False, progress=False)
     close = df["Close"]
     if hasattr(close, "columns"):
         close = close.iloc[:, 0]
@@ -164,6 +164,17 @@ def main() -> None:
     except Exception as exc:  # noqa: BLE001
         logger.error("S&P 500 download failed (%s) - leaving existing file untouched", exc)
         return
+    # QQQ closes (price-only) for the "Market regime vs QQQ" chart on the Breadth Cycle page. Optional: a failure keeps the previous QQQ arrays.
+    try:
+        qqq_dates, qqq = fetch_spx("2008-01-01", "QQQ")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("QQQ download failed (%s) - keeping any existing QQQ series", exc)
+        qqq_dates, qqq = [], []
+        try:
+            old = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+            qqq_dates, qqq = old.get("qqq_dates", []), old.get("qqq", [])
+        except Exception:  # noqa: BLE001
+            pass
     # Typo dates (weekends/holidays) have no S&P close — drop them so every breadth row aligns with a trading session.
     have = set(spx_dates)
     dates = [d for d in dates if d in have]
@@ -174,6 +185,8 @@ def main() -> None:
         "cols": {k: [by_date[d].get(k) for d in dates] for k in FIELDS},
         "spx_dates": spx_dates,
         "spx": spx,
+        "qqq_dates": qqq_dates,
+        "qqq": qqq,
     }
     OUTPUT_PATH.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
     logger.info("Written %s: %d sessions %s -> %s, %d S&P closes (%.0f KB)", OUTPUT_PATH, len(dates), dates[0], dates[-1], len(spx),

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
+import BreadthRegime from "./BreadthRegime";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
 import { ChevronDown, ChevronRight, Activity, RefreshCw, Search, SlidersHorizontal, X, Zap, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
@@ -7985,6 +7986,8 @@ const BreadthCycleTab = React.memo(function BreadthCycleTab() {
           <p className="text-[10px] text-zinc-600 mt-3">The cycle estimate combines daily ±4% breadth, 5- and 10-day pressure, quarter and 34-day participation, and T2108 (equal weights). It is our own scoring — use it as context, not a mechanical signal.</p>
         </div>
       </div>
+
+      <BreadthRegime enriched={enriched} hist={hist} selDate={sel.date} />
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
         <div className="text-[11px] font-semibold tracking-wider text-zinc-500">READ ON {sel.date}</div>

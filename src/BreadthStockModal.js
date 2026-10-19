@@ -414,13 +414,15 @@ function fmtDollarVol(v) {
 }
 
 // Format market_cap_b (value already in billions) → "$5.3B" / "$342M"
-function fmtMktCap(v) {
+// `approx` = the snapshot's market cap is an estimate (backfill_missing_fields.py: that day's price × today's share count) → "≈".
+function fmtMktCap(v, approx = false) {
   if (v == null) return "—";
   const n = parseFloat(v);
   if (isNaN(n)) return "—";
-  if (n >= 1000) return `$${(n / 1000).toFixed(1)}T`;
-  if (n >= 1)    return `$${n.toFixed(1)}B`;
-  return `$${(n * 1000).toFixed(0)}M`;
+  const pre = approx ? "≈" : "";
+  if (n >= 1000) return `${pre}$${(n / 1000).toFixed(1)}T`;
+  if (n >= 1)    return `${pre}$${n.toFixed(1)}B`;
+  return `${pre}$${(n * 1000).toFixed(0)}M`;
 }
 
 // ---------------------------------------------------------------------------
@@ -692,7 +694,7 @@ const BASE_SORT_COLS = [
   { key: "rs",            label: "RS",            align: "right", numeric: true  },
 ];
 
-const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData }) {
+const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData, onOrder }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
 
@@ -762,6 +764,11 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
     });
   }, [stocks, sortKey, sortDir, perfField, spxReturn]);
 
+  // Tell the modal the order the table is showing, so the Mini Charts grid follows the column sort.
+  useEffect(() => {
+    onOrder?.(sortedStocks.map((s) => ({ ticker: s.ticker, category: s.industry || null })));
+  }, [sortedStocks, onOrder]);
+
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
   }
@@ -814,7 +821,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
               </td>
               {/* Mkt Cap */}
               <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
-                {fmtMktCap(s.market_cap_b)}
+                {fmtMktCap(s.market_cap_b, s.mc_approx)}
               </td>
               {/* ADR×$Vol */}
               <td className="px-2 py-1.5 text-right font-mono text-amber-300 font-semibold">
@@ -939,7 +946,7 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                   <span className="flex-1 truncate text-zinc-400">{s.company}</span>
                   {/* Mkt Cap */}
                   <span className="w-16 text-right font-mono text-zinc-400">
-                    {fmtMktCap(s.market_cap_b)}
+                    {fmtMktCap(s.market_cap_b, s.mc_approx)}
                   </span>
                   {/* ADR×$Vol */}
                   <span className="w-16 text-right font-mono text-amber-300 font-semibold">
@@ -977,7 +984,7 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
   );
 });
 
-const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxData, onAddToClipboard }) {
+const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxData, onAddToClipboard, onOrder }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
   const [groupSortKey, setGroupSortKey] = useState("count");
@@ -1034,7 +1041,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
       let av, bv;
       if (groupSortKey === "count") { av = a.items.length; bv = b.items.length; }
       else if (groupSortKey === "countPct") { av = a.countPct; bv = b.countPct; }
-      else if (groupSortKey === "rs") { av = a.groupRS; bv = b.groupRS; }
+      else if (groupSortKey === "rs") { av = a.groupRS?.v ?? null; bv = b.groupRS?.v ?? null; }
       else { av = a.items.length; bv = b.items.length; }
       if (av == null && bv == null) return 0;
       if (av == null) return 1;
@@ -1078,6 +1085,11 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
       }),
     }));
   }, [stocks, sortKey, sortDir, perfField, spxReturn, totalCount, groupSortKey, groupSortDir]);
+
+  // Group order, then each group's stock order (the order the expanded rows use) — the Mini Charts grid follows it.
+  useEffect(() => {
+    onOrder?.(groups.flatMap((g) => g.items.map((s) => ({ ticker: s.ticker, category: g.industry }))));
+  }, [groups, onOrder]);
 
   if (!groups.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No groups to display.</p>;
@@ -1151,8 +1163,9 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
 // Normalize compact history record → standard stock shape
 // ---------------------------------------------------------------------------
 
-function normalizeHistoricalStock(s) {
+function normalizeHistoricalStock(s, approxMc = false) {
   return {
+    mc_approx:      approxMc && s.mc != null,
     ticker:         s.t   ?? "",
     company:        s.co  ?? "",
     price:          s.p   ?? null,
@@ -1176,13 +1189,14 @@ function normalizeHistoricalStock(s) {
 // Main modal
 // ---------------------------------------------------------------------------
 
-const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, date, isLatest, onClose, onAddToClipboard, onMiniCharts }) {
+const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, date, isLatest, onClose, onAddToClipboard, onMiniCharts, dates = null, onNavigate = null }) {
   const [view, setView] = useState("list");
   const [stocks, setStocks] = useState([]);
   const [spxData, setSpxData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedStock, setSelectedStock] = useState(null);
+  const [orderedItems, setOrderedItems] = useState(null);   // Mini Charts order reported by the visible table
   const [archiveRawCount, setArchiveRawCount] = useState(null); // null = live, 0+ = archive raw count
   const abortRef = useRef(null);
 
@@ -1207,8 +1221,9 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
       );
       const data = await res.json();
       const raw = data.filters?.[filter] ?? [];
+      const approxMc = Array.isArray(data.approx) && data.approx.includes("mc");
       setArchiveRawCount(raw.length);
-      setStocks(raw.map(normalizeHistoricalStock));
+      setStocks(raw.map((st) => normalizeHistoricalStock(st, approxMc)));
       setSpxData(null);
     };
 
@@ -1254,12 +1269,23 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     return () => abortRef.current?.abort();
   }, [load]);
 
-  // Close on Escape
+  // Previous / next trading day. `dates` is newest-first (the Market Monitor's rows), so "older" is the next index.
+  const dayIdx = dates && date ? dates.indexOf(date) : -1;
+  const olderDate = dayIdx >= 0 ? (dates[dayIdx + 1] ?? null) : null;
+  const newerDate = dayIdx > 0 ? dates[dayIdx - 1] : null;
+  const goDay = useCallback((d) => { if (d && onNavigate) { setOrderedItems(null); onNavigate(d); } }, [onNavigate]);
+
+  // Close on Escape; ← / → step to the previous / next day (not while a stock's detail overlay is open or a field is focused).
   useEffect(() => {
-    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    const handler = (e) => {
+      if (e.key === "Escape") { onClose(); return; }
+      if (selectedStock || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target?.tagName ?? "")) return;
+      if (e.key === "ArrowLeft") goDay(olderDate);
+      else if (e.key === "ArrowRight") goDay(newerDate);
+    };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [onClose, selectedStock, goDay, olderDate, newerDate]);
 
   // Client-side threshold guard: enforce each scanner's minimum perf cutoff.
   // Uses the NATIVE field directly (no fallback) so that:
@@ -1289,9 +1315,13 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
   // Group view additionally clusters/orders by that industry (matching the
   // table's own grouping); List view keeps the table's own row order and just
   // labels each card, same as everywhere else in the app.
-  const miniChartItems = view === "group"
-    ? groupByIndustry(displayStocks).flatMap((g) => g.items.map((s) => ({ ticker: s.ticker, category: g.industry })))
-    : displayStocks.map((s) => ({ ticker: s.ticker, category: s.industry || null }));
+  // The visible table reports its current order (column sort included) through `orderedItems`; the plain arrays below are only the fallback
+  // for the instant before it has reported.
+  const miniChartItems = orderedItems && orderedItems.length === displayStocks.length
+    ? orderedItems
+    : view === "group"
+      ? groupByIndustry(displayStocks).flatMap((g) => g.items.map((s) => ({ ticker: s.ticker, category: g.industry })))
+      : displayStocks.map((s) => ({ ticker: s.ticker, category: s.industry || null }));
 
   return (
     <>
@@ -1308,9 +1338,19 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <h2 className="text-sm font-semibold text-zinc-100">{filterLabel}</h2>
-              {!isLatest && date && (
-                <span className="rounded bg-amber-900/50 px-1.5 py-0.5 text-[10px] font-medium text-amber-300 border border-amber-700/50">
-                  {date}
+              {date && (
+                <span className="flex items-center gap-0.5">
+                  {dates && (
+                    <button onClick={() => goDay(olderDate)} disabled={!olderDate} title="Previous day (←)" aria-label="Previous day"
+                      className="rounded px-1.5 py-0.5 text-sm leading-none text-zinc-300 hover:bg-zinc-700 disabled:opacity-25 disabled:hover:bg-transparent">‹</button>
+                  )}
+                  <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium border ${isLatest ? "bg-emerald-900/40 text-emerald-300 border-emerald-700/50" : "bg-amber-900/50 text-amber-300 border-amber-700/50"}`}>
+                    {date}
+                  </span>
+                  {dates && (
+                    <button onClick={() => goDay(newerDate)} disabled={!newerDate} title="Next day (→)" aria-label="Next day"
+                      className="rounded px-1.5 py-0.5 text-sm leading-none text-zinc-300 hover:bg-zinc-700 disabled:opacity-25 disabled:hover:bg-transparent">›</button>
+                  )}
                 </span>
               )}
             </div>
@@ -1401,9 +1441,9 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
               </p>
             </div>
           ) : view === "list" ? (
-            <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} />
+            <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} onOrder={setOrderedItems} />
           ) : (
-            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} onAddToClipboard={onAddToClipboard} />
+            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} onAddToClipboard={onAddToClipboard} onOrder={setOrderedItems} />
           )}
         </div>
       </div>
