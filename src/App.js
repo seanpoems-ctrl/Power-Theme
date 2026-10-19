@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from 
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import BreadthStatus from "./BreadthStatus";
+import BreadthBacktest from "./BreadthBacktest";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
 import { ChevronDown, ChevronRight, Activity, RefreshCw, Search, SlidersHorizontal, X, Zap, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
@@ -8017,6 +8018,8 @@ const BreadthCycleTab = React.memo(function BreadthCycleTab() {
       <BreadthStatus enriched={enriched} hist={hist} selDate={sel.date} />
 
       <BreadthRegime enriched={enriched} hist={hist} selDate={sel.date} />
+
+      <BreadthBacktest enriched={enriched} hist={hist} selDate={sel.date} />
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
         <div className="text-[11px] font-semibold tracking-wider text-zinc-500">READ ON {sel.date}</div>
