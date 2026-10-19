@@ -1,6 +1,6 @@
 import React from "react";
 import { createChart, CandlestickSeries, LineSeries, HistogramSeries } from "lightweight-charts";
-import { BREADTH_PHASES } from "./breadthCycle";
+import { BREADTH_PHASES, CONFIRM_SESSIONS } from "./breadthCycle";
 import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, candleOptions, candleData } from "./chartTheme";
 
 // "Market regime vs QQQ" (Breadth → Breadth Cycle): QQQ's daily candles — same look as the Mini / enlarged charts (grey canvas, white / grey outlined
@@ -26,17 +26,21 @@ const px = v => (v == null ? "—" : v.toFixed(2));
 
 // variant "card" = the panel on the Breadth Cycle page; "modal" = the same chart enlarged in an overlay (opened from the card's ⤢ button or by
 // double-clicking the chart, like the Mini Charts).
-export default function BreadthRegime({ enriched, hist, selDate, variant = "card", onClose = null, initialRange = "1Y" }) {
+export default function BreadthRegime({ enriched, hist, selDate, variant = "card", onClose = null, initialRange = "1Y", initialMode = "confirmed" }) {
   const isModal = variant === "modal";
   const [open, setOpen] = React.useState(false);
   const [range, setRange] = React.useState(initialRange);
+  // "confirmed" = a new regime only after 3 sessions in a row (the default; ~75 % fewer colour changes), "raw" = each day's own reading
+  const [mode, setMode] = React.useState(initialMode);
   const [hoverDate, setHoverDate] = React.useState(null);
   const containerRef = React.useRef(null);
   const chartRef = React.useRef(null);
   const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;      // same wrapper fix as MiniChartCard (body { zoom } skews the crosshair)
 
   // phase + strength per breadth date
-  const regimeByDate = React.useMemo(() => new Map((enriched || []).filter(r => r.strength != null).map(r => [r.date, { phase: r.phase, strength: r.strength }])), [enriched]);
+  const regimeByDate = React.useMemo(() => new Map((enriched || []).filter(r => r.strength != null).map(r => [r.date, {
+    phase: mode === "confirmed" && r.confirmed ? r.confirmed : r.phase, raw: r.phase, strength: r.strength, days: r.daysInRegime,
+  }])), [enriched, mode]);
 
   // QQQ candles (all dates, ascending)
   const bars = React.useMemo(() => {
@@ -167,7 +171,14 @@ export default function BreadthRegime({ enriched, hist, selDate, variant = "card
           <div className="text-[11px] font-semibold tracking-wider text-zinc-500">MARKET REGIME VS QQQ</div>
           {curReg && <div className="text-lg font-bold" style={{ color: curReg.color }}>{curReg.label} <span className="text-[12px] font-normal text-zinc-500">· {cur.phase} on {fullDate(lastBar.time)}</span></div>}
         </div>
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 flex-wrap justify-end">
+          <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40"
+            title={`Confirmed: a new regime is shown only after ${CONFIRM_SESSIONS} sessions in a row (far fewer one-day flips, two sessions of lag). Raw: each day's own reading.`}>
+            {[["confirmed", `Confirmed (${CONFIRM_SESSIONS} sessions)`], ["raw", "Raw daily"]].map(([k, l]) => (
+              <button key={k} onClick={() => setMode(k)}
+                className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${mode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>{l}</button>
+            ))}
+          </div>
           <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
             {RANGES.map(([l]) => (
               <button key={l} onClick={() => setRange(l)}
@@ -204,7 +215,7 @@ export default function BreadthRegime({ enriched, hist, selDate, variant = "card
             <span className="ml-auto flex items-center gap-1.5 font-sans">
               <span className="w-2 h-2 rounded-full" style={{ background: REGIMES[reg.phase].color }} />
               <span className="font-bold text-zinc-100">{REGIMES[reg.phase].label}</span>
-              <span className="text-zinc-500">{reg.phase} · strength {reg.strength.toFixed(0)}</span>
+              <span className="text-zinc-500">{reg.phase}{mode === "confirmed" && reg.days != null ? ` · day ${reg.days}` : ""} · strength {reg.strength.toFixed(0)}{reg.raw !== reg.phase ? ` · raw ${REGIMES[reg.raw].label}` : ""}</span>
             </span>
           )}
         </div>
@@ -247,7 +258,7 @@ export default function BreadthRegime({ enriched, hist, selDate, variant = "card
             </tbody>
           </table>
           <p className="mt-2 text-[11px] text-zinc-600 leading-snug">
-            Statistics cover {fullDate(stats.from)} – {fullDate(stats.to)}. The regimes are our own breadth-cycle scoring (strength ≥ 55 and not falling = Risk-on; falling = Caution;
+            Statistics cover {fullDate(stats.from)} – {fullDate(stats.to)} and follow the selected mode. The regimes are our own breadth-cycle scoring (strength ≥ 55 and not falling = Risk-on; falling = Caution;
             low and falling = Risk-off; low but up ≥ 5 pts in 5 sessions = Recovery) — in-sample context for risk appetite, not a trading system. Note what the numbers
             say: Risk-off and Recovery are the BUMPY regimes (roughly twice the volatility and bigger worst days), but QQQ's average return after them has not been lower —
             washed-out breadth is also where many bounces begin. Read the regime as risk level and position-sizing context, not as a sell signal.
@@ -266,7 +277,7 @@ export default function BreadthRegime({ enriched, hist, selDate, variant = "card
   return (
     <>
       {content}
-      {open && <BreadthRegime enriched={enriched} hist={hist} selDate={selDate} variant="modal" initialRange={range} onClose={() => setOpen(false)} />}
+      {open && <BreadthRegime enriched={enriched} hist={hist} selDate={selDate} variant="modal" initialRange={range} initialMode={mode} onClose={() => setOpen(false)} />}
     </>
   );
 }

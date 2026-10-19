@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime from "./BreadthRegime";
+import BreadthStatus from "./BreadthStatus";
 import StageAnalysisCard, { loadStageAnalysis, loadStageStocks, buildStageBrief, buildMoversBrief } from "./StageAnalysis";
 import { ChevronDown, ChevronRight, Activity, RefreshCw, Search, SlidersHorizontal, X, Zap, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
@@ -10,7 +11,7 @@ import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
 import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
-import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle } from "./breadthCycle";
+import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle, addConfirmedPhase } from "./breadthCycle";
 import { buildDataset, scenarioReport } from "./breadthScenario";
 import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from "./chartTheme";
 const CotTab = React.lazy(() => import("./CotTab"));   // loaded only when the COT tab opens
@@ -7877,7 +7878,7 @@ const BreadthCycleTab = React.memo(function BreadthCycleTab() {
   }, [hist, shortRows]);
   const dsIndex = React.useMemo(() => (ds ? new Map(ds.dates.map((d, i) => [d, i])) : null), [ds]);
 
-  const enriched = React.useMemo(() => computeBreadthCycle(rows), [rows]);
+  const enriched = React.useMemo(() => addConfirmedPhase(computeBreadthCycle(rows)), [rows]);     // + confirmed regime (3 sessions in a row), days in regime
   const selIdx = enriched.findIndex(r => r.date === selDate);
   const sel = selIdx >= 0 ? enriched[selIdx] : null;
   // ~4,400 <option>s: build once per data load, not on every Time Machine change.
@@ -7970,6 +7971,8 @@ const BreadthCycleTab = React.memo(function BreadthCycleTab() {
           <p className="text-[10px] text-zinc-600 mt-3">The cycle estimate combines daily ±4% breadth, 5- and 10-day pressure, quarter and 34-day participation, and T2108 (equal weights). It is our own scoring — use it as context, not a mechanical signal.</p>
         </div>
       </div>
+
+      <BreadthStatus enriched={enriched} hist={hist} selDate={sel.date} />
 
       <BreadthRegime enriched={enriched} hist={hist} selDate={sel.date} />
 

@@ -50,6 +50,51 @@ export function computeBreadthCycle(rows) {
   });
 }
 
+// Confirmed regime: a new phase is only adopted after CONFIRM_SESSIONS sessions in a row. On 2009–2026 that cut colour changes by ~75 % (1,678 → 448),
+// removed every one-day regime, and kept the volatility gap between the calm and the bumpy regimes (CLAUDE.md → "Market regime vs QQQ").
+// Cost: a real change is shown two sessions late. Input rows ascending with `.phase`; adds `confirmed`, `daysInRegime` (counted from the first of the
+// confirming sessions), and `pendingPhase` / `pendingCount` (a different raw phase that has not been confirmed yet).
+export const CONFIRM_SESSIONS = 3;
+export function addConfirmedPhase(rows, n = CONFIRM_SESSIONS) {
+  let shown = rows?.[0]?.phase ?? null, cand = null, cnt = 0, start = 0;
+  return (rows || []).map((r, i) => {
+    if (r.phase === shown) { cand = null; cnt = 0; }
+    else if (r.phase === cand) { cnt++; if (cnt >= n) { shown = r.phase; start = i - (n - 1); cand = null; cnt = 0; } }
+    else { cand = r.phase; cnt = 1; if (n <= 1) { shown = r.phase; start = i; cand = null; cnt = 0; } }
+    return { ...r, confirmed: shown, daysInRegime: i - start + 1, pendingPhase: cand, pendingCount: cnt };
+  });
+}
+
+// Exposure guide for a swing trader: the confirmed regime paired with QQQ's own trend (+ T2108). Built from the backtests in CLAUDE.md: the
+// confirmed Risk-off regime AND QQQ below its 50-day EMA was the best pairing (it beat the regime alone in every window); the 9 / 21 EMAs were
+// worse as market-level exits (too noisy), so the 21-day only tightens things up and the 200-day is the bear-market line.
+//   confirmed: "Expansion" | "Repair" | "Distribution" | "Contraction";  qqq: { close, e21, e50, s200 } (any may be missing)
+// Returns { key: full | build | reduce | defensive | bounce, label, tone: ok | info | warn | bad, line, why: [...] }.
+export function exposureGuide({ confirmed, t2108, qqq } = {}) {
+  const ge = (a, b) => (a != null && b != null ? a >= b : null);
+  const a21 = ge(qqq?.close, qqq?.e21), a50 = ge(qqq?.close, qqq?.e50), a200 = ge(qqq?.close, qqq?.s200);
+  const washed = t2108 != null && t2108 < 20;
+  const res = (key, label, tone, line, why) => ({ key, label, tone, line, why });
+  const trend = [];
+  if (a21 === false) trend.push("QQQ below its 21-day EMA");
+  if (a50 === false) trend.push("QQQ below its 50-day EMA");
+  if (a200 === false) trend.push("QQQ below its 200-day average");
+  if (confirmed === "Contraction") {
+    if (washed) return res("bounce", "Bounce watch", "info", "Breadth is washed out (T2108 under 20). Small, short-term trades only — don't chase new lows.", ["Confirmed Risk-off", "T2108 under 20", ...trend]);
+    if (a50 === false || a200 === false) return res("defensive", "Defensive", "bad", "No new longs except top-quality names. Smaller size, tight stops.", ["Confirmed Risk-off", ...trend]);
+    return res("reduce", "Reduce", "warn", "Breadth is weak but QQQ still holds its 50-day. Half size, tighten stops, fewer new entries.", ["Confirmed Risk-off", "QQQ above its 50-day EMA"]);
+  }
+  if (confirmed === "Distribution") return res("reduce", "Reduce", "warn", "Participation is fading. Half size, tighten stops, don't add to extended names.", ["Confirmed Caution", ...trend]);
+  if (confirmed === "Expansion" || confirmed === "Repair") {
+    const name = confirmed === "Expansion" ? "Confirmed Risk-on" : "Confirmed Recovery";
+    if (a50 === false) return res("reduce", "Reduce", "warn", "Breadth looks better, but QQQ is below its 50-day EMA. Keep size down until it reclaims it.", [name, ...trend]);
+    if (a21 === false) return res("reduce", "Reduce", "warn", "QQQ has slipped under its 21-day EMA. Tighten stops and slow new entries until it recovers.", [name, ...trend]);
+    if (confirmed === "Repair") return res("build", "Build", "info", "Breadth is recovering from weak levels and QQQ is above its 21 and 50-day. Starter positions; add as it turns Risk-on.", [name, "QQQ above its 21 and 50-day EMAs"]);
+    return res("full", "Full size", "ok", "Broad participation and QQQ above its 21 and 50-day EMAs. Normal size — press quality breakouts.", [name, "QQQ above its 21 and 50-day EMAs"]);
+  }
+  return res("reduce", "No read", "warn", "Not enough data for a regime read.", []);
+}
+
 // The most recent session's cycle reading (or null).
 export function latestBreadthCycle(rows) {
   const all = computeBreadthCycle(rows);

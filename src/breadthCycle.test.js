@@ -1,4 +1,4 @@
-import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence } from "./breadthCycle";
+import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide } from "./breadthCycle";
 
 const row = (date, over = {}) => ({
   date, up_4_pct: 200, down_4_pct: 200, ratio_5d: 1, ratio_10d: 1, up_25_q: 1000, down_25_q: 1000,
@@ -71,4 +71,26 @@ describe("breadthDivergence", () => {
     expect(breadthDivergence("yellow", cyc("Expansion", 70))).toBeNull();
     expect(breadthDivergence("green", cyc("Repair", 38.4, 23.78)).text).toMatch(/strength 38.*T2108 23\.8%/);
   });
+});
+
+test("confirmed regime needs 3 sessions in a row and counts days from the first confirming session", () => {
+  const ph = ["Expansion", "Expansion", "Contraction", "Expansion", "Contraction", "Contraction", "Contraction", "Contraction", "Repair"];
+  const out = addConfirmedPhase(ph.map((phase, i) => ({ date: `d${i}`, phase })));
+  expect(out.map(r => r.confirmed)).toEqual(["Expansion", "Expansion", "Expansion", "Expansion", "Expansion", "Expansion", "Contraction", "Contraction", "Contraction"]);
+  expect(out[6].daysInRegime).toBe(3);                 // confirmed at index 6, the run began at index 4
+  expect(out[7].daysInRegime).toBe(4);
+  expect(out[8].pendingPhase).toBe("Repair");          // a different raw phase waiting for confirmation
+  expect(out[8].pendingCount).toBe(1);
+});
+
+test("exposure guide pairs the confirmed regime with QQQ's trend and T2108", () => {
+  const up = { close: 110, e21: 105, e50: 100, s200: 90 };
+  expect(exposureGuide({ confirmed: "Expansion", t2108: 60, qqq: up }).key).toBe("full");
+  expect(exposureGuide({ confirmed: "Repair", t2108: 40, qqq: up }).key).toBe("build");
+  expect(exposureGuide({ confirmed: "Distribution", t2108: 55, qqq: up }).key).toBe("reduce");
+  expect(exposureGuide({ confirmed: "Expansion", t2108: 60, qqq: { ...up, e21: 120 } }).key).toBe("reduce");          // below the 21-day
+  expect(exposureGuide({ confirmed: "Expansion", t2108: 60, qqq: { ...up, e50: 120 } }).key).toBe("reduce");          // below the 50-day
+  expect(exposureGuide({ confirmed: "Contraction", t2108: 35, qqq: { ...up, e50: 120 } }).key).toBe("defensive");
+  expect(exposureGuide({ confirmed: "Contraction", t2108: 35, qqq: up }).key).toBe("reduce");                          // Risk-off but QQQ holds its 50-day
+  expect(exposureGuide({ confirmed: "Contraction", t2108: 12, qqq: { ...up, e50: 120 } }).key).toBe("bounce");         // washed out
 });
