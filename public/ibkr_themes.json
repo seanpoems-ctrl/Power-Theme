@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-19T23:05:39.688462+00:00",
+  "generated_at": "2026-10-20T01:36:56.566389+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Other",
-      "theme_rs": 94.6,
+      "theme_rs": 94.7,
       "perf_1d": 7.5,
       "leaders": [
         {
@@ -65,6 +65,25 @@
           "setup_label": "Flag"
         },
         {
+          "ticker": "MRVL",
+          "price": 237.09,
+          "rs_52w": 95,
+          "adr_pct": 6.78,
+          "vol_surge": 0.82,
+          "mkt_cap": 213073873405,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
           "ticker": "UMC",
           "price": 20.08,
           "rs_52w": 95,
@@ -82,25 +101,6 @@
           "primary_theme": "Other",
           "secondary_themes": [],
           "setup_label": "Base"
-        },
-        {
-          "ticker": "MRVL",
-          "price": 237.09,
-          "rs_52w": 94,
-          "adr_pct": 6.78,
-          "vol_surge": 0.81,
-          "mkt_cap": 213073873405,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
         },
         {
           "ticker": "CLF",
@@ -127,7 +127,7 @@
           "rs_52w": 91,
           "adr_pct": 6.33,
           "vol_surge": 0.95,
-          "mkt_cap": 483574050355,
+          "mkt_cap": 486480260809,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,

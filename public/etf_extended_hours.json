@@ -1,779 +1,179 @@
 {
- "generated_at": "2026-10-19 19:09 ET",
+ "generated_at": "2026-10-19 21:41 ET",
  "etfs": {
   "DXYZ": {
    "premarket": -0.57,
-   "afterhours": -0.04
+   "afterhours": 0.32
   },
   "VCX": {
    "premarket": 0.49,
-   "afterhours": 0.76
-  },
-  "BLOK": {
-   "premarket": 1.41,
-   "afterhours": 0.0
-  },
-  "ARKW": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "IWM": {
-   "premarket": 0.5,
-   "afterhours": 0.08
-  },
-  "ROBO": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "ESGU": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "MJ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "IVW": {
-   "premarket": 1.04,
-   "afterhours": -0.01
-  },
-  "EWZ": {
-   "premarket": 1.34,
-   "afterhours": 0.56
-  },
-  "XRPI": {
-   "premarket": 0.33,
-   "afterhours": 0.29
-  },
-  "LIT": {
-   "premarket": 0.78,
-   "afterhours": 0.0
-  },
-  "UX": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "XSD": {
-   "premarket": 3.57,
-   "afterhours": -0.05
-  },
-  "KRE": {
-   "premarket": 0.03,
-   "afterhours": 0.2
-  },
-  "RSPG": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "EWY": {
-   "premarket": 5.77,
-   "afterhours": 0.73
-  },
-  "REMX": {
-   "premarket": -0.17,
-   "afterhours": 0.0
-  },
-  "ETHA": {
-   "premarket": 0.39,
-   "afterhours": 0.55
-  },
-  "AWAY": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "EEM": {
-   "premarket": 1.54,
-   "afterhours": 0.0
-  },
-  "IGF": {
-   "premarket": 0.0,
-   "afterhours": 0.0
-  },
-  "IYC": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "KRBN": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "KWEB": {
-   "premarket": 0.49,
-   "afterhours": 0.04
-  },
-  "IBB": {
-   "premarket": 0.5,
-   "afterhours": -0.11
-  },
-  "GNR": {
-   "premarket": -0.36,
-   "afterhours": 0.0
-  },
-  "SILJ": {
-   "premarket": -0.58,
-   "afterhours": 0.86
-  },
-  "GXC": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "USO": {
-   "premarket": -1.71,
-   "afterhours": -0.09
-  },
-  "WGMI": {
-   "premarket": 5.47,
-   "afterhours": 2.0
-  },
-  "UNG": {
-   "premarket": -0.19,
-   "afterhours": 0.0
-  },
-  "ENFR": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "IJK": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "PALL": {
-   "premarket": 1.44,
-   "afterhours": -0.05
-  },
-  "NASA": {
-   "premarket": 1.74,
-   "afterhours": 0.24
-  },
-  "BITW": {
-   "premarket": 1.45,
-   "afterhours": null
-  },
-  "SVIX": {
-   "premarket": 3.72,
-   "afterhours": 0.36
-  },
-  "XLK": {
-   "premarket": 1.9,
-   "afterhours": 0.08
-  },
-  "SHLD": {
-   "premarket": -0.49,
-   "afterhours": 0.41
-  },
-  "EUV": {
-   "premarket": 4.04,
-   "afterhours": 0.88
-  },
-  "ICLN": {
-   "premarket": 0.98,
-   "afterhours": 0.0
-  },
-  "RSPU": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "NCLD": {
-   "premarket": 6.28,
-   "afterhours": 0.18
-  },
-  "SHE": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "BETZ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "ARKF": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "SMH": {
-   "premarket": 3.13,
-   "afterhours": 0.3
-  },
-  "IAI": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "METV": {
-   "premarket": 0.85,
-   "afterhours": 0.0
-  },
-  "XOP": {
-   "premarket": -0.41,
-   "afterhours": 0.15
-  },
-  "RSPD": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "ESPO": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "FOTO": {
-   "premarket": 4.65,
-   "afterhours": 0.75
-  },
-  "SLX": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "SOLZ": {
-   "premarket": 2.05,
-   "afterhours": 0.52
-  },
-  "MEME": {
-   "premarket": 3.87,
-   "afterhours": 0.0
-  },
-  "WEED": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "ITA": {
-   "premarket": -0.41,
-   "afterhours": 0.68
-  },
-  "GBTC": {
-   "premarket": 1.21,
-   "afterhours": 0.25
-  },
-  "XLY": {
-   "premarket": 0.48,
-   "afterhours": 0.61
+   "afterhours": -0.17
   },
   "IYK": {
    "premarket": -0.27,
    "afterhours": 0.0
   },
-  "XHE": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "SCHH": {
-   "premarket": -1.02,
-   "afterhours": 0.48
-  },
-  "LOHA": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "MOO": {
-   "premarket": -0.24,
-   "afterhours": -0.04
-  },
-  "KURE": {
+  "ARKF": {
    "premarket": null,
    "afterhours": 0.0
-  },
-  "LYTE": {
-   "premarket": 2.88,
-   "afterhours": 0.3
   },
   "RSP": {
    "premarket": 0.07,
    "afterhours": 0.01
   },
-  "CLOU": {
+  "RSPS": {
    "premarket": null,
-   "afterhours": 0.0
+   "afterhours": null
   },
-  "FDN": {
-   "premarket": null,
-   "afterhours": 0.0
+  "GLD": {
+   "premarket": -0.15,
+   "afterhours": -0.26
   },
-  "MTUM": {
-   "premarket": 1.7,
-   "afterhours": -0.12
+  "XLE": {
+   "premarket": -0.53,
+   "afterhours": 0.14
   },
-  "XLRE": {
-   "premarket": -0.09,
-   "afterhours": 0.0
+  "BAI": {
+   "premarket": 3.25,
+   "afterhours": 0.27
+  },
+  "NANC": {
+   "premarket": 1.43,
+   "afterhours": -0.39
+  },
+  "GBTC": {
+   "premarket": 1.21,
+   "afterhours": 0.25
+  },
+  "EUV": {
+   "premarket": 4.04,
+   "afterhours": 0.57
+  },
+  "SVIX": {
+   "premarket": 3.72,
+   "afterhours": 0.36
+  },
+  "XRT": {
+   "premarket": 0.32,
+   "afterhours": -0.07
+  },
+  "CRAK": {
+   "premarket": -0.36,
+   "afterhours": 0.68
   },
   "IPAY": {
    "premarket": null,
    "afterhours": null
   },
-  "RSPH": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "IJH": {
-   "premarket": 0.46,
+  "XLU": {
+   "premarket": -0.14,
    "afterhours": 0.1
   },
-  "NERD": {
+  "SHLD": {
+   "premarket": -0.49,
+   "afterhours": 0.69
+  },
+  "BITW": {
+   "premarket": 1.45,
+   "afterhours": null
+  },
+  "PALL": {
+   "premarket": 1.44,
+   "afterhours": -0.05
+  },
+  "BUZZ": {
+   "premarket": 3.35,
+   "afterhours": null
+  },
+  "HUMN": {
+   "premarket": 4.05,
+   "afterhours": -3.53
+  },
+  "ERTH": {
    "premarket": null,
    "afterhours": null
   },
-  "XHS": {
+  "ILF": {
+   "premarket": 0.51,
+   "afterhours": -0.16
+  },
+  "PBE": {
    "premarket": null,
    "afterhours": null
   },
-  "IVV": {
-   "premarket": 0.53,
-   "afterhours": 0.12
+  "RSPT": {
+   "premarket": 1.79,
+   "afterhours": 0.17
   },
-  "ASHR": {
-   "premarket": 1.12,
-   "afterhours": 0.54
-  },
-  "SOXX": {
-   "premarket": 3.59,
-   "afterhours": 0.38
-  },
-  "QQQ": {
-   "premarket": 1.38,
-   "afterhours": 0.18
-  },
-  "IYG": {
+  "XTN": {
    "premarket": null,
    "afterhours": 0.0
   },
-  "ZCSH": {
-   "premarket": -0.23,
-   "afterhours": 4.33
-  },
-  "FFTY": {
+  "XES": {
    "premarket": null,
-   "afterhours": 0.0
-  },
-  "QTUM": {
-   "premarket": 2.0,
-   "afterhours": 0.0
-  },
-  "GDX": {
-   "premarket": -0.7,
-   "afterhours": 0.13
-  },
-  "XTL": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "BUG": {
-   "premarket": 1.49,
-   "afterhours": 0.0
-  },
-  "TAN": {
-   "premarket": 1.1,
-   "afterhours": 0.0
-  },
-  "GLD": {
-   "premarket": -0.15,
-   "afterhours": -0.14
-  },
-  "GUNR": {
-   "premarket": -0.58,
-   "afterhours": 0.0
-  },
-  "HLAL": {
-   "premarket": 0.84,
-   "afterhours": 0.0
-  },
-  "NLR": {
-   "premarket": 1.4,
-   "afterhours": 0.35
-  },
-  "KIE": {
-   "premarket": -0.43,
    "afterhours": 0.0
   },
   "IJR": {
    "premarket": 0.52,
    "afterhours": -0.15
   },
-  "SPMO": {
-   "premarket": 1.19,
-   "afterhours": 0.07
+  "XLF": {
+   "premarket": -0.34,
+   "afterhours": 0.05
   },
-  "RSPT": {
-   "premarket": 1.79,
-   "afterhours": 0.0
+  "IBIT": {
+   "premarket": 1.04,
+   "afterhours": 0.04
   },
-  "RSPM": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "ARKX": {
-   "premarket": 1.22,
-   "afterhours": 0.0
-  },
-  "KCE": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "HUMN": {
-   "premarket": 4.05,
-   "afterhours": 0.0
-  },
-  "MARS": {
-   "premarket": 1.08,
-   "afterhours": 0.0
-  },
-  "FTXG": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "USCA": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "BOTZ": {
-   "premarket": 1.24,
-   "afterhours": 0.0
-  },
-  "ILF": {
-   "premarket": 0.51,
-   "afterhours": 0.0
+  "URNM": {
+   "premarket": 1.44,
+   "afterhours": -0.01
   },
   "AMLP": {
    "premarket": -0.25,
    "afterhours": 0.0
   },
-  "IDGT": {
-   "premarket": null,
-   "afterhours": null
+  "NASA": {
+   "premarket": 1.74,
+   "afterhours": 0.2
   },
-  "SLV": {
-   "premarket": 0.78,
-   "afterhours": -0.33
-  },
-  "PRNT": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "PSIL": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "SKYY": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "SIL": {
-   "premarket": 0.0,
-   "afterhours": 0.07
-  },
-  "FRI": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "COPX": {
-   "premarket": -0.46,
-   "afterhours": -0.46
-  },
-  "QQQE": {
-   "premarket": null,
-   "afterhours": -0.19
-  },
-  "OZEM": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "ERTH": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "GRID": {
-   "premarket": 1.35,
-   "afterhours": 0.0
-  },
-  "CABZ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "SOCL": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "XTN": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "CNBS": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "NANC": {
-   "premarket": 1.43,
-   "afterhours": -0.39
-  },
-  "XLI": {
-   "premarket": 0.59,
-   "afterhours": 0.08
-  },
-  "XLV": {
-   "premarket": -0.52,
-   "afterhours": -0.03
-  },
-  "IHI": {
-   "premarket": -0.07,
-   "afterhours": 0.0
+  "GDXJ": {
+   "premarket": -0.65,
+   "afterhours": -0.15
   },
   "RSPN": {
    "premarket": null,
    "afterhours": null
   },
-  "XME": {
-   "premarket": 1.83,
-   "afterhours": 0.01
-  },
-  "PAWZ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "IYT": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "IVE": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "GENZ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "BUZZ": {
-   "premarket": 3.35,
-   "afterhours": null
-  },
-  "RSPC": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "XLB": {
-   "premarket": 0.26,
-   "afterhours": -0.16
-  },
-  "IEO": {
-   "premarket": -0.28,
-   "afterhours": 0.0
-  },
-  "HOMZ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "CHAT": {
-   "premarket": 2.62,
-   "afterhours": 0.72
-  },
-  "BOAT": {
-   "premarket": 0.08,
-   "afterhours": -0.48
-  },
-  "IJS": {
-   "premarket": 0.36,
-   "afterhours": 0.0
-  },
-  "MAGS": {
-   "premarket": 0.63,
-   "afterhours": 0.1
-  },
-  "ARGT": {
-   "premarket": -0.01,
-   "afterhours": 0.0
-  },
-  "IBIT": {
-   "premarket": 1.04,
-   "afterhours": 0.28
-  },
-  "WCLD": {
-   "premarket": 1.28,
-   "afterhours": 0.0
-  },
-  "XLC": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "XHB": {
-   "premarket": 0.24,
-   "afterhours": 0.16
-  },
-  "ARKG": {
-   "premarket": 1.39,
-   "afterhours": 0.17
-  },
-  "PAVE": {
-   "premarket": 0.81,
-   "afterhours": 0.04
-  },
-  "URNM": {
-   "premarket": 1.44,
-   "afterhours": 0.26
-  },
-  "PHO": {
-   "premarket": -0.37,
-   "afterhours": 0.0
-  },
-  "CHIQ": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "XRT": {
-   "premarket": 0.32,
-   "afterhours": -0.07
-  },
-  "RTH": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "XLF": {
-   "premarket": -0.34,
-   "afterhours": 0.12
-  },
-  "XES": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "WOOD": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "MSOS": {
-   "premarket": 1.29,
-   "afterhours": 0.52
-  },
-  "XSW": {
-   "premarket": 0.17,
-   "afterhours": 0.0
-  },
-  "XBI": {
-   "premarket": 0.96,
-   "afterhours": 0.01
-  },
-  "BAI": {
-   "premarket": 3.25,
-   "afterhours": 0.27
-  },
-  "DRIV": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "FDRV": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "IJJ": {
-   "premarket": 1.09,
-   "afterhours": 0.0
-  },
-  "IHF": {
-   "premarket": -0.49,
-   "afterhours": 0.41
-  },
-  "FXI": {
-   "premarket": 0.27,
-   "afterhours": 0.21
-  },
-  "DRAM": {
-   "premarket": 5.06,
-   "afterhours": 0.46
-  },
-  "JETS": {
-   "premarket": 0.93,
-   "afterhours": 0.0
-  },
-  "SPY": {
-   "premarket": 0.52,
-   "afterhours": 0.13
-  },
-  "HACK": {
-   "premarket": 0.85,
-   "afterhours": 0.0
-  },
-  "AIQ": {
-   "premarket": 1.53,
+  "MEME": {
+   "premarket": 3.87,
    "afterhours": 0.0
   },
   "RSPR": {
    "premarket": null,
    "afterhours": 0.0
   },
-  "PEJ": {
-   "premarket": null,
-   "afterhours": 0.11
+  "BOTZ": {
+   "premarket": 1.24,
+   "afterhours": 0.03
   },
-  "TLT": {
-   "premarket": -0.19,
-   "afterhours": 0.1
-  },
-  "PBE": {
-   "premarket": null,
-   "afterhours": null
-  },
-  "CIBR": {
-   "premarket": 1.4,
-   "afterhours": -0.03
-  },
-  "DIA": {
-   "premarket": -0.13,
-   "afterhours": 0.11
-  },
-  "URA": {
-   "premarket": 1.69,
-   "afterhours": 0.37
-  },
-  "RSPF": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "ITB": {
-   "premarket": 0.25,
-   "afterhours": 0.0
+  "ICLN": {
+   "premarket": 0.98,
+   "afterhours": -0.37
   },
   "OIH": {
    "premarket": 1.04,
-   "afterhours": 0.0
+   "afterhours": 0.36
   },
-  "ARKK": {
-   "premarket": 1.78,
-   "afterhours": 0.87
-  },
-  "IYZ": {
-   "premarket": 0.56,
-   "afterhours": 0.0
-  },
-  "CRAK": {
-   "premarket": -0.36,
-   "afterhours": 0.0
-  },
-  "PPH": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "RACK": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "IJT": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "CANC": {
+  "LOHA": {
    "premarket": null,
    "afterhours": null
   },
-  "KBE": {
-   "premarket": 0.02,
-   "afterhours": -0.63
+  "METV": {
+   "premarket": 0.85,
+   "afterhours": 0.0
   },
-  "PLTM": {
-   "premarket": 0.7,
-   "afterhours": 0.13
-  },
-  "IGV": {
-   "premarket": 0.73,
-   "afterhours": 0.03
-  },
-  "XLP": {
-   "premarket": -0.8,
-   "afterhours": 0.03
-  },
-  "RSPS": {
+  "RSPG": {
    "premarket": null,
    "afterhours": null
   },
@@ -781,71 +181,671 @@
    "premarket": null,
    "afterhours": 0.0
   },
-  "BWET": {
-   "premarket": null,
-   "afterhours": -1.42
-  },
-  "HYDR": {
-   "premarket": null,
-   "afterhours": 0.0
-  },
-  "XLE": {
-   "premarket": -0.53,
-   "afterhours": 0.07
-  },
-  "UFO": {
-   "premarket": 1.17,
-   "afterhours": -1.02
-  },
   "IAK": {
    "premarket": null,
    "afterhours": 0.0
   },
-  "ARKQ": {
-   "premarket": 1.57,
-   "afterhours": 0.0
+  "COPX": {
+   "premarket": -0.46,
+   "afterhours": -0.28
   },
-  "FCG": {
-   "premarket": -0.32,
-   "afterhours": -0.13
+  "XHE": {
+   "premarket": null,
+   "afterhours": null
   },
-  "GDXJ": {
-   "premarket": -0.65,
-   "afterhours": 0.22
+  "KWEB": {
+   "premarket": 0.49,
+   "afterhours": 0.16
   },
-  "FAN": {
+  "VEGI": {
    "premarket": null,
    "afterhours": 0.0
+  },
+  "IJT": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "NERD": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "XHB": {
+   "premarket": 0.24,
+   "afterhours": 0.16
+  },
+  "TLT": {
+   "premarket": -0.19,
+   "afterhours": 0.08
+  },
+  "GRID": {
+   "premarket": 1.35,
+   "afterhours": 0.0
+  },
+  "MARS": {
+   "premarket": 1.08,
+   "afterhours": 0.0
+  },
+  "IJS": {
+   "premarket": 0.36,
+   "afterhours": 0.0
+  },
+  "XLRE": {
+   "premarket": -0.09,
+   "afterhours": -0.17
+  },
+  "WGMI": {
+   "premarket": 5.47,
+   "afterhours": 1.49
+  },
+  "SOXX": {
+   "premarket": 3.59,
+   "afterhours": 0.17
+  },
+  "LIT": {
+   "premarket": 0.78,
+   "afterhours": 0.02
+  },
+  "PRNT": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "ITA": {
+   "premarket": -0.41,
+   "afterhours": 0.68
+  },
+  "KRBN": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "KCE": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "GENZ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "XSD": {
+   "premarket": 3.57,
+   "afterhours": -0.05
+  },
+  "RSPF": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "PPH": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "KIE": {
+   "premarket": -0.43,
+   "afterhours": 0.0
+  },
+  "SPY": {
+   "premarket": 0.52,
+   "afterhours": 0.13
+  },
+  "SKYY": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "SMH": {
+   "premarket": 3.13,
+   "afterhours": 0.04
+  },
+  "CNBS": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "IVW": {
+   "premarket": 1.04,
+   "afterhours": -0.01
+  },
+  "IVE": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "JETS": {
+   "premarket": 0.93,
+   "afterhours": 0.0
+  },
+  "GUNR": {
+   "premarket": -0.58,
+   "afterhours": 0.0
+  },
+  "LYTE": {
+   "premarket": 2.88,
+   "afterhours": 0.45
+  },
+  "XLC": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "IYG": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "HELX": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "MSOS": {
+   "premarket": 1.29,
+   "afterhours": 0.52
+  },
+  "IGF": {
+   "premarket": 0.0,
+   "afterhours": 0.0
+  },
+  "DRAM": {
+   "premarket": 5.06,
+   "afterhours": 0.0
+  },
+  "AWAY": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "KBE": {
+   "premarket": 0.02,
+   "afterhours": -0.63
+  },
+  "XLV": {
+   "premarket": -0.52,
+   "afterhours": -0.03
+  },
+  "RACK": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "DIA": {
+   "premarket": -0.13,
+   "afterhours": 0.12
+  },
+  "XBI": {
+   "premarket": 0.96,
+   "afterhours": 0.05
+  },
+  "IHI": {
+   "premarket": -0.07,
+   "afterhours": 0.0
+  },
+  "CABZ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "CLOU": {
+   "premarket": null,
+   "afterhours": -0.07
+  },
+  "IWM": {
+   "premarket": 0.5,
+   "afterhours": 0.07
+  },
+  "PBJ": {
+   "premarket": null,
+   "afterhours": 0.22
+  },
+  "PEJ": {
+   "premarket": null,
+   "afterhours": 0.11
+  },
+  "FTXG": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "IVV": {
+   "premarket": 0.53,
+   "afterhours": 0.14
+  },
+  "DRIV": {
+   "premarket": null,
+   "afterhours": 1.98
+  },
+  "XHS": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "ARKG": {
+   "premarket": 1.39,
+   "afterhours": 0.17
+  },
+  "BOAT": {
+   "premarket": 0.08,
+   "afterhours": -0.48
+  },
+  "BUG": {
+   "premarket": 1.49,
+   "afterhours": 0.51
+  },
+  "ZCSH": {
+   "premarket": -0.23,
+   "afterhours": 2.05
+  },
+  "GNR": {
+   "premarket": -0.36,
+   "afterhours": 0.0
+  },
+  "USCA": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "QQQ": {
+   "premarket": 1.38,
+   "afterhours": 0.09
+  },
+  "TAN": {
+   "premarket": 1.1,
+   "afterhours": 0.0
+  },
+  "IDGT": {
+   "premarket": null,
+   "afterhours": null
   },
   "XAR": {
    "premarket": 0.09,
    "afterhours": 0.04
   },
-  "XPH": {
-   "premarket": 0.26,
+  "MAGS": {
+   "premarket": 0.63,
+   "afterhours": 0.04
+  },
+  "IYZ": {
+   "premarket": 0.56,
+   "afterhours": 0.0
+  },
+  "ARGT": {
+   "premarket": -0.01,
+   "afterhours": 0.0
+  },
+  "PSIL": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "EWY": {
+   "premarket": 5.77,
+   "afterhours": 0.13
+  },
+  "SPMO": {
+   "premarket": 1.19,
+   "afterhours": 0.06
+  },
+  "ARKW": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "NCLD": {
+   "premarket": 6.28,
+   "afterhours": 0.83
+  },
+  "IGV": {
+   "premarket": 0.73,
+   "afterhours": -0.27
+  },
+  "AIQ": {
+   "premarket": 1.53,
+   "afterhours": 0.0
+  },
+  "PAWZ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "PAVE": {
+   "premarket": 0.81,
+   "afterhours": -0.08
+  },
+  "ARKK": {
+   "premarket": 1.78,
+   "afterhours": 0.23
+  },
+  "BETZ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "XLI": {
+   "premarket": 0.59,
+   "afterhours": 0.08
+  },
+  "ARKX": {
+   "premarket": 1.22,
+   "afterhours": 0.1
+  },
+  "ESGU": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "KURE": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "MOO": {
+   "premarket": -0.24,
+   "afterhours": -0.04
+  },
+  "IHF": {
+   "premarket": -0.49,
+   "afterhours": 0.41
+  },
+  "OZEM": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "FDRV": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "ITB": {
+   "premarket": 0.25,
+   "afterhours": 0.0
+  },
+  "IJK": {
+   "premarket": null,
    "afterhours": 0.0
   },
   "EVX": {
    "premarket": 0.32,
    "afterhours": null
   },
-  "XLU": {
-   "premarket": -0.14,
-   "afterhours": 0.05
+  "GDX": {
+   "premarket": -0.7,
+   "afterhours": -0.19
   },
-  "PBJ": {
-   "premarket": null,
-   "afterhours": 0.22
+  "USO": {
+   "premarket": -1.71,
+   "afterhours": -0.22
   },
-  "HELX": {
+  "WEED": {
    "premarket": null,
    "afterhours": null
   },
-  "VEGI": {
+  "MJ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "XRPI": {
+   "premarket": 0.33,
+   "afterhours": 0.29
+  },
+  "SHE": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "CHIQ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "EWZ": {
+   "premarket": 1.34,
+   "afterhours": 0.56
+  },
+  "ARKQ": {
+   "premarket": 1.57,
+   "afterhours": 0.0
+  },
+  "XPH": {
+   "premarket": 0.26,
+   "afterhours": 0.0
+  },
+  "XTL": {
    "premarket": null,
    "afterhours": 0.0
   },
+  "XLY": {
+   "premarket": 0.48,
+   "afterhours": -0.01
+  },
+  "XLP": {
+   "premarket": -0.8,
+   "afterhours": 0.19
+  },
+  "BWET": {
+   "premarket": null,
+   "afterhours": -1.42
+  },
+  "RTH": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "CANC": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "BLOK": {
+   "premarket": 1.41,
+   "afterhours": 0.0
+  },
+  "FXI": {
+   "premarket": 0.27,
+   "afterhours": 0.21
+  },
+  "XLB": {
+   "premarket": 0.26,
+   "afterhours": -0.16
+  },
+  "XLK": {
+   "premarket": 1.9,
+   "afterhours": 0.12
+  },
+  "RSPC": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "XOP": {
+   "premarket": -0.41,
+   "afterhours": 0.0
+  },
+  "FFTY": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "HOMZ": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "URA": {
+   "premarket": 1.69,
+   "afterhours": 0.31
+  },
+  "HACK": {
+   "premarket": 0.85,
+   "afterhours": 0.49
+  },
+  "PLTM": {
+   "premarket": 0.7,
+   "afterhours": 0.13
+  },
+  "RSPH": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "SLX": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "IEO": {
+   "premarket": -0.28,
+   "afterhours": 0.0
+  },
+  "NLR": {
+   "premarket": 1.4,
+   "afterhours": 0.35
+  },
+  "ETHA": {
+   "premarket": 0.39,
+   "afterhours": 0.61
+  },
+  "HLAL": {
+   "premarket": 0.84,
+   "afterhours": 0.0
+  },
+  "SOLZ": {
+   "premarket": 2.05,
+   "afterhours": 1.42
+  },
+  "CHAT": {
+   "premarket": 2.62,
+   "afterhours": 0.72
+  },
+  "SOCL": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "XME": {
+   "premarket": 1.83,
+   "afterhours": 0.01
+  },
+  "WCLD": {
+   "premarket": 1.28,
+   "afterhours": -0.61
+  },
+  "CIBR": {
+   "premarket": 1.4,
+   "afterhours": -0.03
+  },
+  "RSPM": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "FAN": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "FDN": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "ESPO": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "ROBO": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "FCG": {
+   "premarket": -0.32,
+   "afterhours": 0.57
+  },
+  "RSPD": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "ASHR": {
+   "premarket": 1.12,
+   "afterhours": 0.54
+  },
+  "FOTO": {
+   "premarket": 4.65,
+   "afterhours": 0.75
+  },
+  "FRI": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "XSW": {
+   "premarket": 0.17,
+   "afterhours": 0.0
+  },
+  "IAI": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "IYT": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "KRE": {
+   "premarket": 0.03,
+   "afterhours": 0.06
+  },
+  "HYDR": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "SIL": {
+   "premarket": 0.0,
+   "afterhours": -0.1
+  },
+  "IJJ": {
+   "premarket": 1.09,
+   "afterhours": 0.0
+  },
+  "IYC": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "SLV": {
+   "premarket": 0.78,
+   "afterhours": -0.35
+  },
+  "QQQE": {
+   "premarket": null,
+   "afterhours": -0.19
+  },
+  "ENFR": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "SILJ": {
+   "premarket": -0.58,
+   "afterhours": -0.28
+  },
+  "EEM": {
+   "premarket": 1.54,
+   "afterhours": 0.0
+  },
+  "IBB": {
+   "premarket": 0.5,
+   "afterhours": -0.11
+  },
+  "GXC": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "SCHH": {
+   "premarket": -1.02,
+   "afterhours": -0.09
+  },
+  "UNG": {
+   "premarket": -0.19,
+   "afterhours": 0.02
+  },
+  "REMX": {
+   "premarket": -0.17,
+   "afterhours": 0.0
+  },
+  "UFO": {
+   "premarket": 1.17,
+   "afterhours": -1.02
+  },
   "IBUY": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "MTUM": {
+   "premarket": 1.7,
+   "afterhours": -0.12
+  },
+  "WOOD": {
+   "premarket": null,
+   "afterhours": null
+  },
+  "PHO": {
+   "premarket": -0.37,
+   "afterhours": 0.0
+  },
+  "QTUM": {
+   "premarket": 2.0,
+   "afterhours": -0.46
+  },
+  "IJH": {
+   "premarket": 0.46,
+   "afterhours": 0.1
+  },
+  "RSPU": {
+   "premarket": null,
+   "afterhours": 0.0
+  },
+  "UX": {
    "premarket": null,
    "afterhours": null
   }
