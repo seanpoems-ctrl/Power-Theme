@@ -3,16 +3,33 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 0,
-  "stocks": [],
+  "count": 1,
+  "stocks": [
+    {
+      "ticker": "CIFR",
+      "company": "Cipher Digital Inc.",
+      "industry": "Data Processing Services",
+      "market_cap_b": 3.685,
+      "price": 8.88,
+      "change_pct": -0.67,
+      "dollar_volume": "$526.3M",
+      "adr_pct": 14.1,
+      "perf_1m": -50.11,
+      "perf_3m": -60.45,
+      "perf_34d": null,
+      "perf_qtd": -60.45,
+      "perf_mtd": -50.11,
+      "rs_ibd": 8
+    }
+  ],
   "spx_benchmarks": {
-    "spx_1d": 0.41,
-    "spx_1m": -0.95,
-    "spx_3m": 2.56,
-    "spx_34d": 0.78,
-    "spx_qtd": 0.32,
-    "spx_mtd": 0.32
+    "spx_1d": 0.28,
+    "spx_1m": -0.67,
+    "spx_3m": 4.11,
+    "spx_34d": 0.6,
+    "spx_qtd": 0.6,
+    "spx_mtd": 0.6
   },
-  "fetched_at_utc": "2026-10-20T01:37:11+00:00",
+  "fetched_at_utc": "2026-10-20T23:09:08+00:00",
   "source": "tv_fallback"
 }

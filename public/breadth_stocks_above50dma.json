@@ -2,40 +2,64 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 2,
+  "count": 4,
   "stocks": [
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 91.35,
-      "change_pct": 6.53,
-      "adr_pct": 8.0,
-      "dollar_volume": "$136.0M",
-      "market_cap_b": 5.741,
-      "rs_ibd": 99,
+      "price": 92.97,
+      "change_pct": 1.77,
+      "adr_pct": 7.8,
+      "dollar_volume": "$132.7M",
+      "market_cap_b": 5.843,
+      "rs_ibd": 98,
       "above50dma_pct": 67.5
     },
     {
       "ticker": "RGC",
       "company": "Regencell Bioscience Holdings Limited",
       "industry": "Pharmaceuticals: Major",
-      "price": 10.05,
-      "change_pct": 4.8,
-      "adr_pct": 10.2,
-      "dollar_volume": "$5.6M",
-      "market_cap_b": 4.984,
+      "price": 10.45,
+      "change_pct": 3.98,
+      "adr_pct": 10.3,
+      "dollar_volume": "$5.9M",
+      "market_cap_b": 5.182,
       "rs_ibd": 95,
-      "above50dma_pct": 59.2
+      "above50dma_pct": 62.9
+    },
+    {
+      "ticker": "BRZE",
+      "company": "Braze, Inc.",
+      "industry": "Internet Software/Services",
+      "price": 45.57,
+      "change_pct": 51.7,
+      "adr_pct": 5.5,
+      "dollar_volume": "$377.2M",
+      "market_cap_b": 5.176,
+      "rs_ibd": 92,
+      "above50dma_pct": 59.7
+    },
+    {
+      "ticker": "SLN",
+      "company": "Silence Therapeutics Plc - American Depository Share",
+      "industry": "Miscellaneous Commercial Services",
+      "price": 19.61,
+      "change_pct": 0.15,
+      "adr_pct": 6.7,
+      "dollar_volume": "$188.4M",
+      "market_cap_b": 1.217,
+      "rs_ibd": 96,
+      "above50dma_pct": 56.3
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.41,
-    "spx_1m": -0.95,
-    "spx_3m": 2.56,
-    "spx_34d": 0.78,
-    "spx_qtd": 0.32,
-    "spx_mtd": 0.32
+    "spx_1d": 0.28,
+    "spx_1m": -0.67,
+    "spx_3m": 4.11,
+    "spx_34d": 0.6,
+    "spx_qtd": 0.6,
+    "spx_mtd": 0.6
   },
-  "fetched_at_utc": "2026-10-20T01:36:57+00:00"
+  "fetched_at_utc": "2026-10-20T23:08:54+00:00"
 }

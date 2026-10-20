@@ -1,133 +1,19 @@
 {
-  "generated_at": "2026-10-20T01:36:56.566389+00:00",
+  "generated_at": "2026-10-20T23:03:01.413494+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Other",
-      "theme_rs": 94.7,
-      "perf_1d": 7.5,
+      "theme_rs": 96.0,
+      "perf_1d": 51.56,
       "leaders": [
         {
-          "ticker": "MXL",
-          "price": 77.11,
-          "rs_52w": 98,
-          "adr_pct": 10.35,
-          "vol_surge": 1.29,
-          "mkt_cap": 6993352013,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "PENG",
-          "price": 56.54,
-          "rs_52w": 97,
-          "adr_pct": 9.67,
-          "vol_surge": 1.42,
-          "mkt_cap": 2897262248,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "MANE",
-          "price": 122.28,
-          "rs_52w": 95,
-          "adr_pct": 6.76,
-          "vol_surge": 1.88,
-          "mkt_cap": 5108697795,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "MRVL",
-          "price": 237.09,
-          "rs_52w": 95,
-          "adr_pct": 6.78,
-          "vol_surge": 0.82,
-          "mkt_cap": 213073873405,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "UMC",
-          "price": 20.08,
-          "rs_52w": 95,
-          "adr_pct": 4.78,
-          "vol_surge": 0.66,
-          "mkt_cap": 50358804095,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "CLF",
-          "price": 14.1,
-          "rs_52w": 92,
-          "adr_pct": 5.53,
-          "vol_surge": 4.69,
-          "mkt_cap": 8044614880,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "INTC",
-          "price": 92.03,
-          "rs_52w": 91,
-          "adr_pct": 6.33,
-          "vol_surge": 0.95,
-          "mkt_cap": 486480260809,
+          "ticker": "BRZE",
+          "price": 45.57,
+          "rs_52w": 96,
+          "adr_pct": 5.51,
+          "vol_surge": 26.27,
+          "mkt_cap": 5176042303,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
