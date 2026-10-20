@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-20 11:36 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Signals, Mild Risk-On",
+    "spy_price": 768.87,
+    "spy_change_pct": 0.31,
+    "vix": 17.8,
+    "hy_oas": 3.29,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 52.0,
+    "mmth": 56.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announces a significant new partnership in cloud computing, expanding its enterprise solutions offerings."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "UnitedHealth Group upgrades full-year earnings guidance following strong Q3 performance and favorable policy developments."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA sees continued flow-driven interest from institutional investors positioning for long-term artificial intelligence growth narratives."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-20 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation continues to see momentum-driven flows after recent AI developments, without a fresh fundamental catalyst today, making it a C-Grade candidate for continued technical trading."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-29 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Sentiment / Risk-Off",
-    "spy_price": 765.61,
-    "spy_change_pct": -0.74,
-    "vix": 16.03,
-    "hy_oas": 2.93,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 27.6,
-    "mmth": 48.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is reportedly announcing a significant partnership with a major cloud provider to deploy its next-generation AI accelerators, suggesting continued leadership in the artificial intelligence sector."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly shares are active pre-market following an upgrade from a prominent investment bank, citing strong pipeline catalysts and robust sales forecasts for its new obesity drug."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft is seeing typical pre-market activity driven by broader tech sector movements and options flow, lacking any distinct fundamental news today."
         }
       ]
     }
