@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-20 16:46 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Oil Relief, Equity Divergence",
+    "spy_price": 769.05,
+    "spy_change_pct": 0.34,
+    "vix": 17.31,
+    "hy_oas": 3.29,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 51.1,
+    "mmth": 55.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "WMT",
+          "company": "Walmart Inc.",
+          "reason": "Walmart reported stronger-than-expected Q3 earnings, driven by robust e-commerce growth and improved supply chain efficiency, raising full-year guidance."
+        },
+        {
+          "ticker": "TGT",
+          "company": "Target Corp.",
+          "reason": "Target announced an innovative new partnership with a leading AI firm to personalize shopping experiences, boosting investor confidence in its tech adoption strategy."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Continued investor attention on Alphabet's cloud division growth and ongoing advancements in AI research, maintaining its position as a defensive tech play."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-20 11:36 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil",
           "reason": "Positioning based on the significant crude oil price decline today, reflecting broader energy sector flow rather than a fresh company-specific catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-29 12:51 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious / Mixed Flow",
-    "spy_price": 763.26,
-    "spy_change_pct": -0.31,
-    "vix": 16.19,
-    "hy_oas": 3.02,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 25.7,
-    "mmth": 46.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SMMT",
-          "company": "Summit Therapeutics Inc.",
-          "reason": "SMMT gained strong conviction today following news of a significant strategic equity investment from AstraZeneca, signaling robust institutional confidence in its pipeline."
-        },
-        {
-          "ticker": "NVTS",
-          "company": "Navitas Semiconductor Corporation",
-          "reason": "NVTS is an A-Grade candidate after announcing a new U.S. Government Defense Contract, which is expected to drive substantial revenue growth and market share in critical applications."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation continues to see momentum-driven flows after recent AI developments, without a fresh fundamental catalyst today, making it a C-Grade candidate for continued technical trading."
         }
       ]
     }
