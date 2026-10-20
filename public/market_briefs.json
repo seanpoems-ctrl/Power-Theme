@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-20 19:23 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Weakness, US Mixed Tape",
+    "spy_price": 769.05,
+    "spy_change_pct": 0.34,
+    "vix": 17.31,
+    "hy_oas": 3.29,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 51.1,
+    "mmth": 55.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announces a groundbreaking advancement in its new generation of AI accelerators, securing a massive pre-order from a major hyperscaler that significantly upgrades revenue guidance."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc",
+          "reason": "Amazon Web Services (AWS) secures a multi-year, multi-billion dollar cloud contract with a major government entity, significantly boosting long-term revenue projections."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet saw continued algorithmic buying pressure today, extending a multi-day rally initiated by last week's sector rotation, without any fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-20 16:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Shares traded largely on technical flows today, with no new fundamental catalyst driving significant price action."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-29 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Session, Oil Weakness",
-    "spy_price": 764.2,
-    "spy_change_pct": -0.18,
-    "vix": 16.04,
-    "hy_oas": 3.02,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 27.3,
-    "mmth": 47.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SMMT",
-          "company": "Summit Therapeutics",
-          "reason": "AstraZeneca's strategic equity investment provides a significant validation and capital infusion, boosting prospects for its clinical pipeline."
-        },
-        {
-          "ticker": "NVTS",
-          "company": "Navitas Semiconductor",
-          "reason": "Securing a U.S. Government defense contract represents a strong endorsement of its advanced power semiconductor technology and opens new market opportunities."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil",
-          "reason": "Positioning based on the significant crude oil price decline today, reflecting broader energy sector flow rather than a fresh company-specific catalyst."
         }
       ]
     }
