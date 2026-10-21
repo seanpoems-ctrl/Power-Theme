@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-21 11:54 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Tech-Led Risk-On Momentum",
+    "spy_price": 772.66,
+    "spy_change_pct": 0.47,
+    "vix": 16.56,
+    "hy_oas": 3.29,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 55.8,
+    "mmth": 57.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "SMCI",
+          "company": "Super Micro Computer Inc.",
+          "reason": "Robust demand projections for AI infrastructure hardware are driving pre-market enthusiasm."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "Nvidia Corp.",
+          "reason": "Market sentiment regarding accelerating enterprise AI adoption translates into strong pre-market buying for chip leaders."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Showing continued strength on general market upside momentum and e-commerce sector rotation."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-21 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil continued its upward trajectory, benefiting from the broader surge in crude oil prices, though no specific fresh corporate news was released today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-30 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Tailwinds, Domestic Equilibrium",
-    "spy_price": 764.2,
-    "spy_change_pct": -0.18,
-    "vix": 16.09,
-    "hy_oas": 3.02,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 27.3,
-    "mmth": 47.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announces new AI-powered enterprise software suite, expected to significantly boost cloud revenue in the coming quarters."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "ExxonMobil secures major new offshore oil drilling rights in Brazil, boosting long-term production outlook amidst rising crude prices."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA sees continued momentum from AI hardware demand, with analysts reiterating strong Q4 revenue guidance based on recent sector flows."
         }
       ]
     }
