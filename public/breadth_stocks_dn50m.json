@@ -3,33 +3,49 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 1,
+  "count": 2,
   "stocks": [
     {
       "ticker": "CIFR",
       "company": "Cipher Digital Inc.",
       "industry": "Data Processing Services",
-      "market_cap_b": 3.685,
-      "price": 8.88,
-      "change_pct": -0.67,
-      "dollar_volume": "$526.6M",
-      "adr_pct": 14.1,
-      "perf_1m": -50.11,
-      "perf_3m": -60.45,
+      "market_cap_b": 3.789,
+      "price": 9.13,
+      "change_pct": 2.82,
+      "dollar_volume": "$542.7M",
+      "adr_pct": 13.3,
+      "perf_1m": -51.08,
+      "perf_3m": -62.22,
       "perf_34d": null,
-      "perf_qtd": -60.45,
-      "perf_mtd": -50.11,
-      "rs_ibd": 8
+      "perf_qtd": -62.22,
+      "perf_mtd": -51.08,
+      "rs_ibd": 10
+    },
+    {
+      "ticker": "SHAZ",
+      "company": "SharonAI Holdings, Inc.",
+      "industry": "Data Processing Services",
+      "market_cap_b": 1.002,
+      "price": 28.0,
+      "change_pct": 3.82,
+      "dollar_volume": "$68.6M",
+      "adr_pct": 14.3,
+      "perf_1m": -50.92,
+      "perf_3m": -59.12,
+      "perf_34d": null,
+      "perf_qtd": -59.12,
+      "perf_mtd": -50.92,
+      "rs_ibd": 59
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.28,
-    "spx_1m": -0.67,
-    "spx_3m": 4.11,
-    "spx_34d": 0.6,
-    "spx_qtd": 0.6,
-    "spx_mtd": 0.6
+    "spx_1d": 0.58,
+    "spx_1m": 0.66,
+    "spx_3m": 4.66,
+    "spx_34d": 0.12,
+    "spx_qtd": 1.18,
+    "spx_mtd": 1.18
   },
-  "fetched_at_utc": "2026-10-21T01:18:23+00:00",
+  "fetched_at_utc": "2026-10-21T23:05:57+00:00",
   "source": "tv_fallback"
 }

@@ -2,76 +2,64 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 5,
+  "count": 4,
   "stocks": [
     {
       "ticker": "PCRX",
       "company": "Pacira BioSciences, Inc.",
       "industry": "Pharmaceuticals: Major",
-      "price": 36.38,
-      "change_pct": 0.11,
-      "adr_pct": 2.5,
-      "dollar_volume": "$167.7M",
-      "market_cap_b": 1.45,
+      "price": 36.33,
+      "change_pct": -0.14,
+      "adr_pct": 2.4,
+      "dollar_volume": "$170.0M",
+      "market_cap_b": 1.448,
       "rs_ibd": 86,
-      "atr_ext_val": 13.64
+      "atr_ext_val": 14.02
     },
     {
       "ticker": "OPCH",
       "company": "Option Care Health, Inc.",
       "industry": "Medical/Nursing Services",
-      "price": 31.36,
-      "change_pct": 0.48,
-      "adr_pct": 2.0,
-      "dollar_volume": "$196.5M",
-      "market_cap_b": 4.697,
-      "rs_ibd": 77,
-      "atr_ext_val": 12.26
+      "price": 31.29,
+      "change_pct": -0.22,
+      "adr_pct": 1.9,
+      "dollar_volume": "$142.5M",
+      "market_cap_b": 4.687,
+      "rs_ibd": 79,
+      "atr_ext_val": 12.48
     },
     {
       "ticker": "PTC",
       "company": "PTC Inc.",
       "industry": "Packaged Software",
-      "price": 193.35,
-      "change_pct": 0.15,
-      "adr_pct": 2.2,
-      "dollar_volume": "$769.3M",
-      "market_cap_b": 21.004,
-      "rs_ibd": 65,
-      "atr_ext_val": 10.98
+      "price": 194.38,
+      "change_pct": 0.53,
+      "adr_pct": 2.1,
+      "dollar_volume": "$664.1M",
+      "market_cap_b": 21.116,
+      "rs_ibd": 73,
+      "atr_ext_val": 11.6
     },
     {
       "ticker": "BRZE",
       "company": "Braze, Inc.",
       "industry": "Internet Software/Services",
-      "price": 45.57,
-      "change_pct": 51.7,
-      "adr_pct": 5.5,
-      "dollar_volume": "$377.2M",
-      "market_cap_b": 5.176,
+      "price": 45.68,
+      "change_pct": 0.24,
+      "adr_pct": 5.2,
+      "dollar_volume": "$447.4M",
+      "market_cap_b": 5.189,
       "rs_ibd": 92,
-      "atr_ext_val": 10.82
-    },
-    {
-      "ticker": "XP",
-      "company": "XP Inc.",
-      "industry": "Investment Banks/Brokers",
-      "price": 31.34,
-      "change_pct": 3.57,
-      "adr_pct": 4.3,
-      "dollar_volume": "$340.6M",
-      "market_cap_b": 16.203,
-      "rs_ibd": 94,
-      "atr_ext_val": 10.43
+      "atr_ext_val": 11.25
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.28,
-    "spx_1m": -0.67,
-    "spx_3m": 4.11,
-    "spx_34d": 0.6,
-    "spx_qtd": 0.6,
-    "spx_mtd": 0.6
+    "spx_1d": 0.58,
+    "spx_1m": 0.66,
+    "spx_3m": 4.66,
+    "spx_34d": 0.12,
+    "spx_qtd": 1.18,
+    "spx_mtd": 1.18
   },
-  "fetched_at_utc": "2026-10-21T01:18:11+00:00"
+  "fetched_at_utc": "2026-10-21T23:05:44+00:00"
 }
