@@ -1,192 +1,76 @@
 {
-  "scan_time": "2026-10-20 08:55 ET",
+  "scan_time": "2026-10-21 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "BRZE",
-      "price": 45.75,
-      "gap_pct": 52.3,
-      "pm_volume": 155954,
-      "avg_vol_10d": 1985963,
-      "avg_dollar_vol": 90857807,
-      "mkt_cap": 3412076287,
-      "rvol": 0.52,
-      "adr_pct": 5.18,
-      "category": "New Contract/Partnership",
-      "theme": "Acquisition by Salesforce",
-      "reasoning": "BRZE surged following news that Salesforce intends to acquire the company for **$5.7 billion**, indicating a major strategic consolidation.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "C",
-      "finviz_theme": "Cloud SaaS",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Salesforce announced its intention to acquire **Braze** for **$5.7 billion**. The news also reported that **Salesforce (CRM) shares slid 3%** following the announcement.",
-        "impact": "This definitive acquisition by a major enterprise software player provides a clear exit strategy and valuation for BRZE shareholders, potentially driving significant upside."
-      },
-      "analysis_details": "• **Impact**\n**Salesforce** has announced an agreement to acquire **Braze** for a substantial **$5.7 billion**, marking a definitive strategic move for the customer engagement platform. This development sent **Salesforce (CRM) shares sliding 3%** in response to the news.\n\n• **Strategic Value**\nThis acquisition provides a clear premium for **Braze** shareholders, offering a strategic exit into one of the largest enterprise software companies. The integration could significantly enhance **Salesforce's** customer data platform capabilities and market reach in personalized marketing.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "BRZE Nov 2026 35.000 put (BRZE261120P00035000) interactive stock chart - Yahoo Finance UK",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9FeHhnLUpMVDNfU0hCRElndVFDZkJFWWEyaDBSZzU4bzQwYnQ2U1JKbTNiOXRRcVA5VURqa2dMd0RlR3RROHE3dlBuVENOVUhyTVZKQVppMVdmVDJIdGlCSXp3WUZfUUgwLTNPN193?oc=5"
-        },
-        {
-          "title": "Salesforce to buy Braze for $5.7 billion, CRM shares slide 3% - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOVFlZbVhEZUVYNU5xekdta3UtQ21JQ1pOc2x2eU5XU2oxOWdwdmNiOVh6aDRETW5kNlNFYXVzUnllRHo5V2VEMWp5UDNMOHVYbVlxaHFzWWFreHFYaHpkcE8xWTUyLTJ3UWl4QmZwLU1LQk9iRk1lM0htYXJUZ3BWQXpYeU9MWjZaY21IMERESC1xNEZrYUNfTm9QSVhIeFRCWlg5Sl82WkMzVFQtV1lvWXUyZmc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "87.73M",
-      "short_float": "7.98%",
-      "daily_pct": 2.39,
-      "prev_close": 30.04,
-      "industry": "Cloud SaaS",
-      "technical_status": "Fail (Avg $Vol $91M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Salesforce intends to acquire BRZE for $5.7 billion.",
-        "discrepancy_note": "Source A (Finviz News) contains no relevant information. Source B (Google News - Investing.com) confirms the acquisition amount as '$5.7 billion'. Since 'both sources' are required for verification, this is a discrepancy."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "RAPP",
-      "price": 35.8,
-      "gap_pct": 25.19,
-      "pm_volume": 1052372,
-      "avg_vol_10d": 282578,
-      "avg_dollar_vol": 10116292,
-      "mkt_cap": 1372179019,
-      "rvol": 1.12,
-      "adr_pct": 6.75,
-      "category": "FDA",
-      "theme": "Positive Clinical Trial Results",
-      "reasoning": "RAPP reported positive clinical trial results for an experimental drug, which significantly reduced mania symptom scores in a three-week trial.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 22,
-      "grade": "C",
-      "finviz_theme": "Biotech - Neurology",
+      "ticker": "SMCI",
+      "price": 36.52,
+      "gap_pct": 12.47,
+      "pm_volume": 3333835,
+      "avg_vol_10d": 34534015,
+      "avg_dollar_vol": 1261182228,
+      "mkt_cap": 21331667115,
+      "rvol": 0.96,
+      "adr_pct": 5.47,
+      "category": "Thematic Narratives",
+      "theme": "AI Demand Optimism",
+      "reasoning": "SMCI provided stronger-than-expected preliminary revenue guidance, reviving optimism for global AI chip demand.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Compute",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Catalyst: RAPP filed an 8-K with the SEC on 2026-10-20, disclosing positive results from a clinical trial. In a **three-week trial**, an **experimental drug** significantly **reduced mania symptom scores by a mean 15.4 points**. This disclosure aligns with 8-K Items **7.01** and **8.01**, indicating a material event.\nImpact: This positive trial data advances the experimental drug towards potential regulatory submission and market entry, de-risking the development pathway and enhancing the company's valuation thesis.",
-        "impact": ""
+        "catalyst": "Super Micro Computer filed an **8-K** on **2026-10-20**, disclosing **preliminary revenue guidance** that was **stronger-than-expected** and **topped estimates**. This disclosure sparked a rally in **global chip stocks**, including **SMCI +1.15%** (per the article's specific quote, though the context is broader market reaction).",
+        "impact": "The positive update from a key AI infrastructure provider suggests a sustained demand environment for AI-related hardware, potentially leading to a re-rating of the broader AI semiconductor sector."
       },
-      "analysis_details": "• **The Drug**\nIn a recent **three-week trial**, RAPP's **experimental drug** demonstrated a significant therapeutic effect, successfully reducing **mania symptom scores by a mean 15.4 points**. This outcome highlights the drug's potential efficacy in addressing a critical medical need, aligning with the company's development pipeline.\n\n• **The Significance**\nThese positive clinical trial results are a crucial de-risking event for RAPP, substantiating the drug's therapeutic potential and paving the way for further development and regulatory milestones. This could accelerate its path towards an FDA application, offering a substantial boost to the company's competitive standing in the **Biotech - Neurology** sector and unlocking significant long-term value.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "analysis_details": "• **The Narrative**\nSuper Micro Computer disclosed **stronger-than-expected preliminary revenue guidance** on **2026-10-20**, as indicated by an **8-K SEC filing** and subsequent news. Headlines noted **preliminary results topped estimates**, with **SMCI** jumping following the announcement. This update from **Super Micro** has reportedly **revived AI demand optimism** across **Asian chip stocks** and **global chipmakers**.\n\n• **Explosiveness**\nThis catalyst is significant as it provides a tangible data point reinforcing the continued strength of AI infrastructure spending, a critical driver for the sector. Given **Super Micro's** role in AI server solutions, its positive guidance can act as a bellwether, potentially driving further momentum and capital rotation into the broader **AI compute** and **semiconductor** ecosystem as investors gain renewed confidence in the sustainability of demand.",
+      "peer_tickers": [
+        "HPE",
+        "NTAP",
+        "WDC"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SMCX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SMCZ",
+          "mult": "1x"
+        }
+      ],
       "headlines": [
         {
-          "title": "Rapp Shares Perspective on AI in the Classroom – KCSR / KBPY - chadronradio.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBjNDh1aUxiOFJhc3BGSVdEUm5nZE5uN3dBZnM2WEZlcWh5RVJjdGJXQXN4UElCalNsUGxpQ2pTOGY1UmF5UjhTb3dfUzVJaERFVXphdzctTnVoQTRmTjQzUUk2Zk9pOVNkaktXeG15XzNJNS1nZXdhMW81NHI?oc=5"
+          "title": "Asian chip stocks rally as Super Micro forecast revives AI demand optimism",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/asian-chip-stocks-rally-super-023854114.html"
         },
         {
-          "title": "In a three-week trial, an experimental drug reduced mania symptom scores by a mean 15.4 points. - Stock Titan",
+          "title": "Super Micro Jumps After Preliminary Results Top Estimates - Bloomberg.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOZTRzUVlwNVhIR1pJN1NXVWN6U0VDNjFpbkliYVJuaG5XYUx4TXRJT0hGT216U1ZwNWxNOHRIckc3Q3BUUmtXQ3BNOXc0WkNUMWQ2eVlJLW5MYkdMdUFlUXNlZy1fUG9KNEQxb01GaURfVWJxNXZncVJwR3VQVHdTUS1xMWZsLXZOamQ5Z2UtX1JCQUg0Snd0MWs2TFNzWmZtWVkwVDNfQkdmck5EOUdCUkJJeFhaa2QtZ3hv?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOWXUwcFRta3JZTXFpV3ljbGNKa1BXQWgyT1hUMDczeDhyX3M4WWNENzUwQ2ZBeG00djJZNjVNZjVqYmhFd2t3S1VRSzVZcFczNzFJaDkzbi1kbjc2a0VvOURwMjAtei00ajZfU0VxVkoxODBOVE14M2tqRFl0ekhCOERfS1M5Q1U0ckVnc01hMGlBMGh2LVZJdzE0ZDZITmdtTHd0U21pRjNKN2JR?oc=5"
         }
       ],
       "edgar_filing": {
         "filing_date": "2026-10-20",
         "form": "8-K",
         "items": [
-          "7.01",
-          "8.01",
+          "2.02",
           "9.01"
         ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/2012593/000119312526425647/d185134d8k.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000025/smci-20261020.htm"
       },
-      "float_shares": "28.81M",
-      "short_float": "10.54%",
-      "daily_pct": 3.74,
-      "prev_close": 28.6,
-      "industry": "Biotech - Neurology",
-      "technical_status": "Fail (Avg $Vol $10M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "mania symptom scores were significantly reduced",
-        "discrepancy_note": "The primary catalyst claims 'significantly reduced mania symptom scores'. Source B [1] provides a specific reduction of 'mean 15.4 points' and confirms the 'three-week trial', but Source A (Finviz) provides no information to confirm this specific numerical claim or the general reduction statement. The catalyst summary does not provide a specific numerical value for the reduction."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "KVYO",
-      "price": 19.32,
-      "gap_pct": 10.27,
-      "pm_volume": 672580,
-      "avg_vol_10d": 4909537,
-      "avg_dollar_vol": 94852255,
-      "mkt_cap": 4988424726,
-      "rvol": 0.53,
-      "adr_pct": 5.34,
-      "category": "Others",
-      "theme": "Analyst/Media Opinion",
-      "reasoning": "A media outlet suggests Klaviyo (KVYO) stock appears discounted after a significant **40% three-year decline**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Cloud SaaS",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "A Google News article indicates that **Klaviyo (KVYO) stock looks discounted** following a substantial **40% decline over three years**. This headline reflects a media perspective rather than a company-specific event.",
-        "impact": "This serves as a qualitative observation, potentially influencing sentiment or attracting value investors, but does not represent an immediate operational or financial catalyst for price momentum."
-      },
-      "analysis_details": "• **What Happened**\nA Google News report published on **2026-10-20** at **07:11 UTC** stated that **Klaviyo (KVYO) stock looks discounted** to analysts. This assessment is based on the company's performance, specifically noting a **40% decline** over the past **three years**.\n\n• **Key Consideration**\nThis catalyst primarily represents an external media opinion on valuation, rather than a direct fundamental action from the company, analysts, or institutional players. While it may generate discussion around KVYO's long-term prospects, its immediate impact on price momentum is likely limited without further supporting news or significant changes in trading volume, which is currently **0.5x RVOL**.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Klaviyo (KVYO) Stock Looks Discounted Following Its 40% Three Year Fall - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNM2U5ei0tQWdsTUhvSWtaMGo1WTF1QUZSS1JKd2Jxazhna2QxaDNOcXNjdnVrdlJsaFJKQUNGanlDUDZGc19WS0hoYVdMNWNrV1JaR2JkR0NYbDhwYU9ITVVLc1B0RVR3bEhXNGE2SDZNbjBWMzhMTlF0UGg3RzA1VXQxZUxPcUFJcDItbjBFb055aDZ3MU1IZ240cms2c3RYN0E?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "116.02M",
-      "short_float": "16.76%",
-      "daily_pct": 2.58,
-      "prev_close": 17.52,
-      "industry": "Cloud SaaS",
-      "technical_status": "Fail (Avg $Vol $95M < $100M)",
+      "float_shares": "573.86M",
+      "short_float": "14.82%",
+      "daily_pct": 1.15,
+      "prev_close": 32.47,
+      "industry": "Semiconductors - Compute",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 80,
@@ -194,80 +78,163 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "40% three-year decline",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding the 40% three-year decline. Source B (Google News) headline [1] mentions a '40% Three Year Fall', but it is not confirmed by both provided sources."
+        "primary_claim": "SMCI provided stronger-than-expected preliminary revenue guidance.",
+        "discrepancy_note": "Google News [3] specifies 'raising Q1 revenue guidance by $4B'. Finviz sources generally mention 'Preliminary Q1 Sales Smash Estimates' or 'forecast' but do not provide a specific dollar amount for the guidance or the amount it was raised by across any of its headlines."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ROIV",
+      "price": 38.05,
+      "gap_pct": 8.96,
+      "pm_volume": 168129,
+      "avg_vol_10d": 5252260,
+      "avg_dollar_vol": 199848493,
+      "mkt_cap": 25223517768,
+      "rvol": 0.7,
+      "adr_pct": 3.36,
+      "category": "Others",
+      "theme": "Positive Drug Trial Data",
+      "reasoning": "Roivant Sciences surged on positive uveitis trial data, a significant development in its drug pipeline, disclosed via an 8-K filing.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Biotech - Immunology",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Roivant Sciences (NASDAQ: ROIV) stock surged today following the announcement of **positive uveitis trial data**. This significant development was disclosed, consistent with an **8-K filing on 2026-10-21** under **Item 7.01 (Regulation FD Disclosure)**. An officer also proposed selling **200,000 shares** under a trading plan, but this is secondary to the drug news.",
+        "impact": "Positive trial data typically de-risks a drug candidate, increases the probability of market approval, and can significantly boost investor confidence, leading to strong upward momentum."
+      },
+      "analysis_details": "• **What Happened**\nRoivant Sciences (NASDAQ: ROIV) stock surged on **2026-10-21** after reporting **positive uveitis trial data**. This material disclosure was corroborated by an **8-K filing** on the same day under **Item 7.01 (Regulation FD Disclosure)**, indicating an official communication regarding the trial results. Separately, an officer initiated a plan to sell **200,000 shares**, but this appears to be overshadowed by the clinical news.\n\n• **Key Consideration**\nPositive trial data, especially for a specific indication like **uveitis**, is a crucial milestone for biotech companies, suggesting potential for future regulatory approval and commercialization. This development significantly improves the drug candidate's outlook, which is a strong catalyst for momentum investors. The market will now focus on the next steps in the drug's development and regulatory pathway.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "An officer proposes selling 200,000 Roivant Sciences (NASDAQ: ROIV) shares under a trading plan. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNSWJtTExUTFFwdGJmT29LTzhBRHhDbmxlelNEQWhFaGlDZTRGN3BiWVJJNExPSTUtOENJa3E2cTFETklxaXdma0s3OGduS0hVelNicFVEZGRKOUNHUEQyQmRieXhpMUdDbDFsT3RXRHo3QndkM2FiZ1h2TEd6VXFJS1pMTElwLUFfVWJyY0FmVDlBdWFRdVkxNExMMjVqdw?oc=5"
+        },
+        {
+          "title": "Roivant Sciences stock surges on positive uveitis trial data By Investing.com - Investing.com India",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNa244X1F4ZDlGbTctcHIwaHdvbzR1YjN0MEk0UllZeC13YUlLRU5yaGdvUS1xZ0NPRnNtMlRZR3RUMUEzdzZwVU5OUngxVWVya2M3ay0yTTRqdWxZX2NIUlhMTTNWYXpsdEdnU3FhaFIzd05tME9qdDBDTmpmUUQxN1JIRHgwYkh4S2NzRFdxeXR2Wm15b0hIV2M1cDJWS3YxNUFNazZzQXBWRUY2djBSazNjZE4ySVU?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-21",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1635088/000114036126040332/ef20084121_8k.htm"
+      },
+      "float_shares": "524.23M",
+      "short_float": "7.38%",
+      "daily_pct": 0.63,
+      "prev_close": 34.92,
+      "industry": "Biotech - Immunology",
+      "technical_status": "Fail (ADR 3.4% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "At 48 weeks, 62% of patients had inactive eye inflammation without steroids, versus 20% on placebo.",
+        "discrepancy_note": "Source A (Finviz News) has no mention of the specific trial data. Source B (Google News) [1] mentions these specific percentages, but it is not confirmed by both sources."
       },
       "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": false,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": true
+        "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "HSAI",
-      "price": 14.15,
-      "gap_pct": 9.52,
-      "pm_volume": 186753,
-      "avg_vol_10d": 1471823,
-      "avg_dollar_vol": 20826295,
-      "mkt_cap": 2075679880,
-      "rvol": 2.34,
-      "adr_pct": 3.29,
-      "category": "Others",
-      "theme": "Upcoming Financial Review",
-      "reasoning": "Hesai Group announced a **November 10 board meeting** to review **Q3 and nine-month results**, setting a timeline for financial transparency.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 61,
-      "grade": "C",
-      "finviz_theme": "AI Edge & IoT",
-      "analysis_source": "gemini",
+      "ticker": "SPCX",
+      "price": 161.03,
+      "gap_pct": 8.96,
+      "pm_volume": 7783637,
+      "avg_vol_10d": 82862416,
+      "avg_dollar_vol": 13343334848,
+      "mkt_cap": 2005668238339,
+      "rvol": 1.1,
+      "adr_pct": 3.97,
+      "category": "Earnings",
+      "theme": "Earnings Beat & Strategic Hint",
+      "reasoning": "SpaceX surged **over 8% in premarket** after reporting an **upbeat earnings beat** and CEO Musk teasing a potential **Tesla tie-up**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Space",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Hesai Group (HSAI) announced a **board meeting** scheduled for **November 10** to consider its **Q3 and nine-month results**. This sets a clear timeline for the upcoming financial review.",
-        "impact": "This announcement generates anticipation for HSAI's next financial disclosure, potentially driving momentum as investors position ahead of the internal review and subsequent public release."
+        "catalyst": "SpaceX reported **upbeat earnings**, leading to shares jumping **over 8% in premarket** trading. CEO Elon Musk also **teased a potential Tesla merger** and a **$1 Trillion milestone** for SpaceX.",
+        "impact": "The strong financial performance combined with the strategic hint about a **Tesla tie-up** and **$1 Trillion valuation** indicates significant future growth potential and a re-rating for the stock, attracting strong momentum buying."
       },
-      "analysis_details": "• **What Happened**\nHesai Group (HSAI) has scheduled a **board meeting** on **November 10** to consider its **Q3 and nine-month results**. This announcement provides a firm date for internal financial review, signaling the approach of the company's next significant financial update.\n\n• **Key Consideration**\nThis pre-earnings announcement will likely focus investor attention on Hesai's upcoming performance. Momentum traders may use this as a speculative catalyst, anticipating potential volatility and positioning ahead of the official release of the **Q3 and nine-month results** that will follow this internal review.",
-      "peer_tickers": [
-        "OUST",
-        "AEYE",
-        "LIDR"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSpaceX reported **upbeat earnings**, surpassing market expectations, which propelled the stock to trade **over 8% higher in premarket** activity. This strong financial performance was a significant catalyst for immediate investor enthusiasm.\n\n• **The Growth (Momentum)**\nAdding to the positive momentum, CEO Elon Musk **hinted at a potential Tesla tie-up**, suggesting a major strategic move that could unlock new synergies. Musk further teased a **$1 Trillion milestone** for SpaceX, outlining ambitious long-term valuation and growth prospects for the company.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "A November 10 board meeting at Hesai Group (HSAI) will consider Q3 and nine-month results. - Stock Titan",
+          "title": "SpaceX up over 8% in premarket after earnings beat and Musk hints at Tesla tie-up - CNBC",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNdjNRam5fU244b3llRXBYQmp0Q2RiR2dKSTFGQVNUYlRsN0thdmJHdTdGMHl3WUV5cnRMY0tPY2g1QWhhdzh2bXBTdk9sWkVJMGFTemJINmVIMTBtUUxQMEtPa3ZLZGhnaXM2M19DM1lXQmJtR3NWYlcyQm52eXJ5VDB6QTNDOGUteHQzYzROYTBSYllVQUk0T2N2RGRCaU9zM1dDZnJDSkZEVzQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5PUXotbEFpamZqOGNVR1V3QjBZa1JlMk9BYlEtSXlRVVdZaUx5enhFczJmYzd6RzluMld3T1IxWFpKdUdFd3RLU0hxWTRuV28xVXRhUGt3QUlRWXVnZjcwNld0Y0Uzc3ZySXc1Ykx0dlA5SGtVbVFTZkN1QknSAYIBQVVfeXFMTjR2c3F2OV81OXNqTUxINlRMODJwbzhSNjgxNFlDOURjY0dxSDczVEZKWUdZaWRCc0RGMERLaEY3Y0NJMkIzdHFLMktLTEpkbHY3NTRyUllEYmJ3TWFFSXk5LUZRYUg0NVdpODRzaWJ0Slg3U293UkpETms3aUlDeWlmdw?oc=5"
         },
         {
-          "title": "How Kosmo Launch Will Impact Hesai Group (HSAI) Investors - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNdEVoa19nTWZBNEdqUkt0QS1JUkdnaFlUbTctVW93VkIzVWN5b01OUVhwRG9Nclg1UEl2RzBfbjVtY2tBdzJlbnE1ek1rYkNPVkdsZFRNeGI0YV9TN2J3ZGRybFJHX3pPTFM1YzJhcWF0b1NnQi1SNmphcWZtMXRrcjk1Q1pJVmFlZFozOC1NV2xvX3FnQmtFMHFMUQ?oc=5"
+          "title": "U.S. stock futures rise as SpaceX surges on upbeat earnings",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/u-stock-futures-rise-spacex-022013057.html"
+        },
+        {
+          "title": "NYSE Is Getting Trounced in the Battle for Wall Street's Biggest IPOs",
+          "source": "Finviz",
+          "url": "https://www.wsj.com/finance/stocks/nyse-is-getting-trounced-in-the-battle-for-wall-streets-biggest-ipos-048e3b94?mod=wsj_FV"
+        },
+        {
+          "title": "Elon Musk Teases Tesla Merger and $1 Trillion Milestone for SpaceX",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/elon-musk-teases-tesla-merger-020000124.html"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "130.52M",
-      "short_float": "6.48%",
-      "daily_pct": 4.03,
-      "prev_close": 12.92,
-      "industry": "AI Edge & IoT",
-      "technical_status": "Fail (Avg $Vol $21M < $100M, ADR 3.3% < 4%)",
+      "edgar_filing": {
+        "filing_date": "2026-10-20",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spcx-20261020.htm"
+      },
+      "float_shares": "2.90B",
+      "short_float": "2.71%",
+      "daily_pct": -0.11,
+      "prev_close": 147.79,
+      "industry": "Space",
+      "technical_status": "Fail (ADR 4.0% < 4%)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 75,
@@ -275,14 +242,266 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Hesai Group announced a November 10 board meeting to review Q3 and nine-month results",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News) entry [1] and [4] confirms a November 10 meeting for Q3/nine-month results, but both sources are required for 'Verified' status."
+        "primary_claim": "SpaceX surged over 8% in premarket",
+        "discrepancy_note": "Source B (Google News, specifically CNBC) states 'SpaceX up over 8% in premarket'. Source A (Finviz) mentions SpaceX 'surges' and 'Blowout Quarter' but does not provide a specific premarket percentage gain."
       },
-      "gates_passed": 3,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "AMKR",
+      "price": 44.84,
+      "gap_pct": 7.54,
+      "pm_volume": 193357,
+      "avg_vol_10d": 3399512,
+      "avg_dollar_vol": 152434118,
+      "mkt_cap": 10360468142,
+      "rvol": 0.98,
+      "adr_pct": 4.35,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "60.36M",
+      "short_float": "17.32%",
+      "daily_pct": -0.45,
+      "prev_close": 41.7,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "While Finviz has no news, Google News articles [3] and [5] (Amkor's AI Packaging Growth Accelerates) suggest a potential fundamental catalyst. However, other Google News articles mention weak Q3 outlook [1], institutional selling [2], and lowered price target [4], indicating a mixed picture rather than a clear, singular positive catalyst."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "DELL",
+      "price": 493.25,
+      "gap_pct": 6.87,
+      "pm_volume": 155170,
+      "avg_vol_10d": 7421723,
+      "avg_dollar_vol": 3660764870,
+      "mkt_cap": 293465735502,
+      "rvol": 0.63,
+      "adr_pct": 4.71,
+      "category": "Others",
+      "theme": "Sector Sympathy",
+      "reasoning": "DELL is moving in sympathy with **Super Micro** following its **surprise update**, suggesting tailwinds for **AI server demand**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "AI Compute",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**Super Micro's stock** **soared** after a **surprise update**, prompting **Dell** and **HPE shares** to **join the rally**. This reflects a broader positive sentiment towards companies involved in **AI server demand**.",
+        "impact": "DELL's move is secondary, driven by positive sentiment towards **AI server demand** as validated by a peer's update. This could indicate potential future **upside** for **DELL's AI server business** if the trend continues."
+      },
+      "analysis_details": "• **What Happened**\n**Super Micro’s stock** **soared** after a **surprise update**, leading **Dell** and **HPE shares** to **join the rally**. This collective movement highlights investor optimism regarding the future impact of **AI server demand** on these hardware providers.\n\n• **Key Consideration**\nDELL's participation in this rally is a **sympathy move**, not driven by specific company-issued news. While it signals a positive sector sentiment for **AI server demand**, investors should assess the sustainability of this momentum, given the lack of a direct, fundamental catalyst for DELL itself.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Super Micro’s stock soars after surprise update — with Dell and HPE shares joining the rally - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQ3VrbVQ3MUpJNnk0eFVYenRkLWg3N1duTnFmOTdUZUplNTFFODhDRnZTb2FCV3VmYlZzbmtXUEtzZFVkYmkxMWF4TVRrbklhNFdCQzJZVmpMZmRuQ1g2LVg3dmNIdllTRkQyUV9JZ1Ffd3hRM1RDM2gyVUdGbTY2M1h5Q2lOSFNwMVYyWXFQblhjM01vanl6WTdMbTFVUGpnZDNyMGxYb1M3ZE0weUZGQ0tLb3VVV2N3SDhENU5aNjRpaUJfSEpGMUVnZUU?oc=5"
+        },
+        {
+          "title": "Super Micro's stock soars after surprise update - with Dell and HPE shares joining the rally",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/story/super-micros-stock-soars-after-surprise-update-with-dell-and-hpe-shares-joining-the-rally-1837a69f?mod=mw_FV"
+        },
+        {
+          "title": "How AI Server Demand Will Impact Dell Stock Investors - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNNzNYcVl5YWNfUEo1YUlIYlFZREpzVG9NZ0oweUtuMWxnQndkejU1V2c0T01nSkloMzBQWGpSbGRJRU1FZjJ6VExnNlRCbG9ETFYxbFdNOFVjd3kweFRjLUV0bExmRmR3WHNkVHluQzNRNVdNTlBCWVFOYUFheHV4RXZiNWtidEtQY3BhZnlmMzVIdk94NGY2dg?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "292.32M",
+      "short_float": "4.21%",
+      "daily_pct": 1.34,
+      "prev_close": 461.56,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Super Micro's 'surprise update' is causing DELL shares to rally in sympathy.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CRDO",
+      "price": 182.94,
+      "gap_pct": 6.66,
+      "pm_volume": 66360,
+      "avg_vol_10d": 8592651,
+      "avg_dollar_vol": 1571939574,
+      "mkt_cap": 32235632691,
+      "rvol": 0.85,
+      "adr_pct": 7.08,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No specific fundamental catalyst identified for CRDO; price movement likely driven by technical factors or institutional trading flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Compute",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nNews indicates **Credo (CRDO) stock looks fairly priced after a very large 3 year run**. This headline is a market commentary reflecting past performance and current valuation perception, not an immediate new fundamental catalyst triggering today's price action.\n\n• **Key Consideration**\nWith no specific fundamental catalyst in the last 24 hours and average daily volume at **$1572M** with an **ADR% of 7.1%**, any significant price movement for CRDO today is likely driven by **technical factors**, such as a **breakout**, or underlying **institutional flow** rather than fresh news. The **RVOL of 0.8x** suggests current volume is below average, implying any move isn't accompanied by a significant surge in trading activity.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Credo (CRDO) Stock Looks Fairly Priced After A Very Large 3 Year Run - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNaFo0LTBwVWNyN1lhZG52NUROZUdGY1ZXVEJ5R2pFR3UwOUVKdjVZZEhFejV3cVVLLVQtYzZBTmkyY0xncHpqV0dtcUZzS3Eyb040dGJlam9CZFlVY213TlNOeDlWeTFGWkhXOWYzVzlYYi1PVENmYV94NDVlU3RYVTk0TUxCRmdTeUMwM1VGdGJJdHc0eVdQcWhn?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "169.38M",
+      "short_float": "6.73%",
+      "daily_pct": -0.75,
+      "prev_close": 171.51,
+      "industry": "Semiconductors - Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No specific fundamental catalyst identified for CRDO.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "VRT",
+      "price": 217.0,
+      "gap_pct": 6.6,
+      "pm_volume": 107993,
+      "avg_vol_10d": 6157215,
+      "avg_dollar_vol": 1336115655,
+      "mkt_cap": 78368194955,
+      "rvol": 1.15,
+      "adr_pct": 3.78,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakdown or institutional selling pressure related to ongoing concerns.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Cloud Data Centers",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. The stock is **sinking near post-earnings lows**, driven by concerns that Vertiv **Must Prove Delayed Projects Are Shipping**."
+      },
+      "analysis_details": "• **What Happened**\nNews commentary highlights that Vertiv **Must Prove Delayed Projects Are Shipping**, an ongoing concern contributing to the stock **sinking near post-earnings lows**. This suggests a period of fundamental re-evaluation rather than a new catalyst event.\n\n• **Key Consideration**\nThe absence of a specific positive or negative catalyst in the last 24 hours implies that recent price action is likely driven by **technical pressures** or the continuation of existing **negative sentiment** around project delays. The market is waiting for **tangible evidence** of project execution.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Vertiv Must Prove Delayed Projects Are Shipping As Stock Sinks Near Post-Earnings Lows",
+          "source": "Finviz",
+          "url": "/news/405306/vertiv-must-prove-delayed-projects-are-shipping-as-stock-sinks-near-post-earnings-lows"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "383.75M",
+      "short_float": "3.74%",
+      "daily_pct": -1.22,
+      "prev_close": 203.56,
+      "industry": "Cloud Data Centers",
+      "technical_status": "Fail (ADR 3.8% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; likely technical breakdown or institutional selling pressure related to ongoing concerns.",
+        "discrepancy_note": "The primary catalyst claim is a qualitative assessment of the *absence* of a positive catalyst and *likely causes* for stock movement, rather than a single specific factual claim (dollar amount, percentage, date) that can be 'verified' with exact numerical matching across sources. While sources confirm the stock is sinking ('Sinks near post-earnings lows', 'Stock Sinks', 'Down 20%', 'Falls 11 Days') and mention 'institutional selling pressure' and 'delayed projects' (ongoing concerns), no source explicitly states 'No immediate fundamental catalyst found' or definitively confirms 'technical breakdown' as the primary cause. The overall sentiment and mentioned factors align with the summary's components but lack direct, verifiable statements for the entire claim."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": false
       },
@@ -291,117 +510,43 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ALVO",
-      "price": 5.44,
-      "gap_pct": 8.11,
-      "pm_volume": 151321,
-      "avg_vol_10d": 969632,
-      "avg_dollar_vol": 5274798,
-      "mkt_cap": 1963870313,
-      "rvol": 0.75,
-      "adr_pct": 5.39,
-      "category": "FDA",
-      "theme": "Operational FDA Approval",
-      "reasoning": "Alvotech (ALVO) received FDA approval to manufacture its Humira biosimilar, SIMLANDI, in fewer batches, enhancing operational efficiency and freeing capacity.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 21,
+      "ticker": "LITE",
+      "price": 869.0,
+      "gap_pct": 5.65,
+      "pm_volume": 52939,
+      "avg_vol_10d": 5022624,
+      "avg_dollar_vol": 4364660256,
+      "mkt_cap": 74505311411,
+      "rvol": 0.86,
+      "adr_pct": 6.35,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
       "grade": "C",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
       "analysis_detail": {
-        "catalyst": "Alvotech (ALVO) received **FDA approval** for its **Humira biosimilar SIMLANDI**, allowing the company to produce the same amount of medicine in **fewer batches**. This approval effectively **frees capacity for other products**, optimizing manufacturing processes.",
-        "impact": "This operational efficiency gain is a positive development for ALVO, potentially improving margins and enabling higher output or new product lines without additional investment in infrastructure. It signals improved production economics for a key biosimilar."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Drug**\nAlvotech (ALVO) secured **FDA approval** regarding its **Humira biosimilar SIMLANDI**. This approval specifically allows the company to produce the same amount of medicine in **fewer batches**, rather than being a new drug approval for market entry. This focuses on optimizing the existing production process for **SIMLANDI**.\n\n• **The Significance**\nThis **FDA approval** is significant as it enhances manufacturing efficiency, enabling Alvotech to produce **SIMLANDI** with reduced operational overhead. Crucially, this optimization **frees capacity for other products**, which could support the pipeline or expansion of other existing lines, directly impacting the company's long-term production flexibility and potential profitability.",
-      "peer_tickers": [],
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [
+        "COHR",
+        "AXTI",
+        "GLW"
+      ],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "FDA approval lets Alvotech (ALVO) make Humira biosimilar SIMLANDI in fewer batches. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNdDhLOG0ycTdlTnEwUG4zVnVRenUzbUN4bFZrX2hZQzNEaVhXY0VNV1ZiLUx6MVhyV2FGazk0ZlR2Z1d4RVczdm04QzRYZXRSdWFTTk5OZ18zNlZ6Sk5rYUNsSEZ4ZkhxbjBiV0hlM09wTjlYRlZIQmJXNjRLRzItd3BGX0NnekE4aXV2WmR5M2xWc0dhNXEtakN3YlE4ZnRJRnZsWUVMQQ?oc=5"
-        },
-        {
-          "title": "Alvo Minerals Quotes 954,000 Ordinary Shares Following Option Exercises at $0.05 - Kalkine",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNd0daYmd6QkRIV2JvSVh1RUlmZEdDQkl6NEZBM2ZTMEtsaHR1TWg4RnFXOXNGU2RpUGV5YU9xTEdna3p0azMyZVRtVWRPTUs1RjdfUzhHWDJmamNPdUlINldqX1puMi1CT3cwZ2w2M1NHYTlBbEFWeW1OWEFYS0puZTN6c29LQnA2TlhrRlNFT3pEcF9DMXY0M1N4T29kSnBRN1duaEN0bjN0SHhNUlJwMkd0Sno4amtSRlB3?oc=5"
-        },
-        {
-          "title": "FDA approval lets Alvotech make the same amount of medicine in fewer batches, freeing capacity for other products. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOR0FLQlFNLUxwcFhxc1owLXlIU0w5RFd0NHIwcEV2bHhGeVZkYklUZWoxN3lLLVRyVjZwS0hhbXRjX2lYUS0yektudHUzYTQ1S1c3Ri1qZnoxMHhiVzJMNGk0aHViWkZiRTlpTTlQRExwUHBmU3RYRGgzeDZZbUU3ZmtlT1RCbi14YkJ1QzlNREYwWGppLWs3T2pvSWlhTjVzYVd1S2cwU2hjSGxpR2d2YTdlRjZ2S2M?oc=5"
-        }
-      ],
+      "headlines": [],
       "edgar_filing": null,
-      "float_shares": "173.61M",
-      "short_float": "3.95%",
-      "daily_pct": 0.6,
-      "prev_close": 5.03,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (Avg $Vol $5M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Alvotech (ALVO) received FDA approval to manufacture its Humira biosimilar, SIMLANDI, in fewer batches.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "TLK",
-      "price": 11.26,
-      "gap_pct": 7.75,
-      "pm_volume": 102989,
-      "avg_vol_10d": 3088375,
-      "avg_dollar_vol": 34775102,
-      "mkt_cap": 9643706995,
-      "rvol": 5.61,
-      "adr_pct": 2.04,
-      "category": "Upgrade",
-      "theme": "Analyst Price Target Set",
-      "reasoning": "Telkom Indonesia received a **$17.00** price target from a one-analyst consensus, potentially driving speculative interest and momentum.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 45,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "A **one-analyst consensus** has established a **USD 17.00** price target on **Telkom Indonesia (TLK)** stock.",
-        "impact": "This new price target could attract investor attention, providing a potential upside reference point for the stock."
-      },
-      "analysis_details": "• **The Firm & Rating**\nA **one-analyst consensus** has set a **USD 17.00** price target for **Telkom Indonesia (TLK)** stock. This action indicates a specific valuation perspective from an analyst.\n\n• **The Thesis**\nThe establishment of a **USD 17.00** price target, even from a singular analyst consensus, provides a new data point for investors to consider. This target could serve as a short-term catalyst, influencing price momentum as market participants react to the new valuation benchmark.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Telkom Indonesia stock: One-analyst consensus puts USD 17.00 target on Telkom Indonesia stock - ad-hoc-news.de",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQM3dIekE3VFJtWWF1TDRsTjQ3RS1uTlJwQ1V6amhheUJzb0xmN1A0VmxaSmUyVmRZa1kyMFk4V2dTaTFrdGU3OU4xcWhETnFFWjFnN19jdWRFSjZsTUF4OFEwd2wyclFuV3phQ0Znclo4RUNDQzc0dU1iY2xjT3ZpNlBPVndQU3l3TVFieDBOTFluNTVUTXNIczlMX0w4QVdOVWNLYVpMdlNHdXNSbXRpUEJXQkhrQkZvWkNSdnFQZUFmRkF6UDgxTUJxbG9WSFBZakI5TmZ5d2lHMkZmWUFjUElCN2FXc01Pdjc0?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "985.81M",
-      "short_float": "0.57%",
-      "daily_pct": -5.26,
-      "prev_close": 10.45,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $35M < $100M, ADR 2.0% < 4%)",
+      "float_shares": "89.09M",
+      "short_float": "8.24%",
+      "daily_pct": -1.44,
+      "prev_close": 822.51,
+      "industry": "—",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -409,29 +554,233 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Telkom Indonesia received a $17.00 price target from a one-analyst consensus.",
-        "discrepancy_note": "Source A (Finviz News) contains no information to confirm or deny the claim. Source B (Google News) contains one article headline ('ad-hoc-news.de') that explicitly confirms the '$17.00 target' from a 'one-analyst consensus'. However, since BOTH sources are required to confirm for 'Verified' status and Finviz is empty, it is marked as Discrepancy."
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source A (Finviz) reports no news, which aligns with 'no immediate fundamental catalyst'. However, Source B (Google News) article [3] asks, 'Did Backlog Through 2029 Just Shift Lumentum Holdings' (LITE) Investment Narrative?', strongly suggesting that a significant backlog could be an immediate fundamental catalyst."
       },
-      "gates_passed": 2,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
+        "gate_price": true,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AAOI",
+      "price": 81.0,
+      "gap_pct": 5.55,
+      "pm_volume": 179554,
+      "avg_vol_10d": 13424077,
+      "avg_dollar_vol": 1087350237,
+      "mkt_cap": 6515708371,
+      "rvol": 0.64,
+      "adr_pct": 8.07,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "80.53M",
+      "short_float": "16.92%",
+      "daily_pct": -1.87,
+      "prev_close": 76.74,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "WULF",
+      "price": 12.67,
+      "gap_pct": 5.5,
+      "pm_volume": 294488,
+      "avg_vol_10d": 44665241,
+      "avg_dollar_vol": 565908603,
+      "mkt_cap": 5992614069,
+      "rvol": 0.88,
+      "adr_pct": 7.02,
+      "category": "Thematic Narratives",
+      "theme": "CEO Reiterates Future Demand",
+      "reasoning": "WULF rose after its CEO reiterated strong power demand for 2028 and 2029, reinforcing a long-term growth narrative.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Cloud Data Centers",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "The stock of WULF rose overnight after its **CEO** reiterated **strong power demand** anticipated for **2028** and **2029**. The news also highlighted **retail** interest in the stock due to a **deep discount**.",
+        "impact": "This reiteration strengthens the long-term growth narrative for WULF, potentially attracting investors focused on future revenue streams and addressing perceived undervaluation."
+      },
+      "analysis_details": "• **The Narrative**\nWULF's stock increased overnight, driven by its **CEO** publicly reiterating expectations for **strong power demand** extending into **2028** and **2029**. This forward-looking commentary provides a clearer long-term demand outlook for the company's services or products. Simultaneously, **retail** market participants highlighted that the stock is currently trading at a **deep discount**, suggesting a value proposition alongside the growth narrative.\n\n• **Explosiveness**\nThe CEO's reiterated outlook on future power demand serves as a positive, albeit incremental, catalyst for WULF's long-term investment thesis. While not an immediate earnings beat or new contract, it reinforces market confidence in future growth. The noted **deep discount** perceived by retail investors could also signal potential for a short-term rebound or increased buying interest based on valuation.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "WULF Stock Rises Overnight As CEO Reiterates Strong Power Demand For 2028, 2029: Retail Highlights Deep Discount - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNUUdBLVk1QVdFV1JUVnVicDFTODBBaUZBVWZTQ1RRLU9kMk5iWDRZTlIxNlNyeS0xekwxOVR1OFVka1lnWE1lOGFub050NlRoZGx0V0RicmdsNFIzRGVLUFZrQ3BLRG9zR19HWTNqTVJYT19CMHpmOTNJUXE4MGRZTGpxSXlXbkhJRTVVX2FXdS1KM0hxTmRKeG9Zdw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "348.79M",
+      "short_float": "28.13%",
+      "daily_pct": -0.41,
+      "prev_close": 12.01,
+      "industry": "Cloud Data Centers",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "CEO reiterated strong power demand for 2028 and 2029",
+        "discrepancy_note": "Source A (Finviz) contains no information. Only Source B (Google News, article [1]) confirms the claim regarding '2028 and 2029' and the CEO's reiteration of strong power demand."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "HPE",
+      "price": 58.9,
+      "gap_pct": 5.01,
+      "pm_volume": 116123,
+      "avg_vol_10d": 22299748,
+      "avg_dollar_vol": 1313455157,
+      "mkt_cap": 74457496442,
+      "rvol": 0.62,
+      "adr_pct": 4.96,
+      "category": "Thematic Narratives",
+      "theme": "AI Computing in Space",
+      "reasoning": "HPE's Spaceborne Computer will power high-performance computing and AI on the Moon, highlighting its advanced technology applications.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 55,
+      "grade": "B",
+      "finviz_theme": "Space",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "HPE's **Spaceborne Computer** is set to **Power High Performance Computing and AI on the Moon**, demonstrating a significant new application for its technology. This development was reported on **2026-10-20 19:11 UTC** by Finviz.",
+        "impact": "This event signals HPE's critical role in cutting-edge space computing and AI, potentially expanding its market perception in specialized, high-growth sectors."
+      },
+      "analysis_details": "• **The Narrative**\nHPE announced its **Spaceborne Computer** will **Power High Performance Computing and AI on the Moon**. This positions HPE's technology at the forefront of extraterrestrial computational capabilities, blending advanced AI with space exploration and specialized hardware.\n\n• **Explosiveness**\nWhile the financial impact isn't immediately quantified, this development significantly enhances HPE's brand image as a leader in innovative computing solutions, including for **High Performance Computing** and **AI**. It opens a new, albeit niche, market narrative for momentum investors interested in space technology and next-generation AI applications.",
+      "peer_tickers": [
+        "SMCI",
+        "NTAP",
+        "STX"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Super Micro’s stock soars after surprise update — with Dell and HPE shares joining the rally - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQ3VrbVQ3MUpJNnk0eFVYenRkLWg3N1duTnFmOTdUZUplNTFFODhDRnZTb2FCV3VmYlZzbmtXUEtzZFVkYmkxMWF4TVRrbklhNFdCQzJZVmpMZmRuQ1g2LVg3dmNIdllTRkQyUV9JZ1Ffd3hRM1RDM2gyVUdGbTY2M1h5Q2lOSFNwMVYyWXFQblhjM01vanl6WTdMbTFVUGpnZDNyMGxYb1M3ZE0weUZGQ0tLb3VVV2N3SDhENU5aNjRpaUJfSEpGMUVnZUU?oc=5"
+        },
+        {
+          "title": "Super Micro's stock soars after surprise update - with Dell and HPE shares joining the rally",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/story/super-micros-stock-soars-after-surprise-update-with-dell-and-hpe-shares-joining-the-rally-1837a69f?mod=mw_FV"
+        },
+        {
+          "title": "HPE Spaceborne Computer to Power High Performance Computing and AI on the Moon",
+          "source": "Finviz",
+          "url": "/news/404717/hpe-spaceborne-computer-to-power-high-performance-computing-and-ai-on-the-moon"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "1.32B",
+      "short_float": "4.31%",
+      "daily_pct": 0.39,
+      "prev_close": 56.09,
+      "industry": "Space",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "HPE's Spaceborne Computer will power high-performance computing and AI on the Moon",
+        "discrepancy_note": "Source A (Finviz) confirms 'HPE Spaceborne Computer to Power High Performance Computing and AI on the Moon'. Source B (Google News) does not contain any mention of the HPE Spaceborne Computer or its application on the Moon."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
-    "large_gaps": 2,
-    "total_headlines": 11,
+    "small_gaps": 11,
+    "large_gaps": 0,
+    "total_headlines": 17,
     "monthly_cost_usd": 0.01
   }
 }
