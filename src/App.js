@@ -492,16 +492,16 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   }, [selectedTheme, tblSort, stockFilter]);
 
   // Sortable <th> helper — defined as a closure so it captures tblSort/handleColSort
-  const SortTh = ({ col, label, align = 'right', className = '' }) => {
+  const SortTh = ({ col, label, align = 'right', className = 'px-[3px] lg:px-3' }) => {
     const active = tblSort.col === col;
     const arrow = active ? (tblSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍';
     return (
       <th
         onClick={() => handleColSort(col)}
-        className={`px-3 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap
+        className={`py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap
           ${align === 'right' ? 'text-right' : 'text-left'} ${active ? 'text-zinc-200' : ''} ${className}`}
       >
-        {label}<span className="text-[9px] ml-0.5 opacity-70">{arrow}</span>
+        {label}<span className={`text-[9px] ml-0.5 opacity-70 ${active ? '' : 'hidden lg:inline'}`}>{arrow}</span>
       </th>
     );
   };
@@ -740,11 +740,12 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
 
       {selectedTheme && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-1.5 lg:p-4 bg-black/60 backdrop-blur-sm"
           onClick={() => setSelectedTheme(null)}
         >
+          <PhoneViewportGuard />
           <div
-            className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-[min(92vw,780px)] max-h-[80vh] flex flex-col"
+            className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-full max-w-[980px] max-h-[88%] flex flex-col"
             onClick={e => e.stopPropagation()}
           >
             {/* Header */}
@@ -806,7 +807,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
             )}
 
             {/* Stock list */}
-            <div className="overflow-y-auto flex-1">
+            <div className="overflow-y-auto overflow-x-hidden flex-1">
               {sortedStocks.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
                   {selectedTheme.stocks.length > 0 ? (
@@ -845,32 +846,32 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                 </div>
               ) : (selectedTheme.fromEtf || selectedTheme.fromIndustry) ? (
                 /* ETF holdings table (also used for an industry's own stocks) — same columns as stock table, sub-theme = theme name */
-                <table className="w-full text-xs">
+                <table className="w-full text-[9px] lg:text-xs tracking-tighter lg:tracking-normal">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
-                    <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
-                      <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
-                      <SortTh col="name"     label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
+                    <tr className="text-zinc-500 text-[8px] lg:text-[11px] uppercase tracking-tight lg:tracking-wider">
+                      <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-1.5 lg:px-3" />
+                      <SortTh col="name"     label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden lg:table-cell" />
                       <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
-                      <SortTh col="perf_intraday" label="Intraday"                     align="right" />
+                      <SortTh col="perf_intraday" label={<><span className="lg:hidden">Intra</span><span className="hidden lg:inline">Intraday</span></>} align="right" />
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
-                      <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
+                      <SortTh col="dollar_volume" label="$Vol"                          align="right" />
                       {selectedTheme.fromIndustry
-                        ? <SortTh col="market_cap" label={lang === 'zh' ? '市值' : 'Mkt Cap'} align="right" />
+                        ? <SortTh col="market_cap" label={lang === 'zh' ? '市值' : <><span className="lg:hidden">Cap</span><span className="hidden lg:inline">Mkt Cap</span></>} align="right" />
                         : <SortTh col="rs"       label="RS"                               align="right" />}
-                      <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
+                      <SortTh col="adr_pct"  label="ADR%"                             align="right" />
                     </tr>
                   </thead>
                   <tbody>
                     {sortedStocks.map((h, i) => {
                       const fmtPct = (v) => v != null
-                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
+                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}<span className="max-[380px]:hidden">%</span></span>
                         : <span className="text-zinc-600">—</span>;
                       return (
                         <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
-                          <td className="px-4 py-2">
-                            {selectedTheme.fromIndustry ? <StockCell ticker={h.ticker} /> : (
+                          <td className="px-1.5 lg:px-3 py-2">
+                            {selectedTheme.fromIndustry ? <><TickerLink ticker={h.ticker} /><span className="hidden lg:inline"><LevEtfTag ticker={h.ticker} /></span></> : (
                             <a
                               href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`}
                               target="_blank"
@@ -881,23 +882,23 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                               {h.ticker}
                             </a>)}
                           </td>
-                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{h.name || '—'}</td>
-                          <td className="px-3 py-2 text-right text-zinc-200 font-mono">{h.price != null ? `$${h.price.toFixed(2)}` : '—'}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_intraday)}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1d)}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
-                          <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">
+                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[120px] hidden lg:table-cell">{h.name || '—'}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right text-zinc-200 font-mono">{h.price != null ? `$${h.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_intraday)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_1d)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">
                             {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
                           </td>
-                          <td className="px-3 py-2 text-right font-mono">
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">
                             {selectedTheme.fromIndustry
                               ? <span className="text-zinc-400">{h.market_cap != null ? fmtVol(h.market_cap) : '—'}</span>
                               : h.rs != null
                               ? <span className={h.rs >= 80 ? 'text-emerald-400 font-bold' : h.rs >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{h.rs}</span>
                               : <span className="text-zinc-600">—</span>}
                           </td>
-                          <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right text-zinc-400">{h.adr_pct != null ? <>{h.adr_pct.toFixed(1)}<span className="max-[380px]:hidden">%</span></> : '—'}</td>
                         </tr>
                       );
                     })}
@@ -905,47 +906,47 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                 </table>
               ) : (
                 /* Full stock table — top-5 theme data */
-                <table className="w-full text-xs">
+                <table className="w-full text-[9px] lg:text-xs tracking-tighter lg:tracking-normal">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
-                    <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
-                      <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
-                      <SortTh col="company"  label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
+                    <tr className="text-zinc-500 text-[8px] lg:text-[11px] uppercase tracking-tight lg:tracking-wider">
+                      <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-1.5 lg:px-3" />
+                      <SortTh col="company"  label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden lg:table-cell" />
                       <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
-                      <SortTh col="perf_intraday" label="Intraday"                     align="right" />
+                      <SortTh col="perf_intraday" label={<><span className="lg:hidden">Intra</span><span className="hidden lg:inline">Intraday</span></>} align="right" />
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
-                      <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
+                      <SortTh col="dollar_volume" label="$Vol"                          align="right" />
                       <SortTh col="rs_52w"   label="RS"                               align="right" />
-                      <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
+                      <SortTh col="adr_pct"  label="ADR%"                             align="right" />
                     </tr>
                   </thead>
                   <tbody>
                     {sortedStocks.map((s, i) => {
                       const fmtPct = (v) => v != null
-                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
+                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}<span className="max-[380px]:hidden">%</span></span>
                         : <span className="text-zinc-600">—</span>;
                       return (
                         <tr key={`${s.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
-                          <td className="px-4 py-2">
-                            <StockCell ticker={s.ticker} />
+                          <td className="px-1.5 lg:px-3 py-2">
+                            <TickerLink ticker={s.ticker} /><span className="hidden lg:inline"><LevEtfTag ticker={s.ticker} /></span>
                             {s.pure_play && <span className="ml-1 text-[11px] bg-violet-500/20 text-violet-300 px-1 rounded">PP</span>}
                           </td>
-                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{s.company || '—'}</td>
-                          <td className="px-3 py-2 text-right text-zinc-200 font-mono">{s.price != null ? `$${s.price.toFixed(2)}` : '—'}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_intraday)}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
-                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
-                          <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">
+                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[120px] hidden lg:table-cell">{s.company || '—'}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right text-zinc-200 font-mono">{s.price != null ? `$${s.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_intraday)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">
                             {s.dollar_volume != null ? fmtVol(s.dollar_volume) : '—'}
                           </td>
-                          <td className="px-3 py-2 text-right font-mono">
+                          <td className="px-[3px] lg:px-3 py-2 text-right font-mono">
                             {s.rs_52w != null
                               ? <span className={s.rs_52w >= 80 ? 'text-emerald-400 font-bold' : s.rs_52w >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{s.rs_52w}</span>
                               : <span className="text-zinc-600">—</span>}
                           </td>
-                          <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'}</td>
+                          <td className="px-[3px] lg:px-3 py-2 text-right text-zinc-400">{s.adr_pct != null ? <>{s.adr_pct.toFixed(1)}<span className="max-[380px]:hidden">%</span></> : '—'}</td>
                         </tr>
                       );
                     })}
@@ -13229,6 +13230,9 @@ const usePhoneViewport = () => {
     };
   }, []);
 };
+
+// Mount this inside a modal to get the phone layout while it is open (the hook above, but tied to the modal's lifetime).
+const PhoneViewportGuard = () => { usePhoneViewport(); return null; };
 
 // ── Stats overlay on the enlarged chart (Market Cap / ADR% / ATR / LoD distance, ATR% multiple from the 50-MA, RVOL box) ──────────
 // All computed from the chart's own daily bars, except Market Cap (screener_stocks.json via ScreenerCtx).
