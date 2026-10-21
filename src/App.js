@@ -10660,7 +10660,7 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                       <div className="flex flex-wrap gap-x-2 gap-y-1">
                         {categoryEtfMap[fullResult.ticker].map(etf => (
                           <button key={etf} type="button"
-                            title={`${etf} holdings — all the stocks in the ETF, with Mini Charts`}
+                            title={`${etf} top holdings (up to 10 by weight), with Mini Charts`}
                             onMouseDown={e => e.preventDefault()}
                             onClick={() => { setEtfModal({ etf, theme: categoryThemeMap[fullResult.ticker] || etf, holdings: data?.etf_holdings?.[etf] ?? [] }); setOpen(false); }}
                             className="text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20"
