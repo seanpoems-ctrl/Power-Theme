@@ -10,6 +10,7 @@
  */
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { PhoneViewportGuard } from "./phoneViewport";
 import { Check, Clipboard, ClipboardCheck, Copy, ExternalLink, Layers, LayoutList, Loader2, X } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -774,24 +775,24 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
   }
 
   const SortIcon = ({ colKey }) => {
-    if (sortKey !== colKey) return <span className="ml-0.5 text-zinc-600">⇅</span>;
+    if (sortKey !== colKey) return <span className="ml-0.5 text-zinc-600 hidden lg:inline">⇅</span>;
     return <span className="ml-0.5 text-white">{sortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-left text-xs">
+    <div className="overflow-x-hidden">
+      <table className="w-full border-collapse text-left text-[9px] lg:text-xs tracking-tighter lg:tracking-normal">
         <thead>
           <tr className="border-b border-zinc-800 text-zinc-500">
-            <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
+            <th className="w-8 py-2 pr-2 text-right font-medium hidden lg:table-cell">#</th>
             {sortCols.map((col) => {
               const label = col.key === perfField && col.label === null ? changeColLabel : col.label;
               return (
                 <th
                   key={col.key}
                   onClick={() => handleSort(col.key)}
-                  className={`px-2 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors
-                    ${col.align === "right" ? "text-right" : ""}`}
+                  className={`px-[3px] lg:px-2 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors
+                    ${col.align === "right" ? "text-right" : ""} ${col.key === "company" ? "hidden lg:table-cell" : ""}`}
                 >
                   {label}<SortIcon colKey={col.key} />
                 </th>
@@ -805,9 +806,9 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
               key={s.ticker}
               className="border-b border-zinc-800/50 hover:bg-zinc-800/30"
             >
-              <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
+              <td className="py-1.5 pr-2 text-right font-mono text-zinc-600 hidden lg:table-cell">{i + 1}</td>
               {/* Ticker */}
-              <td className="px-2 py-1.5 font-mono font-semibold text-cyan-400">
+              <td className="px-1.5 lg:px-2 py-1.5 font-mono font-semibold text-cyan-400">
                 <button
                   onClick={() => onStockClick(s)}
                   className="hover:underline hover:text-white transition-colors"
@@ -816,36 +817,36 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
                 </button>
               </td>
               {/* Company */}
-              <td className="max-w-[180px] truncate px-2 py-1.5 text-zinc-300">
+              <td className="max-w-[180px] truncate px-2 py-1.5 text-zinc-300 hidden lg:table-cell">
                 {s.company || "—"}
               </td>
               {/* Mkt Cap */}
-              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+              <td className="px-[3px] lg:px-2 py-1.5 text-right font-mono text-zinc-400">
                 {fmtMktCap(s.market_cap_b, s.mc_approx)}
               </td>
               {/* ADR×$Vol */}
-              <td className="px-2 py-1.5 text-right font-mono text-amber-300 font-semibold">
+              <td className="px-[3px] lg:px-2 py-1.5 text-right font-mono text-amber-300 font-semibold">
                 {fmtAdrVol(adrVolScore(s))}
               </td>
               {/* $Vol */}
-              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+              <td className="px-[3px] lg:px-2 py-1.5 text-right font-mono text-zinc-400">
                 {fmtDollarVol(s.dollar_volume)}
               </td>
               {/* ADR% */}
-              <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
+              <td className="px-[3px] lg:px-2 py-1.5 text-right font-mono text-zinc-300">
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
               </td>
               {/* RS */}
-              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
+              <td className={`px-[3px] lg:px-2 py-1.5 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
                 {fmtRS(getRS(s, spxReturn))}
               </td>
               {/* Last column: custom metric or perf Change% */}
               {customCol ? (
-                <td className={`px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
+                <td className={`px-[3px] lg:px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
                   {customCol.fmt(s[customCol.key])}
                 </td>
               ) : (
-                <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
+                <td className={`px-[3px] lg:px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
                   {fmtPct(getPerfValue(s, perfField))}
                 </td>
               )}
@@ -855,7 +856,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
         {/* Totals footer */}
         <tfoot>
           <tr className="border-t border-zinc-700 text-zinc-600 text-xs">
-            <td colSpan={3} className="py-1.5 pr-2 text-right font-mono">
+            <td colSpan={3} className="py-1.5 pr-2 text-right font-mono whitespace-nowrap">
               {stocks.length} stocks
             </td>
             <td colSpan={customCol ? 5 : 5} />
@@ -896,15 +897,15 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
     <div className="border-t border-zinc-800 first:border-t-0">
       {/* Industry header row — grid matches GroupView header exactly */}
       <div
-        className="group grid grid-cols-[16px_1fr_48px_64px_48px_auto] cursor-pointer items-center gap-2 px-3 py-2 hover:bg-zinc-800/40"
+        className="group grid grid-cols-[14px_1fr_30px_42px_34px_auto] lg:grid-cols-[16px_1fr_48px_64px_48px_auto] cursor-pointer items-center gap-1.5 lg:gap-2 px-2 lg:px-3 py-2 hover:bg-zinc-800/40"
         onClick={() => setOpen((o) => !o)}
       >
         <span className="text-zinc-500 text-xs">{open ? "▾" : "▸"}</span>
-        <span className="text-sm font-medium text-zinc-200">{industry}</span>
+        <span className="text-xs lg:text-sm font-medium text-zinc-200 min-w-0 truncate" title={industry}>{industry}</span>
         <span className="text-xs text-zinc-500 text-right">{items.length}</span>
         <span className="text-xs text-zinc-600 text-right">{countPct != null ? `${countPct.toFixed(1)}%` : "—"}</span>
         <span className={`text-xs font-mono text-right ${rsColor(groupRS)}`}>{fmtRS(groupRS)}</span>
-        <span className="opacity-0 transition-opacity group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
+        <span className="hidden lg:inline opacity-0 transition-opacity group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
           {onAddToClipboard
             ? <AddToClipboardButton label={industry} tickers={tickers} filter={filter} onAdd={onAddToClipboard} />
             : <CopyButton tickers={tickers} />
@@ -913,9 +914,9 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
       </div>
 
       {open && (
-        <div className="ml-4 border-l border-zinc-700 pb-1">
+        <div className="ml-2 lg:ml-4 border-l border-zinc-700 pb-1">
           {/* Column sort header — only shown when group is open */}
-          <div className="flex items-center gap-3 border-b border-zinc-800 bg-zinc-900/80 px-3 py-1 text-xs font-medium text-zinc-500 sticky top-0 z-10">
+          <div className="flex items-center gap-1.5 lg:gap-3 border-b border-zinc-800 bg-zinc-900/80 px-1.5 lg:px-3 py-1 text-[9px] lg:text-xs font-medium text-zinc-500 sticky top-0 z-10">
             {cols.map((col) => (
               <button
                 key={col.key}
@@ -933,44 +934,44 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
               return (
                 <div
                   key={s.ticker}
-                  className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
+                  className="flex items-center gap-1.5 lg:gap-3 px-1.5 lg:px-3 py-1 text-[9px] lg:text-xs hover:bg-zinc-800/30"
                 >
                   {/* Ticker */}
                   <button
                     onClick={() => onStockClick(s)}
-                    className="w-14 font-mono font-semibold text-cyan-400 hover:underline hover:text-white transition-colors text-left"
+                    className="w-11 lg:w-14 font-mono font-semibold text-cyan-400 hover:underline hover:text-white transition-colors text-left"
                   >
                     {s.ticker}
                   </button>
                   {/* Company */}
-                  <span className="flex-1 truncate text-zinc-400">{s.company}</span>
+                  <span className="flex-1 truncate text-zinc-400 hidden lg:block">{s.company}</span>
                   {/* Mkt Cap */}
-                  <span className="w-16 text-right font-mono text-zinc-400">
+                  <span className="w-16 text-right font-mono text-zinc-400 hidden lg:block">
                     {fmtMktCap(s.market_cap_b, s.mc_approx)}
                   </span>
                   {/* ADR×$Vol */}
-                  <span className="w-16 text-right font-mono text-amber-300 font-semibold">
+                  <span className="w-16 text-right font-mono text-amber-300 font-semibold hidden lg:block">
                     {fmtAdrVol(adrVolScore(s))}
                   </span>
                   {/* $Vol */}
-                  <span className="w-20 text-right font-mono text-zinc-400">
+                  <span className="w-12 lg:w-20 text-right font-mono text-zinc-400">
                     {fmtDollarVol(s.dollar_volume)}
                   </span>
                   {/* ADR% */}
-                  <span className="w-12 text-right font-mono text-zinc-500">
+                  <span className="w-9 lg:w-12 text-right font-mono text-zinc-500">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </span>
                   {/* RS */}
-                  <span className={`w-12 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
+                  <span className={`w-8 lg:w-12 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
                     {fmtRS(getRS(s, spxReturn))}
                   </span>
                   {/* Last column: custom metric or Change% */}
                   {customCol ? (
-                    <span className={`w-20 text-right font-mono font-semibold ${customCol.cls}`}>
+                    <span className={`w-14 lg:w-20 text-right font-mono font-semibold ${customCol.cls}`}>
                       {customCol.fmt(s[customCol.key])}
                     </span>
                   ) : (
-                    <span className={`w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
+                    <span className={`w-14 lg:w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
                       {fmtPct(perfVal)}
                     </span>
                   )}
@@ -1099,37 +1100,37 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   // Order: Ticker, Company, Mkt Cap, ADR×$Vol, $Vol, ADR%, RS, Change%/custom (last unchanged)
   const GROUP_STOCK_COLS = customCol
     ? [
-        { key: "ticker",        label: "Ticker",        align: "left",  cls: "w-14" },
-        { key: "company",       label: "Company",       align: "left",  cls: "flex-1" },
-        { key: "market_cap_b",  label: "Mkt Cap",       align: "right", cls: "w-16" },
-        { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", cls: "w-16" },
-        { key: "dollar_volume", label: "$ Vol",         align: "right", cls: "w-20" },
-        { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-12" },
-        { key: "rs",            label: "RS",            align: "right", cls: "w-12" },
-        { key: customCol.key,   label: customCol.label, align: "right", cls: "w-20" },
+        { key: "ticker",        label: "Ticker",        align: "left",  cls: "w-11 lg:w-14" },
+        { key: "company",       label: "Company",       align: "left",  cls: "flex-1 hidden lg:block" },
+        { key: "market_cap_b",  label: "Mkt Cap",       align: "right", cls: "w-16 hidden lg:block" },
+        { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", cls: "w-16 hidden lg:block" },
+        { key: "dollar_volume", label: "$ Vol",         align: "right", cls: "w-12 lg:w-20" },
+        { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-9 lg:w-12" },
+        { key: "rs",            label: "RS",            align: "right", cls: "w-8 lg:w-12" },
+        { key: customCol.key,   label: customCol.label, align: "right", cls: "w-14 lg:w-20" },
       ]
     : [
-        { key: "ticker",        label: "Ticker",       align: "left",  cls: "w-14" },
-        { key: "company",       label: "Company",      align: "left",  cls: "flex-1" },
-        { key: "market_cap_b",  label: "Mkt Cap",      align: "right", cls: "w-16" },
-        { key: "adr_vol_score", label: "ADR×$Vol",     align: "right", cls: "w-16" },
-        { key: "dollar_volume", label: "$ Vol",        align: "right", cls: "w-20" },
-        { key: "adr_pct",       label: "ADR%",         align: "right", cls: "w-12" },
-        { key: "rs",            label: "RS",           align: "right", cls: "w-12" },
-        { key: perfField,       label: changeColLabel, align: "right", cls: "w-20" },
+        { key: "ticker",        label: "Ticker",       align: "left",  cls: "w-11 lg:w-14" },
+        { key: "company",       label: "Company",      align: "left",  cls: "flex-1 hidden lg:block" },
+        { key: "market_cap_b",  label: "Mkt Cap",      align: "right", cls: "w-16 hidden lg:block" },
+        { key: "adr_vol_score", label: "ADR×$Vol",     align: "right", cls: "w-16 hidden lg:block" },
+        { key: "dollar_volume", label: "$ Vol",        align: "right", cls: "w-12 lg:w-20" },
+        { key: "adr_pct",       label: "ADR%",         align: "right", cls: "w-9 lg:w-12" },
+        { key: "rs",            label: "RS",           align: "right", cls: "w-8 lg:w-12" },
+        { key: perfField,       label: changeColLabel, align: "right", cls: "w-14 lg:w-20" },
       ];
 
   return (
     <div>
       {/* Industry / Count / Count% / RS header — grid mirrors GroupRow data grid exactly */}
-      <div className="grid grid-cols-[16px_1fr_48px_64px_48px_auto] items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
+      <div className="grid grid-cols-[14px_1fr_30px_42px_34px_auto] lg:grid-cols-[16px_1fr_48px_64px_48px_auto] items-center gap-1.5 lg:gap-2 border-b border-zinc-800 px-2 lg:px-3 py-1.5 text-[10px] lg:text-xs font-medium text-zinc-600">
         <span />  {/* chevron column */}
         <span>Industry</span>
         <button onClick={() => handleGroupSort("count")} className="block w-full text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count<GroupSortIcon colKey="count"/></button>
         <button onClick={() => handleGroupSort("countPct")} className="block w-full text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count%<GroupSortIcon colKey="countPct"/></button>
         <button onClick={() => handleGroupSort("rs")} className="block w-full text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">RS<GroupSortIcon colKey="rs"/></button>
         {/* placeholder must match the data-row button to keep 'auto' column same width */}
-        <span className="invisible pointer-events-none">
+        <span className="hidden lg:inline invisible pointer-events-none">
           {onAddToClipboard
             ? <AddToClipboardButton label="" tickers={[]} filter={filter} onAdd={() => {}} />
             : <CopyButton tickers={[]} />}
@@ -1327,11 +1328,12 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     <>
     {/* Backdrop */}
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-1.5 lg:p-4 bg-black/70 backdrop-blur-sm"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
+      <PhoneViewportGuard />{/* BREADTH_FIT: phone layout while open; panel sized from its wrapper (body zoom 1.15 scales vw/vh); no sideways scroll */}
       {/* Panel */}
-      <div className="relative flex h-[85vh] w-full max-w-3xl flex-col rounded-xl border border-zinc-700 bg-zinc-900 shadow-2xl">
+      <div className="relative flex h-[92%] lg:h-[85%] w-full max-w-3xl flex-col rounded-xl border border-zinc-700 bg-zinc-900 shadow-2xl">
 
         {/* Header */}
         <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3">
@@ -1415,7 +1417,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
         </div>
 
         {/* Body */}
-        <div className="min-h-0 flex-1 overflow-y-auto">
+        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
           {loading ? (
             <div className="flex h-full items-center justify-center">
               <Loader2 className="h-6 w-6 animate-spin text-zinc-500" />

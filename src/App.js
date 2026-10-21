@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from 
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
+import { usePhoneViewport, PhoneViewportGuard, _isPhone } from "./phoneViewport";
 import { parseOrderLog, isEntryRecord, matchOrderLog, loadOrderLog, saveOrderLog, recordKey } from "./orderLog";
 import { withEstimatedR, fixedRiskDollars, loadFixedRisk, saveFixedRisk } from "./fixedRisk";
 import BreadthStatus from "./BreadthStatus";
@@ -8745,11 +8746,12 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
     {/* ── Leading Theme modal ────────────────────────────────────────────── */}
     {selectedLeadingTheme && (
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center p-1.5 lg:p-4 bg-black/60 backdrop-blur-sm"
         onClick={() => setSelectedLeadingTheme(null)}
       >
+        <PhoneViewportGuard />{/* LEADING_POPUP_FIT: phone layout while open; card sized from its wrapper (body zoom 1.15 scales vw/vh); table compact below lg, never scrolls sideways */}
         <div
-          className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-[min(92vw,780px)] max-h-[80vh] flex flex-col"
+          className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-full max-w-[980px] max-h-[88%] flex flex-col"
           onClick={e => e.stopPropagation()}
         >
           {/* Header */}
@@ -8771,7 +8773,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
           </div>
 
           {/* Stock list */}
-          <div className="overflow-y-auto flex-1">
+          <div className="overflow-y-auto overflow-x-hidden flex-1">
             {selectedLeadingTheme.stocks.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
                 {selectedLeadingTheme.inTop5 === false ? (
@@ -8784,75 +8786,75 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
                 )}
               </div>
             ) : (
-              <table className="w-full text-[12px] text-zinc-300">
-                <thead className="sticky top-0 bg-zinc-900 text-[11px] text-zinc-500 uppercase tracking-wider z-10">
+              <table className="w-full text-[9px] lg:text-[12px] tracking-tighter lg:tracking-normal text-zinc-300">
+                <thead className="sticky top-0 bg-zinc-900 text-[8px] lg:text-[11px] text-zinc-500 uppercase tracking-tight lg:tracking-wider z-10">
                   <tr>
-                    <th className="px-3 py-2 font-medium text-left cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-left cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('ticker')}>
-                      Ticker{ltSort.col === 'ticker' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      Ticker{ltSort.col === 'ticker' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-left cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-3 py-2 font-medium text-left cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden lg:table-cell"
                         onClick={() => handleLtColSort('company')}>
-                      Company{ltSort.col === 'company' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      Company{ltSort.col === 'company' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('price')}>
-                      Price{ltSort.col === 'price' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      Price{ltSort.col === 'price' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('change_pct')}>
-                      1D{ltSort.col === 'change_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      1D{ltSort.col === 'change_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('perf_1w')}>
-                      1W{ltSort.col === 'perf_1w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      1W{ltSort.col === 'perf_1w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('perf_1m')}>
-                      1M{ltSort.col === 'perf_1m' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      1M{ltSort.col === 'perf_1m' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('dollar_volume')}>
-                      $Vol{ltSort.col === 'dollar_volume' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      $Vol{ltSort.col === 'dollar_volume' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('rs_52w')}>
-                      RS{ltSort.col === 'rs_52w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      RS{ltSort.col === 'rs_52w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('adr_pct')}>
-                      ADR%{ltSort.col === 'adr_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      ADR%{ltSort.col === 'adr_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : <span className="hidden lg:inline"> ⬍</span>}
                     </th>
-                    <th className="px-3 py-2 font-medium text-left">Sub-Theme</th>
+                    <th className="px-[3px] lg:px-3 py-2 font-medium text-left hidden lg:table-cell">Sub-Theme</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-800/40">
                   {ltSortedStocks.map(s => (
                     <tr key={s.ticker} className="hover:bg-zinc-800/30 transition-colors">
-                      <td className="px-3 py-2">
+                      <td className="px-1.5 lg:px-3 py-2">
                         <StockCell ticker={s.ticker} />
                       </td>
-                      <td className="px-3 py-2 text-zinc-300 truncate max-w-[160px]">{s.company || '—'}</td>
-                      <td className="px-3 py-2 text-right font-mono">${s.price != null ? s.price.toFixed(2) : '—'}</td>
-                      <td className={`px-3 py-2 text-right font-mono font-bold ${(s.change_pct ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {s.change_pct != null ? `${s.change_pct >= 0 ? '+' : ''}${s.change_pct.toFixed(1)}%` : '—'}
+                      <td className="px-3 py-2 text-zinc-300 truncate max-w-[140px] hidden lg:table-cell">{s.company || '—'}</td>
+                      <td className="px-[3px] lg:px-3 py-2 text-right font-mono">${s.price != null ? s.price.toFixed(2) : '—'}</td>
+                      <td className={`px-[3px] lg:px-3 py-2 text-right font-mono font-bold ${(s.change_pct ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {s.change_pct != null ? <>{s.change_pct >= 0 ? '+' : ''}{s.change_pct.toFixed(1)}<span className="max-[380px]:hidden">%</span></> : '—'}
                       </td>
-                      <td className={`px-3 py-2 text-right font-mono ${(s.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {s.perf_1w != null ? `${s.perf_1w >= 0 ? '+' : ''}${s.perf_1w.toFixed(1)}%` : '—'}
+                      <td className={`px-[3px] lg:px-3 py-2 text-right font-mono ${(s.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {s.perf_1w != null ? <>{s.perf_1w >= 0 ? '+' : ''}{s.perf_1w.toFixed(1)}<span className="max-[380px]:hidden">%</span></> : '—'}
                       </td>
-                      <td className={`px-3 py-2 text-right font-mono ${(s.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {s.perf_1m != null ? `${s.perf_1m >= 0 ? '+' : ''}${s.perf_1m.toFixed(1)}%` : '—'}
+                      <td className={`px-[3px] lg:px-3 py-2 text-right font-mono ${(s.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {s.perf_1m != null ? <>{s.perf_1m >= 0 ? '+' : ''}{s.perf_1m.toFixed(1)}<span className="max-[380px]:hidden">%</span></> : '—'}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono text-zinc-400">
+                      <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">
                         {s.dollar_volume != null ? fmtVol(s.dollar_volume) : '—'}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono">
+                      <td className="px-[3px] lg:px-3 py-2 text-right font-mono">
                         {s.rs_52w != null ? <span className={`font-bold ${s.rs_52w >= 90 ? 'text-emerald-300 font-bold' : s.rs_52w >= 70 ? 'text-emerald-500' : s.rs_52w >= 50 ? 'text-zinc-300' : 'text-zinc-500'}`}>{s.rs_52w}</span> : '—'}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono text-zinc-300">
-                        {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'}
+                      <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-300">
+                        {s.adr_pct != null ? <>{s.adr_pct.toFixed(1)}<span className="max-[380px]:hidden">%</span></> : '—'}
                       </td>
-                      <td className="px-3 py-2 text-zinc-500 text-[11px]">{s._subtheme || selectedLeadingTheme.name}</td>
+                      <td className="px-3 py-2 text-zinc-500 text-[11px] hidden lg:table-cell">{s._subtheme || selectedLeadingTheme.name}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -11628,15 +11630,15 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
     else { setSortCol(col); setSortDir(col === "ticker" || col === "name" ? "asc" : "desc"); }
   };
 
-  const Th = ({ col, label, align = "right" }) => (
+  const Th = ({ col, label, align = "right", hide = false }) => (
     <th onClick={() => handleSort(col)}
-        className={`px-2 py-2.5 font-semibold cursor-pointer hover:text-zinc-100 select-none
-          text-zinc-400 text-[11px] uppercase tracking-wide leading-tight
-          ${align === "left" ? "text-left" : "text-right"}`}>
+        className={`px-[3px] lg:px-2 py-2.5 font-semibold cursor-pointer hover:text-zinc-100 select-none
+          text-zinc-400 text-[8px] lg:text-[11px] uppercase tracking-tight lg:tracking-wide leading-tight
+          ${align === "left" ? "text-left" : "text-right"} ${hide ? "hidden lg:table-cell" : ""}`}>
       {label}
       {sortCol === col
-        ? <span className="ml-1 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
-        : <span className="ml-1 text-zinc-700">⇅</span>}
+        ? <span className="ml-0.5 lg:ml-1 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+        : <span className="ml-1 text-zinc-700 hidden lg:inline">⇅</span>}
     </th>
   );
 
@@ -11647,7 +11649,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
       : v >= 0  ? "text-emerald-400/80"
       : v >= -3 ? "text-rose-400/80"
       : "text-rose-400";
-    return <span className={cls}>{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span>;
+    return <span className={cls}><span className="lg:hidden">{v >= 0 ? "+" : ""}{v.toFixed(1)}<span className="max-[380px]:hidden">%</span></span><span className="hidden lg:inline">{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span></span>;
   };
 
   // Close on Escape key
@@ -11658,10 +11660,11 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 pb-8"
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-3 lg:pt-16 px-1.5 lg:px-4 pb-3 lg:pb-8"
          style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
          onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1320px] flex flex-col max-h-[80vh]"
+      <PhoneViewportGuard />{/* ETF_HOLD_FIT: below lg only Ticker + the 8 return columns show (market cap, $ vol, ADR, RS, Company are in the stock panel behind the ticker) */}
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1320px] flex flex-col max-h-full"
            onClick={e => e.stopPropagation()}>
 
         {/* Title bar — matches screenshot 2 */}
@@ -11718,34 +11721,34 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
               )}
             </div>
           ) : (
-            <table className="w-full text-xs border-collapse table-fixed">
+            <table className="w-full text-[9px] lg:text-xs tracking-tighter lg:tracking-normal border-collapse lg:table-fixed">
               <colgroup>
-                <col style={{ width: "3%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "17%" }} />
-                <col style={{ width: "7%" }} />
-                <col style={{ width: "7%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "5%" }} />
-                <col style={{ width: "7%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "6%" }} />
-                <col style={{ width: "6%" }} />
+                <col className="hidden lg:table-column lg:w-[3%]" />
+                <col className="lg:w-[6%]" />
+                <col className="hidden lg:table-column lg:w-[17%]" />
+                <col className="hidden lg:table-column lg:w-[7%]" />
+                <col className="hidden lg:table-column lg:w-[7%]" />
+                <col className="hidden lg:table-column lg:w-[6%]" />
+                <col className="hidden lg:table-column lg:w-[5%]" />
+                <col className="lg:w-[7%]" />
+                <col className="lg:w-[6%]" />
+                <col className="lg:w-[6%]" />
+                <col className="lg:w-[6%]" />
+                <col className="lg:w-[6%]" />
+                <col className="lg:w-[6%]" />
+                <col className="lg:w-[6%]" />
+                <col className="lg:w-[6%]" />
               </colgroup>
               <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-700">
                 <tr>
-                  <th className="px-2 py-2.5 text-left text-zinc-500 font-semibold text-[11px]">#</th>
+                  <th className="px-2 py-2.5 text-left text-zinc-500 font-semibold text-[11px] hidden lg:table-cell">#</th>
                   <Th col="ticker"        label="Ticker"    align="left" />
-                  <Th col="name"          label="Company"   align="left" />
-                  <Th col="mkt_cap"       label="Mkt Cap"               />
-                  <Th col="dollar_volume" label="$ Vol"                  />
-                  <Th col="adr_pct"       label="ADR%"                   />
-                  <Th col="rs"            label="RS"                     />
-                  <Th col="perf_intraday" label="Intraday"                />
+                  <Th col="name"          label="Company"   align="left" hide />
+                  <Th col="mkt_cap"       label="Mkt Cap" hide              />
+                  <Th col="dollar_volume" label="$ Vol" hide                 />
+                  <Th col="adr_pct"       label="ADR%" hide                  />
+                  <Th col="rs"            label="RS" hide                    />
+                  <Th col="perf_intraday" label={<><span className="lg:hidden">Intra</span><span className="hidden lg:inline">Intraday</span></>} />
                   <Th col="perf_1d"       label="1D"                     />
                   <Th col="perf_1w"       label="1W"                     />
                   <Th col="perf_1m"       label="1M"                     />
@@ -11759,27 +11762,27 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                 {sorted.map((h, i) => (
                   <tr key={`${h.ticker}-${i}`}
                       className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
-                    <td className="px-2 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
-                    <td className="px-2 py-2 truncate">
-                      <StockCell ticker={h.ticker} />
+                    <td className="px-2 py-2 text-zinc-600 text-[11px] hidden lg:table-cell">{i + 1}</td>
+                    <td className="px-1.5 lg:px-2 py-2 truncate">
+                      <TickerLink ticker={h.ticker} /><span className="hidden lg:inline"><LevEtfTag ticker={h.ticker} /></span>
                     </td>
-                    <td className="px-2 py-2 text-zinc-300 truncate">{h.name || "—"}</td>
-                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{fmt(h.mkt_cap)}</td>
-                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{fmt(h.dollar_volume)}</td>
-                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
-                    <td className="px-2 py-2 text-right font-mono">
+                    <td className="px-2 py-2 text-zinc-300 truncate hidden lg:table-cell">{h.name || "—"}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{fmt(h.mkt_cap)}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{fmt(h.dollar_volume)}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-2 py-2 text-right font-mono hidden lg:table-cell">
                       {h.rs != null
                         ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
                         : <span className="text-zinc-600">—</span>}
                     </td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_intraday)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1d)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1w)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1m)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_3m)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_6m)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_ytd)}</td>
-                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1y)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_intraday)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1d)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1w)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1m)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_3m)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_6m)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_ytd)}</td>
+                    <td className="px-[3px] lg:px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1y)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -13204,35 +13207,6 @@ const _evTitle = ev => ev.kind === "E"
   ? `Earnings ${ev.date}${ev.tod === "b" ? " · before open" : ev.tod === "a" ? " · after close" : ""}${ev.sp != null ? ` · EPS surprise ${ev.sp > 0 ? "+" : ""}${ev.sp.toFixed(1)}%` : ""}`
   : ev.kind === "D" ? `Dividend ${ev.date} · $${ev.amount} (ex-date)` : `Split ${ev.date} · ${ev.ratio} (prices are split-adjusted)`;
 
-// ── Phones: the page itself is locked to a 1600px-wide desktop layout (public/index.html viewport), which makes full-screen modals tiny.
-// While a full-screen modal is open on a touch phone, switch the viewport meta to the device width so the modal lays out natively
-// (its own responsive classes then apply), and restore the desktop viewport + scroll position when the last modal closes.
-let _phoneModalCount = 0, _phoneSavedScroll = 0, _origViewport = null;
-const _isPhone = () => {
-  try { return window.matchMedia("(pointer: coarse)").matches && Math.min(window.screen.width, window.screen.height) < 600; } catch { return false; }
-};
-const _viewportMeta = () => document.querySelector('meta[name="viewport"]');
-const usePhoneViewport = () => {
-  React.useEffect(() => {
-    if (!_isPhone()) return undefined;
-    const meta = _viewportMeta();
-    if (!meta) return undefined;
-    if (_phoneModalCount++ === 0) {
-      _origViewport = meta.getAttribute("content");
-      _phoneSavedScroll = window.scrollY;
-      meta.setAttribute("content", "width=device-width, initial-scale=1");
-    }
-    return () => {
-      if (--_phoneModalCount === 0) {
-        meta.setAttribute("content", _origViewport || "width=1600, shrink-to-fit=no");
-        setTimeout(() => window.scrollTo(0, _phoneSavedScroll), 80);
-      }
-    };
-  }, []);
-};
-
-// Mount this inside a modal to get the phone layout while it is open (the hook above, but tied to the modal's lifetime).
-const PhoneViewportGuard = () => { usePhoneViewport(); return null; };
 
 // ── Stats overlay on the enlarged chart (Market Cap / ADR% / ATR / LoD distance, ATR% multiple from the 50-MA, RVOL box) ──────────
 // All computed from the chart's own daily bars, except Market Cap (screener_stocks.json via ScreenerCtx).
@@ -13825,13 +13799,13 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
     else { setSortCol(col); setSortDir(col === "ticker" || col === "company" ? "asc" : "desc"); }
   };
 
-  const Th = ({ col, label, align = "right" }) => (
+  const Th = ({ col, label, align = "right", hide = false }) => (
     <th onClick={() => handleSort(col)}
-        className={`px-3 py-2.5 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-100 select-none text-zinc-400 text-[11px] uppercase tracking-wide ${align === "left" ? "text-left" : "text-right"}`}>
+        className={`px-[3px] lg:px-3 py-2.5 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-100 select-none text-zinc-400 text-[8px] lg:text-[11px] uppercase tracking-tight lg:tracking-wide ${align === "left" ? "text-left" : "text-right"} ${hide ? "hidden lg:table-cell" : ""}`}>
       {label}
       {sortCol === col
-        ? <span className="ml-1 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
-        : <span className="ml-1 text-zinc-700">⇅</span>}
+        ? <span className="ml-0.5 lg:ml-1 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+        : <span className="ml-1 text-zinc-700 hidden lg:inline">⇅</span>}
     </th>
   );
 
@@ -13845,7 +13819,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
   const p1dCell = v => {
     if (v == null) return <span className="text-zinc-600">—</span>;
     const cls = v >= 10 ? "text-emerald-300 font-bold" : v >= 3 ? "text-emerald-400" : v >= 0 ? "text-emerald-400/80" : v >= -3 ? "text-rose-400/80" : "text-rose-400";
-    return <span className={cls}>{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span>;
+    return <span className={cls}><span className="lg:hidden">{v >= 0 ? "+" : ""}{v.toFixed(1)}<span className="max-[380px]:hidden">%</span></span><span className="hidden lg:inline">{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span></span>;
   };
 
   const rsCell = v => {
@@ -13855,10 +13829,11 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 pb-8"
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-3 lg:pt-16 px-1.5 lg:px-4 pb-3 lg:pb-8"
          style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
          onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-4xl flex flex-col max-h-[80vh]"
+      <PhoneViewportGuard />{/* THEME_STOCKS_FIT: phone layout while open; Company + # only from lg; never scrolls sideways */}
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-4xl flex flex-col max-h-full"
            onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
           <div className="flex items-center gap-2">
@@ -13869,19 +13844,19 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
             <X size={15} />
           </button>
         </div>
-        <div className="overflow-auto flex-1">
-          <table className="w-full text-xs border-collapse">
+        <div className="overflow-y-auto overflow-x-hidden flex-1">
+          <table className="w-full text-[9px] lg:text-xs tracking-tighter lg:tracking-normal border-collapse">
             <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-700">
               <tr>
-                <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
+                <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8 hidden lg:table-cell">#</th>
                 <Th col="ticker"            label="Ticker"    align="left" />
-                <Th col="company"           label="Company"   align="left" />
+                <Th col="company"           label="Company"   align="left" hide />
                 <Th col="mkt_cap_b"         label="Mkt Cap"               />
                 <Th col="adr_x_vol"         label="ADR×$Vol"               />
                 <Th col="avg_dollar_volume" label="$ Vol"                  />
                 <Th col="adr_pct"           label="ADR%"                   />
                 <Th col="rs_52w"            label="RS"                     />
-                <Th col="perf_1d"           label="1D Change%"             />
+                <Th col="perf_1d"           label={<><span className="lg:hidden">1D</span><span className="hidden lg:inline">1D Change%</span></>} />
               </tr>
             </thead>
             <tbody>
@@ -13895,17 +13870,17 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
                 const p1d = s.perf_1d ?? s.change_pct;
                 return (
                   <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
-                    <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
-                    <td className="px-3 py-2">
-                      <StockCell ticker={s.ticker} />
+                    <td className="px-3 py-2 text-zinc-600 text-[11px] hidden lg:table-cell">{i + 1}</td>
+                    <td className="px-1.5 lg:px-3 py-2">
+                      <TickerLink ticker={s.ticker} /><span className="hidden lg:inline"><LevEtfTag ticker={s.ticker} /></span>
                     </td>
-                    <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate">{s.company || "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{mktCap}</td>
-                    <td className="px-3 py-2 text-right font-mono text-amber-400">{adrXVol != null ? fmt(adrXVol) : "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(typeof dvol === "number" ? dvol : null)}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
-                    <td className="px-3 py-2 text-right">{rsCell(s.rs_52w)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(p1d)}</td>
+                    <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate hidden lg:table-cell">{s.company || "—"}</td>
+                    <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">{mktCap}</td>
+                    <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-amber-400">{adrXVol != null ? fmt(adrXVol) : "—"}</td>
+                    <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">{fmt(typeof dvol === "number" ? dvol : null)}</td>
+                    <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-[3px] lg:px-3 py-2 text-right">{rsCell(s.rs_52w)}</td>
+                    <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{p1dCell(p1d)}</td>
                   </tr>
                 );
               })}
@@ -16373,36 +16348,37 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8" style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
-        <div className="bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[880px] max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+      <div className="fixed inset-0 z-50 flex items-start justify-center pt-3 lg:pt-8 px-1.5 lg:px-4 pb-3 lg:pb-8" style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
+        <PhoneViewportGuard />
+        <div className="bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[880px] max-h-full overflow-y-auto overflow-x-hidden" onClick={e => e.stopPropagation()}>
           <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
             <h3 className="text-base font-bold text-zinc-100">{only || group.name} Holdings</h3>
             <button onClick={onClose} className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-900 font-bold hover:bg-white" aria-label="Close">×</button>
           </div>
-          <div className="px-5 py-4 space-y-5">
+          <div className="px-2.5 lg:px-5 py-4 space-y-5">
             <div>
               <div className="text-sm font-semibold text-zinc-200 mb-2">ETF Statistics <span className="text-[11px] font-normal text-zinc-600">· Performance is {win.w}</span></div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse">
+              <div className="overflow-x-hidden">
+                <table className="w-full text-[10px] lg:text-xs border-collapse">
                   <thead>
                     <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
                       <SortTh sort={statSort} col="ticker" label="ETF" textual align="left" className="px-2 py-2" />
-                      <SortTh sort={statSort} col="desc" label="Description" textual align="left" className="px-2 py-2" />
-                      <SortTh sort={statSort} col="perf" label="Performance" className="px-2 py-2" />
-                      <SortTh sort={statSort} col="adr" label="ADR" className="px-2 py-2" />
-                      <SortTh sort={statSort} col="dvol" label="Avg $ Vol" className="px-2 py-2" />
-                      <SortTh sort={statSort} col="ext" label="Extension" title={EXTENSION_TIP} className="px-2 py-2" />
+                      <SortTh sort={statSort} col="desc" label="Description" textual align="left" className="px-2 py-2 hidden lg:table-cell" />
+                      <SortTh sort={statSort} col="perf" label={<><span className="lg:hidden">Perf</span><span className="hidden lg:inline">Performance</span></>} className="px-1 lg:px-2 py-2" />
+                      <SortTh sort={statSort} col="adr" label="ADR" className="px-1 lg:px-2 py-2" />
+                      <SortTh sort={statSort} col="dvol" label={<><span className="lg:hidden">$Vol</span><span className="hidden lg:inline">Avg $ Vol</span></>} className="px-1 lg:px-2 py-2" />
+                      <SortTh sort={statSort} col="ext" label={<><span className="lg:hidden">Ext</span><span className="hidden lg:inline">Extension</span></>} title={EXTENSION_TIP} className="px-1 lg:px-2 py-2" />
                     </tr>
                   </thead>
                   <tbody>
                     {statSort.rows.map(m => (
                       <tr key={m.ticker} className="border-t border-zinc-800/70">
                         <td className="px-2 py-2.5"><a href={`https://www.tradingview.com/chart/?symbol=${m.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-zinc-100 hover:text-cyan-400">{m.ticker}</a></td>
-                        <td className="px-2 py-2.5 text-zinc-400 max-w-[300px]">{m.desc || "—"}</td>
-                        <td className={`px-2 py-2.5 text-right font-mono ${(m.perf ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(m.perf)}</td>
-                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300">{m.adr != null ? `${m.adr.toFixed(1)}%` : "—"}</td>
-                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300">{fmtD(m.dvol)}</td>
-                        <td className={`px-2 py-2.5 text-right font-mono ${extensionCls(m.ext)}`}>{fmtExtension(m.ext)}</td>
+                        <td className="px-2 py-2.5 text-zinc-400 max-w-[300px] hidden lg:table-cell">{m.desc || "—"}</td>
+                        <td className={`px-1 lg:px-2 py-2.5 text-right font-mono ${(m.perf ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(m.perf)}</td>
+                        <td className="px-1 lg:px-2 py-2.5 text-right font-mono text-zinc-300">{m.adr != null ? `${m.adr.toFixed(1)}%` : "—"}</td>
+                        <td className="px-1 lg:px-2 py-2.5 text-right font-mono text-zinc-300">{fmtD(m.dvol)}</td>
+                        <td className={`px-1 lg:px-2 py-2.5 text-right font-mono ${extensionCls(m.ext)}`}>{fmtExtension(m.ext)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -16427,27 +16403,27 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
               {holdings.length === 0 ? (
                 <p className="text-xs text-zinc-600 italic py-3">No stock holdings on file for {tab === "Combined" ? "this group" : tab}.</p>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs border-collapse">
+                <div className="overflow-x-hidden">
+                  <table className="w-full text-[10px] lg:text-xs border-collapse">
                     <thead>
                       <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
                         <SortTh sort={holdSort} col="ticker" label="Ticker" textual align="left" className="px-2 py-2" />
-                        <SortTh sort={holdSort} col="name" label="Company" textual align="left" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="name" label="Company" textual align="left" className="px-2 py-2 hidden lg:table-cell" />
                         <SortTh sort={holdSort} col="weight" label="Weight" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="adr" label="ADR%" className="px-2 py-2" />
-                        <SortTh sort={holdSort} col="dvol" label="Avg $ Vol" className="px-2 py-2" />
-                        <SortTh sort={holdSort} col="ext" label="Extension" title={EXTENSION_TIP} className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="dvol" label={<><span className="lg:hidden">$Vol</span><span className="hidden lg:inline">Avg $ Vol</span></>} className="px-1 lg:px-2 py-2" />
+                        <SortTh sort={holdSort} col="ext" label={<><span className="lg:hidden">Ext</span><span className="hidden lg:inline">Extension</span></>} title={EXTENSION_TIP} className="px-1 lg:px-2 py-2" />
                       </tr>
                     </thead>
                     <tbody>
                       {holdSort.rows.map(h => (
                         <tr key={h.ticker} className="border-t border-zinc-800/70">
                           <td className="px-2 py-2"><StockCell ticker={h.ticker} /></td>
-                          <td className="px-2 py-2 text-zinc-400 max-w-[260px] truncate">{h.name || "—"}</td>
-                          <td className="px-2 py-2 text-right font-mono text-zinc-300">{h.weight != null ? `${h.weight.toFixed(1)}%` : "—"}</td>
-                          <td className="px-2 py-2 text-right font-mono text-zinc-300">{h.adr != null ? `${h.adr.toFixed(1)}%` : "—"}</td>
-                          <td className="px-2 py-2 text-right font-mono text-zinc-300">{fmtD(h.dvol)}</td>
-                          <td className={`px-2 py-2 text-right font-mono ${extensionCls(h.ext)}`}>{fmtExtension(h.ext)}</td>
+                          <td className="px-2 py-2 text-zinc-400 max-w-[260px] truncate hidden lg:table-cell">{h.name || "—"}</td>
+                          <td className="px-1 lg:px-2 py-2 text-right font-mono text-zinc-300">{h.weight != null ? `${h.weight.toFixed(1)}%` : "—"}</td>
+                          <td className="px-1 lg:px-2 py-2 text-right font-mono text-zinc-300">{h.adr != null ? `${h.adr.toFixed(1)}%` : "—"}</td>
+                          <td className="px-1 lg:px-2 py-2 text-right font-mono text-zinc-300">{fmtD(h.dvol)}</td>
+                          <td className={`px-1 lg:px-2 py-2 text-right font-mono ${extensionCls(h.ext)}`}>{fmtExtension(h.ext)}</td>
                         </tr>
                       ))}
                     </tbody>
