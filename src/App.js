@@ -4,6 +4,7 @@ import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
 import { usePhoneViewport, PhoneViewportGuard, _isPhone } from "./phoneViewport";
+import { loadMinDollarVolM, saveMinDollarVolM, isLiquid } from "./liquidity";
 import { parseOrderLog, isEntryRecord, matchOrderLog, loadOrderLog, saveOrderLog, recordKey } from "./orderLog";
 import { withEstimatedR, fixedRiskDollars, loadFixedRisk, saveFixedRisk } from "./fixedRisk";
 import BreadthStatus from "./BreadthStatus";
@@ -11592,6 +11593,22 @@ const NO_HOLDINGS_ETFS = {
   NASA: "Mix of public and pre-IPO companies",
 };
 
+// LIQUID_HOLDINGS — the holdings lists only show liquid stocks: avg $ volume at or above a minimum ($M, default 100, remembered; 0 = show all).
+const useMinDollarVol = () => {
+  const [minM, setMinM] = React.useState(() => loadMinDollarVolM());
+  const set = v => { const n = Math.max(0, parseFloat(v) || 0); setMinM(n); saveMinDollarVolM(n); };
+  return [minM, set];
+};
+const LiquidityFilter = ({ min, setMin, hidden }) => (
+  <label className="inline-flex items-center gap-1 text-[11px] text-zinc-500 whitespace-nowrap"
+    title="Hide holdings whose 10-day average dollar volume is below this many $ millions (0 shows every holding). Remembered for the next popup.">
+    Min $ Vol
+    <input type="number" min="0" step="10" value={min} onChange={e => setMin(e.target.value)} onClick={e => e.stopPropagation()}
+      className="w-14 px-1 py-0.5 text-[11px] font-mono bg-zinc-800 border border-zinc-700 rounded text-zinc-200 text-right focus:outline-none focus:border-blue-500/60"/>M
+    {hidden > 0 && <span className="text-amber-400/80">· {hidden} hidden</span>}
+  </label>
+);
+
 const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {}, onMiniCharts = null }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
@@ -11628,14 +11645,16 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
     return `$${v.toFixed(0)}`;
   };
 
+  const [minDv, setMinDv] = useMinDollarVol();
+  const liquidHoldings = useMemo(() => enrichedHoldings.filter(h => isLiquid(h.dollar_volume, minDv)), [enrichedHoldings, minDv]);
   const sorted = useMemo(() => {
-    return [...enrichedHoldings].sort((a, b) => {
+    return [...liquidHoldings].sort((a, b) => {
       const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     });
-  }, [enrichedHoldings, sortCol, sortDir]);
+  }, [liquidHoldings, sortCol, sortDir]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
@@ -11702,7 +11721,8 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                 </span>
               );
             })()}
-            <span className="text-xs text-zinc-500">{sorted.length} stocks · historical snapshot</span>
+            <span className="text-xs text-zinc-500">{sorted.length}{sorted.length !== enrichedHoldings.length ? ` of ${enrichedHoldings.length}` : ""} stocks · historical snapshot</span>
+            <LiquidityFilter min={minDv} setMin={setMinDv} hidden={enrichedHoldings.length - sorted.length} />
           </div>
           <div className="flex items-center gap-3">
             {onMiniCharts && sorted.length > 0 && (
@@ -11721,7 +11741,11 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
             modal's width with no horizontal scroll, however many perf
             columns are shown; only vertical scroll is needed for long lists. */}
         <div className="overflow-y-auto overflow-x-hidden flex-1">
-          {sorted.length === 0 ? (
+          {sorted.length === 0 && enrichedHoldings.length > 0 ? (
+            <div className="py-16 text-center text-zinc-500 text-sm px-6">
+              All {enrichedHoldings.length} holdings are below {`$${minDv}M`} average dollar volume — lower "Min $ Vol" to see them.
+            </div>
+          ) : sorted.length === 0 ? (
             <div className="py-16 text-center text-zinc-600 text-sm px-6">
               {NO_HOLDINGS_ETFS[etf] ? (
                 <>
@@ -16349,7 +16373,9 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
     adr: stats?.etfs?.[m.ticker]?.adr_pct ?? null, dvol: stats?.etfs?.[m.ticker]?.avg_dollar_volume ?? null, ext: stats?.etfs?.[m.ticker]?.extension ?? null,
   })), [members, stats, k]);
   const statSort = useTableSort(statRows, "perf", "desc");
-  const holdSort = useTableSort(holdings, "weight", "desc");
+  const [minDv, setMinDv] = useMinDollarVol();
+  const liquidHoldings = React.useMemo(() => holdings.filter(h => isLiquid(h.dvol, minDv)), [holdings, minDv]);
+  const holdSort = useTableSort(liquidHoldings, "weight", "desc");
 
   const [miniOpen, setMiniOpen] = React.useState(null);
   React.useEffect(() => {
@@ -16400,7 +16426,8 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
             <div>
               <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <div className="text-sm font-semibold text-zinc-200">Top Stock Holdings</div>
-                {holdings.length > 0 && onMiniCharts && (
+                <LiquidityFilter min={minDv} setMin={setMinDv} hidden={holdings.length - liquidHoldings.length} />
+                {liquidHoldings.length > 0 && onMiniCharts && (
                   <button onClick={() => setMiniOpen({ title: `${only || group.name} · ${tab}`, tickers: holdSort.rows.map(h => ({ ticker: h.ticker, category: group.name })) })}
                     className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
                 )}
@@ -16414,6 +16441,8 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
               {tab === "Combined" && <p className="text-[10px] text-zinc-600 mb-1">Average weight across the group's {members.length} ETF{members.length === 1 ? "" : "s"} (0% where an ETF doesn't hold the stock).</p>}
               {holdings.length === 0 ? (
                 <p className="text-xs text-zinc-600 italic py-3">No stock holdings on file for {tab === "Combined" ? "this group" : tab}.</p>
+              ) : liquidHoldings.length === 0 ? (
+                <p className="text-xs text-zinc-500 py-3">All {holdings.length} holdings are below {`$${minDv}M`} average dollar volume — lower "Min $ Vol" to see them.</p>
               ) : (
                 <div className="overflow-x-hidden">
                   <table className="w-full text-[10px] lg:text-xs border-collapse">
