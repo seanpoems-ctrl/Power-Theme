@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, useId } from "react";
+import { createPortal } from "react-dom";
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
@@ -10004,6 +10005,10 @@ const FILING_LABEL = {
 const SearchBar = ({ data, search, setSearch, categoryThemeMap = {}, categoryEtfMap = {} }) => {
   const lang = useLang();
   const [open, setOpen] = useState(false);
+  // SEARCH_ETF_MODAL: a Theme ETF chip opens the dashboard's ETF holdings popup (same table as Group ETF, with Mini Charts / enlarged charts) instead of TradingView
+  const searchScreenerMap = React.useContext(ScreenerCtx) || {};
+  const [etfModal, setEtfModal] = useState(null);       // { etf, theme, holdings }
+  const [searchMiniFor, setSearchMiniFor] = useState(null);   // { title, tickers }
   const [allTickers, setAllTickers] = useState([]);
   const [livePrice, setLivePrice] = useState(null); // { price, change_pct } for non-scanner stocks
   const [livePriceLoading, setLivePriceLoading] = useState(false);
@@ -10654,14 +10659,14 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                       <span className="text-zinc-500 w-16 flex-shrink-0">Theme ETF</span>
                       <div className="flex flex-wrap gap-x-2 gap-y-1">
                         {categoryEtfMap[fullResult.ticker].map(etf => (
-                          <a key={etf}
-                            href={`https://www.tradingview.com/chart/?symbol=${etf}`}
-                            target="_blank" rel="noreferrer"
+                          <button key={etf} type="button"
+                            title={`${etf} holdings — all the stocks in the ETF, with Mini Charts`}
                             onMouseDown={e => e.preventDefault()}
+                            onClick={() => { setEtfModal({ etf, theme: categoryThemeMap[fullResult.ticker] || etf, holdings: data?.etf_holdings?.[etf] ?? [] }); setOpen(false); }}
                             className="text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20"
                           >
                             {etf}
-                          </a>
+                          </button>
                         ))}
                       </div>
                     </div>
@@ -10863,6 +10868,13 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
         </div>
       )}
       {tickerHover && <TVPopup ticker={tickerHover.ticker} anchorRect={tickerHover.rect} onClose={() => setTickerHover(null)}/>}
+      {(etfModal || searchMiniFor) && createPortal(<>
+        {etfModal && (
+          <EtfHoldingsModal etf={etfModal.etf} theme={etfModal.theme} holdings={etfModal.holdings} screenerMap={searchScreenerMap}
+            onClose={() => setEtfModal(null)} onMiniCharts={(tickers, title) => setSearchMiniFor({ title: title || `${etfModal.theme} (${etfModal.etf})`, tickers })} />
+        )}
+        {searchMiniFor && <MiniChartGridModal title={searchMiniFor.title} tickers={searchMiniFor.tickers} onClose={() => setSearchMiniFor(null)} />}
+      </>, document.body)}
     </div>
   );
 };
