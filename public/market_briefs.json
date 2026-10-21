@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-21 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Ascent Amidst Mixed Signals",
+    "spy_price": 769.05,
+    "spy_change_pct": 0.34,
+    "vix": 17.4,
+    "hy_oas": 3.29,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 51.1,
+    "mmth": 55.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. is seeing pre-market strength following news of its new AI-integrated M4 chip exceeding performance benchmarks in early developer tests, signaling a significant leap in computing power for its upcoming device lineup."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla Inc. is rallying after announcing a new long-term supply agreement for critical battery minerals, easing production concerns and signaling an acceleration in its Gigafactory expansion plans."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp",
+          "reason": "NVIDIA Corp is receiving renewed attention as analysts reiterate their outperform ratings based on ongoing AI infrastructure build-out, with no fresh news but continued flow into the AI sector."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-20 19:23 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA sees continued momentum from AI hardware demand, with analysts reiterating strong Q4 revenue guidance based on recent sector flows."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-29 19:56 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Caution / Oil Plunge",
-    "spy_price": 764.2,
-    "spy_change_pct": -0.18,
-    "vix": 16.04,
-    "hy_oas": 3.02,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 27.3,
-    "mmth": 47.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SMMT",
-          "company": "Summit Therapeutics",
-          "reason": "Strategic equity investment from AstraZeneca provides significant validation and capital for their clinical pipeline."
-        },
-        {
-          "ticker": "NVTS",
-          "company": "Navitas Semiconductor",
-          "reason": "Securing a U.S. Government Defense Contract marks a substantial new revenue stream and strategic growth area."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Shares traded largely on technical flows today, with no new fundamental catalyst driving significant price action."
         }
       ]
     }
