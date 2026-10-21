@@ -1,33 +1,6 @@
 {
-  "generated_at": "2026-10-20T23:03:01.413494+00:00",
+  "generated_at": "2026-10-21T01:18:10.470100+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 96.0,
-      "perf_1d": 51.56,
-      "leaders": [
-        {
-          "ticker": "BRZE",
-          "price": 45.57,
-          "rs_52w": 96,
-          "adr_pct": 5.51,
-          "vol_surge": 26.27,
-          "mkt_cap": 5176042303,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
