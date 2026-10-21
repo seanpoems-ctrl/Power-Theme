@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-21 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Growth Optimism Prevails",
+    "spy_price": 773.09,
+    "spy_change_pct": 0.53,
+    "vix": 16.68,
+    "hy_oas": 3.29,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 54.6,
+    "mmth": 58.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "SMCI",
+          "company": "Super Micro Computer, Inc.",
+          "reason": "AI Demand Optimism led to a significant gap up, positioning it as a key beneficiary of renewed investor confidence in AI infrastructure."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Benefited from broader AI demand optimism across the tech sector, showing strong price action alongside other AI-related stocks."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Experienced typical volatile price action driven by retail flow and technical levels, without any fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-21 11:54 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple continued to experience strong institutional buying on general tech flow, without specific fresh news, ahead of anticipated product launch cycles."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-30 12:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "US Equities Advance, Global Stumbles",
-    "spy_price": 768.09,
-    "spy_change_pct": 0.51,
-    "vix": 15.91,
-    "hy_oas": 3.08,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 27.1,
-    "mmth": 46.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a transformative AI-powered enterprise suite, attracting significant institutional upgrades and boosting investor confidence."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a strategic partnership for its new data center GPU architecture, positioning it for continued market share gains in the AI segment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil continued its upward trajectory, benefiting from the broader surge in crude oil prices, though no specific fresh corporate news was released today."
         }
       ]
     }
