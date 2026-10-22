@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-22 11:51 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 764.05,
+    "spy_change_pct": -1.17,
+    "vix": 18.85,
+    "hy_oas": 3.27,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 55.6,
+    "mmth": 56.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil is benefiting from rising crude oil prices and news of a substantial new oil discovery, offering a defensive play amidst broad market weakness."
+        },
+        {
+          "ticker": "LMT",
+          "company": "Lockheed Martin Corporation",
+          "reason": "Lockheed Martin is boosted by a significant multi-year defense contract win, positioning it as a resilient option during periods of geopolitical uncertainty and risk aversion."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA shares continue to face profit-taking and technical breakdowns as investors rotate out of high-growth technology, extending a recycled theme of sector-wide pressure."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-22 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "The stock showed activity driven by technical momentum following recent gains, with no fresh fundamental catalyst reported today to justify new conviction."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-01 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Resilience, US Flat",
-    "spy_price": 762.63,
-    "spy_change_pct": -0.21,
-    "vix": 16.25,
-    "hy_oas": 3.08,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 24.2,
-    "mmth": 45.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company reports exceptional Phase 3 trial results for its next-generation obesity drug, exceeding efficacy expectations and poised for accelerated regulatory review."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announces a groundbreaking partnership with a leading AI research firm to integrate advanced quantum computing capabilities into its Azure cloud platform, potentially revolutionizing enterprise solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil Corporation gains traction as crude oil prices climb above $91.00, fueling sector-wide momentum and attracting flow-based buying in energy majors."
         }
       ]
     }
