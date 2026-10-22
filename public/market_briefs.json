@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-22 19:35 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 763.96,
+    "spy_change_pct": -1.18,
+    "vix": 19.03,
+    "hy_oas": 3.27,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 57.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple unveils revolutionary Vision Pro 2 with significantly enhanced capabilities and a more accessible price point, sparking analyst upgrades on potential upgrade cycle acceleration."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft secures a multi-billion dollar AI infrastructure contract with a major sovereign fund, solidifying its leadership in cloud computing and artificial intelligence services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continues to face demand concerns following recent production reports, leading to further price target cuts by analysts and ongoing technical weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-22 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Trading is likely influenced by recycled narratives around artificial intelligence and semiconductor demand, rather than a fresh, specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-01 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Global Flows / Cautious Balance",
-    "spy_price": 763.99,
-    "spy_change_pct": 0.18,
-    "vix": 16.39,
-    "hy_oas": 3.12,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 26.6,
-    "mmth": 45.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RKLB",
-          "company": "Rocket Lab USA, Inc.",
-          "reason": "Announced a new commercial launch deal, signaling robust demand for its space launch services and expanding backlog."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Reports strong cloud computing contract win with a major government agency, boosting investor confidence in its enterprise segment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Trading on momentum from recent product announcements, but lacks fresh fundamental catalysts today to drive significant directional movement."
         }
       ]
     }
