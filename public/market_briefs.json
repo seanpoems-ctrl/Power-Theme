@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-22 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 763.96,
+    "spy_change_pct": -1.18,
+    "vix": 19.03,
+    "hy_oas": 3.27,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 57.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMD",
+          "company": "Advanced Micro Devices, Inc.",
+          "reason": "Advanced Micro Devices announced a significant new AI chip contract with a major cloud provider, bolstering its competitive stance against Nvidia."
+        },
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Johnson & Johnson received breakthrough therapy designation from the FDA for its new oncology drug, opening accelerated approval pathways."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continued to experience selling pressure on concerns over global EV demand and increasing competition, following a recycled analyst downgrade from yesterday."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-22 11:51 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Trading on momentum from recent product announcements, but lacks fresh fundamental catalysts today to drive significant directional movement."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-01 13:20 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Divergence",
-    "spy_price": 762.86,
-    "spy_change_pct": 0.03,
-    "vix": 16.82,
-    "hy_oas": 3.12,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 24.7,
-    "mmth": 45.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RKLB",
-          "company": "Rocket Lab USA, Inc.",
-          "reason": "The company announced a significant new commercial deal, boosting investor confidence in its growth trajectory and expanding space operations."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Market sentiment was buoyed by news of a major AI integration announcement, positioning the tech giant for continued leadership in artificial intelligence."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "The stock showed activity driven by technical momentum following recent gains, with no fresh fundamental catalyst reported today to justify new conviction."
         }
       ]
     }
