@@ -2,64 +2,40 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 4,
+  "count": 2,
   "stocks": [
-    {
-      "ticker": "RGC",
-      "company": "Regencell Bioscience Holdings Limited",
-      "industry": "Pharmaceuticals: Major",
-      "price": 10.8,
-      "change_pct": 3.35,
-      "adr_pct": 9.7,
-      "dollar_volume": "$6.3M",
-      "market_cap_b": 5.356,
-      "rs_ibd": 95,
-      "above50dma_pct": 65.3
-    },
     {
       "ticker": "BRZE",
       "company": "Braze, Inc.",
       "industry": "Internet Software/Services",
-      "price": 45.68,
-      "change_pct": 0.24,
-      "adr_pct": 5.2,
-      "dollar_volume": "$447.4M",
-      "market_cap_b": 5.189,
-      "rs_ibd": 92,
-      "above50dma_pct": 58.1
+      "price": 45.86,
+      "change_pct": 0.39,
+      "adr_pct": 4.8,
+      "dollar_volume": "$478.3M",
+      "market_cap_b": 5.209,
+      "rs_ibd": 93,
+      "above50dma_pct": 56.8
     },
     {
       "ticker": "SLN",
       "company": "Silence Therapeutics Plc - American Depository Share",
       "industry": "Miscellaneous Commercial Services",
-      "price": 19.67,
-      "change_pct": 0.31,
-      "adr_pct": 6.2,
-      "dollar_volume": "$191.9M",
-      "market_cap_b": 1.219,
-      "rs_ibd": 94,
-      "above50dma_pct": 55.5
-    },
-    {
-      "ticker": "KOD",
-      "company": "Kodiak Sciences Inc",
-      "industry": "Biotechnology",
-      "price": 87.72,
-      "change_pct": -5.65,
-      "adr_pct": 8.3,
-      "dollar_volume": "$122.0M",
-      "market_cap_b": 5.513,
-      "rs_ibd": 98,
-      "above50dma_pct": 55.5
+      "price": 19.66,
+      "change_pct": -0.05,
+      "adr_pct": 5.8,
+      "dollar_volume": "$195.7M",
+      "market_cap_b": 1.223,
+      "rs_ibd": 95,
+      "above50dma_pct": 54.0
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.58,
-    "spx_1m": 0.66,
-    "spx_3m": 4.66,
-    "spx_34d": 0.12,
-    "spx_qtd": 1.18,
-    "spx_mtd": 1.18
+    "spx_1d": -1.21,
+    "spx_1m": -0.53,
+    "spx_3m": 3.38,
+    "spx_34d": -0.71,
+    "spx_qtd": -0.04,
+    "spx_mtd": -0.04
   },
-  "fetched_at_utc": "2026-10-22T01:14:47+00:00"
+  "fetched_at_utc": "2026-10-22T23:03:36+00:00"
 }
