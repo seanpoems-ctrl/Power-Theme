@@ -1,212 +1,48 @@
 {
-  "scan_time": "2026-10-22 08:55 ET",
+  "scan_time": "2026-10-23 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "BHVN",
-      "price": 15.7,
-      "gap_pct": 33.62,
-      "pm_volume": 7794914,
-      "avg_vol_10d": 1843839,
-      "avg_dollar_vol": 28948272,
-      "mkt_cap": 1774764385,
-      "rvol": 0.61,
-      "adr_pct": 5.52,
+      "ticker": "CCI",
+      "price": 88.53,
+      "gap_pct": 12.3,
+      "pm_volume": 149876,
+      "avg_vol_10d": 6488116,
+      "avg_dollar_vol": 574392909,
+      "mkt_cap": 33538653456,
+      "rvol": 1.01,
+      "adr_pct": 3.2,
       "category": "New Contract/Partnership",
-      "theme": "Strategic Partnership with Ono",
-      "reasoning": "Biohaven surged after announcing a significant partnership with Ono, bringing in cash and supercharging its pipeline.",
+      "theme": "Potential SpaceX Partnership",
+      "reasoning": "CCI surged on news that SpaceX is in talks to secure **80,000 cell sites** for a new wireless network, potentially involving CCI.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "C",
-      "finviz_theme": "Biotech - Rare Disease",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Infrastructure",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Biohaven Pharmaceuticals (BHVN) stock surged **25%** after announcing a significant partnership with **Ono**, according to news headlines. This **Ono Deal** is reported to deliver substantial **cash** and provide **validation** for Biohaven's pipeline, effectively **supercharging** its future development efforts.",
-        "impact": "The partnership with Ono represents a strategic value inflection point, providing immediate financial strength and potentially accelerating pipeline progression, de-risking future development, and expanding market reach."
+        "catalyst": "Catalyst: Reports surfaced that **SpaceX** is in discussions to gain access to at least **80,000 cell sites** across the United States for a new wireless network, with **Crown Castle (CCI)** mentioned as a potential major cellular infrastructure company involved. This news drove **CCI +0.23%** in premarket trading.\n| Impact: A potential partnership with **SpaceX** for **80,000 cell sites** would represent a significant expansion opportunity and a substantial new revenue stream, dramatically improving CCI's growth outlook and network utilization.",
+        "impact": ""
       },
-      "analysis_details": "• **Impact**\nBiohaven's stock popped, surging **25%**, following the announcement of a strategic partnership with **Ono**. This collaboration is highlighted as a source of significant **cash** inflow for Biohaven, enhancing its financial flexibility. The **Ono Deal** also reportedly **supercharges** Biohaven's clinical **pipeline**, suggesting potential for accelerated development and expanded therapeutic areas.\n\n• **Strategic Value**\nThis partnership with **Ono** provides crucial **validation** for Biohaven's existing assets and strategic direction. The influx of **cash** and the expanded pipeline capabilities position Biohaven more strongly in the competitive biotech landscape, potentially attracting further investor interest and enabling more aggressive R&D initiatives. This transaction de-risks future operations and provides runway for growth.",
+      "analysis_details": "• **Impact**\n**SpaceX** is reportedly in talks to secure access to a minimum of **80,000 cell sites** across the US to build a new wireless network. **Crown Castle (CCI)** was mentioned in the reporting as a cellular infrastructure company potentially involved in these discussions, with its shares trading **+0.23%** in premarket on the news.\n\n• **Strategic Value**\nThis potential collaboration with **SpaceX** for a new wireless network could unlock substantial growth for CCI by providing a large-scale deployment opportunity for its existing infrastructure. It would diversify CCI's customer base and enhance its competitive positioning in the rapidly evolving wireless communication landscape, offering a strong tailwind beyond its recent Q3 results which put \"leverage in focus\".",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "BHVN Stock Pops As Ono Deal Supercharges Cash And Pipeline - Timothy Sykes",
+          "title": "Crown Castle (CCI) Q3 Results Put Leverage In Focus - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE02ZlNYZ2xRZ3JJYV8wZ1F0aDVMWlp0QTdmbmpWbUs5MXd3UWRpTENCOTZEZ0dUTlYxSk9VM3ZzbHk5OWlCbW9iV3ZSM2ZOeGlmdWlEOUVuWGxxQlo4ZDFBS1NueDYxN2k5ZTVTcVNoQll5UmF3cVdN?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPak9Eekd4S0loZnZraXRGeE90bG5XUHowU0hrazlyU1dScllEYklER3VoMXBOMFBPQU5WTmJTcUUxUWhSSmhMbjljRENhMWt0YW9BV1hSdlh1cFJ3VUU4ejlKdjhGQm45VVp0cHh1Um9YUk1YYnZLWGRmWVlOR1NYVWlTRGFJdF9SaHlPeXd1d0RKbFNubEtB?oc=5"
         },
         {
-          "title": "BHVN Stock Pops As Ono Deal Delivers Cash And Validation - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE52RllhN0hIVEJrSVZyRGpjSVpXMDA5c2JqTWpSY0dLUGpkdXBWNTJyQ0VhdnhaVHRFQjFGbXhPQ3lVd0RmLWpPZnZGdGYwY3RfSHlMZmxwRmc0VzlFNVdOZU8zcFdVUlZDaWxtUjNQXzhoSWc?oc=5"
-        },
-        {
-          "title": "Biohaven stock surges 25% on FDA acceptance of drug filing - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQNGVvcDQ2aVdSaFBnenFHZng4S013RVprdWtZY1ZaUGZkRGk0TmV0N3ZfellSQkxVRldXZng2ZDV6N0o4YnpLcERNWThONzNLUTFzNjliM1NUTUlDNmRGUF8xVXNQdzF5SkZwS3RsaGZyeHl5Ny12MnE1OUFhMVhNOVpQNk95bVEyT1VoaVk4ZWhteVk?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-22",
-        "form": "8-K",
-        "items": [
-          "7.01",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1935979/000193597926000083/bhvn-20261022.htm"
-      },
-      "float_shares": "128.56M",
-      "short_float": "16.14%",
-      "daily_pct": -0.51,
-      "prev_close": 11.75,
-      "industry": "Biotech - Rare Disease",
-      "technical_status": "Fail (Avg $Vol $29M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Biohaven announced a partnership with Ono, bringing in cash and supercharging its pipeline.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AVEX",
-      "price": 10.81,
-      "gap_pct": 11.67,
-      "pm_volume": 341644,
-      "avg_vol_10d": 3103208,
-      "avg_dollar_vol": 33545678,
-      "mkt_cap": 1227123726,
-      "rvol": 9.72,
-      "adr_pct": 7.33,
-      "category": "Government Policy",
-      "theme": "U.S. Navy Program Halt",
-      "reasoning": "Aevex dropped following reports the U.S. Navy halted its **$130M drone boat program** due to **performance issues**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 83,
-      "grade": "C",
-      "finviz_theme": "Drones",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "The U.S. Navy has suspended new orders for Aevex's autonomous **drone speedboats**, halting a **$130M program** over ongoing **performance issues**. Aevex stock **dropped 5%** on the news.",
-        "impact": "This event creates significant negative sentiment and uncertainty regarding future defense contracts for AVEX, potentially impacting revenue guidance and competitive standing in the maritime defense sector."
-      },
-      "analysis_details": "• **The Policy**\nShares of Aevex fell **5%** following reports that the U.S. Navy has suspended new orders for the company's autonomous **drone speedboats**. This decision effectively halts a **$130M drone boat program** due to ongoing **performance issues** identified by the Navy.\n\n• **Direct Impact**\nThe halt of the **$130M program** signals a material negative impact on Aevex's revenue stream and its reputation within the defense contracting space, particularly concerning its maritime systems strategy. The **performance issues** cited by the U.S. Navy could also deter other potential clients and future contract opportunities, creating sustained selling pressure.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "AEVEX Reaffirms Maritime Systems Strategy and Continued U.S. Navy Investment",
+          "title": "SpaceX in talks over 80,000 cell sites to build new wireless network - Bloomberg",
           "source": "Finviz",
-          "url": "/news/406014/aevex-reaffirms-maritime-systems-strategy-and-continued-us-navy-investment"
+          "url": "https://finance.yahoo.com/technology/articles/spacex-talks-80-000-cell-222051612.html"
         },
         {
-          "title": "Aevex's Drone-Launching Boats Sunk by Navy, Report Says. The Stock Is Crumbling.",
+          "title": "SpaceX in Talks to Access 80,000 Cell Sites for Wireless Network",
           "source": "Finviz",
-          "url": "https://www.barrons.com/articles/aevexs-drone-boats-navy-cheaper-weapons-pivot-45c3cc21?mod=bar_FV"
-        },
-        {
-          "title": "Aevex stock drops 5% as US Navy halts $130M drone boat program",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/aevex-stock-drops-5-us-114150834.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "32.44M",
-      "short_float": "8.16%",
-      "daily_pct": -32.5,
-      "prev_close": 9.68,
-      "industry": "Drones",
-      "technical_status": "Fail (Avg $Vol $34M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$130M drone boat program",
-        "discrepancy_note": "Source A (Finviz [4]) explicitly mentions the '$130M drone boat program'. Source B (Google News) does not mention the specific '$130M' figure in any of its provided headlines, making the claim unconfirmed by the second source."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "QS",
-      "price": 4.28,
-      "gap_pct": 7.58,
-      "pm_volume": 696677,
-      "avg_vol_10d": 15016717,
-      "avg_dollar_vol": 64271549,
-      "mkt_cap": 2464071822,
-      "rvol": 0.86,
-      "adr_pct": 5.07,
-      "category": "Earnings",
-      "theme": "Earnings Beat & New Production Line",
-      "reasoning": "QuantumScape reported a **Q3 2026 earnings beat** and announced plans for a **100 MWh solid-state battery production line** for new markets.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "C",
-      "finviz_theme": "EV Batteries",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "QuantumScape reported **Q3 2026 earnings**, stating it **narrows its loss** and **beats estimates**. Concurrently, the company announced significant plans for a new **100 MWh solid-state battery production line**.",
-        "impact": "This earnings beat coupled with a strategic pivot into new, high-growth markets like **AI Data Centers** and **Aerospace and Defense** could signal strong future revenue potential and market expansion, despite potential funding questions."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nQuantumScape reported its **Q3 2026 financial results**, successfully **narrowing its loss** and **beating analyst estimates**. This positive earnings surprise indicates stronger-than-expected operational performance for the quarter, potentially boosting investor confidence.\n\n• **The Growth (Momentum)**\nThe company announced a strategic pivot, planning a new **100 MWh solid-state battery production line**. This expansion targets emerging, high-value sectors including **AI Data Centers** and **Aerospace and Defense**, representing a significant growth avenue beyond traditional automotive applications.\n\n• **The Guide**\nWhile the announcement of the **100 MWh production line** signals an ambitious growth strategy, news headlines noted that this plan \"**raises the funding question**.\" This suggests potential future capital requirements, which could be a point of investor scrutiny for long-term guidance.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "QuantumScape (NASDAQ:QS) Narrows Loss and Pivots to 100 MWh Production Line - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQcE02d2xzRHVrbjlTMlE1aEl3ajZHMWhwQUQxb3B1TzNucUpYbVNtYkc0VGhaZ3pYbjVwbU0wRkdiVGpWd1dqOEt4OTdDbUh0amgwS1VoMExmN3JIRVFrNWc2N0hKbkM2WGJCQkc2NXZXYURRT1U2WnR1UVJxUE9jME5SWVM5Q3YxZHhjX1F0dHdqcU1EMjR1TmdteFNJZ1hOelo1eUhnQzgwa09wcnlwOVZUY09rNzRnTVh1eVJRUQ?oc=5"
-        },
-        {
-          "title": "QuantumScape Corporation Q3 2026 Earnings Call Summary",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/quantumscape-corporation-q3-2026-earnings-004538832.html"
-        },
-        {
-          "title": "QuantumScape Narrows Its Loss And Beats Estimates, But A New 100 MWh Factory Plan Raises The Funding Question",
-          "source": "Finviz",
-          "url": "/news/406050/quantumscape-narrows-its-loss-and-beats-estimates-but-a-new-100-mwh-factory-plan-raises-the-funding-question"
-        },
-        {
-          "title": "QuantumScape Reports Third Quarter 2026 Business and Financial Results",
-          "source": "Finviz",
-          "url": "/news/405884/quantumscape-reports-third-quarter-2026-business-and-financial-results"
-        },
-        {
-          "title": "QuantumScape Announces Plans for 100 MWh Solid-State Battery Production Line for AI Data Centers, Aerospace and Defense",
-          "source": "Finviz",
-          "url": "/news/405890/quantumscape-announces-plans-for-100-mwh-solid-state-battery-production-line-for-ai-data-centers-aerospace-and-defense"
+          "url": "https://finance.yahoo.com/technology/articles/spacex-talks-access-80-000-213142634.html"
         }
       ],
       "edgar_filing": {
@@ -214,18 +50,19 @@
         "form": "8-K",
         "items": [
           "2.02",
+          "7.01",
           "9.01"
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1811414/000119312526427862/qs-20261021.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1051470/000105147026000085/cci-20261021.htm"
       },
-      "float_shares": "503.49M",
-      "short_float": "21.82%",
-      "daily_pct": 0.0,
-      "prev_close": 3.98,
-      "industry": "EV Batteries",
-      "technical_status": "Fail (Avg $Vol $64M < $100M)",
+      "float_shares": "425.02M",
+      "short_float": "2.67%",
+      "daily_pct": 0.23,
+      "prev_close": 78.83,
+      "industry": "Infrastructure",
+      "technical_status": "Fail (ADR 3.2% < 4%)",
       "verification": {
         "status": "Verified",
         "confidence_score": 95,
@@ -233,70 +70,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "QuantumScape announced plans for a 100 MWh solid-state battery production line.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SPOT",
-      "price": 560.74,
-      "gap_pct": 6.74,
-      "pm_volume": 104799,
-      "avg_vol_10d": 1555814,
-      "avg_dollar_vol": 872407142,
-      "mkt_cap": 108158233750,
-      "rvol": 1.36,
-      "adr_pct": 3.07,
-      "category": "Earnings",
-      "theme": "Miss & Lower",
-      "reasoning": "Spotify (SPOT) stock declined after the company reported Q3 earnings that **missed analyst estimates**, indicating underperformance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "C",
-      "finviz_theme": "Consumer - Streaming",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Spotify (SPOT) announced its **Q3 earnings** today, revealing that the company **missed analyst estimates**. This suggests a weaker financial performance than anticipated by the market.",
-        "impact": "The earnings miss signals negative sentiment, potentially leading to downward pressure on the stock price and a reassessment of future growth prospects by investors."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nSpotify (SPOT) reported its **Q3 earnings** today, which **missed estimates** from analysts. This suggests that the company's financial performance during the quarter was below market expectations.\n\n• **The Growth (Momentum)**\nThe **Q3 earnings miss** indicates a potential slowdown or challenges in Spotify's growth trajectory. A miss on estimates often reflects headwinds in subscriber growth, revenue generation, or profitability, impacting investor confidence and short-term momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Spotify (SPOT) Q3 Earnings Miss Estimates - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQOV8xbnhORHBrZVhNTy01cXdxNUl5alZqTXRQUGdBbnpReFVGV3d6OWxVWGVxa3g1NXJnREFlSjRSSl9NM1NBZ3pPSk5EYzhvbG1LNnBBMDd6dnVaMmhmakNNN19OMVFzTmJjM1h4ZUE0Q2VFNnFkNEFLeTZMS2NsU2lWVExWWEhVbTFvaFMxX2RIaU0tVERYX0ln?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "151.31M",
-      "short_float": "2.70%",
-      "daily_pct": -0.14,
-      "prev_close": 525.34,
-      "industry": "Consumer - Streaming",
-      "technical_status": "Fail (ADR 3.1% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Spotify (SPOT) Q3 earnings missed analyst estimates",
-        "discrepancy_note": "Source B [1] (Yahoo Finance) headline states 'Spotify (SPOT) Q3 Earnings Miss Estimates'. However, Source B [3] (GuruFocus) headline states 'Spotify (SPOT) Shares Rise 5.2% Premarket After Q3 Earnings Beat on Operating Income'. Source A (Finviz) has no relevant information."
+        "primary_claim": "SpaceX is in talks to secure 80,000 cell sites for a new wireless network.",
+        "discrepancy_note": null
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -307,52 +82,150 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "PBCRY",
-      "price": 7.47,
-      "gap_pct": 5.06,
-      "pm_volume": 169800,
-      "avg_vol_10d": 1452860,
-      "avg_dollar_vol": 10852864,
-      "mkt_cap": 35765172974,
-      "rvol": 0.56,
-      "adr_pct": 3.37,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "ticker": "AMT",
+      "price": 200.52,
+      "gap_pct": 10.44,
+      "pm_volume": 91998,
+      "avg_vol_10d": 3608581,
+      "avg_dollar_vol": 723592662,
+      "mkt_cap": 84604370143,
+      "rvol": 0.92,
+      "adr_pct": 2.39,
+      "category": "New Contract/Partnership",
+      "theme": "SpaceX Cell Site Talks",
+      "reasoning": "American Tower is in talks with SpaceX to provide access to 80,000 cell sites for a new wireless network.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Infrastructure",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "American Tower (AMT) is reportedly in talks with **SpaceX** to provide access to a minimum of **80,000 cell sites** across the US for a new wireless network. The news prompted a **+2.21%** move in AMT shares.",
+        "impact": "A successful partnership would significantly expand AMT's revenue streams and solidify its position as a critical infrastructure provider for emerging wireless technologies."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **Impact**\nAmerican Tower is engaged in discussions with **SpaceX** to secure access to a minimum of **80,000 cell sites** across the United States. This potential collaboration with a major cellular infrastructure company, likely AMT, aims to support SpaceX's new wireless network. The headline explicitly notes AMT's stock reacted with a **+2.21%** gain.\n\n• **Strategic Value**\nThis development signifies a potential new, substantial revenue opportunity for AMT, leveraging its extensive network infrastructure for an innovative space-based connectivity provider. Such a partnership would enhance AMT's competitive positioning within the telecom infrastructure sector and could serve as a model for future collaborations with new wireless entrants.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Dividend reinvestment accounts for 338 shares bought by American Tower (AMT) director Clarke. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNNE40a2NEZFhvZ0p2NUdxUVNyQmR0U011NGNrSDY0MmY1cGpPRUdneGtyTXVkUUQyVzdRNkdzeWwxZjJqYUFpSzVueHYteFAtSHJfRjM3NUtDOWVZZklfbkNveXFzaXl6aWM0LXhXM0pEdXR2aEhBOHF6NzItbWZEemh6NW9KR3M5Z25nSDRaTHR0NHhETDk1akF0ZEh3ZGpFbEI5Q0VpdEdMWDFsdWJuclJTY0tzdw?oc=5"
+        },
+        {
+          "title": "American Tower director Clarke acquires $63,717 in shares By Investing.com - Investing.com UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQOWNHRVVOblprVmxxTG9Cb21ZbW5DUWtrMi0xSlhhTUlIT2VJQWhLWjhnd1hnYkM0Z0ItSF9ERkFZTl9lRkhUdmRvZjBKczBzX3FzUC1PU29TaW1nYzZjMWdxYU92RjdGSmlHOFZwUzZmSjFnbW5wc0pJbjlWUHV3TENEbmNiOGk0WGhSYU1tdnRVUzVyb082UWgwMV9aRzdRMHdKZEZjUUVJR2M2bEpOV1FXMFhaZTg?oc=5"
+        },
+        {
+          "title": "SpaceX in Talks to Access 80,000 Cell Sites for Wireless Network",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/articles/spacex-talks-access-80-000-213142634.html"
+        }
+      ],
       "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": 2.3,
-      "prev_close": 7.11,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $11M < $100M, ADR 3.4% < 4%)",
+      "float_shares": "465.07M",
+      "short_float": "1.82%",
+      "daily_pct": 2.21,
+      "prev_close": 181.57,
+      "industry": "Infrastructure",
+      "technical_status": "Fail (ADR 2.4% < 4%)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
+        "status": "Discrepancy",
+        "confidence_score": 70,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "primary_claim": "80,000 cell sites",
+        "discrepancy_note": "Source A (Finviz) confirms SpaceX is reportedly eyeing 80,000 cell sites. Source B (Google News) does not contain any information about SpaceX, cell sites, or a new wireless network involving American Tower."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "RITM",
+      "price": 9.2,
+      "gap_pct": 5.93,
+      "pm_volume": 195105,
+      "avg_vol_10d": 6526471,
+      "avg_dollar_vol": 60043533,
+      "mkt_cap": 4846972778,
+      "rvol": 1.59,
+      "adr_pct": 2.72,
+      "category": "Earnings",
+      "theme": "Beat",
+      "reasoning": "RITM reported Q3 adjusted EPS of $0.55, beating FactSet estimates of $0.50, signaling stronger-than-expected financial performance.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "C",
+      "finviz_theme": "REITs",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Rithm Capital Corp. (RITM) announced its Q3 adjusted EPS of **$0.55 per share**, surpassing FactSet's estimate of **$0.50 per share**. This information was disclosed via an **8-K SEC filing on 2026-10-23**, confirming the financial results.",
+        "impact": "The earnings beat suggests operational strength and could drive positive momentum, attracting investors seeking companies exceeding market expectations in the current economic climate."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nRithm Capital Corp. posted **Q3 adjusted EPS of $0.55 per share**, which significantly **beat FactSet estimates of $0.50 per share**. This indicates a positive surprise factor as the company exceeded market expectations for its quarterly financial performance.\n\n• **The Growth (Momentum)**\nThe reported adjusted EPS of **$0.55** demonstrates the company's ability to generate value above analyst projections, potentially indicating underlying operational efficiency or favorable market conditions. This beat could attract further investor attention, building positive momentum for the stock.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Earnings Flash (RITM) Rithm Capital Corp. Posts Q3 Adjusted EPS $0.55 per Share, vs. FactSet Est of $0.50 - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQS3hzaTQ2RURaR2NERlJ0T0lwVFlkZ0cxZzdJRVZuQi04aF85RWNFYndpYnltMnRUbG9jU0pNV0s5bVE0NmdjaHp1aFo4V2JtcTRGaG5EbmJCZ2tJdTd2cGJDemNNZUJ0TG1lUUNQZzVfZHpEUFJmcUNvdmo2ZDdoREdpVTB6cm44Z1VHOWhHeEpSckNyOGdXeW9RNThpWDh2dm1KOHBTYmxiVHZXalR6WFBtNXpvMmk5VVpzdk03S1A0SkNVY3Z3OTJpY3I2SV8td0c0YmNROGpJaGxUWVBJ?oc=5"
+        },
+        {
+          "title": "Form 8K Rithm Capital Corp For: 23 October By Investing.com - Investing.com Nigeria",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOdFI5dWEwMWxiZXFacFFnb1NNNHAyZ0x5eG5kUTYydk9sUWVxNlh3cXFQVGs3TUdGWlZDVXI1aVlKWjBqQWVQcGRDdjdSaEVBM1NPVkptVXhFNHk3cFFlNk1BUGptZHdJSl9zc2RoUmFCaGlTOVJMbTNrWVdWRFNCN2xZZVZKU1FNWkw1ejNSUlZUbHlnZm4tQmJhTmQ5Wl9jT3JLRg?oc=5"
+        },
+        {
+          "title": "Rithm: Q3 Earnings Snapshot - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPM2Z2TXQ0OWNuT3dxV09UNXZ2Y19LMnhMdVMtMXUwSDZ6dGRfcEpoZ1oyWmtFc0JQTDg1VnozTEVwcHFtNGhTNTVxYWZOU09GOWxIVUZlSHRuM2x1a1NPWWFuUG1xa1p6ZG93cnRGZkRBcS02TE1YRmN0V2RRMHMwVlljMGhreG5PQzVEa1FsQWtIUlRfUGc?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-23",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1556593/000155659326000033/ritm-20261023.htm"
+      },
+      "float_shares": "555.57M",
+      "short_float": "6.19%",
+      "daily_pct": 1.52,
+      "prev_close": 8.68,
+      "industry": "REITs",
+      "technical_status": "Fail (Avg $Vol $60M < $100M, ADR 2.7% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "RITM reported Q3 adjusted EPS of $0.55",
+        "discrepancy_note": "Source A (Finviz News) had no relevant news. Source B (Google News) contained an article (marketscreener.com) confirming the $0.55 adjusted EPS, but another article (Quiver Quantitative) incorrectly referenced 'Q3 2026 Earnings'. Since Finviz provided no confirmation, 'BOTH sources' do not confirm the claim."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -371,9 +244,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
-    "large_gaps": 1,
-    "total_headlines": 12,
+    "small_gaps": 3,
+    "large_gaps": 0,
+    "total_headlines": 9,
     "monthly_cost_usd": 0.01
   }
 }
