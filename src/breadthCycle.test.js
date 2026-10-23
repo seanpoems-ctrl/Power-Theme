@@ -1,4 +1,4 @@
-import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide, regimeBefore } from "./breadthCycle";
+import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide, regimeBefore, stagedReentryExposure } from "./breadthCycle";
 
 const row = (date, over = {}) => ({
   date, up_4_pct: 200, down_4_pct: 200, ratio_5d: 1, ratio_10d: 1, up_25_q: 1000, down_25_q: 1000,
@@ -105,4 +105,22 @@ test("regimeBefore returns the confirmed regime at the last session strictly bef
   expect(regimeBefore(cal, "2026-03-06").confirmed).toBe("Expansion");    // 2nd Contraction day: not confirmed yet
   expect(regimeBefore(cal, "2026-03-08").confirmed).toBe("Contraction");  // confirmed on the 3rd
   expect(regimeBefore(cal, "")).toBeNull();
+});
+
+test("staged re-entry: 0 when both flags are true, 0.5 when one clears, 1 when both have cleared", () => {
+  const T = true, F = false;
+  // both, both, one clears, the other flag only, both clear → fully in; later single flags don't matter because we are not out
+  const a = [T, T, F, T, F, F, F, T, F, F];   // riskOff
+  const b = [T, T, T, F, F, T, F, F, F, F];   // below 50-day EMA
+  expect(stagedReentryExposure(a, b)).toEqual([0, 0, 0.5, 0.5, 1, 1, 1, 1, 1, 1]);
+});
+
+test("staged re-entry: while never out, one flag alone leaves you fully invested", () => {
+  expect(stagedReentryExposure([true, false, false], [false, true, false])).toEqual([1, 1, 1]);
+});
+
+test("staged re-entry: out again the day both flags return, and it needs BOTH clear to be fully back in", () => {
+  const ro = [true, false, true, true, false, false];
+  const bl = [true, true, true, true, true, false];
+  expect(stagedReentryExposure(ro, bl)).toEqual([0, 0.5, 0, 0, 0.5, 1]);
 });

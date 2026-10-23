@@ -70,6 +70,23 @@ export function addConfirmedPhase(rows, n = CONFIRM_SESSIONS) {
 // worse as market-level exits (too noisy), so the 21-day only tightens things up and the 200-day is the bear-market line.
 //   confirmed: "Expansion" | "Repair" | "Distribution" | "Contraction";  qqq: { close, e21, e50, s200 } (any may be missing)
 // Returns { key: full | build | reduce | defensive | bounce, label, tone: ok | info | warn | bad, line, why: [...] }.
+/**
+ * Staged re-entry exposure series (0 / 0.5 / 1) from two daily flags: `riskOff[i]` = the confirmed regime is Risk-off, `below[i]` = QQQ closed under its 50-day EMA.
+ * Out (0) the day BOTH are true. Once out, coming back is staged: half (0.5) as soon as EITHER clears, fully (1) once BOTH have cleared (a day with both true
+ * again goes back to 0). While never out, exposure stays 1 even if only one flag is true — the rule only stages the way BACK in, not the way out.
+ */
+export function stagedReentryExposure(riskOff, below) {
+  const out = [];
+  let isOut = false;
+  for (let i = 0; i < riskOff.length; i++) {
+    const a = !!riskOff[i], b = !!below[i];
+    if (a && b) { isOut = true; out.push(0); }
+    else if (isOut && (a || b)) out.push(0.5);
+    else { isOut = false; out.push(1); }
+  }
+  return out;
+}
+
 export function exposureGuide({ confirmed, t2108, qqq } = {}) {
   const ge = (a, b) => (a != null && b != null ? a >= b : null);
   const a21 = ge(qqq?.close, qqq?.e21), a50 = ge(qqq?.close, qqq?.e50), a200 = ge(qqq?.close, qqq?.s200);

@@ -1,5 +1,6 @@
 import React from "react";
 import { _emaSeries, _smaSeries } from "./chartTheme";
+import { stagedReentryExposure } from "./breadthCycle";
 
 // "Backtest" table (Breadth → Breadth Cycle): simple long / flat (or sized) QQQ rules driven by the breadth-cycle regime, QQQ's own trend and
 // T2108, compared with buy-and-hold over 1 / 2 / 5 / 8 / 10 years and since 2009. Same method as the research behind the Market Status panel
@@ -32,6 +33,8 @@ export default function BreadthBacktest({ enriched, hist, selDate }) {
     if (!data) return [];
     const { px, e9, e21, e50, s200, t2108, conf, raw } = data;
     const off = p => p === "Contraction";
+    // staged re-entry: the same exit as the best pairing, but the way back is in two steps (path-dependent, so the whole series is built up front)
+    const staged = stagedReentryExposure(conf.map(off), px.map((p, i) => e50[i] != null && p < e50[i]));
     return [
       { name: "Buy and hold QQQ", base: true, f: () => 1 },
       { name: "QQQ above its 200-day average", f: i => (s200[i] != null && px[i] > s200[i] ? 1 : 0) },
@@ -41,6 +44,7 @@ export default function BreadthBacktest({ enriched, hist, selDate }) {
       { name: "Confirmed regime: out in Risk-off", f: i => (off(conf[i]) ? 0 : 1) },
       { name: "Raw daily regime: out in Risk-off", f: i => (off(raw[i]) ? 0 : 1), note: "never trade the raw colour" },
       { name: "Confirmed Risk-off AND QQQ below 50-day EMA", hl: true, f: i => (off(conf[i]) && px[i] < e50[i] ? 0 : 1) },
+      { name: "Staged re-entry: out when Risk-off AND below 50-day EMA; half back in when either clears, all in when both clear", hl2: true, f: i => staged[i] },
       { name: "Confirmed Risk-off AND QQQ below 21-day EMA", f: i => (off(conf[i]) && px[i] < e21[i] ? 0 : 1) },
       { name: "Confirmed Risk-off, but stay in if T2108 < 20", f: i => (off(conf[i]) && !(t2108[i] != null && t2108[i] < 20) ? 0 : 1) },
       { name: "Risk dial (confirmed): 100 / 75 / 50 / 75 % in Risk-on / Caution / Risk-off / Recovery",
@@ -117,10 +121,11 @@ export default function BreadthBacktest({ enriched, hist, selDate }) {
             {results.table.map((r, ri) => {
               const d = r.cells[dIdx];
               return (
-                <tr key={r.name} className={`border-t border-zinc-800/70 ${r.hl ? "bg-blue-500/5" : ""}`}>
+                <tr key={r.name} className={`border-t border-zinc-800/70 ${r.hl ? "bg-blue-500/5" : r.hl2 ? "bg-amber-500/5" : ""}`}>
                   <td className="py-1.5 pr-3">
                     <span className={r.base ? "font-semibold text-zinc-200" : "text-zinc-300"}>{r.name}</span>
                     {r.hl && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded border border-blue-500/40 text-blue-300">best pairing</span>}
+                    {r.hl2 && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded border border-amber-500/40 text-amber-300">staged</span>}
                     {r.note && <span className="ml-2 text-[10px] text-zinc-600">{r.note}</span>}
                   </td>
                   {r.cells.map((c, ci) => (
@@ -138,6 +143,7 @@ export default function BreadthBacktest({ enriched, hist, selDate }) {
         </table>
       </div>
       <p className="mt-2 text-[11px] text-zinc-600 leading-snug">
+        The amber "staged" row exits exactly like the best pairing but comes back in two steps (half when either condition clears, everything when both have) — it trades a little return for a smaller worst drop and a few more switches.
         Dotted underline = best non-buy-and-hold rule for that window. How to read it: none of these rules beat buy-and-hold QQQ on return over 5–10 years — their value is a much smaller worst drop
         (the pairing above roughly cuts it by a third at similar returns) and fewer whipsaws. The plain 200-day average is the bar a regime rule has to clear; the raw daily colour
         gives the deepest drops; the 9 / 21-day EMAs are too noisy as market-level exits (keep them for stock entries and trailing stops). Over the last year the confirmed rules lagged a V-shaped
