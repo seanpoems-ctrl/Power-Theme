@@ -65,11 +65,6 @@ export function addConfirmedPhase(rows, n = CONFIRM_SESSIONS) {
   });
 }
 
-// Exposure guide for a swing trader: the confirmed regime paired with QQQ's own trend (+ T2108). Built from the backtests in CLAUDE.md: the
-// confirmed Risk-off regime AND QQQ below its 50-day EMA was the best pairing (it beat the regime alone in every window); the 9 / 21 EMAs were
-// worse as market-level exits (too noisy), so the 21-day only tightens things up and the 200-day is the bear-market line.
-//   confirmed: "Expansion" | "Repair" | "Distribution" | "Contraction";  qqq: { close, e21, e50, s200 } (any may be missing)
-// Returns { key: full | build | reduce | defensive | bounce, label, tone: ok | info | warn | bad, line, why: [...] }.
 /**
  * Staged re-entry exposure series (0 / 0.5 / 1) from two daily flags: `riskOff[i]` = the confirmed regime is Risk-off, `below[i]` = QQQ closed under its 50-day EMA.
  * Out (0) the day BOTH are true. Once out, coming back is staged: half (0.5) as soon as EITHER clears, fully (1) once BOTH have cleared (a day with both true
@@ -87,6 +82,27 @@ export function stagedReentryExposure(riskOff, below) {
   return out;
 }
 
+/**
+ * Slow re-entry exposure series (0 / 1): same exit as the staged rule (confirmed Risk-off AND QQQ under its 50-day EMA), but once out you stay in cash until
+ * BOTH flags have cleared. Fewest switches of the regime rules; costs a little return versus coming back at the first sign.
+ */
+export function slowReentryExposure(riskOff, below) {
+  const out = [];
+  let isOut = false;
+  for (let i = 0; i < riskOff.length; i++) {
+    const a = !!riskOff[i], b = !!below[i];
+    if (a && b) isOut = true;
+    else if (isOut && !a && !b) isOut = false;
+    out.push(isOut ? 0 : 1);
+  }
+  return out;
+}
+
+// Exposure guide for a swing trader: the confirmed regime paired with QQQ's own trend (+ T2108). Built from the backtests in CLAUDE.md: the
+// confirmed Risk-off regime AND QQQ below its 50-day EMA was the best pairing (it beat the regime alone in every window); the 9 / 21 EMAs were
+// worse as market-level exits (too noisy), so the 21-day only tightens things up and the 200-day is the bear-market line.
+//   confirmed: "Expansion" | "Repair" | "Distribution" | "Contraction";  qqq: { close, e21, e50, s200 } (any may be missing)
+// Returns { key: full | build | reduce | defensive | bounce, label, tone: ok | info | warn | bad, line, why: [...] }.
 export function exposureGuide({ confirmed, t2108, qqq } = {}) {
   const ge = (a, b) => (a != null && b != null ? a >= b : null);
   const a21 = ge(qqq?.close, qqq?.e21), a50 = ge(qqq?.close, qqq?.e50), a200 = ge(qqq?.close, qqq?.s200);

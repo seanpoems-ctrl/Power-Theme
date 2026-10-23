@@ -1,4 +1,4 @@
-import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide, regimeBefore, stagedReentryExposure } from "./breadthCycle";
+import { breadthScore, breadthPhase, computeBreadthCycle, latestBreadthCycle, breadthDivergence, addConfirmedPhase, exposureGuide, regimeBefore, stagedReentryExposure, slowReentryExposure } from "./breadthCycle";
 
 const row = (date, over = {}) => ({
   date, up_4_pct: 200, down_4_pct: 200, ratio_5d: 1, ratio_10d: 1, up_25_q: 1000, down_25_q: 1000,
@@ -123,4 +123,10 @@ test("staged re-entry: out again the day both flags return, and it needs BOTH cl
   const ro = [true, false, true, true, false, false];
   const bl = [true, true, true, true, true, false];
   expect(stagedReentryExposure(ro, bl)).toEqual([0, 0.5, 0, 0, 0.5, 1]);
+});
+
+test("slow re-entry: out when both flags are true, stays out until BOTH have cleared", () => {
+  const ro = [false, true, true, false, true, false, false];
+  const bl = [false, false, true, true, true, true, false];
+  expect(slowReentryExposure(ro, bl)).toEqual([1, 1, 0, 0, 0, 0, 1]);
 });

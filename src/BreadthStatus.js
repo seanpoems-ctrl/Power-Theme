@@ -3,6 +3,7 @@ import { exposureGuide, CONFIRM_SESSIONS } from "./breadthCycle";
 import { REGIMES } from "./BreadthRegime";
 import { loadStageAnalysis } from "./stageDefs";
 import { _emaSeries, _smaSeries } from "./chartTheme";
+import { alignQqq, ruleSeries, signalAt, indexOnOrBefore } from "./exitSignals";
 
 // "Market status" panel (Breadth → Breadth Cycle): one place that pairs the CONFIRMED breadth-cycle regime (3 sessions in a row) with QQQ's own
 // trend (21 / 50-day EMA, 200-day average) and T2108, and turns them into an exposure guide for a swing trader. The pairing and the
@@ -30,6 +31,8 @@ export default function BreadthStatus({ enriched, hist, selDate }) {
     return { dates: new Map(hist.qqq_dates.map((d, i) => [d, i])), c, e21: _emaSeries(c, 21), e50: _emaSeries(c, 50), s200: _smaSeries(c, 200) };
   }, [hist]);
 
+  // exit / re-entry signals: QQQ lined up with the confirmed regime, and the four rules run over the whole history (cheap: one pass each)
+  const sig = React.useMemo(() => { const a = alignQqq(enriched, hist); return a ? { a, s: ruleSeries(a) } : null; }, [enriched, hist]);
   const idx = React.useMemo(() => (enriched || []).findIndex(r => r.date === selDate), [enriched, selDate]);
   const row = idx >= 0 ? enriched[idx] : null;
   if (!row || !row.confirmed) return null;
@@ -54,6 +57,30 @@ export default function BreadthStatus({ enriched, hist, selDate }) {
   const avgs = [["21-day EMA", qqq && dist(qqq.close, qqq.e21)], ["50-day EMA", qqq && dist(qqq.close, qqq.e50)], ["200-day avg", qqq && dist(qqq.close, qqq.s200)]];
   const t = row.t2108;
   const tState = t == null ? null : t < 20 ? ["washed out", "#6db0ff"] : t > 80 ? ["overbought", "#e5b567"] : ["neutral", "#a1a1aa"];
+
+  // ── Exit / re-entry signals ──
+  const si = sig ? indexOnOrBefore(sig.a.dates, row.date) : -1;
+  let signalRows = null, flagLine = null;
+  if (sig && si >= 0) {
+    const A = sig.a, px = A.px[si], e50 = A.e50[si], e9 = A.e9[si], e21 = A.e21[si], riskOff = A.riskOff[si], below = A.below50[si];
+    const n2 = v => v.toFixed(2);
+    const exitTxt = `Goes to cash when the regime is confirmed Risk-off AND QQQ closes under its 50-day EMA (${n2(e50)}; QQQ ${n2(px)}).`;
+    const either = `the regime confirms out of Risk-off, or QQQ closes above its 50-day EMA (${n2(e50)})`;
+    const both = `the regime is not Risk-off AND QQQ closes above its 50-day EMA (${n2(e50)})`;
+    flagLine = `Right now: confirmed Risk-off — ${riskOff ? "YES" : "no"} · QQQ under its 50-day EMA — ${below ? "YES" : "no"} · ${riskOff && below ? "both true = cash" : riskOff || below ? "one true" : "neither true"}`;
+    const v = k => sig.s[k][si];
+    signalRows = [
+      { key: "staged", name: "Staged re-entry", tag: "best balance", tagTone: "ok",
+        next: v("staged") === 1 ? exitTxt : v("staged") === 0 ? `Half back in as soon as EITHER clears: ${either}.` : `All the way back in once BOTH have cleared: ${both}. Back to cash if both turn bad again.` },
+      { key: "pairing", name: "Best pairing (all in / all out)",
+        next: v("pairing") === 1 ? exitTxt : `Back in, all at once, as soon as EITHER clears: ${either}.` },
+      { key: "slow", name: "Slow re-entry", tag: "fewest trades", tagTone: "info",
+        next: v("slow") === 1 ? exitTxt : `Stays in cash until BOTH have cleared: ${both}.` },
+      { key: "cross", name: "9 / 21-day EMA cross", tag: "comparison only", tagTone: "warn",
+        next: v("cross") === 1 ? `Out when the 9-day EMA (${n2(e9)}) closes under the 21-day EMA (${n2(e21)}).` : `Back in when the 9-day EMA (${n2(e9)}) closes above the 21-day EMA (${n2(e21)}).` },
+    ].map(r => ({ ...r, value: v(r.key), at: signalAt(sig.s[r.key], A.dates, si) }));
+  }
+  const stateOf = x => (x === 1 ? { t: "IN", sub: "100 %", tone: TONE.ok } : x === 0.5 ? { t: "HALF", sub: "50 %", tone: TONE.warn } : { t: "CASH", sub: "0 %", tone: TONE.bad });
 
   const tile = "rounded-lg border border-zinc-800 bg-zinc-900 p-3";
   const lab = "text-[10px] text-zinc-500 tracking-wide";
@@ -126,6 +153,36 @@ export default function BreadthStatus({ enriched, hist, selDate }) {
           ) : <div className="text-[12px] text-zinc-600 mt-1">{isLatest ? "not loaded yet" : "latest session only"}</div>}
         </div>
       </div>
+
+      {signalRows && (
+        <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-900 p-3">
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <div className={lab}>EXIT / RE-ENTRY SIGNALS · QQQ</div>
+            <div className="text-[11px] text-zinc-500">read at the close, applied from the next session</div>
+          </div>
+          <div className="text-[12px] text-zinc-300 mt-1">{flagLine}</div>
+          <div className="mt-2 divide-y divide-zinc-800">
+            {signalRows.map(r => {
+              const st = stateOf(r.value);
+              return (
+                <div key={r.key} className="py-2 grid gap-x-3 gap-y-1 items-start sm:grid-cols-[170px_96px_170px_1fr]">
+                  <div className="text-[12px] text-zinc-200 font-semibold">
+                    {r.name}
+                    {r.tag && <span className="ml-1.5 text-[10px] font-normal px-1.5 py-px rounded-full border" style={{ color: TONE[r.tagTone].fg, borderColor: TONE[r.tagTone].bd, background: TONE[r.tagTone].bg }}>{r.tag}</span>}
+                  </div>
+                  <div><span className="text-[12px] font-bold px-2 py-0.5 rounded-md border" style={{ color: st.tone.fg, background: st.tone.bg, borderColor: st.tone.bd }}>{st.t} · {st.sub}</span></div>
+                  <div className="text-[11px] text-zinc-500">
+                    {r.at.firstSession ? "since the start of the data" : `since ${fullDate(r.at.since)}`}
+                    {!r.at.firstSession && <span className="text-zinc-600"> · {r.at.sessions === 0 ? "changed today" : `${r.at.sessions} session${r.at.sessions === 1 ? "" : "s"}`}</span>}
+                  </div>
+                  <div className="text-[11px] text-zinc-400 leading-snug">{r.next}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="text-[11px] text-zinc-600 mt-1">Staged and slow re-entry gave the best return per unit of drawdown in the backtest table below; the 9 / 21 cross lagged buy-and-hold badly. Not advice — in-sample, QQQ only.</div>
+        </div>
+      )}
 
       <details className="mt-3 group">
         <summary className="text-[11px] text-zinc-500 cursor-pointer hover:text-zinc-300 select-none">How this is decided</summary>
