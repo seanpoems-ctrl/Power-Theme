@@ -11798,10 +11798,10 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
             </div>
           ) : (
             <table className="w-full text-[9px] lg:text-xs tracking-tighter lg:tracking-normal border-collapse lg:table-fixed">
-              <colgroup>
+              <colgroup>{/* TICKER_COL_FIT */}
                 <col className="hidden lg:table-column lg:w-[3%]" />
-                <col className="lg:w-[6%]" />
-                <col className="hidden lg:table-column lg:w-[17%]" />
+                <col className="lg:w-[10%]" />
+                <col className="hidden lg:table-column lg:w-[13%]" />
                 <col className="hidden lg:table-column lg:w-[7%]" />
                 <col className="hidden lg:table-column lg:w-[7%]" />
                 <col className="hidden lg:table-column lg:w-[6%]" />
@@ -11839,10 +11839,10 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                   <tr key={`${h.ticker}-${i}`}
                       className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
                     <td className="px-2 py-2 text-zinc-600 text-[11px] hidden lg:table-cell">{i + 1}</td>
-                    <td className="px-1.5 lg:px-2 py-2 truncate">
+                    <td className="px-1.5 lg:px-2 py-2 align-top">
                       <TickerLink ticker={h.ticker} /><span className="hidden lg:inline"><LevEtfTag ticker={h.ticker} /></span>
                     </td>
-                    <td className="px-2 py-2 text-zinc-300 truncate hidden lg:table-cell">{h.name || "—"}</td>
+                    <td className="px-2 py-2 text-zinc-300 truncate hidden lg:table-cell" title={h.name || ""}>{h.name || "—"}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{fmt(h.mkt_cap)}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{fmt(h.dollar_volume)}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
