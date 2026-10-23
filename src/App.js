@@ -11618,15 +11618,22 @@ const useNasdaqShares = etfHoldings => {
   React.useEffect(() => { let dead = false; loadStockLookup().then(m => { if (!dead) setLookup(m); }); return () => { dead = true; }; }, []);
   const [minPct, setMinPctState] = React.useState(() => loadNasdaqMin());
   const setMinPct = v => { const n = Math.max(0, Math.min(100, parseFloat(v) || 0)); setMinPctState(n); saveNasdaqMin(n); };
+  const minDv = React.useMemo(() => loadMinDollarVolM(), [lookup, etfHoldings]); // eslint-disable-line react-hooks/exhaustive-deps
   const shares = React.useMemo(() => {
     const m = {};
     if (!lookup) return m;
-    const minDv = loadMinDollarVolM();
     for (const [etf, h] of Object.entries(etfHoldings || {})) { const sh = nasdaqShare(h, lookup, minDv); if (sh) m[etf] = sh; }
     return m;
-  }, [lookup, etfHoldings]);
+  }, [lookup, etfHoldings, minDv]);
   const passes = etf => !(minPct > 0) || (shares[etf]?.pct ?? -1) >= minPct;
-  return { shares, minPct, setMinPct, passes };
+  // A theme / sector group: the distinct holdings of all its member ETFs pooled (a stock held by three ETFs counts once), same liquidity and exchange rules.
+  const groupShare = React.useCallback(members => {
+    if (!lookup) return null;
+    const pool = new Map();
+    for (const m of members || []) for (const h of etfHoldings?.[m] || []) if (!pool.has(h.ticker)) pool.set(h.ticker, h);
+    return nasdaqShare([...pool.values()], lookup, minDv);
+  }, [lookup, etfHoldings, minDv]);
+  return { shares, minPct, setMinPct, passes, groupShare };
 };
 const NasdaqFilter = ({ minPct, setMinPct }) => (
   <label className="inline-flex items-center gap-1 text-[11px] text-zinc-500 whitespace-nowrap"
@@ -16676,8 +16683,11 @@ const EtfPerformanceHeatmap = ({ groups, etfs, extAsOf, onPickGroup, onPickEtf, 
 };
 
 // Top-10 theme table for one window (module-level so its sort state survives the parent re-rendering).
-const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", titleSuffix = "Top 10", footer = null }) => {
-  const rows = React.useMemo(() => top.map(r => ({ ...r, ratio: r.total ? r.confirmed / r.total : null })), [top]);
+const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", titleSuffix = "Top 10", footer = null, nasdaqOf = null }) => {
+  const rows = React.useMemo(() => top.map(r => {
+    const nasdaqInfo = nasdaqOf ? nasdaqOf(r.members) : null;      // pooled holdings of the group's ETFs (useNasdaqShares → groupShare)
+    return { ...r, ratio: r.total ? r.confirmed / r.total : null, nasdaqInfo, nasdaq: nasdaqInfo?.pct ?? null };
+  }), [top, nasdaqOf]); // eslint-disable-line react-hooks/exhaustive-deps
   const sort = useTableSort(rows, "rank", "asc");
   const hasRot = rows.some(r => r.rotation_delta != null);   // Theme Leaders rows carry ROT; the Sectors tables don't
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
@@ -16700,6 +16710,7 @@ const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", t
               <SortTh sort={sort} col="median" label="Median" />
               <SortTh sort={sort} col="leader" label="Leader" textual align="left" />
               <SortTh sort={sort} col="ratio" label="Confirmed" />
+              {nasdaqOf && <SortTh sort={sort} col="nasdaq" label="Nasdaq %" title="Share of the group's distinct top holdings (across all its ETFs, above the Min $ Vol in the holdings popups) that are listed on Nasdaq" />}
               {hasRot && <SortTh sort={sort} col="rotation_delta" label="ROT" title="Rotation: rank by 3M return − rank by 1W return, across all themes. Positive = the short-term rank has jumped ahead of the long-term rank (early rotation in). ⚡ = jump of 25%+ of the themes, with 1W up." />}
             </tr>
           </thead>
@@ -16717,6 +16728,7 @@ const ThemeTopTable = ({ t, top, onRow, onLeader, onMini, nameLabel = "Theme", t
                     : "—"}
                 </td>
                 <td className={`px-3 py-1.5 text-right font-mono ${r.total && r.confirmed === r.total ? "text-emerald-400" : r.confirmed === 0 ? "text-zinc-600" : "text-zinc-300"}`}>{r.confirmed}/{r.total}</td>
+                {nasdaqOf && <td className={`px-3 py-1.5 text-right font-mono ${nasdaqCls(r.nasdaqInfo)}`} title={nasdaqCellTitle(r.nasdaqInfo)}>{r.nasdaq != null ? `${r.nasdaq}%` : "—"}</td>}
                 {hasRot && (
                   <td className="px-3 py-1.5 text-right"
                       title={r.rotation_delta == null ? "" : `1W rank #${r.rank_1w} vs 3M rank #${r.rank_3m} — ${r.rotation_delta > 0 ? "climbing" : r.rotation_delta < 0 ? "fading" : "steady"}`}>
@@ -16882,7 +16894,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {tables.map(t => (
-          <ThemeTopTable key={t.w} t={t} top={t.rows.slice(0, 10)}
+          <ThemeTopTable key={t.w} t={t} top={t.rows.slice(0, 10)} nasdaqOf={nq.groupShare}
             onRow={r => setSel({ group: groups.find(g => g.name === r.name), win: { w: t.w, k: t.k } })}
             onLeader={ticker => openEtf(ticker, { w: t.w, k: t.k })}
             onMini={onMiniCharts ? list => onMiniCharts(list, `Theme Leaders · ${t.w}`) : null} />
@@ -16973,6 +16985,7 @@ const StrengthOverTime = ({ dates, series, names, top }) => {
 };
 
 const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }) => {
+  const nq = useNasdaqShares(etfHoldings);
   const [hist, setHist]       = React.useState(null);   // public/sector_leadership.json
   const [stats, setStats]     = React.useState(null);   // public/etf_stats.json
   const [extHours, setExtHours] = React.useState(null); // public/etf_extended_hours.json
@@ -17018,7 +17031,7 @@ const SectorsView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }
         {tables.map(t => {
           const topTickers = t.rows.slice(0, 3).map(r => r.leader);
           return (
-            <ThemeTopTable key={t.w} t={t} top={t.rows.slice(0, 3)} nameLabel="Sector" titleSuffix="Top 3"
+            <ThemeTopTable key={t.w} t={t} top={t.rows.slice(0, 3)} nasdaqOf={nq.groupShare} nameLabel="Sector" titleSuffix="Top 3"
               onRow={r => openSector(r.leader, { w: t.w, k: t.k })}
               onLeader={ticker => openEtfOnly(ticker, { w: t.w, k: t.k })}
               onMini={onMiniCharts ? list => onMiniCharts(list, `Sector Leaders · ${t.w}`) : null}
