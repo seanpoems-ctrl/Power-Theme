@@ -41,7 +41,7 @@ MIN_STOCKS = 3
 MAX_WEIGHT_SHARE = 0.35    # one stock can carry at most 35 % of an industry's weight
 TOP_STOCKS = 30            # stocks kept per industry in industry_stocks.json
 OUT_STOCKS = ROOT / "public" / "industry_stocks.json"
-OUT_LOOKUP = ROOT / "public" / "stock_lookup.json"   # {ticker: [market cap $B, TradingView industry]} for EVERY stock above MIN_CAP - the chart stats / stock panel fallback
+OUT_LOOKUP = ROOT / "public" / "stock_lookup.json"   # {ticker: [market cap $B, TradingView industry, exchange NASDAQ/NYSE/AMEX]} for EVERY stock above MIN_CAP - chart stats / stock panel fallback + the Nasdaq % column
 
 
 def _num(v):
@@ -68,7 +68,7 @@ def build() -> dict | None:
 
     q = (Query().set_markets("america")
          .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y", "ATR", "SMA50",
-                 "price_52_week_high", "price_52_week_low", "industry")
+                 "price_52_week_high", "price_52_week_low", "industry", "exchange")
          .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
          .order_by("market_cap_basic", ascending=False).limit(5000))
@@ -83,7 +83,7 @@ def build() -> dict | None:
         t = str(r["name"])
         _cap = _num(r.get("market_cap_basic"))
         if _cap:
-            lookup[t] = [round(_cap / 1e9, 2), str(r.get("industry") or "") or None]
+            lookup[t] = [round(_cap / 1e9, 2), str(r.get("industry") or "") or None, str(r.get("exchange") or "") or None]
         ind = industry_of.get(t)
         o, c, cap = _num(r.get("open")), _num(r.get("close")), _num(r.get("market_cap_basic"))
         if not ind or not o or not c or not cap or o <= 0:

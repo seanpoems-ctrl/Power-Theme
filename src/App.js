@@ -5,6 +5,7 @@ import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
 import { usePhoneViewport, PhoneViewportGuard, _isPhone } from "./phoneViewport";
 import { loadMinDollarVolM, saveMinDollarVolM, isLiquid } from "./liquidity";
+import { nasdaqShare, loadNasdaqMin, saveNasdaqMin } from "./nasdaq";
 import { parseOrderLog, isEntryRecord, matchOrderLog, loadOrderLog, saveOrderLog, recordKey } from "./orderLog";
 import { withEstimatedR, fixedRiskDollars, loadFixedRisk, saveFixedRisk } from "./fixedRisk";
 import BreadthStatus from "./BreadthStatus";
@@ -11609,6 +11610,38 @@ const LiquidityFilter = ({ min, setMin, hidden }) => (
   </label>
 );
 
+// NASDAQ_COLUMN — "Nasdaq %" column + filter for the ETF tables (Group ETF table, ETF NEL): share of an ETF's liquid top holdings that are Nasdaq-listed
+// (nasdaq.js; exchanges from stock_lookup.json). One shared minimum (localStorage etf_nasdaq_min_pct_v1; 0 = off). With a minimum set, ETFs whose share can't be
+// worked out (fewer than 3 liquid holdings with a known exchange) are hidden.
+const useNasdaqShares = etfHoldings => {
+  const [lookup, setLookup] = React.useState(null);
+  React.useEffect(() => { let dead = false; loadStockLookup().then(m => { if (!dead) setLookup(m); }); return () => { dead = true; }; }, []);
+  const [minPct, setMinPctState] = React.useState(() => loadNasdaqMin());
+  const setMinPct = v => { const n = Math.max(0, Math.min(100, parseFloat(v) || 0)); setMinPctState(n); saveNasdaqMin(n); };
+  const shares = React.useMemo(() => {
+    const m = {};
+    if (!lookup) return m;
+    const minDv = loadMinDollarVolM();
+    for (const [etf, h] of Object.entries(etfHoldings || {})) { const sh = nasdaqShare(h, lookup, minDv); if (sh) m[etf] = sh; }
+    return m;
+  }, [lookup, etfHoldings]);
+  const passes = etf => !(minPct > 0) || (shares[etf]?.pct ?? -1) >= minPct;
+  return { shares, minPct, setMinPct, passes };
+};
+const NasdaqFilter = ({ minPct, setMinPct }) => (
+  <label className="inline-flex items-center gap-1 text-[11px] text-zinc-500 whitespace-nowrap"
+    title="Show only ETFs where at least this share of the top holdings (those above the Min $ Vol in the holdings popups) list on Nasdaq. Any = no filter.">
+    Nasdaq
+    <select value={minPct} onChange={e => setMinPct(e.target.value)}
+      className="px-1 py-0.5 text-[11px] bg-zinc-800 border border-zinc-700 rounded text-zinc-200 focus:outline-none focus:border-blue-500/60">
+      <option value={0}>any</option>
+      {[50, 70, 90, 100].map(v => <option key={v} value={v}>{v === 100 ? "100%" : `≥ ${v}%`}</option>)}
+    </select>
+  </label>
+);
+const nasdaqCellTitle = sh => sh ? `${sh.nas} of ${sh.n} top holdings (above the Min $ Vol) are Nasdaq-listed${sh.tickers.length ? `: ${sh.tickers.join(", ")}` : ""}` : "Not enough liquid holdings with a known exchange";
+const nasdaqCls = sh => !sh ? "text-zinc-600" : sh.pct >= 90 ? "text-sky-300 font-semibold" : sh.pct >= 70 ? "text-sky-400" : sh.pct >= 50 ? "text-zinc-300" : "text-zinc-500";
+
 const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {}, onMiniCharts = null }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
@@ -12884,7 +12917,9 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
 
   // Exclude Index/Segment/EW Sector/SPDR Sector — those have their own
   // dedicated table (IndexSectorBenchmarkTable) above this one.
-  const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
+  const nq = useNasdaqShares(etfHoldings);
+  const etfsAll = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
+  const etfs = etfsAll.filter(e => nq.passes(e.ticker));      // Nasdaq filter (everything when it is off)
 
   const etfRsMap = React.useMemo(() => {
     const m = {};
@@ -12913,7 +12948,10 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
 
   const sorted = useMemo(() => [...etfs].sort((a, b) => {
     let av, bv;
-    if (sortCol === "rs_pct") {
+    if (sortCol === "nasdaq_pct") {
+      av = nq.shares[a.ticker]?.pct ?? (sortDir === "asc" ? Infinity : -Infinity);
+      bv = nq.shares[b.ticker]?.pct ?? (sortDir === "asc" ? Infinity : -Infinity);
+    } else if (sortCol === "rs_pct") {
       av = getRsPct(a.rs_histogram);
       bv = getRsPct(b.rs_histogram);
     } else {
@@ -12922,7 +12960,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
     }
     if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
     return sortDir === "asc" ? av - bv : bv - av;
-  }), [etfs, sortCol, sortDir]);
+  }), [etfs, sortCol, sortDir, nq.shares]);
 
   const pctBg = v => {
     if (v == null) return "";
@@ -12955,6 +12993,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
   const COLS = [
     { col: "ticker",        label: "Group",       align: "left"  },
     { col: "theme",         label: "Group",       align: "left"  },
+    { col: "nasdaq_pct",    label: "Nasdaq\n%",   align: "right", tooltip: "Share of the ETF's top holdings (above the Min $ Vol in the holdings popups) that are listed on Nasdaq" },
     { col: "score",         label: "Score ↓",     align: "right" },
     { col: "rs_thrust_1w",  label: "RS\nThrust", align: "right", tooltip: "1-week recency-weighted RS line vs its own 1-month baseline. >100% = relative strength accelerating this week; <100% = decelerating." },
     { col: "rs_pct",        label: "RS%",         align: "right", tooltip: "Use Score for theme selection, and RS% for tactical entry/exit timing" },
@@ -12987,6 +13026,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
         <h3 className="text-sm font-semibold text-zinc-100">Industry Sector Relative Strength</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
         <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
+        <NasdaqFilter minPct={nq.minPct} setMinPct={nq.setMinPct} />
         {etfRsData.generated_at && (
           <span className="text-xs text-zinc-700 ml-auto font-mono">
             {new Date(etfRsData.generated_at).toLocaleDateString()}
@@ -13056,6 +13096,10 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
                 </td>
                 {/* Theme name — plain text */}
                 <td className="px-2 py-1 text-zinc-300 text-[11px] border-r border-zinc-800 max-w-[180px] truncate">{e.theme}</td>
+                {/* Nasdaq % — share of the liquid top holdings listed on Nasdaq */}
+                <td className={`px-2 py-1 text-right font-mono text-[11px] border-r border-zinc-800 ${nasdaqCls(nq.shares[e.ticker])}`} title={nasdaqCellTitle(nq.shares[e.ticker])}>
+                  {nq.shares[e.ticker] ? `${nq.shares[e.ticker].pct}%` : "—"}
+                </td>
                 {/* Score */}
                 <td className="px-2 py-1 text-right font-mono font-bold text-[12px] border-r border-zinc-800">
                   <span className={(e.score ?? 0) >= 70 ? "text-emerald-300" : (e.score ?? 0) >= 50 ? "text-zinc-200" : "text-rose-400"}>
@@ -16720,6 +16764,7 @@ const NelTable = ({ n, onRow, onMini }) => {
                 <SortTh sort={sort} col="adr" label="ADR" />
                 <SortTh sort={sort} col="dvol" label="Avg $ Vol" />
                 <SortTh sort={sort} col="ext" label="Extension" title={EXTENSION_TIP} />
+                <SortTh sort={sort} col="nasdaq" label="Nasdaq %" title="Share of the ETF's top holdings (above the Min $ Vol in the holdings popups) listed on Nasdaq" />
               </tr>
             </thead>
             <tbody>
@@ -16732,6 +16777,7 @@ const NelTable = ({ n, onRow, onMini }) => {
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.dvol)}</td>
                   <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.ext)}`}>{fmtExtension(r.ext)}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono ${nasdaqCls(r.nasdaqInfo)}`} title={nasdaqCellTitle(r.nasdaqInfo)}>{r.nasdaq != null ? `${r.nasdaq}%` : "—"}</td>
                 </tr>
               ))}
             </tbody>
@@ -16743,6 +16789,7 @@ const NelTable = ({ n, onRow, onMini }) => {
 };
 
 const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }) => {
+  const nq = useNasdaqShares(etfHoldings);
   const [sel, setSel]     = React.useState(null);   // { group, window } for the group popup
   const [stats, setStats] = React.useState(null);   // public/etf_stats.json
   React.useEffect(() => {
@@ -16805,17 +16852,17 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
     // broad group doesn't drag in every laggard ETF it happens to contain.
     const rows = etfs.filter(e => !e.benchmark && themeOf(e) && top.has(themeOf(e)) && e[t.k] != null && e[t.k] > 0 && e[t.k] >= t.med).map(e => {
       const st = stats?.etfs?.[e.ticker] || {};
-      return { ticker: e.ticker, group: themeOf(e), perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null };
-    }).filter(x => x.ext != null && x.ext < nelCrit.maxExt && (x.dvol ?? 0) >= nelCrit.minDvolM * 1e6).sort((a, b) => b.perf - a.perf);
+      return { ticker: e.ticker, group: themeOf(e), perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null, nasdaq: nq.shares[e.ticker]?.pct ?? null, nasdaqInfo: nq.shares[e.ticker] || null };
+    }).filter(x => x.ext != null && x.ext < nelCrit.maxExt && (x.dvol ?? 0) >= nelCrit.minDvolM * 1e6 && nq.passes(x.ticker)).sort((a, b) => b.perf - a.perf);
     return { w: t.w, k: t.k, rows };
-  }), [tables, etfs, stats, nelCrit]);
+  }), [tables, etfs, stats, nelCrit, nq.shares, nq.minPct]); // eslint-disable-line react-hooks/exhaustive-deps
   const nelUnique = [...new Set(nel.flatMap(n => n.rows.map(r => r.ticker)))];
   const nelCopy = () => {
     (navigator.clipboard?.writeText(nelUnique.join(",")) || Promise.reject()).then(() => { setNelCopied(true); setTimeout(() => setNelCopied(false), 1500); }).catch(() => {});
   };
   const nelExport = () => {
-    const out = [["Window", "ETF", "Group", "Performance %", "ADR %", "Avg $ Vol", "Extension"]];
-    for (const n of nel) for (const r of n.rows) out.push([n.w, r.ticker, r.group, r.perf, r.adr ?? "", r.dvol ?? "", r.ext]);
+    const out = [["Window", "ETF", "Group", "Performance %", "ADR %", "Avg $ Vol", "Extension", "Nasdaq %"]];
+    for (const n of nel) for (const r of n.rows) out.push([n.w, r.ticker, r.group, r.perf, r.adr ?? "", r.dvol ?? "", r.ext, r.nasdaq ?? ""]);
     const csv = out.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
@@ -16858,6 +16905,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
           <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">Avg $ Vol ≥
             <input type="number" step="5" min="0" value={nelCrit.minDvolM} onChange={e => setNelCrit(c => ({ ...c, minDvolM: Number.isFinite(parseFloat(e.target.value)) ? parseFloat(e.target.value) : 0 }))}
               className="w-14 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" /><span className="text-zinc-600">M</span></label>
+          <NasdaqFilter minPct={nq.minPct} setMinPct={nq.setMinPct} />
           {(nelCrit.maxExt !== 4 || nelCrit.minDvolM !== 10) && <button onClick={() => setNelCrit({ maxExt: 4, minDvolM: 10 })} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>}
         </div>
         {!stats ? <p className="text-xs text-zinc-600 italic py-3">Loading ETF stats…</p> : (
