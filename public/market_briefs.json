@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-23 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Heightened Volatility",
+    "spy_price": 763.96,
+    "spy_change_pct": -1.18,
+    "vix": 19.75,
+    "hy_oas": 3.27,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 57.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CVX",
+          "company": "Chevron Corporation",
+          "reason": "Chevron announced a new significant oil discovery in the Gulf of Mexico, boosting its long-term production outlook amidst rising crude oil prices, providing a strong fundamental catalyst."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly received accelerated FDA approval for its groundbreaking Alzheimer's drug, significantly expanding its market opportunity and strengthening its pharmaceutical pipeline."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is expected to face continued pressure from broad tech sector weakness and rising interest rate concerns, which negatively impact growth stock valuations."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-22 19:35 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple shows signs of accumulation on daily charts, attracting buying interest from institutional funds looking for defensive quality, despite no specific fresh news catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-01 20:13 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Sentiment / Global Divergence",
-    "spy_price": 762.63,
-    "spy_change_pct": -0.21,
-    "vix": 16.39,
-    "hy_oas": 3.12,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 26.6,
-    "mmth": 45.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RKLB",
-          "company": "Rocket Lab USA, Inc.",
-          "reason": "The company announced a new commercial deal today, providing a clear and specific catalyst for potential upward momentum."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "The significant +2.85% surge in crude oil prices provides a fresh, direct catalyst for this major energy producer, signaling potential tailwinds for the sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Trading is likely influenced by recycled narratives around artificial intelligence and semiconductor demand, rather than a fresh, specific catalyst today."
         }
       ]
     }
