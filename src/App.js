@@ -13344,6 +13344,14 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   const screenerRef = useRef(screenerMap);
   screenerRef.current = screenerMap;
   const [stats, setStats] = useState(null);   // enlarged-chart stats overlay (daily bars only)
+  const [lookupRow, setLookupRow] = useState(null);   // stock_lookup.json [cap $B, industry] — fills Market Cap / industry when the screener doesn't carry the stock
+  useEffect(() => {
+    if (!showStats) return undefined;
+    let dead = false;
+    loadStockLookup().then(m => { if (!dead) setLookupRow(m?.[ticker] || null); });
+    return () => { dead = true; };
+  }, [ticker, showStats]);
+  const statsView = stats && lookupRow ? { ...stats, marketCapB: stats.marketCapB ?? lookupRow[0] ?? null, industry: stats.industry || lookupRow[1] || null } : stats;
   // Company name beside the select box on the enlarged chart: screener row first, then the industry list (stocks ≥ $500M the screener lacks).
   const [indName, setIndName] = useState(null);
   useEffect(() => {
@@ -13609,7 +13617,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         onPointerDown={() => { touchedRef.current = true; }}
         onTouchEnd={onExpand ? () => { const now = Date.now(); if (now - lastTapRef.current < 350) { lastTapRef.current = 0; onExpand(); } else lastTapRef.current = now; } : undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
-        {status === "ready" && stats && <ChartStatsOverlay st={stats} />}
+        {status === "ready" && statsView && <ChartStatsOverlay st={statsView} />}
         {status === "ready" && strip.length > 0 && (
           <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 30, height: 0, zIndex: 15 }}>
             {strip.map((m, i) => (
@@ -13626,7 +13634,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Failed to load</div>}
         {status === "no-proxy" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px] px-3 text-center">Bar-data proxy not configured</div>}
       </div>
-      {status === "ready" && stats && <ChartStatsStrip st={stats} />}
+      {status === "ready" && statsView && <ChartStatsStrip st={statsView} />}
     </div>
   );
 };
@@ -15914,6 +15922,14 @@ const loadIndustryStocks = () => {
   return _industryStocksP;
 };
 
+// public/stock_lookup.json (industry_intraday_builder.py): {ticker: [market cap $B, industry]} for every US stock above $500M. Last-resort source for the
+// enlarged-chart stats and the stock panel, for names the 500-stock screener, the leader lists and the industry top-30 don't carry (e.g. IOVA).
+let _stockLookupP = null;
+const loadStockLookup = () => {
+  if (!_stockLookupP) _stockLookupP = fetch(`${process.env.PUBLIC_URL}/stock_lookup.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => d?.s || null).catch(() => null);
+  return _stockLookupP;
+};
+
 const StockPanelCtx = React.createContext(null);
 const useOpenStock = () => React.useContext(StockPanelCtx) || (() => {});
 const stockLinkClick = (e, open, ticker) => {
@@ -15957,7 +15973,10 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
   const lead = React.useMemo(() => _leaderRow(leadFile, ticker), [leadFile, ticker]);
   const [indFile, setIndFile] = React.useState(null);
   React.useEffect(() => { let dead = false; loadIndustryStocks().then(f => { if (!dead) setIndFile(f); }); return () => { dead = true; }; }, []);
-  const ind = indFile?.byTicker?.[ticker] || null;     // last resort: industry_stocks.json row
+  const ind = indFile?.byTicker?.[ticker] || null;     // industry_stocks.json row
+  const [lookupMap, setLookupMap] = React.useState(null);
+  React.useEffect(() => { let dead = false; loadStockLookup().then(m => { if (!dead) setLookupMap(m); }); return () => { dead = true; }; }, []);
+  const look = lookupMap?.[ticker] || null;           // very last resort: stock_lookup.json [cap $B, industry]
   const open = useOpenStock();
   const [copied, setCopied] = React.useState(false);
   const sc = screenerMap?.[ticker] || null;
@@ -15978,7 +15997,7 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
   const chg = sc?.change_pct ?? rec?.change_pct ?? ind?.d ?? null;
   const perf = k => sc?.[k] ?? rec?.[k] ?? lead?.perfs?.[k] ?? indPerf[k] ?? null;
   const company = sc?.company || rec?.company || lead?.company || ind?.n || "";
-  const industry = sc?.industry || lead?.industry || ind?.industry || "";
+  const industry = sc?.industry || lead?.industry || ind?.industry || look?.[1] || "";
   const group = categoryThemeMap?.[ticker] || null;
   const etfs = lev?.all?.[ticker] || [];
   const stat = (label, val, cls = "text-zinc-200", tip) => (
@@ -15991,7 +16010,7 @@ const StockPanel = ({ ticker, onClose, screenerMap, themeData, categoryThemeMap 
   const rs = sc?.rs_score ?? rec?.rs_52w ?? null;
   const adr = sc?.adr_pct ?? rec?.adr_pct ?? ind?.adr ?? null;
   const dvol = sc?.avg_dollar_volume ?? rec?.dollar_volume ?? lead?.avg_dollar_volume ?? ind?.dv ?? null;
-  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? (lead?.market_cap != null ? lead.market_cap / 1e9 : (ind?.cap != null ? ind.cap / 1e9 : null));
+  const cap = sc?.market_cap_b ?? rec?.mkt_cap_b ?? (lead?.market_cap != null ? lead.market_cap / 1e9 : (ind?.cap != null ? ind.cap / 1e9 : (look?.[0] ?? null)));
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.6)", backdropFilter: "blur(3px)" }} onClick={onClose}>
       <aside className="w-full max-w-[520px] max-h-[92vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl overflow-y-auto" onClick={e => e.stopPropagation()}>
