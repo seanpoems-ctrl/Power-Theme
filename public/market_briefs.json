@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-23 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Risk-Off / Inflationary Concerns",
+    "spy_price": 759.97,
+    "spy_change_pct": -0.52,
+    "vix": 19.45,
+    "hy_oas": 3.4,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 56.0,
+    "mmth": 56.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Reports groundbreaking Phase 3 trial data for a new obesity drug, significantly expanding its market opportunity."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Launches a strategic partnership with a major cloud provider to deploy its next-gen AI supercomputers, driving demand expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Experiences typical year-end shopping volume, but today's price action is largely technical amidst broader market pressures."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-23 11:42 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Continues to trade on recycled speculation regarding its upcoming product roadmap and supply chain developments, without fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-02 12:35 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Rally, Risk Appetite",
-    "spy_price": 769.29,
-    "spy_change_pct": 0.69,
-    "vix": 15.57,
-    "hy_oas": 3.24,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 29.5,
-    "mmth": 47.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ON",
-          "company": "ON Semiconductor Corporation",
-          "reason": "Company confirmed a revised merger agreement, acting as a fresh catalyst for a potential re-rating and strong directional flow."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Benefited from positive analyst sentiment following news of expanded cloud services partnerships, driving fresh institutional interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Capitalized on the broad tech sector momentum as global risk appetite improved, without any specific new company-specific catalyst today."
         }
       ]
     }
