@@ -2,40 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 2,
+  "count": 3,
   "stocks": [
     {
       "ticker": "BRZE",
       "company": "Braze, Inc.",
       "industry": "Internet Software/Services",
-      "price": 45.86,
-      "change_pct": 0.39,
-      "adr_pct": 4.8,
-      "dollar_volume": "$478.3M",
-      "market_cap_b": 5.209,
-      "rs_ibd": 93,
-      "above50dma_pct": 56.8
+      "price": 45.88,
+      "change_pct": 0.04,
+      "adr_pct": 4.5,
+      "dollar_volume": "$501.0M",
+      "market_cap_b": 5.211,
+      "rs_ibd": 94,
+      "above50dma_pct": 55.1
     },
     {
       "ticker": "SLN",
       "company": "Silence Therapeutics Plc - American Depository Share",
       "industry": "Miscellaneous Commercial Services",
-      "price": 19.66,
-      "change_pct": -0.05,
-      "adr_pct": 5.8,
-      "dollar_volume": "$195.7M",
-      "market_cap_b": 1.223,
+      "price": 19.67,
+      "change_pct": 0.05,
+      "adr_pct": 5.4,
+      "dollar_volume": "$198.3M",
+      "market_cap_b": 1.222,
       "rs_ibd": 95,
-      "above50dma_pct": 54.0
+      "above50dma_pct": 52.7
+    },
+    {
+      "ticker": "KOD",
+      "company": "Kodiak Sciences Inc",
+      "industry": "Biotechnology",
+      "price": 87.63,
+      "change_pct": 2.16,
+      "adr_pct": 7.9,
+      "dollar_volume": "$103.1M",
+      "market_cap_b": 5.507,
+      "rs_ibd": 98,
+      "above50dma_pct": 50.5
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -1.21,
-    "spx_1m": -0.53,
-    "spx_3m": 3.38,
-    "spx_34d": -0.71,
-    "spx_qtd": -0.04,
-    "spx_mtd": -0.04
+    "spx_1d": -0.52,
+    "spx_1m": -1.55,
+    "spx_3m": 2.62,
+    "spx_34d": -0.65,
+    "spx_qtd": -0.56,
+    "spx_mtd": -0.56
   },
-  "fetched_at_utc": "2026-10-23T01:23:39+00:00"
+  "fetched_at_utc": "2026-10-23T22:40:20+00:00"
 }

@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-10-23T01:17:24.173242+00:00",
+  "generated_at": "2026-10-23T22:40:19.631756+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 97.0,
+      "perf_1d": 14.58,
+      "leaders": [
+        {
+          "ticker": "RNG",
+          "price": 83.39,
+          "rs_52w": 97,
+          "adr_pct": 5.68,
+          "vol_surge": 2.5,
+          "mkt_cap": 6963578798,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
