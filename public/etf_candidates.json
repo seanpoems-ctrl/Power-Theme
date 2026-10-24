@@ -1,38 +1,38 @@
 {
-  "generated_at": "2026-10-17T16:13:55.334272+00:00",
+  "generated_at": "2026-10-24T16:29:07.518595+00:00",
   "note": "Review these, then paste accepted entries into etf_master.json and run build_etf_metadata.py.",
   "candidates": [
     {
       "ticker": "BITO",
       "name": "ProShares Bitcoin ETF",
-      "avg_dollar_vol": 777518242,
+      "avg_dollar_vol": 708735856,
       "category": "Crypto & Digital Assets",
       "label": "Bitcoin Futures",
       "type": "beta_booster",
       "liquid": true
     },
     {
+      "ticker": "VGT",
+      "name": "Vanguard Information Tech ETF",
+      "avg_dollar_vol": 595548512,
+      "category": "Technology & Digital Disruption",
+      "label": "Information Technology",
+      "type": "pure_sector",
+      "liquid": true
+    },
+    {
       "ticker": "IYR",
       "name": "iShares U.S. Real Estate ETF",
-      "avg_dollar_vol": 624051376,
+      "avg_dollar_vol": 579209765,
       "category": "Real Estate & Utilities",
       "label": "US Real Estate",
       "type": "pure_sector",
       "liquid": true
     },
     {
-      "ticker": "VGT",
-      "name": "Vanguard Information Tech ETF",
-      "avg_dollar_vol": 578684775,
-      "category": "Technology & Digital Disruption",
-      "label": "Information Tech",
-      "type": "pure_sector",
-      "liquid": true
-    },
-    {
       "ticker": "EWT",
       "name": "iShares MSCI Taiwan ETF",
-      "avg_dollar_vol": 543782150,
+      "avg_dollar_vol": 503777918,
       "category": "Geographic / Country Specific",
       "label": "Taiwan Equity",
       "type": "pure_sector",
@@ -41,331 +41,340 @@
     {
       "ticker": "VNQ",
       "name": "Vanguard Real Estate ETF",
-      "avg_dollar_vol": 423869794,
+      "avg_dollar_vol": 389309262,
       "category": "Real Estate & Utilities",
       "label": "US Real Estate",
       "type": "pure_sector",
       "liquid": true
     },
     {
+      "ticker": "IAU",
+      "name": "iShares Gold Trust Shares",
+      "avg_dollar_vol": 347644178,
+      "category": "Energy, Metals & Commodities",
+      "label": "Physical Gold",
+      "type": "pure_sector",
+      "liquid": true
+    },
+    {
       "ticker": "EWJ",
       "name": "iShares MSCI Japan Index Fund",
-      "avg_dollar_vol": 329235450,
+      "avg_dollar_vol": 339379470,
       "category": "Geographic / Country Specific",
       "label": "Japan Equity",
       "type": "pure_sector",
       "liquid": true
     },
     {
-      "ticker": "IAU",
-      "name": "iShares Gold Trust Shares",
-      "avg_dollar_vol": 313368038,
-      "category": "Energy, Metals & Commodities",
-      "label": "Gold Trust",
-      "type": "beta_booster",
-      "liquid": true
-    },
-    {
       "ticker": "INDA",
       "name": "iShares MSCI India ETF",
-      "avg_dollar_vol": 304153686,
+      "avg_dollar_vol": 322545563,
       "category": "Geographic / Country Specific",
       "label": "India Equity",
       "type": "pure_sector",
       "liquid": true
     },
     {
-      "ticker": "GLDM",
-      "name": "SPDR Gold MiniShares Trust",
-      "avg_dollar_vol": 297075104,
-      "category": "Energy, Metals & Commodities",
-      "label": "Gold MiniShares",
-      "type": "beta_booster",
-      "liquid": true
-    },
-    {
       "ticker": "KBWB",
       "name": "Invesco KBW Bank ETF",
-      "avg_dollar_vol": 266641747,
+      "avg_dollar_vol": 305008080,
       "category": "Finance & Capital Markets",
       "label": "US Banks",
       "type": "pure_sector",
       "liquid": true
     },
     {
-      "ticker": "VGK",
-      "name": "Vanguard FTSEEuropean ETF",
-      "avg_dollar_vol": 256239708,
-      "category": "Geographic / Country Specific",
-      "label": "European Equity",
+      "ticker": "GLDM",
+      "name": "SPDR Gold MiniShares Trust",
+      "avg_dollar_vol": 270396120,
+      "category": "Energy, Metals & Commodities",
+      "label": "Physical Gold",
       "type": "pure_sector",
       "liquid": true
     },
     {
-      "ticker": "EMXC",
-      "name": "iShares MSCI Emerging Markets ex China ETF",
-      "avg_dollar_vol": 246252870,
-      "category": "Geographic / Country Specific",
-      "label": "Emerging Markets ex-China",
+      "ticker": "SVXY",
+      "name": "ProShares Short VIX Short Term Futures ETF",
+      "avg_dollar_vol": 200373666,
+      "category": "Quantitative Factors & Volatility",
+      "label": "Short VIX Short Term Futures",
       "type": "beta_booster",
       "liquid": true
     },
     {
       "ticker": "FBTC",
       "name": "Fidelity Wise Origin Bitcoin Fund",
-      "avg_dollar_vol": 187189852,
+      "avg_dollar_vol": 194565227,
       "category": "Crypto & Digital Assets",
-      "label": "Bitcoin Fund",
+      "label": "Bitcoin Spot",
       "type": "beta_booster",
       "liquid": true
     },
     {
       "ticker": "USMV",
       "name": "iShares MSCI USA Min Vol Factor ETF",
-      "avg_dollar_vol": 175968585,
+      "avg_dollar_vol": 183051514,
       "category": "Quantitative Factors & Volatility",
       "label": "US Minimum Volatility",
       "type": "beta_booster",
       "liquid": true
     },
     {
-      "ticker": "SVXY",
-      "name": "ProShares Short VIX Short Term Futures ETF",
-      "avg_dollar_vol": 158613066,
-      "category": "Quantitative Factors & Volatility",
-      "label": "Short VIX Futures",
-      "type": "beta_booster",
-      "liquid": true
-    },
-    {
       "ticker": "DYNF",
       "name": "iShares U.S. Equity Factor Rotation Active ETF",
-      "avg_dollar_vol": 156839386,
+      "avg_dollar_vol": 155879615,
       "category": "Quantitative Factors & Volatility",
       "label": "US Equity Factor Rotation",
       "type": "beta_booster",
       "liquid": true
     },
     {
-      "ticker": "FTXR",
-      "name": "First Trust Nasdaq Transportation ETF",
-      "avg_dollar_vol": 152032885,
-      "category": "Industrials, Transportation & Infrastructure",
-      "label": "Nasdaq Transportation",
+      "ticker": "SOXQ",
+      "name": "Invesco PHLX Semiconductor ETF",
+      "avg_dollar_vol": 152294666,
+      "category": "Technology & Digital Disruption",
+      "label": "Semiconductors",
       "type": "pure_sector",
       "liquid": true
     },
     {
-      "ticker": "SIVR",
-      "name": "abrdn Physical Silver Shares ETF",
-      "avg_dollar_vol": 139583902,
+      "ticker": "IAUM",
+      "name": "iShares Gold Trust Micro Shares",
+      "avg_dollar_vol": 127110319,
       "category": "Energy, Metals & Commodities",
-      "label": "Physical Silver",
-      "type": "beta_booster",
+      "label": "Physical Gold",
+      "type": "pure_sector",
       "liquid": true
     },
     {
       "ticker": "VFLO",
       "name": "VictoryShares Free Cash Flow ETF",
-      "avg_dollar_vol": 124565251,
+      "avg_dollar_vol": 127043245,
       "category": "Quantitative Factors & Volatility",
       "label": "Free Cash Flow",
       "type": "beta_booster",
       "liquid": true
     },
     {
-      "ticker": "PSLV",
-      "name": "Sprott Physical Silver Trust ETV",
-      "avg_dollar_vol": 114583649,
-      "category": "Energy, Metals & Commodities",
-      "label": "Physical Silver",
-      "type": "beta_booster",
-      "liquid": true
-    },
-    {
       "ticker": "DBMF",
       "name": "iMGP DBi Managed Futures Strategy ETF",
-      "avg_dollar_vol": 106838815,
+      "avg_dollar_vol": 114700197,
       "category": "Quantitative Factors & Volatility",
       "label": "Managed Futures",
       "type": "beta_booster",
       "liquid": true
     },
     {
+      "ticker": "BNO",
+      "name": "United States Brent Oil Fund, LP ETV",
+      "avg_dollar_vol": 111683456,
+      "category": "Energy, Metals & Commodities",
+      "label": "Brent Oil",
+      "type": "beta_booster",
+      "liquid": true
+    },
+    {
+      "ticker": "SIVR",
+      "name": "abrdn Physical Silver Shares ETF",
+      "avg_dollar_vol": 108959527,
+      "category": "Energy, Metals & Commodities",
+      "label": "Physical Silver",
+      "type": "pure_sector",
+      "liquid": true
+    },
+    {
       "ticker": "EWC",
       "name": "iShares MSCI Canada Index Fund",
-      "avg_dollar_vol": 106096529,
+      "avg_dollar_vol": 100906568,
       "category": "Geographic / Country Specific",
       "label": "Canada Equity",
       "type": "pure_sector",
       "liquid": true
     },
     {
+      "ticker": "SGOL",
+      "name": "abrdn Physical Gold Shares ETF",
+      "avg_dollar_vol": 99400793,
+      "category": "Energy, Metals & Commodities",
+      "label": "Physical Gold",
+      "type": "pure_sector",
+      "liquid": false
+    },
+    {
+      "ticker": "PSLV",
+      "name": "Sprott Physical Silver Trust ETV",
+      "avg_dollar_vol": 91944553,
+      "category": "Energy, Metals & Commodities",
+      "label": "Physical Silver",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
       "ticker": "MCHI",
       "name": "iShares MSCI China ETF",
-      "avg_dollar_vol": 100301548,
+      "avg_dollar_vol": 91780102,
       "category": "Geographic / Country Specific",
       "label": "China Equity",
       "type": "pure_sector",
-      "liquid": true
-    },
-    {
-      "ticker": "EUFN",
-      "name": "iShares MSCI Europe Financials ETF",
-      "avg_dollar_vol": 99550460,
-      "category": "Finance & Capital Markets",
-      "label": "Europe Financials",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "PHYS",
-      "name": "Sprott Physical Gold Trust ETV",
-      "avg_dollar_vol": 85714968,
-      "category": "Energy, Metals & Commodities",
-      "label": "Physical Gold",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "CORO",
-      "name": "iShares International Country Rotation Active ETF",
-      "avg_dollar_vol": 85194180,
-      "category": "Quantitative Factors & Volatility",
-      "label": "International Country Rotation",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "PDBC",
-      "name": "Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF",
-      "avg_dollar_vol": 84101448,
-      "category": "Energy, Metals & Commodities",
-      "label": "Diversified Commodities",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "REET",
-      "name": "iShares Global REIT ETF",
-      "avg_dollar_vol": 83646300,
-      "category": "Real Estate & Utilities",
-      "label": "Global REIT",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "EWS",
-      "name": "iShares MSCI Singapore ETF",
-      "avg_dollar_vol": 82226833,
-      "category": "Geographic / Country Specific",
-      "label": "Singapore Equity",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "SGOL",
-      "name": "abrdn Physical Gold Shares ETF",
-      "avg_dollar_vol": 81660162,
-      "category": "Energy, Metals & Commodities",
-      "label": "Physical Gold",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "IALT",
-      "name": "iShares Systematic Alternatives Active ETF",
-      "avg_dollar_vol": 80027783,
-      "category": "Quantitative Factors & Volatility",
-      "label": "Systematic Alternatives",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "IAUM",
-      "name": "iShares Gold Trust Micro Shares",
-      "avg_dollar_vol": 79703284,
-      "category": "Energy, Metals & Commodities",
-      "label": "Gold Micro Shares",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "EWA",
-      "name": "iShares MSCI Australia Index Fund",
-      "avg_dollar_vol": 73479584,
-      "category": "Geographic / Country Specific",
-      "label": "Australia Equity",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "EWH",
-      "name": "iShares MSCI Hong Kong Index Fund",
-      "avg_dollar_vol": 73286089,
-      "category": "Geographic / Country Specific",
-      "label": "Hong Kong Equity",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "GSG",
-      "name": "iShares GSCI Commodity-Indexed Trust Fund",
-      "avg_dollar_vol": 71360040,
-      "category": "Energy, Metals & Commodities",
-      "label": "GSCI Commodity-Indexed",
-      "type": "pure_sector",
-      "liquid": false
-    },
-    {
-      "ticker": "CQQQ",
-      "name": "Invesco China Technology ETF",
-      "avg_dollar_vol": 69329604,
-      "category": "Technology & Digital Disruption",
-      "label": "China Technology",
-      "type": "beta_booster",
       "liquid": false
     },
     {
       "ticker": "VIXY",
       "name": "VIX Short-Term Futures ETF",
-      "avg_dollar_vol": 62946996,
+      "avg_dollar_vol": 91500835,
       "category": "Quantitative Factors & Volatility",
       "label": "VIX Short-Term Futures",
       "type": "beta_booster",
       "liquid": false
     },
     {
-      "ticker": "BSOL",
-      "name": "Bitwise Solana Staking ETF",
-      "avg_dollar_vol": 50181041,
-      "category": "Crypto & Digital Assets",
-      "label": "Solana Staking",
+      "ticker": "REET",
+      "name": "iShares Global REIT ETF",
+      "avg_dollar_vol": 90260850,
+      "category": "Real Estate & Utilities",
+      "label": "Global REIT",
+      "type": "pure_sector",
+      "liquid": false
+    },
+    {
+      "ticker": "CORO",
+      "name": "iShares International Country Rotation Active ETF",
+      "avg_dollar_vol": 83698607,
+      "category": "Quantitative Factors & Volatility",
+      "label": "International Country Rotation",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "IQLT",
+      "name": "iShares MSCI Intl Quality Factor ETF",
+      "avg_dollar_vol": 74700931,
+      "category": "Quantitative Factors & Volatility",
+      "label": "International Quality Factor",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "PDBC",
+      "name": "Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF",
+      "avg_dollar_vol": 74135974,
+      "category": "Energy, Metals & Commodities",
+      "label": "Diversified Commodities",
+      "type": "pure_sector",
+      "liquid": false
+    },
+    {
+      "ticker": "PHYS",
+      "name": "Sprott Physical Gold Trust ETV",
+      "avg_dollar_vol": 74055721,
+      "category": "Energy, Metals & Commodities",
+      "label": "Physical Gold",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "GSG",
+      "name": "iShares GSCI Commodity-Indexed Trust Fund",
+      "avg_dollar_vol": 73977798,
+      "category": "Energy, Metals & Commodities",
+      "label": "GSCI Commodity",
+      "type": "pure_sector",
+      "liquid": false
+    },
+    {
+      "ticker": "EWA",
+      "name": "iShares MSCI Australia Index Fund",
+      "avg_dollar_vol": 73558125,
+      "category": "Geographic / Country Specific",
+      "label": "Australia Equity",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "IALT",
+      "name": "iShares Systematic Alternatives Active ETF",
+      "avg_dollar_vol": 72878311,
+      "category": "Quantitative Factors & Volatility",
+      "label": "Systematic Alternatives",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "CQQQ",
+      "name": "Invesco China Technology ETF",
+      "avg_dollar_vol": 68053962,
+      "category": "Technology & Digital Disruption",
+      "label": "China Technology",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "EUFN",
+      "name": "iShares MSCI Europe Financials ETF",
+      "avg_dollar_vol": 63327025,
+      "category": "Finance & Capital Markets",
+      "label": "Europe Financials",
+      "type": "pure_sector",
+      "liquid": false
+    },
+    {
+      "ticker": "EWH",
+      "name": "iShares MSCI Hong Kong Index Fund",
+      "avg_dollar_vol": 62736029,
+      "category": "Geographic / Country Specific",
+      "label": "Hong Kong Equity",
       "type": "beta_booster",
       "liquid": false
     },
     {
       "ticker": "EWZS",
       "name": "iShares MSCI Brazil Small-Cap ETF",
-      "avg_dollar_vol": 50088684,
+      "avg_dollar_vol": 57873548,
       "category": "Geographic / Country Specific",
-      "label": "Brazil Small-Cap Equity",
+      "label": "Brazil Small-Cap",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "GRNY",
+      "name": "Fundstrat Granny Shots US Large Cap ETF",
+      "avg_dollar_vol": 48775919,
+      "category": "Quantitative Factors & Volatility",
+      "label": "US Large Cap Growth",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "BSOL",
+      "name": "Bitwise Solana Staking ETF",
+      "avg_dollar_vol": 48056850,
+      "category": "Crypto & Digital Assets",
+      "label": "Solana Staking",
       "type": "beta_booster",
       "liquid": false
     },
     {
       "ticker": "AIPO",
       "name": "Defiance AI & Power Infrastructure ETF",
-      "avg_dollar_vol": 48481645,
+      "avg_dollar_vol": 45456210,
       "category": "Technology & Digital Disruption",
       "label": "AI & Power Infrastructure",
       "type": "beta_booster",
       "liquid": false
     },
     {
+      "ticker": "DFAR",
+      "name": "Dimensional US Real Estate ETF",
+      "avg_dollar_vol": 43410688,
+      "category": "Real Estate & Utilities",
+      "label": "US Real Estate",
+      "type": "pure_sector",
+      "liquid": false
+    },
+    {
       "ticker": "ETH",
       "name": "Grayscale Ethereum Staking Mini ETF Shares",
-      "avg_dollar_vol": 48197590,
+      "avg_dollar_vol": 42468357,
       "category": "Crypto & Digital Assets",
       "label": "Ethereum Staking Mini",
       "type": "beta_booster",
@@ -374,7 +383,7 @@
     {
       "ticker": "ETHE",
       "name": "Grayscale Ethereum Staking ETF Shares",
-      "avg_dollar_vol": 46585585,
+      "avg_dollar_vol": 39356236,
       "category": "Crypto & Digital Assets",
       "label": "Ethereum Staking",
       "type": "beta_booster",
@@ -383,36 +392,27 @@
     {
       "ticker": "FETH",
       "name": "Fidelity Ethereum Fund",
-      "avg_dollar_vol": 43409806,
+      "avg_dollar_vol": 35465864,
       "category": "Crypto & Digital Assets",
-      "label": "Ethereum Fund",
+      "label": "Ethereum Spot",
+      "type": "beta_booster",
+      "liquid": false
+    },
+    {
+      "ticker": "EIDO",
+      "name": "iShares MSCI Indonesia ETF",
+      "avg_dollar_vol": 35371232,
+      "category": "Geographic / Country Specific",
+      "label": "Indonesia Equity",
       "type": "beta_booster",
       "liquid": false
     },
     {
       "ticker": "REM",
       "name": "iShares Mortgage Real Estate ETF",
-      "avg_dollar_vol": 29803973,
+      "avg_dollar_vol": 27515165,
       "category": "Real Estate & Utilities",
       "label": "Mortgage Real Estate",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "PPLT",
-      "name": "abrdn Physical Platinum Shares ETF",
-      "avg_dollar_vol": 28532517,
-      "category": "Energy, Metals & Commodities",
-      "label": "Physical Platinum",
-      "type": "beta_booster",
-      "liquid": false
-    },
-    {
-      "ticker": "DAPP",
-      "name": "VanEck Digital Transformation ETF",
-      "avg_dollar_vol": 25106322,
-      "category": "Crypto & Digital Assets",
-      "label": "Digital Transformation",
       "type": "beta_booster",
       "liquid": false
     }
