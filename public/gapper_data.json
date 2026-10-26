@@ -1,68 +1,120 @@
 {
-  "scan_time": "2026-10-23 08:55 ET",
+  "scan_time": "2026-10-26 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CCI",
-      "price": 88.53,
-      "gap_pct": 12.3,
-      "pm_volume": 149876,
-      "avg_vol_10d": 6488116,
-      "avg_dollar_vol": 574392909,
-      "mkt_cap": 33538653456,
-      "rvol": 1.01,
-      "adr_pct": 3.2,
-      "category": "New Contract/Partnership",
-      "theme": "Potential SpaceX Partnership",
-      "reasoning": "CCI surged on news that SpaceX is in talks to secure **80,000 cell sites** for a new wireless network, potentially involving CCI.",
+      "ticker": "XNCR",
+      "price": 33.1,
+      "gap_pct": 31.45,
+      "pm_volume": 1173835,
+      "avg_vol_10d": 1320072,
+      "avg_dollar_vol": 43694383,
+      "mkt_cap": 1872218665,
+      "rvol": 1.0,
+      "adr_pct": 5.67,
+      "category": "Earnings",
+      "theme": "8-K Filing",
+      "reasoning": "Xencor filed an 8-K today detailing financial results, representing a formal disclosure of operational performance.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Infrastructure",
+      "grade": "C",
+      "finviz_theme": "Biotech - Oncology",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Catalyst: Reports surfaced that **SpaceX** is in discussions to gain access to at least **80,000 cell sites** across the United States for a new wireless network, with **Crown Castle (CCI)** mentioned as a potential major cellular infrastructure company involved. This news drove **CCI +0.23%** in premarket trading.\n| Impact: A potential partnership with **SpaceX** for **80,000 cell sites** would represent a significant expansion opportunity and a substantial new revenue stream, dramatically improving CCI's growth outlook and network utilization.",
-        "impact": ""
+        "catalyst": "Xencor filed an **8-K with the SEC on 2026-10-26**, specifically categorized under **Earnings/Financial Results** and including **Item 2.02 (Results of Operations and Financial Condition)**. This filing serves as an official company disclosure of its financial standing.",
+        "impact": "Without specific financial figures or qualitative updates from accompanying headlines, the immediate impact is limited to the procedural release of information, requiring further analysis for investment implications."
       },
-      "analysis_details": "• **Impact**\n**SpaceX** is reportedly in talks to secure access to a minimum of **80,000 cell sites** across the US to build a new wireless network. **Crown Castle (CCI)** was mentioned in the reporting as a cellular infrastructure company potentially involved in these discussions, with its shares trading **+0.23%** in premarket on the news.\n\n• **Strategic Value**\nThis potential collaboration with **SpaceX** for a new wireless network could unlock substantial growth for CCI by providing a large-scale deployment opportunity for its existing infrastructure. It would diversify CCI's customer base and enhance its competitive positioning in the rapidly evolving wireless communication landscape, offering a strong tailwind beyond its recent Q3 results which put \"leverage in focus\".",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile Xencor officially filed an **8-K today, 2026-10-26**, under the event type **Earnings/Financial Results** and including **Item 2.02**, no specific financial figures such as EPS or revenue beats/misses were provided in the input. Consequently, the surprise factor of the earnings report cannot be assessed directly from the available information.\n\n• **The Growth (Momentum)**\nGiven the absence of detailed financial outcomes from the **8-K filing**, there is no immediate data to evaluate Xencor's growth trajectory or operational momentum. The market's reaction would typically be informed by revenue, profit, and pipeline updates, which are not present here.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": {
+        "filing_date": "2026-10-26",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1326732/000121390026112279/ea0309596-8k_xencor.htm"
+      },
+      "float_shares": "69.99M",
+      "short_float": "31.23%",
+      "daily_pct": -2.55,
+      "prev_close": 25.18,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Fail (Avg $Vol $44M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Xencor filed an 8-K today detailing financial results.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SGRY",
+      "price": 19.47,
+      "gap_pct": 23.62,
+      "pm_volume": 104952,
+      "avg_vol_10d": 2135040,
+      "avg_dollar_vol": 41569229,
+      "mkt_cap": 2061962574,
+      "rvol": 2.05,
+      "adr_pct": 3.92,
+      "category": "New Contract/Partnership",
+      "theme": "Potential Acquisition",
+      "reasoning": "Surgery Partners is reportedly in late-stage talks for a **$6 billion** takeover by Bon Secours Mercy Health, valuing shares at **$20**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
+      "grade": "C",
+      "finviz_theme": "Medical Devices",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Bon Secours Mercy Health is in late-stage talks to acquire a majority stake in Surgery Partners, a deal reportedly valuing the group at about **$6 billion** and **$20 a share**, according to the Financial Times.",
+        "impact": "This potential takeover news introduces a significant M&A premium, creating upward price momentum and a floor for the stock price based on the reported acquisition valuation."
+      },
+      "analysis_details": "• **Impact**\nBon Secours Mercy Health is reportedly nearing a **$6 billion** takeover of Surgery Partners, valuing the group at approximately **$20 a share**. This news, cited by the Financial Times, indicates **late-stage talks** for a majority stake acquisition.\n\n• **Strategic Value**\nThis potential acquisition represents a significant corporate event, suggesting a strategic realignment for Surgery Partners. An agreed takeover at **$20 a share** would likely provide a substantial premium, driving near-term price appreciation towards that valuation and potentially reducing volatility from standard operational news.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Crown Castle (CCI) Q3 Results Put Leverage In Focus - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPak9Eekd4S0loZnZraXRGeE90bG5XUHowU0hrazlyU1dScllEYklER3VoMXBOMFBPQU5WTmJTcUUxUWhSSmhMbjljRENhMWt0YW9BV1hSdlh1cFJ3VUU4ejlKdjhGQm45VVp0cHh1Um9YUk1YYnZLWGRmWVlOR1NYVWlTRGFJdF9SaHlPeXd1d0RKbFNubEtB?oc=5"
+          "title": "Bon Secours Nears $6 Billion Takeover of Surgery Partners, FT Reports",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/healthcare/articles/bon-secours-nears-6-billion-182456406.html"
         },
         {
-          "title": "SpaceX in talks over 80,000 cell sites to build new wireless network - Bloomberg",
+          "title": "Bon Secours nears $6bn takeover of Bain-backed Surgery Partners",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/spacex-talks-80-000-cell-222051612.html"
-        },
-        {
-          "title": "SpaceX in Talks to Access 80,000 Cell Sites for Wireless Network",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/spacex-talks-access-80-000-213142634.html"
+          "url": "https://finance.yahoo.com/healthcare/articles/bon-secours-nears-6bn-takeover-181623379.html"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-10-21",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1051470/000105147026000085/cci-20261021.htm"
-      },
-      "float_shares": "425.02M",
-      "short_float": "2.67%",
-      "daily_pct": 0.23,
-      "prev_close": 78.83,
-      "industry": "Infrastructure",
-      "technical_status": "Fail (ADR 3.2% < 4%)",
+      "edgar_filing": null,
+      "float_shares": "78.00M",
+      "short_float": "21.72%",
+      "daily_pct": -0.94,
+      "prev_close": 15.75,
+      "industry": "Medical Devices",
+      "technical_status": "Fail (Avg $Vol $42M < $100M, ADR 3.9% < 4%)",
       "verification": {
         "status": "Verified",
         "confidence_score": 95,
@@ -70,167 +122,13 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "SpaceX is in talks to secure 80,000 cell sites for a new wireless network.",
-        "discrepancy_note": null
+        "primary_claim": "$6 billion takeover",
+        "discrepancy_note": ""
       },
-      "gates_passed": 4,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "AMT",
-      "price": 200.52,
-      "gap_pct": 10.44,
-      "pm_volume": 91998,
-      "avg_vol_10d": 3608581,
-      "avg_dollar_vol": 723592662,
-      "mkt_cap": 84604370143,
-      "rvol": 0.92,
-      "adr_pct": 2.39,
-      "category": "New Contract/Partnership",
-      "theme": "SpaceX Cell Site Talks",
-      "reasoning": "American Tower is in talks with SpaceX to provide access to 80,000 cell sites for a new wireless network.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "B",
-      "finviz_theme": "Infrastructure",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "American Tower (AMT) is reportedly in talks with **SpaceX** to provide access to a minimum of **80,000 cell sites** across the US for a new wireless network. The news prompted a **+2.21%** move in AMT shares.",
-        "impact": "A successful partnership would significantly expand AMT's revenue streams and solidify its position as a critical infrastructure provider for emerging wireless technologies."
-      },
-      "analysis_details": "• **Impact**\nAmerican Tower is engaged in discussions with **SpaceX** to secure access to a minimum of **80,000 cell sites** across the United States. This potential collaboration with a major cellular infrastructure company, likely AMT, aims to support SpaceX's new wireless network. The headline explicitly notes AMT's stock reacted with a **+2.21%** gain.\n\n• **Strategic Value**\nThis development signifies a potential new, substantial revenue opportunity for AMT, leveraging its extensive network infrastructure for an innovative space-based connectivity provider. Such a partnership would enhance AMT's competitive positioning within the telecom infrastructure sector and could serve as a model for future collaborations with new wireless entrants.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Dividend reinvestment accounts for 338 shares bought by American Tower (AMT) director Clarke. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNNE40a2NEZFhvZ0p2NUdxUVNyQmR0U011NGNrSDY0MmY1cGpPRUdneGtyTXVkUUQyVzdRNkdzeWwxZjJqYUFpSzVueHYteFAtSHJfRjM3NUtDOWVZZklfbkNveXFzaXl6aWM0LXhXM0pEdXR2aEhBOHF6NzItbWZEemh6NW9KR3M5Z25nSDRaTHR0NHhETDk1akF0ZEh3ZGpFbEI5Q0VpdEdMWDFsdWJuclJTY0tzdw?oc=5"
-        },
-        {
-          "title": "American Tower director Clarke acquires $63,717 in shares By Investing.com - Investing.com UK",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQOWNHRVVOblprVmxxTG9Cb21ZbW5DUWtrMi0xSlhhTUlIT2VJQWhLWjhnd1hnYkM0Z0ItSF9ERkFZTl9lRkhUdmRvZjBKczBzX3FzUC1PU29TaW1nYzZjMWdxYU92RjdGSmlHOFZwUzZmSjFnbW5wc0pJbjlWUHV3TENEbmNiOGk0WGhSYU1tdnRVUzVyb082UWgwMV9aRzdRMHdKZEZjUUVJR2M2bEpOV1FXMFhaZTg?oc=5"
-        },
-        {
-          "title": "SpaceX in Talks to Access 80,000 Cell Sites for Wireless Network",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/spacex-talks-access-80-000-213142634.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "465.07M",
-      "short_float": "1.82%",
-      "daily_pct": 2.21,
-      "prev_close": 181.57,
-      "industry": "Infrastructure",
-      "technical_status": "Fail (ADR 2.4% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "80,000 cell sites",
-        "discrepancy_note": "Source A (Finviz) confirms SpaceX is reportedly eyeing 80,000 cell sites. Source B (Google News) does not contain any information about SpaceX, cell sites, or a new wireless network involving American Tower."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "RITM",
-      "price": 9.2,
-      "gap_pct": 5.93,
-      "pm_volume": 195105,
-      "avg_vol_10d": 6526471,
-      "avg_dollar_vol": 60043533,
-      "mkt_cap": 4846972778,
-      "rvol": 1.59,
-      "adr_pct": 2.72,
-      "category": "Earnings",
-      "theme": "Beat",
-      "reasoning": "RITM reported Q3 adjusted EPS of $0.55, beating FactSet estimates of $0.50, signaling stronger-than-expected financial performance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "C",
-      "finviz_theme": "REITs",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Rithm Capital Corp. (RITM) announced its Q3 adjusted EPS of **$0.55 per share**, surpassing FactSet's estimate of **$0.50 per share**. This information was disclosed via an **8-K SEC filing on 2026-10-23**, confirming the financial results.",
-        "impact": "The earnings beat suggests operational strength and could drive positive momentum, attracting investors seeking companies exceeding market expectations in the current economic climate."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nRithm Capital Corp. posted **Q3 adjusted EPS of $0.55 per share**, which significantly **beat FactSet estimates of $0.50 per share**. This indicates a positive surprise factor as the company exceeded market expectations for its quarterly financial performance.\n\n• **The Growth (Momentum)**\nThe reported adjusted EPS of **$0.55** demonstrates the company's ability to generate value above analyst projections, potentially indicating underlying operational efficiency or favorable market conditions. This beat could attract further investor attention, building positive momentum for the stock.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Earnings Flash (RITM) Rithm Capital Corp. Posts Q3 Adjusted EPS $0.55 per Share, vs. FactSet Est of $0.50 - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQS3hzaTQ2RURaR2NERlJ0T0lwVFlkZ0cxZzdJRVZuQi04aF85RWNFYndpYnltMnRUbG9jU0pNV0s5bVE0NmdjaHp1aFo4V2JtcTRGaG5EbmJCZ2tJdTd2cGJDemNNZUJ0TG1lUUNQZzVfZHpEUFJmcUNvdmo2ZDdoREdpVTB6cm44Z1VHOWhHeEpSckNyOGdXeW9RNThpWDh2dm1KOHBTYmxiVHZXalR6WFBtNXpvMmk5VVpzdk03S1A0SkNVY3Z3OTJpY3I2SV8td0c0YmNROGpJaGxUWVBJ?oc=5"
-        },
-        {
-          "title": "Form 8K Rithm Capital Corp For: 23 October By Investing.com - Investing.com Nigeria",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOdFI5dWEwMWxiZXFacFFnb1NNNHAyZ0x5eG5kUTYydk9sUWVxNlh3cXFQVGs3TUdGWlZDVXI1aVlKWjBqQWVQcGRDdjdSaEVBM1NPVkptVXhFNHk3cFFlNk1BUGptZHdJSl9zc2RoUmFCaGlTOVJMbTNrWVdWRFNCN2xZZVZKU1FNWkw1ejNSUlZUbHlnZm4tQmJhTmQ5Wl9jT3JLRg?oc=5"
-        },
-        {
-          "title": "Rithm: Q3 Earnings Snapshot - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPM2Z2TXQ0OWNuT3dxV09UNXZ2Y19LMnhMdVMtMXUwSDZ6dGRfcEpoZ1oyWmtFc0JQTDg1VnozTEVwcHFtNGhTNTVxYWZOU09GOWxIVUZlSHRuM2x1a1NPWWFuUG1xa1p6ZG93cnRGZkRBcS02TE1YRmN0V2RRMHMwVlljMGhreG5PQzVEa1FsQWtIUlRfUGc?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-23",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1556593/000155659326000033/ritm-20261023.htm"
-      },
-      "float_shares": "555.57M",
-      "short_float": "6.19%",
-      "daily_pct": 1.52,
-      "prev_close": 8.68,
-      "industry": "REITs",
-      "technical_status": "Fail (Avg $Vol $60M < $100M, ADR 2.7% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "RITM reported Q3 adjusted EPS of $0.55",
-        "discrepancy_note": "Source A (Finviz News) had no relevant news. Source B (Google News) contained an article (marketscreener.com) confirming the $0.55 adjusted EPS, but another article (Quiver Quantitative) incorrectly referenced 'Q3 2026 Earnings'. Since Finviz provided no confirmation, 'BOTH sources' do not confirm the claim."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": true,
         "gate_adr": false
@@ -238,15 +136,99 @@
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
+    },
+    {
+      "ticker": "RRC",
+      "price": 50.0,
+      "gap_pct": 9.84,
+      "pm_volume": 251243,
+      "avg_vol_10d": 2608214,
+      "avg_dollar_vol": 130410700,
+      "mkt_cap": 10637091842,
+      "rvol": 1.33,
+      "adr_pct": 2.67,
+      "category": "New Contract/Partnership",
+      "theme": "Acquisition by EQT",
+      "reasoning": "Range Resources (RRC) confirmed an all-stock acquisition by EQT for $50 billion, fundamentally altering its corporate structure.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Energy - Oil & Gas",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Range Resources (RRC) confirmed a definitive agreement for an **all-stock acquisition** by **EQT**. The deal is valued at approximately **$50 billion**. This represents a major strategic move in the **Energy - Oil & Gas** sector.",
+        "impact": "This acquisition signifies a complete change in ownership and corporate strategy for RRC, likely leading to a re-rating of the combined entity and immediate price convergence to the deal terms. It removes RRC's independent trading status."
+      },
+      "analysis_details": "• **Impact**\n**Range Resources (RRC)** has entered into a definitive **all-stock acquisition agreement** with **EQT**. This significant transaction is valued at approximately **$50 billion**, profoundly impacting **RRC's** future as an independent entity. This deal marks a major consolidation in the natural gas industry.\n\n• **Strategic Value**\nThe acquisition by **EQT** positions the combined entity as a dominant player, creating scale and operational synergies in the **Energy - Oil & Gas** sector. For **RRC** shareholders, it provides liquidity through the **all-stock transaction** and exposure to the larger **EQT** enterprise, fundamentally changing the investment thesis.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Range Resources (RRC) Q3 earnings report preview: what to look for - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNVhON1ZGVE5SSHZva2ZjS1hDMmpGNVB0NllHYkxtdEtMaEZlVHpKek9BSHJEQTltQmIyT0REOXR4by11LVF6YkxfZk95MXpjSl91cHlOem1nU3N5NzRFNlQ0WE90OWtTaHlNTk5QWHE3alRtckJCd2pjZGE3NzdkY1YwdXJFZ3ZQWTlzNFdkdUkwZjFCU2pwRS1wd0g?oc=5"
+        },
+        {
+          "title": "EQT Agrees to Acquire Range Resources in All-Stock Transaction - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOWk53N1lUQU8wYWFEczJyR0xRejFSM015VnNXbjY1V1J4R0VQdGlJTTBjTVNZYkM4cERuQnRyVWpKS0lwNFVWTXVRVHczQVMxR21tSGJNYnBjdUVKbkZXcVBFd2NEeXNJdVRnRXRLQ01DY0dlNGRma193d2ZiR2lwLXZadjgwdkx2cWs5RlowZnk0SXI2Uy1uQ0pUS1dENVgw?oc=5"
+        },
+        {
+          "title": "EQT to acquire Range Resources in $50 billion all-stock deal - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQb0U3Q2g3WFlmWG5fRkJxazl0TlEtdFJ1OHVnR0dlQXZfdmpvWVh6cHBlOV9UeVZDanEtY1g1Y3BtUmFuTHg0WFJJZkVSWXRLcjZIQjlSeTF1WE5JZUhoaFN5NXBTMGZpdEVZZXdjS0JFUVZIUEo3WkUxbklWQXFCeVkyV2dTS1FPTDlVUXpuTnRXZk1fMUtlS3BiYzQ2R1ZfRFU5eFVjSmpyeFRUWWJYZWRxc1g5QQ?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-26",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/315852/000119312526431025/d161989d8k.htm"
+      },
+      "float_shares": "230.05M",
+      "short_float": "14.81%",
+      "daily_pct": 3.78,
+      "prev_close": 45.52,
+      "industry": "Energy - Oil & Gas",
+      "technical_status": "Fail (ADR 2.7% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$50 billion",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding the acquisition or its value. Source B (Google News) articles [2], [3], and [4] confirm the $50 billion all-stock deal."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 3,
-    "large_gaps": 0,
-    "total_headlines": 9,
+    "small_gaps": 1,
+    "large_gaps": 2,
+    "total_headlines": 5,
     "monthly_cost_usd": 0.01
   }
 }
