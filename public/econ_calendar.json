@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T01:14:09.373180+00:00",
+  "generated_at": "2026-10-26T23:02:30.157492+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3167,9 +3167,9 @@
       "time_et": "08:30",
       "event": "Chicago Fed National Activity Index",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.07",
       "forecast": null,
-      "previous": "-0.04",
+      "previous": "-0.08",
       "currency": "USD"
     },
     {
@@ -3177,7 +3177,7 @@
       "time_et": "10:30",
       "event": "Dallas Fed Manufacturing Index",
       "impact": "Low",
-      "actual": null,
+      "actual": "13.4",
       "forecast": null,
       "previous": "9.8",
       "currency": "USD"
@@ -3187,7 +3187,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.21",
       "forecast": null,
       "previous": "4.22",
       "currency": "USD"
@@ -3197,7 +3197,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.05",
       "forecast": null,
       "previous": "4.095",
       "currency": "USD"
@@ -3207,7 +3207,7 @@
       "time_et": "13:00",
       "event": "2-Year Note Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.708",
       "forecast": null,
       "previous": "4.787",
       "currency": "USD"
@@ -3258,7 +3258,7 @@
       "event": "Non Defense Goods Orders Ex Air",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "0.7",
       "previous": "1.6",
       "currency": "USD"
     },
@@ -3278,7 +3278,7 @@
       "event": "Durable Goods Orders MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.6",
+      "forecast": "1.5",
       "previous": null,
       "currency": "USD"
     },
@@ -3315,16 +3315,6 @@
     {
       "date": "2026-10-27",
       "time_et": "09:00",
-      "event": "House Price Index MoM",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "0.1",
-      "previous": "0.3",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-27",
-      "time_et": "09:00",
       "event": "S&P/Case-Shiller Home Price MoM",
       "impact": "Low",
       "actual": null,
@@ -3335,10 +3325,20 @@
     {
       "date": "2026-10-27",
       "time_et": "09:00",
+      "event": "House Price Index MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "0.1",
+      "previous": "0.3",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-27",
+      "time_et": "09:00",
       "event": "S&P/Case-Shiller Home Price YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": "2.6",
+      "forecast": "2.5",
       "previous": "2.5",
       "currency": "USD"
     },
@@ -3378,7 +3378,7 @@
       "event": "CB Consumer Confidence",
       "impact": "Low",
       "actual": null,
-      "forecast": "80.5",
+      "forecast": "81",
       "previous": "81.9",
       "currency": "USD"
     },
@@ -3388,7 +3388,7 @@
       "event": "New Home Sales",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.66",
+      "forecast": "0.65",
       "previous": "0.684",
       "currency": "USD"
     },
@@ -3538,7 +3538,7 @@
       "event": "Goods Trade Balance Adv",
       "impact": "Low",
       "actual": null,
-      "forecast": "-128.7",
+      "forecast": "-130",
       "previous": "-132.1",
       "currency": "USD"
     },
@@ -3685,6 +3685,16 @@
     {
       "date": "2026-10-28",
       "time_et": "14:00",
+      "event": "FOMC Statement",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-28",
+      "time_et": "14:00",
       "event": "Fed Interest Rate Decision",
       "impact": "Low",
       "actual": null,
@@ -3705,6 +3715,16 @@
     {
       "date": "2026-10-29",
       "time_et": "08:30",
+      "event": "Continuing Jobless Claims",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "1730",
+      "previous": "1728",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-10-29",
+      "time_et": "08:30",
       "event": "Jobless Claims 4-week Average",
       "impact": "Low",
       "actual": null,
@@ -3715,20 +3735,10 @@
     {
       "date": "2026-10-29",
       "time_et": "08:30",
-      "event": "Continuing Jobless Claims",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "1728",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-29",
-      "time_et": "08:30",
       "event": "Core PCE Prices QoQ Adv",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "2.4",
       "previous": "3.3",
       "currency": "USD"
     },
@@ -3788,7 +3798,7 @@
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "196",
+      "forecast": "200",
       "previous": "194",
       "currency": "USD"
     },
@@ -3818,7 +3828,7 @@
       "event": "PCE Price Index YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "3.6",
       "previous": "3.4",
       "currency": "USD"
     },
@@ -3848,7 +3858,7 @@
       "event": "Personal Spending MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.3",
+      "forecast": "0.5",
       "previous": "0.9",
       "currency": "USD"
     },
@@ -3988,7 +3998,7 @@
       "event": "Chicago PMI",
       "impact": "Low",
       "actual": null,
-      "forecast": "55.9",
+      "forecast": "55.5",
       "previous": "58.8",
       "currency": "USD"
     },
@@ -4089,7 +4099,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.21",
       "currency": "USD"
     },
     {
@@ -4099,7 +4109,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.05",
       "currency": "USD"
     },
     {
@@ -4870,6 +4880,86 @@
       "actual": null,
       "forecast": null,
       "previous": "8.28",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "10:00",
+      "event": "Wholesale Inventories MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "0.5",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "10:00",
+      "event": "Fed Goolsbee Speech",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "11:00",
+      "event": "Consumer Inflation Expectations",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.9",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "11:00",
+      "event": "Atlanta Fed GDPNow",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "11:30",
+      "event": "6-Week Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-09",
+      "time_et": "13:00",
+      "event": "3-Year Note Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "4.932",
       "currency": "USD"
     }
   ]

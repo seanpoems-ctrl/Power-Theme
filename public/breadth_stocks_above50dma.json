@@ -2,52 +2,76 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 5,
   "stocks": [
+    {
+      "ticker": "CD",
+      "company": "Chaince Digital Holdings Inc. - American",
+      "industry": "Information Technology Services",
+      "price": 9.77,
+      "change_pct": 11.53,
+      "adr_pct": 14.4,
+      "dollar_volume": "$3.0M",
+      "market_cap_b": 1.075,
+      "rs_ibd": 97,
+      "above50dma_pct": 84.8
+    },
+    {
+      "ticker": "SGRY",
+      "company": "Surgery Partners, Inc.",
+      "industry": "Hospital/Nursing Management",
+      "price": 23.25,
+      "change_pct": 47.62,
+      "adr_pct": 4.8,
+      "dollar_volume": "$183.6M",
+      "market_cap_b": 3.044,
+      "rs_ibd": 67,
+      "above50dma_pct": 61.5
+    },
     {
       "ticker": "BRZE",
       "company": "Braze, Inc.",
       "industry": "Internet Software/Services",
-      "price": 45.88,
-      "change_pct": 0.04,
-      "adr_pct": 4.5,
-      "dollar_volume": "$501.0M",
-      "market_cap_b": 5.211,
-      "rs_ibd": 94,
-      "above50dma_pct": 55.1
+      "price": 45.84,
+      "change_pct": -0.09,
+      "adr_pct": 4.2,
+      "dollar_volume": "$519.4M",
+      "market_cap_b": 5.207,
+      "rs_ibd": 92,
+      "above50dma_pct": 53.2
     },
     {
       "ticker": "SLN",
       "company": "Silence Therapeutics Plc - American Depository Share",
       "industry": "Miscellaneous Commercial Services",
-      "price": 19.67,
-      "change_pct": 0.05,
-      "adr_pct": 5.4,
-      "dollar_volume": "$198.3M",
+      "price": 19.78,
+      "change_pct": 0.56,
+      "adr_pct": 5.1,
+      "dollar_volume": "$207.5M",
       "market_cap_b": 1.223,
       "rs_ibd": 95,
-      "above50dma_pct": 52.7
+      "above50dma_pct": 52.1
     },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 87.63,
-      "change_pct": 2.16,
-      "adr_pct": 7.9,
-      "dollar_volume": "$103.1M",
-      "market_cap_b": 5.507,
+      "price": 89.6,
+      "change_pct": 2.25,
+      "adr_pct": 7.5,
+      "dollar_volume": "$101.9M",
+      "market_cap_b": 5.631,
       "rs_ibd": 98,
-      "above50dma_pct": 50.5
+      "above50dma_pct": 51.4
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": null,
-    "spx_1m": null,
-    "spx_3m": null,
-    "spx_34d": null,
-    "spx_qtd": null,
-    "spx_mtd": null
+    "spx_1d": 0.7,
+    "spx_1m": -0.09,
+    "spx_3m": 4.93,
+    "spx_34d": 0.53,
+    "spx_qtd": 0.13,
+    "spx_mtd": 0.13
   },
-  "fetched_at_utc": "2026-10-26T01:16:27+00:00"
+  "fetched_at_utc": "2026-10-26T23:04:41+00:00"
 }
