@@ -2,88 +2,100 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 6,
+  "count": 7,
   "stocks": [
     {
       "ticker": "PCRX",
       "company": "Pacira BioSciences, Inc.",
       "industry": "Pharmaceuticals: Major",
-      "price": 36.38,
-      "change_pct": -0.11,
-      "adr_pct": 1.9,
-      "dollar_volume": "$48.8M",
-      "market_cap_b": 1.45,
-      "rs_ibd": 88,
-      "atr_ext_val": 15.27
+      "price": 36.4,
+      "change_pct": 0.05,
+      "adr_pct": 1.8,
+      "dollar_volume": "$42.5M",
+      "market_cap_b": 1.451,
+      "rs_ibd": 87,
+      "atr_ext_val": 15.75
     },
     {
       "ticker": "OPCH",
       "company": "Option Care Health, Inc.",
       "industry": "Medical/Nursing Services",
-      "price": 31.23,
-      "change_pct": 0.03,
-      "adr_pct": 1.5,
-      "dollar_volume": "$98.3M",
-      "market_cap_b": 4.678,
-      "rs_ibd": 74,
-      "atr_ext_val": 13.53
+      "price": 31.29,
+      "change_pct": 0.19,
+      "adr_pct": 1.4,
+      "dollar_volume": "$90.7M",
+      "market_cap_b": 4.687,
+      "rs_ibd": 61,
+      "atr_ext_val": 14.08
     },
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 23.25,
-      "change_pct": 47.62,
-      "adr_pct": 4.8,
-      "dollar_volume": "$183.6M",
-      "market_cap_b": 3.044,
-      "rs_ibd": 67,
-      "atr_ext_val": 12.82
+      "price": 23.36,
+      "change_pct": 0.47,
+      "adr_pct": 4.5,
+      "dollar_volume": "$208.0M",
+      "market_cap_b": 3.058,
+      "rs_ibd": 66,
+      "atr_ext_val": 13.37
     },
     {
       "ticker": "PTC",
       "company": "PTC Inc.",
       "industry": "Packaged Software",
-      "price": 194.25,
-      "change_pct": 0.23,
-      "adr_pct": 1.7,
-      "dollar_volume": "$500.3M",
-      "market_cap_b": 21.102,
+      "price": 194.62,
+      "change_pct": 0.19,
+      "adr_pct": 1.6,
+      "dollar_volume": "$476.9M",
+      "market_cap_b": 21.142,
       "rs_ibd": 64,
-      "atr_ext_val": 12.76
+      "atr_ext_val": 13.18
     },
     {
       "ticker": "BRZE",
       "company": "Braze, Inc.",
       "industry": "Internet Software/Services",
-      "price": 45.84,
-      "change_pct": -0.09,
-      "adr_pct": 4.2,
-      "dollar_volume": "$519.4M",
-      "market_cap_b": 5.207,
-      "rs_ibd": 92,
-      "atr_ext_val": 12.7
+      "price": 45.78,
+      "change_pct": -0.13,
+      "adr_pct": 3.9,
+      "dollar_volume": "$542.6M",
+      "market_cap_b": 5.2,
+      "rs_ibd": 91,
+      "atr_ext_val": 13.09
+    },
+    {
+      "ticker": "RRC",
+      "company": "Range Resources Corporation",
+      "industry": "Oil & Gas Production",
+      "price": 56.38,
+      "change_pct": 5.27,
+      "adr_pct": 3.2,
+      "dollar_volume": "$358.3M",
+      "market_cap_b": 13.175,
+      "rs_ibd": 87,
+      "atr_ext_val": 11.4
     },
     {
       "ticker": "SLN",
       "company": "Silence Therapeutics Plc - American Depository Share",
       "industry": "Miscellaneous Commercial Services",
       "price": 19.78,
-      "change_pct": 0.56,
-      "adr_pct": 5.1,
-      "dollar_volume": "$207.5M",
-      "market_cap_b": 1.223,
+      "change_pct": 0.0,
+      "adr_pct": 4.7,
+      "dollar_volume": "$207.6M",
+      "market_cap_b": 1.229,
       "rs_ibd": 95,
-      "atr_ext_val": 10.3
+      "atr_ext_val": 10.75
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.7,
-    "spx_1m": -0.09,
-    "spx_3m": 4.93,
-    "spx_34d": 0.53,
-    "spx_qtd": 0.13,
-    "spx_mtd": 0.13
+    "spx_1d": 0.6,
+    "spx_1m": 0.67,
+    "spx_3m": 3.83,
+    "spx_34d": 1.72,
+    "spx_qtd": 0.73,
+    "spx_mtd": 0.73
   },
-  "fetched_at_utc": "2026-10-27T01:56:29+00:00"
+  "fetched_at_utc": "2026-10-27T23:04:10+00:00"
 }
