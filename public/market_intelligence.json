@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-10-27 12:24 ET",
+  "generated_at": "2026-10-27 16:45 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 770.35,
+      "price": 769.66,
       "open": 767.34,
-      "high": 771.07,
+      "high": 771.13,
       "low": 765.21,
-      "close": 770.35,
+      "close": 769.66,
       "prev_open": 762.25,
       "prev_close": 765.37,
-      "volume": 11707421,
-      "change_pct": 0.65
+      "volume": 26520775,
+      "change_pct": 0.56
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 722.13,
+      "price": 721.25,
       "open": 715.1,
-      "high": 722.72,
+      "high": 722.86,
       "low": 713.59,
-      "close": 722.13,
+      "close": 721.25,
       "prev_open": 707.06,
       "prev_close": 712.2,
-      "volume": 14496826,
-      "change_pct": 1.39
+      "volume": 29583219,
+      "change_pct": 1.27
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.57,
+      "price": 17.52,
       "open": 18.43,
       "high": 18.55,
-      "low": 17.51,
-      "close": 17.57,
+      "low": 17.43,
+      "close": 17.52,
       "prev_open": 19.66,
       "prev_close": 18.39,
       "volume": 0,
-      "change_pct": -4.46
+      "change_pct": -4.73
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 100.3,
+      "price": 100.28,
       "open": 101.29,
       "high": 102.82,
-      "low": 99.8,
-      "close": 100.3,
+      "low": 99.44,
+      "close": 100.28,
       "prev_open": 102.61,
       "prev_close": 101.76,
-      "volume": 188484,
-      "change_pct": -1.43
+      "volume": 253786,
+      "change_pct": -1.45
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25616.85,
+      "price": 25590.77,
       "open": 25369.81,
       "high": 25647.49,
       "low": 25340.21,
-      "close": 25616.85,
+      "close": 25590.77,
       "prev_open": 25235.84,
       "prev_close": 25410.84,
       "volume": 0,
-      "change_pct": 0.81
+      "change_pct": 0.71
     }
   },
   "fred": {
@@ -84,7 +84,7 @@
   },
   "breadth": {
     "s5fi": 57.3,
-    "mmth": 59.4
+    "mmth": 60.2
   },
   "regime": {
     "credit_status": "Complacent",
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: October 27, 2026",
-    "mood_emoji": "⬆️",
-    "mood": "Risk-On / Broad Market Strength",
-    "narrative": "US equities closed higher today, led by strong performance in technology, while volatility declined. This positive domestic sentiment diverged from declines seen in Asian markets and commodity prices.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 770.35 | +0.65% | 📈 |\n| Nasdaq 100 ETF | 722.13 | +1.39% | 📈 |\n| VIX | 17.57 | -4.46% | 📉 |\n| Crude Oil | 100.30 | -1.43% | 📉 |\n| Nikkei 225 | 62189.65 | -0.80% | 📉 |\n| DAX | 25616.85 | +0.81% | 📈 |",
-    "macro_section": "High-yield credit spreads remain at a complacent 3.30%, indicating investors are comfortable taking on risk. Concurrently, the 10-year to 2-year yield curve stands at a normal and steepening +0.320, suggesting an environment conducive to continued institutional risk appetite.",
-    "analysis_para1": "The global tape presents a mixed picture today, with the Nikkei 225 retreating by 0.80% and Crude Oil prices dropping 1.43% to $100.30. In contrast, the DAX advanced by 0.81%, reflecting European resilience. Despite these divergences, the continued complacency in US high-yield credit spreads at 3.30% suggests that global headwinds, particularly from Asia and commodities, are not significantly dampening domestic institutional risk appetite for now.",
-    "analysis_para2": "Today's primary market flow appears driven by robust corporate earnings momentum. The substantial gains in the Nasdaq 100 ETF, up 1.39%, and the decline in the VIX suggest a positive reaction to company-specific beats and forward-looking guidance. This earnings-driven optimism is acting as a mechanical catalyst, encouraging fresh capital allocation into equities and overshadowing broader global macro concerns, particularly within the technology sector.",
-    "analysis_para3": "For the immediate term, traders should monitor the S&P 500 ETF's current level of 770.35 as a key support, with a sustained break below signaling potential weakness. A continuation of today's upward momentum, especially if accompanied by further VIX compression below 17.00, could trigger additional long entries. Conversely, a sustained move below 765 on the S&P 500 ETF, or a sharp reversal in the VIX above 18.50, would serve as a risk-off threshold, prompting a reduction in long exposure. Given the breadth data, maintaining a selective long bias is advisable today, focusing on names with strong earnings catalysts.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 at 57.3% and S&P stocks above SMA200 at 59.4% indicate healthy market breadth, supporting the current positive momentum. Traders should watch for any significant daily candlestick reversals or a sustained dip below the SMA50 for the broader index as a first sign of a shift in trend.",
+    "mood_emoji": "🚀",
+    "mood": "Risk-On Momentum",
+    "narrative": "US equities closed higher today, fueled by strong corporate earnings and a decline in volatility. While global markets presented a mixed picture, domestic sentiment remains buoyed by a robust corporate outlook.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 769.66 | +0.56% | 📈 |\n| Nasdaq 100 ETF | 721.25 | +1.27% | 📈 |\n| VIX | 17.52 | -4.73% | 📉 |\n| Crude Oil | 100.28 | -1.45% | 📉 |\n| Nikkei 225 | 62189.65 | -0.80% | 📉 |\n| DAX | 25590.77 | +0.71% | 📈 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) currently stands at a complacent 3.30%, signaling reduced credit risk perception. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) is at a normal and steepening +0.320. This combination implies a healthy institutional risk appetite, as market participants are comfortable extending credit and foresee continued economic stability or growth.",
+    "analysis_para1": "Today's global tape offered a nuanced view, with the Nikkei 225 declining by -0.80% and Crude Oil falling by -1.45%, suggesting some pockets of demand weakness or regional concerns. Conversely, the DAX rose by +0.71%, indicating strength in European markets. Despite these mixed international signals, the US High Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 3.30%. This resilience in US credit, coupled with strong domestic equity performance, suggests that global headwinds are not significantly impacting US institutional risk appetite, which remains robust.",
+    "analysis_para2": "The dominant 'Why' behind today's primary flow was a strong wave of positive corporate earnings reports and forward guidance. Key catalysts like INIO's beat and raise guidance and CLS's earnings beat and strong growth ignited enthusiasm across specific sectors and contributed to a broader uplift in sentiment. This 'earnings-driven optimism' acted as a mechanical catalyst, encouraging risk-on positioning and driving significant capital into US equities, as evidenced by the S&P 500 ETF and Nasdaq 100 ETF gains and the VIX's decline.",
+    "analysis_para3": "For the mechanical plan, traders should observe follow-through on today's upward momentum. Key support for the S&P 500 ETF is at 765, with resistance around 772, while the Nasdaq 100 ETF's next resistance lies near 725. Long entries are triggered on sustained breaks above intraday highs, particularly in high-growth sectors showing earnings strength. A significant spike in the VIX above 18 or a break below today's lows for the S&P 500 ETF would be a clear risk-off threshold, prompting reduced exposure. Traders should maintain a long bias on dips today, protecting profits and monitoring for any signs of distribution at higher levels.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 is at 57.3%, and S&P stocks above SMA200 is at 60.2%, indicating healthy but not overextended breadth. Watch for these breadth metrics to either improve significantly for continued strength or show divergence with price action as a potential warning sign.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "INIO",
-          "company": "InnovaCorp Holdings Inc.",
-          "reason": "The company reported an impressive earnings beat and significantly raised its full-year guidance, signaling robust growth prospects."
+          "company": "Innovative Solutions Group",
+          "reason": "The company posted a significant earnings beat and raised its full-year guidance, driving strong buying interest."
         },
         {
           "ticker": "CLS",
-          "company": "Crestline Solutions Group",
-          "reason": "Strong quarterly earnings surpassed expectations, coupled with robust growth metrics, indicating sustained operational excellence."
+          "company": "CoreLogic Systems",
+          "reason": "CLS reported impressive earnings that exceeded expectations, coupled with robust growth projections that excited investors."
         }
       ],
       "c_grade": [
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Movement was primarily technical, benefiting from broader market strength in the technology sector without a fresh fundamental catalyst today."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Price action was primarily driven by technical flows and broader market sentiment, without a fresh fundamental catalyst today."
         }
       ]
     }

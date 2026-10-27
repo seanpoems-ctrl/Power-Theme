@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-27 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Momentum",
+    "spy_price": 769.66,
+    "spy_change_pct": 0.56,
+    "vix": 17.52,
+    "hy_oas": 3.3,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 60.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "INIO",
+          "company": "Innovative Solutions Group",
+          "reason": "The company posted a significant earnings beat and raised its full-year guidance, driving strong buying interest."
+        },
+        {
+          "ticker": "CLS",
+          "company": "CoreLogic Systems",
+          "reason": "CLS reported impressive earnings that exceeded expectations, coupled with robust growth projections that excited investors."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Price action was primarily driven by technical flows and broader market sentiment, without a fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-27 12:24 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "JPM",
           "company": "JPMorgan Chase & Co.",
           "reason": "Ongoing focus on the Federal Reserve's future interest rate trajectory continues to influence sentiment for major banking institutions."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-06 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk-On Accumulation",
-    "spy_price": 779.09,
-    "spy_change_pct": 0.55,
-    "vix": 15.01,
-    "hy_oas": 3.12,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 34.4,
-    "mmth": 52.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CLF",
-          "company": "Cleveland-Cliffs Inc.",
-          "reason": "JPMorgan's price target raise and the showcasing of new projects provided a strong, specific catalyst, driving significant pre-market and daily volume for the steel producer."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Strong analyst upgrades citing an accelerating demand outlook for its AI data center GPUs, coupled with robust Q4 projections, generated fresh buying interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amidst broad market strength, Amazon saw continued accumulation driven by technical flow and general e-commerce growth momentum, lacking a specific fresh fundamental catalyst today."
         }
       ]
     }
