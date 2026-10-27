@@ -1,67 +1,592 @@
 {
-  "scan_time": "2026-10-26 08:55 ET",
+  "scan_time": "2026-10-27 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "XNCR",
-      "price": 33.1,
-      "gap_pct": 31.45,
-      "pm_volume": 1173835,
-      "avg_vol_10d": 1320072,
-      "avg_dollar_vol": 43694383,
-      "mkt_cap": 1872218665,
-      "rvol": 1.0,
-      "adr_pct": 5.67,
-      "category": "Earnings",
-      "theme": "8-K Filing",
-      "reasoning": "Xencor filed an 8-K today detailing financial results, representing a formal disclosure of operational performance.",
+      "ticker": "MFIC",
+      "price": 10.25,
+      "gap_pct": 22.61,
+      "pm_volume": 583744,
+      "avg_vol_10d": 523341,
+      "avg_dollar_vol": 5364245,
+      "mkt_cap": 688635135,
+      "rvol": 0.61,
+      "adr_pct": 2.15,
+      "category": "New Contract/Partnership",
+      "theme": "Acquisition Agreement",
+      "reasoning": "MFIC agreed to be acquired by Ares Capital Corporation for **$2.6 billion**, a significant strategic transaction.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "conviction": 75,
       "grade": "C",
-      "finviz_theme": "Biotech - Oncology",
+      "finviz_theme": "Fintech - Lending",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Xencor filed an **8-K with the SEC on 2026-10-26**, specifically categorized under **Earnings/Financial Results** and including **Item 2.02 (Results of Operations and Financial Condition)**. This filing serves as an official company disclosure of its financial standing.",
-        "impact": "Without specific financial figures or qualitative updates from accompanying headlines, the immediate impact is limited to the procedural release of information, requiring further analysis for investment implications."
+        "catalyst": "MidCap Financial Investment Corporation (MFIC) announced it has agreed to be acquired by **Ares Capital Corporation**. The deal is valued at approximately **$2.6 billion**, confirming a major strategic move for MFIC.",
+        "impact": "This acquisition represents a definitive liquidity event for MFIC shareholders and significantly alters the company's competitive and financial positioning as it integrates into Ares Capital's operations."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile Xencor officially filed an **8-K today, 2026-10-26**, under the event type **Earnings/Financial Results** and including **Item 2.02**, no specific financial figures such as EPS or revenue beats/misses were provided in the input. Consequently, the surprise factor of the earnings report cannot be assessed directly from the available information.\n\n• **The Growth (Momentum)**\nGiven the absence of detailed financial outcomes from the **8-K filing**, there is no immediate data to evaluate Xencor's growth trajectory or operational momentum. The market's reaction would typically be informed by revenue, profit, and pipeline updates, which are not present here.",
+      "analysis_details": "• **Impact**\nMidCap Financial Investment Corporation (MFIC) has agreed to be acquired by **Ares Capital Corporation** in a substantial deal valued at **$2.6 billion**. This transaction, confirmed by today's SEC 8-K filing (Item 1.01), signals a major strategic shift for MFIC, effectively transferring ownership and control.\n\n• **Strategic Value**\nThis acquisition by **Ares Capital** provides a clear exit and valuation for MFIC, demonstrating a premium in the market for its assets and operations within the lending and investment sector. The move streamlines MFIC's future by integrating it into a larger, established financial entity, potentially unlocking synergies and expanding market reach under new ownership.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Ares Capital to buy Apollo's MidCap Financial Investment in $2.6 billion deal - Reuters",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNbEhWMG56WWx5aDBUbHlkdkZXQ19zakRDcjgyYzhjak9UTktQOU1jT0F3anF6bmgyVFB3M2M4TjI0Z2ZFN0FIVDZIWDluZTRnSnV6QWNsLWM2ZnE4VS1ncjlUc2RYZXg4V1pSZFhvc0V6TDFUSmJYMWtnbUp0U0Ezd2FKc2tNNUlQM0dHSjhrdzk3LWxkbEtTODJ0NGpYcWJZa3pRdko1c3V1OHp5ZVJLOWtFd2k0SXRfNGRFQUxHVG9VZw?oc=5"
+        },
+        {
+          "title": "Ares Capital Corporation Agrees to Acquire MidCap Financial Investment Corporation - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPazcxcy12UTdOMkZNVmk3ZzFuT1d3S20yaHI1Tm16WEtFeGRfU2lXa2NVQWh3OUxRelVmaFlYUnlQRHF0a0FlSTJ0bjhCZHZSRTFjY0RqTTlHOTRzWjNEUzVUUXRvczROWWlpblZCcXBCclpoelBfT1ppbGtpRlg2Y1JiaTBfczJOck16U3lSbllDQngtb0tsZTl2RmhEUEZsZmUzeGNvUQ?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-27",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "2.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1278752/000119312526432622/d115048d8k.htm"
+      },
+      "float_shares": "79.27M",
+      "short_float": "3.35%",
+      "daily_pct": -0.24,
+      "prev_close": 8.36,
+      "industry": "Fintech - Lending",
+      "technical_status": "Fail (Avg $Vol $5M < $100M, ADR 2.1% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "MFIC agreed to be acquired for $2.6 billion",
+        "discrepancy_note": "Source A (Finviz News) does not mention the acquisition price. Source B (Google News) confirms the $2.6 billion acquisition price across multiple headlines."
+      },
+      "gates_passed": 1,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "JBLU",
+      "price": 2.7,
+      "gap_pct": 13.83,
+      "pm_volume": 1053302,
+      "avg_vol_10d": 41508335,
+      "avg_dollar_vol": 112072504,
+      "mkt_cap": 894229859,
+      "rvol": 2.15,
+      "adr_pct": 6.93,
+      "category": "Earnings",
+      "theme": "Mixed Q3, Positive Q4 Guidance",
+      "reasoning": "JetBlue's stock rose premarket on positive Q4 revenue growth and margin improvement forecasts despite a wider Q3 loss.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
+      "grade": "B",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "JetBlue reported **Q3 earnings** with a **bigger loss** that **widened despite higher revenue**, attributing this to **rising fuel costs**. However, the company's CEO indicated **margins improving** and forecast **Q4 revenue growth** and **margin improvement**.",
+        "impact": "The positive forward guidance on revenue and margins appears to outweigh the Q3 loss, driving investor confidence and the stock's premarket rise, suggesting potential for continued momentum."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nJetBlue Airways reported a **bigger loss** in its third quarter, with the **loss widening despite higher revenue** due to **rising fuel costs**. However, the third-quarter performance brought **some relief to investors**, suggesting the results were better than feared despite the widened loss.\n\n• **The Guide**\nJetBlue's CEO stated that **margins are improving**, and the airline specifically forecasted **Q4 revenue growth** and **margin improvement**. This positive forward-looking guidance propelled JetBlue Airways shares to **rise 5.5% premarket**, indicating strong market reaction to future prospects rather than past results.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "JetBlue Airways Shares Rise 5.5% Premarket as Airline Forecasts Q4 Revenue Growth and Margin Improvement - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQWUVtZnZ1aHI1cnBQUEpRVFNNcFhkTGtFQU9GWnVCR3BSMXNyLWhVdjNkaHpsV2h1ZzM4ZmhhalU1UlRNTExDQUotbHZHUVlNbXNjZFBtU0pTSy1WS2JjeU5EYk51c0pzRVVTSXAtNGRTM1ZxX0txNlpPUHVobmVndFpKc3UySjh1NzFkWEk4dXNPeGNxbXJPd2RR?oc=5"
+        },
+        {
+          "title": "JetBlue Brings Some Relief to Investors With Third-Quarter Performance - WSJ",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQTk5xcDhmRlRjazhpN1BsODI1ZzFzZHNvZlI3V2JFX2xtOTA2RDN1SmhfNDJIaEU0ZUJCeUdqMXYwYWhNN00xRzJScHEtS3ZlXzE4cVJPdGItMExPRkpOQk13dks0aU9mcFh6VWpfWW9pbFBLYWZTSF85YnlmYjMxNUlNRGNMdy04SlZOZTg1X1ZKUlhleGxXZzlUaTI1cVhlMTU0NTRXdWRyS1dmWUN0RVlnSQ?oc=5"
+        },
+        {
+          "title": "JetBlue posts bigger loss on fuel costs, but CEO says margins improving - CNBC",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBtZXM2VzlmNWZXS2VSZTE3Y1NLMmM5cVMyeUpwRm1YU1YxSjZQTzgxX3p4MmNLQXVLbXdpTWJPNHNkVEwtLTMzdUpVbnVrZmVNX2J2UzZNYXlZY3R6ZlBLS2ZqT1R1b3RkZ2hLRmZXUmVzNG9X0gF6QVVfeXFMTjlXWWtsTVdSaktQWlpiLVR0Rzc0c0EtcGtldXpndjBKZWd3YjA3R2E2ME9NNHpIcVNwN09iNVdVZEJ0TjZFRnhURjlVRjh5MGd5VjJpOVlJSWJxVU96S1ZkamRSeEtBS3RVQlhMTjM2RFBqeUZmeEM5bFE?oc=5"
+        },
+        {
+          "title": "JetBlue's Loss Widens Despite Higher Revenue. Blame Rising Fuel Costs.",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/jetblue-earnings-stock-price-44cfbb47?mod=bar_FV"
+        },
+        {
+          "title": "JetBlue: Q3 Earnings Snapshot",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jetblue-q3-earnings-snapshot-202542774.html"
+        }
+      ],
       "edgar_filing": {
         "filing_date": "2026-10-26",
         "form": "8-K",
         "items": [
           "2.02",
           "7.01",
-          "8.01",
           "9.01"
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1326732/000121390026112279/ea0309596-8k_xencor.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1158463/000115846326000095/jblu-20261026.htm"
       },
-      "float_shares": "69.99M",
-      "short_float": "31.23%",
-      "daily_pct": -2.55,
-      "prev_close": 25.18,
-      "industry": "Biotech - Oncology",
-      "technical_status": "Fail (Avg $Vol $44M < $100M)",
+      "float_shares": "325.45M",
+      "short_float": "30.10%",
+      "daily_pct": -9.71,
+      "prev_close": 2.37,
+      "industry": "Others",
+      "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
+        "status": "Discrepancy",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Xencor filed an 8-K today detailing financial results.",
-        "discrepancy_note": ""
+        "primary_claim": "JetBlue's stock rose premarket on positive Q4 revenue growth and margin improvement forecasts despite a wider Q3 loss.",
+        "discrepancy_note": "Source B [2] and [4] confirm JetBlue shares rose premarket on Q4 forecasts. Specifically, Source B [2] states 'Shares Rise 5.5% Premarket'. However, Source A [5] states 'JetBlue Shares in Tailspin' and Source B [5] states 'JetBlue Airways Tumbles 16%', directly contradicting the 'rose premarket' claim. Additionally, Source A [4] mentions 'Third Quarter 2026 Results', indicating potentially irrelevant or outdated news compared to the other headlines that reference Q3/Q4 performance."
       },
       "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "INIO",
+      "price": 18.88,
+      "gap_pct": 13.53,
+      "pm_volume": 458311,
+      "avg_vol_10d": 5997061,
+      "avg_dollar_vol": 113224512,
+      "mkt_cap": 12472499371,
+      "rvol": 2.26,
+      "adr_pct": 7.17,
+      "category": "Earnings",
+      "theme": "Beat & Raise Guidance",
+      "reasoning": "INIO reported its Q3 earnings and issued 2026 revenue guidance of $3.9B-$4B, surpassing FactSet estimates of $3.87B.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
+      "grade": "A",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Innio filed an 8-K related to **Earnings/Financial Results** on **2026-10-27**. News headlines confirm an \"**Q3 Earnings Snapshot**\" and that Innio **expects 2026 revenue range of $3.9B - $4B**, which is higher than the FactSet estimate of **$3.87B**.",
+        "impact": "The upward revision in revenue guidance signals strong future performance, potentially attracting institutional interest and driving continued momentum."
+      },
+      "analysis_details": "• **The Guide**\nInnio expects its **2026 revenue range to be between $3.9 billion and $4 billion**, which notably surpasses the FactSet estimate of **$3.87 billion**. This guidance represents a positive surprise for the market, indicating stronger financial prospects than previously anticipated by analysts.\n\n• **The Growth (Momentum)**\nThis upward revision in the 2026 revenue outlook suggests robust underlying business momentum. Surpassing analyst consensus on forward guidance often serves as a powerful catalyst for stock price appreciation, as it implies an improved growth trajectory and potential for sustained earnings momentum. This could lead to positive analyst revisions and increased investor confidence in INIO's future performance.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "(INIO) Innio Expects 2026 Revenue Range $3.9B - $4B, vs. FactSet Est of $3.87B - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQWUlqaDhtY0tLckp0V1lHR3NQbFJWMkc4Rkt2SHJ5THZfUUxlejZmYWhIQVhUQ0Y4THU1VC1wMDhIT05zc0UxSFAzQkk0WGZKRnQ4UDQ3SHBqVnpYeVNnZW9iOFhkM2xQNDMzeGoxWFRRa3hhRS10OWxldkl3Smlval9SdjJkaWRBamhfZ2xBWWhuRU9PbkVmM3pzdlJjRS1ZV3RPZS1JSDllanpyQ00yeGtHU2RobkROR2tpQnFTaw?oc=5"
+        },
+        {
+          "title": "Innio: Q3 Earnings Snapshot - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPUVlNN1F3cFJRQWEyc1phOHNFY2l2SDJuTmFwcWdJNUR3RVVfSGNWTXpmLXZLTkM3eHYyRHpLRDlhQXpPWWctVWZvaGV2UlZpTHJUamJOQVU3RGtCa0R3bXNqVFhNaDV4cU9Lb3RiNFVJSmNJMlNNYmJPOTJlM1p1YzZkMExqMXJnRkZ5SkpPb3dHNGRhdEE?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-27",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/2109150/000162828026067394/inio-20261027.htm"
+      },
+      "float_shares": "405.06M",
+      "short_float": "22.82%",
+      "daily_pct": 9.34,
+      "prev_close": 16.63,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "2026 revenue guidance of $3.9B-$4B, surpassing FactSet estimates of $3.87B",
+        "discrepancy_note": "Finviz News provided no information ('none'). Only Google News link [5] ('(INIO) Innio Expects 2026 Revenue Range $3.9B - $4B, vs. FactSet Est of $3.87B - marketscreener.com') confirmed the specific revenue guidance and FactSet estimates. Since only one source mentioned the claim, it's marked as Discrepancy."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
         "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "SOFI",
+      "price": 16.11,
+      "gap_pct": 11.4,
+      "pm_volume": 13851426,
+      "avg_vol_10d": 48750785,
+      "avg_dollar_vol": 785375146,
+      "mkt_cap": 18676108532,
+      "rvol": 0.8,
+      "adr_pct": 3.69,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "SoFi reported strong Q3 2026 results, beating expectations with record revenue and net income, and raising full-year guidance.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Fintech - Lending",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "SoFi reported **Third Quarter 2026** with **record Net Revenue of $1.4 Billion** and **Net Income of $241 Million**, indicating a strong earnings beat. The company also **raised its full-year guidance**.",
+        "impact": "This strong performance and upward revision in guidance signals robust operational momentum and positive market sentiment, driven by the consumer lending sector."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSoFi delivered **strong Q3 2026 earnings**, surprising the market with **record Net Revenue of $1.4 Billion** and achieving **Net Income of $241 Million**. The company's stock **climbed 6%** immediately following the announcement, demonstrating investor confidence in its operational execution within the consumer lending boom.\n\n• **The Guide**\nThe company not only exceeded third-quarter expectations but also **raised its full-year guidance**, signaling continued positive momentum. This forward-looking revision suggests management's optimistic outlook on future performance and growth prospects.\n\n• **The Growth (Momentum)**\nThis significant earnings beat and raised guidance suggest a strong acceleration in SoFi's business, particularly benefiting from a robust **consumer lending boom**. The positive surprise and forward momentum are likely to sustain investor interest and could drive further upward price action for the stock.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "SOFX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "SoFi stock jumps as consumer lending boom kicks into higher gear - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOR1NEWVdXWGNTUXZqYWlaMFVyVVkxWmNKZWc2emlTaEhveHdBSDNIVm5QWlJ6T2F6NHR6Qld5emtDTDBNVWhjWHRCajlRSDdwelQ0UWh5aDFzVkhJY1l0VVZxbTh3cmpsajdMNF9kakF0Tk1DRzZTdUp0aGFWSXBjUGxZYlhRUUNKX0ZQRjhleDZOdGdfWnE5S1o0enE3aklNaXhTTHpDbVNvZjJSc0R6ZGNKa0kyLUxnZjN4WkZuLU1saktrbU9n?oc=5"
+        },
+        {
+          "title": "SoFi (NASDAQ:SOFI) surprises with strong Q3 2026, stock soars - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOUXhuVDNRbDV3dGxHU2piR0tLUUZjVnJQckN0SHBmdUZvanVaMV9PcG1zSWxjWEF1YzBWeGJGUGhob0M4a2k3MDYwNm1aX2R5RnkzV3JGZGp3aWpnaVRiQUJBeFlVNGthM3FvNk4wV2pHZ3NlV3IzQ3VzWmY0X2RwMzRzZjdVQ1B0bVZqLXZjRDZPQjdCamNYenBLdU9uVkE?oc=5"
+        },
+        {
+          "title": "SoFi stock climbs 6% on earnings beat and raised guidance - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOelZ6SjRyZXlQVVF5MHZkUTJLaFZKYnZMdVZqbUZHemp3MjE4NHY5MXRsUlBtU2FWZkVHMDdsejh1Z3I0dGNMUjlrWG51N0VDclJFVEQ4M2RtdXc3UGppMzRRd2M4cUY0d3lVdm9ScVdlV1BpRTNQeElraTBQckk5dktwb1ZFeWFiNGoyRXUxbHRuU2FVdDR5SVEtRV9ib1h6ZjhGQ0t6eTNqeHFDTHc?oc=5"
+        },
+        {
+          "title": "SoFi Reports Third Quarter 2026 with Record Net Revenue of $1.4 Billion, Net Income of $241 Million and Raises Full-Year Guidance - SoFi Investor Relations",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxPa2xzOElJYzllTHVPaEh3eF9xMUk0Wmgyei1lTnRKMzRncV80YW15QlpQd3VfREhjX1plSnk2SGVuNVJpVDRWdHc5OU10N1liNV9xaVl0Q01OT3RabVFvZU1reERsek1kZ19ZMW1aRGpjUlRUdUpZQmo0blYzODk2NVJGOVpfNGh0WkZCcmtBYTRnQ0t2MGRoanRDU1ZkZko5ZURpNUxfQXNuZGgxN2pOclpCWkdCY1ZJdnNDZ1gzcGpkNkd5ajlLMktSd1hqVEstMWdjbXVIWkw0RmsyYlpkNHVhRU1IUXNuUnAxVnNQYW9PZjRiMEZ4ZVF4clFBalJwdUNpUFkzUUNidkhZR2t6QXFKc3pndjlY?oc=5"
+        },
+        {
+          "title": "SOFI Vs PYPL: Which Fintech Stock Looks Better Ahead Of Q3 Earnings?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/sofi-vs-pypl-fintech-stock-011216713.html"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-27",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1818874/000181887426000065/sofi-20261027.htm"
+      },
+      "float_shares": "1.27B",
+      "short_float": "16.87%",
+      "daily_pct": -1.06,
+      "prev_close": 14.46,
+      "industry": "Fintech - Lending",
+      "technical_status": "Fail (ADR 3.7% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SoFi reported Record Net Revenue of $1.4 Billion for Q3 2026.",
+        "discrepancy_note": "Google News [3] directly confirms 'Record Net Revenue of $1.4 Billion' for Q3 2026. However, Finviz does not contain any specific financial figures or confirmation of Q3 2026 results. Finviz [2] even suggests Q3 earnings are 'Ahead', directly contradicting the catalyst claim that results were reported. Therefore, only one source confirms the claim, and another source in the 'unconfirmed' set provides conflicting timeline information."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "CLS",
+      "price": 274.0,
+      "gap_pct": 11.09,
+      "pm_volume": 254099,
+      "avg_vol_10d": 2925956,
+      "avg_dollar_vol": 801711944,
+      "mkt_cap": 31105306501,
+      "rvol": 2.18,
+      "adr_pct": 5.91,
+      "category": "Earnings",
+      "theme": "Earnings Beat & Strong Growth",
+      "reasoning": "Celestica (CLS) reported a blowout Q3, topping estimates with revenue growth of 83% driven by AI demand, sending shares up 10%.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
+      "grade": "A",
+      "finviz_theme": "AI Compute",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Celestica (CLS) announced its Third Quarter 2026 Financial Results, which included a **blowout Q3** where **earnings and revenues topped estimates**. The company's stock **jumped 10% after hours** and **soared premarket** following the report.",
+        "impact": "The significant beat and strong growth driven by AI demand signal robust momentum, potentially leading to upward revisions in analyst models and sustained investor interest in CLS's exposure to the AI 'supercycle'."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nCelestica (CLS) delivered a **blowout Q3 earnings report**, with both **Q3 earnings and revenues topping estimates**. This strong performance catalyzed a significant market reaction, with the stock **jumping 10% after hours** immediately following the announcement on October 26, 2026, and continuing to **soar premarket** on October 27, 2026.\n\n• **The Growth (Momentum)**\nThe company's revenue was significantly boosted, with **AI demand lifting revenue by an impressive 83%**. Celestica specifically touted its role in the **AI 'supercycle'**, indicating strong underlying business momentum driven by high-growth technological trends. This substantial revenue growth highlights CLS's increasing relevance in the rapidly expanding AI hardware ecosystem.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "CLS Stock Soars Premarket After Blowout Q3 — Retail Calls It ‘Very Inexpensive’ As Celestica Touts AI ‘Supercycle’ - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPUnR4U1piRlFUUnN3UVlHMUVlaEYxZDhvaEFhSmJKWjFoemdXbW14YlNaU2d6MmdUbklTdHRrNVk1bU9KVHNjWlNpT3ZaYXhhTnNFa1lvWVlkdW1JM2M2cXNHVnV4NjQ1TmwzeF8xV1JESzBCT2x0ZUJqakYtOXBCMEI0NUdTLXJfVWtIdkVMUDNiM2p4cm01Y216UHNSTTg?oc=5"
+        },
+        {
+          "title": "Celestica (CLS) stock jumps 10% after hours as AI demand lifts revenue 83% - Nacionale",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWFdwak50MmFQdngxM0d0REVjMVl5ak9PU0s2c3J5MGhRY0pQYTZkMklFT0hGcllsOVE0T0lqcUx5YUVnTHA4Sm9oS1lhYXRSc21KZ3dZdG95OVpsQUdJYWpaOENmSW9rcld4clNqSFA4SG9ReXBRSnJjMVVrTWZYRGdPUjVOaEZwREc2amhTM3Qybk5jdTg1dHV4eHU?oc=5"
+        },
+        {
+          "title": "Celestica (CLS) Q3 Earnings and Revenues Top Estimates - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQYVBlUFRVR0xQYzZ2S2pmWVJMeDZzVk9EdkVEczRGRkg0c1dMS3AxTUZwVUhiRUxzZkpvWkMxUjV5RkFUanhxRnRUdjhDQjNoa3FnWHdDcDJPbjZhSm05NVpHNnNBay12cjdBbEw0ZTVSLTJYa0hjZFhpSUt0M3VNcmp4ZE01b0FNM1ZGcVRIdDJMY2tPNTNyeF9XUWZ1U1li?oc=5"
+        },
+        {
+          "title": "Celestica: Q3 Earnings Snapshot",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/celestica-q3-earnings-snapshot-203343813.html"
+        },
+        {
+          "title": "Celestica Announces Third Quarter 2026 Financial Results and Will Hold 2026 Investor and Analyst Day",
+          "source": "Finviz",
+          "url": "/news/408117/celestica-announces-third-quarter-2026-financial-results-and-will-hold-2026-investor-and-analyst-day"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-27",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1030894/000110465926118978/tm2628147d1_8k.htm"
+      },
+      "float_shares": "125.25M",
+      "short_float": "3.55%",
+      "daily_pct": -5.14,
+      "prev_close": 246.65,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "revenue growth of 83%",
+        "discrepancy_note": "Source B [3] and [5] mention 'revenue 83%' or 'revenue up 83%', confirming the percentage. However, Source A [3] refers to 'Third Quarter 2026 Financial Results', which significantly post-dates a 'Q3' earnings report typically understood to be current, creating a conflict in the reporting period even though it doesn't state the growth percentage. Source A does not explicitly confirm 'revenue growth of 83%' for any Q3 period relevant to a current catalyst."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "FER",
+      "price": 55.28,
+      "gap_pct": 9.79,
+      "pm_volume": 97947,
+      "avg_vol_10d": 2267829,
+      "avg_dollar_vol": 125365587,
+      "mkt_cap": 35951563288,
+      "rvol": 0.84,
+      "adr_pct": 1.71,
+      "category": "New Contract/Partnership",
+      "theme": "Major Infrastructure Award",
+      "reasoning": "Ferrovial surged after announcing a **$24.8 billion award figure** for **I-24 payments**, establishing a consistent payment basis.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "C",
+      "finviz_theme": "Infrastructure",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Ferrovial reported a **$24.8 billion award figure** related to **I-24 payments**, aiming to establish a consistent payment basis. This significant development drove **Ferrovial (FER) to jump 8% premarket**.",
+        "impact": "This substantial award figure signals a major long-term revenue stream and enhances the company's financial stability, potentially leading to a re-rating of future earnings potential and a positive sentiment shift among institutional investors."
+      },
+      "analysis_details": "• **Impact**\nFerrovial (FER) saw its stock jump **8% premarket** following news of a **$24.8 billion award figure** related to **I-24 payments**. This announcement specifies that the company is putting these payments on a consistent basis, clarifying revenue streams.\n\n• **Strategic Value**\nThe **$24.8 billion award** represents a structural change, providing substantial and consistent revenue for Ferrovial's infrastructure operations. This clarifies future cash flows for its **I-24** project, potentially reducing operational uncertainty and strengthening its competitive position in the infrastructure sector.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "A $24.8B award figure mixed measures. Ferrovial (FER) puts I-24 payments on a consistent basis. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQV1Z4ZFB3VGNNLUZKMG5INWxWUkJsc29MWkZoMkdEVi0zZDJUa3NzcHJKczJrU1IzbEJfOWs0aHhhN05vVmdETFR6dkFKMEsyemkzaG03aWlCMDhkTUdjdHZsZ0VLN3pScTdLUVQyVWN5clA1djlaTm9TNmtPR2RScjB5VkNjLTF1bEhIdjRjblZNV1lXREJtS3VGUWpGaS1VWmZiYnJWRTJCblQ3?oc=5"
+        },
+        {
+          "title": "Ferrovial Jumps 8% Premarket - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE12Z2o0RXdSendIakJ4OERuLUxsRHF3My1DR2ZmT0tSSTJwcFZzYTU5YzdzWUtoZ2dGZjdWYndsdEdfNWpxck4tLTlxcmdUOFZBZEZ4V2NyMmhkRHFaS2NMSnNIVXZtU19faC1WQW5ELWdpVWc?oc=5"
+        },
+        {
+          "title": "Spanish stocks - Factors to watch on Oct 27 - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQTmlOUUNtai1lY2E3OE41RmYxc0VKUWpxaEVjS1U3ZlVPSWRKRmM3OXI5NVA4cl9OT0JlZngxMXV1SDdqcnNualk1bTJMa3RmeVc1d2Z5MllVRjVFN2Rmd196TEcxWlNiTnl5TGIxRXJncnNZMnMwWVduMy1vZnllWFZoOHpPaG43dm9ZYm5oQ3R6VDgtbElNT0J3?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "465.35M",
+      "short_float": "0.96%",
+      "daily_pct": 1.41,
+      "prev_close": 50.35,
+      "industry": "Infrastructure",
+      "technical_status": "Fail (ADR 1.7% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$24.8 billion award figure for I-24 payments",
+        "discrepancy_note": "Source B [1] mentions a '$24.8B award figure' for Ferrovial (FER) and I-24 payments, matching the claim. Source A (Finviz News) has no information on this specific claim."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "WVE",
+      "price": 3.45,
+      "gap_pct": 7.48,
+      "pm_volume": 51649,
+      "avg_vol_10d": 2902596,
+      "avg_dollar_vol": 10013956,
+      "mkt_cap": 633102073,
+      "rvol": 1.17,
+      "adr_pct": 5.3,
+      "category": "Earnings",
+      "theme": "Q3 Revenue Beat, Wider Loss",
+      "reasoning": "Wave Life Sciences (WVE) reported Q3 financial results today, with revenue exceeding estimates but losses widening.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Biotech - Rare Disease",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Catalyst: Wave Life Sciences (WVE) filed an 8-K on **2026-10-27** announcing **Q3 2026 financial results**. The company reported **revenue rises**, including a **$12M GSK milestone**, and **topped revenue estimates**. Impact: The mixed financial performance, with revenue outperforming expectations but losses expanding, creates a nuanced short-term outlook, likely leading to continued volatility as investors digest the details.",
+        "impact": ""
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nWave Life Sciences (WVE) reported **Q3 2026 financial results**, with headlines indicating the company **topped revenue estimates**. Revenue was noted to have **risen**, supported by a significant **$12M GSK milestone** during the quarter. This suggests a positive surprise on the top line.\n\n• **The Growth (Momentum)**\nDespite the revenue beat and the **$12M GSK milestone** contributing to top-line growth, the company's financial update also highlighted that **losses widen** in the third quarter. This indicates that while revenue generation is improving, profitability remains a challenge, potentially weighing on sustained momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Revenue rises with a $12M GSK milestone, but losses widen at Wave Life Sciences (WVE). - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQNmI5WlluNEN3cWpRb3NiM2xmSjNYcW5mVnhGOUxQNDQtUnR3aUpLcGdmdVQ5cFNETVNCNmw2VkFfUUNPWHJYcWN5S0t5Z0xjTndfX1dsYnFhTElmSko0SXJ5Sk8yLTZfRE5za0kySjQtWTB6NHlWVUFkZEx5RGZEMzkwbHNZQ0ZXTkd1RGRIMWpwQWpwMzloZ2gwTVBaQUtaWUlZUktfU0FYMTdZZzF1dEs2bk0?oc=5"
+        },
+        {
+          "title": "Wave Life Sciences (WVE) Reports Q3 Loss, Tops Revenue Estimates - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOcVRtWnZsd3J4VkVVM3Q0Vlo0UWdkWGUzdmVhV1ZlQlBRaUhwWDJ0TURPenVsYkZmeUM0dnRDMmxKazhJWXBsMTBpZ2oyM2ZRNzNZWC03UHdWRHZBdEx1ZmJaenhkMVY1NjhGQ1FuYWQwMVRSU2tTTGxCMEpWcl9CRXVDVEpybHlvOFpMSTVhaUFqQzIwZVE?oc=5"
+        },
+        {
+          "title": "Wave Life Sciences Reports Third Quarter 2026 Financial Results and Provides Business Update - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOQnc1R2xRQWNUTGdQNjhRRWU5aE5pWGN1SUZOUFhSa1N5aXoxTnZMZXNXRjI1MU5QcXJHaFVFMGVGeDZiZGlaZnhBOFZuODZMbGYtMWNNTXdocmlFVUd5R2l2VGJvNktyUlRoWVQyZXBUb0lSemJTT3dKZFJHVEppZllQRTJFMmQ1SzZpenZIOGJrbEVCcnhsZg?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-10-27",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1631574/000119312526432690/d120442d8k.htm"
+      },
+      "float_shares": "165.32M",
+      "short_float": "11.62%",
+      "daily_pct": 0.94,
+      "prev_close": 3.21,
+      "industry": "Biotech - Rare Disease",
+      "technical_status": "Fail (Avg $Vol $10M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Wave Life Sciences (WVE) reported Q3 financial results today.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -71,143 +596,64 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "SGRY",
-      "price": 19.47,
-      "gap_pct": 23.62,
-      "pm_volume": 104952,
-      "avg_vol_10d": 2135040,
-      "avg_dollar_vol": 41569229,
-      "mkt_cap": 2061962574,
-      "rvol": 2.05,
-      "adr_pct": 3.92,
-      "category": "New Contract/Partnership",
-      "theme": "Potential Acquisition",
-      "reasoning": "Surgery Partners is reportedly in late-stage talks for a **$6 billion** takeover by Bon Secours Mercy Health, valuing shares at **$20**.",
+      "ticker": "RCL",
+      "price": 295.87,
+      "gap_pct": 5.44,
+      "pm_volume": 73770,
+      "avg_vol_10d": 1811655,
+      "avg_dollar_vol": 536014365,
+      "mkt_cap": 75047057357,
+      "rvol": 1.53,
+      "adr_pct": 3.07,
+      "category": "Earnings",
+      "theme": "Operational Performance",
+      "reasoning": "RCL reported strong third-quarter operational results, with passenger volume increasing significantly year-over-year.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 80,
-      "grade": "C",
-      "finviz_theme": "Medical Devices",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Bon Secours Mercy Health is in late-stage talks to acquire a majority stake in Surgery Partners, a deal reportedly valuing the group at about **$6 billion** and **$20 a share**, according to the Financial Times.",
-        "impact": "This potential takeover news introduces a significant M&A premium, creating upward price momentum and a floor for the stock price based on the reported acquisition valuation."
-      },
-      "analysis_details": "• **Impact**\nBon Secours Mercy Health is reportedly nearing a **$6 billion** takeover of Surgery Partners, valuing the group at approximately **$20 a share**. This news, cited by the Financial Times, indicates **late-stage talks** for a majority stake acquisition.\n\n• **Strategic Value**\nThis potential acquisition represents a significant corporate event, suggesting a strategic realignment for Surgery Partners. An agreed takeover at **$20 a share** would likely provide a substantial premium, driving near-term price appreciation towards that valuation and potentially reducing volatility from standard operational news.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Bon Secours Nears $6 Billion Takeover of Surgery Partners, FT Reports",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/healthcare/articles/bon-secours-nears-6-billion-182456406.html"
-        },
-        {
-          "title": "Bon Secours nears $6bn takeover of Bain-backed Surgery Partners",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/healthcare/articles/bon-secours-nears-6bn-takeover-181623379.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "78.00M",
-      "short_float": "21.72%",
-      "daily_pct": -0.94,
-      "prev_close": 15.75,
-      "industry": "Medical Devices",
-      "technical_status": "Fail (Avg $Vol $42M < $100M, ADR 3.9% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$6 billion takeover",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "RRC",
-      "price": 50.0,
-      "gap_pct": 9.84,
-      "pm_volume": 251243,
-      "avg_vol_10d": 2608214,
-      "avg_dollar_vol": 130410700,
-      "mkt_cap": 10637091842,
-      "rvol": 1.33,
-      "adr_pct": 2.67,
-      "category": "New Contract/Partnership",
-      "theme": "Acquisition by EQT",
-      "reasoning": "Range Resources (RRC) confirmed an all-stock acquisition by EQT for $50 billion, fundamentally altering its corporate structure.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "conviction": 78,
       "grade": "B",
-      "finviz_theme": "Energy - Oil & Gas",
+      "finviz_theme": "Others",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Range Resources (RRC) confirmed a definitive agreement for an **all-stock acquisition** by **EQT**. The deal is valued at approximately **$50 billion**. This represents a major strategic move in the **Energy - Oil & Gas** sector.",
-        "impact": "This acquisition signifies a complete change in ownership and corporate strategy for RRC, likely leading to a re-rating of the combined entity and immediate price convergence to the deal terms. It removes RRC's independent trading status."
+        "catalyst": "Royal Caribbean filed an 8-K today, reporting that **2.7 million people** took cruises in the **third quarter**, representing a **9% increase** in passenger volume.",
+        "impact": "This strong operational update suggests robust demand for cruise travel, potentially leading to positive investor sentiment regarding RCL's Q3 financial performance and future outlook."
       },
-      "analysis_details": "• **Impact**\n**Range Resources (RRC)** has entered into a definitive **all-stock acquisition agreement** with **EQT**. This significant transaction is valued at approximately **$50 billion**, profoundly impacting **RRC's** future as an independent entity. This deal marks a major consolidation in the natural gas industry.\n\n• **Strategic Value**\nThe acquisition by **EQT** positions the combined entity as a dominant player, creating scale and operational synergies in the **Energy - Oil & Gas** sector. For **RRC** shareholders, it provides liquidity through the **all-stock transaction** and exposure to the larger **EQT** enterprise, fundamentally changing the investment thesis.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nRoyal Caribbean announced that **2.7 million people** embarked on vacations with the company in the **third quarter**. This figure represents a **9% increase** compared to the prior year, indicating strong demand and operational recovery within the cruise sector. The information stems directly from an 8-K filing regarding earnings/financial results.\n\n• **The Growth (Momentum)**\nThe significant **9% increase** in passenger volume for the third quarter highlights Royal Caribbean's continued growth momentum. This operational metric suggests healthy bookings and customer engagement, which are crucial drivers for revenue and profitability in the travel industry, potentially setting a positive tone for future financial disclosures.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Range Resources (RRC) Q3 earnings report preview: what to look for - Yahoo Finance",
+          "title": "2.7 million people took Royal Caribbean vacations in the third quarter, up 9% - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNVhON1ZGVE5SSHZva2ZjS1hDMmpGNVB0NllHYkxtdEtMaEZlVHpKek9BSHJEQTltQmIyT0REOXR4by11LVF6YkxfZk95MXpjSl91cHlOem1nU3N5NzRFNlQ0WE90OWtTaHlNTk5QWHE3alRtckJCd2pjZGE3NzdkY1YwdXJFZ3ZQWTlzNFdkdUkwZjFCU2pwRS1wd0g?oc=5"
-        },
-        {
-          "title": "EQT Agrees to Acquire Range Resources in All-Stock Transaction - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOWk53N1lUQU8wYWFEczJyR0xRejFSM015VnNXbjY1V1J4R0VQdGlJTTBjTVNZYkM4cERuQnRyVWpKS0lwNFVWTXVRVHczQVMxR21tSGJNYnBjdUVKbkZXcVBFd2NEeXNJdVRnRXRLQ01DY0dlNGRma193d2ZiR2lwLXZadjgwdkx2cWs5RlowZnk0SXI2Uy1uQ0pUS1dENVgw?oc=5"
-        },
-        {
-          "title": "EQT to acquire Range Resources in $50 billion all-stock deal - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQb0U3Q2g3WFlmWG5fRkJxazl0TlEtdFJ1OHVnR0dlQXZfdmpvWVh6cHBlOV9UeVZDanEtY1g1Y3BtUmFuTHg0WFJJZkVSWXRLcjZIQjlSeTF1WE5JZUhoaFN5NXBTMGZpdEVZZXdjS0JFUVZIUEo3WkUxbklWQXFCeVkyV2dTS1FPTDlVUXpuTnRXZk1fMUtlS3BiYzQ2R1ZfRFU5eFVjSmpyeFRUWWJYZWRxc1g5QQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOaHRiNUp4VUFHcFlObklqekVpckpTSXkxWDV6SzNoZ0RQZWZpcGVWenVubW5rck9PYVg3QVdXQlpRbWw5UUJqc2NqNXRHSUdkLTQ1dENOc2JzeVFTb2dGQXdzSWpsU1QyTVFtLUlmOVdYM052eWdhcGZzNjRFT0liSUR2QkpBSERZbnNsWHFaY3lvRVZnYVcyYVRFQndWMzBqUnY5dnlSSUZqOUVjdWRLaQ?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-10-26",
+        "filing_date": "2026-10-27",
         "form": "8-K",
         "items": [
-          "1.01",
-          "7.01",
-          "8.01",
+          "2.02",
           "9.01"
         ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/315852/000119312526431025/d161989d8k.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/884887/000088488726000042/rcl-20261027.htm"
       },
-      "float_shares": "230.05M",
-      "short_float": "14.81%",
-      "daily_pct": 3.78,
-      "prev_close": 45.52,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (ADR 2.7% < 4%)",
+      "float_shares": "249.99M",
+      "short_float": "6.20%",
+      "daily_pct": 1.49,
+      "prev_close": 280.6,
+      "industry": "Others",
+      "technical_status": "Fail (ADR 3.1% < 4%)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$50 billion",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding the acquisition or its value. Source B (Google News) articles [2], [3], and [4] confirm the $50 billion all-stock deal."
+        "primary_claim": "Passenger volume increased significantly year-over-year.",
+        "discrepancy_note": "Finviz News provided no information. Google News, via Stock Titan [5], reports specific passenger volume: '2.7 million people took Royal Caribbean vacations in the third quarter, up 9%'. This specific detail is only present in one sub-source within Google News and is not corroborated by Finviz."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -226,9 +672,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 1,
-    "large_gaps": 2,
-    "total_headlines": 5,
+    "small_gaps": 7,
+    "large_gaps": 1,
+    "total_headlines": 26,
     "monthly_cost_usd": 0.01
   }
 }
