@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-10-26 20:04 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-10-27 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 759.97,
-      "open": 759.9,
-      "high": 763.47,
-      "low": 758.68,
-      "close": 759.97,
-      "prev_open": 766.37,
-      "prev_close": 763.96,
-      "volume": 33377700,
-      "change_pct": -0.52
+      "price": 765.37,
+      "open": 762.25,
+      "high": 767.73,
+      "low": 761.63,
+      "close": 765.37,
+      "prev_open": 759.9,
+      "prev_close": 759.97,
+      "volume": 31651600,
+      "change_pct": 0.71
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 704.4,
-      "open": 702.2,
-      "high": 709.3,
-      "low": 701.16,
-      "close": 704.4,
-      "prev_open": 713.61,
-      "prev_close": 704.47,
-      "volume": 30138000,
-      "change_pct": -0.01
+      "price": 712.2,
+      "open": 707.06,
+      "high": 715.25,
+      "low": 705.58,
+      "close": 712.2,
+      "prev_open": 702.2,
+      "prev_close": 704.4,
+      "volume": 32925600,
+      "change_pct": 1.11
     },
     "^VIX": {
       "label": "VIX",
-      "price": 18.39,
-      "open": 19.66,
-      "high": 19.84,
-      "low": 17.79,
-      "close": 18.39,
-      "prev_open": 19.18,
-      "prev_close": 19.45,
+      "price": 17.94,
+      "open": 18.43,
+      "high": 18.55,
+      "low": 17.78,
+      "close": 17.94,
+      "prev_open": 19.66,
+      "prev_close": 18.39,
       "volume": 0,
-      "change_pct": -5.45
+      "change_pct": -2.45
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 101.52,
+      "price": 101.27,
       "open": 101.29,
-      "high": 101.6,
-      "low": 101.25,
-      "close": 101.52,
-      "prev_open": 99.1,
-      "prev_close": 103.27,
-      "volume": 1944,
-      "change_pct": -1.69
+      "high": 102.82,
+      "low": 100.6,
+      "close": 101.27,
+      "prev_open": 102.61,
+      "prev_close": 101.76,
+      "volume": 65009,
+      "change_pct": -0.48
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 62693.16,
-      "open": 62667.05,
-      "high": 62786.89,
-      "low": 61462.61,
-      "close": 62693.16,
-      "prev_open": 64539.36,
-      "prev_close": 62907.84,
-      "volume": 208600000,
-      "change_pct": -0.34
+      "price": 63268.37,
+      "open": 62569.08,
+      "high": 63684.69,
+      "low": 62389.47,
+      "close": 63268.37,
+      "prev_open": 62449.96,
+      "prev_close": 62189.65,
+      "volume": 0,
+      "change_pct": 1.73
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25181.65,
-      "open": 25325.58,
-      "high": 25329.32,
-      "low": 25013.54,
-      "close": 25181.65,
-      "prev_open": 25497.94,
-      "prev_close": 25371.75,
-      "volume": 58950600,
-      "change_pct": -0.75
+      "price": 25491.85,
+      "open": 25369.81,
+      "high": 25532.6,
+      "low": 25340.21,
+      "close": 25491.85,
+      "prev_open": 25235.84,
+      "prev_close": 25410.84,
+      "volume": 0,
+      "change_pct": 0.32
     }
   },
   "fred": {
@@ -83,8 +83,8 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 57.5,
-    "mmth": 58.3
+    "s5fi": 57.7,
+    "mmth": 58.5
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: October 26, 2026",
-    "mood_emoji": "⚖️",
-    "mood": "Mixed Flows, Cautious Dip",
-    "narrative": "Global indices saw a slight dip today, yet the Nasdaq remained resilient while volatility surprisingly declined. Investors are navigating a cautious environment, with credit spreads signaling complacency despite broader market weakness.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 759.97 | -0.52% | 📉 |\n| Nasdaq 100 ETF | 704.40 | -0.01% | ➡️ |\n| VIX | 18.39 | -5.45% | 📉 |\n| Crude Oil | 101.52 | -1.69% | 📉 |\n| Nikkei 225 | 62693.16 | -0.34% | ➡️ |\n| DAX | 25181.65 | -0.75% | 📉 |",
-    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) at 3.38% indicates a complacent credit regime, suggesting comfortable institutional risk-taking. Coupled with a Normal / Steepening 10-Year Minus 2-Year Yield Curve (T10Y2Y) at +0.320, the underlying macro backdrop continues to support institutional risk appetite despite today's market performance.",
-    "analysis_para1": "Today's global tape showed a distinct softening, with the Nikkei 225 declining by -0.34% and the DAX by -0.75%, alongside a notable -1.69% drop in Crude Oil prices. Despite these broad international and commodity market declines, the US high-yield credit spread (BAMLH0A0HYM2) remains at a complacent 3.38%. This divergence suggests that the global risk-off tone has not translated into significant stress within the US credit markets, thus maintaining institutional risk appetite at current levels for domestic assets.",
-    "analysis_para2": "The primary flow today appears driven by systematic positioning adjustments and end-of-week profit-taking rather than a singular fear-inducing event. The S&P 500 ETF saw a -0.52% dip, while the Nasdaq 100 ETF remained largely flat at -0.01%, indicating a rotation within sectors. Crucially, the VIX simultaneously declined by -5.45%, suggesting that today's pullback was not born of panic but rather a measured unwinding of positions, likely influenced by the mixed global sentiment and upcoming week's calendar.",
-    "analysis_para3": "Traders should exercise caution and monitor key support levels for the S&P 500 ETF, particularly around 755 and 750. A successful bounce off the 755 level, accompanied by increasing volume, could signal a short-term long entry opportunity. Conversely, a decisive break and sustained close below the 750 threshold would be a significant risk-off trigger, indicating potential for further downside pressure. For today, the plan is to remain nimble, avoid aggressive entries, and await confirmation of a clear direction.",
-    "technical_signal": "No reversal pattern confirmed yet. The underlying market breadth, with 57.5% of S&P 500 stocks above SMA50 and 58.3% above SMA200, remains relatively healthy despite the recent pullback. Watch for a clear rebound with strong volume at key support levels or a sustained move back above prior resistance to confirm a bullish reversal.",
+    "title": "Pre-Market Brief: October 27, 2026",
+    "mood_emoji": "🚀",
+    "mood": "Risk-On Momentum Continues",
+    "narrative": "Global equities are surging, led by strong gains in Asia, as risk appetite firmly takes hold. The VIX is declining significantly, signaling reduced market uncertainty and fostering a bullish environment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 765.37 | +0.71% | 📈 |\n| Nasdaq 100 ETF | 712.20 | +1.11% | 📈 |\n| VIX | 17.94 | -2.45% | 📉 |\n| Crude Oil | 101.27 | -0.48% | ➡️ |\n| Nikkei 225 | 63268.37 | +1.73% | 📈 |\n| DAX | 25491.85 | +0.32% | ➡️ |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains 'Complacent' at 3.38%, suggesting investors are comfortable taking on credit risk. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) is 'Normal / Steepening' at +0.320, reinforcing a healthy economic outlook. Both indicators combined imply a robust institutional risk appetite, favoring equities and growth assets.",
+    "analysis_para1": "The global tape is sending clear bullish signals, with the Nikkei 225 rocketing up by +1.73% and the DAX posting a respectable +0.32% gain overnight. This broad international strength aligns perfectly with the 'Complacent' US High Yield Credit Spread of 3.38%, indicating low perceived credit risk. Although Crude Oil saw a slight dip of -0.48%, the dominant narrative from global equities and stable credit spreads implies a robust and growing US risk appetite heading into the open.",
+    "analysis_para2": "Today's primary flow is largely driven by a significant easing of market volatility, acting as a powerful mechanical catalyst for risk assets. The VIX index has dropped sharply by -2.45% to 17.94, signaling a substantial reduction in perceived short-term market risk and uncertainty. This decline in fear encourages investors to re-allocate capital towards higher-beta assets, driving upward momentum in both the S&P 500 ETF and Nasdaq 100 ETF as positioning shifts from defensive to aggressive.",
+    "analysis_para3": "Traders should prepare to lean long, targeting continuation in tech and growth sectors. Watch for the S&P 500 ETF to hold above 765 as initial support, with a break above 767 signaling further upside toward 770. For the Nasdaq 100 ETF, 710 acts as a key support, with entries triggered on dips towards this level or a decisive break above 713. A risk-off threshold would be a break below the prior day's close for both major indices, or a sharp reversal in the VIX back above 18.50, prompting caution and potential profit-taking TODAY.",
+    "technical_signal": "No reversal pattern confirmed yet. The market breadth remains moderately healthy, with 57.7% of S&P 500 stocks above their SMA50 and 58.5% above their SMA200, supporting the underlying bullish trend. Traders should monitor for any sudden divergences or a significant reversal in the VIX from these lower levels.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) surged following reports of a significant breakthrough in generative AI chip efficiency, attracting strong institutional buying."
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking new enterprise AI solution partnership with a major cloud infrastructure provider, fueling optimism for accelerated revenue growth in its AI-powered services."
         },
         {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase (JPM) saw strong buying after a major analyst upgrade citing robust Q3 earnings and a favorable outlook for the banking sector amidst rising interest rates."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA has secured a significant multi-year chip supply contract with a leading global automotive manufacturer for their autonomous driving AI division, highlighting strong demand for its specialized processors."
         }
       ],
       "c_grade": [
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) experienced continued accumulation flows after yesterday's positive cloud commentary, reinforcing technical support around its 50-day moving average."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Analysts continue to debate preliminary iPhone 18 pre-order volumes, creating mixed sentiment and a recycled headline lacking a fresh, decisive catalyst."
         }
       ]
     }

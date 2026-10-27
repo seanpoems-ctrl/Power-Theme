@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-27 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Momentum Continues",
+    "spy_price": 765.37,
+    "spy_change_pct": 0.71,
+    "vix": 17.94,
+    "hy_oas": 3.38,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 57.7,
+    "mmth": 58.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking new enterprise AI solution partnership with a major cloud infrastructure provider, fueling optimism for accelerated revenue growth in its AI-powered services."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA has secured a significant multi-year chip supply contract with a leading global automotive manufacturer for their autonomous driving AI division, highlighting strong demand for its specialized processors."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Analysts continue to debate preliminary iPhone 18 pre-order volumes, creating mixed sentiment and a recycled headline lacking a fresh, decisive catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-26 20:04 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "GOOGL",
           "company": "Alphabet Inc.",
           "reason": "Alphabet continues to benefit from the general tech sector rally and ongoing positive sentiment around digital advertising, rather than a fresh specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-06 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Broad Risk-On Momentum",
-    "spy_price": 774.83,
-    "spy_change_pct": 0.67,
-    "vix": 15.35,
-    "hy_oas": 3.1,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 32.1,
-    "mmth": 48.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Announced a new multi-billion dollar strategic partnership with a leading AI research firm, bolstering its cloud and AI solutions portfolio."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Issued an unexpectedly strong upward revision to its Q4 revenue guidance, citing robust early holiday shopping trends and improved supply chain efficiency."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Continues to attract significant institutional inflow driven by ongoing enthusiasm for AI infrastructure and semiconductor demand, maintaining its technical uptrend."
         }
       ]
     }
