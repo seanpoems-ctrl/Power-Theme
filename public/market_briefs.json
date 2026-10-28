@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-28 13:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Momentum Builds",
+    "spy_price": 771.68,
+    "spy_change_pct": 0.26,
+    "vix": 17.35,
+    "hy_oas": 3.18,
+    "yield_curve": 0.29,
+    "credit_status": "Complacent",
+    "s5fi": 57.8,
+    "mmth": 59.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "VRT",
+          "company": "Vertiv Holdings Co",
+          "reason": "Reported strong earnings beat, signaling robust financial performance and upward momentum potential."
+        },
+        {
+          "ticker": "ETSY",
+          "company": "Etsy, Inc.",
+          "reason": "Posted an earnings beat, driving positive investor sentiment and indicating continued growth in its niche market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Featured due to general market flow and technical positioning, lacking a fresh specific catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-28 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Amazon saw continued technical buying as it tested its 50-day moving average, building on recent momentum driven by ongoing e-commerce strength."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-07 13:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Divergence, Cautious Tone",
-    "spy_price": 777.53,
-    "spy_change_pct": -0.2,
-    "vix": 15.15,
-    "hy_oas": 3.03,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 33.0,
-    "mmth": 51.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a new enterprise AI suite integrated with Azure, promising substantial productivity gains and projecting a significant uplift in cloud services revenue."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company revealed positive Phase 3 trial data for its new obesity drug, demonstrating superior efficacy and safety profiles, setting it up for accelerated regulatory approval."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experienced continued momentum today, likely a continuation of sector rotation into high-growth semiconductors following recent analyst upgrades and favorable technical setups."
         }
       ]
     }
