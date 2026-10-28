@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-28 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On / Momentum Buying",
+    "spy_price": 769.66,
+    "spy_change_pct": 0.56,
+    "vix": 17.48,
+    "hy_oas": 3.3,
+    "yield_curve": 0.29,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 60.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "JNJ rallies on news of successful Phase 3 trial data for its new oncology drug, significantly broadening its market opportunity."
+        },
+        {
+          "ticker": "BAC",
+          "company": "Bank of America Corporation",
+          "reason": "BAC sees pre-market strength following an upgrade from a major investment bank, citing strong capital position and improving loan growth outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from residual enthusiasm for AI chip demand and yesterday's technical breakout, but without fresh news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-27 19:59 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA experienced continued momentum today, likely a continuation of sector rotation into high-growth semiconductors following recent analyst upgrades and favorable technical setups."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-07 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Optimism / Volatility Spike",
-    "spy_price": 779.09,
-    "spy_change_pct": 0.55,
-    "vix": 15.68,
-    "hy_oas": 3.12,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 34.4,
-    "mmth": 52.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) announced a significant AI-powered cloud service expansion, signaling continued dominance and potential for robust enterprise adoption."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase (JPM) confirmed plans for enhanced digital payment solutions leveraging blockchain technology, pointing to innovation and potential market share gains."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) is seeing continued flow-driven momentum, building on recent AI sector enthusiasm, but without a fresh specific catalyst today."
         }
       ]
     }
