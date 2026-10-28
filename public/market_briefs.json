@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-27 19:59 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Sentiment Prevails",
+    "spy_price": 769.66,
+    "spy_change_pct": 0.56,
+    "vix": 17.52,
+    "hy_oas": 3.3,
+    "yield_curve": 0.29,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 60.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "INIO",
+          "company": "Innovate Systems Inc.",
+          "reason": "The company reported strong earnings and raised full-year guidance, driving significant pre-market gapping and continued upside momentum today."
+        },
+        {
+          "ticker": "CLS",
+          "company": "Catalyst Solutions Group",
+          "reason": "CLS posted an impressive earnings beat coupled with robust growth projections, attracting substantial investor interest and volume today."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continued to experience positive flow today driven by broad market sentiment and ongoing AI infrastructure spending narratives, without a specific fresh catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-27 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA (NVDA) is seeing continued flow-driven momentum, building on recent AI sector enthusiasm, but without a fresh specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-06 20:07 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Uptick in Risk Appetite",
-    "spy_price": 774.83,
-    "spy_change_pct": 0.67,
-    "vix": 15.01,
-    "hy_oas": 3.12,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 34.4,
-    "mmth": 52.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CLF",
-          "company": "Cleveland-Cliffs Inc.",
-          "reason": "JPMorgan's price target raise and recent project showcasing are driving strong institutional and retail interest in the steel and mining firm."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Reports of accelerated adoption in key cloud segments and robust enterprise spending continue to fuel bullish sentiment for the tech giant."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Ongoing focus on the Federal Reserve's future interest rate trajectory continues to influence sentiment for major banking institutions."
         }
       ]
     }
