@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-28 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Confident Accumulation",
+    "spy_price": 772.31,
+    "spy_change_pct": 0.34,
+    "vix": 16.91,
+    "hy_oas": 3.18,
+    "yield_curve": 0.29,
+    "credit_status": "Complacent",
+    "s5fi": 58.2,
+    "mmth": 59.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "VRT",
+          "company": "Vertiv Holdings Co.",
+          "reason": "The company reported an earnings beat, signaling strong operational performance and a positive outlook for its sector."
+        },
+        {
+          "ticker": "FLEX",
+          "company": "Flex Ltd.",
+          "reason": "Demonstrated strong financial performance, indicating robust business fundamentals and potential for continued growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "The stock moved today primarily on broader market momentum and technical flows, lacking a fresh, specific news catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-28 13:05 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "NVIDIA shares saw continued buying interest driven by ongoing institutional rotation into semiconductor names, despite no fresh company-specific news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-07 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Global / Complacent Credit",
-    "spy_price": 777.22,
-    "spy_change_pct": -0.24,
-    "vix": 15.08,
-    "hy_oas": 3.03,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 31.9,
-    "mmth": 50.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a groundbreaking AI partnership with a major automotive manufacturer, significantly expanding its cloud and machine learning services into autonomous driving platforms."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly revealed positive Phase 3 trial results for a novel Alzheimer's treatment, significantly outperforming competitor drugs in cognitive improvement metrics."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon saw continued technical buying as it tested its 50-day moving average, building on recent momentum driven by ongoing e-commerce strength."
         }
       ]
     }
