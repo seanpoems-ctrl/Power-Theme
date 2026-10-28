@@ -3,49 +3,16 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 2,
-  "stocks": [
-    {
-      "ticker": "CIFR",
-      "company": "Cipher Digital Inc.",
-      "industry": "Data Processing Services",
-      "market_cap_b": 3.519,
-      "price": 8.48,
-      "change_pct": 9.99,
-      "dollar_volume": "$455.6M",
-      "adr_pct": 13.1,
-      "perf_1m": -54.38,
-      "perf_3m": -58.79,
-      "perf_34d": null,
-      "perf_qtd": -58.79,
-      "perf_mtd": -54.38,
-      "rs_ibd": 6
-    },
-    {
-      "ticker": "FRVO",
-      "company": "Fervo Energy Company",
-      "industry": "Alternative Power Generation",
-      "market_cap_b": 2.559,
-      "price": 8.68,
-      "change_pct": 8.91,
-      "dollar_volume": "$86.1M",
-      "adr_pct": 11.4,
-      "perf_1m": -50.64,
-      "perf_3m": -58.98,
-      "perf_34d": null,
-      "perf_qtd": -58.98,
-      "perf_mtd": -50.64,
-      "rs_ibd": 5
-    }
-  ],
+  "count": 0,
+  "stocks": [],
   "spx_benchmarks": {
-    "spx_1d": 0.6,
-    "spx_1m": 0.67,
-    "spx_3m": 3.83,
-    "spx_34d": 1.72,
-    "spx_qtd": 0.73,
-    "spx_mtd": 0.73
+    "spx_1d": 0.28,
+    "spx_1m": 1.21,
+    "spx_3m": 3.39,
+    "spx_34d": 1.14,
+    "spx_qtd": 1.01,
+    "spx_mtd": 1.01
   },
-  "fetched_at_utc": "2026-10-28T02:03:38+00:00",
+  "fetched_at_utc": "2026-10-28T23:05:13+00:00",
   "source": "tv_fallback"
 }

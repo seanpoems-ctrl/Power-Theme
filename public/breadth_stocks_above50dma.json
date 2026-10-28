@@ -2,76 +2,64 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 5,
+  "count": 4,
   "stocks": [
     {
       "ticker": "CD",
       "company": "Chaince Digital Holdings Inc. - American",
       "industry": "Information Technology Services",
-      "price": 10.13,
-      "change_pct": 3.68,
-      "adr_pct": 13.9,
-      "dollar_volume": "$3.2M",
-      "market_cap_b": 1.114,
-      "rs_ibd": 97,
-      "above50dma_pct": 87.0
+      "price": 9.15,
+      "change_pct": -9.67,
+      "adr_pct": 15.4,
+      "dollar_volume": "$3.1M",
+      "market_cap_b": 1.007,
+      "rs_ibd": 96,
+      "above50dma_pct": 65.5
     },
     {
-      "ticker": "SGRY",
-      "company": "Surgery Partners, Inc.",
-      "industry": "Hospital/Nursing Management",
-      "price": 23.36,
-      "change_pct": 0.47,
-      "adr_pct": 4.5,
-      "dollar_volume": "$208.0M",
-      "market_cap_b": 3.058,
-      "rs_ibd": 66,
-      "above50dma_pct": 60.3
+      "ticker": "GMAB",
+      "company": "Genmab A/S",
+      "industry": "Biotechnology",
+      "price": 57.29,
+      "change_pct": 28.25,
+      "adr_pct": 4.3,
+      "dollar_volume": "$445.0M",
+      "market_cap_b": 26.599,
+      "rs_ibd": 94,
+      "above50dma_pct": 58.3
     },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 91.32,
-      "change_pct": 1.92,
-      "adr_pct": 7.3,
-      "dollar_volume": "$99.0M",
-      "market_cap_b": 5.739,
+      "price": 97.04,
+      "change_pct": 6.26,
+      "adr_pct": 6.9,
+      "dollar_volume": "$91.3M",
+      "market_cap_b": 6.099,
       "rs_ibd": 98,
-      "above50dma_pct": 51.7
+      "above50dma_pct": 58.2
     },
     {
-      "ticker": "BRZE",
-      "company": "Braze, Inc.",
-      "industry": "Internet Software/Services",
-      "price": 45.78,
-      "change_pct": -0.13,
-      "adr_pct": 3.9,
-      "dollar_volume": "$542.6M",
-      "market_cap_b": 5.2,
-      "rs_ibd": 91,
-      "above50dma_pct": 51.2
-    },
-    {
-      "ticker": "SLN",
-      "company": "Silence Therapeutics Plc - American Depository Share",
-      "industry": "Miscellaneous Commercial Services",
-      "price": 19.78,
-      "change_pct": 0.0,
-      "adr_pct": 4.7,
-      "dollar_volume": "$207.6M",
-      "market_cap_b": 1.229,
-      "rs_ibd": 95,
-      "above50dma_pct": 50.8
+      "ticker": "SGRY",
+      "company": "Surgery Partners, Inc.",
+      "industry": "Hospital/Nursing Management",
+      "price": 23.24,
+      "change_pct": -0.51,
+      "adr_pct": 4.3,
+      "dollar_volume": "$210.8M",
+      "market_cap_b": 2.995,
+      "rs_ibd": 58,
+      "above50dma_pct": 57.5
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.6,
-    "spx_1m": 0.67,
-    "spx_3m": 3.83,
-    "spx_34d": 1.72,
-    "spx_qtd": 0.73,
-    "spx_mtd": 0.73
+    "spx_1d": 0.28,
+    "spx_1m": 1.21,
+    "spx_3m": 3.39,
+    "spx_34d": 1.14,
+    "spx_qtd": 1.01,
+    "spx_mtd": 1.01
   },
-  "fetched_at_utc": "2026-10-28T02:03:26+00:00"
+  "fetched_at_utc": "2026-10-28T23:05:01+00:00"
 }
