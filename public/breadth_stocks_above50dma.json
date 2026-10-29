@@ -5,61 +5,61 @@
   "count": 4,
   "stocks": [
     {
-      "ticker": "CD",
-      "company": "Chaince Digital Holdings Inc. - American",
-      "industry": "Information Technology Services",
-      "price": 9.15,
-      "change_pct": -9.67,
-      "adr_pct": 15.4,
-      "dollar_volume": "$3.1M",
-      "market_cap_b": 1.007,
-      "rs_ibd": 96,
-      "above50dma_pct": 65.5
-    },
-    {
-      "ticker": "GMAB",
-      "company": "Genmab A/S",
-      "industry": "Biotechnology",
-      "price": 57.29,
-      "change_pct": 28.25,
-      "adr_pct": 4.3,
-      "dollar_volume": "$445.0M",
-      "market_cap_b": 26.599,
-      "rs_ibd": 94,
-      "above50dma_pct": 58.3
+      "ticker": "KPLT",
+      "company": "Katapult Holdings, Inc.",
+      "industry": "Miscellaneous Commercial Services",
+      "price": 12.52,
+      "change_pct": 37.58,
+      "adr_pct": 7.8,
+      "dollar_volume": "$6.6M",
+      "market_cap_b": 1.062,
+      "rs_ibd": 82,
+      "above50dma_pct": 85.2
     },
     {
       "ticker": "KOD",
       "company": "Kodiak Sciences Inc",
       "industry": "Biotechnology",
-      "price": 97.04,
-      "change_pct": 6.26,
-      "adr_pct": 6.9,
-      "dollar_volume": "$91.3M",
-      "market_cap_b": 6.099,
+      "price": 100.4,
+      "change_pct": 3.46,
+      "adr_pct": 6.8,
+      "dollar_volume": "$92.3M",
+      "market_cap_b": 6.31,
       "rs_ibd": 98,
-      "above50dma_pct": 58.2
+      "above50dma_pct": 60.5
     },
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 23.24,
-      "change_pct": -0.51,
+      "price": 23.21,
+      "change_pct": -0.13,
+      "adr_pct": 4.0,
+      "dollar_volume": "$213.2M",
+      "market_cap_b": 2.991,
+      "rs_ibd": 60,
+      "above50dma_pct": 55.3
+    },
+    {
+      "ticker": "GMAB",
+      "company": "Genmab A/S",
+      "industry": "Biotechnology",
+      "price": 56.49,
+      "change_pct": -1.4,
       "adr_pct": 4.3,
-      "dollar_volume": "$210.8M",
-      "market_cap_b": 2.995,
-      "rs_ibd": 58,
-      "above50dma_pct": 57.5
+      "dollar_volume": "$451.0M",
+      "market_cap_b": 34.422,
+      "rs_ibd": 94,
+      "above50dma_pct": 54.2
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.28,
-    "spx_1m": 1.21,
-    "spx_3m": 3.39,
-    "spx_34d": 1.14,
-    "spx_qtd": 1.01,
-    "spx_mtd": 1.01
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-10-29T02:14:22+00:00"
+  "fetched_at_utc": "2026-10-29T23:03:39+00:00"
 }
