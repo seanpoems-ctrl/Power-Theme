@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-29 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Signals, Tech Underperforms",
+    "spy_price": 769.36,
+    "spy_change_pct": -0.38,
+    "vix": 17.2,
+    "hy_oas": 3.14,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 63.9,
+    "mmth": 65.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CVNA",
+          "company": "Carvana Co.",
+          "reason": "The company reported a significant 'Beat & Raise' for its latest quarter, signaling strong operational performance and an improved outlook."
+        },
+        {
+          "ticker": "DASH",
+          "company": "DoorDash, Inc.",
+          "reason": "News of the company's acquisition of Instacart provides a fresh, high-conviction catalyst for strategic expansion and market dominance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "The stock moved in sympathy with broader tech weakness without a specific fresh catalyst, presenting a pure technical flow candidate."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-29 13:22 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Amazon (AMZN) exhibited range-bound trading today, attributed to persistent technical resistance near recent highs and ongoing consolidation after last week's holiday sales update."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-08 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Heightened Caution",
-    "spy_price": 773.93,
-    "spy_change_pct": -0.42,
-    "vix": 15.41,
-    "hy_oas": 3.09,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 34.4,
-    "mmth": 51.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "WOLF",
-          "company": "Wolfspeed, Inc.",
-          "reason": "A Conditional Loan Commitment from the U.S. Department of War provides a significant capital injection and strategic validation for the company."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new AI infrastructure partnership, bolstering its competitive edge in generative AI services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to trade on prior positive sentiment, with today's action primarily driven by technical flows rather than fresh fundamental news."
         }
       ]
     }
