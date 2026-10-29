@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-29 13:22 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "US Pullback, Selective Risk",
+    "spy_price": 768.39,
+    "spy_change_pct": -0.51,
+    "vix": 16.29,
+    "hy_oas": 3.14,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 62.9,
+    "mmth": 64.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CVNA",
+          "company": "Carvana Co.",
+          "reason": "The company saw significant upside after reporting a strong earnings beat and raising its future guidance, signaling robust operational performance."
+        },
+        {
+          "ticker": "DASH",
+          "company": "DoorDash, Inc.",
+          "reason": "DoorDash's shares surged on news of its strategic acquisition of Instacart, promising expanded market share and synergistic growth opportunities."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase showed minor price action today, likely driven by general financial sector flow and technical rebalancing rather than fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-29 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to trade on prior positive sentiment, with today's action primarily driven by technical flows rather than fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-08 13:49 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Global Weakness",
-    "spy_price": 771.71,
-    "spy_change_pct": -0.71,
-    "vix": 16.04,
-    "hy_oas": 3.09,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 32.0,
-    "mmth": 50.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "WOLF",
-          "company": "Wolfspeed, Inc.",
-          "reason": "A conditional loan commitment from the U.S. Department of War provides significant long-term contract visibility and capital, driving strong investor interest."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Positive late-stage clinical trial results for its novel oncology drug exceeded expectations, significantly boosting future revenue projections and market confidence."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "The stock experienced a technical rebound today after hitting short-term oversold levels, lacking new fundamental news to sustain broader momentum."
         }
       ]
     }
