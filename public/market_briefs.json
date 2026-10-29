@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-29 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Equities Advance",
+    "spy_price": 772.31,
+    "spy_change_pct": 0.34,
+    "vix": 17.0,
+    "hy_oas": 3.18,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 58.2,
+    "mmth": 59.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet is poised for strong gains following reports of a groundbreaking AI partnership with a major automotive manufacturer, expected to significantly boost its cloud and autonomous driving segments."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase is expected to trade higher after announcing a robust share buyback program alongside an upgrade from a prominent analyst firm, signaling strong capital return to shareholders."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft is gaining attention due to ongoing momentum in its Azure cloud services and recent analyst upgrades, representing a continuation of existing bullish narratives."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-28 20:24 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "The stock experienced a technical rebound today after hitting short-term oversold levels, lacking new fundamental news to sustain broader momentum."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-08 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk Aversion / Volatility Spike",
-    "spy_price": 777.22,
-    "spy_change_pct": -0.24,
-    "vix": 15.97,
-    "hy_oas": 3.03,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 31.9,
-    "mmth": 50.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) surges pre-market following news of positive Phase 3 trial results for its new Alzheimer's treatment, significantly beating analyst expectations and opening a new market."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) sees strong buying interest after announcing a multi-billion dollar AI infrastructure deal with a major defense contractor, solidifying its position in enterprise AI solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) is attracting C-Grade interest today due to pure technical flow, with analysts noting increased options activity ahead of key support levels."
         }
       ]
     }
