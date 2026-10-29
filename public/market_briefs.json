@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-28 20:24 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Growth-Led Accumulation",
+    "spy_price": 769.66,
+    "spy_change_pct": 0.56,
+    "vix": 16.91,
+    "hy_oas": 3.18,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 58.2,
+    "mmth": 59.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "VRT",
+          "company": "Vertiv Holdings Co",
+          "reason": "The company reported a significant earnings beat today, signaling robust operational performance and positive future outlook."
+        },
+        {
+          "ticker": "FLEX",
+          "company": "Flex Ltd.",
+          "reason": "Strong financial performance and a positive outlook announced today highlight the company's solid execution in a key growth sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Trading on general market flow and recycled technical interest, without a fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-28 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA (NVDA) is attracting C-Grade interest today due to pure technical flow, with analysts noting increased options activity ahead of key support levels."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-07 20:24 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Market / Cautious Optimism",
-    "spy_price": 779.09,
-    "spy_change_pct": 0.55,
-    "vix": 15.08,
-    "hy_oas": 3.03,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 31.9,
-    "mmth": 50.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announced a significant new partnership with a leading automotive manufacturer to integrate its Azure AI services into next-gen autonomous driving platforms."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly reported positive Phase 3 trial results for its new obesity drug, showing superior efficacy and safety profiles compared to existing treatments."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA shares saw continued buying interest driven by ongoing institutional rotation into semiconductor names, despite no fresh company-specific news today."
         }
       ]
     }
