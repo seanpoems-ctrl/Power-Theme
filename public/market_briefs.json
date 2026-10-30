@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-30 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk Aversion Spikes / Equity Sell-Off",
+    "spy_price": 755.72,
+    "spy_change_pct": -1.77,
+    "vix": 19.42,
+    "hy_oas": 3.26,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 59.5,
+    "mmth": 61.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Reports indicate Tesla is accelerating production ramp-up for its next-generation vehicle, defying broader market weakness with strong delivery projections."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Inc.",
+          "reason": "Analyst upgrades following strong quarterly subscriber growth and positive forward guidance, positioning UNH as a defensive play in a volatile market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Continues to see speculative interest based on technical bounce attempts, but no fresh fundamental catalyst drives conviction today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-30 12:59 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation (NVDA) showed continued technical pressure today, reflecting broader sector rebalancing and profit-taking after recent strong performance."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-09 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On / Broad Market Strength",
-    "spy_price": 778.57,
-    "spy_change_pct": 0.6,
-    "vix": 14.84,
-    "hy_oas": 3.15,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 38.1,
-    "mmth": 52.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LITE",
-          "company": "Lumentum Holdings Inc.",
-          "reason": "Bolstered by a significant surge in optics sector demand, Lumentum Holdings Inc. is positioned for continued upside momentum."
-        },
-        {
-          "ticker": "ACHR",
-          "company": "Archer Aviation Inc.",
-          "reason": "Archer Aviation Inc. received a strong conviction boost from Barclays' upgrade to Overweight, signaling renewed institutional interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft Corporation exhibited pure technical flow today, with its established trend continuing without specific new fundamental catalysts."
         }
       ]
     }
