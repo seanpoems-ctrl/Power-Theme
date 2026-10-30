@@ -1,134 +1,47 @@
 {
-  "scan_time": "2026-10-29 08:55 ET",
+  "scan_time": "2026-10-30 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "MAX",
-      "price": 14.0,
-      "gap_pct": 19.45,
-      "pm_volume": 58177,
-      "avg_vol_10d": 824958,
-      "avg_dollar_vol": 11549412,
-      "mkt_cap": 718013848,
-      "rvol": 0.94,
-      "adr_pct": 5.03,
+      "ticker": "CPRI",
+      "price": 17.82,
+      "gap_pct": 10.96,
+      "pm_volume": 272575,
+      "avg_vol_10d": 3103255,
+      "avg_dollar_vol": 55300004,
+      "mkt_cap": 1825244940,
+      "rvol": 1.65,
+      "adr_pct": 4.16,
       "category": "Earnings",
-      "theme": "Beat & Mixed Guidance",
-      "reasoning": "MediaAlpha (MAX) reported strong Q3 2026 results that beat expectations and guidance, but Q4 contribution is expected to slow.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "C",
-      "finviz_theme": "AI Ads & Search",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "MediaAlpha (MAX) announced Third Quarter 2026 Financial Results on **2026-10-28**, reporting **strong Q3 2026** results that **beat expectations** and **blew past its own guide**, causing the stock to **jump 18%**.",
-        "impact": "The positive Q3 performance and reaccelerating growth are tailwinds, but potential headwinds from slowing Q4 contribution and the non-recurring nature of the TRA gain suggest a nuanced outlook for sustained momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nMediaAlpha (MAX) announced Third Quarter 2026 Financial Results, revealing **strong Q3 2026** performance where the company **beats expectations** and **blew past its own guide**. This positive surprise led to the stock **jumping 18%** in reaction. The financial results indicated that **growth reaccelerates** during the quarter.\n\n• **The Growth (Momentum)**\nThe company demonstrated reaccelerating growth in Q3 2026, surpassing its own guidance and analyst expectations. However, the reported EPS was flattered by a **TRA Gain**, which suggests that underlying operational profitability might be less robust than the headline EPS figure. The market's initial **18% jump** indicates strong positive sentiment towards the Q3 performance.\n\n• **The Guide**\nDespite the strong Q3 beat, the outlook for the upcoming quarter is tempered, with headlines noting that **Q4 contribution slows**. This mixed guidance, where past performance was strong but future expectations are moderated, could cap sustained upward momentum for the stock in the near term.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "A director sells 30,103 MediaAlpha (MAX) shares under a previously adopted trading plan. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOTS1CUE1LMmJEb3BjU2JzWWVlN1ZOTmRvZ2hmei15d3hpM2FvN3E5c0JucHVwSHJCdjhZWVVOSVpkSWd2NzRheFhKRUNFSDlYdDRqdEprbUhacHR2Wldra01pekVWMVVuMjd2aXkzeGJmZ0NtS0Y4YUdVWUltbHdaN0F4czM4UkNkbUtuUEpSZHg4WlJZbmk3OWNJaG9zazg4Zzl0WnA1RDNYR29M?oc=5"
-        },
-        {
-          "title": "MediaAlpha (NYSE:MAX) beats expectations in strong Q3 2026, stock jumps 18% - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQb0xlNkVYbkdRMjFkTUJCLWw2b3l2ODlKdkpTdlVZV2tRWlpsanhUQjVkVFU3TGtpTXc1TWhwZ0plMGNwVjNlSUVtT3liRDBYTnBReXBKc3FDTnphTE16NWJ2enZaeVpIaFh0dUdJVmtCNUhZbjEwdHNPdnJ0aDhVUmR6X0QxS0tzYlN2RDYyS2RSVU9TcnhxMXVzS0NKR2hHcWYwLUZB?oc=5"
-        },
-        {
-          "title": "MediaAlpha Blows Past Its Own Guide As Growth Reaccelerates, But A TRA Gain Flatters EPS And Q4 Contribution Slows",
-          "source": "Finviz",
-          "url": "/news/410869/mediaalpha-blows-past-its-own-guide-as-growth-reaccelerates-but-a-tra-gain-flatters-eps-and-q4-contribution-slows"
-        },
-        {
-          "title": "MediaAlpha Announces Third Quarter 2026 Financial Results",
-          "source": "Finviz",
-          "url": "/news/410517/mediaalpha-announces-third-quarter-2026-financial-results"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-28",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1818383/000181838326000263/max-20261028.htm"
-      },
-      "float_shares": "27.99M",
-      "short_float": "10.66%",
-      "daily_pct": -0.42,
-      "prev_close": 11.72,
-      "industry": "AI Ads & Search",
-      "technical_status": "Fail (Avg $Vol $12M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "MediaAlpha (MAX) reported Q3 2026 results that beat expectations, and Q4 contribution is expected to slow.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CROX",
-      "price": 142.5,
-      "gap_pct": 19.06,
-      "pm_volume": 129826,
-      "avg_vol_10d": 1063919,
-      "avg_dollar_vol": 151608458,
-      "mkt_cap": 5738546262,
-      "rvol": 1.6,
-      "adr_pct": 3.14,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Crocs stock jumped following Q3 2026 earnings beat and raised guidance disclosed in an official SEC 8-K filing.",
+      "theme": "Q2 Earnings Beat",
+      "reasoning": "Capri Holdings (CPRI) reported Q2 earnings and revenues that topped estimates, driving the stock higher.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 78,
-      "grade": "B",
+      "grade": "C",
       "finviz_theme": "Consumer - E-Commerce",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Crocs (NASDAQ:CROX) reported **upbeat Q3 2026 earnings**, leading to a significant **19% to 19.3% stock jump**. The company also announced **raised guidance** for future periods.",
-        "impact": "This strong beat and raise indicates robust operational performance and positive future outlook, likely driving continued investor confidence and upward momentum."
+        "catalyst": "Capri Holdings (CPRI) filed an **8-K** on **2026-10-30** detailing **Q2 Earnings and Revenues**, which **topped estimates**. The company's **Q2 Profit Beat** led to a significant market reaction.",
+        "impact": "The positive earnings surprise and revenue beat are likely to generate strong upward momentum for CPRI stock, potentially attracting further institutional interest."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nCrocs (NASDAQ:CROX) reported **upbeat Q3 2026 earnings**, which served as a major positive catalyst. The company's stock responded with a substantial increase, **jumping 19% to 19.3%** on the news. This significant move highlights the market's positive surprise at the reported financial results.\n\n• **The Guide**\nAdding to the positive sentiment, Crocs also announced **raised guidance**. This indicates management's increased confidence in the company's future financial performance and growth prospects. Revised forecasts often act as a strong indicator for sustained momentum, signaling potential for further analyst upgrades and institutional accumulation.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nCapri Holdings (CPRI) delivered a strong financial performance for its **Q2**, with both **earnings and revenues topping analyst estimates**. The reported **Q2 Profit Beat** was well-received by the market, leading to an immediate positive reaction in the stock price.\n\n• **The Growth (Momentum)**\nFollowing the announcement, **Capri Stock Bounced Back 8.4%** on the day. This robust performance indicates that the market views these results as a strong positive catalyst, suggesting potential for continued momentum as investors re-evaluate the company's growth trajectory and profitability.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Crocs (NASDAQ:CROX) reports upbeat Q3 2026, stock jumps 19.3% - Yahoo Finance",
+          "title": "Capri Holdings (CPRI) Q2 Earnings and Revenues Top Estimates - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOV1VBTEVobHVtUW0xaWszOU81Q2FqNUVhZ0VzQ25TZkhPZnk1Tjc4ejBCN1VYSExPSjFOV1NGNkZFTk9IUTZnQTBhRUY5UGMxbXZNUE05RmFYUmZnZGNqVjh4MDBoclRFelgyMVlqRGo4UUoydW1ydmttMGdIeXM5ZFVJSnR5SEtlSnN6VWNlamVKNDAwNS1DbnJUenRWZw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQRzlSNWxnZEwtTnpVR01XQmNSLTF0c3QyWUdGRHIyVlltQ0xOSjBzODZVVGlrYmZFaUw5MFF5SXE0RERoYzdKaDZqTllzdkNwLThqbHl6eXFnY2FCcy1xSWVtZHRYT1pWQXFiN2NmdmRvOEE1N1ZxREo3ODUydTZHbHNGR0ZhYjdWU1VXeTA0dzRHYW5Ha1VvUGtfTmE?oc=5"
         },
         {
-          "title": "Crocs stock soars 19% on earnings beat and raised guidance - Investing.com",
+          "title": "Capri Stock Bounces Back 8.4% on Q2 Profit Beat - WWD",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNZUJlUmRnaTkzWFVUa091RHctQkRqdnBIbktrRVJxMkEzdGQ5cnpYSTJudUtfb1YwLUkxWkIzSmpudnpyOF9IY1ZjVi03RVNVaDlkWVlaUTJZREt2bjYtVnRNNHNVZ256Q3N5Nnk2UWFzQXJNUURzalZQQ0QtU212VnZBNHVLRzlZT0NDaFNMMTZlNTlfdk54MHI1QXpTenpyMk52TF9oSzE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQN28zU0ZUanByYlE5RWh1MXhQYzRQdkF2OVc2bkhpbGdHQkJRUW9Mb2ZHV2gwcnU5ZmRBcG9uU0dnZGpoY3E0TGlxSGkwQ2RJT25PY2NoRXdCVjQycVJ5eEtFb0dBYjZJWnNMSHotYTFwdFg2M3pMVFRNYXo0MTJyRngzdU91TlVOVlh4YXVodk9QVlEwN0lNdg?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-10-29",
+        "filing_date": "2026-10-30",
         "form": "8-K",
         "items": [
           "2.02",
@@ -136,322 +49,14 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000058/crox-20261029.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1530721/000153072126000092/cpri-20261030.htm"
       },
-      "float_shares": "45.84M",
-      "short_float": "12.78%",
-      "daily_pct": 0.16,
-      "prev_close": 119.69,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (ADR 3.1% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Crocs stock jumped 19.3% following Q3 2026 earnings beat and raised guidance.",
-        "discrepancy_note": "Source B [1] states 'stock jumps 19.3%', while Source B [4] states 'stock soars 19%'. These percentages do not match exactly."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "INSM",
-      "price": 112.5,
-      "gap_pct": 16.0,
-      "pm_volume": 435876,
-      "avg_vol_10d": 3194179,
-      "avg_dollar_vol": 359345138,
-      "mkt_cap": 21178638627,
-      "rvol": 1.66,
-      "adr_pct": 3.64,
-      "category": "Earnings",
-      "theme": "Earnings Miss",
-      "reasoning": "Insmed reported a **Q3 loss of $0.46 a share**, wider than FactSet estimates of a **$0.38 loss**, impacting short-term investor sentiment.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "C",
-      "finviz_theme": "Biotech - Rare Disease",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Insmed announced a **Q3 loss of $0.46 a share**, which was notably wider than the FactSet consensus estimate for a **$0.38 loss**.",
-        "impact": "The earnings miss indicates underperformance relative to analyst expectations, potentially leading to negative market sentiment and short-term selling pressure."
-      },
-      "analysis_details": "• **The Surprise Factor**\nInsmed reported a **Q3 loss of $0.46 a share**. This result significantly **missed** the consensus FactSet estimate, which had projected a **$0.38 loss** for the quarter. This wider-than-expected loss suggests operational or financial challenges during the period.\n\n• **The Growth (Momentum)**\nThe reported **Q3 loss of $0.46 a share**, falling short of analyst estimates, provides a negative signal for momentum investors. The unexpected miss could dampen enthusiasm and lead to a re-evaluation of the company's near-term growth trajectory and profitability prospects.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Earnings Flash (INSM) Insmed Posts Q3 Loss $0.46 a Share, vs. FactSet Est of $0.38 Loss - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPdHZrX05QbVg0VlpHY3Y1MG91NVRtMjRINUQ0ZFZNdlVPMDlIYUVqeDc3bVpBNzJ0NW5uMG1MMzhyRTVEcDZpMXdKbWxvNFNoa3hUdm1CNkdjdHFzSkFibmV0Zmt6RGpQT09ZZ3NGOUY2VTYyc0U4WWlIX0JrRjV3MVdzMDlkZlZBVTZhdURoZV9FSHFxcFZXaGNXbHd4VFFoWTVRcEYxUDg0bGxGUFdqcXFEZU5GUjJBU0ZnTVFmck5qbUhkaDNVeE9yR2hIck0?oc=5"
-        },
-        {
-          "title": "Insmed: Q3 Earnings Snapshot - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNSHZnbGoyZWZQS1I5eTNGbUJOWExVekcycW9pbEdfc3lDckdUUnFJZC1jcG02N0xnV3FTcmtncmRGTklmWEpzR0xFZGhjOHRxSHhIRjhJQXFYa3VGYU5GVUY3RU5TVHNGU1F3VXRZMnhueWFtci1oVC0tam1DeTY1VGRGdmxvRkhXRFVycEhQcFozZw?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-29",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1104506/000114036126041097/ef20084500_8k.htm"
-      },
-      "float_shares": "215.15M",
-      "short_float": "6.95%",
-      "daily_pct": 2.13,
-      "prev_close": 96.98,
-      "industry": "Biotech - Rare Disease",
-      "technical_status": "Fail (ADR 3.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Insmed reported a Q3 loss of $0.46 a share, wider than FactSet estimates of a $0.38 loss.",
-        "discrepancy_note": "Source A (Finviz News) provides no information regarding INSM's Q3 earnings per share. Source B (Google News, specifically marketscreener.com) confirms the reported Q3 loss of $0.46 a share and FactSet estimates of a $0.38 loss. However, since only one of the two main sources (Google News) contained the specific numerical claim, the condition for 'BOTH sources confirm' is not met, leading to a 'Discrepancy'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "NCLH",
-      "price": 17.98,
-      "gap_pct": 11.96,
-      "pm_volume": 4419142,
-      "avg_vol_10d": 17973483,
-      "avg_dollar_vol": 323163224,
-      "mkt_cap": 7374556396,
-      "rvol": 1.05,
-      "adr_pct": 3.77,
-      "category": "Earnings",
-      "theme": "Earnings Beat",
-      "reasoning": "Norwegian Cruise Line stock jumped after **Q3 2026 sales** exceeded estimates, signaling strong demand in the cruise sector.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "NCLH filed an **8-K on 2026-10-29** indicating **Earnings/Financial Results** for Q3 2026. News reports confirmed **Norwegian Cruise Line's Q3 2026 sales beat estimates**, leading to the stock jumping **10.9%**.",
-        "impact": "The positive sales surprise and significant stock jump indicate strong operational performance and investor confidence in the immediate term, potentially setting up for continued price momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nNorwegian Cruise Line Holdings (NCLH) reported **Q3 2026 sales** that **beat estimates**, as confirmed by the **8-K filing on 2026-10-29** for **Earnings/Financial Results**. This positive sales surprise drove the stock to jump **10.9%** following the announcement. The market reacted strongly to the better-than-expected top-line performance.\n\n• **The Growth (Momentum)**\nThe significant **10.9%** stock jump on the earnings beat indicates strong market momentum driven by the company's financial results. While debt concerns were mentioned in a separate headline, the immediate focus is on the robust sales performance and its positive reception, suggesting potential for continued upward price trajectory as investors digest the improved financial outlook.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Norwegian Cruise Line’s (NYSE:NCLH) Q3 2026 sales beat estimates, stock jumps 10.9% - FinancialContent",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOa0JLdTJoSzVKZ0ktX0dkLXVmdkpMTmg1UWZEaUpmVnNEWW9NQUFMbHo4bXY0X19uQ0hza2hWeFptNU9OUVhrTXRRQWstV2dEMC1pdGR0Nk1XU1VlQ19TQUtuSDM0Sy1XU3JTS2RsZXlmWkRxaUF2cnVQRmE1eUZDQ09nUC1jU2gtRmpXX0ZxTEtGdTJsM0lzOW1XN1hHUE14U1JORGRmTlctd0NqYVpmdWUwcVhiQTZXb0VvR2t2M1BuazcybVp5M1owSUJodGJSdzNRcDZR?oc=5"
-        },
-        {
-          "title": "Norwegian Cruise Line Holdings (NCLH) Stock Looks Reasonable Despite Debt Concerns - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPNDZfbHFkUl9iclRPNDJzUWRQazY2cGNSVk5ON3NUMTZISV9BUzE5M19QVEQ5WE5kVGxQZElvS3p6YmhlQXhTNGg2Zkk2M1pLeHJWSURTLTJ0Z0xPVE1yaHFkdTYxOWVHaEVZMmlEX0dxajkzZ2xmbVBrbzUzbU55bkdGUnlfVjlueS1pV2hTMkNod2phS1BmOVZuaC1LVTFfZXc?oc=5"
-        },
-        {
-          "title": "Norwegian Cruise Line Holdings Announces CFO Transition - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOV3hUamFubEt0WENqZWtpUTA4SWVsbDdYYWFXZDJWdTd5NGZfV2xJZU96Nl9MbV9ETmlMQTlNa1FLRlFFV25rWFR1alR3U3ozNTRsSW1MVERTSkVHNHZnVUU3MGlGcElkRFUwX1NnbkpCRW1TWHk5NC1IekdNTnFWZWVXTzBIYmU1d1M4VmFNYkdCN2ZPakdYcl9PcHJOc0k3?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-29",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1513761/000117184326006957/f8k_102826.htm"
-      },
-      "float_shares": "454.10M",
-      "short_float": "22.01%",
-      "daily_pct": 1.97,
+      "float_shares": "110.76M",
+      "short_float": "12.91%",
+      "daily_pct": 5.04,
       "prev_close": 16.06,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 3.8% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Q3 2026 sales exceeded estimates for NCLH",
-        "discrepancy_note": "Finviz News (Source A) provided no articles, making it impossible for both sources to confirm the claim. While Google News [2] explicitly states 'Q3 2026 sales beat estimates', the absence of a second confirming source means the claim cannot be 'Verified'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "PURR",
-      "price": 11.05,
-      "gap_pct": 10.83,
-      "pm_volume": 4244422,
-      "avg_vol_10d": 10955020,
-      "avg_dollar_vol": 121052971,
-      "mkt_cap": 2774364644,
-      "rvol": 0.78,
-      "adr_pct": 6.42,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; the stock move is likely attributed to technical breakout or institutional flow dynamics.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "The **PURR stock** is observed **rebounding** today as **traders** appear to be **zeroing in on momentum**, rather than any specific fundamental news. This suggests a move driven by **technical factors** and **market flow**.",
-        "impact": "This price action is highly speculative given the absence of a discernible fundamental trigger, carrying a high risk of being a **gap and trap** or a **low float squeeze** without sustainable drivers."
-      },
-      "analysis_details": "• **What Happened**\nThe **PURR stock** has experienced a **rebound** today, with the news specifically highlighting that **traders** are **zeroing in on momentum**. This indicates that the price action is likely driven by **technical indicators** and **market participant flows**, rather than any new company-specific fundamental developments or reports. The headline makes no mention of earnings, upgrades, new contracts, or other direct catalysts.\n\n• **Key Consideration**\nGiven the lack of a specific fundamental catalyst and the focus on **momentum** by **traders**, this move carries inherent risk. Such price action is often characteristic of **technical breakouts** or **institutional flow**, potentially leading to rapid fluctuations. Without a clear underlying fundamental driver, the sustainability of this rebound is questionable, increasing the likelihood of a potential **gap and trap** scenario for short-term traders.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "PURR Stock Rebounds As Traders Zero In On Momentum - Timothy Sykes",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNNnFsRHVxaGFhX0htRWF0WWxYSno3STh0U0JrY1F4U05iZkdiQVNTUWVuVWluTGtaQm4tRUlTYy1yWElGdG01b01xZXl2b0sxMUZWcVVXekNKZkctd1dXc3RDeGVRcFZZeTlTY0dvYU9UREQ0LW9WZ0pkY0dmWDRuUEQ2em5UdndpZXc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "252.91M",
-      "short_float": "8.36%",
-      "daily_pct": 1.22,
-      "prev_close": 9.97,
-      "industry": "Others",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; the stock move is likely attributed to technical breakout or institutional flow dynamics.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "TDOC",
-      "price": 7.6,
-      "gap_pct": 10.47,
-      "pm_volume": 219247,
-      "avg_vol_10d": 3726646,
-      "avg_dollar_vol": 28322510,
-      "mkt_cap": 1249986085,
-      "rvol": 2.43,
-      "adr_pct": 4.48,
-      "category": "Earnings",
-      "theme": "Beat on Reduced Loss",
-      "reasoning": "Teladoc (TDOC) surged **11.5%** after reporting **Q3 2026 earnings** that **exceeded expectations**, significantly reducing its net loss.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "C",
-      "finviz_theme": "Digital Health",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Teladoc (TDOC) announced its **Q3 2026 earnings** on October 28, 2026, reporting a **$26.9 million loss**, a substantial improvement from the **$49.5 million loss** a year earlier. These results **exceeded Q3 2026 expectations**.",
-        "impact": "This strong earnings beat and improved profitability are likely to attract momentum traders and potentially lead to positive analyst revisions, supporting continued upward price action."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nTeladoc Health reported **Q3 2026 earnings** where its **$26.9 million loss** was notably lower than the **$49.5 million loss** recorded in the previous year. This significant reduction in net loss, coupled with results that **exceeded Q3 2026 expectations**, signals a positive operational turnaround and financial outperformance.\n\n• **The Growth (Momentum)**\nFollowing the better-than-expected **Q3 2026 results**, Teladoc's stock **jumped 11.5%**. This strong market reaction indicates robust investor confidence in the company's financial trajectory and its ability to improve profitability, positioning TDOC for potential further momentum in the near term.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Teladoc (TDOC) Q3 Earnings: Taking a Look at Key Metrics Versus Estimates - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNbjdScEdRYkhBM2xCRmdXUHRHVUw3NVgxeTdhMV8zandLRWlFbmJmdDVGaXpGNjd1eEdpdmJfV1NxQ00yZUFnT1YxZXhLSnRSbWdpQWNoV0xvdnAwV2xkYXIwZ2VzWDFzbDRUY0QxTEgxYW1ZMG9Udi1na2oyTVA4S3laeUtwQ01CY2w5ZTZidlNhWDVOaXNpeC14VHA?oc=5"
-        },
-        {
-          "title": "Teladoc (NYSE:TDOC) exceeds Q3 2026 expectations, stock jumps 11.5% - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOWEZhS01rZGFURTI0aVB2TWNvQjVKNkpCQWxKVVJlU0psYi0tYzc5cFY3bDluczVxb3htYTYyaVdjZVNLRHhzMkw5UUVhamM1bldZRHpCM1ItS3g2WG5hU0l2T09aTTdQeGlleGswN0gzNGRRMTZyUnE2WldUckRuVjRwT0Y0Yk1LU1lsVjgyeThXUGJKQzFrTg?oc=5"
-        },
-        {
-          "title": "A $26.9 million loss was down from $49.5 million a year earlier at Teladoc Health. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSFpNSWI1bzJualZrMGRPQ1lWQXk3VUNhWks4N1RuSXk3RWhZMzZLRjJzMjFPcUxhNk81SndXZkFJQk5NeEpjUV9qUnFQQ2JFa2g1YTVndkZPVTE4RFVkNFdsUmlFYUdvTWZUVzJiZWF5UklfeUNMZWtVTjV0azJwSklJa2Z3SzVLZk9nRm52NUhmSVlfN1BJejhheWg?oc=5"
-        },
-        {
-          "title": "Teladoc Health Reports Third Quarter 2026 Results",
-          "source": "Finviz",
-          "url": "/news/410518/teladoc-health-reports-third-quarter-2026-results"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-28",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1477449/000147744926000050/tdoc-20261028.htm"
-      },
-      "float_shares": "180.37M",
-      "short_float": "17.74%",
-      "daily_pct": 6.67,
-      "prev_close": 6.88,
-      "industry": "Digital Health",
-      "technical_status": "Fail (Avg $Vol $28M < $100M)",
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (Avg $Vol $55M < $100M)",
       "verification": {
         "status": "Verified",
         "confidence_score": 95,
@@ -459,13 +64,13 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Q3 2026 earnings",
+        "primary_claim": "Capri Holdings (CPRI) reported Q2 earnings and revenues that topped estimates.",
         "discrepancy_note": ""
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -475,147 +80,60 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "BHC",
-      "price": 7.63,
-      "gap_pct": 10.26,
-      "pm_volume": 181930,
-      "avg_vol_10d": 2557999,
-      "avg_dollar_vol": 19517532,
-      "mkt_cap": 2588014765,
-      "rvol": 4.01,
-      "adr_pct": 4.27,
+      "ticker": "MDLZ",
+      "price": 66.83,
+      "gap_pct": 6.88,
+      "pm_volume": 94270,
+      "avg_vol_10d": 7445802,
+      "avg_dollar_vol": 497602948,
+      "mkt_cap": 79807536644,
+      "rvol": 1.16,
+      "adr_pct": 1.81,
       "category": "Earnings",
-      "theme": "Mixed Earnings & Debt Reduction",
-      "reasoning": "Bausch Health reported mixed Q3 results with program misses but strong adjusted EPS, debt redemption, and share repurchase, driving BHC +9.67%.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 86,
-      "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Bausch Health (BHC) reported Q3 net income of **$436 million**, adjusted EPS of **$1.77 per share**, and revenue of **$2.94 billion**. The company also announced the **full redemption of 8.500% Senior Notes Due 2027** and a **US$50 Million Share Repurchase Program**, despite **two drug programs missing main goals** and a **Salix write-down**.",
-        "impact": "The positive financial management actions and solid adjusted earnings appear to have offset negative clinical news, suggesting improved capital structure and shareholder returns, leading to a significant upward move."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nBausch Health reported Q3 net income of **$436 million** and adjusted earnings of **$1.77 per share**, on revenue of **$2.94 billion**. Despite these positive financial figures, the company also disclosed a **Salix write-down** and that **two drug programs missed their main goals**. The stock reacted positively, rising **+9.67%**.\n\n• **The Growth (Momentum)**\nBeyond the reported financial results, Bausch Health demonstrated proactive capital management by announcing the **full redemption of 8.500% Senior Notes Due 2027**. Furthermore, the company initiated a **US$50 Million Share Repurchase Program**, signaling confidence and a commitment to enhancing shareholder value. These actions contribute to positive momentum by addressing debt and returning capital.\n\n• **The Guide**\nThe mixed nature of the earnings, with clinical program setbacks juxtaposed against strong adjusted financial performance and shareholder-friendly capital actions, suggests a complex outlook. The debt reduction and share repurchase could provide a floor for the stock, while the drug program misses introduce uncertainty regarding future pipeline potential and growth drivers.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Two drug programs missed their main goals. Bausch Health (BHC) recorded a Salix write-down. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQRG1oMG9SNzNrekN4cUVfTU9pR1FGLVhNMDdZc3kyNXNwRFJIaldOa1Y2MUsyTWl2YXhwNm5URXNVOXA2ME5NSlBSaXZXOElMMGo3VTk1bGI4S0NvUjgzUTFaZUU3S05fdEZQalVzeTNqR2p0dHJUV3Y1TEdwbDB4cGJkTkZ1cDN2amZlMndyWGxfLVZPZnc2TFFtOVJPbU5yT2tyNzZVRThsRXA0enhvZFB4dFk3MlNkOGtB?oc=5"
-        },
-        {
-          "title": "Bausch: Q3 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/bausch-q3-earnings-snapshot-211855239.html"
-        },
-        {
-          "title": "Bausch Health Announces Full Redemption of 8.500% Senior Notes Due 2027",
-          "source": "Finviz",
-          "url": "/news/410566/bausch-health-announces-full-redemption-of-8500-senior-notes-due-2027"
-        },
-        {
-          "title": "Bausch Health Announces US$50 Million Share Repurchase Program",
-          "source": "Finviz",
-          "url": "/news/410567/bausch-health-announces-us50-million-share-repurchase-program"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-28",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/885590/000088559026000121/bhc-20261028.htm"
-      },
-      "float_shares": "331.34M",
-      "short_float": "2.76%",
-      "daily_pct": 9.67,
-      "prev_close": 6.92,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $20M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "BHC +9.67%",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CMG",
-      "price": 31.28,
-      "gap_pct": 8.88,
-      "pm_volume": 567196,
-      "avg_vol_10d": 22349054,
-      "avg_dollar_vol": 699078409,
-      "mkt_cap": 36355457663,
-      "rvol": 1.3,
-      "adr_pct": 3.46,
-      "category": "Earnings",
-      "theme": "Earnings Beat & Positive Outlook",
-      "reasoning": "CMG surged after reporting **higher revenue** and **beating its comp guide**, with the CEO expecting **sustained sales growth** and **modestly higher sales** for the year.",
+      "theme": "Earnings Beat & PT Hike",
+      "reasoning": "Mondelez (MDLZ) Q3 profit **beat** expectations, while revenue **fell slightly short**, leading TD Cowen to **raise** its price target to **$75**.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Consumer - E-Commerce",
+      "grade": "C",
+      "finviz_theme": "Others",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Catalyst: CMG filed an 8-K on **2026-10-28** for earnings, with headlines indicating the company **beat its own comparable sales guide** and logged **higher revenue**. Impact: The positive sales momentum and forward guidance, including expectations for **modestly higher sales** this year and continued **same-store sales growth**, fueled a significant **7%** rise in shares, despite an earnings miss.",
-        "impact": ""
+        "catalyst": "Mondelez International (MDLZ) reported Q3 earnings, with **profit beating expectations** and **revenue falling slightly short**. The company's **profit and sales rose** primarily driven by **emerging market growth**. Following the report, **TD Cowen raised its stock price target to $75** based on **volume growth**.",
+        "impact": "The positive earnings surprise on profit and a supportive analyst re-rating from TD Cowen provides a tailwind for MDLZ's stock momentum. The performance in emerging markets signals sustained growth opportunities, potentially offsetting broader revenue challenges."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nChipotle reported **higher revenue** and successfully **beat its own comparable sales guide** for Q3. Despite **missing on earnings** due to margins paying for traffic, the market reacted positively, with Chipotle stock popping and shares rising **7%**.\n\n• **The Growth (Momentum)**\nHeadlines indicate **sustained sales momentum in Q3**, a key driver of the stock's positive reaction. The company's CEO stated that **same-store sales growth will continue**, highlighting ongoing operational strength in its core business.\n\n• **The Guide**\nChipotle provided a positive outlook, stating it **expects modestly higher sales this year**. This forward guidance, partly driven by the expansion of drive-thru 'Chipotlanes' to **more stores**, reinforces confidence in continued topline growth and future performance.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nMondelez International (MDLZ) announced **Q3 profit beats**, although **revenue fell slightly short** of expectations. Despite the minor revenue miss, the company reported an overall **rise in both profit and sales**, significantly propelled by robust **emerging market growth**. This mixed but generally positive financial performance contributed to the stock climbing.\n\n• **The Growth (Momentum)**\nThe company's performance, particularly the underlying **volume growth**, prompted **TD Cowen** to reassess its outlook. As a result, the firm **raised** Mondelez's **stock price target to $75**. This upgrade signals analyst confidence in MDLZ's continued operational execution and potential for future appreciation, reinforcing positive momentum for the stock.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Chipotle stock pops on sustained sales momentum in Q3 - Yahoo Finance",
+          "title": "Mondelez International, Inc. (MDLZ) Stock Forecasts - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOdUZ0c0U5Zzg2RmNEaVM5VW5aMjNPTHhJd2JuTGExRWJMZjY1ek4zWFZnUE1UUFFmaHA2WjhJWWJGdHJWRThvU0toaHk4Znl4eGpuRm5nUFppMWdSbnZHVHpJVWlaR281Y2pyUWlDWFBIWHpHYm9TODZBajJCbXdQLVpGUnJMbnUySFRRbHpXeWJfbldoakZoLUhIVVRHTlY1U1VySEc0LWFWa1pxbEpCZzgtXzFrY1JM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNTTBnY3lqcUZpMS1VWE1NUUtXZmprdVNMUmlUaWowUld1b3luYlE0NWZIVTVjei1RdlR0ZGhqZGh3UE1nRlJha1BnS1RlVG4yaGVKclpqMzIwZW5uMjU0QU8tSDlQSjJYWDhFM00tXzFtb1RnMVg2RUNmbklFZDFUdHdlM1J6Y0ZGV3hNYg?oc=5"
         },
         {
-          "title": "Chipotle shares rise 7% after CEO says same-store sales growth will continue - CNBC",
+          "title": "Mondelez International (NASDAQ:MDLZ) Q3 Profit Beats as Revenue Falls Slightly Short - ChartMill",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNWHUzaE81RUpUZm5MY3RnRFhJcUl3bDN4SVRKbEVicVk4V2FaTDhVQjhMZE1OalFrN3NkWVZmaWdGelJpQlFKQktHMGZrMjhYdGozQ1ZiRHZGM0EtWlJrNnFjalU1NjBZUGNNcml5SzNHWFBnTTlqamRxRDNEYjh0UTJOWG1fMGPSAYwBQVVfeXFMTmFwSlJyX0xXV2VyLXdKb0JXRUd5ZVFwbkpvTjg4YXlseEZoaGwxckxsaU9kLTdyN3ZCSzd4elJ0Q2swM2NTdkZiSTYtcWJkcnZoVldkSHdCaU1kYVhGLWlrcm9leWtzZ2xkcndfT29GbXBneXFPdktrZTR5VmFQSDJSZzMxSkZvQ19nRko?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWHFaTXJkSWdYeEIxWmlLRzZnR2J1Q0JhcVM4MjN5WS1GdGFfNWVNT24xS3doMzRNb190VWZVY2IyU185MWREUzNjUWpReldPS01ZbGJfLXNPdFAtaDZMdGtrZmowOHdYZFlZVGhkamNXTXdZTW9WVEczQWdqb2QyUWVJdzcxdWdpTmV0c3A0dWZIMlA5ZWhLV1lLZ0c2NDBDY2duQWtHbmEtc1EzeUE3RW9QVnVSdjBsX3V4VjJ0QkZaMjVsaGJyR1JTSG5rZw?oc=5"
         },
         {
-          "title": "Chipotle Beats Its Own Comp Guide But Misses On Earnings As Margins Pay For Traffic",
-          "source": "Finviz",
-          "url": "/news/410820/chipotle-beats-its-own-comp-guide-but-misses-on-earnings-as-margins-pay-for-traffic"
+          "title": "TD Cowen raises Mondelez stock price target to $75 on volume growth - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNVTEyemNIRlJKVk40S0Z1RTNQY1lrNzdXR2hMam5tZGY2VGdjWmdBOExlQm9JM21EV0g1MndWTlNxNnFwdHFZaG5GT2I3SUZ5bnVlaE5CenRwNUZhdF9OOXhuVEcwdDBVbXFlRGlpb2lLTERQbkt4dzJFVHlnWkFOS00zZE9QZzBKUWhBNGt6WFlibTBnSDVHQWs4WWR3dlVsSS03a2ZNT3NvdjVNSHctQzdrOG5fSlBhNnFISlFUT3VLRXl1?oc=5"
         },
         {
-          "title": "Chipotle Logs Higher Revenue as Same-Restaurant Sales Climb",
+          "title": "Mondelez climbs on earnings beat",
           "source": "Finviz",
-          "url": "https://www.wsj.com/business/earnings/chipotle-logs-higher-revenue-as-same-restaurant-sales-climb-4f8b2ba5?mod=wsj_FV"
+          "url": "https://finance.yahoo.com/markets/stocks/articles/mondelez-climbs-earnings-beat-213340700.html"
         },
         {
-          "title": "Chipotle expects modestly higher sales this year as drive-thru 'Chipotlanes' come to more stores",
+          "title": "Mondelez Profit, Sales Rise on Emerging Market Growth",
           "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/chipotle-expects-modestly-higher-sales-this-year-as-drive-thru-chipotlanes-come-to-more-stores-4f255bbc?mod=mw_FV"
+          "url": "https://www.wsj.com/business/earnings/mondelez-profit-sales-rise-on-emerging-market-growth-049ffe2a?mod=wsj_FV"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-10-28",
+        "filing_date": "2026-10-29",
         "form": "8-K",
         "items": [
           "2.02",
@@ -623,106 +141,14 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1058090/000105809026000103/cmg-20261028.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1103982/000162828026068233/mdlz-20261029.htm"
       },
-      "float_shares": "1.26B",
-      "short_float": "3.43%",
-      "daily_pct": 2.68,
-      "prev_close": 28.73,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (ADR 3.5% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "beating its comp guide",
-        "discrepancy_note": "Source A (Finviz) explicitly states 'Chipotle Beats Its Own Comp Guide' and 'comp sales beat'. Source B (Google News) mentions 'sustained sales momentum', 'same-store sales growth', 'Strong Q3 Revenue', and 'Traffic Growth', which imply strong sales performance, but it does not specifically confirm 'beating its comp guide' or 'comp sales beat'. Therefore, not both sources confirm this specific claim with matching specifics."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "CVNA",
-      "price": 63.71,
-      "gap_pct": 7.88,
-      "pm_volume": 183215,
-      "avg_vol_10d": 8843404,
-      "avg_dollar_vol": 563413269,
-      "mkt_cap": 64982386425,
-      "rvol": 1.97,
-      "adr_pct": 4.68,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Carvana reported better-than-expected Q3 revenue and lifted full-year adjusted EBITDA outlook, triggering a premarket share surge.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "A",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Carvana announced **record Third Quarter 2026 results**, with **Q3 revenue beating expectations** and causing shares to **surge around 9% in premarket trading**. The company also **lifted its full-year adjusted EBITDA outlook**, despite **missing on EPS** but achieving **record 39% unit growth**.",
-        "impact": "The strong revenue performance and upward revision to EBITDA guidance signal improving operational efficiency and demand, likely sustaining positive momentum and analyst re-ratings."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nCarvana Co. reported **better-than-expected quarterly revenue** for Q3 2026, leading to a significant **surge of around 9%** in premarket trading. This strong top-line performance overshadowed a reported **miss on EPS**, demonstrating investor confidence in the company's revenue generation capabilities.\n\n• **The Growth (Momentum)**\nVehicle sales climbed **nearly 40%**, contributing to **record 39% unit growth** and a soaring profit. This substantial growth in unit sales and overall profit suggests robust demand and effective market penetration, albeit at the cost of **thinner unit margins**.\n\n• **The Guide**\nManagement **lifted its full-year adjusted EBITDA outlook**, indicating an improved profitability forecast for the remainder of 2026. This upward revision to guidance is a strong positive signal for future financial performance, potentially driving sustained momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Carvana Announces Record Third Quarter 2026 Results - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQVWlaZlA0Y1F2SS03ejVaeXI5b0wxNGZLc3E0ajBteGlFamdfUGtWU3lJVnhleS1GZ2RMNUJOWGdlTFBrN2tqUDF4X2tuQU8wVGtrLTFGVVAwUDg3SjUxc3NYcldvZ0Nwc2Y1eFY1aDJLRENmVTBZUk15d2tSQkRuYTlKR3lKbDVrejUxSEMtbHM3cU9wU1Z5b1d6YXNZaTFaWkVKdktR?oc=5"
-        },
-        {
-          "title": "Carvana Misses On EPS As Record 39% Unit Growth Comes At The Cost Of Thinner Unit Margins",
-          "source": "Finviz",
-          "url": "/news/410900/carvana-misses-on-eps-as-record-39-unit-growth-comes-at-the-cost-of-thinner-unit-margins"
-        },
-        {
-          "title": "Carvana shares rise after Q3 revenue beats expectations",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/carvana-shares-rise-q3-revenue-204536410.html"
-        },
-        {
-          "title": "Carvana Profit Soars as Vehicle Sales Climb Nearly 40%",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/business/earnings/carvana-profit-soars-as-vehicle-sales-climb-nearly-40-8e0355ab?mod=wsj_FV"
-        },
-        {
-          "title": "Carvana: Q3 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/carvana-q3-earnings-snapshot-201245077.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-28",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082026000066/cvna-20261028.htm"
-      },
-      "float_shares": "672.58M",
-      "short_float": "12.51%",
-      "daily_pct": -0.3,
-      "prev_close": 59.05,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Pass",
+      "float_shares": "1.27B",
+      "short_float": "2.52%",
+      "daily_pct": 1.07,
+      "prev_close": 62.53,
+      "industry": "Others",
+      "technical_status": "Fail (ADR 1.8% < 4%)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 85,
@@ -730,209 +156,190 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "lifted full-year adjusted EBITDA outlook",
-        "discrepancy_note": "Source B [3] states 'Carvana (CVNA) Stock Looks Reasonable Despite Lower EBITDA Guidance', directly contradicting the claim that the full-year adjusted EBITDA outlook was 'lifted'. Finviz news sources mention Q3 revenue beats and profit increases, but none specifically confirm or deny a 'lifted full-year adjusted EBITDA outlook'."
+        "primary_claim": "TD Cowen to raise its price target to $75",
+        "discrepancy_note": "Source B ([5] Investing.com) explicitly states 'TD Cowen raises Mondelez stock price target to $75'. Source A (Finviz) does not contain any mention of TD Cowen or a $75 price target across its provided headlines."
       },
-      "gates_passed": 5,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": true
+        "gate_adr": false
       },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     },
     {
-      "ticker": "DASH",
-      "price": 180.5,
-      "gap_pct": 6.5,
-      "pm_volume": 313965,
-      "avg_vol_10d": 4031311,
-      "avg_dollar_vol": 727651636,
-      "mkt_cap": 73444073568,
-      "rvol": 0.95,
-      "adr_pct": 4.19,
-      "category": "New Contract/Partnership",
-      "theme": "Acquisition of Instacart",
-      "reasoning": "DoorDash announced the acquisition of Instacart for **$17 billion**, triggering a significant strategic consolidation in the delivery sector.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A+",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini+edgar",
+      "ticker": "AZN",
+      "price": 184.68,
+      "gap_pct": 5.89,
+      "pm_volume": 65147,
+      "avg_vol_10d": 3036702,
+      "avg_dollar_vol": 560818125,
+      "mkt_cap": 270477973697,
+      "rvol": 0.89,
+      "adr_pct": 1.8,
+      "category": "Thematic Narratives",
+      "theme": "Drug Pipeline Potential",
+      "reasoning": "AstraZeneca CEO highlights **over $20B potential** from **2027 drug trial readouts** and reports **12 late-stage studies** with **positive results**, boosting future growth narrative.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "DoorDash filed an **8-K** on **2026-10-29** related to a Material Contract or Agreement, confirming its intent to **acquire Instacart for $17 billion**. This major deal was highlighted in recent news headlines.",
-        "impact": "This acquisition represents a significant market consolidation, potentially reducing competition and expanding DoorDash's market share and service offerings, impacting its long-term growth trajectory."
+        "catalyst": "AstraZeneca's CEO sees **over $20B potential** from **2027 drug trial readouts**, building on the company's strong pipeline. This follows news of **12 late-stage drug studies** showing **positive results**, further bolstering the company's future growth prospects.",
+        "impact": "The news signals a strong future revenue stream and pipeline momentum, potentially driving a significant re-rating of AZN as investors factor in substantial upcoming drug launches."
       },
-      "analysis_details": "• **Impact**\nDoorDash officially disclosed a Material Contract or Agreement via an **8-K filing** on **October 29, 2026**, confirming the **acquisition of Instacart for $17 billion**. This move, reported by Google News, consolidates two major players in the on-demand delivery sector, signifying a massive expansion of DoorDash's market footprint.\n\n• **Strategic Value**\nThe **$17 billion** Instacart acquisition provides DoorDash with substantial strategic advantages, including a broader customer base, enhanced delivery network, and potentially reduced competitive pressure. This transformative deal positions DoorDash for accelerated growth and market dominance in the consumer e-commerce and logistics space.",
+      "analysis_details": "• **The Narrative**\nAstraZeneca's CEO is projecting significant future growth, anticipating **over $20B potential** from **2027 drug trial readouts**. This forward-looking statement is underpinned by recent success, with **12 late-stage drug studies** reportedly showing **positive results**, indicating a robust pipeline of new treatments.\n\n• **Explosiveness**\nThe explicit quantification of **over $20B potential** from specific future events (**2027 drug trial readouts**) combined with current positive results from **12 late-stage studies** provides a clear long-term growth catalyst. This creates a strong narrative around pipeline value and future market share gains, which can drive sustained investor interest and momentum in the stock.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "DoorDash Announces Date and Time Change of Third Quarter 2026 Financial Results and Conference Call",
-          "source": "Finviz",
-          "url": "/news/411033/doordash-announces-date-and-time-change-of-third-quarter-2026-financial-results-and-conference-call"
-        },
-        {
-          "title": "IPO Edge Nasdaq Firesides Scheduled for Dec 8",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/ipo-edge-nasdaq-firesides-scheduled-222359804.html"
-        },
-        {
-          "title": "FTC orders Walmart, Delta and others to share how they use personal data to set prices and pay",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/economy/policy/articles/ftc-orders-walmart-delta-others-211247864.html"
-        },
-        {
-          "title": "3 Popular Stocks Seeing a Surge in Options Volume Today",
-          "source": "Finviz",
-          "url": "/news/410355/3-popular-stocks-seeing-a-surge-in-options-volume-today"
-        },
-        {
-          "title": "DoorDash to acquire Instacart for $17 billion - CNBC",
+          "title": "AstraZeneca CEO Sees Over $20B Potential From 2027 Drug Trial Readouts – AZN Stock Eyes Breakout After Q3 Earnings Beat - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBoNHJyZ0ZzT3cxLU11VWxiTWVWVm9QTEc4SV8wZDlLYnV5Y3VRMVM4VlZIcDl5ZlpRNngwU0luczVkeEVTM1JfbzQ4bFpsemgydjVYbTl6eFlhRUE3UVlrU0hPSWpVYTFIUVNTaEpmdVU1NUHSAXhBVV95cUxPbGRfa2FDQVZfWnplOFJzMjZRYUNhYVJPUHVRTGQxUWV5SFRlbGFfalhKTHN0MVVBQ0dNLVZEamxENkdKeXduUy1idzVLc3pHX3MtU0wxaGZYVmRnVEpLN3FMbl9NZHpFajVsdEFRZTRVMmQ0WHluTFg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQSjZWM29pWmZKMkh6bEduREZZMEpUVWRvUDU2OWhKdy0xd08xeGRfYWNRdDNCazZlelRzQkZTYTZoWnlGdll1T2p3eC1TTW5NYnU2dk9wdFdiaEJGeXhmNkNpcnNFRVZrNzh2eERrQ2h1SjIxV3dHQ3hoWXp0eXdjc2M2TjFmQnJPbVJHWlo4aks2Tlpu?oc=5"
+        },
+        {
+          "title": "12 late-stage drug studies show positive results at AstraZeneca - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQMHhjOURyOU9KZjlCUWRiZFhFVjJBWWQ0azlEQWhDREtPVjNBSGlzdWRobnU4UjlHSFZvQXF3b0xndlhMcmRJcENkcDktYTFHUW0wWkZZZGZZNzZsQVlyT09XbTBXRGV1THBBZjZiSXZOa3pqZ2dIVXFaVTBvRnYzdkRETzk2NmFGT1Mwag?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "1.50B",
+      "short_float": "0.21%",
+      "daily_pct": 2.88,
+      "prev_close": 174.4,
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (ADR 1.8% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "over $20B potential from 2027 drug trial readouts",
+        "discrepancy_note": "Finviz News provides no details. Only one article within Google News (Yahoo Finance [1]) specifically mentions 'Over $20B Potential From 2027 Drug Trial Readouts'."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "RIVN",
+      "price": 12.09,
+      "gap_pct": 5.59,
+      "pm_volume": 1629007,
+      "avg_vol_10d": 26551426,
+      "avg_dollar_vol": 321006740,
+      "mkt_cap": 16578003823,
+      "rvol": 1.61,
+      "adr_pct": 3.84,
+      "category": "Earnings",
+      "theme": "Earnings Beat & Raise",
+      "reasoning": "Rivian's shares rose after Q3 earnings beat estimates, driven by R2 deliveries and software revenue, leading to a third guidance raise.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "B",
+      "finviz_theme": "Electric Vehicles",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "RIVN reported Q3 earnings, with a **loss of $913 million** or **$0.48 per share (adjusted)**, but **beat analyst estimates** on both **revenue and earnings**. The company cited **rising software revenue** and **increasing R2 deliveries** as key drivers.",
+        "impact": "This strong performance led to a **third guidance raise**, suggesting improving operational execution and demand for its next-generation vehicles, potentially driving further positive momentum despite margin pressures."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nRivian Automotive reported a **loss of $913 million** in its third quarter, equating to an **adjusted loss of 48 cents per share**. Despite the loss, the company's **third-quarter earnings and revenue beat analyst estimates**, driving its shares higher.\n\n• **The Growth (Momentum)**\nThe revenue acceleration was primarily driven by increasing **R2 deliveries** and rising **software revenue**. This strong performance contributed to Rivian announcing a **third guidance raise**, signaling continued positive momentum.\n\n• **The Guide**\nThe **third guidance raise** for the year indicates management's increasing confidence in future performance and demand for its product lineup, particularly the R2 platform. While **margins and cash burn moved backward**, the positive revenue and delivery trends are a significant forward indicator for market sentiment and competitive positioning.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Rivian third-quarter earnings beat estimates as software revenue, R2 deliveries rise - CNBC",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE83V19lNUxMZmJGVHhqcy1PSEZwbnZrVkpvUDhwSjVqalp1OV9oU1dPM091d3JfRE5oT0c2TUJDTDFGMmgyMTM1SDVIMFBhOERFdGUyOWp5STZMVjNKVVAtS3BRcVktMHlPNG1kZXJVWV9JQmfSAXhBVV95cUxPcGp5akoxeDVIeHRwRVFkRmc0Mk95M2lEMEZWV2YxT2k1OEJYMGh1bU1BNUdkWW50Q2hWVWNCa0N1TVFrNFA4bEtvX05yTGQ0THVKeHJXWnNSTG9ReGIzTUFjc0VXWlUtbDFsRVhyOTVBVEVCZ3JpZnQ?oc=5"
+        },
+        {
+          "title": "Rivian Beats As R2 Drives Revenue Acceleration And A Third Guidance Raise, But Margins And Cash Burn Moved Backward",
+          "source": "Finviz",
+          "url": "/news/412364/rivian-beats-as-r2-drives-revenue-acceleration-and-a-third-guidance-raise-but-margins-and-cash-burn-moved-backward"
+        },
+        {
+          "title": "Rivian Automotive: Q3 Earnings Snapshot",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/rivian-automotive-q3-earnings-snapshot-205552629.html"
+        },
+        {
+          "title": "Rivian shares rise after revenue and earnings beat estimates",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/rivian-shares-rise-revenue-earnings-204600686.html"
+        },
+        {
+          "title": "Rivian Earnings Show There Is Still Life in the EV Market",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/rivian-earnings-stock-price-7b3b01b4?mod=bar_FV"
         }
       ],
       "edgar_filing": {
         "filing_date": "2026-10-29",
         "form": "8-K",
         "items": [
-          "1.01",
+          "2.02",
+          "5.02",
           "7.01",
-          "8.01",
           "9.01"
         ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1792789/000114036126041111/ef20084547_8k.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1874178/000187417826000065/rivn-20261027.htm"
       },
-      "float_shares": "378.18M",
-      "short_float": "4.09%",
-      "daily_pct": -0.63,
-      "prev_close": 169.49,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Pass",
+      "float_shares": "942.87M",
+      "short_float": "14.46%",
+      "daily_pct": -1.89,
+      "prev_close": 11.45,
+      "industry": "Electric Vehicles",
+      "technical_status": "Fail (ADR 3.8% < 4%)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 75,
+        "confidence_score": 80,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$17 billion",
-        "discrepancy_note": "Source A (Finviz News) does not mention any acquisition of Instacart by DoorDash or the $17 billion figure. Source B (Google News) confirms the acquisition and the $17 billion figure in multiple articles ([1], [4], [5]). Verification requires *both* sources to confirm the claim."
+        "primary_claim": "Rivian's Q3 earnings led to a third guidance raise.",
+        "discrepancy_note": "Source A (Finviz [1]) explicitly states 'A Third Guidance Raise'. Source B (Google News) mentions Rivian 'boosts full-year guidance' [2] and 'raises delivery forecast' [4], confirming a guidance raise, but does not specify that it is the 'third' guidance raise. Source B [5] even mentions analysts *lowering* forecasts, which could be confusing contextually, though the claim refers to company guidance."
       },
-      "gates_passed": 5,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": true
+        "gate_adr": false
       },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "LITE",
-      "price": 964.0,
-      "gap_pct": 5.48,
-      "pm_volume": 383498,
-      "avg_vol_10d": 5191679,
-      "avg_dollar_vol": 5004778556,
-      "mkt_cap": 82788208611,
-      "rvol": 0.91,
-      "adr_pct": 6.9,
-      "category": "Thematic Narratives",
-      "theme": "Potential Acquisition",
-      "reasoning": "Lumentum surged after reports indicated a potential acquisition by Marvell Technology, seeking access to high-performance optical assets.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "A+",
-      "finviz_theme": "Semiconductors - Analog",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "News surfaced that **Marvell Technology** is exploring a **potential Lumentum deal**, which sent LITE surging **+5.52% after-hours**. The report suggests this combination would provide **Marvell** access to **scarce, high-performance optical** components.",
-        "impact": "This potential acquisition could significantly revalue LITE, as M&A targets often trade up towards the rumored or expected offer price, driving strong short-term momentum."
-      },
-      "analysis_details": "• **The Narrative**\nNews reports indicate a **potential Lumentum deal** with **Marvell Technology**, sending LITE surging **+5.52% after-hours**. While a **final deal hasn't been reached**, the market is reacting positively to the prospect of **Marvell** acquiring **Lumentum**. The move caused MRVL to slide, while LITE popped as investors cheered a **possible sale**.\n\n• **Explosiveness**\nThis potential acquisition suggests a significant premium could be paid for **Lumentum**, whose market value is about **$83 billion** compared to **Marvell's $221 billion**. Such a deal would give **Marvell** access to **scarce, high-performance optical** assets, marking a strategic move. The initial surge indicates strong investor sentiment regarding the re-rating potential, setting up an explosive move if the deal progresses or becomes finalized.",
-      "peer_tickers": [
-        "COHR",
-        "AXTI",
-        "GLW"
-      ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Marvell’s Potential Lumentum Deal Sends LITE Surging, MRVL Sliding After-Hours - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOZ1NVeHVzV3dhNFdSWTRzVHBNQ0dMZ0s3cE4yWFg3bkstRDhmOUE5ckRhN2QwTDcxLTdnaGVZczRfMG1UUVFJMUtheFRuVTk1M0o4QTYzUFhwWEVSTGJMcmtPZjZVWGZNOGduNVlKU0h2dERvUEQ2c2V5YUJLbEN1TzZxUVRTSTFlYmxFUHljSzZwVHdiak4xUnJlTXF0TlFXOV9zcQ?oc=5"
-        },
-        {
-          "title": "Marvells Potential Lumentum Deal Sends LITE Surging, MRVL Sliding After-Hours",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/marvell-potential-lumentum-deal-sends-232041510.html"
-        },
-        {
-          "title": "Lumentum’s stock pops as investors cheer a possible sale to Marvell - MarketWatch",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxORVROZ19hYjgyRW5UWnB2dkFPb2FQbWRiZlJYOEQzRURxNTE3WUdqOU9seFZHaDh4YVVBRW9ONlFsaGYxUG5WUFBCVjYyQ2dMcDdrOWVSVXdvTXIyQ0c1UEtuam9LM3NnUTBuMXZqbUdFZG5NQlliZXd6OTZZV3pwM1RWSTRWWVpSSWd0MkJ0VEFCX0pfTGtNc3BNU21nbTA2WFJGaFFRWEVDaks5dEE?oc=5"
-        },
-        {
-          "title": "Lumentum Faces A Whisper Above Its Own Guidance As Laser Supply Sets The Ceiling",
-          "source": "Finviz",
-          "url": "/news/410968/lumentum-faces-a-whisper-above-its-own-guidance-as-laser-supply-sets-the-ceiling"
-        },
-        {
-          "title": "Lumentum Jumps On Marvell Buyout Report",
-          "source": "Finviz",
-          "url": "https://www.investors.com/news/technology/lumentum-stock-jumps-marvell-buyout?mod=IBD_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "89.09M",
-      "short_float": "8.57%",
-      "daily_pct": 5.52,
-      "prev_close": 913.95,
-      "industry": "Semiconductors - Analog",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Lumentum is facing a potential acquisition by Marvell Technology.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 8,
-    "large_gaps": 3,
-    "total_headlines": 40,
+    "small_gaps": 4,
+    "large_gaps": 0,
+    "total_headlines": 14,
     "monthly_cost_usd": 0.01
   }
 }
