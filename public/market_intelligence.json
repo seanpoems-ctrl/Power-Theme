@@ -1,31 +1,31 @@
 {
-  "generated_at": "2026-10-29 16:45 ET",
+  "generated_at": "2026-10-29 20:20 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 769.36,
-      "open": 768.79,
-      "high": 770.76,
-      "low": 766.62,
-      "close": 769.36,
-      "prev_open": 771.43,
-      "prev_close": 772.31,
-      "volume": 37840090,
-      "change_pct": -0.38
+      "price": 772.31,
+      "open": 771.43,
+      "high": 773.36,
+      "low": 769.24,
+      "close": 772.31,
+      "prev_open": 767.34,
+      "prev_close": 769.66,
+      "volume": 30133800,
+      "change_pct": 0.34
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 715.34,
-      "open": 716.57,
-      "high": 718.07,
-      "low": 711.62,
-      "close": 715.34,
-      "prev_open": 724.12,
-      "prev_close": 725.61,
-      "volume": 35582934,
-      "change_pct": -1.42
+      "price": 725.61,
+      "open": 724.12,
+      "high": 726.14,
+      "low": 720.3,
+      "close": 725.61,
+      "prev_open": 715.12,
+      "prev_close": 721.25,
+      "volume": 30507400,
+      "change_pct": 0.6
     },
     "^VIX": {
       "label": "VIX",
@@ -41,44 +41,44 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 102.85,
-      "open": 101.96,
-      "high": 103.0,
-      "low": 99.79,
-      "close": 102.85,
+      "price": 102.74,
+      "open": 102.8,
+      "high": 102.94,
+      "low": 102.6,
+      "close": 102.74,
       "prev_open": 100.17,
       "prev_close": 102.78,
-      "volume": 239445,
-      "change_pct": 0.07
+      "volume": 4358,
+      "change_pct": -0.04
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 63954.19,
-      "open": 63738.98,
-      "high": 64308.71,
-      "low": 63660.3,
-      "close": 63954.19,
-      "prev_open": 62569.08,
-      "prev_close": 63268.37,
-      "volume": 165400000,
-      "change_pct": 1.08
+      "price": 64152.93,
+      "open": 64344.37,
+      "high": 64589.04,
+      "low": 64152.93,
+      "close": 64152.93,
+      "prev_open": 63738.98,
+      "prev_close": 63954.19,
+      "volume": 0,
+      "change_pct": 0.31
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26039.68,
-      "open": 25724.02,
-      "high": 26106.19,
-      "low": 25720.69,
-      "close": 26039.68,
-      "prev_open": 25577.36,
-      "prev_close": 25704.02,
-      "volume": 0,
-      "change_pct": 1.31
+      "price": 25704.02,
+      "open": 25577.36,
+      "high": 25716.83,
+      "low": 25534.42,
+      "close": 25704.02,
+      "prev_open": 25369.81,
+      "prev_close": 25590.77,
+      "volume": 49500500,
+      "change_pct": 0.44
     }
   },
   "fred": {
     "hy_oas": 3.14,
-    "yield_curve": 0.38,
+    "yield_curve": 0.37,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: October 29, 2026",
-    "mood_emoji": "⚖️",
-    "mood": "Mixed Signals, Tech Underperforms",
-    "narrative": "US equities experienced a divergent session, with major tech indices pulling back while global markets showed resilience. The increase in the VIX indicated underlying caution despite broad complacency in credit spreads.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 769.36 | -0.38% | ➡️ |\n| Nasdaq 100 ETF | 715.34 | -1.42% | 📉 |\n| VIX | 17.20 | +1.71% | 📈 |\n| Crude Oil | 102.85 | +0.07% | ➡️ |\n| Nikkei 225 | 63954.19 | +1.08% | 📈 |\n| DAX | 26039.68 | +1.31% | 📈 |",
-    "macro_section": "High-yield credit spreads remain complacent at 3.14%, indicating a comfortable risk environment. The 10Y-2Y yield curve sits at +0.380, confirming a normal to steepening regime. This combination typically suggests institutional investors maintain a healthy appetite for risk, willing to deploy capital in the current economic landscape.",
-    "analysis_para1": "The global tape presented a robust picture today, with the Nikkei 225 advancing by +1.08% and the DAX gaining +1.31%, while Crude Oil held steady with a +0.07% increase. This international strength, typically indicative of global growth optimism, contrasts with the more muted US equity performance. Despite the Nasdaq 100 ETF's notable decline, US high-yield credit spreads persist in a complacent regime at 3.14%. This suggests that while domestic equities faced some headwinds, broader credit markets are not signaling significant distress, likely cushioned by positive global sentiment and ample liquidity.",
-    "analysis_para2": "Today's primary flow was dominated by a mechanical catalyst of sector rotation and profit-taking, particularly impacting high-beta technology names within the US market. The Nasdaq 100 ETF's -1.42% decline, juxtaposed with the S&P 500 ETF's milder -0.38% dip and the VIX's +1.71% ascent, points to targeted unwinding of positions or hedging activities in a specific sector. This move appears to be a defensive rotation within US equities, rather than a broad market capitulation, as global indices remained strong and credit spreads were undisturbed, suggesting investors are rebalancing portfolios ahead of potential future events or simply locking in gains from recent tech rallies.",
-    "analysis_para3": "Traders should focus on the S&P 500 ETF, currently at 769.36, and watch for its ability to hold key support levels around recent lows, such as the 760-765 range. A sustained break below 760, especially accompanied by an acceleration in VIX or any widening of credit spreads, would be a critical risk-off threshold confirming increased bearish momentum. Conversely, a strong bounce from these support levels could present tactical long opportunities, particularly if the Nasdaq 100 ETF stabilizes. Traders should maintain a nimble posture today, preparing to react to confirmation of either continued tech weakness or a broader market consolidation.",
-    "technical_signal": "No reversal pattern confirmed yet. The underlying technical health remains relatively strong, with 63.9% of S&P 500 stocks above SMA50 and 65.3% above SMA200. Traders should monitor volume on subsequent moves and watch for the S&P 500 ETF to either defend or break its immediate support levels for further directional cues.",
+    "mood_emoji": "🧐",
+    "mood": "Measured Gains, Underlying Caution",
+    "narrative": "Equity markets edged higher today with strong leadership from the Nasdaq, while an uptick in the VIX suggested underlying investor caution. Macro indicators continue to signal a generally supportive environment for risk, promoting discerning accumulation.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 772.31 | +0.34% | ➡️ |\n| Nasdaq 100 ETF | 725.61 | +0.60% | 📈 |\n| VIX | 17.20 | +1.71% | 📈 |\n| Crude Oil | 102.74 | -0.04% | ➡️ |\n| Nikkei 225 | 64152.93 | +0.31% | ➡️ |\n| DAX | 25704.02 | +0.44% | ➡️ |",
+    "macro_section": "The high-yield credit spread (BAMLH0A0HYM2) currently stands at a Complacent 3.14%, indicating a healthy risk appetite in fixed income markets. Concurrently, the 10-Year minus 2-Year Treasury Yield Curve (T10Y2Y) is Normal and Steepening at +0.370, which typically implies institutional investors are comfortable taking on risk with a positive outlook on future economic growth and inflation.",
+    "analysis_para1": "Global equity markets exhibited modest strength, with the Nikkei 225 advancing by +0.31% and the DAX rising +0.44% today, signaling a generally positive international risk sentiment. This overseas performance, coupled with Crude Oil's relatively flat movement at $102.74 (-0.04%), aligns with the observed Complacent 3.14% high-yield credit spread in the US. The global tape therefore implies a continued, albeit not exuberant, appetite for risk among US institutions, suggesting broader market stability.",
+    "analysis_para2": "Today's primary market flow appears driven by a confluence of idiosyncratic corporate catalysts rather than a singular macro event. High-conviction gappers like Carvana's significant 'Beat & Raise' earnings and DoorDash's strategic 'Acquisition of Instacart' injected substantial capital into specific growth sectors. This theme of robust company-specific news and strategic corporate actions fueled targeted accumulation, overshadowing broader market narratives and underpinning the positive, yet somewhat selective, equity performance.",
+    "analysis_para3": "Traders should interpret today's price action as a continuation of discerning accumulation, focusing on sectors and individual names with strong fundamental catalysts. With the S&P 500 ETF at 772.31, consider this level as immediate support, with deeper pullbacks towards yesterday's close or the 770 level presenting tactical long entries. A persistent rise in the VIX above 18, or a decisive break below the 765 mark on the S&P 500 ETF, would serve as a risk-off threshold, prompting a reduction in aggressive long exposure today.",
+    "technical_signal": "No reversal pattern confirmed yet. The market's internal breadth remains robust, with S&P 500 stocks above SMA50 at 63.9% and S&P stocks above SMA200 at 65.3%, reinforcing the underlying uptrend. Traders should monitor for any sustained negative divergence in breadth or an accelerated spike in the VIX above 20 as potential harbingers of a shift in market character.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "CVNA",
           "company": "Carvana Co.",
-          "reason": "The company reported a significant 'Beat & Raise' for its latest quarter, signaling strong operational performance and an improved outlook."
+          "reason": "The company's significant 'Beat & Raise' earnings report today indicates strong operational performance and an improved outlook, driving high conviction."
         },
         {
           "ticker": "DASH",
-          "company": "DoorDash, Inc.",
-          "reason": "News of the company's acquisition of Instacart provides a fresh, high-conviction catalyst for strategic expansion and market dominance."
+          "company": "DoorDash Inc.",
+          "reason": "The reported acquisition of Instacart positions DoorDash for enhanced market leadership and growth in the last-mile delivery sector."
         }
       ],
       "c_grade": [
         {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "The stock moved in sympathy with broader tech weakness without a specific fresh catalyst, presenting a pure technical flow candidate."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued investor interest in semiconductor and artificial intelligence plays provides ongoing flow-driven support, despite a lack of fresh news today."
         }
       ]
     }

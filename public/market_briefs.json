@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-29 20:20 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Measured Gains, Underlying Caution",
+    "spy_price": 772.31,
+    "spy_change_pct": 0.34,
+    "vix": 17.2,
+    "hy_oas": 3.14,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 63.9,
+    "mmth": 65.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CVNA",
+          "company": "Carvana Co.",
+          "reason": "The company's significant 'Beat & Raise' earnings report today indicates strong operational performance and an improved outlook, driving high conviction."
+        },
+        {
+          "ticker": "DASH",
+          "company": "DoorDash Inc.",
+          "reason": "The reported acquisition of Instacart positions DoorDash for enhanced market leadership and growth in the last-mile delivery sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued investor interest in semiconductor and artificial intelligence plays provides ongoing flow-driven support, despite a lack of fresh news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-29 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com Inc.",
           "reason": "Amazon is a recycled candidate showing consolidation, with traders watching for a potential technical breakout or breakdown on current flow-driven dynamics."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-08 20:38 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Risk-Off, Oil Driven",
-    "spy_price": 777.22,
-    "spy_change_pct": -0.24,
-    "vix": 15.41,
-    "hy_oas": 3.09,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 34.4,
-    "mmth": 51.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "WOLF",
-          "company": "Wolfspeed, Inc.",
-          "reason": "Wolfspeed (WOLF) confirmed a conditional loan commitment from the U.S. Department of War, signaling significant government backing for its advanced semiconductor manufacturing capabilities."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) announced a strategic partnership with a major defense contractor, aiming to integrate its AI and cloud solutions into next-generation national security platforms."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon (AMZN) exhibited range-bound trading today, attributed to persistent technical resistance near recent highs and ongoing consolidation after last week's holiday sales update."
         }
       ]
     }
