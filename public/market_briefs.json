@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-30 12:59 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Volatile Risk-Off Session",
+    "spy_price": 756.41,
+    "spy_change_pct": -1.68,
+    "vix": 20.0,
+    "hy_oas": 3.26,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 60.5,
+    "mmth": 61.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Analyst upgrade citing strong cloud growth outlook and robust holiday shopping season projections drives fresh buying interest."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Significant new offshore discovery announced today, boosting future production estimates and attracting capital amid rising crude oil prices."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued institutional rotation into AI beneficiaries sustained momentum for NVIDIA, despite broader market weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-30 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Microsoft Corporation exhibited pure technical flow today, with its established trend continuing without specific new fundamental catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-09 13:24 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Selective Strength, Reduced Volatility",
-    "spy_price": 777.85,
-    "spy_change_pct": 0.51,
-    "vix": 14.88,
-    "hy_oas": 3.15,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 37.9,
-    "mmth": 52.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LITE",
-          "company": "Lumentum Holdings Inc.",
-          "reason": "Optics sector demand surge provides a strong tailwind for Lumentum, signaling robust revenue growth potential."
-        },
-        {
-          "ticker": "ACHR",
-          "company": "Archer Aviation Inc.",
-          "reason": "Barclays upgrade to Overweight validates Archer Aviation's long-term potential in the burgeoning eVTOL market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft continues to benefit from steady institutional capital flows, reflecting its defensive growth characteristics and market leadership."
         }
       ]
     }
