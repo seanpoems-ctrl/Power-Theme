@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-10-30 20:03 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Volatility Surges, US Equities Retreat",
+    "spy_price": 769.36,
+    "spy_change_pct": -0.38,
+    "vix": 19.42,
+    "hy_oas": 3.26,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 59.5,
+    "mmth": 61.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Microsoft secured a multi-billion dollar government contract for its Azure cloud services, bolstering its already strong enterprise segment."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corp",
+          "reason": "Exxon Mobil announced a significant new oil discovery in the Permian Basin, poised to substantially boost future production capacity amidst rising crude prices."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc",
+          "reason": "Apple experienced increased selling pressure today, largely driven by broader tech sector weakness and position unwinding rather than specific fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-30 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMD",
           "company": "Advanced Micro Devices, Inc.",
           "reason": "Advanced Micro Devices is seeing renewed speculative interest on yesterday's momentum, with no fresh catalyst to drive today's action."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-09 20:18 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech Weakness, Global Caution",
-    "spy_price": 773.93,
-    "spy_change_pct": -0.42,
-    "vix": 14.84,
-    "hy_oas": 3.15,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 38.1,
-    "mmth": 52.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LITE",
-          "company": "Lumentum Holdings Inc.",
-          "reason": "Lumentum Holdings Inc. is experiencing strong upward momentum driven by a significant surge in demand across the optics sector, indicating robust fundamental tailwinds."
-        },
-        {
-          "ticker": "ACHR",
-          "company": "Archer Aviation Inc.",
-          "reason": "Archer Aviation Inc. received a notable upgrade to Overweight from Barclays, signaling increased analyst confidence and potential for future upside."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation (NVDA) showed continued technical pressure today, reflecting broader sector rebalancing and profit-taking after recent strong performance."
         }
       ]
     }
