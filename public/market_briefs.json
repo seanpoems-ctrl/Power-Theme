@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-02 15:42 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 752.39,
+    "spy_change_pct": -0.44,
+    "vix": 21.06,
+    "hy_oas": 3.44,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 63.1,
+    "mmth": 63.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce announced a major AI integration partnership with a leading cloud provider, expected to significantly boost enterprise software sales and deepen its market footprint."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly's new Alzheimer's drug received accelerated FDA approval, immediately expanding its addressable market and positioning it as a leader in a high-demand therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to experience high trading volume, driven by ongoing AI infrastructure demand and speculative flow, though no fresh catalysts emerged today to alter the technical picture."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-02 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla experienced elevated trading volume driven by ongoing speculation about its Q4 production outlook and technical price action after breaking a short-term resistance level."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-12 16:13 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Flows, Underlying Caution",
-    "spy_price": 778.07,
-    "spy_change_pct": -0.06,
-    "vix": 15.22,
-    "hy_oas": 3.15,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 38.7,
-    "mmth": 53.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a significant new partnership to supply next-generation AI accelerators for a major cloud provider, boosting its data center segment outlook."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly reported positive Phase 3 clinical trial results for its novel obesity and metabolic disorder treatment, exceeding efficacy expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continued debate over Q4 production and delivery targets, coupled with CEO Elon Musk's social media activity, fueled significant intraday volatility."
         }
       ]
     }
