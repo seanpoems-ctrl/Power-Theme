@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T02:07:10.838191+00:00",
+  "generated_at": "2026-11-02T23:02:32.517173+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3087,7 +3087,7 @@
       "time_et": "09:45",
       "event": "S&P Global Manufacturing PMI Final",
       "impact": "Low",
-      "actual": null,
+      "actual": "54.9",
       "forecast": "56",
       "previous": "55.9",
       "currency": "USD"
@@ -3097,7 +3097,7 @@
       "time_et": "10:00",
       "event": "ISM Manufacturing New Orders",
       "impact": "Low",
-      "actual": null,
+      "actual": "55.5",
       "forecast": null,
       "previous": "55.3",
       "currency": "USD"
@@ -3107,9 +3107,9 @@
       "time_et": "10:00",
       "event": "Construction Spending MoM",
       "impact": "Low",
-      "actual": null,
+      "actual": "-1.9",
       "forecast": "0.4",
-      "previous": "0.9",
+      "previous": "2",
       "currency": "USD"
     },
     {
@@ -3117,7 +3117,7 @@
       "time_et": "10:00",
       "event": "ISM Manufacturing Prices",
       "impact": "Low",
-      "actual": null,
+      "actual": "75.2",
       "forecast": "77",
       "previous": "77.9",
       "currency": "USD"
@@ -3127,7 +3127,7 @@
       "time_et": "10:00",
       "event": "ISM Manufacturing Employment",
       "impact": "Low",
-      "actual": null,
+      "actual": "52.4",
       "forecast": null,
       "previous": "52.7",
       "currency": "USD"
@@ -3137,7 +3137,7 @@
       "time_et": "10:00",
       "event": "ISM Manufacturing PMI",
       "impact": "Low",
-      "actual": null,
+      "actual": "55.5",
       "forecast": "54.6",
       "previous": "54.5",
       "currency": "USD"
@@ -3157,7 +3157,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.15",
       "forecast": null,
       "previous": "4.21",
       "currency": "USD"
@@ -3167,7 +3167,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.04",
       "forecast": null,
       "previous": "4.05",
       "currency": "USD"
@@ -3220,6 +3220,26 @@
       "actual": null,
       "forecast": null,
       "previous": "9.3",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-03",
+      "time_et": "10:00",
+      "event": "Durable Goods Orders ex Defense MoM Final",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "2.2",
+      "previous": "0.3",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-03",
+      "time_et": "10:00",
+      "event": "Durable Goods Orders Ex Transp MoM Final",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "0.5",
+      "previous": "0.3",
       "currency": "USD"
     },
     {
@@ -4039,7 +4059,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.15",
       "currency": "USD"
     },
     {
@@ -4049,7 +4069,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "4.04",
       "currency": "USD"
     },
     {
@@ -4596,6 +4616,46 @@
       "date": "2026-11-13",
       "time_et": "13:00",
       "event": "Baker Hughes Total Rigs Count",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-16",
+      "time_et": "08:30",
+      "event": "NY Empire State Manufacturing Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "25.5",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-16",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-16",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-16",
+      "time_et": "12:00",
+      "event": "NOPA Crush Report",
       "impact": "Low",
       "actual": null,
       "forecast": null,
