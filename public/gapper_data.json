@@ -1,62 +1,41 @@
 {
-  "scan_time": "2026-10-30 08:55 ET",
+  "scan_time": "2026-11-02 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CPRI",
-      "price": 17.82,
-      "gap_pct": 10.96,
-      "pm_volume": 272575,
-      "avg_vol_10d": 3103255,
-      "avg_dollar_vol": 55300004,
-      "mkt_cap": 1825244940,
-      "rvol": 1.65,
-      "adr_pct": 4.16,
-      "category": "Earnings",
-      "theme": "Q2 Earnings Beat",
-      "reasoning": "Capri Holdings (CPRI) reported Q2 earnings and revenues that topped estimates, driving the stock higher.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
+      "ticker": "BRAI",
+      "price": 2.7,
+      "gap_pct": 10.22,
+      "pm_volume": 451375,
+      "avg_vol_10d": 12113818,
+      "avg_dollar_vol": 32707309,
+      "mkt_cap": 504916202,
+      "rvol": 0.14,
+      "adr_pct": 22.91,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
       "grade": "C",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini+edgar",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
       "analysis_detail": {
-        "catalyst": "Capri Holdings (CPRI) filed an **8-K** on **2026-10-30** detailing **Q2 Earnings and Revenues**, which **topped estimates**. The company's **Q2 Profit Beat** led to a significant market reaction.",
-        "impact": "The positive earnings surprise and revenue beat are likely to generate strong upward momentum for CPRI stock, potentially attracting further institutional interest."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nCapri Holdings (CPRI) delivered a strong financial performance for its **Q2**, with both **earnings and revenues topping analyst estimates**. The reported **Q2 Profit Beat** was well-received by the market, leading to an immediate positive reaction in the stock price.\n\n• **The Growth (Momentum)**\nFollowing the announcement, **Capri Stock Bounced Back 8.4%** on the day. This robust performance indicates that the market views these results as a strong positive catalyst, suggesting potential for continued momentum as investors re-evaluate the company's growth trajectory and profitability.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Capri Holdings (CPRI) Q2 Earnings and Revenues Top Estimates - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQRzlSNWxnZEwtTnpVR01XQmNSLTF0c3QyWUdGRHIyVlltQ0xOSjBzODZVVGlrYmZFaUw5MFF5SXE0RERoYzdKaDZqTllzdkNwLThqbHl6eXFnY2FCcy1xSWVtZHRYT1pWQXFiN2NmdmRvOEE1N1ZxREo3ODUydTZHbHNGR0ZhYjdWU1VXeTA0dzRHYW5Ha1VvUGtfTmE?oc=5"
-        },
-        {
-          "title": "Capri Stock Bounces Back 8.4% on Q2 Profit Beat - WWD",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQN28zU0ZUanByYlE5RWh1MXhQYzRQdkF2OVc2bkhpbGdHQkJRUW9Mb2ZHV2gwcnU5ZmRBcG9uU0dnZGpoY3E0TGlxSGkwQ2RJT25PY2NoRXdCVjQycVJ5eEtFb0dBYjZJWnNMSHotYTFwdFg2M3pMVFRNYXo0MTJyRngzdU91TlVOVlh4YXVodk9QVlEwN0lNdg?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-30",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1530721/000153072126000092/cpri-20261030.htm"
-      },
-      "float_shares": "110.76M",
-      "short_float": "12.91%",
-      "daily_pct": 5.04,
-      "prev_close": 16.06,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (Avg $Vol $55M < $100M)",
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "206.09M",
+      "short_float": "0.46%",
+      "daily_pct": -19.93,
+      "prev_close": 2.45,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $33M < $100M)",
       "verification": {
         "status": "Verified",
         "confidence_score": 95,
@@ -64,13 +43,13 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Capri Holdings (CPRI) reported Q2 earnings and revenues that topped estimates.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
       },
-      "gates_passed": 3,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -80,266 +59,69 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "MDLZ",
-      "price": 66.83,
-      "gap_pct": 6.88,
-      "pm_volume": 94270,
-      "avg_vol_10d": 7445802,
-      "avg_dollar_vol": 497602948,
-      "mkt_cap": 79807536644,
-      "rvol": 1.16,
-      "adr_pct": 1.81,
-      "category": "Earnings",
-      "theme": "Earnings Beat & PT Hike",
-      "reasoning": "Mondelez (MDLZ) Q3 profit **beat** expectations, while revenue **fell slightly short**, leading TD Cowen to **raise** its price target to **$75**.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "ticker": "ECHO",
+      "price": 104.0,
+      "gap_pct": 7.28,
+      "pm_volume": 94550,
+      "avg_vol_10d": 4147295,
+      "avg_dollar_vol": 431318680,
+      "mkt_cap": 28191688793,
+      "rvol": 1.14,
+      "adr_pct": 4.2,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
       "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini+edgar",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
       "analysis_detail": {
-        "catalyst": "Mondelez International (MDLZ) reported Q3 earnings, with **profit beating expectations** and **revenue falling slightly short**. The company's **profit and sales rose** primarily driven by **emerging market growth**. Following the report, **TD Cowen raised its stock price target to $75** based on **volume growth**.",
-        "impact": "The positive earnings surprise on profit and a supportive analyst re-rating from TD Cowen provides a tailwind for MDLZ's stock momentum. The performance in emerging markets signals sustained growth opportunities, potentially offsetting broader revenue challenges."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nMondelez International (MDLZ) announced **Q3 profit beats**, although **revenue fell slightly short** of expectations. Despite the minor revenue miss, the company reported an overall **rise in both profit and sales**, significantly propelled by robust **emerging market growth**. This mixed but generally positive financial performance contributed to the stock climbing.\n\n• **The Growth (Momentum)**\nThe company's performance, particularly the underlying **volume growth**, prompted **TD Cowen** to reassess its outlook. As a result, the firm **raised** Mondelez's **stock price target to $75**. This upgrade signals analyst confidence in MDLZ's continued operational execution and potential for future appreciation, reinforcing positive momentum for the stock.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Mondelez International, Inc. (MDLZ) Stock Forecasts - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNTTBnY3lqcUZpMS1VWE1NUUtXZmprdVNMUmlUaWowUld1b3luYlE0NWZIVTVjei1RdlR0ZGhqZGh3UE1nRlJha1BnS1RlVG4yaGVKclpqMzIwZW5uMjU0QU8tSDlQSjJYWDhFM00tXzFtb1RnMVg2RUNmbklFZDFUdHdlM1J6Y0ZGV3hNYg?oc=5"
-        },
-        {
-          "title": "Mondelez International (NASDAQ:MDLZ) Q3 Profit Beats as Revenue Falls Slightly Short - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWHFaTXJkSWdYeEIxWmlLRzZnR2J1Q0JhcVM4MjN5WS1GdGFfNWVNT24xS3doMzRNb190VWZVY2IyU185MWREUzNjUWpReldPS01ZbGJfLXNPdFAtaDZMdGtrZmowOHdYZFlZVGhkamNXTXdZTW9WVEczQWdqb2QyUWVJdzcxdWdpTmV0c3A0dWZIMlA5ZWhLV1lLZ0c2NDBDY2duQWtHbmEtc1EzeUE3RW9QVnVSdjBsX3V4VjJ0QkZaMjVsaGJyR1JTSG5rZw?oc=5"
-        },
-        {
-          "title": "TD Cowen raises Mondelez stock price target to $75 on volume growth - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNVTEyemNIRlJKVk40S0Z1RTNQY1lrNzdXR2hMam5tZGY2VGdjWmdBOExlQm9JM21EV0g1MndWTlNxNnFwdHFZaG5GT2I3SUZ5bnVlaE5CenRwNUZhdF9OOXhuVEcwdDBVbXFlRGlpb2lLTERQbkt4dzJFVHlnWkFOS00zZE9QZzBKUWhBNGt6WFlibTBnSDVHQWs4WWR3dlVsSS03a2ZNT3NvdjVNSHctQzdrOG5fSlBhNnFISlFUT3VLRXl1?oc=5"
-        },
-        {
-          "title": "Mondelez climbs on earnings beat",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/mondelez-climbs-earnings-beat-213340700.html"
-        },
-        {
-          "title": "Mondelez Profit, Sales Rise on Emerging Market Growth",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/business/earnings/mondelez-profit-sales-rise-on-emerging-market-growth-049ffe2a?mod=wsj_FV"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-29",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1103982/000162828026068233/mdlz-20261029.htm"
-      },
-      "float_shares": "1.27B",
-      "short_float": "2.52%",
-      "daily_pct": 1.07,
-      "prev_close": 62.53,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 1.8% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "TD Cowen to raise its price target to $75",
-        "discrepancy_note": "Source B ([5] Investing.com) explicitly states 'TD Cowen raises Mondelez stock price target to $75'. Source A (Finviz) does not contain any mention of TD Cowen or a $75 price target across its provided headlines."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AZN",
-      "price": 184.68,
-      "gap_pct": 5.89,
-      "pm_volume": 65147,
-      "avg_vol_10d": 3036702,
-      "avg_dollar_vol": 560818125,
-      "mkt_cap": 270477973697,
-      "rvol": 0.89,
-      "adr_pct": 1.8,
-      "category": "Thematic Narratives",
-      "theme": "Drug Pipeline Potential",
-      "reasoning": "AstraZeneca CEO highlights **over $20B potential** from **2027 drug trial readouts** and reports **12 late-stage studies** with **positive results**, boosting future growth narrative.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "AstraZeneca's CEO sees **over $20B potential** from **2027 drug trial readouts**, building on the company's strong pipeline. This follows news of **12 late-stage drug studies** showing **positive results**, further bolstering the company's future growth prospects.",
-        "impact": "The news signals a strong future revenue stream and pipeline momentum, potentially driving a significant re-rating of AZN as investors factor in substantial upcoming drug launches."
-      },
-      "analysis_details": "• **The Narrative**\nAstraZeneca's CEO is projecting significant future growth, anticipating **over $20B potential** from **2027 drug trial readouts**. This forward-looking statement is underpinned by recent success, with **12 late-stage drug studies** reportedly showing **positive results**, indicating a robust pipeline of new treatments.\n\n• **Explosiveness**\nThe explicit quantification of **over $20B potential** from specific future events (**2027 drug trial readouts**) combined with current positive results from **12 late-stage studies** provides a clear long-term growth catalyst. This creates a strong narrative around pipeline value and future market share gains, which can drive sustained investor interest and momentum in the stock.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "AstraZeneca CEO Sees Over $20B Potential From 2027 Drug Trial Readouts – AZN Stock Eyes Breakout After Q3 Earnings Beat - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQSjZWM29pWmZKMkh6bEduREZZMEpUVWRvUDU2OWhKdy0xd08xeGRfYWNRdDNCazZlelRzQkZTYTZoWnlGdll1T2p3eC1TTW5NYnU2dk9wdFdiaEJGeXhmNkNpcnNFRVZrNzh2eERrQ2h1SjIxV3dHQ3hoWXp0eXdjc2M2TjFmQnJPbVJHWlo4aks2Tlpu?oc=5"
-        },
-        {
-          "title": "12 late-stage drug studies show positive results at AstraZeneca - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQMHhjOURyOU9KZjlCUWRiZFhFVjJBWWQ0azlEQWhDREtPVjNBSGlzdWRobnU4UjlHSFZvQXF3b0xndlhMcmRJcENkcDktYTFHUW0wWkZZZGZZNzZsQVlyT09XbTBXRGV1THBBZjZiSXZOa3pqZ2dIVXFaVTBvRnYzdkRETzk2NmFGT1Mwag?oc=5"
-        }
-      ],
+      "headlines": [],
       "edgar_filing": null,
-      "float_shares": "1.50B",
-      "short_float": "0.21%",
-      "daily_pct": 2.88,
-      "prev_close": 174.4,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (ADR 1.8% < 4%)",
+      "float_shares": "132.52M",
+      "short_float": "21.61%",
+      "daily_pct": -0.74,
+      "prev_close": 96.94,
+      "industry": "—",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 85,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "over $20B potential from 2027 drug trial readouts",
-        "discrepancy_note": "Finviz News provides no details. Only one article within Google News (Yahoo Finance [1]) specifically mentions 'Over $20B Potential From 2027 Drug Trial Readouts'."
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary catalyst claim states 'No immediate fundamental catalyst found'. However, Source B [1] reports 'EchoStar gains on report of SpaceX wireless service talks', which represents a specific, immediate fundamental catalyst for price action, directly contradicting the initial claim."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "RIVN",
-      "price": 12.09,
-      "gap_pct": 5.59,
-      "pm_volume": 1629007,
-      "avg_vol_10d": 26551426,
-      "avg_dollar_vol": 321006740,
-      "mkt_cap": 16578003823,
-      "rvol": 1.61,
-      "adr_pct": 3.84,
-      "category": "Earnings",
-      "theme": "Earnings Beat & Raise",
-      "reasoning": "Rivian's shares rose after Q3 earnings beat estimates, driven by R2 deliveries and software revenue, leading to a third guidance raise.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "Electric Vehicles",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "RIVN reported Q3 earnings, with a **loss of $913 million** or **$0.48 per share (adjusted)**, but **beat analyst estimates** on both **revenue and earnings**. The company cited **rising software revenue** and **increasing R2 deliveries** as key drivers.",
-        "impact": "This strong performance led to a **third guidance raise**, suggesting improving operational execution and demand for its next-generation vehicles, potentially driving further positive momentum despite margin pressures."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nRivian Automotive reported a **loss of $913 million** in its third quarter, equating to an **adjusted loss of 48 cents per share**. Despite the loss, the company's **third-quarter earnings and revenue beat analyst estimates**, driving its shares higher.\n\n• **The Growth (Momentum)**\nThe revenue acceleration was primarily driven by increasing **R2 deliveries** and rising **software revenue**. This strong performance contributed to Rivian announcing a **third guidance raise**, signaling continued positive momentum.\n\n• **The Guide**\nThe **third guidance raise** for the year indicates management's increasing confidence in future performance and demand for its product lineup, particularly the R2 platform. While **margins and cash burn moved backward**, the positive revenue and delivery trends are a significant forward indicator for market sentiment and competitive positioning.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Rivian third-quarter earnings beat estimates as software revenue, R2 deliveries rise - CNBC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE83V19lNUxMZmJGVHhqcy1PSEZwbnZrVkpvUDhwSjVqalp1OV9oU1dPM091d3JfRE5oT0c2TUJDTDFGMmgyMTM1SDVIMFBhOERFdGUyOWp5STZMVjNKVVAtS3BRcVktMHlPNG1kZXJVWV9JQmfSAXhBVV95cUxPcGp5akoxeDVIeHRwRVFkRmc0Mk95M2lEMEZWV2YxT2k1OEJYMGh1bU1BNUdkWW50Q2hWVWNCa0N1TVFrNFA4bEtvX05yTGQ0THVKeHJXWnNSTG9ReGIzTUFjc0VXWlUtbDFsRVhyOTVBVEVCZ3JpZnQ?oc=5"
-        },
-        {
-          "title": "Rivian Beats As R2 Drives Revenue Acceleration And A Third Guidance Raise, But Margins And Cash Burn Moved Backward",
-          "source": "Finviz",
-          "url": "/news/412364/rivian-beats-as-r2-drives-revenue-acceleration-and-a-third-guidance-raise-but-margins-and-cash-burn-moved-backward"
-        },
-        {
-          "title": "Rivian Automotive: Q3 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/rivian-automotive-q3-earnings-snapshot-205552629.html"
-        },
-        {
-          "title": "Rivian shares rise after revenue and earnings beat estimates",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/rivian-shares-rise-revenue-earnings-204600686.html"
-        },
-        {
-          "title": "Rivian Earnings Show There Is Still Life in the EV Market",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/rivian-earnings-stock-price-7b3b01b4?mod=bar_FV"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-10-29",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "5.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1874178/000187417826000065/rivn-20261027.htm"
-      },
-      "float_shares": "942.87M",
-      "short_float": "14.46%",
-      "daily_pct": -1.89,
-      "prev_close": 11.45,
-      "industry": "Electric Vehicles",
-      "technical_status": "Fail (ADR 3.8% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Rivian's Q3 earnings led to a third guidance raise.",
-        "discrepancy_note": "Source A (Finviz [1]) explicitly states 'A Third Guidance Raise'. Source B (Google News) mentions Rivian 'boosts full-year guidance' [2] and 'raises delivery forecast' [4], confirming a guidance raise, but does not specify that it is the 'third' guidance raise. Source B [5] even mentions analysts *lowering* forecasts, which could be confusing contextually, though the claim refers to company guidance."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
+    "small_gaps": 2,
     "large_gaps": 0,
-    "total_headlines": 14,
+    "total_headlines": 0,
     "monthly_cost_usd": 0.01
   }
 }
