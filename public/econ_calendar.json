@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T01:46:29.739570+00:00",
+  "generated_at": "2026-11-02T02:07:10.838191+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3108,7 +3108,7 @@
       "event": "Construction Spending MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.6",
+      "forecast": "0.4",
       "previous": "0.9",
       "currency": "USD"
     },
@@ -3118,7 +3118,7 @@
       "event": "ISM Manufacturing Prices",
       "impact": "Low",
       "actual": null,
-      "forecast": "77.5",
+      "forecast": "77",
       "previous": "77.9",
       "currency": "USD"
     },
@@ -3138,7 +3138,7 @@
       "event": "ISM Manufacturing PMI",
       "impact": "Low",
       "actual": null,
-      "forecast": "54.7",
+      "forecast": "54.6",
       "previous": "54.5",
       "currency": "USD"
     },
@@ -3258,7 +3258,7 @@
       "event": "Factory Orders MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "1.1",
+      "forecast": "1.2",
       "previous": "0.1",
       "currency": "USD"
     },
@@ -3268,7 +3268,7 @@
       "event": "JOLTs Job Openings",
       "impact": "Low",
       "actual": null,
-      "forecast": "7.1",
+      "forecast": "7.13",
       "previous": "7.079",
       "currency": "USD"
     },
@@ -3375,16 +3375,6 @@
     {
       "date": "2026-11-04",
       "time_et": "08:30",
-      "event": "Balance of Trade",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "-107.6",
-      "previous": "-105.6",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-11-04",
-      "time_et": "08:30",
       "event": "Imports",
       "impact": "Low",
       "actual": null,
@@ -3400,6 +3390,16 @@
       "actual": null,
       "forecast": null,
       "previous": "315.2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-04",
+      "time_et": "08:30",
+      "event": "Balance of Trade",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "-108",
+      "previous": "-105.6",
       "currency": "USD"
     },
     {
@@ -3598,7 +3598,7 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1710",
       "previous": "1701",
       "currency": "USD"
     },
@@ -3608,7 +3608,7 @@
       "event": "Unit Labour Costs QoQ Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": "1.5",
+      "forecast": "0.6",
       "previous": "1.2",
       "currency": "USD"
     },
@@ -3628,7 +3628,7 @@
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "197",
+      "forecast": "195",
       "previous": "194",
       "currency": "USD"
     },
@@ -3638,7 +3638,7 @@
       "event": "Nonfarm Productivity QoQ Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": "3.1",
+      "forecast": "2.5",
       "previous": "1.4",
       "currency": "USD"
     },
@@ -3778,7 +3778,7 @@
       "event": "Nonfarm Payrolls Private",
       "impact": "Low",
       "actual": null,
-      "forecast": "60",
+      "forecast": "58",
       "previous": "46",
       "currency": "USD"
     },
@@ -3788,8 +3788,18 @@
       "event": "Manufacturing Payrolls",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "4",
       "previous": "9",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-06",
+      "time_et": "08:30",
+      "event": "Average Weekly Hours",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "34.4",
+      "previous": "34.4",
       "currency": "USD"
     },
     {
@@ -3800,16 +3810,6 @@
       "actual": null,
       "forecast": null,
       "previous": "-17",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-11-06",
-      "time_et": "08:30",
-      "event": "Average Weekly Hours",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "34.4",
       "currency": "USD"
     },
     {
@@ -3828,7 +3828,7 @@
       "event": "Average Hourly Earnings YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "2.9",
       "previous": "3",
       "currency": "USD"
     },
@@ -3938,7 +3938,7 @@
       "event": "Michigan Consumer Sentiment Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": "47.3",
+      "forecast": "48.2",
       "previous": "48",
       "currency": "USD"
     },
@@ -3978,7 +3978,7 @@
       "event": "Consumer Credit Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "12",
+      "forecast": "11.8",
       "previous": "8.28",
       "currency": "USD"
     },
