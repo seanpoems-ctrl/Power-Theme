@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-02 06:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Sharp Equity Sell-Off",
+    "spy_price": 755.72,
+    "spy_change_pct": -1.77,
+    "vix": 18.91,
+    "hy_oas": 3.26,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 59.5,
+    "mmth": 60.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Reports stronger-than-expected Q3 earnings and provides an optimistic outlook for AI chip demand, defying broader market weakness."
+        },
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Announces positive Phase 3 trial results for a new oncology drug, opening up a significant new revenue stream and bolstering its pharmaceutical pipeline."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Building on yesterday's analyst commentary regarding production targets, the stock sees continued volatility from retail flow with no new material news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-10-30 20:03 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continued debate over Q4 production and delivery targets, coupled with CEO Elon Musk's social media activity, fueled significant intraday volatility."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-12 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Resilient Gains, Volatility Undercurrent",
-    "spy_price": 778.57,
-    "spy_change_pct": 0.6,
-    "vix": 15.48,
-    "hy_oas": 3.15,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 38.1,
-    "mmth": 52.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a groundbreaking new cloud security platform today, expected to significantly expand its enterprise market share."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla received a large government contract for autonomous fleet development, boosting projections for Q4 vehicle deliveries."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMD",
-          "company": "Advanced Micro Devices, Inc.",
-          "reason": "Advanced Micro Devices is seeing renewed speculative interest on yesterday's momentum, with no fresh catalyst to drive today's action."
         }
       ]
     }
