@@ -1,50 +1,56 @@
 {
-  "scan_time": "2026-11-02 07:55 ET",
+  "scan_time": "2026-11-03 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
       "ticker": "BRAI",
-      "price": 2.7,
-      "gap_pct": 10.22,
-      "pm_volume": 451375,
-      "avg_vol_10d": 12113818,
-      "avg_dollar_vol": 32707309,
-      "mkt_cap": 504916202,
-      "rvol": 0.14,
-      "adr_pct": 22.91,
+      "price": 2.92,
+      "gap_pct": 16.8,
+      "pm_volume": 575337,
+      "avg_vol_10d": 12497664,
+      "avg_dollar_vol": 36493179,
+      "mkt_cap": 515220604,
+      "rvol": 0.12,
+      "adr_pct": 22.65,
       "category": "Others",
       "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
+      "reasoning": "No specific fundamental catalyst from a new analyst rating or price target revision for Braiin, suggesting technical flows.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 54,
       "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "finviz_theme": "AI Enterprise Software",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Unknown",
+        "impact": "Speculative. A generic headline about **Analyst Ratings, Stock Forecast and Price Target** does not confirm a new, impactful catalyst. Significant moves often occur on low float squeezes or institutional rebalancing without specific news. | Impact: Highly speculative due to the absence of concrete news. Price action would primarily be driven by supply/demand imbalances or short covering, creating a risk of a gap and trap scenario for momentum traders."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **What Happened**\nThere is no specific catalyst identified for Braiin (**BRAI**) beyond a generic Google News headline mentioning **Analyst Ratings, Stock Forecast and Price Target** published on **2026-11-02 13:29 UTC**. This headline does not specify any new rating action, target change, or firm, preventing confirmation of a fundamental catalyst. The **RVOL: 0.1x** indicates exceptionally low trading volume compared to its **Avg $ Vol (20d): $36M**, suggesting limited liquidity.\n\n• **Key Consideration**\nGiven the lack of specific news from the provided headline and the extremely low **RVOL**, any significant price movement in BRAI would likely be attributed to technical factors such as low-float dynamics or institutional rebalancing, rather than a verifiable fundamental event. This situation presents a high risk for momentum trades due to the absence of a clear narrative and potential for volatility without sustained follow-through.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Braiin (BRAI) Analyst Ratings, Stock Forecast and Price Target - Moomoo",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiywJBVV95cUxPdHY1cDZhWEVJUzJpRFRwdzEtUTlOVTZ1V0J2MEtGVXFwMDB0Y3N6dk83ZUkzenE2RFhKMV9NbVFFcDdlbXJNUGlPbHVHMGdiM1VPc2VXUFBwUFhFaDZpZkxyUC1PQlpzU2pOX2Q3MnRwQWRJekRtZlRJVnVxNy1laGFqNDVGZkJ1LTVhVnBIb1dVTlJONG82Y3NoYmQtSUt4eFRyOHdZZlBkYXJrc1lsR2hnRnc2SEJpUkctbGstdERNc250TjdwQmVzS1l5cWpGYjdPc3YxZE5jWWtoTHZZU2R4bDlpVGtwQk1UOVhuaW9UQU93c0k1SHl0Q0w3UndTTFVrYUhrMUtuYTRVZklBOW1Eb24wVjFrSDVCNFlYZVdJaUtEQlI0dTlJTUFYNVUwUG9pWlEtS0hrVVJCcGFvMDVUTTVnbXM1U180?oc=5"
+        }
+      ],
       "edgar_filing": null,
       "float_shares": "206.09M",
       "short_float": "0.46%",
-      "daily_pct": -19.93,
-      "prev_close": 2.45,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $33M < $100M)",
+      "daily_pct": 2.04,
+      "prev_close": 2.5,
+      "industry": "AI Enterprise Software",
+      "technical_status": "Fail (Avg $Vol $36M < $100M)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
+        "status": "Discrepancy",
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "primary_claim": "No specific fundamental catalyst from a new analyst rating or price target revision for Braiin",
+        "discrepancy_note": "The primary claim states 'No specific fundamental catalyst from a new analyst rating or price target revision'. However, Google News Source [1] 'Braiin (BRAI) Analyst Ratings, Stock Forecast and Price Target - Moomoo' directly relates to analyst ratings and price targets. While it doesn't explicitly confirm a *new* revision, the headline's existence suggests that analyst coverage and related information are current enough to be reported, creating a discrepancy with the claim that there is *no* specific fundamental catalyst from a new analyst rating or price target revision."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -59,48 +65,401 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ECHO",
-      "price": 104.0,
-      "gap_pct": 7.28,
-      "pm_volume": 94550,
-      "avg_vol_10d": 4147295,
-      "avg_dollar_vol": 431318680,
-      "mkt_cap": 28191688793,
-      "rvol": 1.14,
-      "adr_pct": 4.2,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "ticker": "AEHR",
+      "price": 59.0,
+      "gap_pct": 14.63,
+      "pm_volume": 108939,
+      "avg_vol_10d": 2328283,
+      "avg_dollar_vol": 137368697,
+      "mkt_cap": 1680986866,
+      "rvol": 1.69,
+      "adr_pct": 9.4,
+      "category": "Earnings",
+      "theme": "Earnings Beat & Raise",
+      "reasoning": "AEHR surged after reporting strong **Q1 earnings**, **crushing estimates**, and **lifting its outlook**, signaling robust growth.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 79,
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Packaging",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "AEHR filed an **8-K** on **2026-11-02** for its **Q1 earnings**, with headlines reporting the company **crushed estimates**. Additionally, management **lifted its outlook** for the coming periods.",
+        "impact": "The significant financial outperformance and raised guidance signal **accelerated momentum** and **improved profitability outlook**, which could drive further investor interest and potential analyst re-ratings."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nAehr Test Systems reported its **Q1 earnings** on **2026-11-02**, as indicated by the **8-K filing**. News headlines highlight that the company **crushed estimates**, signaling a significant positive surprise against market expectations. This strong performance occurred even as the stock was trading **near its lows**.\n\n• **The Guide**\nFollowing the impressive Q1 results, Aehr Test Systems **lifted its outlook**. This upward revision in guidance demonstrates management's increased confidence in future business performance and potential market expansion. The **improved outlook** provides a strong bullish signal to investors.",
+      "peer_tickers": [
+        "COHU",
+        "ONTO",
+        "MKSI"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "What Aehr Test Systems (AEHR) Said on Its Q1 Earnings Call - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNcy1QZExqbjlBdThSNDdPaC1ETzV4M1FNSnRzX3lEUmFZaExNRl8tdTRsdXc1SXJfRk1yaHAyQW90SUZ1S2dabXhneFJtYWJLSTFMTm1DUnNvNGVHelI4UWZIRHFneUFtSG9nM1cta0g3WjNVZXA2aGtlbVFzZklMMjMzUEpnT212aWhpWXpqM3J2ZFdWSzhV?oc=5"
+        },
+        {
+          "title": "Aehr Test Systems Crushes Estimates And Lifts Outlook, But The Stock Arrives Near Its Lows",
+          "source": "Finviz",
+          "url": "/news/413842/aehr-test-systems-crushes-estimates-and-lifts-outlook-but-the-stock-arrives-near-its-lows"
+        },
+        {
+          "title": "Apple headlines Monday's earnings slate",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-s-p-500-nasdaq-rebound-midterm-elections-earnings-economic-data-apple/card/apple-headlines-monday-s-earnings-slate-jtMY5otAj4mkkZhh1VCJ?mod=mw_FV"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-02",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1040470/000165495426009385/aehr_8k.htm"
+      },
+      "float_shares": "31.07M",
+      "short_float": "18.04%",
+      "daily_pct": -6.23,
+      "prev_close": 51.47,
+      "industry": "Semiconductors - Packaging",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AEHR reported Q1 revenue of $33.0 Million",
+        "discrepancy_note": "Source A [2] mentions 'First Quarter Fiscal 2027 Revenue of $33.0 Million', but none of the provided headlines from Source B explicitly state this specific dollar amount for Q1 revenue. While Source B headlines confirm Q1 results were reported and led to a stock jump, the specific numerical claim for Q1 revenue is not present in both sources."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "CMPS",
+      "price": 9.34,
+      "gap_pct": 11.06,
+      "pm_volume": 126465,
+      "avg_vol_10d": 3330929,
+      "avg_dollar_vol": 31110877,
+      "mkt_cap": 1164590052,
+      "rvol": 11.42,
+      "adr_pct": 7.31,
+      "category": "Earnings",
+      "theme": "EPS Beat",
+      "reasoning": "Compass Pathways reported a **Q3 loss of $0.31 a share**, which **beat FactSet's estimate of $0.39 loss**, signaling a narrower loss than anticipated.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 99,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Compass Pathways posted a **Q3 loss of $0.31 a share**, outperforming the **FactSet estimate of a $0.39 loss**.",
+        "impact": "The narrower-than-expected loss may provide temporary positive sentiment, as the company is burning less cash than analysts projected."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nCompass Pathways reported a **Q3 loss of $0.31 a share**, which favorably compares to the **FactSet estimated loss of $0.39 a share**. This indicates the company is managing its expenses or operational burn better than consensus expectations.\n\n• **The Growth (Momentum)**\nThe earnings flash highlights the company's financial performance by reporting a **Q3 loss of $0.31 a share**. This beat on EPS estimates can generate positive short-term momentum, as the market often reacts favorably to better-than-expected financial results, even for companies not yet profitable.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Earnings Flash (CMPS) Compass Pathways Posts Q3 Loss $0.31 a Share, Vs. FactSet Est of $0.39 Loss - Moomoo",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNSmFrZUFmWTVSR0ZxazIyMExQN0xuTHpCMnpXajJ4RUFKMVlHeGN6TUNTbnRfQUNfYUtzd21mY1dNa3J4OEc4ZHlJMUg5MWNUUkxzdWc0M0ZXRTE0b1VfbV9wbWkxaVFTWWNBN2VEZTRjcWpyMll0Q3lGdXFRRU9RXzNmdFUyb3JKZzlsMWpGZ2hGS0Q5X2Qxd1FWMjNBT3dt?oc=5"
+        },
+        {
+          "title": "Compass Pathways stock closes at $8.41 below $9.24 pivot - The Cryptonomist",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNZEFlX1ZnUzJWekpTVUdteW90RXhSSHNFQk85SG5VUFNaUS03TEVLb2lRNGZYZXVZN2ZnaHdZeTlLSUdjc3FhUXctZTQ4VFhaUW51S3N1WjFhUHdSV2NZa3NNWVItMzlSVURuZm0zTXlPTjVrcWxheVBwZHE2YkdEM0pkUmQ?oc=5"
+        },
+        {
+          "title": "New Joint Survey from Compass Pathways and the Depression and Bipolar Support Alliance Reveals the Lived Burden of Treatment-Resistant Depression on Patients and Caregivers",
+          "source": "Finviz",
+          "url": "/news/412971/new-joint-survey-from-compass-pathways-and-the-depression-and-bipolar-support-alliance-reveals-the-lived-burden-of-treatment-resistant-depression-on-patients-and-caregivers"
+        }
+      ],
       "edgar_filing": null,
-      "float_shares": "132.52M",
-      "short_float": "21.61%",
-      "daily_pct": -0.74,
-      "prev_close": 96.94,
-      "industry": "—",
-      "technical_status": "Pass",
+      "float_shares": "136.24M",
+      "short_float": "12.93%",
+      "daily_pct": -27.31,
+      "prev_close": 8.41,
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (Avg $Vol $31M < $100M)",
       "verification": {
         "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Compass Pathways reported a Q3 loss of $0.31 a share, which beat FactSet's estimate of $0.39 loss",
+        "discrepancy_note": "Source A (Finviz) does not contain any details regarding the Q3 loss or FactSet's estimate. Source B (Google News) [1] confirms the claim with matching specifics, but since only one of the two main sources provides the details, it's considered a discrepancy as 'BOTH sources' are required for 'Verified'."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "GRAB",
+      "price": 3.16,
+      "gap_pct": 10.49,
+      "pm_volume": 5425909,
+      "avg_vol_10d": 54425726,
+      "avg_dollar_vol": 171985294,
+      "mkt_cap": 11664558449,
+      "rvol": 1.45,
+      "adr_pct": 3.7,
+      "category": "Earnings",
+      "theme": "Break-Even Earnings Report",
+      "reasoning": "Grab reported break-even Q3 earnings, leading to a 5.54% stock surge but closing below key moving averages, indicating uncertain momentum.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "B",
+      "finviz_theme": "Consumer - E-Commerce",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Grab Holdings Limited (**GRAB**) reported **break-even earnings** for its Q3 period.",
+        "impact": "The market reacted positively initially, with the stock rising **5.54%**, but its failure to close above daily EMAs suggests potential caution despite the improved profitability."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nGrab Holdings Limited (**GRAB**) announced that it reported **break-even earnings** for its third quarter. This outcome signifies a notable improvement, moving the company to a neutral profitability position for the quarter.\n\n• **The Growth (Momentum)**\nFollowing the earnings announcement, Grab's stock rose by **5.54%**. However, despite this positive intraday move, the stock ultimately **closed below all three daily EMAs**, which suggests that the upward momentum might be encountering resistance or that investors remain cautious about the sustainability of the move.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Grab Holdings Limited (GRAB) Reports Break-Even Earnings for Q3 - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPTEJUWWhHUGdLeDhfUEJobVNiU0l3Q2liaWc4VHZ2dkF6VXRvbS1jVEU5b1BjSEN2NmRiS0lnaXpqWFhHLTJwYnJRNG5Ka2NCVzU4bGxyVnhUSk9IU2tyV1hNZmw4dUNBSXZqeXRhVkRtUHZRWjlnbXFpY2Y5RWhiZGdMVXlFblJkVEl5U3M0aW5sT1I3ZDVJa2YyX1JmZHI0?oc=5"
+        },
+        {
+          "title": "Grab stock rose 5.54%, but closed below all three daily EMAs - The Cryptonomist",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNOEkwSmNldU40XzR1Q0l3Nl9Ra3hPOXpGLVZkRlk5UVJFTTkzV2dTRlZpQWw5M2k1UHoxR05lN2NXY2tuLS1xTWlxd2lobGY0dk5GRUk4ei14bU40ZGtSN2syMXYtU2JnRlpFeEZKWU1udHB3Z2xWZDFPamFpMlFHOGRR?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "2.77B",
+      "short_float": "5.47%",
+      "daily_pct": 5.54,
+      "prev_close": 2.86,
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (ADR 3.7% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "5.54% stock surge",
+        "discrepancy_note": "Source A (Finviz) has no information. Source B (Google News) contains one headline [5] that mentions 'Grab stock rose 5.54%', which matches the claim. However, another headline [4] in Source B mentions 'GRAB Stock Shows 49% Unde', which is unclear but a different percentage. Since only one *specific article* within Google News (Source B) mentions the exact percentage, and Finviz (Source A) has no relevant information, it cannot be confirmed by *both* primary sources (Source A and Source B as a whole) with matching specifics."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "LIFE",
+      "price": 46.93,
+      "gap_pct": 10.11,
+      "pm_volume": 50189,
+      "avg_vol_10d": 1557411,
+      "avg_dollar_vol": 73089298,
+      "mkt_cap": 2769617616,
+      "rvol": 2.28,
+      "adr_pct": 5.92,
+      "category": "Others",
+      "theme": "Unknown Catalyst",
+      "reasoning": "Despite an 8-K filing for earnings, no specific financial results or company-specific news for LIFE were provided in headlines.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 60,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. No immediate fundamental catalyst found; likely technical breakout or institutional flow. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nDespite an **8-K filing on 2026-11-02** indicating **Earnings/Financial Results** for LIFE, the provided news headlines reference **Swiss Life** and **Ethos's Q3 results**, without mentioning any specific figures or outcomes for **LIFE**. There is no information to confirm a **beat, miss, or guidance change** for LIFE.\n\n• **Key Consideration**\nWith no specific company-level fundamental news, any stock movement for LIFE today is likely driven by **technical factors** or **broader market flows**. Investors should be cautious as the catalyst for any significant price action remains **unknown**, posing a **high risk of a gap and trap** scenario.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Swiss Life stock rises ahead of November results checkpoint - ad-hoc-news.de",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNR1lseV9PVWlORkVRN0sxVFRlMVp6YVpXcm9aOFBBNDJkeEg1MDhoNmZsSWlQSnFRTDd5WE1NeWZraDRSaEFwYVFINDM1Z1d6bnRuZExVeWV0dFlxekt3U3VIMWREQS04S1ZWc0hfV2d0WmR2dTJBYml1M1EzTEttYnIxekV3RUlmbWE3U3RBZnljeVpLeWdHc2JjMnFDTk03dkFFcDZYdldqR0FRLWlpdFl1X3ByRnhHSTgyZjdMZw?oc=5"
+        },
+        {
+          "title": "Ethos Crushes Q3 Estimates And Raises Guidance Again, But Third-Party Mix Shift Keeps Compressing Margins",
+          "source": "Finviz",
+          "url": "/news/413790/ethos-crushes-q3-estimates-and-raises-guidance-again-but-third-party-mix-shift-keeps-compressing-margins"
+        },
+        {
+          "title": "Ethos Reports Third Quarter Fiscal Year 2026 Financial Results",
+          "source": "Finviz",
+          "url": "/news/413527/ethos-reports-third-quarter-fiscal-year-2026-financial-results"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-02",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1788451/000119312526443655/life-20261102.htm"
+      },
+      "float_shares": "16.70M",
+      "short_float": "12.18%",
+      "daily_pct": -1.77,
+      "prev_close": 42.62,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $73M < $100M)",
+      "verification": {
+        "status": "Verified",
         "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The primary catalyst claim states 'No immediate fundamental catalyst found'. However, Source B [1] reports 'EchoStar gains on report of SpaceX wireless service talks', which represents a specific, immediate fundamental catalyst for price action, directly contradicting the initial claim."
+        "primary_claim": "No specific financial results or company-specific news for LIFE were provided in headlines.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "LSCC",
+      "price": 105.01,
+      "gap_pct": 10.03,
+      "pm_volume": 152021,
+      "avg_vol_10d": 2460634,
+      "avg_dollar_vol": 258391176,
+      "mkt_cap": 13555368187,
+      "rvol": 3.42,
+      "adr_pct": 4.67,
+      "category": "Earnings",
+      "theme": "Q3 Beat & Multi-Year Outlook",
+      "reasoning": "Lattice Semiconductor reported a blowout Q3 earnings beat, surpassing Wall Street estimates and providing a positive multi-year outlook.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 84,
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Lattice Semiconductor reported **third-quarter net income** of **$11.2 million**, with adjusted earnings of **72 cents per share**, which **surpassed Wall Street** expectations. The company also announced **record 3Q26 revenue**, up an impressive **118% YOY**.",
+        "impact": "The significant earnings beat, record revenue growth, and introduction of a multi-year outlook signal robust fundamental strength and potential for sustained momentum, despite previous market doubts."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nLattice Semiconductor (LSCC) reported a strong Q3 performance, with adjusted earnings of **72 cents per share**, which **surpassed Wall Street** estimates. The company's net income for the quarter stood at **$11.2 million**, or **8 cents per share**. Additionally, LSCC delivered **record 3Q26 revenue**, marking an impressive **118% YOY** increase.\n\n• **The Growth (Momentum)**\nThe company's **record 3Q26 revenue**, up **118% YOY**, indicates substantial growth momentum, likely driven by fresh AI demand news. This strong top-line expansion, coupled with the earnings beat, positions LSCC favorably for continued attention from growth-focused investors, moving the stock **+10.75%**.\n\n• **The Guide**\nLSCC delivered a \"blowout quarter\" and, importantly, provided its **\"first multi-year outlook.\"** While specific figures for the outlook are not detailed in the headlines, the qualitative description suggests a positive future trajectory and increased confidence from management, likely boosting investor sentiment regarding the durability of its growth.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Lattice Semiconductor (LSCC) Stock Looks Fully Valued After Fresh AI Demand News - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNcWFodWk0cHllRTNiYV82dGhibElhRHhrM3FpajR0MldNSWNCVVFCU3RvM3MydFJ6S2Q2OUtqZm5UMF9rclJySVFvczlkazZ5ME03YlppNkV3R1cxMDkwMUEwWUhKYTdtcjFTZTBxS0FoNlNLOEU1YU5oNF9VY2dFcEZxcUZ4TDBWZ3RVTnhIblBKNmJ3R0ExTnN6WHpndW03dEllcUNR?oc=5"
+        },
+        {
+          "title": "Lattice Semiconductor (LSCC) Moved Today, What Is Behind The Attention? - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPOEFVd0p3d09GSVNPWW1RTnhaYTZzQjJPWm1aemFwLTdWbHZfREl1SHRheUdTbENHUXNicDFqa09qVUJzdmVKV3lMOE9lLWYwRWtxOHl5a0JYeFR3cTZFUTdiTzl1U2hoSlNVWFo5UHBCLVY0Njd4Wl9MeHZxQ0xjRXBEc2NSaXhNS09RR2FSek9sVWN4cDVCY3RuNzZKNHdNTHREa0tn?oc=5"
+        },
+        {
+          "title": "Lattice: Q3 Earnings Snapshot",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/lattice-q3-earnings-snapshot-042936609.html"
+        },
+        {
+          "title": "Lattice Delivers A Blowout Quarter And A First Multi-Year Outlook, But A Stock Near Its Lows Signals Doubts About Durability",
+          "source": "Finviz",
+          "url": "/news/413841/lattice-delivers-a-blowout-quarter-and-a-first-multi-year-outlook-but-a-stock-near-its-lows-signals-doubts-about-durability"
+        },
+        {
+          "title": "Lattice Semiconductor Reports Record 3Q26 Revenue, Up 118% YOY",
+          "source": "Finviz",
+          "url": "/news/413476/lattice-semiconductor-reports-record-3q26-revenue-up-118-yoy"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-02",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/855658/000143774926034452/lscc20260903_8k.htm"
+      },
+      "float_shares": "140.85M",
+      "short_float": "9.42%",
+      "daily_pct": 2.66,
+      "prev_close": 95.44,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Lattice Semiconductor reported a blowout Q3 earnings beat, surpassing Wall Street estimates and providing a positive multi-year outlook.",
+        "discrepancy_note": "While both sources confirm a Q3 earnings beat and surpassing estimates, and a multi-year outlook, Source A [Finviz] headline [4] mentions 'Record 3Q26 Revenue, Up 118% YOY'. The '3Q26' appears to be a typo, as Q3 2026 is in the future. Source B [Google News] headline [2] confirms 'Record Q3 Revenue Surge' but does not provide a specific percentage or year-over-year growth figure to corroborate or contradict the '118% YOY' claim, nor does it contain the typo. The primary claim itself does not specify a revenue percentage beat, but the inclusion of such a stark, potentially erroneous, specific number in one source for the 'blowout' nature creates a discrepancy in the factual detail provided, making full verification problematic without clarification on the '3Q26' and the '118% YOY'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -111,17 +470,161 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "FISV",
+      "price": 55.8,
+      "gap_pct": 7.45,
+      "pm_volume": 178213,
+      "avg_vol_10d": 6156975,
+      "avg_dollar_vol": 343559205,
+      "mkt_cap": 27614646121,
+      "rvol": 2.04,
+      "adr_pct": 2.65,
+      "category": "Earnings",
+      "theme": "Q3 2026 Earnings Report",
+      "reasoning": "Fiserv reported its Third Quarter 2026 Results today, impacting investor sentiment and providing a clear directional catalyst.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
+      "grade": "B",
+      "finviz_theme": "Fintech - Payments",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Fiserv **reported Third Quarter 2026 Results** and a **Q3 Earnings Snapshot** on **2026-11-03**. This release provides investors with the latest financial performance data, which is a primary driver for stock movement.",
+        "impact": "The immediate price action will depend on whether the reported **Q3 2026 results** met, exceeded, or missed analyst expectations for EPS and revenue, alongside any forward guidance."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nFiserv has officially **reported its Third Quarter 2026 Results** as of **2026-11-03**. The market will now react to whether these results, detailed in the **Q3 Earnings Snapshot**, surprised to the upside or downside compared to consensus estimates for key metrics like revenue, earnings per share, and segment performance.\n\n• **The Growth (Momentum)**\nFollowing the release of **Fiserv's Third Quarter 2026 Results** today, the focus shifts to the underlying growth trends within its core businesses. Investors will scrutinize the **Q3 Earnings Snapshot** for indications of acceleration or deceleration in critical areas such as payment processing volumes, digital banking adoption, or merchant solutions, which will dictate short-term momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Fiserv: Q3 Earnings Snapshot - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPTFphZzNNWFVxbFd5Nkg5ZGd3NkxpVGZYeGZ3NHNQUGFyNDV6bnNDaUt5dVV1V285OWVCZDBkckc3OHI2NXNKOTBnRDhYT3lkdXVDcGlYeXAxQVB2OGVRZDBzMjRYMmhvZE9DVmpFd3dRNFFfSnViZXVhOF9jajN1alRn?oc=5"
+        },
+        {
+          "title": "Fiserv Reports Third Quarter 2026 Results - Fiserv",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQWE5SdFB2cTk2RGNUSV8zNURCdGZpcXhYVUlEdFUyQ1lUT3gtMnJRalo0a0Qxcmh4OGE4cUtVd2IxUDdVNlRFeGk2bEd0SlRheThReXlqa0RlVmJLQXhkQnlfeEJuM0hvX19SYVVQamhPRnpzWExNMFB5bVYtcXdNTGNhNVpvS1FCRVl4akdkUVgwLXcwejF0RzBLOFZWVURjZUlyS1RDTGw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "529.43M",
+      "short_float": null,
+      "daily_pct": 3.82,
+      "prev_close": 51.93,
+      "industry": "Fintech - Payments",
+      "technical_status": "Fail (ADR 2.6% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Fiserv reported its Third Quarter 2026 Results today",
+        "discrepancy_note": "Source A (Finviz News) provides no information to confirm or deny the claim. While Source B (Google News) headline [1] mentions 'Fiserv Reports Third Quarter 2026 Results', the absence of detail from Source A means the claim cannot be confirmed by 'BOTH sources' as required."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "BE",
+      "price": 208.75,
+      "gap_pct": 6.37,
+      "pm_volume": 298827,
+      "avg_vol_10d": 17596933,
+      "avg_dollar_vol": 3673359764,
+      "mkt_cap": 58022622909,
+      "rvol": 1.12,
+      "adr_pct": 6.92,
+      "category": "New Contract/Partnership",
+      "theme": "CRC Fuel-Cell Capacity Tie-Up",
+      "reasoning": "Bloom Energy rallied after announcing a significant tie-up with **CRC** aimed at developing **1GW of fuel-cell capacity**, driving substantial after-hours momentum.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "A",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Bloom Energy stock **rallied after-hours** following news of a strategic **tie-up** with **CRC** to target **1GW of fuel-cell capacity**.",
+        "impact": "This partnership signifies a substantial expansion opportunity for BE in the clean energy sector, potentially accelerating its market penetration and revenue growth, suggesting a re-rating of future potential."
+      },
+      "analysis_details": "• **Impact**\nBloom Energy's stock rallied **after-hours** on news of a strategic **tie-up** with **CRC**. This partnership specifically targets **1GW of fuel-cell capacity**, indicating a significant scale for the collaboration. The development suggests a material positive impact on Bloom Energy's future project pipeline and revenue prospects in the clean energy sector.\n\n• **Strategic Value**\nThis tie-up positions Bloom Energy for substantial expansion within the fuel-cell market, reinforcing its role as a key player in the clean energy transition. The **1GW capacity target** implies a long-term, high-value commitment that could significantly enhance BE's competitive standing and market footprint, attracting further institutional interest and momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "BE Stock Rallies After-Hours On CRC Tie-Up Targeting 1GW Of Fuel-Cell Capacity - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQekw1SHlLRDAtb2YyNkp0RGxlSnh3YlFrMVVqNzNXUVdzQk9Uek5IeGgzTFBhd0hHNWR5TVNGOExpbE5udG1Ub2RVQi1zT0h6LWpNaUFBSG1Pc2lvTzYyMUp3RDN4eGtNZHllTU1fX21NdExkSElac1NkM0JxVlM0WnRIdXlnYnVWRDJqU3l3c2ZiRkJuWVFB?oc=5"
+        },
+        {
+          "title": "Bloom Energy Corporation (BE) Weighed on Clough Capital’s Portfolio in Q3 2026 - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOQV93TUJnczZmQXdOUmQ2N19CNEpTUWJNbVZ1aERZeDRsZ3k2WGpXV3huMXppNDEzMWFfYnZPWjllMGdKWFcwT2NzNGdueG1FS1JDcEhTUUZXMlBWRjRNTm5HaU02MzlIX1pSSHBSSWp1elFHTHRKMlhSeExWZjd0UVowOWVZUGlXcV9HS0tsUlg1d0dveGtldVF3aW9XRk1KWkVKZUp4MA?oc=5"
+        },
+        {
+          "title": "Nvidia and Nike Lead Biggest Wave Yet of Tokenized Stock Objections",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/nvidia-nike-lead-biggest-wave-173603488.html"
+        },
+        {
+          "title": "Nvidia, Costco and 10 More Issuers Opt Out of ICE and OKXs Tokenized Stock Venue",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/nvidia-costco-10-more-issuers-093005069.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "277.97M",
+      "short_float": "6.62%",
+      "daily_pct": -3.41,
+      "prev_close": 196.25,
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "1GW of fuel-cell capacity",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 2,
-    "large_gaps": 0,
-    "total_headlines": 0,
+    "small_gaps": 7,
+    "large_gaps": 1,
+    "total_headlines": 23,
     "monthly_cost_usd": 0.01
   }
 }
