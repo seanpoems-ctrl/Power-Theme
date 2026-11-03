@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-03 13:21 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Optimistic Accumulation",
+    "spy_price": 756.17,
+    "spy_change_pct": 0.54,
+    "vix": 20.59,
+    "hy_oas": 3.43,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 63.9,
+    "mmth": 63.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AEHR",
+          "company": "AEHR Test Systems",
+          "reason": "Experienced significant upside today following a robust earnings beat and raise, signaling strong operational performance and future guidance."
+        },
+        {
+          "ticker": "LSCC",
+          "company": "Lattice Semiconductor Corporation",
+          "reason": "Jumped on strong Q3 results and an optimistic multi-year outlook, reflecting solid growth prospects in its core markets."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Continues to benefit from broad market strength and consistent cloud demand, but today's price action lacked a fresh, specific fundamental catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-03 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft",
           "reason": "Microsoft shares see an uptick in institutional buying following technical breakout signals above its 50-day moving average."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-13 14:06 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Consolidation",
-    "spy_price": 777.9,
-    "spy_change_pct": -0.03,
-    "vix": 15.54,
-    "hy_oas": 3.11,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 37.9,
-    "mmth": 53.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MRK",
-          "company": "Merck & Co.",
-          "reason": "Merck & Co. announced highly anticipated positive Phase 3 trial results for its new oncology drug, significantly exceeding efficacy expectations."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce",
-          "reason": "Salesforce secured a transformative multi-year cloud services contract with a major government agency, projected to substantially boost recurring revenue."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla",
-          "reason": "Tesla traded on renewed speculation regarding upcoming production figures, alongside ongoing concerns about increasing competition in the EV market."
         }
       ]
     }
