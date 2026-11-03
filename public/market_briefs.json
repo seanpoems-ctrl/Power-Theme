@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-02 21:38 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk Aversion Heightens, Oil Plunges",
+    "spy_price": 752.1,
+    "spy_change_pct": -0.48,
+    "vix": 21.15,
+    "hy_oas": 3.44,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 63.1,
+    "mmth": 63.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "INTC",
+          "company": "Intel Corporation",
+          "reason": "Reports indicate a major new contract win for Intel's foundry services with a leading AI chip designer, signaling a potential resurgence in its manufacturing division."
+        },
+        {
+          "ticker": "TSM",
+          "company": "Taiwan Semiconductor Manufacturing Company",
+          "reason": "Announced plans for accelerated expansion of its advanced packaging capabilities, addressing a critical bottleneck in the high-demand AI chip market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Continues to see strong cloud adoption, but today's broader tech sector weakness led to profit-taking without fresh significant news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-02 15:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla shares are exhibiting heightened intraday swings, as market participants digest recent production updates and ongoing competitive pressures, without any new significant fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-12 22:14 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Sentiment / Global Caution",
-    "spy_price": 778.1,
-    "spy_change_pct": -0.06,
-    "vix": 15.21,
-    "hy_oas": 3.15,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 39.4,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon announced a groundbreaking new cloud computing service, promising significant cost reductions and enhanced AI capabilities for enterprise clients, sparking analyst upgrades."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil secured a major long-term liquefied natural gas supply deal with a key European utility, bolstering its future revenue outlook amid rising global energy demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla shares exhibited volatility today, bouncing off a critical technical support level as investors continued to digest prior production and delivery reports."
         }
       ]
     }
