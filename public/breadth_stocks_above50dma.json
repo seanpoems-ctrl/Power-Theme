@@ -2,52 +2,40 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 2,
   "stocks": [
+    {
+      "ticker": "BUUU",
+      "company": "BUUU Group Limited",
+      "industry": "Miscellaneous Commercial Services",
+      "price": 7.38,
+      "change_pct": 28.35,
+      "adr_pct": 13.7,
+      "dollar_volume": "$6.8M",
+      "market_cap_b": 1.391,
+      "rs_ibd": 99,
+      "above50dma_pct": 70.8
+    },
     {
       "ticker": "GDYN",
       "company": "Grid Dynamics Holdings, Inc.",
       "industry": "Information Technology Services",
-      "price": 13.69,
-      "change_pct": 2.47,
-      "adr_pct": 4.9,
-      "dollar_volume": "$34.5M",
-      "market_cap_b": 1.111,
-      "rs_ibd": 94,
-      "above50dma_pct": 66.2
-    },
-    {
-      "ticker": "SGRY",
-      "company": "Surgery Partners, Inc.",
-      "industry": "Hospital/Nursing Management",
-      "price": 23.12,
-      "change_pct": -0.39,
-      "adr_pct": 3.5,
-      "dollar_volume": "$223.1M",
-      "market_cap_b": 2.98,
-      "rs_ibd": 59,
-      "above50dma_pct": 51.1
-    },
-    {
-      "ticker": "KOD",
-      "company": "Kodiak Sciences Inc",
-      "industry": "Biotechnology",
-      "price": 97.62,
-      "change_pct": -1.57,
-      "adr_pct": 6.7,
-      "dollar_volume": "$79.9M",
-      "market_cap_b": 6.136,
-      "rs_ibd": 98,
-      "above50dma_pct": 50.4
+      "price": 13.37,
+      "change_pct": -2.34,
+      "adr_pct": 5.0,
+      "dollar_volume": "$35.2M",
+      "market_cap_b": 1.075,
+      "rs_ibd": 88,
+      "above50dma_pct": 60.2
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.51,
-    "spx_1m": -2.99,
-    "spx_3m": -2.36,
-    "spx_34d": -0.14,
-    "spx_qtd": -1.63,
-    "spx_mtd": -0.51
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-11-03T04:00:15+00:00"
+  "fetched_at_utc": "2026-11-03T23:02:24+00:00"
 }
