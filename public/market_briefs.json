@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-03 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Domestic Risk-On Continues",
+    "spy_price": 754.47,
+    "spy_change_pct": 0.32,
+    "vix": 20.81,
+    "hy_oas": 3.43,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 63.9,
+    "mmth": 63.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AEHR",
+          "company": "Aehr Test Systems",
+          "reason": "Reported a significant earnings beat and raised full-year guidance, fueling strong investor conviction."
+        },
+        {
+          "ticker": "LSCC",
+          "company": "Lattice Semiconductor Corporation",
+          "reason": "Delivered a strong Q3 beat and provided an encouraging multi-year outlook, driving renewed interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Benefited from general tech sector strength and institutional flow without specific fresh news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-03 13:21 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Experienced volatility today attributed to technical trading patterns and speculative option flows, lacking any fresh fundamental news to drive its price action."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-13 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Cues / Energy Bid",
-    "spy_price": 778.01,
-    "spy_change_pct": -0.01,
-    "vix": 15.27,
-    "hy_oas": 3.11,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 39.9,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "PG",
-          "company": "Procter & Gamble",
-          "reason": "Procter & Gamble announces a new share buyback program and increases quarterly dividend, boosting investor confidence in consumer staples amid economic uncertainty."
-        },
-        {
-          "ticker": "BA",
-          "company": "Boeing",
-          "reason": "Boeing secures a significant new order for 50 737 MAX aircraft from a major international carrier, signaling a strong rebound in air travel demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft",
-          "reason": "Microsoft shares see an uptick in institutional buying following technical breakout signals above its 50-day moving average."
         }
       ]
     }
