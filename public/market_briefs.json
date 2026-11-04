@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-04 13:33 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Robust Risk-On Rally",
+    "spy_price": 768.18,
+    "spy_change_pct": 1.83,
+    "vix": 16.89,
+    "hy_oas": 3.4,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 68.1,
+    "mmth": 66.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "HL",
+          "company": "Hecla Mining",
+          "reason": "Hecla Mining (HL) rallied after reporting a significant beat on earnings and achieving record free cash flow, indicating strong operational performance and financial health."
+        },
+        {
+          "ticker": "ANET",
+          "company": "Arista Networks",
+          "reason": "Arista Networks (ANET) saw strong buying interest following its impressive beat on quarterly expectations and an optimistic guidance raise, signaling robust demand for its networking solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. (MSFT) advanced today as broader market enthusiasm lifted technology giants, with no specific fresh catalyst beyond general market flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-04 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Continued consolidation after recent gains, with flow indicating technical profit-taking rather than new fundamental developments."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-14 11:47 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off Sentiment / Elevated Volatility",
-    "spy_price": 770.59,
-    "spy_change_pct": -0.95,
-    "vix": 15.88,
-    "hy_oas": 3.16,
-    "yield_curve": 0.42,
-    "credit_status": "Complacent",
-    "s5fi": 35.0,
-    "mmth": 50.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LQDA",
-          "company": "Liquidia Technologies",
-          "reason": "The stock is gapping higher following news of a significant litigation settlement and positive updates on its commercialization efforts for key drug candidates."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Reported pre-market that it secured a major contract for its next-generation AI accelerators with a leading cloud provider, significantly boosting Q4 revenue guidance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Continues to be a key focus for institutional rebalancing flows, with price action driven primarily by broad market sentiment and options activity rather than fresh company-specific news."
         }
       ]
     }
