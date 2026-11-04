@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-04 06:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "VIX Retreat, Tech Leads Charge",
+    "spy_price": 754.35,
+    "spy_change_pct": 0.3,
+    "vix": 18.31,
+    "hy_oas": 3.43,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 63.0,
+    "mmth": 62.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a new strategic partnership with a major automotive manufacturer for its Azure AI platform in autonomous driving initiatives, signaling expanding enterprise adoption."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon is rumored to be exploring a significant expansion into prescription drug delivery in Europe, potentially disrupting the pharmaceutical supply chain."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla's recent price action appears primarily driven by short-term options flow and technical momentum, with no fresh fundamental catalysts reported this morning."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-03 19:53 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com Inc.",
           "reason": "Continues to be a key focus for institutional rebalancing flows, with price action driven primarily by broad market sentiment and options activity rather than fresh company-specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-14 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Balance / Commodity Lift",
-    "spy_price": 778.01,
-    "spy_change_pct": -0.01,
-    "vix": 15.31,
-    "hy_oas": 3.11,
-    "yield_curve": 0.42,
-    "credit_status": "Complacent",
-    "s5fi": 39.9,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil shares are poised for gains following news of a significant new drilling discovery in the Guyana region, exceeding initial estimates and boosting future production forecasts."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly is in focus after receiving accelerated FDA approval for its new Alzheimer's treatment, expanding its market potential significantly earlier than anticipated."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares show renewed algorithmic buying interest as investors rotate into high-beta names on perceived short-term technical support, despite lack of fresh fundamental news."
         }
       ]
     }
