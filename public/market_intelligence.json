@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-11-03 15:45 ET",
+  "generated_at": "2026-11-03 19:53 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 754.47,
+      "price": 754.35,
       "open": 752.73,
       "high": 757.07,
       "low": 752.41,
-      "close": 754.47,
+      "close": 754.35,
       "prev_open": 759.45,
       "prev_close": 752.1,
-      "volume": 25727843,
-      "change_pct": 0.32
+      "volume": 32156615,
+      "change_pct": 0.3
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 685.91,
-      "open": 684.2,
+      "price": 685.28,
+      "open": 684.39,
       "high": 688.69,
       "low": 683.18,
-      "close": 685.91,
+      "close": 685.28,
       "prev_open": 695.32,
       "prev_close": 681.09,
-      "volume": 29330641,
-      "change_pct": 0.71
+      "volume": 35664298,
+      "change_pct": 0.62
     },
     "^VIX": {
       "label": "VIX",
-      "price": 20.81,
+      "price": 20.83,
       "open": 21.66,
       "high": 21.91,
       "low": 20.29,
-      "close": 20.81,
+      "close": 20.83,
       "prev_open": 19.05,
       "prev_close": 21.15,
       "volume": 0,
-      "change_pct": -1.61
+      "change_pct": -1.51
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 96.75,
-      "open": 102.39,
-      "high": 98.82,
-      "low": 93.59,
-      "close": 96.75,
+      "price": 96.63,
+      "open": 96.81,
+      "high": 96.82,
+      "low": 95.73,
+      "close": 96.63,
       "prev_open": 102.39,
       "prev_close": 96.46,
-      "volume": 343289,
-      "change_pct": 0.3
+      "volume": 4743,
+      "change_pct": 0.18
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 63081.86,
-      "open": 62972.02,
-      "high": 63615.32,
-      "low": 62712.91,
-      "close": 63081.86,
-      "prev_open": 64344.37,
-      "prev_close": 63290.11,
-      "volume": 162800000,
-      "change_pct": -0.33
+      "price": 62100.28,
+      "open": 62973.16,
+      "high": 63105.47,
+      "low": 62074.0,
+      "close": 62100.28,
+      "prev_open": 62972.02,
+      "prev_close": 63081.86,
+      "volume": 0,
+      "change_pct": -1.56
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25864.62,
-      "open": 25730.06,
-      "high": 26037.28,
-      "low": 25677.86,
-      "close": 25864.62,
-      "prev_open": 25802.74,
-      "prev_close": 25981.09,
-      "volume": 0,
-      "change_pct": -0.45
+      "price": 25981.09,
+      "open": 25802.74,
+      "high": 26022.26,
+      "low": 25741.57,
+      "close": 25981.09,
+      "prev_open": 25948.61,
+      "prev_close": 25818.21,
+      "volume": 51950600,
+      "change_pct": 0.63
     }
   },
   "fred": {
     "hy_oas": 3.43,
-    "yield_curve": 0.32,
+    "yield_curve": 0.34,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 63.9,
-    "mmth": 63.3
+    "s5fi": 63.0,
+    "mmth": 62.5
   },
   "regime": {
     "credit_status": "Complacent",
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: November 03, 2026",
-    "mood_emoji": "📈",
-    "mood": "Domestic Risk-On Continues",
-    "narrative": "US equities notched modest gains today, buoyed by declining volatility and complacent credit conditions. Despite some global market softness, the domestic tape showed resilience, absorbing positive corporate catalysts.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 754.47 | +0.32% | ➡️ |\n| Nasdaq 100 ETF | 685.91 | +0.71% | 📈 |\n| VIX | 20.81 | -1.61% | 📉 |\n| Crude Oil | 96.75 | +0.30% | ➡️ |\n| Nikkei 225 | 63081.86 | -0.33% | ➡️ |\n| DAX | 25864.62 | -0.45% | ➡️ |",
-    "macro_section": "The BAMLH0A0HYM2 (HY Credit Spread) held at a 'Complacent' 3.43% today, signaling little stress in corporate credit markets. Concurrently, the T10Y2Y (10Y-2Y Yield Curve) remained in a 'Normal / Steepening' regime at +0.320. These benign macro indicators generally foster a healthy environment for institutional risk appetite, encouraging continued capital deployment into equities.",
-    "analysis_para1": "While global equity markets like the Nikkei 225 (-0.33%) and DAX (-0.45%) showed slight declines today, the US market displayed divergence. Crude Oil's marginal gain of +0.30% suggests some underlying stability in commodity demand, but the key takeaway is the steadfastness of US HY credit spreads. At a 'Complacent' 3.43%, these spreads indicate that international market jitters are not translating into a significant tightening of financial conditions or increased default risk perceptions in the US, thereby supporting continued domestic risk appetite.",
-    "analysis_para2": "Today's primary market flow was predominantly driven by strong corporate fundamentals, particularly standout earnings and outlook reports. High-conviction gappers like AEHR and LSCC, reporting significant beats and positive multi-year outlooks, acted as a mechanical catalyst, instilling confidence in specific sectors and contributing to the broader positive sentiment seen in the Nasdaq 100 ETF's +0.71% gain. This 'Earnings/Guidance-driven Rally' underscored the market's capacity to absorb positive news, further supported by the backdrop of benign credit conditions and falling volatility.",
-    "analysis_para3": "Traders should maintain long exposure with a focus on high-growth sectors showing strong fundamentals. Watch the S&P 500 ETF at 754.47, with initial support around the 750-752 range; any dips towards these levels in conjunction with stable macro signals could be seen as buying opportunities. A key trigger for further long entries would be a sustained break above 755 or continued VIX decline below 20. Risk-off thresholds include a sharp spike in the VIX above 22, or a breakdown below 748 on the S&P 500 ETF accompanied by widening credit spreads; in such a scenario, reducing exposure would be prudent.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 and S&P stocks above SMA200 are both robustly above 63%, indicating broad participation and a healthy underlying trend. Traders should continue to monitor price action for signs of exhaustion near overhead resistance or a breach of critical support levels that could signal a shift in momentum.",
+    "mood_emoji": "😊",
+    "mood": "Mild Risk-On, Steady Accumulation",
+    "narrative": "U.S. equities saw modest gains today, led by tech, while volatility eased. Global markets showed divergence, but credit indicators suggest continued institutional complacency.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 754.35 | +0.30% | ➡️ |\n| Nasdaq 100 ETF | 685.28 | +0.62% | 📈 |\n| VIX | 20.83 | -1.51% | 📉 |\n| Crude Oil | 96.63 | +0.18% | ➡️ |\n| Nikkei 225 | 62100.28 | -1.56% | 📉 |\n| DAX | 25981.09 | +0.63% | 📈 |",
+    "macro_section": "High-yield credit spreads, as measured by BAMLH0A0HYM2, registered 3.43% today, signaling a Complacent regime in credit markets. Concurrently, the 10-Year minus 2-Year Yield Curve (T10Y2Y) stands at +0.340, indicating a Normal / Steepening curve. These combined readings suggest that institutional risk appetite remains robust, with little concern for near-term credit stress or economic contraction.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 down 1.56% while the DAX rose by 0.63% and Crude Oil saw a modest 0.18% gain. Despite the pronounced decline in Asian equities, U.S. high-yield credit spreads holding firm at a Complacent 3.43% implies that this regional weakness is not broadly translating into a risk-off sentiment for U.S. institutions. The divergence suggests a localized sell-off in Japan rather than a systemic global concern impacting American fixed income and equity risk appetite, which remains supported by the stable credit environment.",
+    "analysis_para2": "The dominant 'why' behind today's observed price action appears to be a continued positive sentiment stemming from a robust corporate earnings season. With several companies reporting strong beats and raising guidance, as exemplified by today's high-conviction gappers, the market is finding mechanical support. This influx of positive micro-catalysts is aggregating to drive broader market optimism, particularly in growth-oriented sectors, and is sustaining the mild risk-on flow observed in U.S. equity indices and the easing of volatility.",
+    "analysis_para3": "Today's action warrants maintaining a cautiously bullish posture, with a focus on companies demonstrating earnings momentum. Traders should monitor the S&P 500 ETF for support at the 750 level; a hold above this threshold could signal continued upward potential. Long entries are favored on dips towards 750, particularly in high-growth names, while a decisive break below 748 would serve as a trigger for re-evaluating risk exposure. A sudden spike in the VIX above 22.0 or a noticeable widening of high-yield credit spreads would constitute a critical risk-off threshold, prompting an immediate reduction in long positions.",
+    "technical_signal": "No reversal pattern confirmed yet. The broad market participation, with 63.0% of S&P 500 stocks above their 50-day moving average and 62.5% above their 200-day moving average, suggests underlying strength rather than immediate reversal. Monitor for a dip below these broad participation levels as a potential early warning.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "AEHR",
           "company": "Aehr Test Systems",
-          "reason": "Reported a significant earnings beat and raised full-year guidance, fueling strong investor conviction."
+          "reason": "The company reported an earnings beat and raised its full-year guidance, indicating strong operational performance and a positive outlook for future growth."
         },
         {
           "ticker": "LSCC",
           "company": "Lattice Semiconductor Corporation",
-          "reason": "Delivered a strong Q3 beat and provided an encouraging multi-year outlook, driving renewed interest."
+          "reason": "Lattice Semiconductor posted a strong Q3 earnings beat and provided an optimistic multi-year outlook, signaling robust demand and strategic positioning in its market."
         }
       ],
       "c_grade": [
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Benefited from general tech sector strength and institutional flow without specific fresh news today."
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon is a recycled ticker with no new fundamental catalyst today, maintaining its prior trend primarily driven by broader market sentiment or technical flows."
         }
       ]
     }

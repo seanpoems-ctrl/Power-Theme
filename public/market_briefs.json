@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-03 19:53 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mild Risk-On, Steady Accumulation",
+    "spy_price": 754.35,
+    "spy_change_pct": 0.3,
+    "vix": 20.83,
+    "hy_oas": 3.43,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 63.0,
+    "mmth": 62.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AEHR",
+          "company": "Aehr Test Systems",
+          "reason": "The company reported an earnings beat and raised its full-year guidance, indicating strong operational performance and a positive outlook for future growth."
+        },
+        {
+          "ticker": "LSCC",
+          "company": "Lattice Semiconductor Corporation",
+          "reason": "Lattice Semiconductor posted a strong Q3 earnings beat and provided an optimistic multi-year outlook, signaling robust demand and strategic positioning in its market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon is a recycled ticker with no new fundamental catalyst today, maintaining its prior trend primarily driven by broader market sentiment or technical flows."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-03 15:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA shares show renewed algorithmic buying interest as investors rotate into high-beta names on perceived short-term technical support, despite lack of fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-13 19:52 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Flows / Watchful Consolidation",
-    "spy_price": 778.01,
-    "spy_change_pct": -0.01,
-    "vix": 15.27,
-    "hy_oas": 3.11,
-    "yield_curve": 0.42,
-    "credit_status": "Complacent",
-    "s5fi": 39.9,
-    "mmth": 53.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Reported better-than-expected Q3 earnings, fueled by strong net interest income growth and disciplined expense management, driving optimism for the financial sector."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group",
-          "reason": "Announced a strategic partnership to expand its virtual care services, signaling aggressive growth in healthcare technology and potentially boosting its market share."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Experienced volatility today attributed to technical trading patterns and speculative option flows, lacking any fresh fundamental news to drive its price action."
         }
       ]
     }
