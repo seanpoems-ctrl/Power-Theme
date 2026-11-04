@@ -6,30 +6,30 @@
   "count": 1,
   "stocks": [
     {
-      "ticker": "INTC",
-      "company": "Intel Corporation",
-      "industry": "Semiconductors",
-      "market_cap_b": 321.823,
-      "price": 60.55,
-      "change_pct": 0.97,
-      "dollar_volume": "$9.22B",
-      "adr_pct": 10.9,
-      "perf_1m": -51.17,
-      "perf_3m": -39.02,
+      "ticker": "CIFR",
+      "company": "Cipher Digital Inc.",
+      "industry": "Data Processing Services",
+      "market_cap_b": 2.966,
+      "price": 6.5,
+      "change_pct": -19.95,
+      "dollar_volume": "$352.4M",
+      "adr_pct": 17.5,
+      "perf_1m": -58.85,
+      "perf_3m": -64.02,
       "perf_34d": null,
-      "perf_qtd": -39.02,
-      "perf_mtd": -51.17,
-      "rs_ibd": 96
+      "perf_qtd": -64.02,
+      "perf_mtd": -58.85,
+      "rs_ibd": 5
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.36,
-    "spx_1m": -3.2,
-    "spx_3m": -1.83,
-    "spx_34d": -0.9,
-    "spx_qtd": -1.27,
-    "spx_mtd": -0.15
+    "spx_1d": 1.58,
+    "spx_1m": -1.45,
+    "spx_3m": -0.89,
+    "spx_34d": 0.5,
+    "spx_qtd": 0.29,
+    "spx_mtd": 1.43
   },
-  "fetched_at_utc": "2026-11-04T03:03:14+00:00",
+  "fetched_at_utc": "2026-11-04T23:04:16+00:00",
   "source": "tv_fallback"
 }
