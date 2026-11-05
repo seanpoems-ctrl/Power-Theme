@@ -1,7 +1,7 @@
 """Tests for deal_filter.py (pending cash-takeover detection). Run: python -m pytest test_deal_filter.py"""
 import json
 
-from deal_filter import (_DEAL_RE, drop_pending, hide_pending_in, jump_then_pinned, load_registry, pending_deal_tickers,
+from deal_filter import (_DEAL_RE, _candidates, _search_name, drop_pending, hide_pending_in, jump_then_pinned, load_registry, pending_deal_tickers,
                          save_registry, update_registry)
 
 
@@ -28,7 +28,7 @@ def test_no_jump_and_short_history():
 
 def test_old_jump_outside_lookback_ignored():
     b = _base(10)
-    assert jump_then_pinned(b + [b[-1] * 1.5] + [b[-1] * 1.5] * 40) is None
+    assert jump_then_pinned(b + [b[-1] * 1.5] + [b[-1] * 1.5] * 130) is None
 
 
 def test_headline_regex_matches_target_not_buyer():
@@ -78,3 +78,24 @@ def test_drop_pending_and_registry_roundtrip(tmp_path):
     kept, hidden = drop_pending([{"ticker": "BRZE"}, {"ticker": "AAPL"}], deals={"BRZE": "n"})
     assert [r["ticker"] for r in kept] == ["AAPL"] and hidden == ["BRZE"]
     assert hide_pending_in([{"ticker": "AAPL"}])[1] is not None   # never raises
+
+
+def test_slow_creep_to_the_offer_over_months_is_still_pinned():
+    b = _base(40)
+    px = b[-1] * 1.33
+    post = [px]
+    for i in range(80):                       # 80 quiet sessions, one 1.8% day, drifting ~3% up
+        post.append(post[-1] * (1.018 if i == 40 else 1.0004))
+    assert jump_then_pinned(b + post)["sessions_after"] == 80
+
+
+def test_search_name_strips_suffixes():
+    assert _search_name("Silence Therapeutics Plc - ADR") == "Silence Therapeutics"
+    assert _search_name("Pacira BioSciences, Inc.") == "Pacira BioSciences"
+    assert _search_name("Genmab A/S") == "Genmab"
+
+
+def test_prefilter_uses_3m_and_6m_not_just_1m():
+    rows = [_row("PTC", perf_1m=-0.3, perf_3m=30), _row("FLAT", perf_3m=5), _row("MOVING", perf_3m=40, perf_1d=6)]
+    assert [r["ticker"] for r in _candidates(rows)] == ["PTC"]
+    assert len(_candidates(rows, everything=True)) == 3

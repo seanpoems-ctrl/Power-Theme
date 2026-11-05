@@ -40,9 +40,9 @@ MANUAL_DEALS: dict[str, str] = {
 }
 
 JUMP_MIN = 0.15          # day-over-day gain that marks the announcement
-JUMP_LOOKBACK = 30       # sessions to look back for it
-POST_MAX_MOVE = 0.015    # largest daily move allowed after the jump
-POST_MAX_BAND = 0.03     # max close / min close since the jump
+JUMP_LOOKBACK = 120      # sessions to look back for it (deals stay pending for months)
+POST_MAX_MOVE = 0.025    # largest daily move allowed after the jump (spreads move on regulatory news)
+POST_MAX_BAND = 0.06     # max close / min close since the jump
 BREAK_MOVE_PCT = 5.0     # a persisted flag is dropped on a one-day move this big
 
 # Target-side wording only ("to acquire X" would also match the BUYER, so it is deliberately absent).
@@ -77,13 +77,19 @@ def jump_then_pinned(closes: list[float]) -> Optional[dict]:
     return {"jump_pct": round(rets[jump_idx - 1] * 100, 1), "sessions_after": len(post) - 1}
 
 
+def _search_name(company: str) -> str:
+    """'Silence Therapeutics Plc - ADR' -> 'Silence Therapeutics'; 'Pacira BioSciences, Inc.' -> 'Pacira BioSciences'."""
+    name = (company or "").split(" - ")[0]
+    return re.sub(r"\b(?:inc|corp|corporation|co|company|ltd|plc|holdings|n\.?v|s\.?a|ag|class [a-z])\b\.?,?|\ba/s\b", "", name, flags=re.I).strip(" ,.")
+
+
 def has_deal_headline(company: str, timeout: int = 10) -> Optional[bool]:
     """True/False = headline found / not found; None = could not check (network error)."""
     try:
         import requests
         from urllib.parse import quote
         from xml.etree import ElementTree as ET
-        name = re.sub(r"\b(inc|corp|corporation|co|company|ltd|plc|holdings|class [a-z])\b\.?,?", "", company or "", flags=re.I).strip(" ,.")
+        name = _search_name(company)
         if not name:
             return None
         q = quote(f'"{name}" acquired OR "take private" OR "per share" when:45d')
@@ -99,11 +105,14 @@ def has_deal_headline(company: str, timeout: int = 10) -> Optional[bool]:
         return None
 
 
-def _candidates(stocks: list[dict]) -> list[dict]:
-    """Cheap prefilter on the TradingView fields so only a handful of tickers need daily bars."""
+def _candidates(stocks: list[dict], everything: bool = False) -> list[dict]:
+    """Prefilter on the TradingView fields so only a modest number of tickers need daily bars. 3M / 6M performance is
+    included because a deal stays pinned for months: after a month the 1M figure no longer shows the jump (PTC)."""
+    if everything:            # short lists (e.g. the breadth scanners): check every row
+        return list(stocks)
     out = []
     for s in stocks:
-        big = max(s.get("perf_1w") or 0, s.get("perf_1m") or 0)
+        big = max(s.get("perf_1w") or 0, s.get("perf_1m") or 0, s.get("perf_3m") or 0, s.get("perf_6m") or 0)
         if big >= 15 and abs(s.get("perf_1d") or 0) <= 2.5:
             out.append(s)
     return out
@@ -113,7 +122,7 @@ def _download_closes(tickers: list[str]) -> dict[str, list[float]]:
     try:
         import yfinance as yf
         yf_syms = [t.replace(".", "-") for t in tickers]
-        df = yf.download(yf_syms, period="3mo", interval="1d", auto_adjust=False,
+        df = yf.download(yf_syms, period="9mo", interval="1d", auto_adjust=False,
                          progress=False, threads=True, group_by="ticker")
     except Exception as e:                                    # noqa: BLE001
         logger.warning("deal filter: yfinance download failed: %s", e)
@@ -163,7 +172,7 @@ def drop_pending(rows: list[dict], key: str = "ticker", deals: dict[str, str] | 
     return kept, sorted({r[key] for r in hidden})
 
 
-def update_registry(stocks: list[dict], reg: dict, today: Optional[str] = None) -> dict:
+def update_registry(stocks: list[dict], reg: dict, today: Optional[str] = None, check_all: bool = False) -> dict:
     """Runs the full detection over one universe (`stocks`: dicts with ticker/company/perf_1d?/perf_1w?/perf_1m?) and
     returns the updated registry (not saved). Rows of `stocks` are NOT modified."""
     today = today or date.today().isoformat()
@@ -186,7 +195,7 @@ def update_registry(stocks: list[dict], reg: dict, today: Optional[str] = None) 
             deals[t] = {"note": note, "since": today, "source": "manual"}
 
     # new detections
-    cands = [s for s in _candidates(stocks) if s["ticker"] not in deals]
+    cands = [s for s in _candidates(stocks, check_all) if s["ticker"] not in deals]
     if cands:
         closes = _download_closes([s["ticker"] for s in cands])
         for s in cands:
@@ -215,12 +224,12 @@ def apply_pending_deals(stocks: list[dict], path: Path | None = None) -> int:
     return sum(1 for s in stocks if s["pending_deal"])
 
 
-def hide_pending_in(rows: list[dict], key: str = "ticker", widen: bool = False) -> tuple[list[dict], list[str]]:
+def hide_pending_in(rows: list[dict], key: str = "ticker", widen: bool = False, check_all: bool = False) -> tuple[list[dict], list[str]]:
     """Convenience for builders: optionally runs detection over `rows` first (`widen=True`, for pools wider than the
     screener's top 500), then returns (rows without pending deals, hidden tickers). Never raises."""
     try:
         if widen:
-            reg = update_registry([{**r, "ticker": r[key]} for r in rows], load_registry())
+            reg = update_registry([{**r, "ticker": r[key]} for r in rows], load_registry(), check_all=check_all)
             save_registry(reg)
         return drop_pending(rows, key)
     except Exception as e:                                    # noqa: BLE001

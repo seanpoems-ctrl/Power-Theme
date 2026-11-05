@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-05T10:38:26.736162+00:00",
+  "generated_at": "2026-11-05T12:28:47.856788+00:00",
   "date": "2026-11-05",
   "summary": {
-    "total_stocks": 671,
+    "total_stocks": 668,
     "rotating_in": 29,
     "rotating_out": 61,
     "signal_counts": {
@@ -5418,54 +5418,6 @@
       "extension": 5.85
     },
     {
-      "ticker": "OPCH",
-      "name": "Option Care Health, Inc.",
-      "rs": 89,
-      "perf_1d": -0.38,
-      "perf_1w": -0.63,
-      "perf_1m": 2.06,
-      "perf_3m": 33.04,
-      "perf_6m": 52.53,
-      "adr_pct": 0.4,
-      "dollar_volume": 121669550,
-      "mkt_cap": 4741160505.996223,
-      "themes": [],
-      "etfs": [
-        "XHS"
-      ],
-      "etf_count": 1,
-      "signal": "Neutral",
-      "rs_change": null,
-      "new_etfs": [
-        "XHS"
-      ],
-      "extension": 14.64
-    },
-    {
-      "ticker": "PCRX",
-      "name": "Pacira BioSciences, Inc.",
-      "rs": 89,
-      "perf_1d": 0.03,
-      "perf_1w": 0.03,
-      "perf_1m": 44.44,
-      "perf_3m": 45.48,
-      "perf_6m": 53.98,
-      "adr_pct": 0.2,
-      "dollar_volume": 33784766,
-      "mkt_cap": 1450972591.843913,
-      "themes": [],
-      "etfs": [
-        "XPH"
-      ],
-      "etf_count": 1,
-      "signal": "Emerging",
-      "rs_change": null,
-      "new_etfs": [
-        "XPH"
-      ],
-      "extension": 18.61
-    },
-    {
       "ticker": "EXEL",
       "name": "Exelixis, Inc.",
       "rs": 88,
@@ -6254,37 +6206,6 @@
         "RSPT"
       ],
       "extension": 8.74
-    },
-    {
-      "ticker": "PTC",
-      "name": "PTC Inc.",
-      "rs": 84,
-      "perf_1d": 0.58,
-      "perf_1w": 0.2,
-      "perf_1m": 0.82,
-      "perf_3m": 32.14,
-      "perf_6m": 32.19,
-      "adr_pct": 0.5,
-      "dollar_volume": 347591261,
-      "mkt_cap": 21202837415.50809,
-      "themes": [],
-      "etfs": [
-        "PRNT",
-        "ROBO",
-        "RSP",
-        "RSPT",
-        "XSW"
-      ],
-      "etf_count": 5,
-      "signal": "Neutral",
-      "rs_change": -2,
-      "new_etfs": [
-        "ROBO",
-        "RSP",
-        "RSPT",
-        "XSW"
-      ],
-      "extension": 14.28
     },
     {
       "ticker": "HPQ",
@@ -19994,6 +19915,9 @@
   ],
   "pending_deals_hidden": [
     "BRZE",
+    "OPCH",
+    "PCRX",
+    "PTC",
     "SGRY"
   ]
 }

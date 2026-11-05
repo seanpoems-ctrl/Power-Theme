@@ -1044,7 +1044,7 @@ def _hide_pending_deals(data: dict) -> dict:
         if hidden:
             data["stocks"] = kept
             data["count"] = len(kept)
-            data["pending_deals_hidden"] = hidden
+            data["pending_deals_hidden"] = sorted(set(data.get("pending_deals_hidden") or []) | set(hidden))
     except Exception as exc:        # noqa: BLE001 - never block the scan on this
         logger.warning("pending-deal filter failed (non-fatal): %s", exc)
     return data
@@ -1125,6 +1125,24 @@ async def main() -> None:
         out.write_text(json.dumps(data, indent=2), encoding="utf-8")
         logger.info("[%s] wrote %s (%d stocks, %.1fs)",
                     key, out.name, data["count"], monotonic() - t0)
+
+    # ── Pending cash takeovers (BRZE, PTC, OPCH...): the scanner lists are short, so check EVERY stock on them for the
+    # jump-then-pinned pattern + a deal headline (deal_filter.py), then drop the flagged ones and rewrite the files.
+    try:
+        from deal_filter import hide_pending_in
+        union = {}
+        for d in all_data.values():
+            for st in d.get("stocks") or []:
+                union.setdefault(st["ticker"], {"ticker": st["ticker"], "company": st.get("company", "")})
+        hide_pending_in(list(union.values()), widen=True, check_all=True)      # updates public/pending_deals.json
+        for key, d in all_data.items():
+            before = len(d.get("stocks") or [])
+            d = _hide_pending_deals(d)
+            if len(d.get("stocks") or []) != before:
+                all_data[key] = d
+                (PUBLIC_DIR / f"breadth_stocks_{key}.json").write_text(json.dumps(d, indent=2), encoding="utf-8")
+    except Exception as exc:        # noqa: BLE001 - never block the scan on this
+        logger.warning("pending-deal pass failed (non-fatal): %s", exc)
 
     # ── Save compact daily history archive ───────────────────────────────────
     try:
