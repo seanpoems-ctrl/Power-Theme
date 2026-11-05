@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-05 13:39 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 736.34,
+    "spy_change_pct": -3.97,
+    "vix": 27.18,
+    "hy_oas": 3.32,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 56.6,
+    "mmth": 58.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "EPAM",
+          "company": "EPAM Systems, Inc.",
+          "reason": "The company reported a strong Q3 2026 earnings beat, indicating robust performance and positive future outlook despite broader market weakness."
+        },
+        {
+          "ticker": "U",
+          "company": "Unity Software Inc.",
+          "reason": "Unity Software announced a strong earnings report for the latest quarter, exceeding analyst expectations and demonstrating solid growth metrics."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft saw general market pressure, with no new fundamental catalyst today but instead reflecting recycled sentiment and technical flow from the broad market downturn."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-05 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla experienced strong short-covering activity driven by positive technical indicators and broader sector optimism."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-15 11:33 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech Divergence, Credit Complacent",
-    "spy_price": 769.71,
-    "spy_change_pct": 0.01,
-    "vix": 16.66,
-    "hy_oas": 3.25,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 42.3,
-    "mmth": 54.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group",
-          "reason": "UnitedHealth Group announced a major expansion into a new healthcare market segment, projecting significant long-term revenue growth and attracting renewed investor interest."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft revealed breakthrough AI advancements, securing a large enterprise contract and boosting its cloud segment outlook, signaling continued leadership in the AI space."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon is facing technical pressure following broader sector weakness in technology, without new specific company-driving news to counteract the prevailing flow."
         }
       ]
     }
