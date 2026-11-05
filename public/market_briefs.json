@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-04 20:02 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "US Tech Leads, Volatility Plunges",
+    "spy_price": 754.35,
+    "spy_change_pct": 0.3,
+    "vix": 16.61,
+    "hy_oas": 3.4,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 67.5,
+    "mmth": 66.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ANET",
+          "company": "Arista Networks",
+          "reason": "Strong earnings beat and raised guidance provide a fresh catalyst for continued upside momentum."
+        },
+        {
+          "ticker": "HL",
+          "company": "Hanesbrands Inc.",
+          "reason": "Reported a significant earnings beat and record free cash flow, indicating strong operational performance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Flow driven by broader tech sector sentiment, without a specific fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-04 15:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla shares are experiencing continued volatility amidst ongoing debates regarding production ramp-ups for its new models and increased competition in the electric vehicle market."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-14 19:26 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 769.6,
-    "spy_change_pct": -1.08,
-    "vix": 16.87,
-    "hy_oas": 3.16,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 35.9,
-    "mmth": 51.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LQDA",
-          "company": "Liquidia Corporation",
-          "reason": "The company's stock soared following news of a favorable litigation settlement and positive updates on its commercialization efforts."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Shares rallied today after the company announced a new strategic partnership in artificial intelligence, expanding its market reach and competitive edge."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued strong demand for AI chips is offset by broader market de-risking, leading to sideways trading after recent volatility."
         }
       ]
     }
