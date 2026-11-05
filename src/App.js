@@ -7763,7 +7763,12 @@ const BreadthStockScreener = ({ data, compact = false }) => {
       .catch(() => {});
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const stocks = useMemo(() => rawStocks.filter(s => s.price > 0), [rawStocks]);
+  // Stocks pinned under a pending cash takeover (BRZE/Salesforce, ADT/Thrive...) are flagged `pending_deal` by
+  // screener_builder.py / deal_filter.py. They top every momentum sort on the deal-day jump but can't trade, so they are
+  // hidden unless the header toggle is on.
+  const [showDeals, setShowDeals] = useState(false);
+  const dealCount = useMemo(() => rawStocks.filter(s => s.price > 0 && s.pending_deal).length, [rawStocks]);
+  const stocks = useMemo(() => rawStocks.filter(s => s.price > 0 && (showDeals || !s.pending_deal)), [rawStocks, showDeals]);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
@@ -7849,6 +7854,14 @@ const BreadthStockScreener = ({ data, compact = false }) => {
           />
           <span className="absolute left-2 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]">⌕</span>
         </div>
+        {dealCount > 0 && (
+          <button onClick={() => setShowDeals(v => !v)}
+            title={showDeals ? "Pending cash-takeover stocks are shown (marked DEAL). Click to hide them again."
+              : "Hidden: stocks pinned under a pending cash takeover offer (e.g. " + rawStocks.filter(s => s.pending_deal).slice(0, 3).map(s => s.ticker).join(", ") + "). Click to show them."}
+            className={`text-[10px] font-medium px-2 py-1 rounded border transition-colors ${showDeals ? "border-amber-600/60 text-amber-300 bg-amber-900/20" : "border-zinc-700 text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800"}`}>
+            {showDeals ? `Deals shown (${dealCount})` : `${dealCount} pending deals hidden`}
+          </button>
+        )}
         {sorted.length > 0 && (
           <button onClick={() => setMiniChartsFor({ title: "Stock Screener", tickers: sorted.map(s => ({ ticker: s.ticker, category: s.industry })) })}
             className="text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
@@ -7919,6 +7932,10 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                     <div className="flex items-center gap-1 flex-wrap">
                       <TickerLink ticker={s.ticker} />
                       {s.price != null && <span className="text-[10px] font-mono text-zinc-500">${s.price.toFixed(2)}</span>}
+                      {s.pending_deal && (
+                        <span title={s.deal_note || "Pending cash takeover — price is pinned to the offer"}
+                          className="text-[9px] font-mono font-semibold px-1 py-0.5 rounded bg-amber-900/50 text-amber-300">DEAL</span>
+                      )}
                       {(s.ss_etfs || []).map(etf => {
                         const name = etf.ticker || etf;
                         const isBull = /[LU]$/.test(name);

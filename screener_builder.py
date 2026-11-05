@@ -404,6 +404,18 @@ def main():
         logger.error("No stocks — aborting write")
         return
 
+    # Flag stocks pinned under a pending cash takeover (BRZE, ADT...) so the table can hide them. Carries last run's
+    # flags forward, so read the previous output before it is overwritten.
+    try:
+        from deal_filter import apply_pending_deals
+        prev_rows: dict[str, dict] = {}
+        if OUTPUT_PATH.exists():
+            prev_rows = {r["ticker"]: r for r in json.loads(OUTPUT_PATH.read_text(encoding="utf-8")).get("stocks", [])}
+        n_deals = apply_pending_deals(stocks, prev_rows)
+        logger.info("Pending cash deals flagged: %d", n_deals)
+    except Exception as e:  # noqa: BLE001 — never block the screener on this
+        logger.warning("Deal filter failed (non-fatal): %s", e)
+
     # Fetch single-stock ETF live data and attach to each stock
     ss_etf_data = fetch_ss_etf_data()
 
