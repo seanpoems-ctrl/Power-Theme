@@ -1,38 +1,19 @@
 {
-  "generated_at": "2026-11-05T03:07:03.581933+00:00",
+  "generated_at": "2026-11-05T23:02:49.113326+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Other",
-      "theme_rs": 93.0,
-      "perf_1d": 13.25,
+      "theme_rs": 96.0,
+      "perf_1d": 13.45,
       "leaders": [
         {
-          "ticker": "OSCR",
-          "price": 35.19,
-          "rs_52w": 98,
-          "adr_pct": 4.86,
-          "vol_surge": 2.55,
-          "mkt_cap": 10861217126,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "BRKR",
-          "price": 63.79,
-          "rs_52w": 96,
-          "adr_pct": 5.82,
-          "vol_surge": 3.19,
-          "mkt_cap": 9719000907,
+          "ticker": "U",
+          "price": 48.8,
+          "rs_52w": 97,
+          "adr_pct": 5.29,
+          "vol_surge": 4.63,
+          "mkt_cap": 21476339594,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -46,50 +27,12 @@
           "setup_label": "Flag"
         },
         {
-          "ticker": "DUOL",
-          "price": 161.27,
-          "rs_52w": 94,
-          "adr_pct": 6.19,
-          "vol_surge": 8.39,
-          "mkt_cap": 7514072177,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "CNC",
-          "price": 76.01,
-          "rs_52w": 89,
-          "adr_pct": 4.17,
-          "vol_surge": 3.36,
-          "mkt_cap": 37630119737,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "PCOR",
-          "price": 75.6,
-          "rs_52w": 88,
-          "adr_pct": 4.02,
-          "vol_surge": 2.93,
-          "mkt_cap": 11487823320,
+          "ticker": "EPAM",
+          "price": 165.7,
+          "rs_52w": 95,
+          "adr_pct": 4.74,
+          "vol_surge": 3.09,
+          "mkt_cap": 8547962594,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,

@@ -2,40 +2,28 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 2,
+  "count": 1,
   "stocks": [
     {
       "ticker": "GDYN",
       "company": "Grid Dynamics Holdings, Inc.",
       "industry": "Information Technology Services",
-      "price": 13.75,
-      "change_pct": 2.84,
-      "adr_pct": 4.7,
-      "dollar_volume": "$37.5M",
-      "market_cap_b": 1.105,
-      "rs_ibd": 91,
-      "above50dma_pct": 62.5
-    },
-    {
-      "ticker": "TDOC",
-      "company": "Teladoc Health, Inc.",
-      "industry": "Medical/Nursing Services",
-      "price": 9.7,
-      "change_pct": 9.11,
-      "adr_pct": 5.0,
-      "dollar_volume": "$67.0M",
-      "market_cap_b": 1.768,
-      "rs_ibd": 71,
-      "above50dma_pct": 51.5
+      "price": 13.54,
+      "change_pct": -1.56,
+      "adr_pct": 4.8,
+      "dollar_volume": "$38.1M",
+      "market_cap_b": 1.088,
+      "rs_ibd": 89,
+      "above50dma_pct": 57.7
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 1.58,
-    "spx_1m": -1.45,
-    "spx_3m": -0.89,
-    "spx_34d": 0.5,
-    "spx_qtd": 0.29,
-    "spx_mtd": 1.43
+    "spx_1d": -4.36,
+    "spx_1m": -5.3,
+    "spx_3m": -5.15,
+    "spx_34d": -5.29,
+    "spx_qtd": -4.08,
+    "spx_mtd": -2.99
   },
-  "fetched_at_utc": "2026-11-05T03:07:04+00:00"
+  "fetched_at_utc": "2026-11-05T23:02:55+00:00"
 }
