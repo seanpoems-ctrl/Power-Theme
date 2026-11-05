@@ -69,7 +69,7 @@ def _num(v):
 def fetch_universe():
     from tradingview_screener import Query, col
     q = (Query().set_markets("america")
-         .select("name", "description", "close", "ATR", "SMA50", "average_volume_10d_calc", "market_cap_basic", "industry",
+         .select("name", "description", "close", "change", "ATR", "SMA50", "average_volume_10d_calc", "market_cap_basic", "industry",
                  *[c for _, c in WINDOWS])
          .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("close") >= MIN_PRICE, col("average_volume_10d_calc") > MIN_AVG_VOLUME)
@@ -96,6 +96,7 @@ def fetch_universe():
             "avg_dollar_volume": round(dvol),
             "market_cap": _num(r.get("market_cap_basic")),
             "extension": ext,
+            "perf_1d": (round(_num(r.get("change")), 1) if _num(r.get("change")) is not None else None),
             **{f"perf_{w.lower()}": (round(_num(r.get(c)), 1) if _num(r.get(c)) is not None else None) for w, c in WINDOWS},
         })
     logger.info("Liquid universe: %d stocks (avg $ vol >= $%dM)", len(rows), MIN_DOLLAR_VOLUME // 1_000_000)
@@ -162,6 +163,13 @@ def build() -> dict | None:
         logger.error("Only %d liquid stocks - refusing to publish", len(universe))
         return None
 
+    # Leave out stocks pinned under a pending cash takeover (BRZE, ADT...): they top the 1M/3M lists on the deal-day jump.
+    # The pool here is wider than the screener's top 500, so detection runs over it too (updates public/pending_deals.json).
+    from deal_filter import hide_pending_in
+    universe, hidden_deals = hide_pending_in(universe, widen=True)
+    if hidden_deals:
+        logger.info("Pending cash deals left out: %s", ", ".join(hidden_deals))
+
     leaders: dict[str, list[dict]] = {}
     for w, _ in WINDOWS:
         key = f"perf_{w.lower()}"
@@ -185,7 +193,7 @@ def build() -> dict | None:
             for s in lst:
                 s.update(tight.get(s["ticker"], {"rmv": None, "coil": None}))
                 s["lev_etf"] = pairs.get(s["ticker"])
-                for k in ("perf_1m", "perf_3m", "perf_6m", "perf_1y"):
+                for k in ("perf_1d", "perf_1m", "perf_3m", "perf_6m", "perf_1y"):
                     s.pop(k, None)
 
     def _counts(grp):
@@ -197,7 +205,7 @@ def build() -> dict | None:
         return out
     counts, super_counts = _counts(leaders), _counts(super_leaders)
     return {"generated_at": datetime.now(ET).strftime("%Y-%m-%d %H:%M ET"), "date": datetime.now(ET).strftime("%Y-%m-%d"),
-            "universe_size": len(universe), "top_n": TOP_N,
+            "universe_size": len(universe), "top_n": TOP_N, "pending_deals_hidden": hidden_deals,
             "criteria": {"min_dollar_volume": MIN_DOLLAR_VOLUME, "min_avg_volume": MIN_AVG_VOLUME, "min_price": MIN_PRICE,
                          "super_min_dollar_volume": SUPER_MIN_DOLLAR_VOLUME},
             "super_top_n": SUPER_TOP_N, "super_pool_size": len(super_pool),

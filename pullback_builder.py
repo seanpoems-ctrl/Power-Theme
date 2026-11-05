@@ -51,12 +51,28 @@ def _load(name):
         return None
 
 
+HIDDEN_DEALS: set[str] = set()
+
+
+def _deals() -> dict[str, str]:
+    try:
+        from deal_filter import pending_deal_tickers
+        return pending_deal_tickers()
+    except Exception:               # noqa: BLE001 - never block the build on this
+        return {}
+
+
 def collect_sources() -> dict[str, set[str]]:
     """{ticker: {"F","U","L","S"}}"""
     src: dict[str, set[str]] = {}
 
+    deals = _deals()
+
     def add(t, code):
         if t and isinstance(t, str) and t not in EXCLUDE:
+            if t in deals:                  # pinned under a pending cash takeover (public/pending_deals.json)
+                HIDDEN_DEALS.add(t)
+                return
             src.setdefault(t, set()).add(code)
 
     fl = _load("focus_list.json") or {}
@@ -216,7 +232,8 @@ def build() -> dict | None:
     rows.sort(key=lambda r: r["ticker"])
     now = datetime.now(ET)
     return {"generated_at": now.strftime("%Y-%m-%d %H:%M ET"), "date": now.strftime("%Y-%m-%d"), "count": len(rows),
-            "sources": {k: sum(1 for r in rows if k in r["sources"]) for k in "FULS"}, "rows": rows}
+            "sources": {k: sum(1 for r in rows if k in r["sources"]) for k in "FULS"}, "rows": rows,
+            "pending_deals_hidden": sorted(HIDDEN_DEALS)}
 
 
 def main() -> None:

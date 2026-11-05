@@ -3,7 +3,7 @@
   "filter": "up25q",
   "label": "Up 25%+ Quarterly",
   "min_cap_b": 1.0,
-  "count": 91,
+  "count": 90,
   "stocks": [
     {
       "ticker": "MRNA",
@@ -372,22 +372,6 @@
       "perf_qtd": 52.91,
       "perf_mtd": 5.06,
       "rs_ibd": 65
-    },
-    {
-      "ticker": "SGRY",
-      "company": "Surgery Partners, Inc.",
-      "industry": "Hospital/Nursing Management",
-      "market_cap_b": 2.985,
-      "price": 23.16,
-      "change_pct": 0.13,
-      "dollar_volume": "$239.2M",
-      "adr_pct": 3.1,
-      "perf_1m": 74.66,
-      "perf_3m": 50.88,
-      "perf_34d": null,
-      "perf_qtd": 50.88,
-      "perf_mtd": 74.66,
-      "rs_ibd": 64
     },
     {
       "ticker": "PURR",
@@ -1471,5 +1455,8 @@
     "spx_mtd": 1.43
   },
   "fetched_at_utc": "2026-11-05T03:07:08+00:00",
-  "source": "tv_fallback"
+  "source": "tv_fallback",
+  "pending_deals_hidden": [
+    "SGRY"
+  ]
 }

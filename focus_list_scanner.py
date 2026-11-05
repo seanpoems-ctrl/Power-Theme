@@ -562,6 +562,17 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
         for row in scan_result_entry["stocks"]:
             row["is_new"] = (row["ticker"] not in prev_tickers) if prev_tickers else None
 
+    # Stocks pinned under a pending cash takeover (BRZE, ADT...) are not tradeable setups - see deal_filter.py.
+    hidden_deals: list[str] = []
+    try:
+        from deal_filter import drop_pending, pending_deal_tickers
+        deals = pending_deal_tickers()
+        for entry in ([scan_result_entry] if scan_result_entry else []) + scans:
+            entry["stocks"], gone = drop_pending(entry["stocks"], deals=deals)
+            hidden_deals = sorted(set(hidden_deals) | set(gone))
+    except Exception as e:  # noqa: BLE001
+        logger.warning("pending-deal filter failed (non-fatal): %s", e)
+
     OUTPUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_JSON.write_text(
         json.dumps({
@@ -572,6 +583,7 @@ def write_json(master_all_scans: pd.DataFrame, scan_result: pd.DataFrame | None 
             "tightness": {"mode": TIGHTNESS, "label": TIGHTNESS_LABELS[TIGHTNESS]},
             "scan_result": scan_result_entry,
             "scans": scans,
+            "pending_deals_hidden": hidden_deals,
         }, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )

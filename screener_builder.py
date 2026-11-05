@@ -404,15 +404,11 @@ def main():
         logger.error("No stocks — aborting write")
         return
 
-    # Flag stocks pinned under a pending cash takeover (BRZE, ADT...) so the table can hide them. Carries last run's
-    # flags forward, so read the previous output before it is overwritten.
+    # Flag stocks pinned under a pending cash takeover (BRZE, ADT...) so the table can hide them. Updates
+    # public/pending_deals.json, which the other builders read to leave these stocks out of their lists.
     try:
         from deal_filter import apply_pending_deals
-        prev_rows: dict[str, dict] = {}
-        if OUTPUT_PATH.exists():
-            prev_rows = {r["ticker"]: r for r in json.loads(OUTPUT_PATH.read_text(encoding="utf-8")).get("stocks", [])}
-        n_deals = apply_pending_deals(stocks, prev_rows)
-        logger.info("Pending cash deals flagged: %d", n_deals)
+        logger.info("Pending cash deals flagged: %d", apply_pending_deals(stocks))
     except Exception as e:  # noqa: BLE001 — never block the screener on this
         logger.warning("Deal filter failed (non-fatal): %s", e)
 

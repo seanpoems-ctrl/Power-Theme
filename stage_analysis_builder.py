@@ -228,13 +228,21 @@ def build() -> dict | None:
         add(sec, np.array([s == sec for s in sectors]))
 
     stocks = stock_rows(wk, st, close, volume, db)
+    # Movers list only (the stage COUNTS above stay whole-market): leave out stocks pinned under a pending cash takeover.
+    try:
+        from deal_filter import pending_deal_tickers
+        deals = pending_deal_tickers()
+        hidden_deals = sorted(r[0] for r in stocks if r[0] in deals)
+        stocks = [r for r in stocks if r[0] not in deals]
+    except Exception:       # noqa: BLE001
+        hidden_deals = []
     logger.info("stage_stocks rows: %d", len(stocks))
 
     now = datetime.now(ET)
     last = groups["All"]
     logger.info("latest week %s — S1 %d  S2 %d  S3 %d  S4 %d (n=%d)", weeks[-1], last["s1"][-1], last["s2"][-1], last["s3"][-1], last["s4"][-1], last["n"])
     return {"generated_at": now.strftime("%Y-%m-%d %H:%M ET"), "as_of": weeks[-1], "universe": len(tickers), "weeks": weeks, "groups": groups,
-            "_stocks": {"as_of": weeks[-1], "cols": STOCK_COLS, "stocks": stocks}}
+            "_stocks": {"as_of": weeks[-1], "cols": STOCK_COLS, "stocks": stocks, "pending_deals_hidden": hidden_deals}}
 
 
 def main() -> None:

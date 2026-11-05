@@ -1036,6 +1036,20 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
     logger.info("Wrote history archive: %s (%d total stock entries)", out.name, total)
 
 
+def _hide_pending_deals(data: dict) -> dict:
+    """Drop stocks pinned under a pending cash takeover (BRZE, ADT...) from a scanner list - see deal_filter.py."""
+    try:
+        from deal_filter import drop_pending
+        kept, hidden = drop_pending(data.get("stocks") or [])
+        if hidden:
+            data["stocks"] = kept
+            data["count"] = len(kept)
+            data["pending_deals_hidden"] = hidden
+    except Exception as exc:        # noqa: BLE001 - never block the scan on this
+        logger.warning("pending-deal filter failed (non-fatal): %s", exc)
+    return data
+
+
 async def main() -> None:
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
     errors = []
@@ -1093,6 +1107,7 @@ async def main() -> None:
                 logger.error("[%s] TV fallback also failed: %s", filter_key, exc)
                 # Keep the (empty) Finviz result rather than crashing the whole run
 
+        data = _hide_pending_deals(data)
         all_data[filter_key] = data
         out = PUBLIC_DIR / f"breadth_stocks_{filter_key}.json"
         out.write_text(json.dumps(data, indent=2), encoding="utf-8")
@@ -1104,6 +1119,7 @@ async def main() -> None:
         await asyncio.sleep(1.0)
 
     for key, data in [("atr_ext", atr_data), ("above50dma", dma_data)]:
+        data = _hide_pending_deals(data)
         all_data[key] = data
         out = PUBLIC_DIR / f"breadth_stocks_{key}.json"
         out.write_text(json.dumps(data, indent=2), encoding="utf-8")

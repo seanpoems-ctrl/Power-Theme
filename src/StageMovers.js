@@ -69,6 +69,12 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
         <span className="text-[12px] font-semibold text-zinc-300">Stage Movers</span>
         <span className="text-[11px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rows.length}</span>
         <span className="text-[11px] text-zinc-600">{group === "All" ? "all sectors" : group}</span>
+        {stk?.pending_deals_hidden?.length > 0 && (
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-amber-700/40 bg-amber-900/10 text-amber-300/80"
+            title={"Left out of this list: pinned under a pending cash takeover offer. " + stk.pending_deals_hidden.join(", ")}>
+            {stk.pending_deals_hidden.length} pending deal{stk.pending_deals_hidden.length > 1 ? "s" : ""} left out: {stk.pending_deals_hidden.slice(0, 4).join(", ")}
+          </span>
+        )}
         <div className="ml-auto flex items-center gap-2">
           {onMiniCharts && rows.length > 0 && (
             <button onClick={() => onMiniCharts(rows.map(r => r.t), `Stage ${f.stage}${f.within ? ` · last ${f.within}w` : ""}`)}

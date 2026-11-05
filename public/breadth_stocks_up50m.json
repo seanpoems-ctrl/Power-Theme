@@ -3,7 +3,7 @@
   "filter": "up50m",
   "label": "Up 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 9,
+  "count": 8,
   "stocks": [
     {
       "ticker": "TDOC",
@@ -20,22 +20,6 @@
       "perf_qtd": 42.65,
       "perf_mtd": 76.36,
       "rs_ibd": 71
-    },
-    {
-      "ticker": "SGRY",
-      "company": "Surgery Partners, Inc.",
-      "industry": "Hospital/Nursing Management",
-      "market_cap_b": 2.985,
-      "price": 23.16,
-      "change_pct": 0.13,
-      "dollar_volume": "$239.2M",
-      "adr_pct": 3.1,
-      "perf_1m": 74.66,
-      "perf_3m": 50.88,
-      "perf_34d": null,
-      "perf_qtd": 50.88,
-      "perf_mtd": 74.66,
-      "rs_ibd": 64
     },
     {
       "ticker": "LQDA",
@@ -159,5 +143,8 @@
     "spx_mtd": 1.43
   },
   "fetched_at_utc": "2026-11-05T03:07:14+00:00",
-  "source": "tv_fallback"
+  "source": "tv_fallback",
+  "pending_deals_hidden": [
+    "SGRY"
+  ]
 }

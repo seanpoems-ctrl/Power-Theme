@@ -324,6 +324,14 @@ def build_universe() -> dict:
 
     stocks_out.sort(key=lambda x: -(x.get("rs") or 0))
 
+    # Stocks pinned under a pending cash takeover (BRZE, ADT...) are not tradeable setups - see deal_filter.py.
+    try:
+        from deal_filter import drop_pending
+        stocks_out, hidden_deals = drop_pending(stocks_out)
+    except Exception as e:  # noqa: BLE001
+        logger.warning("pending-deal filter failed (non-fatal): %s", e)
+        hidden_deals = []
+
     ext = fetch_extensions([s["ticker"] for s in stocks_out])
     for s in stocks_out:
         s["extension"] = ext.get(s["ticker"])
@@ -348,6 +356,7 @@ def build_universe() -> dict:
         "sector_heatmap": sector_heatmap,
         "etf_rotation":   {"rotating_in": rotating_in, "rotating_out": rotating_out},
         "stocks":         stocks_out,
+        "pending_deals_hidden": hidden_deals,
     }
 
 

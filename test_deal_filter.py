@@ -1,5 +1,8 @@
 """Tests for deal_filter.py (pending cash-takeover detection). Run: python -m pytest test_deal_filter.py"""
-from deal_filter import jump_then_pinned, apply_pending_deals, _DEAL_RE
+import json
+
+from deal_filter import (_DEAL_RE, drop_pending, hide_pending_in, jump_then_pinned, load_registry, pending_deal_tickers,
+                         save_registry, update_registry)
 
 
 def _base(n=30):
@@ -25,8 +28,7 @@ def test_no_jump_and_short_history():
 
 def test_old_jump_outside_lookback_ignored():
     b = _base(10)
-    c = b + [b[-1] * 1.5] + [b[-1] * 1.5] * 40
-    assert jump_then_pinned(c) is None
+    assert jump_then_pinned(b + [b[-1] * 1.5] + [b[-1] * 1.5] * 40) is None
 
 
 def test_headline_regex_matches_target_not_buyer():
@@ -39,16 +41,40 @@ def _row(t, **kw):
     return {"ticker": t, "company": t, "perf_1d": 0.2, "perf_1w": 0, "perf_1m": 0, **kw}
 
 
-def test_seed_only_while_field_absent_and_dropped_on_break():
-    assert apply_pending_deals([_row("BRZE")], {}) == 1                       # never evaluated -> seed
-    s = [_row("BRZE")]
-    assert apply_pending_deals(s, {"BRZE": {"pending_deal": False}}) == 0     # evaluated and cleared -> no re-seed
-    s = [_row("BRZE", perf_1d=-12.0)]
-    assert apply_pending_deals(s, {"BRZE": {"pending_deal": True, "deal_note": "x"}}) == 0   # broke -> unflag
-    assert s[0]["pending_deal"] is False
+def _reg(deals=(), cleared=()):
+    return {"deals": {t: {"note": "n", "since": "2026-11-01"} for t in deals}, "cleared": list(cleared)}
 
 
-def test_flag_persists_after_jump_rolls_out_of_windows():
-    s = [_row("ADT")]
-    assert apply_pending_deals(s, {"ADT": {"pending_deal": True, "deal_note": "Thrive"}}) == 1
-    assert s[0]["deal_note"] == "Thrive"
+def test_seeds_only_for_never_evaluated_tickers():
+    r = update_registry([_row("X")], _reg(), today="2026-11-05")
+    assert {"BRZE", "ADT"} <= set(r["deals"])
+    r = update_registry([_row("X")], _reg(cleared=["BRZE"]), today="2026-11-05")
+    assert "BRZE" not in r["deals"] and "ADT" in r["deals"]
+
+
+def test_big_move_clears_a_flag_and_it_is_not_reseeded():
+    r = update_registry([_row("BRZE", perf_1d=-12.0)], _reg(deals=["BRZE", "ADT"]), today="2026-11-05")
+    assert "BRZE" not in r["deals"] and "BRZE" in r["cleared"]
+    r2 = update_registry([_row("BRZE")], r, today="2026-11-06")
+    assert "BRZE" not in r2["deals"]
+
+
+def test_flag_persists_and_survives_absence_from_universe():
+    r = update_registry([_row("OTHER")], _reg(deals=["ZZZ", "BRZE", "ADT"]), today="2026-11-05")
+    assert "ZZZ" in r["deals"]
+
+
+def test_old_registrations_are_pruned():
+    reg = {"deals": {"OLD": {"note": "n", "since": "2024-01-01"}}, "cleared": ["BRZE", "ADT"]}
+    assert "OLD" not in update_registry([_row("X")], reg, today="2026-11-05")["deals"]
+
+
+def test_drop_pending_and_registry_roundtrip(tmp_path):
+    p = tmp_path / "pending_deals.json"
+    save_registry(_reg(deals=["BRZE"]), p)
+    assert json.loads(p.read_text())["deals"]["BRZE"]["note"] == "n"
+    assert pending_deal_tickers(p) == {"BRZE": "n"}
+    assert load_registry(tmp_path / "missing.json") == {"deals": {}, "cleared": []}
+    kept, hidden = drop_pending([{"ticker": "BRZE"}, {"ticker": "AAPL"}], deals={"BRZE": "n"})
+    assert [r["ticker"] for r in kept] == ["AAPL"] and hidden == ["BRZE"]
+    assert hide_pending_in([{"ticker": "AAPL"}])[1] is not None   # never raises

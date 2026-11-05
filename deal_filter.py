@@ -13,15 +13,22 @@ TradingView has no "pending acquisition" flag, so the screener builder detects t
   3. PERSISTENCE: once flagged, a stock stays flagged (the 14-30 day windows above roll off) until it makes a >= 5 %
      one-day move - a broken deal or a rival bid - or leaves the screener. The caller carries the flag between runs.
   4. SEEDS: MANUAL_DEALS covers deals the pattern cannot see yet (announced yesterday) or news that failed to load. A
-     seed is only used while the previous output has no `pending_deal` field for that ticker, so a deal that later
+     seed is only used for tickers never evaluated before (not in `deals` and not in `cleared`), so a deal that later
      breaks is not re-flagged on the next run.
+
+State lives in public/pending_deals.json ({"deals": {ticker: {note, since, source}}, "cleared": [...]}); the screener
+builder updates it, and the other builders (leadership, focus list, pullback, universe, stage, breadth) only read it via
+pending_deal_tickers() / drop_pending() to leave these stocks out of their lists.
 
 Everything here is best-effort: any network failure just means no NEW flags this run, never a crash.
 """
 from __future__ import annotations
 
+import json
 import logging
 import re
+from datetime import date
+from pathlib import Path
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -123,37 +130,99 @@ def _download_closes(tickers: list[str]) -> dict[str, list[float]]:
     return out
 
 
-def apply_pending_deals(stocks: list[dict], previous: dict[str, dict] | None) -> int:
-    """Sets `pending_deal` (bool) and `deal_note` on every stock in place. `previous` = last run's rows by ticker.
-    Returns the number flagged."""
-    previous = previous or {}
-    flagged: dict[str, str] = {}
+REGISTRY_PATH = Path(__file__).resolve().parent / "public" / "pending_deals.json"
+PRUNE_DAYS = 400         # a deal registered longer ago than this is dropped (closed deals delist; breaks are cleared)
 
-    # 3. persistence + 4. seeds
-    for s in stocks:
-        t = s["ticker"]
-        prev = previous.get(t)
-        broke = abs(s.get("perf_1d") or 0) >= BREAK_MOVE_PCT
-        if prev is not None and "pending_deal" in prev:
-            if prev.get("pending_deal") and not broke:
-                flagged[t] = prev.get("deal_note") or "Pending cash deal"
-        elif t in MANUAL_DEALS and not broke:
-            flagged[t] = MANUAL_DEALS[t]
 
-    # 1 + 2: new detections among the not-yet-flagged candidates
-    cands = [s for s in _candidates(stocks) if s["ticker"] not in flagged]
+def load_registry(path: Path | None = None) -> dict:
+    """{"deals": {ticker: {"note", "since"}}, "cleared": [ticker, ...]} — empty when the file is missing/corrupt."""
+    try:
+        d = json.loads((path or REGISTRY_PATH).read_text(encoding="utf-8"))
+        return {"deals": dict(d.get("deals") or {}), "cleared": list(d.get("cleared") or [])}
+    except Exception:                                         # noqa: BLE001
+        return {"deals": {}, "cleared": []}
+
+
+def save_registry(reg: dict, path: Path | None = None) -> None:
+    out = {"updated": date.today().isoformat(), "deals": dict(sorted(reg["deals"].items())),
+           "cleared": sorted(set(reg["cleared"]))}
+    (path or REGISTRY_PATH).write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def pending_deal_tickers(path: Path | None = None) -> dict[str, str]:
+    """ticker -> note for every registered pending deal. What the other builders use to drop these stocks."""
+    return {t: (v or {}).get("note") or "Pending cash deal" for t, v in load_registry(path)["deals"].items()}
+
+
+def drop_pending(rows: list[dict], key: str = "ticker", deals: dict[str, str] | None = None) -> tuple[list[dict], list[str]]:
+    """(rows without pending-deal tickers, sorted tickers that were removed). `deals` defaults to the registry."""
+    deals = pending_deal_tickers() if deals is None else deals
+    kept, hidden = [], []
+    for r in rows:
+        (hidden if r.get(key) in deals else kept).append(r)
+    return kept, sorted({r[key] for r in hidden})
+
+
+def update_registry(stocks: list[dict], reg: dict, today: Optional[str] = None) -> dict:
+    """Runs the full detection over one universe (`stocks`: dicts with ticker/company/perf_1d?/perf_1w?/perf_1m?) and
+    returns the updated registry (not saved). Rows of `stocks` are NOT modified."""
+    today = today or date.today().isoformat()
+    deals = dict(reg["deals"])
+    cleared = set(reg["cleared"])
+    by_t = {s["ticker"]: s for s in stocks}
+
+    # persistence: a flagged stock that makes a >= 5 % one-day move (deal broke / rival bid) is cleared. A stock that is
+    # simply not in THIS universe keeps its flag (another builder's pool may be wider).
+    for t in list(deals):
+        row = by_t.get(t)
+        if row is not None and abs(row.get("perf_1d") or 0) >= BREAK_MOVE_PCT:
+            del deals[t]
+            cleared.add(t)
+            logger.info("Pending deal cleared (%.1f%% move): %s", row.get("perf_1d"), t)
+
+    # seeds: only for tickers never evaluated before
+    for t, note in MANUAL_DEALS.items():
+        if t not in deals and t not in cleared:
+            deals[t] = {"note": note, "since": today, "source": "manual"}
+
+    # new detections
+    cands = [s for s in _candidates(stocks) if s["ticker"] not in deals]
     if cands:
         closes = _download_closes([s["ticker"] for s in cands])
         for s in cands:
             hit = jump_then_pinned(closes.get(s["ticker"], []))
-            if not hit:
-                continue
-            if has_deal_headline(s.get("company", "")) is True:
-                flagged[s["ticker"]] = (f"Pending cash deal (auto-detected: +{hit['jump_pct']}% jump, "
-                                        f"flat for {hit['sessions_after']} sessions, deal headline)")
-                logger.info("Pending deal detected: %s %s", s["ticker"], flagged[s["ticker"]])
+            if hit and has_deal_headline(s.get("company", "")) is True:
+                deals[s["ticker"]] = {
+                    "note": f"Pending cash deal (auto-detected: +{hit['jump_pct']}% jump, flat for {hit['sessions_after']} sessions, deal headline)",
+                    "since": today, "source": "auto"}
+                cleared.discard(s["ticker"])
+                logger.info("Pending deal detected: %s", s["ticker"])
 
+    cutoff = date.fromisoformat(today).toordinal() - PRUNE_DAYS
+    deals = {t: v for t, v in deals.items() if date.fromisoformat((v or {}).get("since", today)).toordinal() >= cutoff}
+    return {"deals": deals, "cleared": sorted(cleared)}
+
+
+def apply_pending_deals(stocks: list[dict], path: Path | None = None) -> int:
+    """Screener entry point: updates + saves the registry from this universe and sets `pending_deal` / `deal_note` on
+    every row of `stocks` (in place). Returns how many rows are flagged."""
+    reg = update_registry(stocks, load_registry(path))
+    save_registry(reg, path)
     for s in stocks:
-        s["pending_deal"] = s["ticker"] in flagged
-        s["deal_note"] = flagged.get(s["ticker"])
-    return len(flagged)
+        v = reg["deals"].get(s["ticker"])
+        s["pending_deal"] = v is not None
+        s["deal_note"] = (v or {}).get("note")
+    return sum(1 for s in stocks if s["pending_deal"])
+
+
+def hide_pending_in(rows: list[dict], key: str = "ticker", widen: bool = False) -> tuple[list[dict], list[str]]:
+    """Convenience for builders: optionally runs detection over `rows` first (`widen=True`, for pools wider than the
+    screener's top 500), then returns (rows without pending deals, hidden tickers). Never raises."""
+    try:
+        if widen:
+            reg = update_registry([{**r, "ticker": r[key]} for r in rows], load_registry())
+            save_registry(reg)
+        return drop_pending(rows, key)
+    except Exception as e:                                    # noqa: BLE001
+        logger.warning("pending-deal filter failed (non-fatal): %s", e)
+        return rows, []

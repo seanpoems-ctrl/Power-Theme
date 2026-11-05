@@ -15613,6 +15613,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
         <div className="flex items-center gap-3 flex-wrap">
           <h3 className="text-sm font-semibold text-zinc-100">Pullback Watchlist</h3>
           <span className="text-[11px] text-zinc-500">Martin Luk's pullback-buy method · {rows.length} of {all.length} stocks pass · {triggerN} with a daily trigger · data {file.date}</span>
+          <PendingDealsNote tickers={file.pending_deals_hidden} />
           <div className="ml-auto flex items-center gap-2">
             <button onClick={() => setGuideOpen(true)} className="text-[11px] font-medium px-2 py-1 rounded border border-blue-500/40 text-blue-300 hover:bg-blue-500/10 transition-colors">📖 Guide</button>
             <button onClick={copy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : `Copy ${tickers.length}`}</button>
@@ -16014,6 +16015,15 @@ const TickerLink = ({ ticker, tone = "cyan", children = null }) => {
   );
 };
 // The one way to show a stock symbol in a table: clickable ticker + its leveraged ETF.
+// "N pending deals left out: ADT, BRZE" — stocks pinned under a pending cash takeover are removed from the lists by the builders
+// (deal_filter.py → public/pending_deals.json); this keeps the removal visible instead of silent. Renders nothing when there are none.
+const PendingDealsNote = ({ tickers }) => (tickers && tickers.length > 0) ? (
+  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-amber-700/40 bg-amber-900/10 text-amber-300/80"
+    title={"Left out of this list: pinned under a pending cash takeover offer, so not tradeable setups. " + tickers.join(", ")}>
+    {tickers.length} pending deal{tickers.length > 1 ? "s" : ""} left out: {tickers.slice(0, 4).join(", ")}{tickers.length > 4 ? "…" : ""}
+  </span>
+) : null;
+
 const StockCell = ({ ticker, etf = null, tone = "cyan" }) => <><TickerLink ticker={ticker} tone={tone} /><LevEtfTag ticker={ticker} etf={etf} /></>;
 
 const _pCls = v => v == null ? "text-zinc-600" : v >= 0 ? "text-emerald-400" : "text-rose-400";
@@ -16365,6 +16375,7 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
           <span className="text-[11px] text-zinc-600">{isSuper
             ? `top ${data.super_top_n} per window of ${data.super_pool_size} super liquid stocks (avg $ vol ≥ $${((c.super_min_dollar_volume || 0) / 1e9).toFixed(0)}B) · ${data.date}`
             : `top ${data.top_n} per window of ${data.universe_size} liquid stocks (avg $ vol ≥ $${((c.min_dollar_volume || 0) / 1e6).toFixed(0)}M) · ${data.date}`}</span>
+          <PendingDealsNote tickers={data.pending_deals_hidden} />
           {dates.length > 0 && (
             <select value={asOf || dates[0]} onChange={e => setAsOf(e.target.value === dates[0] ? null : e.target.value)} title="View a past day's leaders"
               className="ml-auto px-2 py-1 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50">
@@ -17140,6 +17151,7 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
         <div>
           <h3 className="text-sm font-semibold text-zinc-100">🎯 Focus List</h3>
           <p className="text-[11px] text-zinc-600">Jeff Sun-style screener battery · {scans.length} scans · every scan filtered to {tightLabel}</p>
+          <PendingDealsNote tickers={data?.pending_deals_hidden} />
         </div>
         {scanTimeLabel && <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {scanTimeLabel}</span>}
       </div>
@@ -17386,6 +17398,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
         <div>
           <h2 className="text-base font-bold text-zinc-100">Daily Stock Universe</h2>
           <p className="text-xs text-zinc-500 mt-0.5">{summary.total_stocks} stocks · {summary.rotating_in} ETFs rotating in · {summary.rotating_out} rotating out · {uData.date}</p>
+          <PendingDealsNote tickers={uData.pending_deals_hidden} />
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           {Object.entries(SIG_META).filter(([k]) => k !== "Neutral").map(([k, m]) => (
