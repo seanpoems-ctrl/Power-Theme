@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-05 06:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Momentum",
+    "spy_price": 766.81,
+    "spy_change_pct": 1.65,
+    "vix": 16.86,
+    "hy_oas": 3.4,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 67.5,
+    "mmth": 66.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple (AAPL) surges after announcing a groundbreaking AI integration into its iOS ecosystem, expected to boost iPhone sales and services revenue."
+        },
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Johnson & Johnson (JNJ) shares climb on positive Phase 3 trial results for its new oncology drug, with analysts raising price targets."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) sees continued flow interest following yesterday's broad tech rally, lacking a fresh catalyst but maintaining positive momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-04 20:02 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com Inc.",
           "reason": "Amazon is facing technical pressure following broader sector weakness in technology, without new specific company-driving news to counteract the prevailing flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-15 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off, Volatility Spikes",
-    "spy_price": 769.6,
-    "spy_change_pct": -1.08,
-    "vix": 17.6,
-    "hy_oas": 3.16,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 35.9,
-    "mmth": 51.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "COST",
-          "company": "Costco Wholesale Corporation",
-          "reason": "Costco is trading higher after reporting robust same-store sales figures for the prior quarter, indicating resilient consumer spending in the face of broader economic concerns."
-        },
-        {
-          "ticker": "AMD",
-          "company": "Advanced Micro Devices, Inc.",
-          "reason": "AMD is gaining pre-market on reports of securing a major contract with a hyperscale cloud provider for its latest generation of server processors, signaling market share gains."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla shares are experiencing continued volatility amidst ongoing debates regarding production ramp-ups for its new models and increased competition in the electric vehicle market."
         }
       ]
     }
