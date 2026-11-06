@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-11-05 20:07 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-11-06 06:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 766.81,
-      "open": 762.99,
-      "high": 775.64,
-      "low": 762.64,
-      "close": 766.81,
-      "prev_open": 752.73,
-      "prev_close": 754.35,
-      "volume": 62126400,
-      "change_pct": 1.65
+      "price": 733.0,
+      "open": 765.47,
+      "high": 765.97,
+      "low": 732.71,
+      "close": 733.0,
+      "prev_open": 762.99,
+      "prev_close": 766.81,
+      "volume": 125340600,
+      "change_pct": -4.41
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 691.95,
-      "open": 688.43,
-      "high": 701.45,
-      "low": 687.87,
-      "close": 691.95,
-      "prev_open": 684.39,
-      "prev_close": 685.28,
-      "volume": 62365900,
-      "change_pct": 0.97
+      "price": 647.05,
+      "open": 683.12,
+      "high": 683.65,
+      "low": 647.05,
+      "close": 647.05,
+      "prev_open": 688.43,
+      "prev_close": 691.95,
+      "volume": 128835900,
+      "change_pct": -6.49
     },
     "^VIX": {
       "label": "VIX",
-      "price": 28.18,
-      "open": 17.14,
-      "high": 28.36,
-      "low": 16.7,
-      "close": 28.18,
-      "prev_open": 19.2,
-      "prev_close": 16.61,
+      "price": 26.79,
+      "open": 27.68,
+      "high": 27.68,
+      "low": 25.38,
+      "close": 26.79,
+      "prev_open": 17.14,
+      "prev_close": 28.18,
       "volume": 0,
-      "change_pct": 69.66
+      "change_pct": -4.93
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 91.02,
+      "price": 90.7,
       "open": 91.2,
-      "high": 91.5,
-      "low": 90.89,
-      "close": 91.02,
-      "prev_open": 96.81,
-      "prev_close": 88.12,
-      "volume": 4093,
-      "change_pct": 3.29
+      "high": 92.53,
+      "low": 89.07,
+      "close": 90.7,
+      "prev_open": 88.05,
+      "prev_close": 90.52,
+      "volume": 71262,
+      "change_pct": 0.2
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 57437.69,
+      "price": 57434.77,
       "open": 60374.35,
       "high": 60374.35,
-      "low": 56971.0,
-      "close": 57437.69,
-      "prev_open": 62973.16,
-      "prev_close": 62188.63,
+      "low": 56745.81,
+      "close": 57434.77,
+      "prev_open": 62384.73,
+      "prev_close": 61077.9,
       "volume": 0,
-      "change_pct": -7.64
+      "change_pct": -5.96
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26437.67,
-      "open": 25888.93,
-      "high": 26541.64,
-      "low": 25876.82,
-      "close": 26437.67,
-      "prev_open": 25730.06,
-      "prev_close": 25864.62,
-      "volume": 93436800,
-      "change_pct": 2.22
+      "price": 25731.42,
+      "open": 25919.48,
+      "high": 26061.64,
+      "low": 25731.42,
+      "close": 25731.42,
+      "prev_open": 26449.79,
+      "prev_close": 26325.01,
+      "volume": 0,
+      "change_pct": -2.25
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: November 05, 2026",
-    "mood_emoji": "🌪️",
-    "mood": "Turbulent / Divergent Flows",
-    "narrative": "US equities closed higher today, fueled by strong earnings reports, yet global markets revealed significant fragmentation as the Nikkei plunged and the VIX surged. This divergence suggests underlying market turbulence despite headline gains in the S&P 500 and Nasdaq 100.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 766.81 | +1.65% | 📈 |\n| Nasdaq 100 ETF | 691.95 | +0.97% | 📈 |\n| VIX | 28.18 | +69.66% | 📈 |\n| Crude Oil | 91.02 | +3.29% | 📈 |\n| Nikkei 225 | 57437.69 | -7.64% | 📉 |\n| DAX | 26437.67 | +2.22% | 📈 |",
-    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) remain at a seemingly complacent 3.32%, suggesting investors are currently comfortable with risk. The 10Y-2Y Yield Curve (T10Y2Y) stands at a normal and steepening +0.380, often indicative of economic expansion, yet the day's severe VIX spike contradicts this implied institutional risk appetite, hinting at hidden anxieties.",
-    "analysis_para1": "Today's global tape presented a sharply fractured picture, with the Nikkei 225 plummeting by a substantial -7.64% while the DAX rose +2.22% and Crude Oil rallied +3.29%. This significant divergence, particularly the steep decline in Japanese equities alongside rising energy prices, contrasts sharply with the ostensibly complacent US High Yield Credit Spread of 3.32%. The massive VIX spike of +69.66% further underscores that despite US equity gains, global risk appetite is far from unified or stable, suggesting underlying stress that US credit markets may not yet be fully pricing in.",
-    "analysis_para2": "The single dominant 'Why' behind today's primary market flow appears to be a complex interplay of strong earnings reports driving US equity resilience amidst a sharp spike in volatility and global market fragmentation. While companies like EPAM and U reported strong results, attracting capital, the concurrent surge in the VIX and the drastic Nikkei drop point to significant hedging activity and potentially geopolitical jitters. This suggests a mechanical catalyst of 'flight to quality' within US large-cap equities, where strong fundamentals are temporarily overshadowing broader global risk-off sentiment, creating a divergent market character.",
-    "analysis_para3": "In this turbulent, divergent market, traders should exercise extreme caution. Today's strong VIX spike demands a focus on downside protection and monitoring for cracks in US equity strength. Watch for the S&P 500 ETF (766.81) to hold recent support levels, with a break below 760 potentially triggering increased risk-off positioning. Key triggers for long entries would require sustained momentum above today's close, ideally on reduced VIX. Conversely, a failure to consolidate earnings-driven gains, particularly if coupled with further VIX spikes or global market deterioration, warrants immediate reduction in long exposure. Traders should prioritize capital preservation over aggressive new positions today.",
-    "technical_signal": "No reversal pattern confirmed yet. The VIX surge alongside US equity gains creates a complex technical picture, suggesting underlying volatility despite headline strength. Watch for a decisive close below the S&P 500's 50-day moving average (currently implied around 750-755 from % stocks above SMA50), which would signal a shift in the short-term trend.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "EPAM",
-          "company": "EPAM Systems, Inc.",
-          "reason": "EPAM rallied significantly today following a Q3 2026 earnings beat, demonstrating strong fundamental performance in the technology services sector."
-        },
-        {
-          "ticker": "U",
-          "company": "Unity Software Inc.",
-          "reason": "Unity Software experienced strong upward momentum today after reporting robust earnings, indicating renewed investor confidence in its growth trajectory."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) saw continued flow today, benefiting from broader tech strength and its consistent market position, without a specific fresh news catalyst."
-        }
-      ]
-    }
+    "error": "400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Thinking is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}"
   }
 }
