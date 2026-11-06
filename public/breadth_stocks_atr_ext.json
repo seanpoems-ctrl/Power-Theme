@@ -2,42 +2,54 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 2,
+  "count": 3,
   "stocks": [
+    {
+      "ticker": "XERS",
+      "company": "Xeris Biopharma Holdings, Inc.",
+      "industry": "Biotechnology",
+      "price": 15.2,
+      "change_pct": 16.21,
+      "adr_pct": 5.2,
+      "dollar_volume": "$56.9M",
+      "market_cap_b": 2.771,
+      "rs_ibd": 94,
+      "atr_ext_val": 11.16
+    },
+    {
+      "ticker": "ARDT",
+      "company": "Ardent Health, Inc.",
+      "industry": "Hospital/Nursing Management",
+      "price": 17.3,
+      "change_pct": 8.81,
+      "adr_pct": 4.6,
+      "dollar_volume": "$16.8M",
+      "market_cap_b": 2.44,
+      "rs_ibd": 72,
+      "atr_ext_val": 11.05
+    },
     {
       "ticker": "GDYN",
       "company": "Grid Dynamics Holdings, Inc.",
       "industry": "Information Technology Services",
-      "price": 13.54,
-      "change_pct": -1.56,
-      "adr_pct": 4.8,
-      "dollar_volume": "$38.1M",
-      "market_cap_b": 1.088,
-      "rs_ibd": 89,
-      "atr_ext_val": 12.06
-    },
-    {
-      "ticker": "UPBD",
-      "company": "Upbound Group, Inc.",
-      "industry": "Finance/Rental/Leasing",
-      "price": 24.88,
-      "change_pct": 3.07,
-      "adr_pct": 4.1,
-      "dollar_volume": "$44.2M",
-      "market_cap_b": 1.451,
-      "rs_ibd": 70,
-      "atr_ext_val": 10.13
+      "price": 13.1,
+      "change_pct": -3.21,
+      "adr_pct": 4.9,
+      "dollar_volume": "$37.5M",
+      "market_cap_b": 1.053,
+      "rs_ibd": 87,
+      "atr_ext_val": 10.37
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": null,
-    "spx_1m": null,
-    "spx_3m": null,
-    "spx_34d": null,
-    "spx_qtd": null,
-    "spx_mtd": null
+    "spx_1d": 0.31,
+    "spx_1m": -5.56,
+    "spx_3m": -4.55,
+    "spx_34d": -4.99,
+    "spx_qtd": -3.78,
+    "spx_mtd": -2.68
   },
-  "fetched_at_utc": "2026-11-06T03:09:36+00:00",
+  "fetched_at_utc": "2026-11-06T23:07:50+00:00",
   "pending_deals_hidden": [
     "ADT",
     "BRZE",

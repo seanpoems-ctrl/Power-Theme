@@ -1,19 +1,45 @@
 {
-  "generated_at": "2026-11-06T03:09:33.395397+00:00",
+  "generated_at": "2026-11-06T23:02:41.526557+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Other",
-      "theme_rs": 96.5,
-      "perf_1d": 13.45,
+      "name": "Cybersecurity",
+      "theme_rs": 97.0,
+      "perf_1d": 6.31,
       "leaders": [
         {
-          "ticker": "U",
-          "price": 48.8,
+          "ticker": "CRWD",
+          "price": 216.9,
           "rs_52w": 97,
-          "adr_pct": 5.29,
-          "vol_surge": 4.7,
-          "mkt_cap": 21476339594,
+          "adr_pct": 6.57,
+          "vol_surge": 1.11,
+          "mkt_cap": 222091460980,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Cybersecurity",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Other",
+      "theme_rs": 94.0,
+      "perf_1d": 15.59,
+      "leaders": [
+        {
+          "ticker": "FROG",
+          "price": 100.98,
+          "rs_52w": 97,
+          "adr_pct": 8.08,
+          "vol_surge": 3.61,
+          "mkt_cap": 12450966798,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -27,12 +53,12 @@
           "setup_label": "Flag"
         },
         {
-          "ticker": "EPAM",
-          "price": 165.7,
-          "rs_52w": 96,
-          "adr_pct": 4.74,
-          "vol_surge": 3.09,
-          "mkt_cap": 8547962594,
+          "ticker": "HPE",
+          "price": 44.77,
+          "rs_52w": 94,
+          "adr_pct": 8.58,
+          "vol_surge": 0.86,
+          "mkt_cap": 59430598763,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -43,7 +69,26 @@
           },
           "primary_theme": "Other",
           "secondary_themes": [],
-          "setup_label": "Base"
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "DELL",
+          "price": 328.53,
+          "rs_52w": 91,
+          "adr_pct": 10.39,
+          "vol_surge": 1.11,
+          "mkt_cap": 208883561981,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
         }
       ]
     }
