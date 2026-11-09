@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T02:15:42.200348+00:00",
+  "generated_at": "2026-11-09T23:00:58.497008+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -5348,7 +5348,7 @@
       "event": "Wholesale Inventories MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "0.6",
       "previous": "0.5",
       "currency": "USD"
     },
@@ -5395,7 +5395,7 @@
     {
       "date": "2026-11-09",
       "time_et": "11:00",
-      "event": "United States-NY Fed Consumer Expectation-NY Fed Inflation Expectation 1yr",
+      "event": "United States-NY Fed Consumer Expectation-NY Fed Inflation Expectation 1yr *",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -8140,6 +8140,196 @@
       "actual": null,
       "forecast": null,
       "previous": "100",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "08:30",
+      "event": "Chicago Fed National Activity Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "0.07",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "09:45",
+      "event": "S&P Global Services PMI Flash",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "09:45",
+      "event": "S&P Global Composite PMI Flash",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "09:45",
+      "event": "S&P Global Manufacturing PMI Flash",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:00",
+      "event": "USDA Corn Export Inspections",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:00",
+      "event": "USDA Soybean Export Inspections",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:00",
+      "event": "USDA Wheat Export Inspections",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction Allotted at High",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction Bid-to-Cover",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction Allotted at High",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction Bid-to-Cover",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "13:00",
+      "event": "2-Year Note Auction Allotted at High",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "13:00",
+      "event": "2-Year Note Auction Bid-to-Cover",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "13:00",
+      "event": "2-Year Note Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-23",
+      "time_et": "13:00",
+      "event": "2-Year Note Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
       "currency": "USD"
     }
   ]

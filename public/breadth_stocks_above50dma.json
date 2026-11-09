@@ -2,64 +2,79 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 4,
+  "count": 5,
   "stocks": [
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 15.2,
-      "change_pct": 16.21,
-      "adr_pct": 5.2,
-      "dollar_volume": "$56.9M",
-      "market_cap_b": 2.771,
-      "rs_ibd": 94,
-      "above50dma_pct": 57.9
+      "price": 15.86,
+      "change_pct": 4.34,
+      "adr_pct": 5.0,
+      "dollar_volume": "$65.7M",
+      "market_cap_b": 2.898,
+      "rs_ibd": 93,
+      "above50dma_pct": 62.3
     },
     {
       "ticker": "REPL",
       "company": "Replimune Group, Inc.",
       "industry": "Biotechnology",
-      "price": 21.62,
-      "change_pct": 7.99,
-      "adr_pct": 5.9,
-      "dollar_volume": "$97.9M",
-      "market_cap_b": 2.05,
-      "rs_ibd": 97,
-      "above50dma_pct": 53.4
+      "price": 22.26,
+      "change_pct": 2.96,
+      "adr_pct": 5.7,
+      "dollar_volume": "$103.4M",
+      "market_cap_b": 2.11,
+      "rs_ibd": 96,
+      "above50dma_pct": 56.4
     },
     {
       "ticker": "ARDT",
       "company": "Ardent Health, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 17.3,
-      "change_pct": 8.81,
-      "adr_pct": 4.6,
-      "dollar_volume": "$16.8M",
-      "market_cap_b": 2.44,
-      "rs_ibd": 72,
-      "above50dma_pct": 51.2
+      "price": 17.97,
+      "change_pct": 3.87,
+      "adr_pct": 4.7,
+      "dollar_volume": "$19.8M",
+      "market_cap_b": 2.533,
+      "rs_ibd": 77,
+      "above50dma_pct": 55.2
     },
     {
       "ticker": "GDYN",
       "company": "Grid Dynamics Holdings, Inc.",
       "industry": "Information Technology Services",
-      "price": 13.1,
-      "change_pct": -3.21,
-      "adr_pct": 4.9,
-      "dollar_volume": "$37.5M",
-      "market_cap_b": 1.053,
-      "rs_ibd": 87,
-      "above50dma_pct": 50.8
+      "price": 13.3,
+      "change_pct": 1.53,
+      "adr_pct": 4.8,
+      "dollar_volume": "$38.5M",
+      "market_cap_b": 1.069,
+      "rs_ibd": 86,
+      "above50dma_pct": 51.3
+    },
+    {
+      "ticker": "KOD",
+      "company": "Kodiak Sciences Inc",
+      "industry": "Biotechnology",
+      "price": 107.1,
+      "change_pct": 7.85,
+      "adr_pct": 6.4,
+      "dollar_volume": "$100.8M",
+      "market_cap_b": 6.731,
+      "rs_ibd": 98,
+      "above50dma_pct": 51.0
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.31,
-    "spx_1m": -5.56,
-    "spx_3m": -4.55,
-    "spx_34d": -4.99,
-    "spx_qtd": -3.78,
-    "spx_mtd": -2.68
+    "spx_1d": 2.35,
+    "spx_1m": -3.3,
+    "spx_3m": -2.56,
+    "spx_34d": -2.03,
+    "spx_qtd": -1.52,
+    "spx_mtd": -0.4
   },
-  "fetched_at_utc": "2026-11-09T02:18:16+00:00"
+  "fetched_at_utc": "2026-11-09T23:02:54+00:00",
+  "pending_deals_hidden": [
+    "SGRY"
+  ]
 }
