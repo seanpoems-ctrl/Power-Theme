@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-09 16:23 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Strong Risk Appetite Surge",
+    "spy_price": 752.69,
+    "spy_change_pct": 2.37,
+    "vix": 19.92,
+    "hy_oas": 3.42,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 65.4,
+    "mmth": 63.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation announced a new partnership with a major cloud provider to expand its AI infrastructure, driving strong investor optimism."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet Inc. surged after revealing better-than-expected progress in its cloud computing division and new generative AI features for Google Workspace."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corporation saw strong institutional buying momentum today, likely a continuation of broader tech sector rotation as conviction in cloud growth remains high."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-09 15:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Momentum-driven trading based on pure technical flow and speculative interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-19 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech-Led US Outperformance",
-    "spy_price": 766.48,
-    "spy_change_pct": 0.42,
-    "vix": 18.44,
-    "hy_oas": 3.31,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 42.2,
-    "mmth": 52.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CLF",
-          "company": "Cleveland-Cliffs Inc.",
-          "reason": "Anticipation of strong Q3 profitability, driven by favorable commodity prices and operational efficiency, positions the stock for continued upside."
-        },
-        {
-          "ticker": "CRWV",
-          "company": "CrowdWave Technologies Inc.",
-          "reason": "Goldman Sachs' upgrade to Buy today signals strong institutional confidence in the company's growth trajectory and valuation."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "JNJ",
-          "company": "Johnson & Johnson",
-          "reason": "Continued focus on its pharmaceutical pipeline and consumer health spin-off implications drive steady, but largely priced-in, investor interest."
         }
       ]
     }
