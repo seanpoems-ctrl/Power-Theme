@@ -3,7 +3,7 @@
   "filter": "dn13_34",
   "label": "Down 13%+ 34-Day",
   "min_cap_b": 1.0,
-  "count": 296,
+  "count": 297,
   "stocks": [
     {
       "ticker": "AAOI",
@@ -2742,6 +2742,22 @@
       "rs_ibd": 85
     },
     {
+      "ticker": "IONQ",
+      "company": "IonQ, Inc.",
+      "industry": "Computer Processing Hardware",
+      "market_cap_b": 14.007,
+      "price": 32.62,
+      "change_pct": 23.42,
+      "dollar_volume": "$736.1M",
+      "adr_pct": 8.5,
+      "perf_1m": -22.68,
+      "perf_3m": -19.23,
+      "perf_34d": null,
+      "perf_qtd": -19.23,
+      "perf_mtd": -22.68,
+      "rs_ibd": 11
+    },
+    {
       "ticker": "NU",
       "company": "Nu Holdings Ltd.",
       "industry": "Regional Banks",
@@ -4750,9 +4766,6 @@
     "spx_qtd": -3.78,
     "spx_mtd": -2.68
   },
-  "fetched_at_utc": "2026-11-08T02:13:34+00:00",
-  "source": "tv_fallback",
-  "pending_deals_hidden": [
-    "IONQ"
-  ]
+  "fetched_at_utc": "2026-11-09T02:18:30+00:00",
+  "source": "tv_fallback"
 }
