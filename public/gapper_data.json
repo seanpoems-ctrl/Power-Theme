@@ -1,227 +1,57 @@
 {
-  "scan_time": "2026-11-06 07:55 ET",
+  "scan_time": "2026-11-09 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "NET",
-      "price": 296.23,
-      "gap_pct": 21.15,
-      "pm_volume": 140439,
-      "avg_vol_10d": 3974129,
-      "avg_dollar_vol": 1177256234,
-      "mkt_cap": 87065046585,
-      "rvol": 2.65,
-      "adr_pct": 5.94,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "NET gapping on earnings: Cloudflare (NET) Surpasses Q3 Earnings and Revenue Estimates - Yahoo Finance",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Cloudflare (NET) Surpasses Q3 Earnings and Revenue Estimates - Yahoo Finance | Trump’s Net Worth Tumbles Over $200 Million As DJT Stock Plunges - Forbes | Cloudflare Stock Surges on Lifted Full-Year Outlook, Third-Quarter Revenue Growth - WSJ",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Cloudflare (NET) Surpasses Q3 Earnings and Revenue Estimates - Yahoo Finance | Trump’s Net Worth Tumbles Over $200 Million As DJT Stock Plunges - Forbes | Cloudflare Stock Surges on Lifted Full-Year Outlook, Third-Quarter Revenue Growth - WSJ\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Cloudflare (NET) Surpasses Q3 Earnings and Revenue Estimates - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWXhhQ0xrT2xVYVhJTzBFQ2U3N2VmQ2E3eGU1Zlg0ZjJwNF9hVmVSR09LRFE5VnpMdnhHUTVRQnNTQ0xMcUZzQjEwRWVmekZodENQblJZNnI3cUhSd3pvNkgwSmNKRmozamt3M1NPWUdYajBuYlpHMnJncTFQM1d0Q0doNXdpX2xERHdXVlB1SkVmcUg1WThkcWxfVXRDUk5TQ0hv?oc=5"
-        },
-        {
-          "title": "Trump’s Net Worth Tumbles Over $200 Million As DJT Stock Plunges - Forbes",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNTFFFQkEyRVVLRllqMEFaQjlVVlVyd1R0UU5VS3psMlhaV0JDdlVGV2ZEVHAxaTdyUW9rUzlDdUlGTjkwSDlrdFRXbmp3U1F5ZFg0Nnl4ejRDd2tGVzlZWDJHbG5SUjFSNkRnTTd6RTFZampVNDN3NzZvQVBFQnlfNnZOcDI5eXUyNVZjS3JpaV9kVlUwV0VMRXowVWRMdjkxa3BVdU16VWZlRXpEdEpvcEFBa0tHNU5reDJqSjFxM2hQU2hKWHhR?oc=5"
-        },
-        {
-          "title": "Cloudflare Stock Surges on Lifted Full-Year Outlook, Third-Quarter Revenue Growth - WSJ",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPQjQzcm9BaGVPeW9IQll0NW9UQzRyaUNVdC1lVmFmbEtFNm0zNjc5X0xDME5qU21rWkRIUTNYTGRmNnhTN0x6SnBoWnVZbkpZcHRYWFl6UEhkV2VnTW9ZWlUyS2VXa1JQWl9TUVpyclcyTmRmenRSLXBFVVJqM3ZFU2lFS21sbkF3am5BNGtfeFU3eFNvQkNHVHdIaHZlOGRRV0JuOVNDY3ZEMG5Hd2NWbTBycEFfYy1DNVFhc3pmT0RudV9yNVE?oc=5"
-        },
-        {
-          "title": "Cloudflare Hits 39% Growth And Pulls GAAP Profit Target Into Q4, But Gross Margin And Cash Conversion Lag The Revenue Beat",
-          "source": "Finviz",
-          "url": "/news/418151/cloudflare-hits-39-growth-and-pulls-gaap-profit-target-into-q4-but-gross-margin-and-cash-conversion-lag-the-revenue-beat"
-        },
-        {
-          "title": "Cloudflares appeal wont fix whats broken in Delawares Chancery Court",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/economy/policy/articles/cloudflare-appeal-won-t-fix-020118276.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-05",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1477333/000147733326000060/cloud-20261105.htm"
-      },
-      "float_shares": "319.57M",
-      "short_float": "2.81%",
-      "daily_pct": -8.28,
-      "prev_close": 244.51,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "NET gapping on earnings: Cloudflare (NET) Surpasses Q3 Earnings and Revenue Estimates - Yahoo Finance",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "IREN",
-      "price": 21.26,
-      "gap_pct": 17.92,
-      "pm_volume": 4864583,
-      "avg_vol_10d": 61687115,
-      "avg_dollar_vol": 1311468065,
-      "mkt_cap": 7295181591,
-      "rvol": 2.21,
-      "adr_pct": 9.1,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "IREN gapping on earnings: Here’s what’s driving Iren’s stock higher after a brutal selloff - MarketWatch",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Here’s what’s driving Iren’s stock higher after a brutal selloff - MarketWatch | IREN AI Cloud revenue hits $200 million as $4 billion ARR target moves to January | IREN Reports Q1 FY27 Results",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Here’s what’s driving Iren’s stock higher after a brutal selloff - MarketWatch | IREN AI Cloud revenue hits $200 million as $4 billion ARR target moves to January | IREN Reports Q1 FY27 Results\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "IREX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Here’s what’s driving Iren’s stock higher after a brutal selloff - MarketWatch",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNaERvUXM2VkN2YmxjaEFfOE1SRTdiMTgzUFNnMkdGWU1tZHJnRXpoeGxUVFI4Z1dRQlg2RkNLT05oSFBaRVU0cFZ3ZXJTSmNzSmZvbVNBUTJEcE1hNHozQThzX0lnRkp4MVhlLWExLWxJVUpqZ2dEVDludlhwZ0pDWXVFSllVaUk1S0FDMVNIT21sRW1aRXVVRjFYcnAweDlJOXpmc2Nrcw?oc=5"
-        },
-        {
-          "title": "IREN AI Cloud revenue hits $200 million as $4 billion ARR target moves to January",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/iren-ai-cloud-revenue-hits-212716474.html"
-        },
-        {
-          "title": "IREN Reports Q1 FY27 Results",
-          "source": "Finviz",
-          "url": "/news/417608/iren-reports-q1-fy27-results"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-05",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000065/iren-20261105.htm"
-      },
-      "float_shares": "355.00M",
-      "short_float": "24.40%",
-      "daily_pct": -16.95,
-      "prev_close": 18.03,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "IREN gapping on earnings: Here’s what’s driving Iren’s stock higher after a brutal selloff - MarketWatch",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "FLY",
-      "price": 17.45,
-      "gap_pct": 15.01,
-      "pm_volume": 256915,
-      "avg_vol_10d": 2955580,
-      "avg_dollar_vol": 51574871,
-      "mkt_cap": 2540365508,
-      "rvol": 2.32,
-      "adr_pct": 7.23,
+      "ticker": "GFR",
+      "price": 7.72,
+      "gap_pct": 37.86,
+      "pm_volume": 966360,
+      "avg_vol_10d": 981762,
+      "avg_dollar_vol": 7579203,
+      "mkt_cap": 1346316577,
+      "rvol": 1.39,
+      "adr_pct": 4.68,
       "category": "New Contract/Partnership",
       "theme": "New Contract/Partnership",
-      "reasoning": "FLY deal announcement: A deal worth over $1.3 billion will bring 36 Firefly engines to AST SpaceMobile’s new rock",
+      "reasoning": "GFR deal announcement: Strathcona to acquire Greenfire Resources in $2 bln deal - Investing.com",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: A deal worth over $1.3 billion will bring 36 Firefly engines to AST SpaceMobile’s new rocket - Stock Titan",
+        "catalyst": "Headlines: Strathcona to acquire Greenfire Resources in $2 bln deal - Investing.com | Strathcona Resources Ltd. Announces Agreement to Acquire Greenfire Resources Ltd - Yahoo Finance | Greenfire Resources Reports Third Quarter 2026 Results and Provides an Operational Update",
         "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
       },
-      "analysis_details": "• **The Announcement**\nHeadlines: A deal worth over $1.3 billion will bring 36 Firefly engines to AST SpaceMobile’s new rocket - Stock Titan\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
+      "analysis_details": "• **The Announcement**\nHeadlines: Strathcona to acquire Greenfire Resources in $2 bln deal - Investing.com | Strathcona Resources Ltd. Announces Agreement to Acquire Greenfire Resources Ltd - Yahoo Finance | Greenfire Resources Reports Third Quarter 2026 Results and Provides an Operational Update\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "A deal worth over $1.3 billion will bring 36 Firefly engines to AST SpaceMobile’s new rocket - Stock Titan",
+          "title": "Strathcona to acquire Greenfire Resources in $2 bln deal - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOQkRVUTQ2enFaMk9QMGVKUGxPekpuRU8wVFRmOWc0eng0bDV0UUhNMHZkS3gwc3BUSlJCbW5Ra0VYbzZRMG1PdC03elpaSGFTNWV5YWdHRXlNWXlDaTVQM3lGSXl0UHQydkYycTI2Q3pQclY3VVdIaFd4WG80SnQ5YVRvWE9kNVBEbVlpSEs2akJtRUJwbUNoYlI5NE9ua0dwcFRFZ0NWeS1sOENrbWJVeGd6VXN3dnhsblhjQw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPMW84RGRnV1h0RVZxdVhGX0NOMnFmTlFZTngxWkVQeFVpQXFvbjZ5OGNobFVvTlppTGZkaFB5S2lZTFZmdEYyaGgzR1JqY05NUkdrNmJkU2dzanJJd3BHT2pKcmJNOGdRNVM1ZjdoTWpvTUhYQkVoeFM0UVhvNVhEMzFtd0ktQmhXbVE5bWF5UTZ2Q0QxVGtGNFBjWFZzYXBpb0lsS0hFZVVqZGFIUXNudkxB?oc=5"
+        },
+        {
+          "title": "Strathcona Resources Ltd. Announces Agreement to Acquire Greenfire Resources Ltd - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPQWVZOHRRMFFuWk5uRkVWNV91djRrVFlJN1FKMGdIT1Mxd3FRRHlwVk8zdHZSRzNOSl9hTXQ3NklEX3JrNE51bGxKZE9QeHM3YzVIelVEb1F2eDNieWt5aXdmSUgzRTZVcm1YTDZPNHdXVFRfcmY3NTV5cUNPRmczQWhwY2M3czk2VGFUVEIzSFcyNmhaYV9DVU9hRlJqT21WX0tGeEpXQkpHODJBREE?oc=5"
+        },
+        {
+          "title": "Greenfire Resources Reports Third Quarter 2026 Results and Provides an Operational Update",
+          "source": "Finviz",
+          "url": "https://www.newsfilecorp.com/release/323028/Greenfire-Resources-Reports-Third-Quarter-2026-Results-and-Provides-an-Operational-Update"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "103.34M",
-      "short_float": "13.30%",
-      "daily_pct": -11.57,
-      "prev_close": 15.18,
+      "float_shares": "66.24M",
+      "short_float": "0.64%",
+      "daily_pct": 2.19,
+      "prev_close": 5.6,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $52M < $100M)",
+      "technical_status": "Fail (Avg $Vol $8M < $100M)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -229,7 +59,74 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "FLY deal announcement: A deal worth over $1.3 billion will bring 36 Firefly engines to AST SpaceMobile’s new rock",
+        "primary_claim": "GFR deal announcement: Strathcona to acquire Greenfire Resources in $2 bln deal - Investing.com",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "VIR",
+      "price": 14.07,
+      "gap_pct": 15.23,
+      "pm_volume": 222193,
+      "avg_vol_10d": 1837773,
+      "avg_dollar_vol": 25857466,
+      "mkt_cap": 2066126923,
+      "rvol": 0.99,
+      "adr_pct": 5.85,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "VIR FDA/regulatory event: Vir Biotechnology stock jumps 22% after hepatitis delta Phase 3 trial success - Investing.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Vir Biotechnology stock jumps 22% after hepatitis delta Phase 3 trial success - Investing.com | Vir Biotechnology Announces Primary Endpoint Met in Pivotal Phase 3 ECLIPSE 1 Trial for Elebsiran and Tobevibart in Chronic Hepatitis Delta",
+        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
+      },
+      "analysis_details": "• **The Event**\nHeadlines: Vir Biotechnology stock jumps 22% after hepatitis delta Phase 3 trial success - Investing.com | Vir Biotechnology Announces Primary Endpoint Met in Pivotal Phase 3 ECLIPSE 1 Trial for Elebsiran and Tobevibart in Chronic Hepatitis Delta\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Vir Biotechnology stock jumps 22% after hepatitis delta Phase 3 trial success - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOdkk2V1VFbzR5V3RCTV8tbjVjdTZSZm9menlQMlZySHItNFlVRGJacW04VjdZYjhRalh2My1ONmNJXzE3ZW50R2YxdGU2OGRwODREVzVBZ2UwVDI2Y1liNndCZ3JSbVdoQ1NjNmlZdlpmcC1qNmR1cEw5VDIyYkJZNEZRUFBDaGgzdExyWXI2QmtzNFBaVjJKSk1ha091NVl2d0RrVU9iMEpnSzNyWl84dEliR1FoU1FTbHROMGp6OTZwejV0SFA2b3FadVJOdw?oc=5"
+        },
+        {
+          "title": "Vir Biotechnology Announces Primary Endpoint Met in Pivotal Phase 3 ECLIPSE 1 Trial for Elebsiran and Tobevibart in Chronic Hepatitis Delta",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20261108631000/en/"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "134.07M",
+      "short_float": "9.70%",
+      "daily_pct": 10.8,
+      "prev_close": 12.21,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $26M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "VIR FDA/regulatory event: Vir Biotechnology stock jumps 22% after hepatitis delta Phase 3 trial success - Investing.",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
@@ -245,45 +142,50 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "INOD",
-      "price": 43.98,
-      "gap_pct": 13.88,
-      "pm_volume": 50096,
-      "avg_vol_10d": 2644551,
-      "avg_dollar_vol": 116307353,
-      "mkt_cap": 1327858008,
-      "rvol": 1.31,
-      "adr_pct": 7.08,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "INOD: symbol__ Stock Quote Price and Forecast - CNN",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "ticker": "QXO",
+      "price": 12.28,
+      "gap_pct": 6.22,
+      "pm_volume": 124809,
+      "avg_vol_10d": 16963520,
+      "avg_dollar_vol": 208312026,
+      "mkt_cap": 11993392609,
+      "rvol": 0.78,
+      "adr_pct": 5.77,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "QXO gapping on earnings: QXO, Inc. (QXO) latest stock news and headlines - Yahoo Finance Singapore",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: symbol__ Stock Quote Price and Forecast - CNN | Innodata Reports Record Third Quarter 2026 Results",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+        "catalyst": "Headlines: QXO, Inc. (QXO) latest stock news and headlines - Yahoo Finance Singapore | QXO Q3 Revenue Rises 79% to US$4.9 Billion - grafa.com | QXO Announces Third Quarter 2026 Preliminary Financial Information - Yahoo Finance",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: symbol__ Stock Quote Price and Forecast - CNN | Innodata Reports Record Third Quarter 2026 Results\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **The Results**\nHeadlines: QXO, Inc. (QXO) latest stock news and headlines - Yahoo Finance Singapore | QXO Q3 Revenue Rises 79% to US$4.9 Billion - grafa.com | QXO Announces Third Quarter 2026 Preliminary Financial Information - Yahoo Finance\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "symbol__ Stock Quote Price and Forecast - CNN",
+          "title": "QXO, Inc. (QXO) latest stock news and headlines - Yahoo Finance Singapore",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE94ekJ6NUV4dzBpYXQ5akZ3UlpTbzk5X3VaRTRyNDhiQ2oxbjNNaHBRVlNTcTVON3pneEwxWEY2OG5MVkZ1dzlRVXZDZFV0UWt1?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5ZYVBBc2J4Yi1IX2ZkX3I2YXZ4NjhHVF9ZdHRuajVIZWkweFAwdTZUV2lQWmp0U0VGQ0hyNmlkTmloanAtWWl4M1ZYWEJ5Ul9YbDNPcGZDYw?oc=5"
         },
         {
-          "title": "Innodata Reports Record Third Quarter 2026 Results",
-          "source": "Finviz",
-          "url": "/news/417736/innodata-reports-record-third-quarter-2026-results"
+          "title": "QXO Q3 Revenue Rises 79% to US$4.9 Billion - grafa.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNU2lxc3dMNFFxVVAxekowMnVHSjZKdHRUSUlpZUdsenlheXlHVXdZTGFlV0Z6bUtTdFlhZ2hKNU11by1yczRxX01OaVZOdWdhYXhLQWFQQWZmV2tOanVMZWhUQnJ0OENSQ0RGYnpsNVEwOFFtR3Y5SWhJeTY2WGgzSG5kS3RfZGpCX29sVnVsVjl1Zw?oc=5"
+        },
+        {
+          "title": "QXO Announces Third Quarter 2026 Preliminary Financial Information - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOSkxnRWp0M3VJSTdLSkFyNUN0bHBpSkJhM1pqMGw2akhfa0JDUEtRVmh4NFctWG5PR09MYURvSWJaTkhGcVpjOEh3YzN0bkZlZTNMN2FKNGFSazJGUUdneU92eDFGSmFzQ2xRaGo2MFJyOGRnRlR4a2trRzd4LUhOdEI2QUtKUzlkekUyY1Fwem95bVBrVFpQQWl0M01QZw?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-11-05",
+        "filing_date": "2026-11-09",
         "form": "8-K",
         "items": [
           "2.02",
@@ -291,12 +193,12 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/903651/000110465926123324/tm2628333d1_8k.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1236275/000162828026071846/qxo-20261109.htm"
       },
-      "float_shares": "32.72M",
-      "short_float": "13.67%",
-      "daily_pct": -10.81,
-      "prev_close": 38.62,
+      "float_shares": "964.77M",
+      "short_float": "14.73%",
+      "daily_pct": -0.69,
+      "prev_close": 11.56,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -306,89 +208,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "INOD: symbol__ Stock Quote Price and Forecast - CNN",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "OKLO",
-      "price": 21.75,
-      "gap_pct": 13.28,
-      "pm_volume": 403827,
-      "avg_vol_10d": 9687890,
-      "avg_dollar_vol": 210711608,
-      "mkt_cap": 3571539100,
-      "rvol": 2.43,
-      "adr_pct": 6.67,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "OKLO: A planned North Carolina site is slated to make Oklo reactor parts, with deliveries starti",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: A planned North Carolina site is slated to make Oklo reactor parts, with deliveries starting in 2030. - Stock Titan | Oklo Sank 10% a Day After the Democratic Sweep Rattled AI Power Stocks. Here’s What Friday’s Report Has to Settle - TIKR.com | Dear Oklo Stock Fans, Mark Your Calendars for November 6 - Yahoo Finance",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: A planned North Carolina site is slated to make Oklo reactor parts, with deliveries starting in 2030. - Stock Titan | Oklo Sank 10% a Day After the Democratic Sweep Rattled AI Power Stocks. Here’s What Friday’s Report Has to Settle - TIKR.com | Dear Oklo Stock Fans, Mark Your Calendars for November 6 - Yahoo Finance\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "OKLL",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "OKLS",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "A planned North Carolina site is slated to make Oklo reactor parts, with deliveries starting in 2030. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNTzhrU0F4Q0Z6b0ExbGFSSG5JYjVGYzZoVjVpUmxNei1oR1V6U0lJYTdCa1JFaTZLTUh0RVdDbjhCYS1tekZINkoxNUZHOGpvbnQzSlBpQ1EzMDU4SVNORE9aZlVlalRLd0NzTUV0amNkVVVVWGt1dzdlaXh4cVJDZjBhbTd6akszb1ZKNC1nejdXZUNPaThPdUJiSEhQUldYdkttTW1INVRJUFZNQi1FUkdma1NTenhNMWluWldDSQ?oc=5"
-        },
-        {
-          "title": "Oklo Sank 10% a Day After the Democratic Sweep Rattled AI Power Stocks. Here’s What Friday’s Report Has to Settle - TIKR.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNUFJOcTE5ZFdrcFdzX1ZtcEVvYmw0ZlI5NEZEUUpoN3Y2ZGxxVjFpRnNFNlVqclJoTHZ6SU9VVDk5cUdZc0hWYktSaEdhbTVZekNYOGR4Mjd3RVBqUjZoeExFWHNtb2o2czE3cnVFUXh4Z0wzNDhpc2ljcDBibW5KQWlaMTdLd2VmNktMQThfRVJlWWxpRGVyOEJwM2NJUXhsWlBWUWd3ZzBsQVJmMU5XampFYXI2Z05hbTY0M21HNjdTd1dhS1lvSXVQRlROTlJfSlE?oc=5"
-        },
-        {
-          "title": "Dear Oklo Stock Fans, Mark Your Calendars for November 6 - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxON1g3WlJ1WVI2b1NQd29ZWTBSMmNoMzJsb3ZyUFpoNmlXLXV4NTNtdzhvZVhwSFlQWkh1aTZUSVJWTndnT0lKTFB5ZmVPWUVFQk50RFJJWDc1VnhvZ1dfY2JKQnpvZzQ2X1IxenVna0NqY2dWNEktVU56azhoQ09NN0htMEZjVmdJSC02ZEJ4NVU1Rm5x?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "164.08M",
-      "short_float": "21.92%",
-      "daily_pct": -13.2,
-      "prev_close": 19.2,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "OKLO: A planned North Carolina site is slated to make Oklo reactor parts, with deliveries starti",
+        "primary_claim": "QXO gapping on earnings: QXO, Inc. (QXO) latest stock news and headlines - Yahoo Finance Singapore",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -400,447 +220,57 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "LRCX",
-      "price": 207.41,
-      "gap_pct": 11.99,
-      "pm_volume": 139193,
-      "avg_vol_10d": 14181877,
-      "avg_dollar_vol": 2941463109,
-      "mkt_cap": 231346465345,
-      "rvol": 2.98,
-      "adr_pct": 4.94,
-      "category": "Upgrade",
-      "theme": "Upgrade",
-      "reasoning": "LRCX analyst action: Lam Research Corporation Announces $25 Billion Share Repurchase Authorization and Declares",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Lam Research Corporation Announces $25 Billion Share Repurchase Authorization and Declares Quarterly Dividend - Lam Research Newsroom | Lam Research Corp. stock outperforms competitors despite losses on the day | 'They're shooting the generals': AI trade stocks drop as hedge funds rush to protect 2026 gains",
-        "impact": "Analyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP."
-      },
-      "analysis_details": "• **The Analyst Action**\nHeadlines: Lam Research Corporation Announces $25 Billion Share Repurchase Authorization and Declares Quarterly Dividend - Lam Research Newsroom | Lam Research Corp. stock outperforms competitors despite losses on the day | 'They're shooting the generals': AI trade stocks drop as hedge funds rush to protect 2026 gains\n\n• **Trade Implication**\nAnalyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Lam Research Corporation Announces $25 Billion Share Repurchase Authorization and Declares Quarterly Dividend - Lam Research Newsroom",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOUms2Mmx3akx6OXk5eVBsT1UyemQ2bG1WbzhwUmVNMjY2SEFqSHZUY084RXdCcDZiN3k2Z0Z4RkNiQ2pYV25Ma1pBekZ6dUlGbEZkb2Q3bzlRVkRlekJFSnlKYnRuN3FtOE5ncVhmM3dhMTZud0pFVThzWkktSV84T04zSlVaOENIcUJ6ckxXYkdfbXd3dkN2STlGRlZqOC0wa3htM2lON3hzWXpwXzY0TWZoblBkZ3VwSE9mR2N6NzlQbGg1UzN0NFRRSWNxRUx4LVZuSVJKSXNtUjZLZDU1Z0ZBbGM0dmc?oc=5"
-        },
-        {
-          "title": "Lam Research Corp. stock outperforms competitors despite losses on the day",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/data-news/lam-research-corp-stock-outperforms-competitors-despite-losses-on-the-day-32523c43-b1c3ad78c14f?mod=mw_FV"
-        },
-        {
-          "title": "'They're shooting the generals': AI trade stocks drop as hedge funds rush to protect 2026 gains",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/article/theyre-shooting-the-generals-ai-trade-stocks-drop-as-hedge-funds-rush-to-protect-2026-gains-185019432.html"
-        },
-        {
-          "title": "Two Days Before Today's Selloff, Data Put Global September Chip Sales Up 146.8% Year to Year",
-          "source": "Finviz",
-          "url": "/news/417278/two-days-before-todays-selloff-data-put-global-september-chip-sales-up-1468-year-to-year"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-05",
-        "form": "8-K",
-        "items": [
-          "5.07",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/707549/000070754926000057/lrcx-20261103.htm"
-      },
-      "float_shares": "1.25B",
-      "short_float": "2.27%",
-      "daily_pct": -16.36,
-      "prev_close": 185.2,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "LRCX analyst action: Lam Research Corporation Announces $25 Billion Share Repurchase Authorization and Declares",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CRDO",
-      "price": 125.46,
-      "gap_pct": 11.69,
-      "pm_volume": 184529,
-      "avg_vol_10d": 9540167,
-      "avg_dollar_vol": 1196909352,
-      "mkt_cap": 21112639123,
-      "rvol": 1.98,
-      "adr_pct": 8.34,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "CRDO: Credo Technology Shares Fall Nearly 18% in Thursday Selloff - www.tokenpost.com",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Credo Technology Shares Fall Nearly 18% in Thursday Selloff - www.tokenpost.com | Credo Sinks Another 14% as Democratic Sweep Stokes “Left-Tail Event” Fears for AI - TIKR.com",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Credo Technology Shares Fall Nearly 18% in Thursday Selloff - www.tokenpost.com | Credo Sinks Another 14% as Democratic Sweep Stokes “Left-Tail Event” Fears for AI - TIKR.com\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Credo Technology Shares Fall Nearly 18% in Thursday Selloff - www.tokenpost.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAtcUM3VVFybzRnbTh1TXRvV3RQY2V5NVd0c014NnV5YUxRdW1iUHVBcVJpeGVmXzlzaG5qemkzUWwzdXRuS0RzN1N3emFkOF91bnRyblBWamVTZw?oc=5"
-        },
-        {
-          "title": "Credo Sinks Another 14% as Democratic Sweep Stokes “Left-Tail Event” Fears for AI - TIKR.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOLTJuNnpDYW95bDVtMlBzUlRtN0NiazVxSFljdDlzdDBqWW00SUZlQUFuOG9XLWpYWU1oTG94eldLWkxIb3BHZm5YeFh1WEpoTmQyT0xqRjdhQlVBc2Frd1ZnSk1iQXR5Ym1fdXFwNzR6SlJidnpwajJGZXc3dHhCeWlZSm9TMnV4dTVKU3MzQUVLM2Q1SGNJd0d4OUNwSnF0Q09nTUhiaw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "169.38M",
-      "short_float": "5.78%",
-      "daily_pct": -17.71,
-      "prev_close": 112.33,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "CRDO: Credo Technology Shares Fall Nearly 18% in Thursday Selloff - www.tokenpost.com",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "SNDK",
-      "price": 900.64,
-      "gap_pct": 11.68,
-      "pm_volume": 884233,
-      "avg_vol_10d": 11829772,
-      "avg_dollar_vol": 10654365854,
-      "mkt_cap": 114746405169,
-      "rvol": 4.01,
-      "adr_pct": 6.75,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "SNDK: Sandisk (SNDK) Stock Falls 17.8% to $853 Two Weeks Before 8-for-1 Split - FinanceFeeds",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Sandisk (SNDK) Stock Falls 17.8% to $853 Two Weeks Before 8-for-1 Split - FinanceFeeds | Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed - Yahoo Finance | Nvidia has lost nearly $1.4 trillion since its October record",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Sandisk (SNDK) Stock Falls 17.8% to $853 Two Weeks Before 8-for-1 Split - FinanceFeeds | Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed - Yahoo Finance | Nvidia has lost nearly $1.4 trillion since its October record\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [
-        "STX",
-        "WDC",
-        "SMCI"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Sandisk (SNDK) Stock Falls 17.8% to $853 Two Weeks Before 8-for-1 Split - FinanceFeeds",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPTU0wZ2dtcXlnV0s0ZXZRUzMxZU1EUFU5MkhkZmFRNVFXc1NaZ2hzMlF1X0ozWWRBRTFIcE54SnBqRHR1TGZiMU1ERmY2Y2Ryc3hIVUNCbUFQQVptR3ZYLWFaVGJOWE1hNU9yNjkydWV6VVlCbGpzVVkwMGlGVVhZT2E4SGRjTFU4ZDJuSHg2a0pXZWlVcDQtOQ?oc=5"
-        },
-        {
-          "title": "Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOY1N2S0FERTlhZGdOdnNsT1M1NjRmTnhZY3ZGX2V0Z3RjX1ZCT0pUNkt4Z2FGRy1RUEhlRzZSVE1kMUxpSU4zOXFhRE50SERZZnhjZUR2NUlXNlZaN3dST2tzMjFOcmdYWm1mUjJOazFTUUJ5dXdEYW5DanBDZENRakdmREJual9PVnB6QlFpbXB3S25QRkkyM1VuamQ1ODRTMktVZS0tYnQ1Z3VlenZvVTRrRUV4anlNVXpTdXp0MzctQ25RLV9lQ2htWF9wckl0V2F1UHB3?oc=5"
-        },
-        {
-          "title": "Nvidia has lost nearly $1.4 trillion since its October record",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/article/nvidia-has-lost-nearly-14-trillion-since-its-october-record-165912910.html"
-        },
-        {
-          "title": "Nasdaq sees worst day in 18 months as investors bet on AI slowdown after Democrats election triumph",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/us-tech-shares-fall-sharply-184425813.html"
-        },
-        {
-          "title": "Micron stock sinks 17% as chip sector crashes",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/article/micron-declines-12-as-chip-sell-off-deepens-163137019.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "140.42M",
-      "short_float": "3.28%",
-      "daily_pct": -22.26,
-      "prev_close": 806.43,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SNDK: Sandisk (SNDK) Stock Falls 17.8% to $853 Two Weeks Before 8-for-1 Split - FinanceFeeds",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CIFR",
-      "price": 6.19,
-      "gap_pct": 11.57,
-      "pm_volume": 1430839,
-      "avg_vol_10d": 58250340,
-      "avg_dollar_vol": 360569605,
-      "mkt_cap": 2532826373,
-      "rvol": 1.68,
-      "adr_pct": 10.98,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "CIFR: Cipher Digital (CIFR) Drops 12.4% in One Session, Shedding $300M - 24/7 Wall St.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Cipher Digital (CIFR) Drops 12.4% in One Session, Shedding $300M - 24/7 Wall St.",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Cipher Digital (CIFR) Drops 12.4% in One Session, Shedding $300M - 24/7 Wall St.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Cipher Digital (CIFR) Drops 12.4% in One Session, Shedding $300M - 24/7 Wall St.",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOSVN5UEQxS1ZoR3VoQUxuRWxnei1DSDl3NmpkNjBnSnVZYWk1SkRULVpNd3paSzdEYzRnSXQydWl4ZlFBYW9hX0YxMGpvbDA5ZUVHWW9OeXVTbk5EcnU5dGtTb0o5UDZhTXk2NHMyWEJGbXFHajh1eWRnQkRTa0NVdWZLRGU5dElrdjhwYXJ5Yw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "378.81M",
-      "short_float": "26.84%",
-      "daily_pct": -14.62,
-      "prev_close": 5.55,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "CIFR: Cipher Digital (CIFR) Drops 12.4% in One Session, Shedding $300M - 24/7 Wall St.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "BE",
-      "price": 186.55,
-      "gap_pct": 11.36,
-      "pm_volume": 852169,
-      "avg_vol_10d": 20435018,
-      "avg_dollar_vol": 3812152608,
-      "mkt_cap": 49528405064,
-      "rvol": 2.42,
-      "adr_pct": 7.89,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "BE: Google plans $17 billion Wyoming data center amid rising threats of curbs",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Google plans $17 billion Wyoming data center amid rising threats of curbs | The Stock Market Celebrated Election Day. Then the AI Trade Imploded. | Dow Turns Red as the Blue Wave Tide Shifts",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Google plans $17 billion Wyoming data center amid rising threats of curbs | The Stock Market Celebrated Election Day. Then the AI Trade Imploded. | Dow Turns Red as the Blue Wave Tide Shifts\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Google plans $17 billion Wyoming data center amid rising threats of curbs",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/google-plans-17-billion-wyoming-204551123.html"
-        },
-        {
-          "title": "The Stock Market Celebrated Election Day. Then the AI Trade Imploded.",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/stock-market-ai-stocks-tech-nasdaq-f33b2af3?mod=bar_FV"
-        },
-        {
-          "title": "Dow Turns Red as the Blue Wave Tide Shifts",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/livecoverage/stock-market-news-today-110526/card/dow-turns-red-as-the-blue-wave-tide-shifts-1opG0srFwg4nRnABXB85?mod=bar_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "277.97M",
-      "short_float": "6.62%",
-      "daily_pct": -16.41,
-      "prev_close": 167.52,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "BE: Google plans $17 billion Wyoming data center amid rising threats of curbs",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
       "ticker": "ASX",
-      "price": 33.05,
-      "gap_pct": 11.2,
-      "pm_volume": 111545,
-      "avg_vol_10d": 11848927,
-      "avg_dollar_vol": 391607037,
+      "price": 33.28,
+      "gap_pct": 5.22,
+      "pm_volume": 79242,
+      "avg_vol_10d": 12553436,
+      "avg_dollar_vol": 417778350,
       "mkt_cap": 84136873946,
-      "rvol": 2.68,
-      "adr_pct": 5.06,
-      "category": "FDA",
-      "theme": "FDA",
-      "reasoning": "ASX FDA/regulatory event: Bravura Solutions (ASX:BVS) Shares Look Reasonable As Cash Flow Supports The Price - Yahoo",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "rvol": 1.16,
+      "adr_pct": 5.22,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ASX: ASX Midday Sector Update: Materials Stocks Rebound, Real Estate Sells Off - marketscreener",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Bravura Solutions (ASX:BVS) Shares Look Reasonable As Cash Flow Supports The Price - Yahoo! Finance Canada | AMP (ASX:AMP) Shares May Trade At A Premium On Pension Boost Scrutiny - Yahoo Finance | Paladin Energy (ASX:PDN) Shares Look Rich After Long Term Uranium Deals - Yahoo Finance",
-        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
+        "catalyst": "Headlines: ASX Midday Sector Update: Materials Stocks Rebound, Real Estate Sells Off - marketscreener.com | Australian Stock Market Today: ASX Futures Edge Higher On Firm US Jobs And CPI Watch - Yahoo! Finance Canada | Australian shares shake off early slump to creep higher - SMH.com.au",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **The Event**\nHeadlines: Bravura Solutions (ASX:BVS) Shares Look Reasonable As Cash Flow Supports The Price - Yahoo! Finance Canada | AMP (ASX:AMP) Shares May Trade At A Premium On Pension Boost Scrutiny - Yahoo Finance | Paladin Energy (ASX:PDN) Shares Look Rich After Long Term Uranium Deals - Yahoo Finance\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
+      "analysis_details": "• **What Happened**\nHeadlines: ASX Midday Sector Update: Materials Stocks Rebound, Real Estate Sells Off - marketscreener.com | Australian Stock Market Today: ASX Futures Edge Higher On Firm US Jobs And CPI Watch - Yahoo! Finance Canada | Australian shares shake off early slump to creep higher - SMH.com.au\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Bravura Solutions (ASX:BVS) Shares Look Reasonable As Cash Flow Supports The Price - Yahoo! Finance Canada",
+          "title": "ASX Midday Sector Update: Materials Stocks Rebound, Real Estate Sells Off - marketscreener.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNOHN3OWtjcFd5Y1UycW5EdzlxYzlRTnpEb1VURHpXWkZ3LVVseDVLU2NZQXFDZjh5WTVTTUlMcnRoQ0RLTGFJWktMZ2F0ZVIyRW1mbGVldW5IY3VpMF9OSzdQM3lCMmt1eXZDd3FvaGoyeGtIX2p1cjBKd0JfNUxsb3ZqbDdldjk5?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQa1djcERDNS1DRkpLOEk1YVpwbVFYbjEzSGNKSUxYSFlib0NEUU1Qck9fNERpREctZDB6X0RHXzNDTVAyN3M3UEhlcjVkTnEwYXk0eFRHMlVUZS15Z0lZZ0tIMTMyQk5wUEZsM1JzZGF2WkRfN2xEUmtVWGNXRzRrakhRQ0RXNmtiVVlxR1NoTk9mV0RSbzVFMEktUXZXVTZrOUtMZ0s1a3RSZ2NjMVkwcmNaSkp6cG1PYnFlR0paZmJRdw?oc=5"
         },
         {
-          "title": "AMP (ASX:AMP) Shares May Trade At A Premium On Pension Boost Scrutiny - Yahoo Finance",
+          "title": "Australian Stock Market Today: ASX Futures Edge Higher On Firm US Jobs And CPI Watch - Yahoo! Finance Canada",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQRWRpQVFfaUhJNERmZm10T2g0NzVVMkpFR055ejh1QmQ2Mkpvb0ZMaXh1b1FOQXJ3bUNhcEplN3lTOEg3Y3pzd3FaOThwa3hMeWFkV2JSQnZwSEhDblVfd3dYRVJjUmVQd1d5VTUzU0VteS1OS0VYNVJzTm9UZkZGT0lhZTZJcjlKbTNoV1MxbkM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQOHkybGZmWjdDY2hYSHBpSjBLR05UQ0E5T0h2SFNyWnB5N09qZW83aEpHS2xiMEZvSWw2YnkwQUZhYl9zT3FiQWM5dDlnY0w2OWZULTVRaUxzNnpuSnptbXJlMGdwcVI2QjFZVG9ZOHNKNndPV1VsRFh2VUMtOGg5dVZHWWxpZzU3N3c?oc=5"
         },
         {
-          "title": "Paladin Energy (ASX:PDN) Shares Look Rich After Long Term Uranium Deals - Yahoo Finance",
+          "title": "Australian shares shake off early slump to creep higher - SMH.com.au",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQMXJSbS1CSUw5cVFhQnlnVU00RVhfQy01bHQtUGk2TUVKQWU4WmpnaEhWTlVYaUFSTFI3R09UeWJZYjc1VGlycUlYWDJrS3pDYzA4NHJMSGFGR2tpMEJlQ3dnYXdlTkJNRUlkdUdrSUx2cVNpVVhWQkg1SHIzTjZBaUpYUVhxUXVaWTdUajFuNkxoWXpVZ2FMQldB?oc=5"
-        },
-        {
-          "title": "4DMedical (ASX:4DX) Shares May Be 45% Below Fair Value Despite FDA Clearance - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOeGhkQTJnNVJGVFJRMG9IVFAtR2hFcGVPT3BzNTlId2oxSVVjMnlXb2tWYlNTVk5MNWFUNFVLNmlpYjA1R1EyNjZxUWhLZ1hYUmpqTnZldnRZWmFuX0JmZ3BSdmhLVmFWZDk5b2lUNWUydHM2Y0d0MUpyT0FyenVvTzVTV0VwaHlSbU9Ba243b2hwY243Tm1NMw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWlh3YWExOVJmSjRMVTVEMmhEbFdIQXUtMXRYOU5YWVhwbTZlQkhBZ3ZMemV3STJTTWdMTFFVb1hiSTU2SzkzTzdWRVRfTkFzcm1QYTFaNTMtbHotNzB3dUdUOXZhVGJFcm0zY2hLajFITWJSWGFqQnZrX282STdnNDdySkFlQThKaGJCSE5QUS12RXVfX3dydUFVbG9iN0J1MFctZFhpWm15VXdEQ3VOWGZiX3pRZTdh?oc=5"
         }
       ],
       "edgar_filing": null,
       "float_shares": "2.21B",
       "short_float": "0.72%",
-      "daily_pct": -20.77,
-      "prev_close": 29.72,
+      "daily_pct": 6.43,
+      "prev_close": 31.63,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -850,7 +280,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "ASX FDA/regulatory event: Bravura Solutions (ASX:BVS) Shares Look Reasonable As Cash Flow Supports The Price - Yahoo",
+        "primary_claim": "ASX: ASX Midday Sector Update: Materials Stocks Rebound, Real Estate Sells Off - marketscreener",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -864,1156 +294,15 @@
       "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "PENG",
-      "price": 41.39,
-      "gap_pct": 11.2,
-      "pm_volume": 60197,
-      "avg_vol_10d": 3128220,
-      "avg_dollar_vol": 129477026,
-      "mkt_cap": 2242185609,
-      "rvol": 2.41,
-      "adr_pct": 9.78,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "No specific fundamental catalyst identified. High risk of Gap and Trap.",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nNo specific fundamental catalyst identified. High risk of Gap and Trap.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [
-        "SMCI",
-        "NVDA",
-        "ANET"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "TECL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "TECS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": {
-        "filing_date": "2026-11-04",
-        "form": "8-K",
-        "items": [
-          "5.02",
-          "7.01",
-          "8.01"
-        ],
-        "category": "Others",
-        "label": "Other Material Event",
-        "url": "https://www.sec.gov/Archives/edgar/data/1616533/000161653326000056/peng-20261103.htm"
-      },
-      "float_shares": "57.43M",
-      "short_float": "18.46%",
-      "daily_pct": -23.02,
-      "prev_close": 37.22,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CRWV",
-      "price": 48.54,
-      "gap_pct": 11.18,
-      "pm_volume": 2199872,
-      "avg_vol_10d": 56355488,
-      "avg_dollar_vol": 2735495388,
-      "mkt_cap": 24080086415,
-      "rvol": 1.56,
-      "adr_pct": 8.96,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "CRWV: Is CoreWeave (CRWV) Facing A Growth Squeeze From Election Driven Data Center Rules? - Yaho",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Is CoreWeave (CRWV) Facing A Growth Squeeze From Election Driven Data Center Rules? - Yahoo Finance | CoreWeave vs. Nebius: Which Is the Better AI Neocloud Stock to Own for the Next 3 Years? - The Globe and Mail | Nasdaq futures rise as AI rout pauses amid dip buying",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Is CoreWeave (CRWV) Facing A Growth Squeeze From Election Driven Data Center Rules? - Yahoo Finance | CoreWeave vs. Nebius: Which Is the Better AI Neocloud Stock to Own for the Next 3 Years? - The Globe and Mail | Nasdaq futures rise as AI rout pauses amid dip buying\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Is CoreWeave (CRWV) Facing A Growth Squeeze From Election Driven Data Center Rules? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQcDg4a0lNNThfSFE5Z1RYQkVYT29fZU1UMXp3SGRhRWVuU2Y0TnlRUXJCeV9Oa3ltaFNIdUVmaS1ocXRKV0ZYeElmaXZSZVVDMDM5NWNSWHZsYm1lUGxlYXhYbkpxR0FuX0ZyTDJxWXdkYkx5OFVFMVc4eURqd3hsSC0zTXZlNmZKN05UUGNDZU1ta1FFZDVMaWwwZlp3MHBBZmc?oc=5"
-        },
-        {
-          "title": "CoreWeave vs. Nebius: Which Is the Better AI Neocloud Stock to Own for the Next 3 Years? - The Globe and Mail",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxQakFxR09OMUFZUFJMMGpIN2Y2Slk1clZSU3J5SzhiMlVLbUptNExGcHZfNk9yREVaRkRWNl9hRFItelA0b0Y4c0EzQjhYT2tjMDFJeXRxOVVjNTdJVXd0SGppUFhNQ1hNbTVyNVl6VXEwYVdxQjZTTFZ6MjFuWFJtNmphcFJqa0VUekFvLU5uZGlraElhaDlEWkcxU3VDOEFySUlKa0tVM1ZEWTJWOUpWV2hqTDhDLUtMRkktaVA2RG9Td2d4ejdtY3VpSE1PbktYTlI2TjI0ZkhKem1lSWZZRnRzcTFMX1o4M2dlY1RWNC1UOHMzUTFWYUJtYlpJZU4yY1E?oc=5"
-        },
-        {
-          "title": "Nasdaq futures rise as AI rout pauses amid dip buying",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/u-stock-futures-rise-ai-013807565.html"
-        },
-        {
-          "title": "Oil Rebounds Toward $100 as Democrats Sweep Rattles Energy Stocks",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/energy/articles/oil-rebounds-toward-100-democrats-010000633.html"
-        },
-        {
-          "title": "The Stocks That Most Fear a Data-Center Freeze",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/the-stocks-that-most-fear-a-data-center-freeze-Q39p53wobeuUyTb2Cqlu?mod=wsj_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "349.31M",
-      "short_float": "22.40%",
-      "daily_pct": -9.83,
-      "prev_close": 43.66,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "CRWV: Is CoreWeave (CRWV) Facing A Growth Squeeze From Election Driven Data Center Rules? - Yaho",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "NBIS",
-      "price": 133.53,
-      "gap_pct": 10.93,
-      "pm_volume": 1101070,
-      "avg_vol_10d": 23704321,
-      "avg_dollar_vol": 3165237983,
-      "mkt_cap": 32723215022,
-      "rvol": 2.45,
-      "adr_pct": 8.2,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "NBIS: The Stocks That Most Fear a Data-Center Freeze",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: The Stocks That Most Fear a Data-Center Freeze | CoreWeave Stock Is Plunging After the Election. Its CEO Insists the Business Is Safe. | Nasdaq 100 eyes $1.8 trillion loss as Democratic win sparks AI delay fears",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: The Stocks That Most Fear a Data-Center Freeze | CoreWeave Stock Is Plunging After the Election. Its CEO Insists the Business Is Safe. | Nasdaq 100 eyes $1.8 trillion loss as Democratic win sparks AI delay fears\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "NEBX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "The Stocks That Most Fear a Data-Center Freeze",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/the-stocks-that-most-fear-a-data-center-freeze-Q39p53wobeuUyTb2Cqlu?mod=wsj_FV"
-        },
-        {
-          "title": "CoreWeave Stock Is Plunging After the Election. Its CEO Insists the Business Is Safe.",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/coreweave-stock-price-ai-data-center-selloff-ae7f96de?mod=bar_FV"
-        },
-        {
-          "title": "Nasdaq 100 eyes $1.8 trillion loss as Democratic win sparks AI delay fears",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/ai-data-center-stocks-slip-112314079.html"
-        },
-        {
-          "title": "IREN stock plunges 18% as Microsoft raises concerns over data center delays",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/iren-stock-plunges-18-microsoft-162134051.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "222.55M",
-      "short_float": "20.18%",
-      "daily_pct": -14.94,
-      "prev_close": 120.37,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "NBIS: The Stocks That Most Fear a Data-Center Freeze",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "AEHR",
-      "price": 54.41,
-      "gap_pct": 10.68,
-      "pm_volume": 116980,
-      "avg_vol_10d": 3417639,
-      "avg_dollar_vol": 185953738,
-      "mkt_cap": 1605712995,
-      "rvol": 1.72,
-      "adr_pct": 10.39,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [
-        "COHU",
-        "ONTO",
-        "MKSI"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "31.07M",
-      "short_float": "18.04%",
-      "daily_pct": -19.2,
-      "prev_close": 49.16,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "APLD",
-      "price": 15.66,
-      "gap_pct": 10.53,
-      "pm_volume": 521296,
-      "avg_vol_10d": 27432302,
-      "avg_dollar_vol": 429589849,
-      "mkt_cap": 4284825584,
-      "rvol": 2.19,
-      "adr_pct": 8.62,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "APLD: Shareholders elect six directors at Applied Digital (APLD) and ratify auditor CBIZ CPAs P.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Shareholders elect six directors at Applied Digital (APLD) and ratify auditor CBIZ CPAs P.C. - Stock Titan | Applied Digital (APLD) Stock Falls 12.1% Today - 24/7 Wall St.",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Shareholders elect six directors at Applied Digital (APLD) and ratify auditor CBIZ CPAs P.C. - Stock Titan | Applied Digital (APLD) Stock Falls 12.1% Today - 24/7 Wall St.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Shareholders elect six directors at Applied Digital (APLD) and ratify auditor CBIZ CPAs P.C. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxONzB1Z09tc0w5ekdvbWktN2JBeGxuQlV3QmpOczlsZFJvUnJfUktfdG01d2QwR0c3ektZN1llTUtkWVZMd2otdDU1azhpY2FnakhrSUFPaWpuXzZqOVpzcTBZdGVXdmJSNmN1SVN4YnFETVRxSU9zSk01WW1ZN2FkM2V1N2tLMTY5cE9qcnB5ZGpEd0REMkwtdEh4dC1ja3FKS1lxS3VEa0R2cTd3WEE?oc=5"
-        },
-        {
-          "title": "Applied Digital (APLD) Stock Falls 12.1% Today - 24/7 Wall St.",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORmtIaTYxUEhqU2VDX0h0VGN5N29BeXRNc0EtWlYwZnVYNWVzWFZDdnlHSUc2VDh3ZXM1YS1qdU1hbTlEbFhDdkd5ZlVXZzhnNVZBa21tbnFHREJKZTJhMzZrajhiY21NUTFyWU1xcUFPbExBTVc2R28zWDFKMTZBVW5GRU9UTndzbE42cjBZbEI?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-06",
-        "form": "8-K",
-        "items": [
-          "5.07"
-        ],
-        "category": "Others",
-        "label": "Item 5.07",
-        "url": "https://www.sec.gov/Archives/edgar/data/1144879/000114487926000063/apld-20261104.htm"
-      },
-      "float_shares": "272.68M",
-      "short_float": "23.90%",
-      "daily_pct": -14.69,
-      "prev_close": 14.17,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "APLD: Shareholders elect six directors at Applied Digital (APLD) and ratify auditor CBIZ CPAs P.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "MRVL",
-      "price": 147.31,
-      "gap_pct": 10.3,
-      "pm_volume": 864891,
-      "avg_vol_10d": 35868919,
-      "avg_dollar_vol": 5283850458,
-      "mkt_cap": 117110000496,
-      "rvol": 2.15,
-      "adr_pct": 6.86,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "MRVL deal announcement: Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - Yaho",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - Yahoo Finance | We’re Buying More Shares of 2 Holdings - RealMoney Pro | Marvell Stock Eyes 35% Upside After Lumentum Deal - 24/7 Wall St.",
-        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
-      },
-      "analysis_details": "• **The Announcement**\nHeadlines: Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - Yahoo Finance | We’re Buying More Shares of 2 Holdings - RealMoney Pro | Marvell Stock Eyes 35% Upside After Lumentum Deal - 24/7 Wall St.\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
-      "peer_tickers": [
-        "AVGO",
-        "QCOM",
-        "NVDA"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "MRVU",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQay1qSlIwYmU0ZnRQLTVWQlA2WE1sbTZIX0V0V0tUWlk1elBwRE5WbmZhWHk1cGh4WVNsYktSR0Fudml4Qk5mVmVXNzRlSkV3SXI3bHdHVHAtUGlFZHZUb1Ayc29yWWV5cmRGOEVHYUNPaGZDVFdHN1FfRGNSS3lQdDF2SGNVRU1tOFotRkFPcTFnQUQwU0ZJRDR3?oc=5"
-        },
-        {
-          "title": "We’re Buying More Shares of 2 Holdings - RealMoney Pro",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE12djI4U3gzZjV4MlhMTG4zYnYwd0ZvZ243eWlKb3dfM1hEeWsyLXI2M2VuazY2bEFkSHBjbU5HcFRIUm5oYjhKRlowYXJFY3hpa2FIbV9yQ3ZYaENsbS1RcUxmWS1BUUJnZmx4TFVQczV1bENXYlZMUzRHaFBpZw?oc=5"
-        },
-        {
-          "title": "Marvell Stock Eyes 35% Upside After Lumentum Deal - 24/7 Wall St.",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPOXZFcHFIMDZ3Q2xPaHZOaHpuYWFOT0dyd0tuWG5RR2g1UVhSVk9XRW8yN3hKSXJDcG9hbFdSOUlXdS1DSHNmaTg5WHQ3WHhROHdmb0tGT0hyVXUycm9ibFVYdEVUaVV1dmlOQndwaDBRNE4xV0xzaGRRRmxBNHpINHFvTW5WZkx2dDN4cEMzRk5jM1dudXE0?oc=5"
-        },
-        {
-          "title": "Marvell Stock Eyes 35% Upside After Lumentum Deal - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOVU5LM0NFMnNLSUEwTWNMSzFGakhELTVwVjBOcGdNano5dWc2cVE4ZW1ldUZwZGc5V3Rwd05leldxNmFad0p1bEZEMnVkVWZhTTJHanBDa2VLbGNnM0QzYWJ1TDFSQWRvelA3YkxYY0gxWWVzRlE4aEVCYWttYU9SeHhfM0tJbTRqWTZGUTRYNFQ2a1kzUEE2bg?oc=5"
-        },
-        {
-          "title": "Chip Stocks Hit by Data-Center, AI Regulation Fears",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/chip-stocks-hit-by-data-center-ai-regulation-fears-TjThbzZVLKxkZW5tt26b?mod=wsj_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": "3.28%",
-      "daily_pct": -16.43,
-      "prev_close": 133.55,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "MRVL deal announcement: Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - Yaho",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "MXL",
-      "price": 48.8,
-      "gap_pct": 10.13,
-      "pm_volume": 94128,
-      "avg_vol_10d": 4202880,
-      "avg_dollar_vol": 205100544,
-      "mkt_cap": 4032210229,
-      "rvol": 2.4,
-      "adr_pct": 9.5,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [
-        "MRVL",
-        "COHR",
-        "AVGO"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "85.51M",
-      "short_float": "6.88%",
-      "daily_pct": -22.06,
-      "prev_close": 44.31,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "HUT",
-      "price": 50.59,
-      "gap_pct": 10.1,
-      "pm_volume": 66650,
-      "avg_vol_10d": 6872744,
-      "avg_dollar_vol": 347692119,
-      "mkt_cap": 5663772398,
-      "rvol": 2.13,
-      "adr_pct": 10.1,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "HUT gapping on earnings: Hut 8 Mining stock price target lowered to $165 by StoneX - Investing.com",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Hut 8 Mining stock price target lowered to $165 by StoneX - Investing.com | HUT Q3 Earnings Call Focuses on AI Expansion and Project Financing - Yahoo Finance | Trump-Backed American Bitcoin Turns a Profit as Bitcoin Rise Lifts Books",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Hut 8 Mining stock price target lowered to $165 by StoneX - Investing.com | HUT Q3 Earnings Call Focuses on AI Expansion and Project Financing - Yahoo Finance | Trump-Backed American Bitcoin Turns a Profit as Bitcoin Rise Lifts Books\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Hut 8 Mining stock price target lowered to $165 by StoneX - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcWFJeUY2NHlhRkwwOTNicE9nOUhLdU1VNnNyelFvV05JUGl5UERPLW1zTC1ZXzQ0TWYyb2dhWWZNTDg1bVNDWGl6VTdFdVlvbDF3VWE3R2lUa3gxNmNDSWptcXprVUdYQXNmckRMUGZRUE5nWW5pNk85X2FsVUNqS2tzUTJTOU1oeUtzRE5WdmhqWjFianZzQlFyQk50eEFBZjljZkZFN2d1Y3YteGl0VnF2ZC13bnM?oc=5"
-        },
-        {
-          "title": "HUT Q3 Earnings Call Focuses on AI Expansion and Project Financing - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNZXJSZDI3aHBsZlNSRlFTNWpPLWh1ZE1feWVnLVZubmZoRTN6S05BTHNCQjEzVW55OXZfckgyc0xVaUJRYldGRUZKSGFMZmJzS3R0ajZFVnBRRHFXTXZSRWlsdjRvX3FLNmdoUDNvV1FidlpSTU41RkNZa29wU1NqT3NGYnRsdTlQbEJRWExiemxFc0VqQjVB?oc=5"
-        },
-        {
-          "title": "Trump-Backed American Bitcoin Turns a Profit as Bitcoin Rise Lifts Books",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/trump-backed-american-bitcoin-turns-182531420.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926122347/tm2628741d1_8k.htm"
-      },
-      "float_shares": "112.41M",
-      "short_float": "16.22%",
-      "daily_pct": -6.11,
-      "prev_close": 45.95,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "HUT gapping on earnings: Hut 8 Mining stock price target lowered to $165 by StoneX - Investing.com",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "LITE",
-      "price": 560.8,
-      "gap_pct": 10.03,
-      "pm_volume": 144562,
-      "avg_vol_10d": 7885338,
-      "avg_dollar_vol": 4422097550,
-      "mkt_cap": 46229788444,
-      "rvol": 1.43,
-      "adr_pct": 8.64,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "LITE deal announcement: Lumentum Holdings Inc. (LITE) Stock Forecasts - Yahoo Finance",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Lumentum Holdings Inc. (LITE) Stock Forecasts - Yahoo Finance | Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - 24/7 Wall St. | Marvell Stock Eyes 35% Upside After Lumentum Deal - 24/7 Wall St.",
-        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
-      },
-      "analysis_details": "• **The Announcement**\nHeadlines: Lumentum Holdings Inc. (LITE) Stock Forecasts - Yahoo Finance | Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - 24/7 Wall St. | Marvell Stock Eyes 35% Upside After Lumentum Deal - 24/7 Wall St.\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
-      "peer_tickers": [
-        "COHR",
-        "AXTI",
-        "GLW"
-      ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Lumentum Holdings Inc. (LITE) Stock Forecasts - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxORnZtbmFqZzFUQ2pTYzk5ZTBHZ2JhOUI3NFRYLTVxTC1zaTRfU1VuaE41azBIT055dHlrTmNoVGp5d1dqOGVUOFpOeHI2RkpIUzZKQ09RWkM2LTNPcTNqeHgyaTNaR3pMbVEtV255N296OFFVUU9BVzZJbnVGYy1uQUpHcWZqanlYSGczSQ?oc=5"
-        },
-        {
-          "title": "Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound? - 24/7 Wall St.",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOdzhGc0pCLVN1Y2tuLWUwZ1psQ3U5Rk9UeldyY0ozUkhJcURzMEl6M2J4dm5fQWRlWDVuT2N0SlBST3F5X0JjRDM2bkhoQUo3WVZEOVhLdWVDcWpNRkduSTIxTzVhZl9JcnNUejFCakthR2NfT1gtTTViT1hDV1A3dU5XQzJVSDJseXhhSXBtUkF0ZmRJSXRWYURERnVUdHZzSktORHpPVDVPWlVRWFlIcld0dHN3SUdyNkJIX2tjUWxQQQ?oc=5"
-        },
-        {
-          "title": "Marvell Stock Eyes 35% Upside After Lumentum Deal - 24/7 Wall St.",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPOXZFcHFIMDZ3Q2xPaHZOaHpuYWFOT0dyd0tuWG5RR2g1UVhSVk9XRW8yN3hKSXJDcG9hbFdSOUlXdS1DSHNmaTg5WHQ3WHhROHdmb0tGT0hyVXUycm9ibFVYdEVUaVV1dmlOQndwaDBRNE4xV0xzaGRRRmxBNHpINHFvTW5WZkx2dDN4cEMzRk5jM1dudXE0?oc=5"
-        },
-        {
-          "title": "Chip Stocks Hit by Data-Center, AI Regulation Fears",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/chip-stocks-hit-by-data-center-ai-regulation-fears-TjThbzZVLKxkZW5tt26b?mod=wsj_FV"
-        },
-        {
-          "title": "Marvell agrees to buy Lumentum in $115B stock deal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/marvell-agrees-buy-lumentum-115b-160900024.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "89.09M",
-      "short_float": "8.57%",
-      "daily_pct": -18.68,
-      "prev_close": 509.7,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "LITE deal announcement: Lumentum Holdings Inc. (LITE) Stock Forecasts - Yahoo Finance",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "COHR",
-      "price": 186.44,
-      "gap_pct": 9.82,
-      "pm_volume": 182932,
-      "avg_vol_10d": 9149869,
-      "avg_dollar_vol": 1705901576,
-      "mkt_cap": 33431034384,
-      "rvol": 2.16,
-      "adr_pct": 7.78,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "COHR gapping on earnings: Coherent (COHR) Stock Price Falls Despite Strong Q1 Earnings - Yahoo Finance",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Coherent (COHR) Stock Price Falls Despite Strong Q1 Earnings - Yahoo Finance | Coherent Corp (COHR) (Q1 2027) Earnings Call Highlights: Record $2. ... - Yahoo Finance | Coherent earnings analysis: questions answered and next catalysts",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Coherent (COHR) Stock Price Falls Despite Strong Q1 Earnings - Yahoo Finance | Coherent Corp (COHR) (Q1 2027) Earnings Call Highlights: Record $2. ... - Yahoo Finance | Coherent earnings analysis: questions answered and next catalysts\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [
-        "AXTI",
-        "LITE",
-        "GLW"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Coherent (COHR) Stock Price Falls Despite Strong Q1 Earnings - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOdHN4OWlLNmhhelZGaHNYQVdpSzVPWGRqc1ZNa1ZzZXpqTUx5eDZBVE9GdkhyTjRBMVg4UVpmNTBRMmhwMHplOXU4Y3IwRDVVeWowMG5QOEk4ZHp3NlRFR0NCQWRiR3U5Z2hSNlFNTHFYR2JRZHpuRTdNQlozUmtuZ01xVHVXYXVYZ1ZTOGN1MjBqY1JUZkdVNWNOTmQ?oc=5"
-        },
-        {
-          "title": "Coherent Corp (COHR) (Q1 2027) Earnings Call Highlights: Record $2. ... - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOendBbWxyNktQQ1lDWEdZTDZ2WWZiU1RiUzBTQ1VXNkh4eHFER3gtMlp3RjFhZWp1bTFIdWJOMUN3UGZNdzRMT3JRM0p4Ti1EejlRajRLVDA4QnFNOXJqTGM5OTAxSUN0dHh2OFlyWW10U0daMGlhWFdQZm41VWFxRmdScjd5MmhKOFhJcE9RT1BxZ0ZlZlE?oc=5"
-        },
-        {
-          "title": "Coherent earnings analysis: questions answered and next catalysts",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/coherent-earnings-analysis-questions-answered-204906865.html"
-        },
-        {
-          "title": "Coherent Shares Rise 4% as AI Data Centre Demand Lifts Quarterly Revenue Nearly 50%",
-          "source": "Finviz",
-          "url": "/news/416620/coherent-shares-rise-4-as-ai-data-centre-demand-lifts-quarterly-revenue-nearly-50"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/820318/000119312526447200/d176836d8k.htm"
-      },
-      "float_shares": "188.16M",
-      "short_float": "4.61%",
-      "daily_pct": -12.98,
-      "prev_close": 169.76,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "COHR gapping on earnings: Coherent (COHR) Stock Price Falls Despite Strong Q1 Earnings - Yahoo Finance",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "AXTI",
-      "price": 40.3,
-      "gap_pct": 9.75,
-      "pm_volume": 464872,
-      "avg_vol_10d": 12782371,
-      "avg_dollar_vol": 515129551,
-      "mkt_cap": 2407848379,
-      "rvol": 1.86,
-      "adr_pct": 10.95,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "AXTI deal announcement: SNDK, AXTI-Linked Contracts Fall More Than 10% in 24 Hours - www.tokenpost.com",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: SNDK, AXTI-Linked Contracts Fall More Than 10% in 24 Hours - www.tokenpost.com",
-        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
-      },
-      "analysis_details": "• **The Announcement**\nHeadlines: SNDK, AXTI-Linked Contracts Fall More Than 10% in 24 Hours - www.tokenpost.com\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
-      "peer_tickers": [
-        "COHR",
-        "LITE",
-        "MRVL"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "SNDK, AXTI-Linked Contracts Fall More Than 10% in 24 Hours - www.tokenpost.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1qRXY2Q254SGQ0Z2hldUpnNWdMSE4zMU9xOVd1dEczRFVvRnEtWHl1X01CRFVHczJHZWp1Ry1KX1p5MzVOVmQxcDlsbUU0R2c0WlEydWlvWWE1dw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "62.84M",
-      "short_float": "19.07%",
-      "daily_pct": -22.76,
-      "prev_close": 36.72,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "AXTI deal announcement: SNDK, AXTI-Linked Contracts Fall More Than 10% in 24 Hours - www.tokenpost.com",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "ALAB",
-      "price": 196.73,
-      "gap_pct": 9.62,
-      "pm_volume": 69975,
-      "avg_vol_10d": 5528464,
-      "avg_dollar_vol": 1087614723,
-      "mkt_cap": 31135372824,
-      "rvol": 2.95,
-      "adr_pct": 7.98,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "ALAB: Astera Labs Director Michael Hurlston Resigns from Board - The Globe and Mail",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Astera Labs Director Michael Hurlston Resigns from Board - The Globe and Mail",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Astera Labs Director Michael Hurlston Resigns from Board - The Globe and Mail\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Astera Labs Director Michael Hurlston Resigns from Board - The Globe and Mail",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPRy1mS0lJOUJYcjFZR3Rhdk1Fa18yZ010YllFV09Uc1VvNEdHS2lsWFg5RnZvSDg1V0tiQ05kUWJBM19Wd2pGcjJRaTVRQkk3V3o1RDlZcGg1aHItNXFjS0l1a0pQMlBpQkNVMzlBZmFjcDNUb1VDWUVCWWdkVHU2Yjh3dFcybDlxcUtNUUNNekdiaHV4TmxoZnJMck12eG44eVMxcFpJRkM0Y0RmdW5LNm5sS3AydDFGVXBCbzktQ2I3b3lTNlp6bmtwRXI0dlVfWUw4?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-04",
-        "form": "8-K",
-        "items": [
-          "5.02"
-        ],
-        "category": "Others",
-        "label": "Leadership Change (Director/Officer)",
-        "url": "https://www.sec.gov/Archives/edgar/data/1736297/000162828026070258/alab-20261102.htm"
-      },
-      "float_shares": "142.74M",
-      "short_float": "6.00%",
-      "daily_pct": -19.62,
-      "prev_close": 179.47,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ALAB: Astera Labs Director Michael Hurlston Resigns from Board - The Globe and Mail",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "WULF",
-      "price": 11.03,
-      "gap_pct": 9.42,
-      "pm_volume": 1629199,
-      "avg_vol_10d": 52414716,
-      "avg_dollar_vol": 578134317,
-      "mkt_cap": 5029604303,
-      "rvol": 2.13,
-      "adr_pct": 9.61,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "WULF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "No specific fundamental catalyst identified. High risk of Gap and Trap.",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nNo specific fundamental catalyst identified. High risk of Gap and Trap.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": {
-        "filing_date": "2026-11-06",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1083301/000162828026071306/wulf-20261106.htm"
-      },
-      "float_shares": "348.79M",
-      "short_float": "30.20%",
-      "daily_pct": -13.85,
-      "prev_close": 10.08,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "WULF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "IONQ",
-      "price": 28.89,
-      "gap_pct": 9.31,
-      "pm_volume": 578549,
-      "avg_vol_10d": 19582988,
-      "avg_dollar_vol": 565752523,
-      "mkt_cap": 11349245448,
-      "rvol": 2.15,
-      "adr_pct": 6.82,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "IONQ gapping on earnings: IonQ (IONQ) Stock Fair Value Edges Lower After Analyst Caution On Dilution And Adoption - ",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: IonQ (IONQ) Stock Fair Value Edges Lower After Analyst Caution On Dilution And Adoption - Yahoo Finance | IonQ (IONQ) Stock May Trade Above Fair Value Following Its Elisity Deal - Yahoo Finance | IonQ Beats And Raises Again, But SkyWater-Fueled Scale Arrives With Deeper Operating Losses",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: IonQ (IONQ) Stock Fair Value Edges Lower After Analyst Caution On Dilution And Adoption - Yahoo Finance | IonQ (IONQ) Stock May Trade Above Fair Value Following Its Elisity Deal - Yahoo Finance | IonQ Beats And Raises Again, But SkyWater-Fueled Scale Arrives With Deeper Operating Losses\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "IONX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "IONZ",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "IonQ (IONQ) Stock Fair Value Edges Lower After Analyst Caution On Dilution And Adoption - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNVXNwR2ZFZnJzdTcxZjJvczdqY0VuclVQdnpwODVfUWhUc2xaR1dkdHdSRjQtMDFvVUh6dl96cGdzTHkyVUluVU5adWZuWVhQa0pWcHlTbXhFZTlYVUFZV2xJamJucWQtSzlNTHlVOGJRbldPNzZmbGJ2UllpS2hrdERqeUNHQXVTd3NEUG95ZndIaHJPaFE?oc=5"
-        },
-        {
-          "title": "IonQ (IONQ) Stock May Trade Above Fair Value Following Its Elisity Deal - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxONV8xYWZEX0JzbGJUbEc4VzVKOFdPZ24zLXduOXdhd0FEdEhPek1DQ1E1WWRkUlhMSHhiaXVfOEVNWHdheTNzaVN5aTBLVXAtYkl1YnhCZEpPUUl2UDE2NUtTLU9QTWFoVVFlLWhNMXp1SDRfVWN6RmNnNDJDUHhmVWZRa0hyLTNYMU50bU1DSnBZblZw?oc=5"
-        },
-        {
-          "title": "IonQ Beats And Raises Again, But SkyWater-Fueled Scale Arrives With Deeper Operating Losses",
-          "source": "Finviz",
-          "url": "/news/418066/ionq-beats-and-raises-again-but-skywater-fueled-scale-arrives-with-deeper-operating-losses"
-        },
-        {
-          "title": "IonQ climbs 3% on earnings beat and raised guidance",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/ionq-climbs-3-earnings-beat-234004907.html"
-        },
-        {
-          "title": "IonQ Wants to Be the Nvidia of Quantum. Its Latest Numbers Back Up the Swagger.",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/ionq-earnings-stock-price-44567619?mod=bar_FV"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-05",
-        "form": "8-K",
-        "items": [
-          "2.01",
-          "2.02",
-          "3.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1824920/000119312526449779/ionq-20261103.htm"
-      },
-      "float_shares": "422.93M",
-      "short_float": "11.77%",
-      "daily_pct": -10.53,
-      "prev_close": 26.43,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "IONQ gapping on earnings: IonQ (IONQ) Stock Fair Value Edges Lower After Analyst Caution On Dilution And Adoption - ",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 22,
-    "large_gaps": 3,
-    "total_headlines": 68,
+    "small_gaps": 2,
+    "large_gaps": 2,
+    "total_headlines": 11,
     "monthly_cost_usd": 0.01
   }
 }
