@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-09 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Strong Risk-On Rebound",
+    "spy_price": 754.38,
+    "spy_change_pct": 2.6,
+    "vix": 19.8,
+    "hy_oas": 3.42,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 65.7,
+    "mmth": 65.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Announced groundbreaking advancements in their cloud AI computing architecture, significantly boosting future revenue projections."
+        },
+        {
+          "ticker": "AMD",
+          "company": "Advanced Micro Devices, Inc.",
+          "reason": "Received a major contract for next-generation server processors from a leading hyperscaler, cementing market share gains."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GE",
+          "company": "General Electric Company",
+          "reason": "Saw a bounce driven by broader market optimism and momentum following recent restructuring news, rather than a fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-09 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "JNJ",
           "company": "Johnson & Johnson",
           "reason": "Continued focus on its pharmaceutical pipeline and consumer health spin-off implications drive steady, but largely priced-in, investor interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-19 13:25 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Growth-Led Risk-On Rally",
-    "spy_price": 767.33,
-    "spy_change_pct": 0.53,
-    "vix": 18.48,
-    "hy_oas": 3.31,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 41.7,
-    "mmth": 52.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CLF",
-          "company": "Cleveland-Cliffs Inc.",
-          "reason": "Shares gapped higher today following reports of strong Q3 profitability, indicating robust operational performance."
-        },
-        {
-          "ticker": "CRWV",
-          "company": "CrowdStrike Holdings Inc.",
-          "reason": "The stock surged after Goldman Sachs upgraded its rating to Buy, citing strong growth prospects and valuation."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued strength in semiconductor demand and AI-driven narratives fueled flow-based buying, sustaining its upward momentum without fresh fundamental catalysts."
         }
       ]
     }
