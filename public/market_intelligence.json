@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-09 21:54 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-11-10 06:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -29,51 +29,51 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.92,
-      "open": 25.08,
-      "high": 25.08,
-      "low": 19.64,
-      "close": 19.92,
-      "prev_open": 27.68,
-      "prev_close": 25.64,
+      "price": 20.1,
+      "open": 19.76,
+      "high": 20.32,
+      "low": 19.62,
+      "close": 20.1,
+      "prev_open": 25.08,
+      "prev_close": 19.92,
       "volume": 0,
-      "change_pct": -22.31
+      "change_pct": 0.9
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 86.08,
+      "price": 85.46,
       "open": 86.43,
       "high": 86.93,
-      "low": 85.7,
-      "close": 86.08,
-      "prev_open": 91.2,
-      "prev_close": 90.83,
-      "volume": 9510,
-      "change_pct": -5.23
+      "low": 83.88,
+      "close": 85.46,
+      "prev_open": 90.83,
+      "prev_close": 86.85,
+      "volume": 66134,
+      "change_pct": -1.6
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 60475.78,
+      "price": 60459.58,
       "open": 59372.28,
-      "high": 60619.45,
+      "high": 60743.97,
       "low": 59268.43,
-      "close": 60475.78,
+      "close": 60459.58,
       "prev_open": 57960.7,
       "prev_close": 58775.5,
       "volume": 0,
-      "change_pct": 2.89
+      "change_pct": 2.87
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26267.19,
-      "open": 25815.3,
-      "high": 26276.09,
-      "low": 25793.06,
-      "close": 26267.19,
-      "prev_open": 25919.48,
-      "prev_close": 25820.36,
-      "volume": 57229100,
-      "change_pct": 1.73
+      "price": 26585.92,
+      "open": 26548.59,
+      "high": 26600.21,
+      "low": 26460.64,
+      "close": 26585.92,
+      "prev_open": 25815.3,
+      "prev_close": 26267.19,
+      "volume": 0,
+      "change_pct": 1.21
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: November 09, 2026",
-    "mood_emoji": "🚀",
-    "mood": "Aggressive Risk-On Surge",
-    "narrative": "Global equities soared today, with US indices marking substantial gains as the VIX plummeted to new lows. This robust performance signals a significant increase in investor confidence and a broad return to risk appetite across markets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 752.69 | +2.37% | 📈 |\n| Nasdaq 100 ETF | 679.35 | +3.54% | 📈 |\n| VIX | 19.92 | -22.31% | 📉 |\n| Crude Oil | 86.08 | -5.23% | 📉 |\n| Nikkei 225 | 60475.78 | +2.89% | 📈 |\n| DAX | 26267.19 | +1.73% | 📈 |",
-    "macro_section": "The BAMLH0A0HYM2 (HY Credit Spread) registered at 3.42%, maintaining a Complacent regime, which typically indicates a strong appetite for risk among institutional investors. Simultaneously, the T10Y2Y (10Y-2Y Yield Curve) stood at +0.320, signifying a Normal / Steepening curve environment that generally supports economic expansion and encourages further risk-taking. This combination suggests that institutional capital remains highly willing to deploy into riskier assets.",
-    "analysis_para1": "A robust global tape underscored today's market rally, with the Nikkei 225 surging by +2.89% and the DAX advancing +1.73%, reflecting widespread international optimism. Despite crude oil experiencing a significant drop of -5.23% to 86.08, which often signals demand concerns, equity markets interpreted this as a disinflationary impulse, further fueling risk appetite. This global uplift, particularly in equities, strongly aligns with the US HY credit spread maintaining a Complacent regime at 3.42%, implying a profoundly bullish sentiment for US risk assets.",
-    "analysis_para2": "The single dominant 'Why' behind today's aggressive flow appears to be an unexpected dovish shift in central bank rhetoric, coupled with stronger-than-anticipated positive economic data released earlier this morning. This mechanical catalyst likely eased concerns about future interest rate hikes and accelerated growth expectations. The resultant rush into equities, evidenced by the S&P 500 ETF's +2.37% gain and the Nasdaq 100 ETF's +3.54% surge, triggered a substantial positioning squeeze, leading to the VIX plummeting by -22.31% as perceived market uncertainty evaporated.",
-    "analysis_para3": "Given today's powerful rally, traders should focus on consolidating gains and identifying key support levels for potential long entries on any brief pullbacks. The S&P 500 ETF's previous resistance near 740 now acts as a crucial support level, while today's high around 752.69 should be watched as a short-term target. A sustained break above 755 could trigger further upside momentum, while a decisive close below 735 would be a critical risk-off threshold, signaling a potential reversal of today's bullish trend. Traders should prioritize protecting profits and scaling into positions incrementally TODAY.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is exhibiting strong bullish momentum with broad participation, as evidenced by 65.4% of S&P 500 stocks above SMA50 and 63.7% of S&P stocks above SMA200. Traders should watch for any significant divergence from this trend or an inability to hold gains above key moving averages as an early warning sign.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Salesforce announced a strategic acquisition in the AI sector today, signaling aggressive expansion and integration of generative AI into its core offerings."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly received accelerated FDA approval for a new blockbuster drug, significantly expanding its market presence in a high-growth therapeutic area."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft continued its upward trajectory today on technical momentum, extending gains from last week's positive AI-related announcements without fresh fundamental news."
-        }
-      ]
-    }
+    "error": "400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Thinking is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}"
   }
 }
