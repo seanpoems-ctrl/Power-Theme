@@ -3,8 +3,24 @@
   "filter": "up25m",
   "label": "Up 25%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 92,
+  "count": 93,
   "stocks": [
+    {
+      "ticker": "SGRY",
+      "company": "Surgery Partners, Inc.",
+      "industry": "Hospital/Nursing Management",
+      "market_cap_b": 3.409,
+      "price": 26.45,
+      "change_pct": 14.01,
+      "dollar_volume": "$170.1M",
+      "adr_pct": 3.3,
+      "perf_1m": 93.21,
+      "perf_3m": 62.47,
+      "perf_34d": null,
+      "perf_qtd": 62.47,
+      "perf_mtd": 93.21,
+      "rs_ibd": 76
+    },
     {
       "ticker": "LQDA",
       "company": "Liquidia Corporation",
@@ -716,7 +732,7 @@
       "market_cap_b": 2.545,
       "price": 174.08,
       "change_pct": -1.05,
-      "dollar_volume": "$58.6M",
+      "dollar_volume": "$58.7M",
       "adr_pct": 5.5,
       "perf_1m": 33.19,
       "perf_3m": 13.0,
@@ -1486,9 +1502,6 @@
     "spx_qtd": -1.52,
     "spx_mtd": -0.4
   },
-  "fetched_at_utc": "2026-11-09T23:03:01+00:00",
-  "source": "tv_fallback",
-  "pending_deals_hidden": [
-    "SGRY"
-  ]
+  "fetched_at_utc": "2026-11-10T04:36:46+00:00",
+  "source": "tv_fallback"
 }

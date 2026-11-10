@@ -2,8 +2,20 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 4,
+  "count": 5,
   "stocks": [
+    {
+      "ticker": "SGRY",
+      "company": "Surgery Partners, Inc.",
+      "industry": "Hospital/Nursing Management",
+      "price": 26.45,
+      "change_pct": 14.01,
+      "adr_pct": 3.3,
+      "dollar_volume": "$170.1M",
+      "market_cap_b": 3.409,
+      "rs_ibd": 76,
+      "atr_ext_val": 18.93
+    },
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
@@ -61,14 +73,13 @@
     "spx_qtd": -1.52,
     "spx_mtd": -0.4
   },
-  "fetched_at_utc": "2026-11-09T23:02:54+00:00",
+  "fetched_at_utc": "2026-11-10T04:36:38+00:00",
   "pending_deals_hidden": [
     "ADT",
     "BRZE",
     "OPCH",
     "PCRX",
     "PTC",
-    "SGRY",
     "SLN"
   ]
 }
