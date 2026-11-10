@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-10 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "US Dips, Global Resilient",
+    "spy_price": 749.33,
+    "spy_change_pct": -0.45,
+    "vix": 19.85,
+    "hy_oas": 3.34,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 64.3,
+    "mmth": 63.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple is poised for a strong holiday season as its innovative augmented reality headset generates significant pre-order interest."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla's strategic European gigafactory expansion significantly de-risks future production targets and boosts long-term growth projections."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is attracting short-term technical buyers as it consolidates recent strong gains, but lacks a fresh fundamental catalyst for new longs."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-10 13:35 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "GOOGL",
           "company": "Alphabet Inc.",
           "reason": "Alphabet saw continued algorithmic buying pressure today, extending a multi-day rally initiated by last week's sector rotation, without any fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-20 16:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Oil Relief, Equity Divergence",
-    "spy_price": 769.05,
-    "spy_change_pct": 0.34,
-    "vix": 17.31,
-    "hy_oas": 3.29,
-    "yield_curve": 0.38,
-    "credit_status": "Complacent",
-    "s5fi": 51.1,
-    "mmth": 55.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "WMT",
-          "company": "Walmart Inc.",
-          "reason": "Walmart reported stronger-than-expected Q3 earnings, driven by robust e-commerce growth and improved supply chain efficiency, raising full-year guidance."
-        },
-        {
-          "ticker": "TGT",
-          "company": "Target Corp.",
-          "reason": "Target announced an innovative new partnership with a leading AI firm to personalize shopping experiences, boosting investor confidence in its tech adoption strategy."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Continued investor attention on Alphabet's cloud division growth and ongoing advancements in AI research, maintaining its position as a defensive tech play."
         }
       ]
     }

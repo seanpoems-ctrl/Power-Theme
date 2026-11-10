@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-11-10 13:35 ET",
+  "generated_at": "2026-11-10 15:45 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 746.95,
+      "price": 749.33,
       "open": 747.94,
       "high": 752.14,
       "low": 744.87,
-      "close": 746.95,
+      "close": 749.33,
       "prev_open": 741.95,
       "prev_close": 752.69,
-      "volume": 21143267,
-      "change_pct": -0.76
+      "volume": 29397070,
+      "change_pct": -0.45
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 670.23,
+      "price": 673.39,
       "open": 672.55,
       "high": 680.95,
       "low": 667.05,
-      "close": 670.23,
+      "close": 673.39,
       "prev_open": 662.64,
       "prev_close": 679.35,
-      "volume": 25031550,
-      "change_pct": -1.34
+      "volume": 30761900,
+      "change_pct": -0.88
     },
     "^VIX": {
       "label": "VIX",
-      "price": 20.91,
+      "price": 19.85,
       "open": 19.76,
       "high": 21.61,
       "low": 19.62,
-      "close": 20.91,
+      "close": 19.85,
       "prev_open": 25.08,
       "prev_close": 19.92,
       "volume": 0,
-      "change_pct": 4.97
+      "change_pct": -0.35
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 86.22,
+      "price": 86.49,
       "open": 86.43,
       "high": 86.93,
       "low": 83.88,
-      "close": 86.22,
+      "close": 86.49,
       "prev_open": 90.83,
       "prev_close": 86.85,
-      "volume": 214656,
-      "change_pct": -0.73
+      "volume": 256641,
+      "change_pct": -0.41
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -83,8 +83,8 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 63.7,
-    "mmth": 63.3
+    "s5fi": 64.3,
+    "mmth": 63.1
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Thinking is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}"
+    "title": "Post-Market Brief: November 10, 2026",
+    "mood_emoji": "↘️",
+    "mood": "US Dips, Global Resilient",
+    "narrative": "US equities saw a slight pullback today, with the S&P 500 and Nasdaq 100 ETFs closing lower amid subdued domestic trading. Despite this, global markets demonstrated resilience, particularly in Asia, preventing broader risk aversion.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 749.33 | -0.45% | ➡️ |\n| Nasdaq 100 ETF | 673.39 | -0.88% | 📉 |\n| VIX | 19.85 | -0.35% | ➡️ |\n| Crude Oil | 86.49 | -0.41% | ➡️ |\n| Nikkei 225 | 58775.50 | +2.33% | 📈 |\n| DAX | 26347.45 | +0.31% | ➡️ |",
+    "macro_section": "The High Yield Credit Spread, measured by BAMLH0A0HYM2, registered a value of 3.34%, indicating a complacent regime in credit markets. Concurrently, the 10-year minus 2-year yield curve, T10Y2Y, stood at +0.320, signifying a normal to steepening posture. These readings suggest that institutional risk appetite remains robust, unhindered by immediate concerns over credit stress or economic contraction.",
+    "analysis_para1": "While US equity indices experienced a modest dip, the global tape presented a more constructive narrative. The Nikkei 225 surged by an impressive +2.33%, complemented by a +0.31% gain in the DAX, suggesting sustained risk-on sentiment outside North America. Despite a slight dip in Crude Oil prices by -0.41%, the overall strength in international markets appears to buffer potential contagion to US credit. This resilience helps maintain the High Yield Credit Spread at a complacent 3.34%, implying that while US equities might be consolidating, broader institutional risk appetite remains intact and supported by global dynamics.",
+    "analysis_para2": "Today's primary flow in US equities appears to be driven by a mechanical catalyst of modest profit-taking and end-of-day rebalancing. With no significant macro data or policy decisions announced, the slight pullback in the S&P 500 ETF by -0.45% and Nasdaq 100 ETF by -0.88% suggests investors were consolidating recent gains. This action is further supported by the VIX remaining subdued at 19.85, indicating that the slight equity weakness was not accompanied by increased fear or volatility expectations. The minor unwinding of long positions, likely at a sector or individual stock level, characterized the session rather than a broad directional shift.",
+    "analysis_para3": "For the remainder of the session and into tomorrow, traders should closely monitor the S&P 500 ETF for a critical support level around 745.00. A hold above this level would signal continued resilience despite today's dip, potentially offering long entry triggers for conviction names. Conversely, a break below 740.00 would act as a decisive risk-off threshold, warranting a reduction in long exposure or initiation of tactical shorts. On the upside, a reclaim of 752.00 could indicate renewed momentum. Today, the immediate focus should be on managing existing positions, tightening stops, and avoiding aggressive directional bets until clearer levels are established.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF's modest decline today keeps it within its recent range, neither confirming a breakdown nor establishing a bullish reversal. Traders should observe tomorrow's open for follow-through selling or a bounce from key intraday support, using volume to gauge conviction.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple is poised for a strong holiday season as its innovative augmented reality headset generates significant pre-order interest."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla's strategic European gigafactory expansion significantly de-risks future production targets and boosts long-term growth projections."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is attracting short-term technical buyers as it consolidates recent strong gains, but lacks a fresh fundamental catalyst for new longs."
+        }
+      ]
+    }
   }
 }
