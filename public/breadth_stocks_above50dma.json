@@ -2,88 +2,76 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 6,
+  "count": 5,
   "stocks": [
+    {
+      "ticker": "REPL",
+      "company": "Replimune Group, Inc.",
+      "industry": "Biotechnology",
+      "price": 23.28,
+      "change_pct": 4.58,
+      "adr_pct": 5.5,
+      "dollar_volume": "$105.1M",
+      "market_cap_b": 2.207,
+      "rs_ibd": 95,
+      "above50dma_pct": 61.8
+    },
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 26.45,
-      "change_pct": 14.01,
-      "adr_pct": 3.3,
-      "dollar_volume": "$170.1M",
-      "market_cap_b": 3.409,
-      "rs_ibd": 76,
-      "above50dma_pct": 62.4
+      "price": 26.73,
+      "change_pct": 1.06,
+      "adr_pct": 3.2,
+      "dollar_volume": "$161.5M",
+      "market_cap_b": 3.445,
+      "rs_ibd": 89,
+      "above50dma_pct": 61.5
     },
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 15.86,
-      "change_pct": 4.34,
-      "adr_pct": 5.0,
-      "dollar_volume": "$65.7M",
-      "market_cap_b": 2.898,
+      "price": 15.83,
+      "change_pct": -0.19,
+      "adr_pct": 5.1,
+      "dollar_volume": "$69.2M",
+      "market_cap_b": 2.892,
       "rs_ibd": 93,
-      "above50dma_pct": 62.3
-    },
-    {
-      "ticker": "REPL",
-      "company": "Replimune Group, Inc.",
-      "industry": "Biotechnology",
-      "price": 22.26,
-      "change_pct": 2.96,
-      "adr_pct": 5.7,
-      "dollar_volume": "$103.4M",
-      "market_cap_b": 2.11,
-      "rs_ibd": 96,
-      "above50dma_pct": 56.4
-    },
-    {
-      "ticker": "ARDT",
-      "company": "Ardent Health, Inc.",
-      "industry": "Hospital/Nursing Management",
-      "price": 17.97,
-      "change_pct": 3.87,
-      "adr_pct": 4.7,
-      "dollar_volume": "$19.8M",
-      "market_cap_b": 2.533,
-      "rs_ibd": 77,
-      "above50dma_pct": 55.2
+      "above50dma_pct": 59.6
     },
     {
       "ticker": "GDYN",
       "company": "Grid Dynamics Holdings, Inc.",
       "industry": "Information Technology Services",
-      "price": 13.3,
-      "change_pct": 1.53,
-      "adr_pct": 4.8,
-      "dollar_volume": "$38.5M",
-      "market_cap_b": 1.069,
-      "rs_ibd": 86,
-      "above50dma_pct": 51.3
+      "price": 14.06,
+      "change_pct": 5.71,
+      "adr_pct": 4.7,
+      "dollar_volume": "$42.2M",
+      "market_cap_b": 1.13,
+      "rs_ibd": 89,
+      "above50dma_pct": 57.8
     },
     {
-      "ticker": "KOD",
-      "company": "Kodiak Sciences Inc",
-      "industry": "Biotechnology",
-      "price": 107.1,
-      "change_pct": 7.85,
-      "adr_pct": 6.4,
-      "dollar_volume": "$100.8M",
-      "market_cap_b": 6.731,
-      "rs_ibd": 98,
-      "above50dma_pct": 51.0
+      "ticker": "ARDT",
+      "company": "Ardent Health, Inc.",
+      "industry": "Hospital/Nursing Management",
+      "price": 17.93,
+      "change_pct": -0.22,
+      "adr_pct": 4.6,
+      "dollar_volume": "$20.5M",
+      "market_cap_b": 2.527,
+      "rs_ibd": 80,
+      "above50dma_pct": 52.9
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 2.35,
-    "spx_1m": -3.3,
-    "spx_3m": -2.56,
-    "spx_34d": -2.03,
-    "spx_qtd": -1.52,
-    "spx_mtd": -0.4
+    "spx_1d": -0.38,
+    "spx_1m": -3.65,
+    "spx_3m": -3.57,
+    "spx_34d": -2.38,
+    "spx_qtd": -1.9,
+    "spx_mtd": -0.78
   },
-  "fetched_at_utc": "2026-11-10T04:36:38+00:00"
+  "fetched_at_utc": "2026-11-10T23:03:48+00:00"
 }

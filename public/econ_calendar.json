@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T04:35:05.673298+00:00",
+  "generated_at": "2026-11-10T23:02:17.029823+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -5527,7 +5527,7 @@
       "time_et": "06:00",
       "event": "NFIB Business Optimism Index",
       "impact": "Low",
-      "actual": null,
+      "actual": "97.8",
       "forecast": null,
       "previous": "97.9",
       "currency": "USD"
@@ -5537,9 +5537,19 @@
       "time_et": "07:15",
       "event": "ADP Employment Change Weekly",
       "impact": "Low",
-      "actual": null,
+      "actual": "19500",
       "forecast": null,
       "previous": "16750",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-10",
+      "time_et": "08:15",
+      "event": "ADP Employment Change Weekly",
+      "impact": "Low",
+      "actual": "19750",
+      "forecast": null,
+      "previous": "19500",
       "currency": "USD"
     },
     {
@@ -5547,7 +5557,7 @@
       "time_et": "08:30",
       "event": "Core Inflation Rate MoM",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.3",
       "forecast": "0.2",
       "previous": "0.3",
       "currency": "USD"
@@ -5555,19 +5565,9 @@
     {
       "date": "2026-11-10",
       "time_et": "08:30",
-      "event": "Core Inflation Rate YoY",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "2.8",
-      "previous": "2.6",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-11-10",
-      "time_et": "08:30",
       "event": "Inflation Rate MoM",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.4",
       "forecast": "0.3",
       "previous": "0.6",
       "currency": "USD"
@@ -5577,7 +5577,7 @@
       "time_et": "08:30",
       "event": "Inflation Rate MoM NSA",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.17",
       "forecast": null,
       "previous": "0.59",
       "currency": "USD"
@@ -5587,7 +5587,7 @@
       "time_et": "08:30",
       "event": "CPI-W",
       "impact": "Low",
-      "actual": null,
+      "actual": "331.147",
       "forecast": null,
       "previous": "330.654",
       "currency": "USD"
@@ -5597,7 +5597,7 @@
       "time_et": "08:30",
       "event": "CPI",
       "impact": "Low",
-      "actual": null,
+      "actual": "337.511",
       "forecast": "337.042",
       "previous": "336.94",
       "currency": "USD"
@@ -5607,7 +5607,7 @@
       "time_et": "08:30",
       "event": "Core Consumer Prices",
       "impact": "Low",
-      "actual": null,
+      "actual": "339.9",
       "forecast": null,
       "previous": "338.896",
       "currency": "USD"
@@ -5615,19 +5615,9 @@
     {
       "date": "2026-11-10",
       "time_et": "08:30",
-      "event": "Inflation Rate YoY",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "3.9",
-      "previous": "3.7",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-11-10",
-      "time_et": "08:30",
       "event": "CPI seasonally adjusted",
       "impact": "Low",
-      "actual": null,
+      "actual": "337.48",
       "forecast": null,
       "previous": "336.3",
       "currency": "USD"
@@ -5639,7 +5629,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": "-0.5",
+      "previous": "-0.4",
       "currency": "USD"
     },
     {
@@ -5647,17 +5637,17 @@
       "time_et": "08:55",
       "event": "Redbook YoY",
       "impact": "Low",
-      "actual": null,
+      "actual": "10.1",
       "forecast": null,
       "previous": "10.4",
       "currency": "USD"
     },
     {
       "date": "2026-11-10",
-      "time_et": "10:00",
+      "time_et": "11:00",
       "event": "Cleveland Fed CPI MoM",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.3",
       "forecast": null,
       "previous": "0.2",
       "currency": "USD"
@@ -5667,7 +5657,7 @@
       "time_et": "12:00",
       "event": "WASDE Beef Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "24.588",
       "forecast": null,
       "previous": "24.743",
       "currency": "USD"
@@ -5677,7 +5667,7 @@
       "time_et": "12:00",
       "event": "WASDE Corn Ending Stocks (New Crop)",
       "impact": "Low",
-      "actual": null,
+      "actual": "1.758",
       "forecast": "1.849",
       "previous": "1.849",
       "currency": "USD"
@@ -5687,7 +5677,7 @@
       "time_et": "12:00",
       "event": "WASDE Corn Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "15.893",
       "forecast": "15.985",
       "previous": "16.034",
       "currency": "USD"
@@ -5697,7 +5687,7 @@
       "time_et": "12:00",
       "event": "WASDE Cotton Ending Stocks",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.7",
       "forecast": null,
       "previous": "3.8",
       "currency": "USD"
@@ -5707,7 +5697,7 @@
       "time_et": "12:00",
       "event": "WASDE Cotton Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "13.18",
       "forecast": null,
       "previous": "13.44",
       "currency": "USD"
@@ -5717,7 +5707,7 @@
       "time_et": "12:00",
       "event": "WASDE Poultry Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "55.264",
       "forecast": null,
       "previous": "55.348",
       "currency": "USD"
@@ -5727,7 +5717,7 @@
       "time_et": "12:00",
       "event": "WASDE Pork Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "27.841",
       "forecast": null,
       "previous": "27.841",
       "currency": "USD"
@@ -5737,7 +5727,7 @@
       "time_et": "12:00",
       "event": "WASDE Soybean Ending Stocks (New Crop)",
       "impact": "Low",
-      "actual": null,
+      "actual": "300",
       "forecast": "330",
       "previous": "315",
       "currency": "USD"
@@ -5747,7 +5737,7 @@
       "time_et": "12:00",
       "event": "WASDE Soybean Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "4.574",
       "forecast": "4.587",
       "previous": "4.562",
       "currency": "USD"
@@ -5757,7 +5747,7 @@
       "time_et": "12:00",
       "event": "WASDE Wheat Ending Stocks (New Crop)",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.743",
       "forecast": "0.74",
       "previous": "0.74",
       "currency": "USD"
@@ -5767,7 +5757,7 @@
       "time_et": "12:00",
       "event": "WASDE Wheat Production",
       "impact": "Low",
-      "actual": null,
+      "actual": "1.534",
       "forecast": null,
       "previous": "1.534",
       "currency": "USD"
@@ -5777,7 +5767,7 @@
       "time_et": "12:00",
       "event": "WASDE Wheat Ending Stocks (Old Crop)",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.92",
       "forecast": null,
       "previous": "0.92",
       "currency": "USD"
@@ -5787,7 +5777,7 @@
       "time_et": "12:00",
       "event": "WASDE Corn Ending Stocks (Old Crop)",
       "impact": "Low",
-      "actual": null,
+      "actual": "2.095",
       "forecast": null,
       "previous": "2.095",
       "currency": "USD"
@@ -5797,7 +5787,7 @@
       "time_et": "12:00",
       "event": "WASDE Corn Exports",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.275",
       "forecast": null,
       "previous": "3.3",
       "currency": "USD"
@@ -5807,7 +5797,7 @@
       "time_et": "12:00",
       "event": "WASDE Corn Yield",
       "impact": "Low",
-      "actual": null,
+      "actual": "179.6",
       "forecast": "180.6",
       "previous": "181.2",
       "currency": "USD"
@@ -5817,7 +5807,7 @@
       "time_et": "12:00",
       "event": "WASDE Soybean Ending Stocks (Old Crop)",
       "impact": "Low",
-      "actual": null,
+      "actual": "315",
       "forecast": null,
       "previous": "315",
       "currency": "USD"
@@ -5827,7 +5817,7 @@
       "time_et": "12:00",
       "event": "WASDE Soybean Exports",
       "impact": "Low",
-      "actual": null,
+      "actual": "1.72",
       "forecast": null,
       "previous": "1.695",
       "currency": "USD"
@@ -5837,7 +5827,7 @@
       "time_et": "12:00",
       "event": "WASDE Soybean Yield",
       "impact": "Low",
-      "actual": null,
+      "actual": "53.3",
       "forecast": "53.4",
       "previous": "53.1",
       "currency": "USD"
@@ -5847,7 +5837,7 @@
       "time_et": "12:00",
       "event": "WASDE World Wheat Ending Stocks",
       "impact": "Low",
-      "actual": null,
+      "actual": "280.82",
       "forecast": "276.1",
       "previous": "276.04",
       "currency": "USD"
@@ -5857,7 +5847,7 @@
       "time_et": "12:00",
       "event": "WASDE World Corn Ending Stocks",
       "impact": "Low",
-      "actual": null,
+      "actual": "281.94",
       "forecast": "281.3",
       "previous": "280.44",
       "currency": "USD"
@@ -5867,7 +5857,7 @@
       "time_et": "12:00",
       "event": "WASDE World Soybean Ending Stocks",
       "impact": "Low",
-      "actual": null,
+      "actual": "123.5",
       "forecast": "125",
       "previous": "124.28",
       "currency": "USD"
@@ -5877,9 +5867,9 @@
       "time_et": "13:00",
       "event": "10-Year Note Auction Allotted at High",
       "impact": "Low",
-      "actual": null,
+      "actual": "95.17",
       "forecast": null,
-      "previous": null,
+      "previous": "57.6",
       "currency": "USD"
     },
     {
@@ -5887,9 +5877,9 @@
       "time_et": "13:00",
       "event": "10-Year Note Auction Bid-to-Cover",
       "impact": "Low",
-      "actual": null,
+      "actual": "2.46",
       "forecast": null,
-      "previous": null,
+      "previous": "2.77",
       "currency": "USD"
     },
     {
@@ -5907,9 +5897,9 @@
       "time_et": "13:00",
       "event": "10-Year Note Auction Total Accepted",
       "impact": "Low",
-      "actual": null,
+      "actual": "42.0001",
       "forecast": null,
-      "previous": null,
+      "previous": "39",
       "currency": "USD"
     },
     {
@@ -5917,7 +5907,7 @@
       "time_et": "16:30",
       "event": "API Cushing Number",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.182",
       "forecast": null,
       "previous": "0.511",
       "currency": "USD"
@@ -5927,8 +5917,8 @@
       "time_et": "16:30",
       "event": "API Crude Oil Stock Change",
       "impact": "Low",
-      "actual": null,
-      "forecast": "0.5",
+      "actual": "8.968",
+      "forecast": "-1.483",
       "previous": "-5.267",
       "currency": "USD"
     },
@@ -5937,7 +5927,7 @@
       "time_et": "16:30",
       "event": "API Distillate Stocks",
       "impact": "Low",
-      "actual": null,
+      "actual": "1.515",
       "forecast": "-0.87",
       "previous": "-1.192",
       "currency": "USD"
@@ -5947,7 +5937,7 @@
       "time_et": "16:30",
       "event": "API Gasoline Stocks",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.004",
       "forecast": "-0.35",
       "previous": "1.427",
       "currency": "USD"
@@ -5957,7 +5947,7 @@
       "time_et": "16:30",
       "event": "API Heating Oil",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.433",
       "forecast": null,
       "previous": "-0.27",
       "currency": "USD"
@@ -5967,7 +5957,7 @@
       "time_et": "16:30",
       "event": "API Crude Imports",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.241",
       "forecast": null,
       "previous": "0.463",
       "currency": "USD"
@@ -5977,7 +5967,7 @@
       "time_et": "16:30",
       "event": "API Product Imports",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.05",
       "forecast": null,
       "previous": "0.052",
       "currency": "USD"
@@ -5987,7 +5977,7 @@
       "time_et": "16:30",
       "event": "API Crude Runs",
       "impact": "Low",
-      "actual": null,
+      "actual": "0.249",
       "forecast": null,
       "previous": "0.195",
       "currency": "USD"
@@ -6278,7 +6268,7 @@
       "event": "EIA Crude Oil Stocks Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.5",
+      "forecast": "-1.483",
       "previous": "-0.865",
       "currency": "USD"
     },
@@ -6914,12 +6904,12 @@
     },
     {
       "date": "2026-11-17",
-      "time_et": "07:15",
+      "time_et": "08:15",
       "event": "ADP Employment Change Weekly",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "19750",
       "currency": "USD"
     },
     {
@@ -7029,7 +7019,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "10.1",
       "currency": "USD"
     },
     {
@@ -7109,7 +7099,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "0.182",
       "currency": "USD"
     },
     {
@@ -7119,7 +7109,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "8.968",
       "currency": "USD"
     },
     {
@@ -7129,7 +7119,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "1.515",
       "currency": "USD"
     },
     {
@@ -7139,7 +7129,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "0.004",
       "currency": "USD"
     },
     {
@@ -7149,7 +7139,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "0.433",
       "currency": "USD"
     },
     {
@@ -7159,7 +7149,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "0.241",
       "currency": "USD"
     },
     {
@@ -7169,7 +7159,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "0.05",
       "currency": "USD"
     },
     {
@@ -7179,7 +7169,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "0.249",
       "currency": "USD"
     },
     {
@@ -8326,6 +8316,366 @@
       "date": "2026-11-23",
       "time_et": "13:00",
       "event": "2-Year Note Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "08:15",
+      "event": "ADP Employment Change Weekly",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "08:55",
+      "event": "Redbook YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "09:00",
+      "event": "House Price Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "09:00",
+      "event": "House Price Index MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "09:00",
+      "event": "House Price Index YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "09:00",
+      "event": "S&P/Case-Shiller Home Price MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "09:00",
+      "event": "S&P/Case-Shiller 20-City Home Price MoM s.a",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "09:00",
+      "event": "S&P/Case-Shiller Home Price YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "10:00",
+      "event": "CB Consumer Confidence",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "91.7",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "10:00",
+      "event": "Richmond Fed Manufacturing Shipments Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "10:00",
+      "event": "Richmond Fed Composite Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "10:00",
+      "event": "Richmond Fed Services Revenues Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "2-Year FRN Auction Allotted at High",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "2-Year FRN Auction Bid-to-Cover",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "2-Year FRN Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "2-Year FRN Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "52-Week Bill Auction Allotted at High",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "52-Week Bill Auction Bid-to-Cover",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "52-Week Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "11:30",
+      "event": "52-Week Bill Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "13:00",
+      "event": "5-Year Note Auction Allotted at High",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "13:00",
+      "event": "5-Year Note Auction Bid-to-Cover",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "13:00",
+      "event": "5-Year Note Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "13:00",
+      "event": "5-Year Note Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "13:00",
+      "event": "Money Supply",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "23.4139",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "15:00",
+      "event": "Cold Storage Beef Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "400.006",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "15:00",
+      "event": "Cold Storage Frozen Orange Juice Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "0.477",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "15:00",
+      "event": "Cold Storage Pork Belly Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "19.7",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Cushing Number",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Crude Oil Stock Change",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Distillate Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Gasoline Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Heating Oil",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Crude Imports",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Product Imports",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-11-24",
+      "time_et": "16:30",
+      "event": "API Crude Runs",
       "impact": "Low",
       "actual": null,
       "forecast": null,
