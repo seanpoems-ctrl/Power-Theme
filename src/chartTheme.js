@@ -7,6 +7,8 @@ export const MINI_CHART_THEME = {
   up: "#ffffff", down: "#6e6e6e", outline: "#000000",
   inside: "#ff9800",
   rvolUp: "#ffffff", rvolDown: "#707070",
+  // Mini Charts' volume pane = traded dollar volume (price x volume), green / red by candle body (close vs open) — the user's TradingView "PT RVOL".
+  tdvUp: "#4a9d47", tdvDown: "#f06a6a",
 };
 
 // Candlestick series options in the shared look.
@@ -75,4 +77,19 @@ export const rvolHistogram = data => {
 export const rvolSeriesOptions = (extra = {}) => ({
   priceFormat: { type: "custom", minMove: 0.01, formatter: v => `${v.toFixed(2)}x` },
   priceLineVisible: false, lastValueVisible: false, ...extra,
+});
+
+// ── Mini Charts volume pane (the user's TradingView "PT RVOL"): traded DOLLAR volume (TDV = bar volume x close), green when the bar closes
+// at / above its open, red below. The other charts (Trade Journal, trendline) keep the RVOL bars above.
+export const _fmtDollarVol = v => v == null || !Number.isFinite(v) ? "—"
+  : Math.abs(v) >= 1e9 ? `${(v / 1e9).toFixed(2)}B` : Math.abs(v) >= 1e6 ? `${(v / 1e6).toFixed(2)}M`
+  : Math.abs(v) >= 1e3 ? `${(v / 1e3).toFixed(0)}K` : v.toFixed(0);
+
+export const tdvData = data => data.map(b => ({
+  time: b.time, value: (b.volume || 0) * b.close, color: b.close >= b.open ? MINI_CHART_THEME.tdvUp : MINI_CHART_THEME.tdvDown,
+}));
+
+export const tdvSeriesOptions = (extra = {}) => ({
+  priceFormat: { type: "custom", minMove: 1, formatter: _fmtDollarVol },
+  priceLineVisible: false, lastValueVisible: true, ...extra,
 });

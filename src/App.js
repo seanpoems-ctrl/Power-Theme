@@ -21,7 +21,7 @@ import { loadCotBrief, CotBriefStrip } from "./cotBrief";
 import { fetchFinnhubQuote } from "./finnhubQuote";
 import { BREADTH_PHASES, computeBreadthCycle, breadthDivergence, useBreadthCycle, loadBreadthCycle, addConfirmedPhase, rowsFromLongHistory, loadRegimeCalendar, regimeBefore } from "./breadthCycle";
 import { buildDataset, scenarioReport } from "./breadthScenario";
-import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions } from "./chartTheme";
+import { MINI_CHART_THEME, MINI_EMA_CONFIG, _emaSeries, _smaSeries, _rvolSeries, candleOptions, candleData, rvolHistogram, rvolSeriesOptions, tdvData, tdvSeriesOptions, _fmtDollarVol } from "./chartTheme";
 const CotTab = React.lazy(() => import("./CotTab"));   // loaded only when the COT tab opens
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
@@ -13349,29 +13349,27 @@ const _chartStats = (data, marketCapB) => {
   };
 };
 const _kFmt = v => v == null ? "—" : v >= 1e9 ? `${(v / 1e9).toFixed(2)}B` : v >= 1e6 ? `${(v / 1e6).toFixed(2)}M` : v >= 1e3 ? `${(v / 1e3).toFixed(1)}K` : v.toFixed(0);
-const ChartStatsOverlay = ({ st }) => {
+const ChartStatsOverlay = ({ st, axisH = 28 }) => {
   const row = (k, v, cls = "") => <div className="flex justify-between gap-2"><span className="font-medium">{k}</span><span className={`font-bold tabular-nums ${cls}`}>{v}</span></div>;
   const num = (v, d = 2) => v == null ? "—" : v.toFixed(d);
+  const cell = (k, v, cls = "text-zinc-100", first = false) => (
+    <div className={`px-2 py-0.5 whitespace-nowrap ${first ? "" : "border-l border-zinc-600"}`}><span className="text-zinc-300">{k} : </span><span className={`font-semibold tabular-nums ${cls}`}>{v}</span></div>
+  );
   return (
-    <div className="hidden sm:block absolute top-0 bottom-0 left-0 pointer-events-none select-none text-[9px] leading-[12px]" style={{ right: 78, color: "#000000", zIndex: 20 }}>
-      {/* One column, bottom-right: info lines, the ATR multiple, then the RVOL box */}
-      <div className="absolute right-2 w-[132px] flex flex-col gap-1" style={{ bottom: 80 }}>
-      <div className="w-full">
+    <div className="hidden sm:block absolute top-0 left-0 pointer-events-none select-none text-[10px] leading-[13px]" style={{ right: 78, bottom: axisH, color: "#000000", zIndex: 20 }}>
+      {/* "Swing Data" (the user's TradingView indicator): top-right of the candle pane */}
+      <div className="absolute right-2 w-[150px]" style={{ top: 6 }}>
         {row("Market Cap", st.marketCapB != null ? `${st.marketCapB.toFixed(2)}B` : "—")}
         {row("ADR%", `${num(st.adr)}%`)}
-        {row("ATR", num(st.atr))}
         {row("LoD dist.", st.lod != null ? `${st.lod.toFixed(0)}%` : "—", st.lod != null && st.lod <= 40 ? "text-green-800" : "")}
-        {st.industry && <div className="font-medium text-right">{st.industry}</div>}
-      </div>
-      <div className="w-full">
         {row("ATR% Mult. From MA", num(st.extension), st.extension != null && st.extension >= 7 ? "text-red-800" : st.extension != null && st.extension >= 4 ? "text-amber-800" : "")}
       </div>
-      <div className="w-full rounded border border-zinc-600 text-zinc-100 px-1.5 py-0.5" style={{ background: "#27272af2" }}>
-        <div className="flex justify-between gap-2"><span className="text-zinc-300">{st.pacing ? "RVOL (Pace)" : "RVOL"}</span><span className="font-bold tabular-nums">{st.rvol != null ? `${(st.rvol * 100).toFixed(2)}%` : "—"}</span></div>
-        <div className="flex justify-between gap-2"><span className="text-zinc-300">{st.pacing ? "Vol vs Avg (Est)" : "Vol vs Avg"}</span><span className={`font-semibold tabular-nums ${st.volVsAvg == null ? "" : st.volVsAvg >= 0 ? "text-emerald-400" : "text-red-400"}`}>{st.volVsAvg != null ? `${st.volVsAvg > 0 ? "+" : ""}${st.volVsAvg.toFixed(2)}%` : "—"}</span></div>
-        <div className="flex justify-between gap-2"><span className="text-zinc-300">Avg Vol</span><span className="font-semibold tabular-nums">{_kFmt(st.avgVol)}</span></div>
-        <div className="flex justify-between gap-2"><span className="text-zinc-300">Avg $ Vol</span><span className="font-semibold tabular-nums">${_kFmt(st.avgDvol)}</span></div>
-      </div>
+      {/* "PT RVOL" stats strip: top-right of the volume pane */}
+      <div className="absolute right-2 flex items-center rounded border border-zinc-600" style={{ top: "calc(80% + 3px)", background: "#18181bf2" }}>
+        {cell("Avg Vol", _kFmt(st.avgVol), "text-zinc-100", true)}
+        {cell("Avg $ Vol", `$${_kFmt(st.avgDvol)}`)}
+        {cell(st.pacing ? "RVOL (Pace)" : "RVOL", st.rvol != null ? `${(st.rvol * 100).toFixed(2)}%` : "—")}
+        {cell(st.pacing ? "Vol vs Avg (Est)" : "Vol vs Avg", st.volVsAvg != null ? `${st.volVsAvg > 0 ? "+" : ""}${st.volVsAvg.toFixed(2)}%` : "—", st.volVsAvg == null ? "text-zinc-100" : st.volVsAvg >= 0 ? "text-emerald-400" : "text-red-400")}
       </div>
     </div>
   );
@@ -13385,14 +13383,12 @@ const ChartStatsStrip = ({ st }) => {
     <div className="sm:hidden grid grid-cols-2 gap-x-2 text-[12px] text-zinc-200 border-t border-zinc-800 py-1.5 bg-zinc-900/60">
       {cell("Mkt Cap", st.marketCapB != null ? `${st.marketCapB.toFixed(2)}B` : "—")}
       {cell("ADR%", `${num(st.adr)}%`)}
-      {cell("ATR", num(st.atr))}
       {cell("LoD dist.", st.lod != null ? `${st.lod.toFixed(0)}%` : "—", st.lod != null && st.lod <= 40 ? "text-green-400" : "")}
       {cell("ATR% Mult.", num(st.extension), st.extension != null && st.extension >= 7 ? "text-red-400" : st.extension != null && st.extension >= 4 ? "text-amber-400" : "")}
-      {cell(st.pacing ? "RVOL (Pace)" : "RVOL", st.rvol != null ? `${(st.rvol * 100).toFixed(0)}%` : "—")}
-      {cell("Vol vs Avg", st.volVsAvg != null ? `${st.volVsAvg > 0 ? "+" : ""}${st.volVsAvg.toFixed(1)}%` : "—", st.volVsAvg == null ? "" : st.volVsAvg >= 0 ? "text-emerald-400" : "text-red-400")}
       {cell("Avg Vol", _kFmt(st.avgVol))}
       {cell("Avg $ Vol", `$${_kFmt(st.avgDvol)}`)}
-      {st.industry && cell("Industry", st.industry)}
+      {cell(st.pacing ? "RVOL (Pace)" : "RVOL", st.rvol != null ? `${(st.rvol * 100).toFixed(2)}%` : "—")}
+      {cell("Vol vs Avg", st.volVsAvg != null ? `${st.volVsAvg > 0 ? "+" : ""}${st.volVsAvg.toFixed(2)}%` : "—", st.volVsAvg == null ? "" : st.volVsAvg >= 0 ? "text-emerald-400" : "text-red-400")}
     </div>
   );
 };
@@ -13412,6 +13408,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   const screenerRef = useRef(screenerMap);
   screenerRef.current = screenerMap;
   const [stats, setStats] = useState(null);   // enlarged-chart stats overlay (daily bars only)
+  const [axisH, setAxisH] = useState(28);        // time-axis height (px), measured once the chart is drawn
   const [lookupRow, setLookupRow] = useState(null);   // stock_lookup.json [cap $B, industry] — fills Market Cap / industry when the screener doesn't carry the stock
   useEffect(() => {
     if (!showStats) return undefined;
@@ -13484,21 +13481,16 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         const series = chart.addSeries(CandlestickSeries, candleOptions());
         // Inside bars (range within the previous bar's range) are painted orange.
         series.setData(candleData(data));
-        // Keep the candles in the upper part of the pane, clear of the RVOL bars (bottom 20 %) and the stats box beside them.
-        series.priceScale().applyOptions({ scaleMargins: { top: 0.08, bottom: 0.25 } });
+        // Keep the candles in the upper part of the pane, clear of the volume bars (bottom 20 %) and - on the enlarged chart - the Swing Data box
+        // in the top-right corner (hence the larger top margin there).
+        series.priceScale().applyOptions({ scaleMargins: { top: showStats && timeframe === "D" ? 0.13 : 0.08, bottom: 0.25 } });
 
-        // Relative volume (bar volume ÷ 50-bar average) instead of raw volume; dashed line at 1× = average.
+        // Volume pane = traded DOLLAR volume (the user's TradingView "PT RVOL"): green / red by candle body, last value on the axis.
+        // The relative-volume ratio still feeds the header legend (rvol[i]).
         let rvol = _rvolSeries(data);
-        const volSeries = chart.addSeries(HistogramSeries, {
-          priceFormat: { type: "custom", minMove: 0.01, formatter: v => `${v.toFixed(2)}x` },
-          priceScaleId: "vol", priceLineVisible: false, lastValueVisible: false,
-        });
+        const volSeries = chart.addSeries(HistogramSeries, tdvSeriesOptions({ priceScaleId: "vol" }));
         volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
-        volSeries.setData(data.reduce((acc, b, i) => {
-          if (rvol[i] != null) acc.push({ time: b.time, value: rvol[i], color: b.close >= b.open ? T.rvolUp : T.rvolDown });
-          return acc;
-        }, []));
-        volSeries.createPriceLine({ price: 1, color: "#555555", lineWidth: 1, lineStyle: 2, axisLabelVisible: false });
+        volSeries.setData(tdvData(data));
 
         const closes = data.map(b => b.close);
         const buildLineData = values => data.reduce((acc, b, i) => {
@@ -13561,10 +13553,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         const applyData = () => {
           series.setData(candleData(data));
           rvol = _rvolSeries(data);
-          volSeries.setData(data.reduce((acc, b, i) => {
-            if (rvol[i] != null) acc.push({ time: b.time, value: rvol[i], color: b.close >= b.open ? T.rvolUp : T.rvolDown });
-            return acc;
-          }, []));
+          volSeries.setData(tdvData(data));
           const cl = data.map(b => b.close);
           MINI_EMA_CONFIG.forEach((cfg, k) => {
             const vals = cfg.sma ? _smaSeries(cl, cfg.period) : _emaSeries(cl, cfg.period);
@@ -13612,6 +13601,8 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         };
         chart.timeScale().subscribeVisibleLogicalRangeChange(r => { if (r && r.from < 20 && (autoFit || touchedRef.current)) void loadOlder(); layoutRef.current?.(); });
         setStatus("ready");
+        // Height of the time axis, so the in-pane labels (TDV, volume stats) sit at 80 % of the plot area, not of the whole box.
+        requestAnimationFrame(() => { try { const h = chart.timeScale().height(); if (h > 0) setAxisH(h); } catch { /* chart already removed */ } });
       })
       .catch(() => { if (!cancelled) setStatus("error"); });
 
@@ -13685,7 +13676,15 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         onPointerDown={() => { touchedRef.current = true; }}
         onTouchEnd={onExpand ? () => { const now = Date.now(); if (now - lastTapRef.current < 350) { lastTapRef.current = 0; onExpand(); } else lastTapRef.current = now; } : undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
-        {status === "ready" && statsView && <ChartStatsOverlay st={statsView} />}
+        {status === "ready" && statsView && <ChartStatsOverlay st={statsView} axisH={axisH} />}
+        {status === "ready" && legend && legend.vol != null && (
+          // "TDV 23.16M": traded dollar volume of the hovered (or latest) bar, top-left of the volume pane - like the user's TradingView layout
+          <div className="absolute left-0 top-0 pointer-events-none select-none" style={{ right: 78, bottom: axisH, zIndex: 20 }}>
+            <div className="absolute left-1.5 text-[10px] leading-[12px] whitespace-nowrap" style={{ top: "calc(80% + 3px)", color: "#000000" }}>
+              <span className="font-medium">TDV </span><span className="font-bold tabular-nums">{_fmtDollarVol(legend.vol * legend.c)}</span>
+            </div>
+          </div>
+        )}
         {status === "ready" && strip.length > 0 && (
           <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 30, height: 0, zIndex: 15 }}>
             {strip.map((m, i) => (
