@@ -1,6 +1,52 @@
 {
-  "generated_at": "2026-11-11T02:32:17.559832+00:00",
+  "generated_at": "2026-11-11T23:00:15.048360+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 94.0,
+      "perf_1d": 6.72,
+      "leaders": [
+        {
+          "ticker": "HPE",
+          "price": 50.25,
+          "rs_52w": 95,
+          "adr_pct": 7.48,
+          "vol_surge": 0.72,
+          "mkt_cap": 66705105144,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "DELL",
+          "price": 373.68,
+          "rs_52w": 93,
+          "adr_pct": 9.16,
+          "vol_surge": 1.17,
+          "mkt_cap": 237590503763,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
