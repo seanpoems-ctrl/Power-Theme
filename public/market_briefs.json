@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-11 13:33 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Aggressive Risk-On Accumulation",
+    "spy_price": 762.03,
+    "spy_change_pct": 1.61,
+    "vix": 17.46,
+    "hy_oas": 3.34,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 67.9,
+    "mmth": 64.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new partnership today, securing a multi-billion dollar government contract for its Azure AI services, bolstering its cloud and artificial intelligence growth outlook."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA unveiled its next-generation AI accelerator chip, promising unprecedented performance gains that analysts believe will solidify its market leadership and accelerate data center adoption."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla experienced strong short-covering today following a technical breakout above its 50-day moving average, despite no new fundamental catalysts being released."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-11 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Experienced typical volatile price action driven by retail flow and technical levels, without any fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-21 11:54 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech-Led Risk-On Momentum",
-    "spy_price": 772.66,
-    "spy_change_pct": 0.47,
-    "vix": 16.56,
-    "hy_oas": 3.29,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 55.8,
-    "mmth": 57.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SMCI",
-          "company": "Super Micro Computer Inc.",
-          "reason": "Robust demand projections for AI infrastructure hardware are driving pre-market enthusiasm."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "Nvidia Corp.",
-          "reason": "Market sentiment regarding accelerating enterprise AI adoption translates into strong pre-market buying for chip leaders."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Showing continued strength on general market upside momentum and e-commerce sector rotation."
         }
       ]
     }
