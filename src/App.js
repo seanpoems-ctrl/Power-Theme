@@ -12113,7 +12113,92 @@ const EtfCandidatesPanel = () => {
   );
 };
 
-const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null, livePricesRef = null, onMiniCharts = null }) => {
+// Highest-ADR stocks inside one Theme Leaderboard theme (added 2026-11-11). ETF holdings only list each fund's top ~10 by weight, which are the
+// biggest, slowest names; this lists the theme's own stocks from public/industry_stocks.json (every US stock >= $500M, largest 30 per industry),
+// grouped through each industry's fine_theme, ranked by ADR. Cut-offs are editable and remembered (localStorage theme_adr_filters_v1).
+const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null }) => {
+  const [file, setFile] = React.useState(null);
+  const [f, setF] = React.useState(() => {
+    try { const v = JSON.parse(localStorage.getItem("theme_adr_filters_v1")); if (v && Number.isFinite(v.adr) && Number.isFinite(v.dv)) return v; } catch { /* ignore */ }
+    return { adr: 4, dv: 20 };
+  });
+  React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); return () => { dead = true; }; }, []);
+  const setFilter = (k, v) => setF(prev => {
+    const n = { ...prev, [k]: v };
+    try { localStorage.setItem("theme_adr_filters_v1", JSON.stringify(n)); } catch { /* ignore */ }
+    return n;
+  });
+  const all = React.useMemo(() => {
+    if (!file?.byIndustry) return [];
+    const inds = new Set((industryRankings || []).filter(i => i.fine_theme === theme).map(i => i.name));
+    const out = [];
+    for (const ind of inds) for (const r of file.byIndustry[ind] || []) {
+      if (UNIVERSE_EXCLUDE?.has?.(r.t)) continue;
+      out.push({ ticker: r.t, name: r.n, industry: ind, adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
+    }
+    return out;
+  }, [file, industryRankings, theme]);
+  const rows = React.useMemo(() => all.filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6))), [all, f]);
+  const sort = useTableSort(rows, "adr", "desc");
+  const shown = sort.rows.slice(0, 25);
+  const pc = v => v == null ? <span className="text-zinc-700">—</span> : <span className={v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-400"}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
+  const money = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${(v / 1e6).toFixed(0)}M`;
+  const num = (v, set) => (
+    <input type="number" min="0" step="1" value={v} onClick={e => e.stopPropagation()}
+      onChange={e => { const x = parseFloat(e.target.value); set(Number.isFinite(x) && x >= 0 ? x : 0); }}
+      className="w-12 bg-zinc-900 border border-zinc-700 rounded px-1 py-0.5 text-center text-zinc-200 font-mono text-[11px]" />
+  );
+  return (
+    <div className="mt-3 pt-2.5 border-t border-zinc-800/70" onClick={e => e.stopPropagation()}>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
+        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">Highest-ADR stocks in {theme}</span>
+        <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min ADR% {num(f.adr, v => setFilter("adr", v))}</label>
+        <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min $ Vol {num(f.dv, v => setFilter("dv", v))} M</label>
+        <span className="text-[10px] text-zinc-600">{rows.length} of {all.length} stocks{rows.length > shown.length ? ` · top ${shown.length} shown` : ""}</span>
+        {onMiniCharts && rows.length > 0 && (
+          <button onClick={() => onMiniCharts(sort.rows.map(r => r.ticker), `${theme} — highest ADR`)}
+            className="ml-auto text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800">▦ Mini Charts</button>
+        )}
+      </div>
+      {!file ? <div className="text-[11px] text-zinc-600">Loading…</div> : rows.length === 0 ? (
+        <div className="text-[11px] text-zinc-600">No stocks in this theme clear ADR ≥ {f.adr}% and ${f.dv}M/day — lower the cut-offs.</div>
+      ) : (
+        <table className="w-full text-xs border-collapse">
+          <thead><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
+            <SortTh sort={sort} col="ticker" label="Ticker" textual align="left" className="px-2 py-1" />
+            <SortTh sort={sort} col="industry" label="Industry" textual align="left" className="px-2 py-1" />
+            <SortTh sort={sort} col="adr" label="ADR%" className="px-2 py-1" />
+            <SortTh sort={sort} col="dv" label="$ Vol" className="px-2 py-1" />
+            <SortTh sort={sort} col="cap" label="Mkt Cap" className="px-2 py-1" />
+            <SortTh sort={sort} col="intra" label="Intra" className="px-2 py-1" />
+            <SortTh sort={sort} col="d1" label="1D" className="px-2 py-1" />
+            <SortTh sort={sort} col="w1" label="1W" className="px-2 py-1" />
+            <SortTh sort={sort} col="m1" label="1M" className="px-2 py-1" />
+            <SortTh sort={sort} col="ext" label="Ext" title="ATR% multiple from the 50-day MA" className="px-2 py-1" />
+          </tr></thead>
+          <tbody>
+            {shown.map(r => (
+              <tr key={r.ticker} className="hover:bg-zinc-800/30 border-t border-zinc-900">
+                <td className="px-2 py-1 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
+                <td className="px-2 py-1 text-zinc-500 truncate max-w-[180px]" title={r.name}>{r.industry}</td>
+                <td className="px-2 py-1 text-right font-mono font-bold text-amber-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
+                <td className="px-2 py-1 text-right font-mono text-zinc-300">{money(r.dv)}</td>
+                <td className="px-2 py-1 text-right font-mono text-zinc-400">{money(r.cap)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.intra)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.d1)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.w1)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.m1)}</td>
+                <td className="px-2 py-1 text-right font-mono text-zinc-400">{r.ext != null ? `${r.ext.toFixed(1)}x` : "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
+
+const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null, livePricesRef = null, onMiniCharts = null, industryRankings = [] }) => {
   const [sortCol, setSortCol] = useState("score");      // any column key below
   const [sortDir, setSortDir] = useState("desc");
   const [holdingsModal, setHoldingsModal] = useState(null);
@@ -12467,6 +12552,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                         ))}
                       </tbody>
                     </table>
+                    <ThemeHighAdrStocks theme={c.cat} industryRankings={industryRankings} onMiniCharts={onMiniCharts} />
                   </td>
                 </tr>
               )}
@@ -14721,7 +14807,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
       {mode === "etf" && (
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
-          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef}
+          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef} industryRankings={data?.industry_rankings || []}
             onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF Theme Leaderboard", tickers })} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
             onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "RS Flip Scanner", tickers })} />
