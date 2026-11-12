@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-12 06:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Tech-led Rally / Elevated Volatility",
+    "spy_price": 759.81,
+    "spy_change_pct": 1.32,
+    "vix": 18.28,
+    "hy_oas": 3.34,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 65.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple announced groundbreaking advancements in its Vision Pro spatial computing platform, attracting significant developer interest and better-than-expected pre-order momentum."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft secured a multi-billion dollar strategic cloud computing partnership with a major global industrial conglomerate, highlighting strong Azure growth projections."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet Inc. (GOOGL) sees continued technical consolidation following recent antitrust regulatory scrutiny, lacking fresh catalysts for a breakout."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-11 21:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to see elevated short interest and technical breakouts above key moving averages, attracting momentum traders purely on technical flows."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-21 19:37 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Momentum",
-    "spy_price": 773.09,
-    "spy_change_pct": 0.53,
-    "vix": 16.68,
-    "hy_oas": 3.29,
-    "yield_curve": 0.33,
-    "credit_status": "Complacent",
-    "s5fi": 54.6,
-    "mmth": 58.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SMCI",
-          "company": "Super Micro Computer",
-          "reason": "Strong market conviction in Super Micro Computer stems from optimistic forecasts regarding demand for high-performance AI infrastructure and server solutions."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experienced heightened buying interest driven by the broad market 'AI Demand Optimism', anticipating continued robust sales in its AI chip and platform ecosystem."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon.com's price movement today was primarily a reflection of the broader tech sector's positive flow and general market sentiment rather than a specific new fundamental catalyst."
         }
       ]
     }
