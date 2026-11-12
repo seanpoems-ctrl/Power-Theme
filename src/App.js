@@ -7817,7 +7817,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   };
 
   // Column widths as % — must sum to 100 (# col is separate at 3%)
-  const COL_WIDTHS = ["9%","9%","7%","7%","7%","10%","7%","5.5%","5.5%","5.5%","5.5%","5.5%","6%","6%"];
+  const COL_WIDTHS = ["9%","9%","7%","7%","7%","8%","7%","5.5%","5.5%","5.5%","5.5%","5.5%","6%","8.5%"];
   const COLS = [
     { col: "ticker",        label: "Sym"                                                                     },
     { col: "industry",      label: "Industry",  label2: "Theme",    leftAlign: true                         },
@@ -7870,7 +7870,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
         )}
       </div>
 
-      <div className={`overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
+      <div className={`overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`} style={{ scrollbarGutter: "stable" }}>
         <table className="text-left" style={{ tableLayout: "fixed", width: "100%" }}>
           <colgroup>
             <col style={{ width: "3%" }} />
@@ -7883,7 +7883,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                 <th key={col}
                     onClick={() => handleSort(col)}
                     title={tooltip}
-                    className={`px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider cursor-pointer transition-colors leading-tight ${leftAlign ? "text-left" : "text-center"} ${sortCol === col ? "text-blue-400" : "text-zinc-500 hover:text-zinc-300"}`}>
+                    className={`${col === "rs_52w" ? "pl-2 pr-4" : "px-2"} py-1.5 text-[11px] font-semibold uppercase tracking-wider cursor-pointer transition-colors leading-tight ${leftAlign ? "text-left" : "text-center"} ${sortCol === col ? "text-blue-400" : "text-zinc-500 hover:text-zinc-300"}`}>
                   <div>
                     <span>{label}<SortIcon col={col}/></span>
                     {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal text-[10px]">{label2}</div>}
@@ -7976,7 +7976,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                     </td>
                   ))}
                   {/* RS — last column: score + RS% below */}
-                  <td className="px-2 py-1.5 text-center">
+                  <td className="pl-2 pr-4 py-1.5 text-center">
                     <div className={`text-[12px] font-mono font-bold ${rsCls}`}>{rs ?? "—"}</div>
                     {rsPct != null && (
                       <div className={`text-[10px] font-mono ${rsPctCls}`}>{rsPct}%</div>
