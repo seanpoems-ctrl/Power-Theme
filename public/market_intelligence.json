@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-11-12 13:47 ET",
+  "generated_at": "2026-11-12 15:45 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 759.51,
+      "price": 756.76,
       "open": 753.98,
       "high": 763.03,
       "low": 753.7,
-      "close": 759.51,
+      "close": 756.76,
       "prev_open": 756.8,
       "prev_close": 759.81,
-      "volume": 21062531,
-      "change_pct": -0.04
+      "volume": 28989372,
+      "change_pct": -0.4
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 689.57,
+      "price": 687.16,
       "open": 680.21,
       "high": 694.56,
       "low": 679.84,
-      "close": 689.57,
+      "close": 687.16,
       "prev_open": 687.28,
       "prev_close": 690.38,
-      "volume": 23771531,
-      "change_pct": -0.12
+      "volume": 31010812,
+      "change_pct": -0.47
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.65,
+      "price": 18.76,
       "open": 18.36,
       "high": 19.34,
       "low": 17.38,
-      "close": 17.65,
+      "close": 18.76,
       "prev_open": 18.81,
       "prev_close": 17.49,
       "volume": 0,
-      "change_pct": 0.91
+      "change_pct": 7.26
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 88.08,
+      "price": 88.92,
       "open": 86.5,
-      "high": 88.37,
+      "high": 89.15,
       "low": 85.13,
-      "close": 88.08,
+      "close": 88.92,
       "prev_open": 86.43,
       "prev_close": 86.53,
-      "volume": 184846,
-      "change_pct": 1.79
+      "volume": 231076,
+      "change_pct": 2.76
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -83,8 +83,8 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 68.3,
-    "mmth": 65.9
+    "s5fi": 67.1,
+    "mmth": 64.8
   },
   "regime": {
     "credit_status": "Complacent",
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: November 12, 2026",
-    "mood_emoji": "⚖️",
-    "mood": "Mixed Consolidation / Global Strength",
-    "narrative": "US equities consolidated today with major indices largely flat, while global markets showed robust gains, particularly in Asia and commodities. Despite a slight uptick in volatility, credit spreads remain complacent, reflecting a balanced institutional risk appetite.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 759.51 | -0.04% | ➡️ |\n| Nasdaq 100 ETF | 689.57 | -0.12% | ➡️ |\n| VIX | 17.65 | +0.91% | 📈 |\n| Crude Oil | 88.08 | +1.79% | 📈 |\n| Nikkei 225 | 61248.59 | +1.31% | 📈 |\n| DAX | 26771.88 | +0.41% | ➡️ |",
-    "macro_section": "High-Yield Credit Spreads (BAMLH0A0HYM2) sit at 3.30%, maintaining a 'Complacent' regime for institutional risk appetite, suggesting comfortable credit conditions. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) measures at a 'Flat' +0.250, reflecting an environment where investors aren't demanding significant compensation for long-term duration risk.",
-    "analysis_para1": "Global indices demonstrated robust performance today, with the Nikkei 225 surging by +1.31% and Crude Oil gaining a notable +1.79%, alongside a +0.41% rise in the DAX. This strong international showing, particularly in growth-sensitive assets like oil and major export-driven economies, contrasts with the flatter US session. The persistent 'Complacent' reading of 3.30% in US High-Yield Credit Spreads suggests that despite the mixed US equity performance, there's no immediate pressure on corporate credit, implying that global strength is preventing any significant risk-off contagion in US fixed income. This global buoyancy likely underpins a continued healthy, albeit cautiously balanced, institutional risk appetite for US assets.",
-    "analysis_para2": "The dominant 'why' behind today's muted US equity performance appears to be a phase of technical consolidation and slight positioning rebalancing, rather than a fresh fundamental catalyst. With S&P 500 stocks above their 50-day moving average at 68.3% and 200-day moving average at 65.9%, the underlying technical strength remains robust, suggesting prior momentum is simply pausing. The slight uptick in VIX (+0.91%) alongside largely flat major indices (S&P 500 ETF -0.04%, Nasdaq 100 ETF -0.12%) indicates some opportunistic hedging or minor profit-taking without a significant directional conviction shift. This mechanical flow suggests traders are absorbing recent gains and awaiting clearer macro cues, rather than reacting to new, impactful news.",
-    "analysis_para3": "Today's plan involves a nuanced approach amidst the consolidation, prioritizing defense of recent gains while monitoring for breakout potential. Traders should watch the S&P 500 ETF (SPY) for a hold above 755.00 as a key immediate support level; a sustained break below this threshold would signal increased downside risk and warrant tightening stops. Conversely, a clear push above today's session high on renewed volume could trigger short-term long entries, targeting continuation towards 765.00. Given the elevated VIX and flat indices, maintaining tighter risk management is crucial, with any significant deterioration in global sentiment or a breach of the 65% level for S&P 500 stocks above their 200-day moving average acting as a more significant risk-off threshold for broader portfolio adjustments.",
-    "technical_signal": "No reversal pattern confirmed yet. The market continues to exhibit underlying strength with a high percentage of S&P 500 stocks above their 50-day and 200-day moving averages at 68.3% and 65.9% respectively. Traders should watch for a definitive higher low or lower high on subsequent sessions to signal a clear shift in the current consolidation pattern.",
+    "mood_emoji": "🤔",
+    "mood": "VIX Spike / Defensive Tone",
+    "narrative": "US equities dipped slightly with a VIX spike, indicating increasing caution despite relatively calm global markets and complacent credit spreads. Traders are navigating mixed signals, with energy strength offsetting tech weakness.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 756.76 | -0.40% | ➡️ |\n| Nasdaq 100 ETF | 687.16 | -0.47% | ➡️ |\n| VIX | 18.76 | +7.26% | 📈 |\n| Crude Oil | 88.92 | +2.76% | 📈 |\n| Nikkei 225 | 61248.59 | +1.31% | 📈 |\n| DAX | 26771.88 | +0.41% | ➡️ |",
+    "macro_section": "High Yield (HY) Credit Spreads remain 'Complacent' at 3.30%, indicating limited immediate stress in the credit market. However, the 'Flat' 10-Year Minus 2-Year Yield Curve at +0.250 suggests a lack of conviction for significant economic acceleration, which could temper institutional risk appetite despite the calm credit environment.",
+    "analysis_para1": "Global equity markets showed resilience, with the Nikkei 225 gaining a significant +1.31% and the DAX up +0.41%, indicating a degree of international optimism. This was further bolstered by a robust +2.76% rise in Crude Oil, often a proxy for global demand. Despite the VIX climbing +7.26% and US equity indices retreating, the High Yield Credit Spread remains 'Complacent' at 3.30%, suggesting that underlying credit conditions globally are not signaling broad systemic risk. This divergence implies that the dip in US risk appetite today may be more localized or technical rather than a reflection of global credit tightening.",
+    "analysis_para2": "The primary driver of today's price action appears to be a mechanical positioning adjustment, rather than a fresh fundamental catalyst. With the S&P 500 ETF and Nasdaq 100 ETF experiencing modest declines of -0.40% and -0.47% respectively, the significant +7.26% spike in the VIX suggests an accelerated de-risking or hedging flow. This indicates that participants are either unwinding crowded long positions or adding protection, amplifying market volatility without a proportional drop in underlying asset prices, possibly in anticipation of future economic data or policy announcements.",
+    "analysis_para3": "Given the VIX spike, traders should watch for consolidation around current levels. A key level to monitor for the S&P 500 ETF is the 750 psychological support; a break below could signal further downside risk. Conversely, a reclaim of 760 could indicate buyers stepping back in and alleviating short-term pressure. Traders should observe stability in the VIX below 19.00 as a sign that the immediate risk-off impulse is subsiding, suggesting a wait-and-see approach focusing on confirming support levels today.",
+    "technical_signal": "No reversal pattern confirmed yet. While US indices closed lower and the VIX surged, the underlying market breadth, with 67.1% of S&P 500 stocks above SMA50 and 64.8% above SMA200, remains relatively healthy. Traders should watch for a definitive higher low or a clear close above yesterday's highs as a potential sign of stabilization.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "CAT",
-          "company": "Caterpillar Inc.",
-          "reason": "Caterpillar Inc. secured a multi-billion dollar contract for heavy machinery supply to a major Asian infrastructure project, boosting investor confidence in global industrial demand."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA unveiled a groundbreaking new AI superchip series, significantly boosting its market leadership in high-performance computing."
         },
         {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet's Google Cloud announced a significant expansion of its AI-powered data analytics platform, securing a new enterprise partnership expected to drive substantial revenue growth."
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced positive Phase 3 trial results for its highly anticipated next-generation obesity treatment, exceeding efficacy expectations."
         }
       ],
       "c_grade": [
         {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla shares saw continued volatility today on technical trading patterns and ongoing speculation regarding global EV market share, lacking fresh fundamental catalysts."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple continues to navigate ongoing geopolitical supply chain concerns, leading to minor technical adjustments in its valuation."
         }
       ]
     }

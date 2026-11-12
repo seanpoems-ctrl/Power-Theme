@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-12 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "VIX Spike / Defensive Tone",
+    "spy_price": 756.76,
+    "spy_change_pct": -0.4,
+    "vix": 18.76,
+    "hy_oas": 3.3,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 67.1,
+    "mmth": 64.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA unveiled a groundbreaking new AI superchip series, significantly boosting its market leadership in high-performance computing."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced positive Phase 3 trial results for its highly anticipated next-generation obesity treatment, exceeding efficacy expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple continues to navigate ongoing geopolitical supply chain concerns, leading to minor technical adjustments in its valuation."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-12 13:47 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continued to experience selling pressure on concerns over global EV demand and increasing competition, following a recycled analyst downgrade from yesterday."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-22 11:51 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 764.05,
-    "spy_change_pct": -1.17,
-    "vix": 18.85,
-    "hy_oas": 3.27,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 55.6,
-    "mmth": 56.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil is benefiting from rising crude oil prices and news of a substantial new oil discovery, offering a defensive play amidst broad market weakness."
-        },
-        {
-          "ticker": "LMT",
-          "company": "Lockheed Martin Corporation",
-          "reason": "Lockheed Martin is boosted by a significant multi-year defense contract win, positioning it as a resilient option during periods of geopolitical uncertainty and risk aversion."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares continue to face profit-taking and technical breakdowns as investors rotate out of high-growth technology, extending a recycled theme of sector-wide pressure."
         }
       ]
     }
