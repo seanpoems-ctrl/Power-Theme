@@ -2,76 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 5,
+  "count": 3,
   "stocks": [
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 16.52,
-      "change_pct": 4.36,
-      "adr_pct": 4.8,
-      "dollar_volume": "$76.1M",
-      "market_cap_b": 3.018,
-      "rs_ibd": 94,
-      "above50dma_pct": 63.9
+      "price": 16.65,
+      "change_pct": 0.79,
+      "adr_pct": 4.7,
+      "dollar_volume": "$77.6M",
+      "market_cap_b": 3.042,
+      "rs_ibd": 95,
+      "above50dma_pct": 62.5
     },
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 26.66,
-      "change_pct": -0.26,
-      "adr_pct": 3.0,
-      "dollar_volume": "$159.7M",
-      "market_cap_b": 3.489,
-      "rs_ibd": 90,
-      "above50dma_pct": 58.8
-    },
-    {
-      "ticker": "ARDT",
-      "company": "Ardent Health, Inc.",
-      "industry": "Hospital/Nursing Management",
-      "price": 18.19,
-      "change_pct": 1.45,
-      "adr_pct": 4.4,
-      "dollar_volume": "$21.2M",
-      "market_cap_b": 2.564,
-      "rs_ibd": 81,
-      "above50dma_pct": 53.3
-    },
-    {
-      "ticker": "GDYN",
-      "company": "Grid Dynamics Holdings, Inc.",
-      "industry": "Information Technology Services",
-      "price": 13.83,
-      "change_pct": -1.64,
-      "adr_pct": 4.7,
-      "dollar_volume": "$41.5M",
-      "market_cap_b": 1.112,
-      "rs_ibd": 88,
-      "above50dma_pct": 53.1
+      "price": 26.58,
+      "change_pct": -0.3,
+      "adr_pct": 2.9,
+      "dollar_volume": "$159.1M",
+      "market_cap_b": 3.479,
+      "rs_ibd": 92,
+      "above50dma_pct": 56.0
     },
     {
       "ticker": "REPL",
       "company": "Replimune Group, Inc.",
       "industry": "Biotechnology",
-      "price": 21.78,
-      "change_pct": -6.44,
+      "price": 21.98,
+      "change_pct": 0.92,
       "adr_pct": 6.0,
-      "dollar_volume": "$89.1M",
-      "market_cap_b": 2.065,
+      "dollar_volume": "$85.0M",
+      "market_cap_b": 2.084,
       "rs_ibd": 95,
-      "above50dma_pct": 50.1
+      "above50dma_pct": 50.2
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 1.31,
-    "spx_1m": -1.29,
-    "spx_3m": -2.14,
-    "spx_34d": -1.6,
-    "spx_qtd": -0.61,
-    "spx_mtd": 0.52
+    "spx_1d": -0.35,
+    "spx_1m": -1.96,
+    "spx_3m": -1.97,
+    "spx_34d": -1.19,
+    "spx_qtd": -0.97,
+    "spx_mtd": 0.16
   },
-  "fetched_at_utc": "2026-11-12T03:42:50+00:00"
+  "fetched_at_utc": "2026-11-12T23:02:18+00:00"
 }
