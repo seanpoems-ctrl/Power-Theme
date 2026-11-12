@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-12 13:47 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Consolidation / Global Strength",
+    "spy_price": 759.51,
+    "spy_change_pct": -0.04,
+    "vix": 17.65,
+    "hy_oas": 3.3,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 68.3,
+    "mmth": 65.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CAT",
+          "company": "Caterpillar Inc.",
+          "reason": "Caterpillar Inc. secured a multi-billion dollar contract for heavy machinery supply to a major Asian infrastructure project, boosting investor confidence in global industrial demand."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet's Google Cloud announced a significant expansion of its AI-powered data analytics platform, securing a new enterprise partnership expected to drive substantial revenue growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla shares saw continued volatility today on technical trading patterns and ongoing speculation regarding global EV market share, lacking fresh fundamental catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-12 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA shares continue to face profit-taking and technical breakdowns as investors rotate out of high-growth technology, extending a recycled theme of sector-wide pressure."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-22 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Signals, Cautious Accumulation",
-    "spy_price": 773.09,
-    "spy_change_pct": 0.53,
-    "vix": 18.14,
-    "hy_oas": 3.33,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 54.6,
-    "mmth": 58.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a groundbreaking multi-year cloud services deal with a major global retailer, boosting investor confidence in its enterprise segment."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA unveiled a new generation of AI data center chips with significantly improved performance metrics, driving immediate analyst upgrades and price target increases."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to see elevated short interest and technical breakouts above key moving averages, attracting momentum traders purely on technical flows."
         }
       ]
     }
