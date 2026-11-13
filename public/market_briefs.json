@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-13 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off Retreat",
+    "spy_price": 752.89,
+    "spy_change_pct": -0.56,
+    "vix": 19.09,
+    "hy_oas": 3.2,
+    "yield_curve": 0.24,
+    "credit_status": "Complacent",
+    "s5fi": 65.7,
+    "mmth": 64.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Announced positive Phase 3 trial results for a new metabolic disease treatment, showing superior efficacy that could expand its market share."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Unveiled its next-generation data center GPU architecture, demonstrating significant performance leaps crucial for AI workloads and market leadership."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Experiencing continued pressure from increased competition in the EV market and recent production outlook concerns, fueling technical selling pressure."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-13 13:28 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Experiences typical year-end shopping volume, but today's price action is largely technical amidst broader market pressures."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-23 11:42 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Commodity Push / Uneasy Divergence",
-    "spy_price": 762.46,
-    "spy_change_pct": -0.2,
-    "vix": 18.9,
-    "hy_oas": 3.4,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 57.3,
-    "mmth": 58.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil announces a substantial new deepwater oil discovery off the coast of Guyana, significantly boosting long-term production outlook amidst surging crude prices."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA unveils its next-generation AI accelerator chip, setting new benchmarks for data center performance and solidifying market leadership in a resilient tech sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla (TSLA) is seeing renewed momentum ahead of its highly anticipated CyberTruck production update, following recent analyst upgrades focused on delivery ramp-up."
         }
       ]
     }
