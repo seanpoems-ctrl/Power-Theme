@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import ETF_MAP_JSON from "./etf_map.json";
 import BreadthRegime, { REGIMES } from "./BreadthRegime";
 import { futuresInfo, futuresMultiplier } from "./futuresMultipliers";
+import { adrDollarVol, fmtAdrDollarVol, ADR_DVOL_LABEL, ADR_DVOL_TIP } from "./adrDollarVol";
 import { usePhoneViewport, PhoneViewportGuard, _isPhone } from "./phoneViewport";
 import { loadMinDollarVolM, saveMinDollarVolM, isLiquid } from "./liquidity";
 import { nasdaqShare, loadNasdaqMin, saveNasdaqMin } from "./nasdaq";
@@ -484,8 +485,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       ? selectedTheme.stocks.filter(stockFilter)
       : selectedTheme.stocks;
     const { col, dir } = tblSort;
-    if (!col) return base;
-    return [...base].sort((a, b) => {
+    const withAdrDv = base.map(r => ({ ...r, adr_dvol: adrDollarVol(r.adr_pct, r.dollar_volume) }));
+    if (!col) return withAdrDv;
+    return withAdrDv.sort((a, b) => {
       const av = a[col], bv = b[col];
       if (av == null && bv == null) return 0;
       if (av == null) return 1;
@@ -860,6 +862,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
+                      <SortTh col="adr_dvol" label={ADR_DVOL_LABEL} align="right" className="px-3 hidden lg:table-cell" />
                       <SortTh col="dollar_volume" label="$Vol"                          align="right" />
                       {selectedTheme.fromIndustry
                         ? <SortTh col="market_cap" label={lang === 'zh' ? '市值' : <><span className="lg:hidden">Cap</span><span className="hidden lg:inline">Mkt Cap</span></>} align="right" />
@@ -892,6 +895,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_1d)}</td>
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono text-zinc-300 hidden lg:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(h.adr_dvol)}</td>
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">
                             {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
                           </td>
@@ -920,6 +924,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
+                      <SortTh col="adr_dvol" label={ADR_DVOL_LABEL} align="right" className="px-3 hidden lg:table-cell" />
                       <SortTh col="dollar_volume" label="$Vol"                          align="right" />
                       <SortTh col="rs_52w"   label="RS"                               align="right" />
                       <SortTh col="adr_pct"  label="ADR%"                             align="right" />
@@ -942,6 +947,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono text-zinc-300 hidden lg:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(s.adr_dvol)}</td>
                           <td className="px-[3px] lg:px-3 py-2 text-right font-mono text-zinc-400">
                             {s.dollar_volume != null ? fmtVol(s.dollar_volume) : '—'}
                           </td>
@@ -11692,7 +11698,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
         ),
         dollar_volume: h.dollar_volume ?? sc.avg_dollar_volume,
       };
-    });
+    }).map(h => ({ ...h, adr_dvol: adrDollarVol(h.adr_pct, h.dollar_volume) }));
   }, [holdings, screenerMap, etfRsMap]);
 
   const fmt = v => {
@@ -11818,19 +11824,20 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
               <colgroup>{/* TICKER_COL_FIT */}
                 <col className="hidden lg:table-column lg:w-[3%]" />
                 <col className="lg:w-[10%]" />
-                <col className="hidden lg:table-column lg:w-[13%]" />
+                <col className="hidden lg:table-column lg:w-[10%]" />
                 <col className="hidden lg:table-column lg:w-[7%]" />
-                <col className="hidden lg:table-column lg:w-[7%]" />
+                <col className="hidden lg:table-column lg:w-[8%]" />
                 <col className="hidden lg:table-column lg:w-[6%]" />
-                <col className="hidden lg:table-column lg:w-[5%]" />
-                <col className="lg:w-[7%]" />
-                <col className="lg:w-[6%]" />
-                <col className="lg:w-[6%]" />
-                <col className="lg:w-[6%]" />
-                <col className="lg:w-[6%]" />
-                <col className="lg:w-[6%]" />
-                <col className="lg:w-[6%]" />
-                <col className="lg:w-[6%]" />
+                <col className="hidden lg:table-column lg:w-[5.5%]" />
+                <col className="hidden lg:table-column lg:w-[4.5%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
+                <col className="lg:w-[5.75%]" />
               </colgroup>
               <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-700">
                 <tr>
@@ -11838,6 +11845,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                   <Th col="ticker"        label="Ticker"    align="left" />
                   <Th col="name"          label="Company"   align="left" hide />
                   <Th col="mkt_cap"       label="Mkt Cap" hide              />
+                  <Th col="adr_dvol"      label={ADR_DVOL_LABEL} hide        />
                   <Th col="dollar_volume" label="$ Vol" hide                 />
                   <Th col="adr_pct"       label="ADR%" hide                  />
                   <Th col="rs"            label="RS" hide                    />
@@ -11861,6 +11869,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                     </td>
                     <td className="px-2 py-2 text-zinc-300 truncate hidden lg:table-cell" title={h.name || ""}>{h.name || "—"}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{fmt(h.mkt_cap)}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-300 truncate hidden lg:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(h.adr_dvol)}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{fmt(h.dollar_volume)}</td>
                     <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate hidden lg:table-cell">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
                     <td className="px-2 py-2 text-right font-mono hidden lg:table-cell">
@@ -12116,7 +12125,7 @@ const EtfCandidatesPanel = () => {
 // Highest-ADR stocks inside one Theme Leaderboard theme (added 2026-11-11). ETF holdings only list each fund's top ~10 by weight, which are the
 // biggest, slowest names; this lists the theme's own stocks from public/industry_stocks.json (every US stock >= $500M, largest 30 per industry),
 // grouped through each industry's fine_theme, ranked by ADR. Cut-offs are editable and remembered (localStorage theme_adr_filters_v1).
-const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null }) => {
+const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etfHoldings = {}, onMiniCharts = null }) => {
   const [file, setFile] = React.useState(null);
   const [f, setF] = React.useState(() => {
     try { const v = JSON.parse(localStorage.getItem("theme_adr_filters_v1")); if (v && Number.isFinite(v.adr) && Number.isFinite(v.dv)) return v; } catch { /* ignore */ }
@@ -12131,14 +12140,29 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null 
   const all = React.useMemo(() => {
     if (!file?.byIndustry) return [];
     const inds = new Set((industryRankings || []).filter(i => i.fine_theme === theme).map(i => i.name));
+    // Which of the theme's ETFs hold each stock (stored top holdings), so the table can show it and add holdings the industry grouping misses
+    // (e.g. CRWD / ZS / OKTA sit in "Software - Infrastructure" but are the core of the Cybersecurity ETFs).
+    const heldBy = {};
+    for (const etf of etfTickers) for (const h of etfHoldings?.[etf] || []) (heldBy[h.ticker] ||= []).push(etf);
+    const seen = new Set();
     const out = [];
+    const fromIndustry = (r, ind) => ({ ticker: r.t, name: r.n, industry: ind, etfs: heldBy[r.t] || [], adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
     for (const ind of inds) for (const r of file.byIndustry[ind] || []) {
-      if (UNIVERSE_EXCLUDE?.has?.(r.t)) continue;
-      out.push({ ticker: r.t, name: r.n, industry: ind, adr: r.adr, adrDv: r.adr != null && r.dv != null ? r.adr * r.dv : null, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
+      if (UNIVERSE_EXCLUDE?.has?.(r.t) || seen.has(r.t)) continue;
+      seen.add(r.t); out.push(fromIndustry(r, ind));
     }
+    for (const etf of etfTickers) for (const h of etfHoldings?.[etf] || []) {
+      if (UNIVERSE_EXCLUDE?.has?.(h.ticker) || seen.has(h.ticker)) continue;
+      seen.add(h.ticker);
+      const r = file.byTicker?.[h.ticker];
+      if (r) { out.push(fromIndustry(r, r.industry)); continue; }          // fresher, same fields as the industry rows
+      out.push({ ticker: h.ticker, name: h.name, industry: null, etfs: heldBy[h.ticker] || [], adr: h.adr_pct, dv: h.dollar_volume, cap: h.mkt_cap,
+        intra: h.perf_intraday, d1: h.perf_1d, w1: h.perf_1w, m1: h.perf_1m, ext: null });
+    }
+    for (const o of out) o.adrDv = adrDollarVol(o.adr, o.dv);
     return out;
-  }, [file, industryRankings, theme]);
-  const rows = React.useMemo(() => all.filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6))), [all, f]);
+  }, [file, industryRankings, theme, etfTickers, etfHoldings]);
+  const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6))), [all, f]);
   const sort = useTableSort(rows, "adr", "desc");
   const shown = sort.rows.slice(0, 25);
   const pc = v => v == null ? <span className="text-zinc-700">—</span> : <span className={v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-400"}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
@@ -12167,6 +12191,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null 
           <thead><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
             <SortTh sort={sort} col="ticker" label="Ticker" textual align="left" className="px-2 py-1" />
             <SortTh sort={sort} col="industry" label="Industry" textual align="left" className="px-2 py-1" />
+            <SortTh sort={sort} col="etfCount" label="In ETFs" title="Which of this theme's ETFs hold the stock (stored top holdings only)" className="px-2 py-1" />
             <SortTh sort={sort} col="adrDv" label="ADR× Avg$Vol" title="ADR% × Avg Daily $ Vol (same as the Stock Screener)" className="px-2 py-1" />
             <SortTh sort={sort} col="adr" label="ADR%" className="px-2 py-1" />
             <SortTh sort={sort} col="dv" label="$ Vol" className="px-2 py-1" />
@@ -12181,7 +12206,8 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null 
             {shown.map(r => (
               <tr key={r.ticker} className="hover:bg-zinc-800/30 border-t border-zinc-900">
                 <td className="px-2 py-1 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
-                <td className="px-2 py-1 text-zinc-500 truncate max-w-[180px]" title={r.name}>{r.industry}</td>
+                <td className="px-2 py-1 text-zinc-500 truncate max-w-[180px]" title={r.name}>{r.industry || "—"}</td>
+                <td className="px-2 py-1 text-right font-mono text-[10px] text-sky-400 whitespace-nowrap" title={r.etfs.length ? `Held by ${r.etfs.join(", ")}` : "Not in any of the stored top holdings"}>{r.etfs.length ? r.etfs.join(" ") : <span className="text-zinc-700">—</span>}</td>
                 <td className="px-2 py-1 text-right font-mono font-semibold text-zinc-300">{r.adrDv != null ? (r.adrDv >= 1e9 ? `${(r.adrDv / 1e9).toFixed(2)}B` : r.adrDv >= 1e6 ? `${(r.adrDv / 1e6).toFixed(1)}M` : `${(r.adrDv / 1e3).toFixed(0)}K`) : "—"}</td>
                 <td className="px-2 py-1 text-right font-mono font-bold text-amber-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
                 <td className="px-2 py-1 text-right font-mono text-zinc-300">{money(r.dv)}</td>
@@ -12554,7 +12580,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                         ))}
                       </tbody>
                     </table>
-                    <ThemeHighAdrStocks theme={c.cat} industryRankings={industryRankings} onMiniCharts={onMiniCharts} />
+                    <ThemeHighAdrStocks theme={c.cat} industryRankings={industryRankings} etfTickers={c.members.map(m => m.ticker)} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />
                   </td>
                 </tr>
               )}
@@ -14239,9 +14265,10 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
     return allStocks.map(s => {
       const sc = screenerMap[s.ticker];
       const theme = categoryThemeMap[s.ticker] ?? s.theme;
-      if (!sc) return theme === s.theme ? s : { ...s, theme };
+      const adr_dvol = adrDollarVol(s.adr_pct, parseDvol(s.dollar_volume));
+      if (!sc) return { ...s, theme, adr_dvol };
       return {
-        ...s, theme,
+        ...s, theme, adr_dvol,
         perf_intraday: sc.perf_intraday ?? s.perf_intraday,
         perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m,
         perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y,
@@ -14512,6 +14539,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
                   { col: "company",       label: "Company",  align: "left",  cls: "hidden md:table-cell" },
                   { col: "theme",         label: "Theme",    align: "left",  cls: "hidden lg:table-cell" },
                   { col: "rs_52w",        label: "RS",       align: "right", cls: "" },
+                  { col: "adr_dvol",      label: ADR_DVOL_LABEL, align: "right", cls: "hidden sm:table-cell" },
                   { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
                   { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
                   { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
@@ -14546,6 +14574,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
                     <span className="text-zinc-600 max-w-[140px] truncate block text-[11px]">{s.theme}</span>
                   </td>
                   <td className={`px-3 py-2 text-right font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w ?? "—"}</td>
+                  <td className="px-3 py-2 text-right font-mono text-zinc-300 hidden sm:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(s.adr_dvol)}</td>
                   <td className="px-3 py-2 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                   <td className={`px-3 py-2 text-right font-mono font-semibold ${distCol(s.dist_52w_high)}`}>
                     {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
@@ -15001,6 +15030,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
                         { col: "company",       label: "Company",  align: "left",  cls: "hidden md:table-cell" },
                         { col: "theme",         label: "Theme",    align: "left",  cls: "hidden lg:table-cell" },
                         { col: "rs_52w",        label: "RS",       align: "right", cls: "" },
+                        { col: "adr_dvol",      label: ADR_DVOL_LABEL, align: "right", cls: "hidden sm:table-cell" },
                         { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
                         { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
                         { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
@@ -15027,6 +15057,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
                           <span className="text-zinc-600 max-w-[140px] truncate block text-[11px]">{s.theme}</span>
                         </td>
                         <td className="px-3 py-2 text-right font-mono font-bold text-rose-400">{s.rs_52w ?? "—"}</td>
+                        <td className="px-3 py-2 text-right font-mono text-zinc-300 hidden sm:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(s.adr_dvol)}</td>
                         <td className="px-3 py-2 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                         <td className="px-3 py-2 text-right font-mono text-zinc-400">
                           {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
@@ -15656,7 +15687,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
   const num = (k, v) => set(k, Number.isFinite(v) ? v : 0);
   const isDefault = JSON.stringify(crit) === JSON.stringify(PULLBACK_DEFAULTS);
 
-  const all = React.useMemo(() => (file?.rows || []).map(r => ({ ...r, status: pullbackStatus(r), score: pullbackScore(r), srcCount: (r.sources || "").length })), [file]);
+  const all = React.useMemo(() => (file?.rows || []).map(r => ({ ...r, status: pullbackStatus(r), score: pullbackScore(r), srcCount: (r.sources || "").length, adr_dvol: adrDollarVol(r.adr_pct, r.avg_dollar_volume) })), [file]);
   const rows = React.useMemo(() => all.filter(r => {
     if (!(r.sources || "").split("").some(k => crit.src[k])) return false;
     if (crit.status !== "all" && r.status !== crit.status) return false;
@@ -15749,7 +15780,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
           <div className="rounded-lg border border-zinc-800 overflow-hidden">
             <table className="w-full text-[11px] border-collapse table-fixed">
               <colgroup>
-                {[4, 14, 10, 10, 8, 8, 9, 5, 7, 6, 7, 5, 7].map((w, i) => <col key={i} style={{ width: `${w}%` }} />)}
+                {[4, 12, 9, 9, 7, 7, 9, 5, 7, 6, 7, 5, 6, 7].map((w, i) => <col key={i} style={{ width: `${w}%` }} />)}
               </colgroup>
               <thead>
                 <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
@@ -15765,6 +15796,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
                   <SortTh sort={sort} className="px-1.5 py-2" col="risk_adr" label="Risk÷ADR" title="≤ 1 = stop within one normal day's range" />
                   <SortTh sort={sort} className="px-1.5 py-2" col="ret_1m" label="1M · 3M" title="Price change over 1 and 3 months" />
                   <SortTh sort={sort} className="px-1.5 py-2" col="extension" label="Ext." title={EXTENSION_TIP} />
+                  <SortTh sort={sort} className="px-1.5 py-2" col="adr_dvol" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} />
                   <SortTh sort={sort} className="px-1.5 py-2" col="avg_dollar_volume" label="$ Vol" title="Average dollar volume" />
                 </tr>
               </thead>
@@ -15793,6 +15825,7 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
                     <td className={`px-1.5 py-1.5 text-right font-mono ${r.risk_adr != null && r.risk_adr <= 1 ? "text-emerald-400" : "text-zinc-400"}`}>{r.risk_adr != null ? r.risk_adr.toFixed(2) : "—"}</td>
                     <td className="px-1.5 py-1.5 text-right font-mono"><div className={r.ret_1m >= 0 ? "text-emerald-400" : "text-rose-400"}>{pf(r.ret_1m)}</div><div className={r.ret_3m >= 0 ? "text-emerald-400/70" : "text-rose-400/70"}>{pf(r.ret_3m)}</div></td>
                     <td className={`px-1.5 py-1.5 text-right font-mono ${extensionCls(r.extension)}`}>{fmtExtension(r.extension)}</td>
+                    <td className="px-1.5 py-1.5 text-right font-mono text-zinc-300">{fmtAdrDollarVol(r.adr_dvol)}</td>
                     <td className="px-1.5 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.avg_dollar_volume)}</td>
                   </tr>
                 ))}
@@ -15850,6 +15883,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
         || e.some(x => x.ticker.toLowerCase().includes(q));
     }).map(s => ({
       ...s,
+      adr_dvol: s.adr_dvol ?? adrDollarVol(s.adr_pct, s.avg_dollar_volume),
       theme: tickerThemeMap[s.ticker] ?? null,
       levEtfs: [...(etfsByStock[s.ticker] || [])].sort((a, b) => b.avg_dollar_volume - a.avg_dollar_volume),
       viaEtfOnly: !ownPass(s),
@@ -15877,6 +15911,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
   const COLS = [
     { col: "ticker",             label: "Ticker",    align: "left"  },
     { col: "industry",           label: "Industry",  align: "left"  },
+    { col: "adr_dvol",           label: ADR_DVOL_LABEL, tip: ADR_DVOL_TIP },
     { col: "adr_pct",            label: "ADR%"                      },
     { col: "extension",          label: "Extension", tip: EXTENSION_TIP },
     { col: "avg_dollar_volume",  label: "Avg $ Vol", tip: "10-day average dollar volume (avg shares × price)" },
@@ -15976,6 +16011,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
                     <div className="text-zinc-300 truncate leading-tight">{s.industry || "—"}</div>
                     {s.theme && <div className="text-zinc-600 text-[10px] truncate leading-tight">{s.theme}</div>}
                   </td>
+                  <td className="px-3 py-1.5 text-right font-mono font-semibold text-zinc-300" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(s.adr_dvol)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                   <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(s.avg_dollar_volume)}</td>
@@ -16266,7 +16302,8 @@ const LEADERSHIP_WINDOWS = ["1M", "3M", "6M", "1Y"];
 const LEADERSHIP_DEFAULTS = { maxExt: 4, maxRmv: 20, minCoil: 0 };
 const LEADERSHIP_LS_KEY = "leadership_criteria_v1";
 // One LL / NEL / T-NEL table (module-level so its sort state survives the parent re-rendering).
-const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows, total, win, perWindow, copied, onCopy, onExport, onMini }) => {
+const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows: rowsIn, total, win, perWindow, copied, onCopy, onExport, onMini }) => {
+  const rows = React.useMemo(() => rowsIn.map(x => ({ ...x, adr_dvol: adrDollarVol(x.adr_pct, x.avg_dollar_volume) })), [rowsIn]);
   const sort = useTableSort(rows, "perf", "desc");
   const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
   const fmtPf = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
@@ -16295,6 +16332,7 @@ const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows, total, win
                 <SortTh sort={sort} col="ticker" label="Symbol" textual align="left" />
                 <SortTh sort={sort} col="industry" label="Industry" textual align="left" />
                 <SortTh sort={sort} col="perf" label="Performance" />
+                <SortTh sort={sort} col="adr_dvol" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} />
                 <SortTh sort={sort} col="avg_dollar_volume" label="Avg $ Vol" />
                 {showTight && <SortTh sort={sort} col="coil" label="Coil" title="Consecutive sessions (max 10) with a true range below the 20-day average" />}
                 {showTight && <SortTh sort={sort} col="rmv" label="RMV" title="Relative measured volatility: 5-day avg true range on a 0–100 scale of its own 50-day range. Low = tight" />}
@@ -16309,6 +16347,7 @@ const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows, total, win
                   </td>
                   <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[220px] truncate">{x.industry || "—"}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-emerald-400">{fmtPf(x.perf)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(x.adr_dvol)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(x.avg_dollar_volume)}</td>
                   {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.coil ?? "—"}</td>}
                   {showTight && <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{x.rmv ?? "—"}</td>}
@@ -16556,10 +16595,11 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
   const statRows = React.useMemo(() => members.map(m => ({
     ticker: m.ticker, desc: stats?.etfs?.[m.ticker]?.description || m.label || null, perf: m[k] ?? null,
     adr: stats?.etfs?.[m.ticker]?.adr_pct ?? null, dvol: stats?.etfs?.[m.ticker]?.avg_dollar_volume ?? null, ext: stats?.etfs?.[m.ticker]?.extension ?? null,
+    adrDv: adrDollarVol(stats?.etfs?.[m.ticker]?.adr_pct, stats?.etfs?.[m.ticker]?.avg_dollar_volume),
   })), [members, stats, k]);
   const statSort = useTableSort(statRows, "perf", "desc");
   const [minDv, setMinDv] = useMinDollarVol();
-  const liquidHoldings = React.useMemo(() => holdings.filter(h => isLiquid(h.dvol, minDv)), [holdings, minDv]);
+  const liquidHoldings = React.useMemo(() => holdings.filter(h => isLiquid(h.dvol, minDv)).map(h => ({ ...h, adrDv: adrDollarVol(h.adr, h.dvol) })), [holdings, minDv]);
   const holdSort = useTableSort(liquidHoldings, "weight", "desc");
 
   const [miniOpen, setMiniOpen] = React.useState(null);
@@ -16588,6 +16628,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                       <SortTh sort={statSort} col="ticker" label="ETF" textual align="left" className="px-2 py-2" />
                       <SortTh sort={statSort} col="desc" label="Description" textual align="left" className="px-2 py-2 hidden lg:table-cell" />
                       <SortTh sort={statSort} col="perf" label={<><span className="lg:hidden">Perf</span><span className="hidden lg:inline">Performance</span></>} className="px-1 lg:px-2 py-2" />
+                      <SortTh sort={statSort} col="adrDv" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} className="px-2 py-2 hidden lg:table-cell" />
                       <SortTh sort={statSort} col="adr" label="ADR" className="px-1 lg:px-2 py-2" />
                       <SortTh sort={statSort} col="dvol" label={<><span className="lg:hidden">$Vol</span><span className="hidden lg:inline">Avg $ Vol</span></>} className="px-1 lg:px-2 py-2" />
                       <SortTh sort={statSort} col="ext" label={<><span className="lg:hidden">Ext</span><span className="hidden lg:inline">Extension</span></>} title={EXTENSION_TIP} className="px-1 lg:px-2 py-2" />
@@ -16599,6 +16640,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                         <td className="px-2 py-2.5"><a href={`https://www.tradingview.com/chart/?symbol=${m.ticker}`} target="_blank" rel="noreferrer" className="font-mono font-bold text-zinc-100 hover:text-cyan-400">{m.ticker}</a></td>
                         <td className="px-2 py-2.5 text-zinc-400 max-w-[300px] hidden lg:table-cell">{m.desc || "—"}</td>
                         <td className={`px-1 lg:px-2 py-2.5 text-right font-mono ${(m.perf ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(m.perf)}</td>
+                        <td className="px-2 py-2.5 text-right font-mono text-zinc-300 hidden lg:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(m.adrDv)}</td>
                         <td className="px-1 lg:px-2 py-2.5 text-right font-mono text-zinc-300">{m.adr != null ? `${m.adr.toFixed(1)}%` : "—"}</td>
                         <td className="px-1 lg:px-2 py-2.5 text-right font-mono text-zinc-300">{fmtD(m.dvol)}</td>
                         <td className={`px-1 lg:px-2 py-2.5 text-right font-mono ${extensionCls(m.ext)}`}>{fmtExtension(m.ext)}</td>
@@ -16636,6 +16678,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                         <SortTh sort={holdSort} col="ticker" label="Ticker" textual align="left" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="name" label="Company" textual align="left" className="px-2 py-2 hidden lg:table-cell" />
                         <SortTh sort={holdSort} col="weight" label="Weight" className="px-2 py-2" />
+                        <SortTh sort={holdSort} col="adrDv" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} className="px-2 py-2 hidden lg:table-cell" />
                         <SortTh sort={holdSort} col="adr" label="ADR%" className="px-2 py-2" />
                         <SortTh sort={holdSort} col="dvol" label={<><span className="lg:hidden">$Vol</span><span className="hidden lg:inline">Avg $ Vol</span></>} className="px-1 lg:px-2 py-2" />
                         <SortTh sort={holdSort} col="ext" label={<><span className="lg:hidden">Ext</span><span className="hidden lg:inline">Extension</span></>} title={EXTENSION_TIP} className="px-1 lg:px-2 py-2" />
@@ -16647,6 +16690,7 @@ const ThemeGroupPopup = ({ group, window: win, etfs, etfHoldings, stats, onClose
                           <td className="px-2 py-2"><StockCell ticker={h.ticker} /></td>
                           <td className="px-2 py-2 text-zinc-400 max-w-[260px] truncate hidden lg:table-cell">{h.name || "—"}</td>
                           <td className="px-1 lg:px-2 py-2 text-right font-mono text-zinc-300">{h.weight != null ? `${h.weight.toFixed(1)}%` : "—"}</td>
+                          <td className="px-2 py-2 text-right font-mono text-zinc-300 hidden lg:table-cell" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(h.adrDv)}</td>
                           <td className="px-1 lg:px-2 py-2 text-right font-mono text-zinc-300">{h.adr != null ? `${h.adr.toFixed(1)}%` : "—"}</td>
                           <td className="px-1 lg:px-2 py-2 text-right font-mono text-zinc-300">{fmtD(h.dvol)}</td>
                           <td className={`px-1 lg:px-2 py-2 text-right font-mono ${extensionCls(h.ext)}`}>{fmtExtension(h.ext)}</td>
@@ -16888,6 +16932,7 @@ const NelTable = ({ n, onRow, onMini }) => {
                 <SortTh sort={sort} col="ticker" label="ETF" textual align="left" />
                 <SortTh sort={sort} col="group" label="Theme" textual align="left" />
                 <SortTh sort={sort} col="perf" label="Performance" />
+                <SortTh sort={sort} col="adrDv" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} />
                 <SortTh sort={sort} col="adr" label="ADR" />
                 <SortTh sort={sort} col="dvol" label="Avg $ Vol" />
                 <SortTh sort={sort} col="ext" label="Extension" title={EXTENSION_TIP} />
@@ -16901,6 +16946,7 @@ const NelTable = ({ n, onRow, onMini }) => {
                   <td className="px-3 py-1.5 text-left whitespace-nowrap"><span className="font-mono font-bold text-cyan-400 hover:underline">{r.ticker}</span></td>
                   <td className="px-3 py-1.5 text-left text-zinc-400 whitespace-nowrap">{r.group}</td>
                   <td className={`px-3 py-1.5 text-right font-mono ${r.perf >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{fmtPf(r.perf)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(r.adrDv)}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
                   <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{fmtD(r.dvol)}</td>
                   <td className={`px-3 py-1.5 text-right font-mono ${extensionCls(r.ext)}`}>{fmtExtension(r.ext)}</td>
@@ -16979,7 +17025,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
     // broad group doesn't drag in every laggard ETF it happens to contain.
     const rows = etfs.filter(e => !e.benchmark && themeOf(e) && top.has(themeOf(e)) && e[t.k] != null && e[t.k] > 0 && e[t.k] >= t.med).map(e => {
       const st = stats?.etfs?.[e.ticker] || {};
-      return { ticker: e.ticker, group: themeOf(e), perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, ext: st.extension ?? null, nasdaq: nq.shares[e.ticker]?.pct ?? null, nasdaqInfo: nq.shares[e.ticker] || null };
+      return { ticker: e.ticker, group: themeOf(e), perf: e[t.k], adr: st.adr_pct ?? null, dvol: st.avg_dollar_volume ?? null, adrDv: adrDollarVol(st.adr_pct, st.avg_dollar_volume), ext: st.extension ?? null, nasdaq: nq.shares[e.ticker]?.pct ?? null, nasdaqInfo: nq.shares[e.ticker] || null };
     }).filter(x => x.ext != null && x.ext < nelCrit.maxExt && (x.dvol ?? 0) >= nelCrit.minDvolM * 1e6 && nq.passes(x.ticker)).sort((a, b) => b.perf - a.perf);
     return { w: t.w, k: t.k, rows };
   }), [tables, etfs, stats, nelCrit, nq.shares, nq.minPct]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -17416,6 +17462,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
       if (!sc) return s;
       return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
     });
+    base = base.map(s => ({ ...s, adr_dvol: adrDollarVol(s.adr_pct, s.dollar_volume) }));
     if (sigFilter !== "All") base = base.filter(s => s.signal === sigFilter);
     if (sectorEtfs)          base = base.filter(s => (s.etfs||[]).some(e => sectorEtfs.has(e)));
     if (showNew)             base = base.filter(s => (s.new_etfs||[]).length > 0);
@@ -17691,6 +17738,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                   { col:"perf_1m",       label:"1M",       align:"right" },
                   { col:"perf_3m",       label:"3M",       align:"right" },
                   { col:"perf_6m",       label:"6M",       align:"right" },
+                  { col:"adr_dvol",      label:ADR_DVOL_LABEL, align:"right", tip: ADR_DVOL_TIP },
                   { col:"adr_pct",       label:"ADR%",     align:"right" },
                   { col:"extension",     label:"Extension", align:"right", tip: EXTENSION_TIP },
                   { col:"dollar_volume", label:"$ Vol",    align:"right" },
@@ -17733,6 +17781,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onM
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1m)}`}>{fmtP(s.perf_1m)}</td>
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_3m)}`}>{fmtP(s.perf_3m)}</td>
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_6m)}`}>{fmtP(s.perf_6m)}</td>
+                    <td className="px-3 py-2 text-right font-mono font-semibold text-zinc-300" title={ADR_DVOL_TIP}>{fmtAdrDollarVol(s.adr_dvol)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct!=null?`${s.adr_pct.toFixed(1)}%`:"—"}</td>
                     <td className={`px-3 py-2 text-right font-mono ${extensionCls(s.extension)}`}>{fmtExtension(s.extension)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtV(s.dollar_volume)}</td>

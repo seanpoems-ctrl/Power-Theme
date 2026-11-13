@@ -44,7 +44,7 @@ OUTPUT_PATH = ROOT / "public" / "leadership.json"
 HISTORY_PATH = ROOT / "public" / "leadership_history.json"
 SNAP_DIR = ROOT / "public" / "leadership_snapshots"     # one slim file per trading day + index.json, for the dashboard's date picker
 SNAP_KEEP_DAYS = 120
-SNAP_FIELDS = ("ticker", "industry", "perf", "avg_dollar_volume", "extension", "rmv", "coil", "lev_etf")
+SNAP_FIELDS = ("ticker", "industry", "perf", "avg_dollar_volume", "extension", "rmv", "coil", "lev_etf", "adr_pct")
 ET = ZoneInfo("America/New_York")
 
 MIN_DOLLAR_VOLUME = 40_000_000
@@ -96,6 +96,7 @@ def fetch_universe():
             "avg_dollar_volume": round(dvol),
             "market_cap": _num(r.get("market_cap_basic")),
             "extension": ext,
+            "adr_pct": round(atr / close * 100, 2) if atr and atr > 0 else None,      # same definition as screener_builder.py
             "perf_1d": (round(_num(r.get("change")), 1) if _num(r.get("change")) is not None else None),
             **{f"perf_{w.lower()}": (round(_num(r.get(c)), 1) if _num(r.get(c)) is not None else None) for w, c in WINDOWS},
         })

@@ -12,6 +12,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PhoneViewportGuard } from "./phoneViewport";
 import { Check, Clipboard, ClipboardCheck, Copy, ExternalLink, Layers, LayoutList, Loader2, X } from "lucide-react";
+import { adrDollarVol, fmtAdrDollarVol } from "./adrDollarVol";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -669,27 +670,21 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
-// ADR% × $Vol composite score (volatility × liquidity)
+// ADR× Avg$Vol = ADR% × avg daily $ volume (volatility × liquidity). Same number and formatting as the Stock Screener (shared helper) —
+// until 2026-11-13 this used ADR as a fraction, which made it 100× smaller than every other table.
 function adrVolScore(s) {
-  const dv = parseDollarVolume(s.dollar_volume);
-  if (s.adr_pct == null || dv == null) return null;
-  return (s.adr_pct / 100) * dv;
+  return adrDollarVol(s.adr_pct, parseDollarVolume(s.dollar_volume));
 }
 
-function fmtAdrVol(v) {
-  if (v == null) return "—";
-  if (v >= 1e9)  return `${(v / 1e9).toFixed(1)}B`;
-  if (v >= 1e6)  return `${(v / 1e6).toFixed(0)}M`;
-  return `${(v / 1e3).toFixed(0)}K`;
-}
+const fmtAdrVol = fmtAdrDollarVol;
 
-// Static column definitions — order: Ticker, Company, Mkt Cap, ADR×$Vol, $Vol, ADR%, RS
+// Static column definitions — order: Ticker, Company, Mkt Cap, ADR× Avg$Vol, $Vol, ADR%, RS
 // The last (perf/change) column is appended dynamically inside ListView.
 const BASE_SORT_COLS = [
   { key: "ticker",        label: "Ticker",        align: "left",  numeric: false },
   { key: "company",       label: "Company",       align: "left",  numeric: false },
   { key: "market_cap_b",  label: "Mkt Cap",       align: "right", numeric: true  },
-  { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", numeric: true  },
+  { key: "adr_vol_score", label: "ADR× Avg$Vol",      align: "right", numeric: true  },
   { key: "dollar_volume", label: "$ Vol",         align: "right", numeric: true  },
   { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
   { key: "rs",            label: "RS",            align: "right", numeric: true  },
@@ -712,7 +707,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
         { key: "ticker",        label: "Ticker",        align: "left",  numeric: false },
         { key: "company",       label: "Company",       align: "left",  numeric: false },
         { key: "market_cap_b",  label: "Mkt Cap",       align: "right", numeric: true  },
-        { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", numeric: true  },
+        { key: "adr_vol_score", label: "ADR× Avg$Vol",      align: "right", numeric: true  },
         { key: "dollar_volume", label: "$ Vol",         align: "right", numeric: true  },
         { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
         { key: "rs",            label: "RS",            align: "right", numeric: true  },
@@ -794,7 +789,10 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
                   className={`px-[3px] lg:px-2 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors
                     ${col.align === "right" ? "text-right" : ""} ${col.key === "company" ? "hidden lg:table-cell" : ""}`}
                 >
-                  {label}<SortIcon colKey={col.key} />
+                  {/* short label on phones so the 7-column table still fits */}
+                  {col.key === "adr_vol_score"
+                    ? <><span className="lg:hidden">ADR×$Vol</span><span className="hidden lg:inline">{label}</span></>
+                    : label}<SortIcon colKey={col.key} />
                 </th>
               );
             })}
@@ -824,7 +822,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData,
               <td className="px-[3px] lg:px-2 py-1.5 text-right font-mono text-zinc-400">
                 {fmtMktCap(s.market_cap_b, s.mc_approx)}
               </td>
-              {/* ADR×$Vol */}
+              {/* ADR× Avg$Vol */}
               <td className="px-[3px] lg:px-2 py-1.5 text-right font-mono text-amber-300 font-semibold">
                 {fmtAdrVol(adrVolScore(s))}
               </td>
@@ -949,8 +947,8 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                   <span className="w-16 text-right font-mono text-zinc-400 hidden lg:block">
                     {fmtMktCap(s.market_cap_b, s.mc_approx)}
                   </span>
-                  {/* ADR×$Vol */}
-                  <span className="w-16 text-right font-mono text-amber-300 font-semibold hidden lg:block">
+                  {/* ADR× Avg$Vol */}
+                  <span className="w-24 text-right font-mono text-amber-300 font-semibold hidden lg:block">
                     {fmtAdrVol(adrVolScore(s))}
                   </span>
                   {/* $Vol */}
@@ -1097,13 +1095,13 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   }
 
   // Column config for the stock-row header (mirrors the expanded row layout)
-  // Order: Ticker, Company, Mkt Cap, ADR×$Vol, $Vol, ADR%, RS, Change%/custom (last unchanged)
+  // Order: Ticker, Company, Mkt Cap, ADR× Avg$Vol, $Vol, ADR%, RS, Change%/custom (last unchanged)
   const GROUP_STOCK_COLS = customCol
     ? [
         { key: "ticker",        label: "Ticker",        align: "left",  cls: "w-11 lg:w-14" },
         { key: "company",       label: "Company",       align: "left",  cls: "flex-1 hidden lg:block" },
         { key: "market_cap_b",  label: "Mkt Cap",       align: "right", cls: "w-16 hidden lg:block" },
-        { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", cls: "w-16 hidden lg:block" },
+        { key: "adr_vol_score", label: "ADR× Avg$Vol",      align: "right", cls: "w-24 hidden lg:block" },
         { key: "dollar_volume", label: "$ Vol",         align: "right", cls: "w-12 lg:w-20" },
         { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-9 lg:w-12" },
         { key: "rs",            label: "RS",            align: "right", cls: "w-8 lg:w-12" },
@@ -1113,7 +1111,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
         { key: "ticker",        label: "Ticker",       align: "left",  cls: "w-11 lg:w-14" },
         { key: "company",       label: "Company",      align: "left",  cls: "flex-1 hidden lg:block" },
         { key: "market_cap_b",  label: "Mkt Cap",      align: "right", cls: "w-16 hidden lg:block" },
-        { key: "adr_vol_score", label: "ADR×$Vol",     align: "right", cls: "w-16 hidden lg:block" },
+        { key: "adr_vol_score", label: "ADR× Avg$Vol",     align: "right", cls: "w-24 hidden lg:block" },
         { key: "dollar_volume", label: "$ Vol",        align: "right", cls: "w-12 lg:w-20" },
         { key: "adr_pct",       label: "ADR%",         align: "right", cls: "w-9 lg:w-12" },
         { key: "rs",            label: "RS",           align: "right", cls: "w-8 lg:w-12" },
