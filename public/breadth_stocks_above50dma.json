@@ -2,52 +2,40 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 2,
   "stocks": [
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 16.65,
-      "change_pct": 0.79,
-      "adr_pct": 4.7,
-      "dollar_volume": "$77.6M",
-      "market_cap_b": 3.042,
+      "price": 16.66,
+      "change_pct": 0.06,
+      "adr_pct": 4.5,
+      "dollar_volume": "$80.7M",
+      "market_cap_b": 3.044,
       "rs_ibd": 95,
-      "above50dma_pct": 62.5
+      "above50dma_pct": 60.1
     },
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 26.58,
-      "change_pct": -0.3,
-      "adr_pct": 2.9,
-      "dollar_volume": "$159.1M",
-      "market_cap_b": 3.479,
+      "price": 26.95,
+      "change_pct": 1.39,
+      "adr_pct": 2.7,
+      "dollar_volume": "$160.3M",
+      "market_cap_b": 3.527,
       "rs_ibd": 92,
-      "above50dma_pct": 56.0
-    },
-    {
-      "ticker": "REPL",
-      "company": "Replimune Group, Inc.",
-      "industry": "Biotechnology",
-      "price": 21.98,
-      "change_pct": 0.92,
-      "adr_pct": 6.0,
-      "dollar_volume": "$85.0M",
-      "market_cap_b": 2.084,
-      "rs_ibd": 95,
-      "above50dma_pct": 50.2
+      "above50dma_pct": 55.8
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.35,
-    "spx_1m": -1.96,
-    "spx_3m": -1.97,
-    "spx_34d": -1.19,
-    "spx_qtd": -0.97,
-    "spx_mtd": 0.16
+    "spx_1d": -0.4,
+    "spx_1m": -1.28,
+    "spx_3m": -1.69,
+    "spx_34d": -1.42,
+    "spx_qtd": -1.37,
+    "spx_mtd": -0.24
   },
-  "fetched_at_utc": "2026-11-13T03:14:14+00:00"
+  "fetched_at_utc": "2026-11-13T23:03:49+00:00"
 }
