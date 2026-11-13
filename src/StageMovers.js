@@ -123,6 +123,7 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
                 {warn
                   ? th("bvx", "Break volume ×", "right", "Highest daily volume since the stock slipped below the 10-week MA ÷ average daily volume of the 30 days before. Heavy volume (1.5×+) on the break is the warning TraderLion describes.")
                   : th("vx", "Volume ×", "right", "Highest daily volume since the stage began ÷ average daily volume of the 30 days before (only for changes in the last 12 weeks). 2×+ = a high-volume break.")}
+                {th("adrDv", "ADR× Avg$Vol", "right", "ADR% × Avg Daily $ Vol (same as the Stock Screener and Focus List)")}
                 {th("dv", "Avg $ Vol")}
               </tr>
             </thead>
@@ -138,6 +139,7 @@ export default function StageMovers({ group, StockCell = null, onMiniCharts = nu
                   <td className={`px-2 py-1 text-right font-mono ${r.d10 == null ? "text-zinc-600" : r.d10 >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{r.d10 == null ? "—" : `${r.d10 > 0 ? "+" : ""}${r.d10.toFixed(1)}%`}</td>
                   <td className={`px-2 py-1 text-right font-mono ${r.d30 == null ? "text-zinc-600" : r.d30 >= 0 ? "text-emerald-400" : "text-rose-400"}`}>{r.d30 == null ? "—" : `${r.d30 > 0 ? "+" : ""}${r.d30.toFixed(1)}%`}</td>
                   <td className={`px-2 py-1 text-right font-mono ${(warn ? r.bvx : r.vx) == null ? "text-zinc-600" : (warn ? r.bvx : r.vx) >= 3 ? "text-amber-300 font-bold" : (warn ? r.bvx : r.vx) >= 1.5 + (warn ? 0 : 0.5) ? "text-amber-300" : "text-zinc-400"}`}>{(warn ? r.bvx : r.vx) == null ? "—" : `${(warn ? r.bvx : r.vx).toFixed(1)}×`}</td>
+                  <td className="px-2 py-1 text-right font-mono text-zinc-300">{r.adrDv == null ? "—" : r.adrDv >= 1e9 ? `${(r.adrDv / 1e9).toFixed(2)}B` : r.adrDv >= 1e6 ? `${(r.adrDv / 1e6).toFixed(1)}M` : `${(r.adrDv / 1e3).toFixed(0)}K`}</td>
                   <td className="px-2 py-1 text-right font-mono text-zinc-400">{money(r.dv)}</td>
                 </tr>
               ))}

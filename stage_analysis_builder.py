@@ -23,7 +23,8 @@ Output: public/stage_analysis.json
   { generated_at, as_of, universe, weeks: ["2024-10-18", …], groups: { "All": {n, s1:[…counts per week], s2, s3, s4}, "<Sector>": {…} } }
         public/stage_stocks.json — the stocks behind the counts (for the card's "Stage Movers" table):
   { as_of, cols: [...], stocks: [[ticker, company, sector, stage, weeks_in_stage, prev_stage, price, pct_vs_30w_ma, breakout_vol_x, avg_dollar_vol,
-                                                   pct_vs_10w_ma, weeks_below_10w_ma, break_vol_x], …] }
+                                                   pct_vs_10w_ma, weeks_below_10w_ma, break_vol_x, adr_pct], …] }
+  adr_pct = ATR / close x 100 from TradingView (same definition as the Stock Screener); the Stage Movers table shows adr_pct x avg_dollar_vol as "ADR× Avg$Vol".
   weeks_in_stage = consecutive weeks in the current stage (1 = entered this week); prev_stage = the stage before that (0 = unknown / start of history).
   breakout_vol_x (only for stage changes in the last 12 weeks) = the highest DAILY volume since the entry week began ÷ the average daily volume of the
   30 trading days before it — TraderLion's "breakout on at least twice average volume" test (≥ 2 is a high-volume breakout; the same number on a
@@ -66,9 +67,10 @@ VOL_MAX_WEEKS = 12      # compute it only for stage changes this recent
 MIN_COVERAGE = 0.7      # refuse to publish if fewer than this share of the universe downloaded
 
 
-def universe() -> list[str]:
+def universe() -> tuple[list[str], dict[str, float]]:
+    """Returns (Yahoo-spelled tickers, {ticker: ADR%}); ADR% = ATR / close x 100 from TradingView (same definition as screener_builder.py)."""
     from tradingview_screener import Query, col
-    q = (Query().set_markets("america").select("name", "market_cap_basic", "average_volume_10d_calc")
+    q = (Query().set_markets("america").select("name", "market_cap_basic", "average_volume_10d_calc", "ATR", "close")
          .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
          .order_by("market_cap_basic", ascending=False).limit(6000))
@@ -76,8 +78,15 @@ def universe() -> list[str]:
     _, df = q.get_scanner_data()
     # Yahoo spells class shares BRK-B; "/" lines are preferred shares (WFC/PD) that have no Yahoo history
     tickers = sorted({str(t).replace(".", "-") for t in df["name"] if "/" not in str(t)})
-    logger.info("TradingView universe: %d stocks ≥ $%dM", len(tickers), MIN_CAP // 1_000_000)
-    return tickers
+    adr: dict[str, float] = {}
+    for nm, atr, px in zip(df["name"], df["ATR"], df["close"]):
+        try:
+            if atr and px and float(px) > 0 and float(atr) > 0:
+                adr[str(nm).replace(".", "-")] = round(float(atr) / float(px) * 100, 2)
+        except (TypeError, ValueError):
+            pass
+    logger.info("TradingView universe: %d stocks ≥ $%dM (%d with ADR%%)", len(tickers), MIN_CAP // 1_000_000, len(adr))
+    return tickers, adr
 
 
 def download_prices(tickers: list[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -139,10 +148,10 @@ def stages(wk: pd.DataFrame) -> np.ndarray:
 
 
 STOCK_COLS = ["ticker", "company", "sector", "stage", "weeks_in_stage", "prev_stage", "price", "pct_vs_30w_ma", "breakout_vol_x", "avg_dollar_vol",
-              "pct_vs_10w_ma", "weeks_below_10w_ma", "break_vol_x"]
+              "pct_vs_10w_ma", "weeks_below_10w_ma", "break_vol_x", "adr_pct"]
 
 
-def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd.DataFrame, db: list) -> list:
+def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd.DataFrame, db: list, adr_of: dict | None = None) -> list:
     """One row per classified stock: current stage, how long, where from, price vs the 30-week MA, breakout volume, liquidity."""
     info = {r["ticker"]: r for r in db if r.get("ticker")}
     cols = list(wk.columns)
@@ -187,12 +196,12 @@ def stock_rows(wk: pd.DataFrame, st: np.ndarray, close: pd.DataFrame, volume: pd
         dv = int(last_px[j] * recent.mean()) if len(recent) else None
         d = round((last_px[j] / ma30[j] - 1) * 100, 1) if np.isfinite(ma30[j]) and ma30[j] > 0 else None
         r = info.get(t, {})
-        rows.append([t, r.get("company") or "", r.get("sector") or "", cur, w, prev, round(float(last_px[j]), 2), d, vx, dv, d10, bw, bvx])
+        rows.append([t, r.get("company") or "", r.get("sector") or "", cur, w, prev, round(float(last_px[j]), 2), d, vx, dv, d10, bw, bvx, (adr_of or {}).get(t)])
     return rows
 
 
 def build() -> dict | None:
-    tickers = universe()
+    tickers, adr_of = universe()
     if len(tickers) < 1500:
         logger.error("Universe too small (%d) - refusing to publish", len(tickers))
         return None
@@ -227,7 +236,7 @@ def build() -> dict | None:
     for sec in sorted({s for s in sectors if s}):
         add(sec, np.array([s == sec for s in sectors]))
 
-    stocks = stock_rows(wk, st, close, volume, db)
+    stocks = stock_rows(wk, st, close, volume, db, adr_of)
     # Movers list only (the stage COUNTS above stay whole-market): leave out stocks pinned under a pending cash takeover.
     try:
         from deal_filter import pending_deal_tickers

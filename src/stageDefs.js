@@ -22,7 +22,7 @@ let _stocksP = null;
 export const loadStageStocks = () => {
   if (!_stocksP) {
     _stocksP = fetch(`${process.env.PUBLIC_URL}/stage_stocks.json?v=${Date.now()}`).then(r => (r.ok ? r.json() : null))
-      .then(d => (d?.stocks ? { asOf: d.as_of, rows: d.stocks.map(([t, n, sec, st, w, pv, px, d30, vx, dv, d10, bw, bvx]) => ({ t, n, sec, st, w, pv, px, d30, vx, dv, d10, bw: bw ?? 0, bvx })) } : null))
+      .then(d => (d?.stocks ? { asOf: d.as_of, rows: d.stocks.map(([t, n, sec, st, w, pv, px, d30, vx, dv, d10, bw, bvx, adr]) => ({ t, n, sec, st, w, pv, px, d30, vx, dv, d10, bw: bw ?? 0, bvx, adr: adr ?? null, adrDv: adr != null && dv != null ? adr * dv : null })) } : null))
       .catch(() => null);
   }
   return _stocksP;

@@ -12134,7 +12134,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null 
     const out = [];
     for (const ind of inds) for (const r of file.byIndustry[ind] || []) {
       if (UNIVERSE_EXCLUDE?.has?.(r.t)) continue;
-      out.push({ ticker: r.t, name: r.n, industry: ind, adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
+      out.push({ ticker: r.t, name: r.n, industry: ind, adr: r.adr, adrDv: r.adr != null && r.dv != null ? r.adr * r.dv : null, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
     }
     return out;
   }, [file, industryRankings, theme]);
@@ -12167,6 +12167,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null 
           <thead><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
             <SortTh sort={sort} col="ticker" label="Ticker" textual align="left" className="px-2 py-1" />
             <SortTh sort={sort} col="industry" label="Industry" textual align="left" className="px-2 py-1" />
+            <SortTh sort={sort} col="adrDv" label="ADR× Avg$Vol" title="ADR% × Avg Daily $ Vol (same as the Stock Screener)" className="px-2 py-1" />
             <SortTh sort={sort} col="adr" label="ADR%" className="px-2 py-1" />
             <SortTh sort={sort} col="dv" label="$ Vol" className="px-2 py-1" />
             <SortTh sort={sort} col="cap" label="Mkt Cap" className="px-2 py-1" />
@@ -12181,6 +12182,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], onMiniCharts = null 
               <tr key={r.ticker} className="hover:bg-zinc-800/30 border-t border-zinc-900">
                 <td className="px-2 py-1 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
                 <td className="px-2 py-1 text-zinc-500 truncate max-w-[180px]" title={r.name}>{r.industry}</td>
+                <td className="px-2 py-1 text-right font-mono font-semibold text-zinc-300">{r.adrDv != null ? (r.adrDv >= 1e9 ? `${(r.adrDv / 1e9).toFixed(2)}B` : r.adrDv >= 1e6 ? `${(r.adrDv / 1e6).toFixed(1)}M` : `${(r.adrDv / 1e3).toFixed(0)}K`) : "—"}</td>
                 <td className="px-2 py-1 text-right font-mono font-bold text-amber-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
                 <td className="px-2 py-1 text-right font-mono text-zinc-300">{money(r.dv)}</td>
                 <td className="px-2 py-1 text-right font-mono text-zinc-400">{money(r.cap)}</td>
@@ -14049,7 +14051,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
                 <Th col="ticker"            label="Ticker"    align="left" />
                 <Th col="company"           label="Company"   align="left" hide />
                 <Th col="mkt_cap_b"         label="Mkt Cap"               />
-                <Th col="adr_x_vol"         label="ADR×$Vol"               />
+                <Th col="adr_x_vol"         label="ADR× Avg$Vol"           />
                 <Th col="avg_dollar_volume" label="$ Vol"                  />
                 <Th col="adr_pct"           label="ADR%"                   />
                 <Th col="rs_52w"            label="RS"                     />
@@ -15395,7 +15397,7 @@ const FocusScanTable = ({ scan, title = null, scanLabels = {}, marks = null, onM
     { key: "ticker",     label: "Ticker",     align: "left"  },
     { key: "industry",   label: "Industry",   align: "left"  },
     ...(isResult ? [{ key: "hits", label: "Scans", align: "right" }] : []),
-    { key: "adr_dvol",   label: "ADR×$Vol",   align: "right" },
+    { key: "adr_dvol",   label: "ADR× Avg$Vol", align: "right", tip: "ADR% × Avg Daily $ Vol" },
     { key: "close",      label: "Price",      align: "right" },
     { key: "change",     label: "Day%",       align: "right" },
     ...(hasPerf ? [{ key: "perf", label: scan.timeframe, align: "right" }] : []),
