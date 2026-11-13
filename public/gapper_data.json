@@ -1,142 +1,60 @@
 {
-  "scan_time": "2026-11-12 07:55 ET",
+  "scan_time": "2026-11-13 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "AVEX",
-      "price": 13.76,
-      "gap_pct": 13.44,
-      "pm_volume": 72235,
-      "avg_vol_10d": 1706727,
-      "avg_dollar_vol": 23484564,
-      "mkt_cap": 1537707693,
-      "rvol": 1.02,
-      "adr_pct": 10.73,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "AVEX gapping on earnings: AEVEX's Tax-Driven EPS Miss Hides A Revenue Beat And Third Raise, But Shrinking Ukraine Sa",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: AEVEX's Tax-Driven EPS Miss Hides A Revenue Beat And Third Raise, But Shrinking Ukraine Sales Keep The Stock Near Lows - Finviz | Aevex: Q3 Earnings Snapshot | AEVEX shares soar 10% on raised full-year guidance",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: AEVEX's Tax-Driven EPS Miss Hides A Revenue Beat And Third Raise, But Shrinking Ukraine Sales Keep The Stock Near Lows - Finviz | Aevex: Q3 Earnings Snapshot | AEVEX shares soar 10% on raised full-year guidance\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "AEVEX's Tax-Driven EPS Miss Hides A Revenue Beat And Third Raise, But Shrinking Ukraine Sales Keep The Stock Near Lows - Finviz",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPeFVhN2xoWEdtU0VJNjN6TzRmNnVDdjJtam9nb0EtTFhSeUFCNTQzLVRCY1dwcC1raTlhY0xVZ1dzZlg3OHRxb0JuVldjSldiRGswNUVHc1BwUExVRUgydUMtLTNGVDdQVG9jSV8wRlNCbWxtMGNIbmRmQ2htN3ZqczJiVHNUM2VRb3kzd3haaVROT1BobWo4aXU0REpVckNzZktZU2p2WV9aaXl5Z0FzZ0pBcFZjeEtyUkhZbnQ3eGhPMDJZNVpJcjVGY3JOUUZJVjBwLTFNY2R0bzRUY0tkZQ?oc=5"
-        },
-        {
-          "title": "Aevex: Q3 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/aevex-q3-earnings-snapshot-024638451.html"
-        },
-        {
-          "title": "AEVEX shares soar 10% on raised full-year guidance",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/aevex-shares-soar-10-raised-223443766.html"
-        },
-        {
-          "title": "AEVEX Corp. Announces Financial Results for Third Quarter 2026",
-          "source": "Finviz",
-          "url": "/news/421279/aevex-corp-announces-financial-results-for-third-quarter-2026"
-        },
-        {
-          "title": "Franko-Nevada headlines Wednesday's earnings slate",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-s-p-500-nasdaq-nvidia-scandal-hotter-than-expected-cpi-coreweave/card/franko-nevada-headlines-wednesday-s-earnings-slate-R4NeItAeY589GKuzg986?mod=mw_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "32.44M",
-      "short_float": "6.84%",
-      "daily_pct": 4.57,
-      "prev_close": 12.13,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $23M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "AVEX gapping on earnings: AEVEX's Tax-Driven EPS Miss Hides A Revenue Beat And Third Raise, But Shrinking Ukraine Sa",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "LUNR",
-      "price": 13.57,
-      "gap_pct": 11.41,
-      "pm_volume": 461479,
-      "avg_vol_10d": 9388378,
-      "avg_dollar_vol": 127400289,
-      "mkt_cap": 2788295163,
-      "rvol": 1.15,
-      "adr_pct": 8.61,
+      "ticker": "MOD",
+      "price": 139.84,
+      "gap_pct": 31.8,
+      "pm_volume": 71589,
+      "avg_vol_10d": 3142895,
+      "avg_dollar_vol": 439502437,
+      "mkt_cap": 5644192970,
+      "rvol": 0.51,
+      "adr_pct": 7.11,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "LUNR: LUNR: Intuitive Machines Inc. filed SEC Form 8-K: Results of... - Quantisnow",
+      "reasoning": "MOD: Modine Stock Jumps 29% After Hours on Samsung Talks Report - Gotrade",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: LUNR: Intuitive Machines Inc. filed SEC Form 8-K: Results of... - Quantisnow | Intuitive Machines Reports Third Quarter 2026 Financial Results... - Quantisnow",
+        "catalyst": "Headlines: Modine Stock Jumps 29% After Hours on Samsung Talks Report - Gotrade | Modine Stock Gets a Potential $5.6 Billion Takeover Catalyst From Samsung - Yahoo Finance | Samsung in talks to buy data center cooling firm Modine, Bloomberg reports",
         "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: LUNR: Intuitive Machines Inc. filed SEC Form 8-K: Results of... - Quantisnow | Intuitive Machines Reports Third Quarter 2026 Financial Results... - Quantisnow\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **What Happened**\nHeadlines: Modine Stock Jumps 29% After Hours on Samsung Talks Report - Gotrade | Modine Stock Gets a Potential $5.6 Billion Takeover Catalyst From Samsung - Yahoo Finance | Samsung in talks to buy data center cooling firm Modine, Bloomberg reports\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "LUNR: Intuitive Machines Inc. filed SEC Form 8-K: Results of... - Quantisnow",
+          "title": "Modine Stock Jumps 29% After Hours on Samsung Talks Report - Gotrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNWk2Y2dIeW01bnlYZFh4VlZtb2UxZDdxTE9QbWs4bVNvUjJUbWRHTW5uWE5US0UwaXZVNWc0ZTJsTVM1MVlNWDktRVRSdlJHbVBMdC1TVWtDVU0wZ0x1UlIwMXFCNExCcXRIMXlrcFY5MW5Tdy1DN2lNQWxkd2xCMnlXT29iX0Nhc2RpSFBFdjNsSEhMODlxcjFnZGd2U2NPSlZOSHdtWVo3Zw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE8wTENYSjRPR1RBX1RjSUlfMDdxYnh4MExxNWpBaW82b2s0ei1yUndVZ0xrZk5ldG9WWXl2eVJqTTRDVUZxQ2xoTnQtNkFMa3dhYzdUanRQa09XQWNETVBucWFsb28tSTBrR2o1S2dmVFhtemJlOEo1SUpRYnhuT2M?oc=5"
         },
         {
-          "title": "Intuitive Machines Reports Third Quarter 2026 Financial Results... - Quantisnow",
+          "title": "Modine Stock Gets a Potential $5.6 Billion Takeover Catalyst From Samsung - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNT1l6a3pCVXZ4MUdYZzBITnI1NVRITUtVNjhtWDVxdDNqM1IxSlJRSi1OcnRtNVpBNzFYNTNIY0R4TXgzUldjX0lFVVk3WE9Cd2pMcGhsVzdTUjF4MXU1a2NxblREUVY4ZTZTR2M0RWtrZFpMWDVXdDN4VFdOemt2Y3A4OGx1VDlyVnVha2UxcHRhRnROb1hVZE9iYVFFcTdaVlNTVUZXMFFaLTZOS0VkRURiaWIyQXNfR2w3eXJ3?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQnc3elliRnFtVkVfOWFaYnQwZ01GbUdEb21SWUQxVWpDeU01Z3ZpVkR2STdXMWgzbzhRZmpFdE9lYVV0VURuZ2cteFdjY19uRS04WTVQTVh2TTJ4SmlVM1J2YXNqOGRmRFgwSXVoSXJZVTNhTGp2ME43UTZTX2hkVHVWbGp4dFlmNlN4V01FSVVscHFGSFlRall3?oc=5"
+        },
+        {
+          "title": "Samsung in talks to buy data center cooling firm Modine, Bloomberg reports",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/samsung-talks-buy-data-center-005809830.html"
+        },
+        {
+          "title": "Modine to Host Analyst and Investor Day on November 18, 2026",
+          "source": "Finviz",
+          "url": "/news/421828/modine-to-host-analyst-and-investor-day-on-november-18-2026"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-11-12",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1844452/000162828026073106/lunr-20261112.htm"
-      },
-      "float_shares": "152.73M",
-      "short_float": "27.36%",
-      "daily_pct": 3.13,
-      "prev_close": 12.18,
+      "edgar_filing": null,
+      "float_shares": "51.98M",
+      "short_float": "4.68%",
+      "daily_pct": -0.53,
+      "prev_close": 106.1,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -146,7 +64,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LUNR: LUNR: Intuitive Machines Inc. filed SEC Form 8-K: Results of... - Quantisnow",
+        "primary_claim": "MOD: Modine Stock Jumps 29% After Hours on Samsung Talks Report - Gotrade",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -162,55 +80,73 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "FIGR",
-      "price": 25.88,
-      "gap_pct": 6.99,
-      "pm_volume": 436264,
-      "avg_vol_10d": 5612113,
-      "avg_dollar_vol": 145241484,
-      "mkt_cap": 5427700762,
-      "rvol": 1.06,
-      "adr_pct": 7.63,
+      "ticker": "CBRS",
+      "price": 109.52,
+      "gap_pct": 12.04,
+      "pm_volume": 564464,
+      "avg_vol_10d": 11262272,
+      "avg_dollar_vol": 1233444029,
+      "mkt_cap": 21881194048,
+      "rvol": 1.13,
+      "adr_pct": 8.68,
       "category": "Earnings",
       "theme": "Earnings",
-      "reasoning": "FIGR gapping on earnings: Figure Tech earnings on deck: Can margins offset EPS decline? By Investing.com - Investing",
+      "reasoning": "CBRS gapping on earnings: Cerebras Systems soars on raised revenue guidance - Yahoo Finance",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Figure Tech earnings on deck: Can margins offset EPS decline? By Investing.com - Investing.com Australia",
+        "catalyst": "Headlines: Cerebras Systems soars on raised revenue guidance - Yahoo Finance | Cerebras lifts third-quarter revenue 55% as cloud inference overtakes hardware sales | Cerebras Swings To A Core Profit And Raises Guidance Again, But OpenAI Delays And A 54% Drawdown Set Up A Credibility Test",
         "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **The Results**\nHeadlines: Figure Tech earnings on deck: Can margins offset EPS decline? By Investing.com - Investing.com Australia\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "analysis_details": "• **The Results**\nHeadlines: Cerebras Systems soars on raised revenue guidance - Yahoo Finance | Cerebras lifts third-quarter revenue 55% as cloud inference overtakes hardware sales | Cerebras Swings To A Core Profit And Raises Guidance Again, But OpenAI Delays And A 54% Drawdown Set Up A Credibility Test\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Figure Tech earnings on deck: Can margins offset EPS decline? By Investing.com - Investing.com Australia",
+          "title": "Cerebras Systems soars on raised revenue guidance - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOZTFTcVZSVG5OMC1PZlB4MWxNajhRWDR1c0hET2l1SmNLUVZiQWZtS1NkQ1F3emc5YXBXTjJSN3JsaUtOS3ZiMzZkT1hrcTlKenR2cDVvVEdjZkJYQVNHNlppUWgtSEJua1pfZWdoUUdfaUs0U3JEVnpwWVFydjB0MVdrdXdHTzNES1B0Y0N0QWFrNkxzSDh1MWxpY0szZnlLT0NoSmRZcU9ZdWJvaWtxbGRTNnhlWlU2WTBsXw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWURuaXpnNTY0QW1WbDRaQ3RjS25jekwwN1ZQX1dsZTRUdG5OTDFZWGlxNjB3ZXJWcmJjU1BBWGlKVlRGcjBOOGQ5UkJNTE5XZl9CZFhDQUVISXg4M2ZYaUNsNHhkUks5TnNiU1BBeWMyWFdkaHNnbVdUT21YMDh4bTZOeEwyTHRxbDBzREJHVjgtelB6MkRfY1N0UVI3cjdPRklv?oc=5"
+        },
+        {
+          "title": "Cerebras lifts third-quarter revenue 55% as cloud inference overtakes hardware sales",
+          "source": "Finviz",
+          "url": "https://www.digitimes.com/news/a20261113VL212/cerebras-cloud-business-hardware-revenue-sales.html"
+        },
+        {
+          "title": "Cerebras Swings To A Core Profit And Raises Guidance Again, But OpenAI Delays And A 54% Drawdown Set Up A Credibility Test",
+          "source": "Finviz",
+          "url": "/news/422423/cerebras-swings-to-a-core-profit-and-raises-guidance-again-but-openai-delays-and-a-54-drawdown-set-up-a-credibility-test"
+        },
+        {
+          "title": "Nvidia Rival Cerebras Rallies 13% After-Hours As Q4 Sales Forecast Blows Past Estimates",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-rival-cerebras-rallies-13-223307284.html"
+        },
+        {
+          "title": "Cerebras Systems soars on raised revenue guidance",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/cerebras-systems-soars-raised-revenue-221427915.html"
         }
       ],
       "edgar_filing": {
         "filing_date": "2026-11-12",
         "form": "8-K",
         "items": [
-          "1.01",
           "2.02",
-          "2.03",
           "9.01"
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/2064124/000162828026073077/figr-20261110.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/2021728/000162828026073366/cbrs-20261112.htm"
       },
-      "float_shares": "122.84M",
-      "short_float": "13.17%",
-      "daily_pct": 3.64,
-      "prev_close": 24.19,
+      "float_shares": "98.91M",
+      "short_float": "19.78%",
+      "daily_pct": -3.29,
+      "prev_close": 97.75,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -220,7 +156,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "FIGR gapping on earnings: Figure Tech earnings on deck: Can margins offset EPS decline? By Investing.com - Investing",
+        "primary_claim": "CBRS gapping on earnings: Cerebras Systems soars on raised revenue guidance - Yahoo Finance",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -236,55 +172,65 @@
       "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "CHA",
-      "price": 13.01,
-      "gap_pct": 5.52,
-      "pm_volume": 165101,
-      "avg_vol_10d": 705920,
-      "avg_dollar_vol": 9184019,
-      "mkt_cap": 2352111795,
-      "rvol": 0.74,
-      "adr_pct": 3.37,
+      "ticker": "SLS",
+      "price": 8.93,
+      "gap_pct": 11.21,
+      "pm_volume": 247102,
+      "avg_vol_10d": 6652236,
+      "avg_dollar_vol": 59404467,
+      "mkt_cap": 1621623991,
+      "rvol": 0.49,
+      "adr_pct": 10.33,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "CHA: A special dividend joins Chagee (CHA)'s three-year plan to pay at least 50% of prior-year ",
+      "reasoning": "SLS: SLS: SELLAS Life Sciences Group Inc. filed SEC Form 8-K: Results of... - Quantisnow",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: A special dividend joins Chagee (CHA)'s three-year plan to pay at least 50% of prior-year net income. - Stock Titan | Nvidia Falls 7% Before the Bell After a WSJ Report Its Board Is Preparing to Oust Its CEO, CNBC Says - Stock Titan | A three-year plan calls for Chagee to pay at least half of prior-year profit as dividends each year. - Stock Titan",
+        "catalyst": "Headlines: SLS: SELLAS Life Sciences Group Inc. filed SEC Form 8-K: Results of... - Quantisnow | SLS Stock Surges After-Hours: Sellas Says 'Transformative' Phase 3 AML Results Are Coming This Month - Yahoo Finance | SELLAS Life Sciences Reports Third Quarter 2026 Financial Results and Provides Corporate Update",
         "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: A special dividend joins Chagee (CHA)'s three-year plan to pay at least 50% of prior-year net income. - Stock Titan | Nvidia Falls 7% Before the Bell After a WSJ Report Its Board Is Preparing to Oust Its CEO, CNBC Says - Stock Titan | A three-year plan calls for Chagee to pay at least half of prior-year profit as dividends each year. - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **What Happened**\nHeadlines: SLS: SELLAS Life Sciences Group Inc. filed SEC Form 8-K: Results of... - Quantisnow | SLS Stock Surges After-Hours: Sellas Says 'Transformative' Phase 3 AML Results Are Coming This Month - Yahoo Finance | SELLAS Life Sciences Reports Third Quarter 2026 Financial Results and Provides Corporate Update\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "A special dividend joins Chagee (CHA)'s three-year plan to pay at least 50% of prior-year net income. - Stock Titan",
+          "title": "SLS: SELLAS Life Sciences Group Inc. filed SEC Form 8-K: Results of... - Quantisnow",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNb0xRTS1rRG5ZQjYtUF8xWkdERXJQZ1JHVGFJdjc1T2hxNV8xOXVQa0lSaWxqX182ZDY5Z1pCZnQyaTlDckF2bmxSR2p1WWw3VnlkeEdTUHBsdTZwdmtRaXEyMnp3LWFYLUxFak9kQ0NyMk5tNGlUcm1hZHhSSE92NlNCLURHQlZBdnhUU3lJWGQ1UjVBRmdWSUlzaFB3N0J2bV9mRUJZR21XSF9wSlpqbmQxRkg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOS1JIZWozV3BXajJyNHJCUTY2a2xoTHBVODJrUi1DRU41MXZmcUJMbmlsUHBjSEttSjU5b1pCTS1XV1hDc3IyZ01lbkoxeTNRRzA3Z2Z0MGZPelhZNU9SLWpacDN0R05HdFdTVjYtTldZQ0pxMFJrUXNZX3l1TTVIUkRqaGQyVTY4RmZQa1JsRC1yTEJUZTBLWEgzc3Y?oc=5"
         },
         {
-          "title": "Nvidia Falls 7% Before the Bell After a WSJ Report Its Board Is Preparing to Oust Its CEO, CNBC Says - Stock Titan",
+          "title": "SLS Stock Surges After-Hours: Sellas Says 'Transformative' Phase 3 AML Results Are Coming This Month - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNVWNaaUdDNGFMRWVmb1VJc3JyRFdPS1ZiWV9LNE5sNGdZQUhHYVRGREFOMEltOHRQNmpTcXBGa1dHR0wxeFIzV2ZMMUxoUXBvcGRVS1VWUTVUelFZZWJPa1hfYzRzMFdoelFFTmZTejZYRFpTYmVPQklYWGhaSEJlZlh3?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPSVVuQkVDb253QUZWWmMwQ19BcWxtX013b01teXhxbm9vamh2TmRjdkhmRkNMUkRwZ29uYlVnS3ItOXlnQTNHUjdpVDhJUDhPRG5fbllZSzZPTl92MkdvTU5CQ1pBVU4xa3A4bGxFMFVxbW9LT1g0dFJyLXRRVjQtRG9hOE1QOXNodHdTQUNkZUZiUE5L?oc=5"
         },
         {
-          "title": "A three-year plan calls for Chagee to pay at least half of prior-year profit as dividends each year. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNdGNNTjRfX1Q0TGdnbVQtU09wd2tiWmFXVmdxNnlFLWJPaHN6bzl1NFo0eHl2VFNDVDhnTUE2SjdKeFIxQkw4NHFWT0dhSGxIaGxMMVZ4a1hpaDB1NFgzYzZqaHRfMWUyLU9EaUR1VF96a3Y0OXVzb2tRd2RJNVhQVVM3V0xWS0owWW85czQybGRmeWlZMWppMDFOc2NKY3R6Q1c4Q25fbXRvdlNFTUFveWhpOUtRcG5XNzN5OTA4Zw?oc=5"
+          "title": "SELLAS Life Sciences Reports Third Quarter 2026 Financial Results and Provides Corporate Update",
+          "source": "Finviz",
+          "url": "/news/422170/sellas-life-sciences-reports-third-quarter-2026-financial-results-and-provides-corporate-update"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "120.96M",
-      "short_float": "5.71%",
-      "daily_pct": -0.8,
-      "prev_close": 12.33,
+      "edgar_filing": {
+        "filing_date": "2026-11-12",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1390478/000139047826000021/sls-20261112.htm"
+      },
+      "float_shares": "199.70M",
+      "short_float": "28.40%",
+      "daily_pct": -4.63,
+      "prev_close": 8.03,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $9M < $100M, ADR 3.4% < 4%)",
+      "technical_status": "Fail (Avg $Vol $59M < $100M)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -292,16 +238,16 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CHA: A special dividend joins Chagee (CHA)'s three-year plan to pay at least 50% of prior-year ",
+        "primary_claim": "SLS: SLS: SELLAS Life Sciences Group Inc. filed SEC Form 8-K: Results of... - Quantisnow",
         "discrepancy_note": ""
       },
-      "gates_passed": 3,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_mkt_cap": false,
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
@@ -312,9 +258,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
-    "large_gaps": 0,
-    "total_headlines": 11,
+    "small_gaps": 2,
+    "large_gaps": 1,
+    "total_headlines": 12,
     "monthly_cost_usd": 0.01
   }
 }
