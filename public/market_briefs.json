@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-13 13:28 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equity Weakness / Volatility Spike",
+    "spy_price": 752.36,
+    "spy_change_pct": -0.63,
+    "vix": 19.81,
+    "hy_oas": 3.2,
+    "yield_curve": 0.24,
+    "credit_status": "Complacent",
+    "s5fi": 65.5,
+    "mmth": 64.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA unveiled its groundbreaking 'Aether' AI processing unit, promising a generational leap in computing performance and solidifying its market dominance in the rapidly expanding artificial intelligence sector."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced overwhelmingly positive Phase 3 clinical trial results for its novel Alzheimer's treatment, showing significant improvement in cognitive function and slowing disease progression."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple saw technical buying pressure after testing its 50-day moving average, with no fresh fundamental news catalyst driving today's price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-13 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla (TSLA) is seeing renewed momentum ahead of its highly anticipated CyberTruck production update, following recent analyst upgrades focused on delivery ramp-up."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-23 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Heightened Volatility",
-    "spy_price": 763.96,
-    "spy_change_pct": -1.18,
-    "vix": 19.75,
-    "hy_oas": 3.27,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 57.3,
-    "mmth": 57.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CVX",
-          "company": "Chevron Corporation",
-          "reason": "Chevron announced a new significant oil discovery in the Gulf of Mexico, boosting its long-term production outlook amidst rising crude oil prices, providing a strong fundamental catalyst."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly received accelerated FDA approval for its groundbreaking Alzheimer's drug, significantly expanding its market opportunity and strengthening its pharmaceutical pipeline."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to face continued pressure from broad tech sector weakness and rising interest rate concerns, which negatively impact growth stock valuations."
         }
       ]
     }
