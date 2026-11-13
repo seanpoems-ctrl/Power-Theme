@@ -71,7 +71,7 @@ def universe() -> tuple[list[str], dict[str, float]]:
     """Returns (Yahoo-spelled tickers, {ticker: ADR%}); ADR% = ATR / close x 100 from TradingView (same definition as screener_builder.py)."""
     from tradingview_screener import Query, col
     q = (Query().set_markets("america").select("name", "market_cap_basic", "average_volume_10d_calc", "ATR", "close")
-         .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
+         .where(col("type").isin(["stock", "dr"]), col("typespecs").has_none_of(["preferred"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
          .order_by("market_cap_basic", ascending=False).limit(6000))
     q.query.pop("filter2", None)

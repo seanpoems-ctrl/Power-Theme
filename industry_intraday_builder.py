@@ -69,7 +69,7 @@ def build() -> dict | None:
     q = (Query().set_markets("america")
          .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y", "ATR", "SMA50",
                  "price_52_week_high", "price_52_week_low", "industry", "exchange")
-         .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
+         .where(col("type").isin(["stock", "dr"]), col("typespecs").has_none_of(["preferred"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
          .order_by("market_cap_basic", ascending=False).limit(5000))
     q.query.pop("filter2", None)

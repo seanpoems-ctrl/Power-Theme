@@ -151,6 +151,7 @@ def build_screener() -> list[dict]:
                 col("average_volume_10d_calc") > MIN_AVG_VOL,
                 col("close") > MIN_PRICE,
                 col("type").isin(["stock", "dr"]),   # "dr" = depositary receipt (ARM, ASML, TSM, SAP, etc.)
+                col("typespecs").has_none_of(["preferred"]),   # preferreds (METAM, GOOGN, STRC...) carry the common's market cap but have no ATR
                 col("exchange").isin(["NASDAQ", "NYSE"]),
             )
             .order_by("average_volume_10d_calc", ascending=False)

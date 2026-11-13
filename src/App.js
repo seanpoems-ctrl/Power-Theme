@@ -12131,7 +12131,8 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     try { const v = JSON.parse(localStorage.getItem("theme_adr_filters_v1")); if (v && Number.isFinite(v.adr) && Number.isFinite(v.dv)) return v; } catch { /* ignore */ }
     return { adr: 4, dv: 20 };
   });
-  React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); return () => { dead = true; }; }, []);
+  const [spdr, setSpdr] = React.useState(null);
+  React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); loadSpdrHoldings().then(x => { if (!dead) setSpdr(x); }); return () => { dead = true; }; }, []);
   const setFilter = (k, v) => setF(prev => {
     const n = { ...prev, [k]: v };
     try { localStorage.setItem("theme_adr_filters_v1", JSON.stringify(n)); } catch { /* ignore */ }
@@ -12142,8 +12143,12 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     const inds = new Set((industryRankings || []).filter(i => i.fine_theme === theme).map(i => i.name));
     // Which of the theme's ETFs hold each stock (stored top holdings), so the table can show it and add holdings the industry grouping misses
     // (e.g. CRWD / ZS / OKTA sit in "Software - Infrastructure" but are the core of the Cybersecurity ETFs).
+    // A SPDR fund's list is the issuer's FULL holdings (spdr_holdings.json); every other fund only has the stored top ~10.
+    const holdingsOf = etf => spdr?.[etf]
+      ? spdr[etf].map(r => ({ ticker: r.t, name: r.n, adr_pct: r.adr, dollar_volume: r.dv, mkt_cap: r.cap, perf_intraday: r.i, perf_1d: r.d, perf_1w: r.w, perf_1m: r.m, ext: r.ext, industry: r.ind }))
+      : (etfHoldings?.[etf] || []);
     const heldBy = {};
-    for (const etf of etfTickers) for (const h of etfHoldings?.[etf] || []) (heldBy[h.ticker] ||= []).push(etf);
+    for (const etf of etfTickers) for (const h of holdingsOf(etf)) (heldBy[h.ticker] ||= []).push(etf);
     const seen = new Set();
     const out = [];
     const fromIndustry = (r, ind) => ({ ticker: r.t, name: r.n, industry: ind, etfs: heldBy[r.t] || [], adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
@@ -12151,17 +12156,17 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
       if (UNIVERSE_EXCLUDE?.has?.(r.t) || seen.has(r.t)) continue;
       seen.add(r.t); out.push(fromIndustry(r, ind));
     }
-    for (const etf of etfTickers) for (const h of etfHoldings?.[etf] || []) {
+    for (const etf of etfTickers) for (const h of holdingsOf(etf)) {
       if (UNIVERSE_EXCLUDE?.has?.(h.ticker) || seen.has(h.ticker)) continue;
       seen.add(h.ticker);
       const r = file.byTicker?.[h.ticker];
       if (r) { out.push(fromIndustry(r, r.industry)); continue; }          // fresher, same fields as the industry rows
-      out.push({ ticker: h.ticker, name: h.name, industry: null, etfs: heldBy[h.ticker] || [], adr: h.adr_pct, dv: h.dollar_volume, cap: h.mkt_cap,
-        intra: h.perf_intraday, d1: h.perf_1d, w1: h.perf_1w, m1: h.perf_1m, ext: null });
+      out.push({ ticker: h.ticker, name: h.name, industry: h.industry || null, etfs: heldBy[h.ticker] || [], adr: h.adr_pct, dv: h.dollar_volume, cap: h.mkt_cap,
+        intra: h.perf_intraday, d1: h.perf_1d, w1: h.perf_1w, m1: h.perf_1m, ext: h.ext ?? null });
     }
     for (const o of out) o.adrDv = adrDollarVol(o.adr, o.dv);
     return out;
-  }, [file, industryRankings, theme, etfTickers, etfHoldings]);
+  }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings]);
   const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6))), [all, f]);
   const sort = useTableSort(rows, "adr", "desc");
   const shown = sort.rows.slice(0, 25);
@@ -16112,6 +16117,14 @@ const loadIndustryStocks = () => {
     }).catch(() => null);
   }
   return _industryStocksP;
+};
+
+// public/spdr_holdings.json (spdr_holdings_builder.py): FULL holdings (with TradingView stats) for the State Street / SPDR ETFs, whose issuer publishes every
+// line; Yahoo's stored holdings are only the top ~10. { etfs: { XHB: [{t, n, wt, p, i, d, w, m, ext, dv, adr, cap, ind}, …] } }
+let _spdrHoldingsP = null;
+const loadSpdrHoldings = () => {
+  if (!_spdrHoldingsP) _spdrHoldingsP = fetch(`${process.env.PUBLIC_URL}/spdr_holdings.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => d?.etfs || null).catch(() => null);
+  return _spdrHoldingsP;
 };
 
 // public/stock_lookup.json (industry_intraday_builder.py): {ticker: [market cap $B, industry]} for every US stock above $500M. Last-resort source for the

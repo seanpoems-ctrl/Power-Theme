@@ -71,7 +71,7 @@ def fetch_universe():
     q = (Query().set_markets("america")
          .select("name", "description", "close", "change", "ATR", "SMA50", "average_volume_10d_calc", "market_cap_basic", "industry",
                  *[c for _, c in WINDOWS])
-         .where(col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
+         .where(col("type").isin(["stock", "dr"]), col("typespecs").has_none_of(["preferred"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("close") >= MIN_PRICE, col("average_volume_10d_calc") > MIN_AVG_VOLUME)
          .order_by("average_volume_10d_calc", ascending=False).limit(5000))
     q.query.pop("filter2", None)          # tradingview_screener >= 3.2 hides funds by default; harmless for stocks
