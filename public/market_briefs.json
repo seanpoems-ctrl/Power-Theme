@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-11-13 20:01 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Wary Indecision",
+    "spy_price": 757.12,
+    "spy_change_pct": -0.35,
+    "vix": 19.3,
+    "hy_oas": 3.2,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 66.9,
+    "mmth": 64.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Shares surged after the company announced a significant expansion of its cloud computing services into a high-growth emerging market."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "The financial giant saw strong buying interest following revised guidance for dividend increases next year, citing robust capital ratios."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continued its upward trend on strong demand for its AI processing units, without specific new catalysts today, driven by ongoing sector momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-11-13 15:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Shares saw institutional selling pressure around key resistance levels, with technical traders monitoring the 50-day moving average for potential support or a breakdown."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-23 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Risk-Off / Inflationary Concerns",
-    "spy_price": 759.97,
-    "spy_change_pct": -0.52,
-    "vix": 19.45,
-    "hy_oas": 3.4,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 56.0,
-    "mmth": 56.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Reports groundbreaking Phase 3 trial data for a new obesity drug, significantly expanding its market opportunity."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Launches a strategic partnership with a major cloud provider to deploy its next-gen AI supercomputers, driving demand expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Experiences typical year-end shopping volume, but today's price action is largely technical amidst broader market pressures."
         }
       ]
     }
