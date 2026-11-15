@@ -12153,13 +12153,13 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     // (e.g. CRWD / ZS / OKTA sit in "Software - Infrastructure" but are the core of the Cybersecurity ETFs).
     // A SPDR fund's list is the issuer's FULL holdings (spdr_holdings.json); every other fund only has the stored top ~10.
     const holdingsOf = etf => spdr?.[etf]
-      ? spdr[etf].map(r => ({ ticker: r.t, name: r.n, adr_pct: r.adr, dollar_volume: r.dv, mkt_cap: r.cap, perf_intraday: r.i, perf_1d: r.d, perf_1w: r.w, perf_1m: r.m, ext: r.ext, industry: r.ind }))
+      ? spdr[etf].map(r => ({ ticker: r.t, name: r.n, adr_pct: r.adr, dollar_volume: r.dv, mkt_cap: r.cap, perf_intraday: r.i, perf_1d: r.d, perf_1w: r.w, perf_1m: r.m, perf_3m: r.m3, perf_6m: r.m6, perf_ytd: r.ytd, perf_1y: r.y, ext: r.ext, industry: r.ind }))
       : (etfHoldings?.[etf] || []);
     const heldBy = {};
     for (const etf of etfTickers) for (const h of holdingsOf(etf)) (heldBy[h.ticker] ||= []).push(etf);
     const seen = new Set();
     const out = [];
-    const fromIndustry = (r, ind) => ({ ticker: r.t, name: r.n, industry: ind, etfs: heldBy[r.t] || [], adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, ext: r.ext });
+    const fromIndustry = (r, ind) => ({ ticker: r.t, name: r.n, industry: ind, etfs: heldBy[r.t] || [], adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, m3: r.m3, m6: r.m6, ytd: r.ytd, y1: r.y, ext: r.ext });
     for (const ind of inds) for (const r of file.byIndustry[ind] || []) {
       if (UNIVERSE_EXCLUDE?.has?.(r.t) || seen.has(r.t)) continue;
       seen.add(r.t); out.push(fromIndustry(r, ind));
@@ -12170,7 +12170,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
       const r = file.byTicker?.[h.ticker];
       if (r) { out.push(fromIndustry(r, r.industry)); continue; }          // fresher, same fields as the industry rows
       out.push({ ticker: h.ticker, name: h.name, industry: h.industry || null, etfs: heldBy[h.ticker] || [], adr: h.adr_pct, dv: h.dollar_volume, cap: h.mkt_cap,
-        intra: h.perf_intraday, d1: h.perf_1d, w1: h.perf_1w, m1: h.perf_1m, ext: h.ext ?? null });
+        intra: h.perf_intraday, d1: h.perf_1d, w1: h.perf_1w, m1: h.perf_1m, m3: h.perf_3m, m6: h.perf_6m, ytd: h.perf_ytd, y1: h.perf_1y, ext: h.ext ?? null });
     }
     for (const o of out) o.adrDv = adrDollarVol(o.adr, o.dv);
     return out;
@@ -12217,6 +12217,10 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
             <SortTh sort={sort} col="d1" label="1D" className="px-2 py-1" />
             <SortTh sort={sort} col="w1" label="1W" className="px-2 py-1" />
             <SortTh sort={sort} col="m1" label="1M" className="px-2 py-1" />
+            <SortTh sort={sort} col="m3" label="3M" className="px-2 py-1" />
+            <SortTh sort={sort} col="m6" label="6M" className="px-2 py-1" />
+            <SortTh sort={sort} col="ytd" label="YTD" className="px-2 py-1" />
+            <SortTh sort={sort} col="y1" label="1Y" className="px-2 py-1" />
             <SortTh sort={sort} col="ext" label="Ext" title="ATR% multiple from the 50-day MA" className="px-2 py-1" />
           </tr></thead>
           <tbody>
@@ -12233,6 +12237,10 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
                 <td className="px-2 py-1 text-right font-mono">{pc(r.d1)}</td>
                 <td className="px-2 py-1 text-right font-mono">{pc(r.w1)}</td>
                 <td className="px-2 py-1 text-right font-mono">{pc(r.m1)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.m3)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.m6)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.ytd)}</td>
+                <td className="px-2 py-1 text-right font-mono">{pc(r.y1)}</td>
                 <td className="px-2 py-1 text-right font-mono text-zinc-400">{r.ext != null ? `${r.ext.toFixed(1)}x` : "—"}</td>
               </tr>
             ))}

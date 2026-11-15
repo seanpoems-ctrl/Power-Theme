@@ -18,7 +18,7 @@ Output: public/industry_intraday.json  { generated_at, date, count, values: { "<
 
 The same TradingView call also feeds public/industry_stocks.json — the industry's real stocks (every stock >= MIN_CAP, largest first; TOP_STOCKS can cap it) for the Industry
 Matrix drill-down, so an industry tile that isn't one of the scanned top-5 themes shows its own companies instead of its parent theme's proxy ETF
-(Apparel Manufacturing used to list XLY's AMZN / TSLA).  { generated_at, date, industries: { "<industry>": [ {t, n, p, i, d, w, m, m3, m6, y, dv, adr, cap, ext, rng}, … ] } }
+(Apparel Manufacturing used to list XLY's AMZN / TSLA).  { generated_at, date, industries: { "<industry>": [ {t, n, p, i, d, w, m, m3, m6, ytd, y, dv, adr, cap, ext, rng}, … ] } }
 """
 import json
 import logging
@@ -67,7 +67,7 @@ def build() -> dict | None:
     company_of = {r["ticker"]: r.get("company") for r in db if r.get("ticker")}
 
     q = (Query().set_markets("america")
-         .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y", "ATR", "SMA50",
+         .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.YTD", "Perf.Y", "ATR", "SMA50",
                  "price_52_week_high", "price_52_week_low", "industry", "exchange")
          .where(col("type").isin(["stock", "dr"]), col("typespecs").has_none_of(["preferred"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                 col("market_cap_basic") >= MIN_CAP, col("average_volume_10d_calc") >= MIN_AVG_VOL)
@@ -95,7 +95,7 @@ def build() -> dict | None:
         stocks.setdefault(ind, []).append({
             "t": t, "n": company_of.get(t) or "", "p": round(c, 2), "i": round(intra, 2),
             "d": _r(_num(r.get("change"))), "w": _r(_num(r.get("Perf.W"))), "m": _r(_num(r.get("Perf.1M"))),
-            "m3": _r(_num(r.get("Perf.3M"))), "m6": _r(_num(r.get("Perf.6M"))), "y": _r(_num(r.get("Perf.Y"))),
+            "m3": _r(_num(r.get("Perf.3M"))), "m6": _r(_num(r.get("Perf.6M"))), "ytd": _r(_num(r.get("Perf.YTD"))), "y": _r(_num(r.get("Perf.Y"))),
             "ext": round(((c / sma50) - 1) / (atr / c), 2) if sma50 and atr else None,
             "rng": round((c - lo) / (hi - lo) * 100) if hi and lo and hi > lo else None,
             "dv": round(c * vol) if vol else None, "adr": round(atr / c * 100, 1) if atr else None, "cap": round(cap),
