@@ -16994,6 +16994,106 @@ const NelTable = ({ n, onRow, onMini }) => {
   );
 };
 
+// ── Themes → Theme Leaders: "which themes move QQQ / QQQE" ─────────────────────────────────────────────────────────────────────────
+// public/qqq_contribution.json (qqq_contribution_builder.py): the funds' FULL holdings (Invesco for QQQ, Direxion for QQQE) grouped by the theme each stock's
+// industry belongs to; contribution = weight × stock return, in points of the fund's own return (rows add up to roughly the fund's move).
+let _qqqContribP = null;
+const loadQqqContribution = () => {
+  if (!_qqqContribP) _qqqContribP = fetch(`${process.env.PUBLIC_URL}/qqq_contribution.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => d?.funds ? d : null).catch(() => null);
+  return _qqqContribP;
+};
+const QQQ_CONTRIB_WINDOWS = [["p1w", "1W", 2], ["p1m", "1M", 3], ["p3m", "3M", 4], ["pytd", "YTD", 5]];
+const QqqContributionCard = () => {
+  const [data, setData] = React.useState(null);
+  const [fund, setFund] = React.useState(() => { try { return localStorage.getItem("qqq_contrib_fund_v1") === "QQQE" ? "QQQE" : "QQQ"; } catch { return "QQQ"; } });
+  const [win, setWin] = React.useState(() => { try { const v = localStorage.getItem("qqq_contrib_win_v1"); return QQQ_CONTRIB_WINDOWS.some(w => w[0] === v) ? v : "p1m"; } catch { return "p1m"; } });
+  React.useEffect(() => { let dead = false; loadQqqContribution().then(d => { if (!dead) setData(d); }); return () => { dead = true; }; }, []);
+  const pick = (setter, key) => v => { setter(v); try { localStorage.setItem(key, v); } catch { /* ignore */ } };
+  const f = data?.funds?.[fund];
+  const otherName = fund === "QQQ" ? "QQQE" : "QQQ";
+  const idx = QQQ_CONTRIB_WINDOWS.find(w => w[0] === win)?.[2] ?? 3;
+  const rows = React.useMemo(() => {
+    if (!f) return [];
+    const other = {};
+    for (const t of data.funds[otherName]?.themes || []) other[t.theme] = t.w;
+    return f.themes.map(t => ({
+      ...t, pts: t[win], abs: Math.abs(t[win]), ret: t.w > 0 ? t[win] / t.w * 100 : null, otherW: other[t.theme] ?? 0,
+      movers: [...t.top].map(x => ({ t: x[0], c: x[idx] == null ? null : x[1] * x[idx] / 100 })).filter(x => x.c != null).sort((a, b) => Math.abs(b.c) - Math.abs(a.c)).slice(0, 4),
+    }));
+  }, [f, data, win, otherName]);
+  const sort = useTableSort(rows, "abs", "desc");
+  if (!data || !f) return null;
+  const maxAbs = Math.max(0.01, ...rows.map(r => r.abs));
+  const pts = v => <span className={v > 0.004 ? "text-emerald-400" : v < -0.004 ? "text-rose-400" : "text-zinc-500"}>{v > 0 ? "+" : ""}{v.toFixed(2)}</span>;
+  const pc = v => v == null ? <span className="text-zinc-700">—</span> : <span className={v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-400"}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
+  const pillBtn = (on, onClick, label) => (
+    <button key={label} onClick={onClick} className={`text-[11px] px-2 py-0.5 rounded border transition-colors ${on ? "border-blue-500/60 bg-blue-500/10 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>{label}</button>
+  );
+  return (
+    <div className="space-y-2.5">
+      <div className="flex items-center gap-2 flex-wrap">
+        <h3 className="text-sm font-semibold text-zinc-100">{fund} Contribution By Theme</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{f.n} stocks · holdings {f.as_of}</span>
+        <div className="ml-auto flex items-center gap-1.5 flex-wrap">
+          {["QQQ", "QQQE"].map(x => pillBtn(fund === x, () => pick(setFund, "qqq_contrib_fund_v1")(x), x))}
+          <span className="mx-1 text-zinc-700">|</span>
+          {QQQ_CONTRIB_WINDOWS.map(([k, label]) => pillBtn(win === k, () => pick(setWin, "qqq_contrib_win_v1")(k), label))}
+        </div>
+      </div>
+      <p className="text-[11px] text-zinc-600 leading-snug">
+        Points of {fund} return = weight × stock return, so the rows add up to the fund's move ({pts(f.total[win])} pts over {QQQ_CONTRIB_WINDOWS.find(w => w[0] === win)[1]}).
+        {fund === "QQQ" ? " QQQ is cap-weighted: a few mega-caps set the result." : " QQQE holds each Nasdaq-100 stock at ~1%, so it shows what the average stock is doing."} Stocks are grouped by the theme their industry sits in on the Industry Matrix; Apple is shown on its own row (its industry otherwise lands inside Semiconductors).
+        Approximate: latest holdings applied to trailing price returns, no cash / rebalancing.
+      </p>
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 overflow-hidden">
+        <table className="w-full text-xs border-collapse">
+          <thead><tr className="text-zinc-600 text-[10px] uppercase tracking-wide">
+            <SortTh sort={sort} col="theme" label="Theme" textual align="left" className="px-3 py-2" />
+            <SortTh sort={sort} col="w" label={`${fund} Wt`} className="px-2 py-2" />
+            <SortTh sort={sort} col="otherW" label={`${otherName} Wt`} title={`The same theme's weight in ${otherName}`} className="px-2 py-2 hidden md:table-cell" />
+            <SortTh sort={sort} col="ret" label="Return" title="Weighted average return of the theme's stocks over the window" className="px-2 py-2" />
+            <SortTh sort={sort} col="pts" label="Contribution (pts)" title="Weight × return, in points of the fund's return" className="px-3 py-2" />
+            <th className="px-2 py-2 text-left font-medium hidden lg:table-cell">Biggest movers (pts)</th>
+          </tr></thead>
+          <tbody>
+            {sort.rows.map(r => (
+              <tr key={r.theme} className="border-t border-zinc-800/70 hover:bg-zinc-800/30">
+                <td className="px-3 py-1.5 text-zinc-200 whitespace-nowrap">{r.theme}<span className="ml-1.5 text-[10px] text-zinc-600">{r.n}</span></td>
+                <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{r.w.toFixed(1)}%</td>
+                <td className="px-2 py-1.5 text-right font-mono text-zinc-500 hidden md:table-cell">{r.otherW ? `${r.otherW.toFixed(1)}%` : "—"}</td>
+                <td className="px-2 py-1.5 text-right font-mono">{pc(r.ret)}</td>
+                <td className="px-3 py-1.5">
+                  <div className="flex items-center justify-end gap-2">
+                    <div className="relative h-2 w-24 sm:w-32 bg-zinc-800/60 rounded-sm overflow-hidden">
+                      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-zinc-600" />
+                      <div className={`absolute top-0 bottom-0 ${r.pts >= 0 ? "bg-emerald-500/80" : "bg-rose-500/80"}`}
+                        style={r.pts >= 0 ? { left: "50%", width: `${r.abs / maxAbs * 50}%` } : { right: "50%", width: `${r.abs / maxAbs * 50}%` }} />
+                    </div>
+                    <span className="font-mono w-14 text-right">{pts(r.pts)}</span>
+                  </div>
+                </td>
+                <td className="px-2 py-1.5 hidden lg:table-cell">
+                  <div className="flex flex-wrap gap-x-2.5 gap-y-0.5 font-mono text-[10px]">
+                    {r.movers.map(m => <span key={m.t} className="whitespace-nowrap"><span className="text-zinc-400">{m.t}</span> {pts(m.c)}</span>)}
+                  </div>
+                </td>
+              </tr>
+            ))}
+            <tr className="border-t border-zinc-700 bg-zinc-900/60 font-semibold">
+              <td className="px-3 py-1.5 text-zinc-300">Total</td>
+              <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{f.total.w.toFixed(1)}%</td>
+              <td className="px-2 py-1.5 hidden md:table-cell" />
+              <td className="px-2 py-1.5" />
+              <td className="px-3 py-1.5 text-right font-mono">{pts(f.total[win])}</td>
+              <td className="hidden lg:table-cell" />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
 const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = null }) => {
   const nq = useNasdaqShares(etfHoldings);
   const [sel, setSel]     = React.useState(null);   // { group, window } for the group popup
@@ -17124,6 +17224,7 @@ const ThemeLeadersView = ({ etfRsData = null, etfHoldings = {}, onMiniCharts = n
           </div>
         )}
       </div>
+      <QqqContributionCard />
       <EtfPerformanceHeatmap groups={groups} etfs={etfs} extAsOf={extHours?.generated_at}
         onPickGroup={(g, win) => setSel({ group: g, win })} onPickEtf={openEtf} />
       {sel?.group && <ThemeGroupPopup key={`${sel.group.name}|${sel.win.w}|${sel.only || ""}`} only={sel.only || null} group={sel.group} window={sel.win} etfs={etfs} etfHoldings={etfHoldings} stats={stats}
