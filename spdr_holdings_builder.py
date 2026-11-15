@@ -11,7 +11,7 @@ those stay at the top 10.
 Output: public/spdr_holdings.json
   { generated_at, as_of, etfs: { "XHB": [ {t, n, wt, p, i, d, w, m, ext, dv, adr, cap, ind}, … ] } }
     wt  = weight in the fund (%)            p   = price                      i = intraday % (close vs open)
-    d / w / m = 1D / 1W / 1M %              ext = ATR% multiple from the 50-MA (same formula as everywhere else)
+    d / w / m / m3 / m6 / ytd / y = 1D / 1W / 1M / 3M / 6M / YTD / 1Y %     ext = ATR% multiple from the 50-MA (same formula as everywhere else)
     dv  = avg daily $ volume (10d)          adr = ATR / close x 100          cap = market cap ($)   ind = TradingView industry
   Only US-listed (NASDAQ / NYSE / AMEX) stocks / ADRs with market cap >= $500M (same floor as the stored holdings); everything else
   (cash, futures, foreign lines, small caps) is left out. Rows are sorted by weight.
@@ -92,7 +92,7 @@ def lookup(tickers: list[str]) -> dict[str, dict]:
     for i in range(0, len(tickers), 400):
         chunk = tickers[i:i + 400]
         q = (Query().set_markets("america")
-             .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "ATR", "SMA50", "industry")
+             .select("name", "open", "close", "market_cap_basic", "average_volume_10d_calc", "change", "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.YTD", "Perf.Y", "ATR", "SMA50", "industry")
              .where(col("name").isin(chunk), col("type").isin(["stock", "dr"]), col("exchange").isin(["NASDAQ", "NYSE", "AMEX"]),
                     col("market_cap_basic") >= MIN_CAP)
              .limit(len(chunk) + 100))
@@ -107,7 +107,8 @@ def lookup(tickers: list[str]) -> dict[str, dict]:
                 continue
             out[t] = {
                 "p": round(c, 2), "i": _r((c / o - 1) * 100) if o else None, "d": _r(_num(r.get("change"))),
-                "w": _r(_num(r.get("Perf.W"))), "m": _r(_num(r.get("Perf.1M"))),
+                "w": _r(_num(r.get("Perf.W"))), "m": _r(_num(r.get("Perf.1M"))), "m3": _r(_num(r.get("Perf.3M"))), "m6": _r(_num(r.get("Perf.6M"))),
+                "ytd": _r(_num(r.get("Perf.YTD"))), "y": _r(_num(r.get("Perf.Y"))),
                 "ext": round(((c / sma50) - 1) / (atr / c), 2) if sma50 and atr and atr > 0 else None,
                 "dv": round(c * vol) if vol else None, "adr": _r(atr / c * 100) if atr and atr > 0 else None,
                 "cap": round(cap), "ind": str(r.get("industry") or "") or None,
@@ -121,7 +122,7 @@ def build() -> dict | None:
     except Exception as exc:    # noqa: BLE001
         logger.error("thematic_data.json unreadable (%s)", exc)
         return None
-    with ThreadPoolExecutor(max_workers=8) as ex:
+    with ThreadPoolExecutor(max_workers=3) as ex:       # gentle: 8 parallel requests got this IP a 403 from State Street once
         funds = [f for f in ex.map(fetch_fund, etfs) if f]
     logger.info("SPDR funds read: %d of %d ETFs", len(funds), len(etfs))
     if len(funds) < MIN_FUNDS:

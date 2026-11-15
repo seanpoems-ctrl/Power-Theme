@@ -16,7 +16,7 @@ This builds one: for every industry, the market-cap-weighted average of (close �
 Run after the close it is the day's open→close move ("Intra" = what the day's candle body did); during the session it is open→last.
 Output: public/industry_intraday.json  { generated_at, date, count, values: { "<industry>": { "intra": 0.42, "n": 17 } } }
 
-The same TradingView call also feeds public/industry_stocks.json — the industry's real stocks (largest TOP_STOCKS by market cap) for the Industry
+The same TradingView call also feeds public/industry_stocks.json — the industry's real stocks (every stock >= MIN_CAP, largest first; TOP_STOCKS can cap it) for the Industry
 Matrix drill-down, so an industry tile that isn't one of the scanned top-5 themes shows its own companies instead of its parent theme's proxy ETF
 (Apparel Manufacturing used to list XLY's AMZN / TSLA).  { generated_at, date, industries: { "<industry>": [ {t, n, p, i, d, w, m, m3, m6, y, dv, adr, cap, ext, rng}, … ] } }
 """
@@ -39,7 +39,7 @@ MIN_CAP = 500e6            # ignore small caps - not traded, and keeps every lis
 MIN_AVG_VOL = 100_000
 MIN_STOCKS = 3
 MAX_WEIGHT_SHARE = 0.35    # one stock can carry at most 35 % of an industry's weight
-TOP_STOCKS = 30            # stocks kept per industry in industry_stocks.json
+TOP_STOCKS = None          # stocks kept per industry in industry_stocks.json: None = all (>= MIN_CAP, largest first). Was 30 until 2026-11-15, which dropped e.g. BB ($5B) from "Software - Infrastructure" (#30 is $11.7B)
 OUT_STOCKS = ROOT / "public" / "industry_stocks.json"
 OUT_LOOKUP = ROOT / "public" / "stock_lookup.json"   # {ticker: [market cap $B, TradingView industry, exchange NASDAQ/NYSE/AMEX]} for EVERY stock above MIN_CAP - chart stats / stock panel fallback + the Nasdaq % column
 

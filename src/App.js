@@ -11680,8 +11680,16 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
   // Also backfill adr_pct/rs/mkt_cap when the scraper's own per-holding fetch came back null
   // (screenerMap's 500-name universe and etfRsMap don't always overlap with etf_holdings, but
   // when they do it's real data that shouldn't be wasted).
+  // SPDR funds: the issuer's FULL holdings (spdr_holdings.json) replace the stored top ~10 (Yahoo). Shape matches the stored rows.
+  const [spdrAll, setSpdrAll] = useState(null);
+  React.useEffect(() => { let dead = false; loadSpdrHoldings().then(x => { if (!dead) setSpdrAll(x); }); return () => { dead = true; }; }, []);
+  const fullList = spdrAll?.[etf] || null;
+  const baseHoldings = React.useMemo(() => fullList
+    ? fullList.map(r => ({ ticker: r.t, name: r.n, weight: r.wt, price: r.p, perf_intraday: r.i, perf_1d: r.d, perf_1w: r.w, perf_1m: r.m, perf_3m: r.m3 ?? null, perf_6m: r.m6 ?? null,
+        perf_ytd: r.ytd ?? null, perf_1y: r.y ?? null, adr_pct: r.adr, dollar_volume: r.dv, mkt_cap: r.cap }))
+    : holdings, [fullList, holdings]);
   const enrichedHoldings = React.useMemo(() => {
-    return holdings.map(h => {
+    return baseHoldings.map(h => {
       const sc = screenerMap[h.ticker] || etfRsMap[h.ticker];
       if (!sc) return h;
       return {
@@ -11699,7 +11707,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
         dollar_volume: h.dollar_volume ?? sc.avg_dollar_volume,
       };
     }).map(h => ({ ...h, adr_dvol: adrDollarVol(h.adr_pct, h.dollar_volume) }));
-  }, [holdings, screenerMap, etfRsMap]);
+  }, [baseHoldings, screenerMap, etfRsMap]);
 
   const fmt = v => {
     if (v == null) return "—";
@@ -11784,7 +11792,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                 </span>
               );
             })()}
-            <span className="text-xs text-zinc-500">{sorted.length}{sorted.length !== enrichedHoldings.length ? ` of ${enrichedHoldings.length}` : ""} stocks · historical snapshot</span>
+            <span className="text-xs text-zinc-500">{sorted.length}{sorted.length !== enrichedHoldings.length ? ` of ${enrichedHoldings.length}` : ""} stocks · {fullList ? "full fund holdings (State Street)" : "top holdings (historical snapshot)"}</span>
             <LiquidityFilter min={minDv} setMin={setMinDv} hidden={enrichedHoldings.length - sorted.length} />
           </div>
           <div className="flex items-center gap-3">
@@ -12169,7 +12177,8 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
   }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings]);
   const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6))), [all, f]);
   const sort = useTableSort(rows, "adr", "desc");
-  const shown = sort.rows.slice(0, 25);
+  const [showAll, setShowAll] = React.useState(false);
+  const shown = showAll ? sort.rows : sort.rows.slice(0, 25);
   const pc = v => v == null ? <span className="text-zinc-700">—</span> : <span className={v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-400"}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
   const money = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${(v / 1e6).toFixed(0)}M`;
   const num = (v, set) => (
@@ -12184,6 +12193,9 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min ADR% {num(f.adr, v => setFilter("adr", v))}</label>
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min $ Vol {num(f.dv, v => setFilter("dv", v))} M</label>
         <span className="text-[10px] text-zinc-600">{rows.length} of {all.length} stocks{rows.length > shown.length ? ` · top ${shown.length} shown` : ""}</span>
+        {rows.length > 25 && (
+          <button onClick={() => setShowAll(v => !v)} className="text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-sky-400 hover:bg-zinc-800">{showAll ? "Show top 25" : `Show all ${rows.length}`}</button>
+        )}
         {onMiniCharts && rows.length > 0 && (
           <button onClick={() => onMiniCharts(sort.rows.map(r => r.ticker), `${theme} — highest ADR`)}
             className="ml-auto text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800">▦ Mini Charts</button>
