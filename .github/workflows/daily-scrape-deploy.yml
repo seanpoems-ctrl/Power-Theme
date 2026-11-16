@@ -23,7 +23,7 @@ concurrency:
 jobs:
   scrape-build-deploy:
     runs-on: ubuntu-24.04
-    timeout-minutes: 55
+    timeout-minutes: 70      # was 55; the scraper's retry now waits up to 8 min between attempts (Finviz 403s)
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     permissions:
@@ -88,8 +88,14 @@ jobs:
               f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF
 
+      # continue-on-error (2026-11-16): Finviz answers HTTP 403 to GitHub's runner IPs for stretches (runs #291 on 11-14 and #293 on 11-16 died on
+      # screener.ashx; 3 attempts inside 5 minutes never got through). Everything after this step that does NOT need Finviz (screener / leadership /
+      # stage / breadth / COT / ETF builders, the build and the deploy) used to be skipped along with it, so one blocked scrape froze the whole site.
+      # Now those steps run on yesterday's thematic_data.json, and "Fail the run if the scraper failed" (after the deploy) keeps the run red + opens the issue.
       - name: Run scraper (retry on failure)
+        id: scraper
         if: steps.trading_day.outputs.is_trading_day == 'true'
+        continue-on-error: true
         env:
           CI: true
         run: |
@@ -99,9 +105,12 @@ jobs:
               echo "Scraper OK"
               exit 0
             fi
-            if [ "$attempt" -lt 3 ]; then
+            if [ "$attempt" -eq 1 ]; then
               echo "Failed — waiting 2 minutes before retry..."
               sleep 120
+            elif [ "$attempt" -eq 2 ]; then
+              echo "Failed — waiting 8 minutes before the last try (Finviz blocks often clear within minutes)..."
+              sleep 480
             fi
           done
           echo "Scraper failed after 3 attempts"
@@ -302,6 +311,12 @@ jobs:
       - id: deploy3
         if: steps.trading_day.outputs.is_trading_day == 'true' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v5
+
+      - name: Fail the run if the scraper failed
+        if: always() && steps.scraper.outcome == 'failure'
+        run: |
+          echo "::error::scraper.py failed after 3 attempts (Finviz blocked?). The other data refreshed and the site was deployed, but thematic_data.json is still the previous run's."
+          exit 1
 
       - name: Notify on failure
         if: failure()
