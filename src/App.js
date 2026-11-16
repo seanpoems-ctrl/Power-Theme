@@ -11673,8 +11673,11 @@ const nasdaqCellTitle = sh => sh ? `${sh.nas} of ${sh.n} top holdings (above the
 const nasdaqCls = sh => !sh ? "text-zinc-600" : sh.pct >= 90 ? "text-sky-300 font-semibold" : sh.pct >= 70 ? "text-sky-400" : sh.pct >= 50 ? "text-zinc-300" : "text-zinc-500";
 
 const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {}, onMiniCharts = null }) => {
-  const [sortCol, setSortCol] = useState("perf_1d");
+  // Opens sorted by ADR% (highest first) — the user trades high-ADR names, and ETF weights put the slowest mega-caps on top. Min ADR% (0 = off) is remembered.
+  const [sortCol, setSortCol] = useState("adr_pct");
   const [sortDir, setSortDir] = useState("desc");
+  const [minAdr, setMinAdrState] = useState(() => { try { const v = parseFloat(localStorage.getItem("etf_holdings_min_adr_v1")); return Number.isFinite(v) && v >= 0 ? v : 0; } catch { return 0; } });
+  const setMinAdr = v => { const n = Math.max(0, parseFloat(v) || 0); setMinAdrState(n); try { localStorage.setItem("etf_holdings_min_adr_v1", String(n)); } catch { /* ignore */ } };
 
   // Enrich holdings with TradingView rolling perf — stocks from screenerMap, ETFs from etfRsMap.
   // Also backfill adr_pct/rs/mkt_cap when the scraper's own per-holding fetch came back null
@@ -11717,7 +11720,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
   };
 
   const [minDv, setMinDv] = useMinDollarVol();
-  const liquidHoldings = useMemo(() => enrichedHoldings.filter(h => isLiquid(h.dollar_volume, minDv)), [enrichedHoldings, minDv]);
+  const liquidHoldings = useMemo(() => enrichedHoldings.filter(h => isLiquid(h.dollar_volume, minDv) && (!(minAdr > 0) || (h.adr_pct ?? 0) >= minAdr)), [enrichedHoldings, minDv, minAdr]);
   const sorted = useMemo(() => {
     return [...liquidHoldings].sort((a, b) => {
       const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
@@ -11793,7 +11796,12 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
               );
             })()}
             <span className="text-xs text-zinc-500">{sorted.length}{sorted.length !== enrichedHoldings.length ? ` of ${enrichedHoldings.length}` : ""} stocks · {fullList ? "full fund holdings (State Street)" : "top holdings (historical snapshot)"}</span>
-            <LiquidityFilter min={minDv} setMin={setMinDv} hidden={enrichedHoldings.length - sorted.length} />
+            <LiquidityFilter min={minDv} setMin={setMinDv} hidden={enrichedHoldings.filter(h => !isLiquid(h.dollar_volume, minDv)).length} />
+            <label className="inline-flex items-center gap-1 text-[11px] text-zinc-500 whitespace-nowrap" title="Hide holdings whose ADR% is below this (0 shows every holding). Remembered for the next popup.">
+              Min ADR%
+              <input type="number" min="0" step="1" value={minAdr} onChange={e => setMinAdr(e.target.value)} onClick={e => e.stopPropagation()}
+                className="w-12 px-1 py-0.5 text-[11px] font-mono bg-zinc-800 border border-zinc-700 rounded text-zinc-200 text-right focus:outline-none focus:border-blue-500/60"/>
+            </label>
           </div>
           <div className="flex items-center gap-3">
             {onMiniCharts && sorted.length > 0 && (
@@ -11814,7 +11822,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
         <div className="overflow-y-auto overflow-x-hidden flex-1">
           {sorted.length === 0 && enrichedHoldings.length > 0 ? (
             <div className="py-16 text-center text-zinc-500 text-sm px-6">
-              All {enrichedHoldings.length} holdings are below {`$${minDv}M`} average dollar volume — lower "Min $ Vol" to see them.
+              None of the {enrichedHoldings.length} holdings clear {`$${minDv}M`} average dollar volume{minAdr > 0 ? ` and ADR ≥ ${minAdr}%` : ""} — lower "Min $ Vol"{minAdr > 0 ? " or \"Min ADR%\"" : ""} to see them.
             </div>
           ) : sorted.length === 0 ? (
             <div className="py-16 text-center text-zinc-600 text-sm px-6">
