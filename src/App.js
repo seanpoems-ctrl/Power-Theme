@@ -7894,15 +7894,17 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   const [showDeals, setShowDeals] = useState(false);
   const dealCount = useMemo(() => rawStocks.filter(s => s.price > 0 && s.pending_deal).length, [rawStocks]);
   const stocks = useMemo(() => rawStocks.filter(s => s.price > 0 && (showDeals || !s.pending_deal)), [rawStocks, showDeals]);
+  const nelF = useNelFilter("screener_nel_v1");
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return stocks.filter(s =>
+      nelF.passes(s) && (
       !q || s.ticker.toLowerCase().includes(q) ||
       (s.industry || "").toLowerCase().includes(q) ||
-      (s.theme || "").toLowerCase().includes(q)
+      (s.theme || "").toLowerCase().includes(q))
     );
-  }, [stocks, search]);
+  }, [stocks, search, nelF.passes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
     // rs_52w col → use rs_score ?? rs_52w so screener stocks sort correctly
@@ -7979,6 +7981,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
           />
           <span className="absolute left-2 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]">⌕</span>
         </div>
+        <NelButton nel={nelF} />
         {dealCount > 0 && (
           <button onClick={() => setShowDeals(v => !v)}
             title={showDeals ? "Pending cash-takeover stocks are shown (marked DEAL). Click to hide them again."
@@ -16020,6 +16023,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
   const [search, setSearch]   = React.useState("");
   const [sortCol, setSortCol] = React.useState("avg_dollar_volume");
   const [sortDir, setSortDir] = React.useState("desc");
+  const nelF = useNelFilter("universe_nel_v1");
   const [etfs, setEtfs]       = React.useState([]);   // public/leveraged_stock_etfs.json (leveraged_etf_builder.py)
   React.useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/leveraged_stock_etfs.json?v=${Date.now()}`)
@@ -16047,6 +16051,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
     const ownPass = s => (s.adr_pct ?? 0) > crit.adr && (s.avg_dollar_volume ?? 0) > crit.dvolM * 1e6 && (s.avg_volume ?? 0) > crit.volM * 1e6;
     const passing = stocks.filter(s => {
       if (UNIVERSE_EXCLUDE.has(s.ticker)) return false;
+      if (!nelF.passes(s)) return false;
       const e = etfsByStock[s.ticker] || [];
       if (!ownPass(s) && !e.length) return false;
       return !q || s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q) || (s.industry || "").toLowerCase().includes(q)
@@ -16067,7 +16072,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     });
-  }, [stocks, etfs, crit, search, sortCol, sortDir, tickerThemeMap]);
+  }, [stocks, etfs, crit, search, sortCol, sortDir, tickerThemeMap, nelF.passes]);
   const viaEtfCount = rows.filter(r => r.viaEtfOnly).length;
 
   const handleSort = col => {
@@ -16115,6 +16120,7 @@ const UniverseScreen = ({ stocks = [], tickerThemeMap = {}, onMiniCharts = null 
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rows.length}</span>
         <span className="text-[11px] text-zinc-600">ADR &gt; {crit.adr}% · Avg $ Vol &gt; ${crit.dvolM}M · Avg Vol &gt; {crit.volM}M shares{crit.etfOn && ` · + stocks whose leveraged ETF has ADR > ${crit.etfAdr}%${viaEtfCount ? ` (${viaEtfCount} added)` : ""}`}</span>
         <div className="ml-auto flex items-center gap-2 flex-wrap justify-end">
+          <NelButton nel={nelF} />
           <div className="relative">
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter ticker / industry…"
               className="pl-6 pr-3 py-1 text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 w-44" />
@@ -16479,6 +16485,19 @@ const DataAgeCountdown = ({ nextFetchAt }) => {
 const LEADERSHIP_WINDOWS = ["1M", "3M", "6M", "1Y"];
 const LEADERSHIP_DEFAULTS = { maxExt: 4, maxRmv: 20, minCoil: 0 };
 const LEADERSHIP_LS_KEY = "leadership_criteria_v1";
+// NEL = non-extended leaders: Extension below the Leadership page's cut-off (4x by default, read from leadership_criteria_v1). A per-list on/off switch,
+// remembered under its own localStorage key; stocks with no Extension value are hidden while it is on. Used by the Universe and Stock Screener tables.
+const useNelFilter = (key) => {
+  const [on, setOnState] = React.useState(() => { try { return localStorage.getItem(key) === "1"; } catch { return false; } });
+  const setOn = v => { setOnState(v); try { localStorage.setItem(key, v ? "1" : "0"); } catch { /* ignore */ } };
+  const max = React.useMemo(() => { try { const v = JSON.parse(localStorage.getItem(LEADERSHIP_LS_KEY) || "null"); if (v && Number.isFinite(v.maxExt)) return v.maxExt; } catch { /* ignore */ } return LEADERSHIP_DEFAULTS.maxExt; }, []);
+  const passes = React.useCallback(s => !on || (s.extension != null && s.extension < max), [on, max]);
+  return { on, setOn, max, passes };
+};
+const NelButton = ({ nel }) => (
+  <button onClick={() => nel.setOn(!nel.on)} title={`NEL = non-extended: only stocks with Extension < ${nel.max}× (ATR multiple from the 50-day MA — the Leadership page's NEL cut-off). Stocks with no Extension value are hidden while it is on.`}
+    className={`text-[10px] font-medium px-2 py-1 rounded border transition-colors whitespace-nowrap ${nel.on ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>NEL &lt; {nel.max}×</button>
+);
 // One LL / NEL / T-NEL table (module-level so its sort state survives the parent re-rendering).
 const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows: rowsIn, total, win, perWindow, copied, onCopy, onExport, onMini, tabs = null }) => {
   const rows = React.useMemo(() => rowsIn.map(x => ({ ...x, adr_dvol: adrDollarVol(x.adr_pct, x.avg_dollar_volume) })), [rowsIn]);
