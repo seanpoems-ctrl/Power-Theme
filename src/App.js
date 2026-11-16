@@ -13795,19 +13795,23 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
 
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
-      <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden whitespace-nowrap">
-        {onToggle && (
-          // 10px box (half the old size) inside a 24px tap area so it stays easy to hit on a phone
-          <label className="self-center flex-shrink-0 flex items-center justify-center w-6 h-6 cursor-pointer" title={selected ? `Deselect ${ticker}` : `Select ${ticker} (for Copy / Download)`}>
-            <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} aria-label={`Select ${ticker}`} className="w-2.5 h-2.5 cursor-pointer accent-blue-500" />
-          </label>
-        )}
-        {companyName && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={companyName}>{companyName}</span>}
-        {category && <span className="text-[15px] text-zinc-500 font-sans font-normal whitespace-nowrap flex-shrink-0">{category}</span>}
-        {legend && status === "ready" ? (
-          <div className="flex items-baseline gap-1 text-[14px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
-            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-              className="text-[15px] font-bold text-cyan-400 hover:text-cyan-300 mr-1.5">{ticker}</a>
+      {/* Two lines (standard for every mini chart: grid, enlarged, stock panel): line 1 = tick box · company / industry · ticker, line 2 = the hovered bar's O H L C, % change, RVOL.
+          On one line a long industry name pushed the OHLC off the card (cut-off "C 88…"); line 2 wraps instead of clipping when the card is narrow. */}
+      <div className="px-2 pt-2 pb-1.5 border-b border-zinc-800/60 overflow-hidden">
+        <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+          {onToggle && (
+            // 10px box (half the old size) inside a 24px tap area so it stays easy to hit on a phone
+            <label className="self-center flex-shrink-0 flex items-center justify-center w-6 h-6 cursor-pointer" title={selected ? `Deselect ${ticker}` : `Select ${ticker} (for Copy / Download)`}>
+              <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} aria-label={`Select ${ticker}`} className="w-2.5 h-2.5 cursor-pointer accent-blue-500" />
+            </label>
+          )}
+          {companyName && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={companyName}>{companyName}</span>}
+          {category && <span className="text-[15px] text-zinc-500 font-sans font-normal truncate min-w-0" title={category}>{category}</span>}
+          <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+            className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
+        </div>
+        <div className={`flex flex-wrap items-baseline gap-x-1.5 text-[13px] font-mono leading-[18px] min-h-[18px] ${onToggle ? "pl-[30px]" : ""}`}>
+          {legend && status === "ready" && (<>
             <span className="text-zinc-500">O</span><span className="text-zinc-300">{fmtPx(legend.o)}</span>
             <span className="text-zinc-500">H</span><span className="text-zinc-300">{fmtPx(legend.h)}</span>
             <span className="text-zinc-500">L</span><span className="text-zinc-300">{fmtPx(legend.l)}</span>
@@ -13819,14 +13823,11 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
             )}
             {legend.rvol != null && (
               <span title="Relative volume: this bar's volume ÷ the previous 50-bar average" className={legend.rvol >= 1.5 ? "text-amber-300" : "text-zinc-400"}>
-                <span className="text-zinc-500"> RVOL </span>{legend.rvol.toFixed(2)}x
+                <span className="text-zinc-500">RVOL </span>{legend.rvol.toFixed(2)}x
               </span>
             )}
-          </div>
-        ) : (
-          <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-            className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
-        )}
+          </>)}
+        </div>
       </div>
       <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom, background: MINI_CHART_THEME.bg }}
         onDoubleClick={onExpand ? () => onExpand() : undefined}
