@@ -447,7 +447,118 @@ const MATRIX_METRICS = [
   { key: 'perf_1y',  label: '1Y',  thresholds: [50, 25, 10] },
 ];
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRankings = [], fineThemeRankings = [], generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
+// Industry Matrix → click a GROUP name (e.g. "Artificial Intelligence"): one popup for the whole group with two buttons, like the Theme Leaderboard rows —
+// "Highest-ADR Stocks" (the same panel: the group's industry stocks + its ETFs' holdings, ADR / $ Vol cut-offs) and "All Industries · n" (every stock of the
+// group's industries, optionally narrowed to one sub-industry). Data: industry_stocks.json (every stock ≥ $500M per industry).
+const IndustryGroupModal = ({ group, industryRankings = [], etfTickers = [], etfHoldings = {}, onClose, onMiniCharts = null }) => {
+  const [view, setViewState] = React.useState(() => { try { return localStorage.getItem("matrix_group_view_v1") === "all" ? "all" : "adr"; } catch { return "adr"; } });
+  const setView = v => { setViewState(v); try { localStorage.setItem("matrix_group_view_v1", v); } catch { /* ignore */ } };
+  const [file, setFile] = React.useState(null);
+  const [sub, setSub] = React.useState(null);           // null = every industry of the group
+  React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); return () => { dead = true; }; }, []);
+  React.useEffect(() => { const h = e => { if (e.key === "Escape") onClose(); }; window.addEventListener("keydown", h); return () => window.removeEventListener("keydown", h); }, [onClose]);
+  const names = React.useMemo(() => group.industries.map(i => i.name), [group]);
+  const all = React.useMemo(() => {
+    if (!file?.byIndustry) return [];
+    const out = [];
+    for (const ind of names) for (const r of file.byIndustry[ind] || []) {
+      if (UNIVERSE_EXCLUDE?.has?.(r.t)) continue;
+      out.push({ ticker: r.t, name: r.n, industry: ind, adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, m3: r.m3, m6: r.m6, ytd: r.ytd, y1: r.y, ext: r.ext, adrDv: adrDollarVol(r.adr, r.dv) });
+    }
+    return out;
+  }, [file, names]);
+  const counts = React.useMemo(() => { const c = {}; for (const r of all) c[r.industry] = (c[r.industry] || 0) + 1; return c; }, [all]);
+  const [nelAll, setNelAllState] = React.useState(() => { try { return localStorage.getItem("theme_adr_nel_v1") === "1"; } catch { return false; } });   // same switch as the Highest-ADR panel
+  const setNelAll = v => { setNelAllState(v); try { localStorage.setItem("theme_adr_nel_v1", v ? "1" : "0"); } catch { /* ignore */ } };
+  const nelMaxAll = React.useMemo(() => { try { const v = JSON.parse(localStorage.getItem(LEADERSHIP_LS_KEY) || "null"); if (v && Number.isFinite(v.maxExt)) return v.maxExt; } catch { /* ignore */ } return LEADERSHIP_DEFAULTS.maxExt; }, []);
+  const rows = React.useMemo(() => all.filter(r => (!sub || r.industry === sub) && (!nelAll || (r.ext != null && r.ext < nelMaxAll))), [all, sub, nelAll, nelMaxAll]);
+  const sort = useTableSort(rows, "adrDv", "desc");
+  const pc = v => v == null ? <span className="text-zinc-700">—</span> : <span className={v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-400"}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
+  const money = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${(v / 1e6).toFixed(0)}M`;
+  const tab = (k, label) => (
+    <button key={k} onClick={() => setView(k)}
+      className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors ${view === k ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>{label}</button>
+  );
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-1.5 lg:p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <PhoneViewportGuard />
+      <div className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-full max-w-[1180px] max-h-[88%] flex flex-col" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center gap-2 flex-wrap px-4 py-3 border-b border-zinc-800">
+          <span className="text-sm font-semibold text-zinc-100">{group.theme}</span>
+          <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{names.length} {names.length === 1 ? "industry" : "industries"}</span>
+          <div className="flex items-center gap-2 ml-3">{tab("adr", "Highest-ADR Stocks")}{tab("all", `All Industries · ${all.length}`)}</div>
+          <button onClick={onClose} className="ml-auto text-zinc-500 hover:text-zinc-200 transition-colors p-1"><X size={16} /></button>
+        </div>
+        <div className="overflow-y-auto overflow-x-auto flex-1 px-4 pb-4">
+          {view === "adr" ? (
+            <ThemeHighAdrStocks theme={group.theme} industryRankings={industryRankings} etfTickers={etfTickers} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />
+          ) : !file ? <div className="text-[11px] text-zinc-600 py-4">Loading…</div> : (
+            <div className="pt-3">
+              <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                <button onClick={() => setSub(null)} className={`text-[10px] px-2 py-0.5 rounded border transition-colors ${sub == null ? "bg-zinc-700 border-zinc-600 text-zinc-100" : "border-zinc-700 text-zinc-400 hover:text-zinc-200"}`}>All</button>
+                {names.map(n => (
+                  <button key={n} onClick={() => setSub(sub === n ? null : n)} title={`${counts[n] || 0} stocks`}
+                    className={`text-[10px] px-2 py-0.5 rounded border transition-colors whitespace-nowrap ${sub === n ? "bg-zinc-700 border-zinc-600 text-zinc-100" : "border-zinc-700 text-zinc-400 hover:text-zinc-200"}`}>{n}<span className="ml-1 font-mono opacity-60">{counts[n] || 0}</span></button>
+                ))}
+                <button onClick={() => setNelAll(!nelAll)} title={`NEL = non-extended: only stocks with Extension < ${nelMaxAll}×`}
+                  className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${nelAll ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>NEL &lt; {nelMaxAll}×</button>
+                <span className="text-[10px] text-zinc-600 ml-1">{rows.length} stocks · every stock ≥ $500M market cap</span>
+                {onMiniCharts && rows.length > 0 && (
+                  <button onClick={() => onMiniCharts(sort.rows.map(r => r.ticker), `${group.theme}${sub ? ` — ${sub}` : ""}`)}
+                    className="ml-auto text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800">▦ Mini Charts</button>
+                )}
+              </div>
+              {rows.length === 0 ? <div className="text-[11px] text-zinc-600 py-4">No stocks.</div> : (
+                <table className="w-full text-xs border-collapse">
+                  <thead className="sticky top-0 bg-zinc-900"><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
+                    <SortTh sort={sort} col="ticker" label="Ticker" textual align="left" className="px-2 py-1" />
+                    <SortTh sort={sort} col="industry" label="Industry" textual align="left" className="px-2 py-1" />
+                    <SortTh sort={sort} col="adrDv" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} className="px-2 py-1" />
+                    <SortTh sort={sort} col="adr" label="ADR%" className="px-2 py-1" />
+                    <SortTh sort={sort} col="dv" label="$ Vol" className="px-2 py-1" />
+                    <SortTh sort={sort} col="cap" label="Mkt Cap" className="px-2 py-1" />
+                    <SortTh sort={sort} col="intra" label="Intra" className="px-2 py-1" />
+                    <SortTh sort={sort} col="d1" label="1D" className="px-2 py-1" />
+                    <SortTh sort={sort} col="w1" label="1W" className="px-2 py-1" />
+                    <SortTh sort={sort} col="m1" label="1M" className="px-2 py-1" />
+                    <SortTh sort={sort} col="m3" label="3M" className="px-2 py-1" />
+                    <SortTh sort={sort} col="m6" label="6M" className="px-2 py-1" />
+                    <SortTh sort={sort} col="ytd" label="YTD" className="px-2 py-1" />
+                    <SortTh sort={sort} col="y1" label="1Y" className="px-2 py-1" />
+                    <SortTh sort={sort} col="ext" label="Ext" title="ATR% multiple from the 50-day MA" className="px-2 py-1" />
+                  </tr></thead>
+                  <tbody>
+                    {sort.rows.map(r => (
+                      <tr key={r.ticker} className="hover:bg-zinc-800/30 border-t border-zinc-900">
+                        <td className="px-2 py-1 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
+                        <td className="px-2 py-1 text-zinc-500 truncate max-w-[180px]" title={r.name}>{r.industry}</td>
+                        <td className="px-2 py-1 text-right font-mono font-semibold text-zinc-300">{fmtAdrDollarVol(r.adrDv)}</td>
+                        <td className="px-2 py-1 text-right font-mono font-bold text-amber-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
+                        <td className="px-2 py-1 text-right font-mono text-zinc-300">{money(r.dv)}</td>
+                        <td className="px-2 py-1 text-right font-mono text-zinc-400">{money(r.cap)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.intra)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.d1)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.w1)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.m1)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.m3)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.m6)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.ytd)}</td>
+                        <td className="px-2 py-1 text-right font-mono">{pc(r.y1)}</td>
+                        <td className="px-2 py-1 text-right font-mono text-zinc-400">{r.ext != null ? `${r.ext.toFixed(1)}x` : "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRankings = [], fineThemeRankings = [], generatedAt, etfHoldings = {}, etfRsData = null, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
   const lang = useLang();
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
@@ -460,6 +571,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   const [indStocks, setIndStocks] = useState({});   // { industry: [stock rows] } from public/industry_stocks.json — an industry's own companies for the drill-down
   React.useEffect(() => { loadIndustryStocks().then(f => { if (f) setIndStocks(f.byIndustry); }); }, []);
   const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the theme drill-down's mini-chart grid
+  const [groupOpen, setGroupOpen] = useState(null);       // { theme, industries } - a matrix GROUP opened from its name (IndustryGroupModal)
 
   // Reset sort whenever a new theme is opened
   React.useEffect(() => { setTblSort({ col: null, dir: 'desc' }); }, [selectedTheme?.name]);
@@ -696,7 +808,8 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
             {groupedIndustries.map(({ theme, avg, industries }) => (
               <div key={theme}>
                 <div className="flex items-center gap-1.5 mb-1 px-0.5">
-                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wide truncate">{theme}</span>
+                  <button onClick={() => setGroupOpen({ theme, industries })} title={`Open ${theme}: highest-ADR stocks and every stock of its ${industries.length} industries`}
+                    className="text-[10px] font-semibold text-zinc-400 hover:text-zinc-100 uppercase tracking-wide truncate cursor-pointer text-left">{theme}<span className="ml-1 text-zinc-600">▸</span></button>
                   <span className={`text-[10px] font-mono ${avg == null ? 'text-zinc-700' : avg >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
                     {avg != null ? `${avg >= 0 ? '+' : ''}${avg.toFixed(1)}%` : '—'}
                   </span>
@@ -744,6 +857,12 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
         )}
       </div>
 
+      {groupOpen && (
+        <IndustryGroupModal key={groupOpen.theme} group={groupOpen} industryRankings={industryRankings}
+          etfTickers={(etfRsData?.etfs || []).filter(e => !e.benchmark && (e.fine_theme || e.category) === groupOpen.theme).map(e => e.ticker)}
+          etfHoldings={etfHoldings} onClose={() => setGroupOpen(null)}
+          onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || groupOpen.theme, tickers })} />
+      )}
       {selectedTheme && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-1.5 lg:p-4 bg-black/60 backdrop-blur-sm"
@@ -12148,6 +12267,10 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     return { adr: 4, dv: 20 };
   });
   const [spdr, setSpdr] = React.useState(null);
+  // NEL button: only non-extended stocks (Extension < the Leadership page's NEL cut-off, 4x by default - the same number, read from leadership_criteria_v1). Remembered.
+  const [nel, setNelState] = React.useState(() => { try { return localStorage.getItem("theme_adr_nel_v1") === "1"; } catch { return false; } });
+  const setNel = v => { setNelState(v); try { localStorage.setItem("theme_adr_nel_v1", v ? "1" : "0"); } catch { /* ignore */ } };
+  const nelMax = React.useMemo(() => { try { const v = JSON.parse(localStorage.getItem(LEADERSHIP_LS_KEY) || "null"); if (v && Number.isFinite(v.maxExt)) return v.maxExt; } catch { /* ignore */ } return LEADERSHIP_DEFAULTS.maxExt; }, []);
   React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); loadSpdrHoldings().then(x => { if (!dead) setSpdr(x); }); return () => { dead = true; }; }, []);
   const setFilter = (k, v) => setF(prev => {
     const n = { ...prev, [k]: v };
@@ -12183,7 +12306,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     for (const o of out) o.adrDv = adrDollarVol(o.adr, o.dv);
     return out;
   }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings]);
-  const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6))), [all, f]);
+  const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6)) && (!nel || (r.ext != null && r.ext < nelMax))), [all, f, nel, nelMax]);
   const sort = useTableSort(rows, "adr", "desc");
   const [showAll, setShowAll] = React.useState(false);
   const shown = showAll ? sort.rows : sort.rows.slice(0, 25);
@@ -12200,6 +12323,8 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
         <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">Highest-ADR stocks in {theme}</span>
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min ADR% {num(f.adr, v => setFilter("adr", v))}</label>
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min $ Vol {num(f.dv, v => setFilter("dv", v))} M</label>
+        <button onClick={() => setNel(!nel)} title={`NEL = non-extended: only stocks with Extension < ${nelMax}× (ATR multiple from the 50-day MA — the Leadership page's NEL cut-off). Stocks with no Extension value are hidden while it is on.`}
+          className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${nel ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>NEL &lt; {nelMax}×</button>
         <span className="text-[10px] text-zinc-600">{rows.length} of {all.length} stocks{rows.length > shown.length ? ` · top ${shown.length} shown` : ""}</span>
         {rows.length > 25 && (
           <button onClick={() => setShowAll(v => !v)} className="text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-sky-400 hover:bg-zinc-800">{showAll ? "Show top 25" : `Show all ${rows.length}`}</button>
@@ -12210,7 +12335,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
         )}
       </div>
       {!file ? <div className="text-[11px] text-zinc-600">Loading…</div> : rows.length === 0 ? (
-        <div className="text-[11px] text-zinc-600">No stocks in this theme clear ADR ≥ {f.adr}% and ${f.dv}M/day — lower the cut-offs.</div>
+        <div className="text-[11px] text-zinc-600">No stocks in this theme clear ADR ≥ {f.adr}% and ${f.dv}M/day{nel ? ` with Extension < ${nelMax}×` : ""} — lower the cut-offs{nel ? " or switch NEL off" : ""}.</div>
       ) : (
         <table className="w-full text-xs border-collapse">
           <thead><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
@@ -18701,7 +18826,7 @@ const appScreenerMap = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
           <main className="flex-1 min-w-0 w-full flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} fineThemeRankings={fineThemeRankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} fineThemeRankings={fineThemeRankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} etfRsData={appEtfRsData} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
             {data && <MarketWarnings themes={data.themes}/>}
             <NewsHubFold newsData={newsData}/>
