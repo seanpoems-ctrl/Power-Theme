@@ -12266,6 +12266,9 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
   const [expandedCat, setExpandedCat] = useState(null);  // category name whose top movers are shown
   const [moverSortCol, setMoverSortCol] = useState("perf_1w"); // sort within the expanded top-movers table
   const [moverSortDir, setMoverSortDir] = useState("desc");
+  // An expanded theme shows ONE of two views, switched with buttons: its highest-ADR stocks (default — the user trades stocks) or its ETFs' top movers. Remembered.
+  const [rowView, setRowViewState] = useState(() => { try { return localStorage.getItem("theme_row_view_v1") === "etfs" ? "etfs" : "stocks"; } catch { return "stocks"; } });
+  const setRowView = v => { setRowViewState(v); try { localStorage.setItem("theme_row_view_v1", v); } catch { /* ignore */ } };
 
   // Live (IBKR, 15-min delayed) prices for category-leader ETFs — livePricesRef
   // is mutated directly by the WebSocket handler with no re-render, so poll it
@@ -12564,6 +12567,13 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
               {isExpanded && (
                 <tr className="border-b border-zinc-800/60 bg-zinc-950/40">
                   <td colSpan={14} className="px-4 py-2.5">
+                    <div className="flex items-center gap-2 mb-2" onClick={e => e.stopPropagation()}>
+                      {[["stocks", "Highest-ADR Stocks"], ["etfs", `ETFs · ${movers.length}`]].map(([k, l]) => (
+                        <button key={k} onClick={() => setRowView(k)}
+                          className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors ${rowView === k ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>{l}</button>
+                      ))}
+                    </div>
+                    {rowView === "etfs" && (<>
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">
                         Top movers in {c.cat} · click any column to sort
@@ -12613,7 +12623,8 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                         ))}
                       </tbody>
                     </table>
-                    <ThemeHighAdrStocks theme={c.cat} industryRankings={industryRankings} etfTickers={c.members.map(m => m.ticker)} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />
+                    </>)}
+                    {rowView === "stocks" && <ThemeHighAdrStocks theme={c.cat} industryRankings={industryRankings} etfTickers={c.members.map(m => m.ticker)} etfHoldings={etfHoldings} onMiniCharts={onMiniCharts} />}
                   </td>
                 </tr>
               )}
@@ -16343,7 +16354,7 @@ const LEADERSHIP_WINDOWS = ["1M", "3M", "6M", "1Y"];
 const LEADERSHIP_DEFAULTS = { maxExt: 4, maxRmv: 20, minCoil: 0 };
 const LEADERSHIP_LS_KEY = "leadership_criteria_v1";
 // One LL / NEL / T-NEL table (module-level so its sort state survives the parent re-rendering).
-const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows: rowsIn, total, win, perWindow, copied, onCopy, onExport, onMini }) => {
+const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows: rowsIn, total, win, perWindow, copied, onCopy, onExport, onMini, tabs = null }) => {
   const rows = React.useMemo(() => rowsIn.map(x => ({ ...x, adr_dvol: adrDollarVol(x.adr_pct, x.avg_dollar_volume) })), [rowsIn]);
   const sort = useTableSort(rows, "perf", "desc");
   const fmtD  = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v / 1e6).toFixed(0)}M` : `$${(v / 1e3).toFixed(0)}K`;
@@ -16355,6 +16366,11 @@ const LeadershipTier = ({ title, short = "NEL", sub, showTight, rows: rowsIn, to
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{total} tickers</span>
         <span className="text-[11px] text-zinc-600">{sub}</span>
         <div className="ml-auto flex items-center gap-2">
+          {tabs && tabs.map(t => (
+            <button key={t.label} onClick={t.onClick} title={t.title}
+              className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors ${t.active ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>{t.label}</button>
+          ))}
+          {tabs && <span className="text-zinc-800">|</span>}
           <button onClick={onCopy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : "Copy"}</button>
           <button onClick={onExport} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
           {onMini && rows.length > 0 && (
@@ -16525,8 +16541,15 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
     </label>
   );
 
+  // One module instead of three: the LL table, with NEL / T-NEL buttons in its header that swap the table to that tier (click the active button again to go back to LL).
+  const [view, setViewState] = React.useState(() => { try { const v = localStorage.getItem("leadership_tier_view_v1"); return v === "NEL" || v === "TNEL" ? v : "LL"; } catch { return "LL"; } });
+  const setView = v => { setViewState(v); try { localStorage.setItem("leadership_tier_view_v1", v); } catch { /* ignore */ } };
   const tierEl = (tier, title, short, sub, showTight = false) => (
     <LeadershipTier title={title} short={isSuper ? "S-NEL" : "NEL"} sub={sub} showTight={showTight} rows={tiers[tier][win] || []} total={uniq(tier).length} win={win}
+      tabs={[
+        { label: P.NEL, active: view === "NEL", onClick: () => setView(view === "NEL" ? "LL" : "NEL"), title: `Show only the ${P.LL} with Extension < ${crit.maxExt}× (${uniq("NEL").length} tickers)` },
+        { label: P.TNEL, active: view === "TNEL", onClick: () => setView(view === "TNEL" ? "LL" : "TNEL"), title: `Show only the tight ${P.NEL} (RMV ≤ ${crit.maxRmv}${crit.minCoil ? `, Coil ≥ ${crit.minCoil}` : ""}) — ${uniq("TNEL").length} tickers` },
+      ]}
       perWindow={LEADERSHIP_WINDOWS.map(w => `${w} ${tiers[tier][w].length}`).join(" · ")}
       copied={copied === tier} onCopy={() => copyList(tier)} onExport={() => exportList(tier, short)}
       onMini={onMiniCharts ? rows => onMiniCharts(rows.map(x => ({ ticker: x.ticker, category: x.industry })), `${short} · ${win}`) : null} />
@@ -16593,9 +16616,10 @@ const LeadershipStocksView = ({ onMiniCharts = null, pool = "liquid" }) => {
         </div>
       </div>
       {isSuper && !data.super_leaders && <p className="text-xs text-zinc-600 italic">Super liquid data arrives with the next nightly run.</p>}
-      {tierEl("LL",   `${P.LLname} (${P.LL})`,       P.LL,   `top ${isSuper ? data.super_top_n : data.top_n} performers per window`)}
-      {tierEl("NEL",  `${P.NELname} (${P.NEL})`,     P.NEL,  `${P.LL} with Extension < ${crit.maxExt}×`)}
-      {tierEl("TNEL", `${P.TNELname} (${P.TNEL})`,   P.TNEL, `${P.NEL} with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`, true)}
+      {/* a single slot, so the table keeps its sort when you flip between LL / NEL / T-NEL */}
+      {view === "NEL" ? tierEl("NEL",  `${P.NELname} (${P.NEL})`,     P.NEL,  `${P.LL} with Extension < ${crit.maxExt}×`)
+        : view === "TNEL" ? tierEl("TNEL", `${P.TNELname} (${P.TNEL})`,   P.TNEL, `${P.NEL} with RMV ≤ ${crit.maxRmv}${crit.minCoil ? ` and Coil ≥ ${crit.minCoil}` : ""}`, true)
+        : tierEl("LL",   `${P.LLname} (${P.LL})`,       P.LL,   `top ${isSuper ? data.super_top_n : data.top_n} performers per window`)}
     </div>
   );
 };
@@ -17378,6 +17402,9 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
     try { return JSON.parse(localStorage.getItem("focus_marks") || "{}"); } catch { return {}; }
   });
   const [newOnly, setNewOnly] = React.useState(false);
+  // One section at a time, picked with the buttons under the header ("All" = the old long page). Remembered.
+  const [fview, setFviewState] = React.useState(() => { try { return localStorage.getItem("focus_view_v1") || "Scan Result"; } catch { return "Scan Result"; } });
+  const setFview = v => { setFviewState(v); try { localStorage.setItem("focus_view_v1", v); } catch { /* ignore */ } };
   React.useEffect(() => {
     try { localStorage.setItem("focus_marks", JSON.stringify(marks)); } catch { /* storage unavailable */ }
   }, [marks]);
@@ -17419,6 +17446,9 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
     { title: "Bases at Beaten-Down Levels", sub: ">70% below all-time high, near SMA200, institutions buying (Finviz)", groups: [{ key: "Beaten_Down_Bases" }] },
   ];
   const byKey = Object.fromEntries(scans.map(s => [s.key, s]));
+  // Buttons available now; a remembered choice that no longer exists (e.g. an empty scan) falls back to the first one.
+  const fkeys = [...(scanResult?.stocks?.length ? ["Scan Result"] : []), ...SECTIONS.filter(sec => sec.groups.some(g => byKey[g.key])).map(sec => sec.title), "All"];
+  const fv = fkeys.includes(fview) ? fview : fkeys[0];
 
   return (
     <div className="space-y-6">
@@ -17468,7 +17498,24 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
         );
       })()}
 
-      {scanResult && scanResult.stocks?.length > 0 && (() => {
+      {(() => {
+        const cnt = sec => sec.groups.reduce((n, g) => n + (byKey[g.key]?.stocks?.length || 0), 0);
+        const btn = (key, label, n) => (
+          <button key={key} onClick={() => setFview(key)}
+            className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors whitespace-nowrap ${fv === key ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>
+            {label}{n != null && <span className="ml-1 font-mono text-[10px] opacity-60">{n}</span>}
+          </button>
+        );
+        return (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {scanResult?.stocks?.length > 0 && btn("Scan Result", "Scan Result", scanResult.stocks.length)}
+            {SECTIONS.filter(sec => sec.groups.some(g => byKey[g.key])).map(sec => btn(sec.title, sec.title, cnt(sec)))}
+            {btn("All", "All")}
+          </div>
+        );
+      })()}
+
+      {(fv === "Scan Result" || fv === "All") && scanResult && scanResult.stocks?.length > 0 && (() => {
         const all = scanResult.stocks;
         const hasNewInfo = all.some(s => s.is_new != null);
         const newCount = all.filter(s => s.is_new).length;
@@ -17494,6 +17541,7 @@ const FocusListTab = ({ data, onMiniCharts = null }) => {
       {SECTIONS.map(sec => {
         const groups = sec.groups.filter(g => byKey[g.key]);
         if (groups.length === 0) return null;
+        if (fv !== "All" && fv !== sec.title) return null;
         return (
           <div key={sec.title}>
             <FocusSec title={sec.title} sub={sec.sub} />
