@@ -15031,6 +15031,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
       {/* ── PULLBACK WATCHLIST (mode "pullback") — Martin Luk method across Focus List / Universe / Liquid / Super Liquid ── */}
       {mode === "pullback" && <PullbackScreen onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Pullback Watchlist", tickers })} />}
 
+      {/* ── EARNINGS GAPS (mode "earningsGap") — stocks that gapped up >= 5 % on earnings, per season, with a catalyst summary ── */}
+      {mode === "earningsGap" && <EarningsGapScreen onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Earnings Gaps", tickers })} />}
+
       {/* ── UNIVERSE (mode "adrUniverse" — not to be confused with mode "universe" = Group ETF) ── */}
       {mode === "adrUniverse" && <UniverseScreen stocks={screenerStocks} tickerThemeMap={tickerThemeMap}
         onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Universe", tickers })} />}
@@ -16007,6 +16010,184 @@ const PullbackScreen = ({ onMiniCharts = null }) => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+// ── Stocks → Gap-Ups (mode "earningsGap") ────────────────────────────────────────────────────────────────────────────────────────
+// public/earnings_gaps.json (earnings_gap_builder.py): stocks that gapped up >= 5 % at the open, per earnings season — on an earnings report (kind e) or with
+// no report that day (kind o) — screened with the Theme Leaderboard rules (ADR >= 4 %, avg $ vol >= $20M), each with a Catalyst Summary. The columns that change every day (ADR, Avg $ Vol, Mkt Cap, Extension, Intra / 1D / 1W / 1M / 3M, price) are joined from industry_stocks.json
+// here in the browser, so the gap file only stores what is specific to the gap. 6M / 1Y / YTD are left out on purpose.
+let _earnGapsP = null;
+const loadEarningsGaps = () => {
+  if (!_earnGapsP) _earnGapsP = fetch(`${process.env.PUBLIC_URL}/earnings_gaps.json?v=${Date.now()}`).then(r => r.ok ? r.json() : null).then(d => d?.seasons ? d : null).catch(() => null);
+  return _earnGapsP;
+};
+const EARN_GAP_DEFAULTS = { gap: 5, dv: 20, adr: 4 };   // = the Theme Leaderboard Highest-ADR defaults (ADR >= 4 %, $ vol >= $20M)
+const EarningsGapScreen = ({ onMiniCharts = null }) => {
+  const [data, setData] = React.useState(undefined);        // undefined = loading, null = no file
+  const [cur, setCur] = React.useState(null);               // industry_stocks.json byTicker
+  React.useEffect(() => { let dead = false; loadEarningsGaps().then(d => { if (!dead) setData(d); }); loadIndustryStocks().then(f => { if (!dead) setCur(f?.byTicker || {}); }); return () => { dead = true; }; }, []);
+  const [seasonKey, setSeasonKeyState] = React.useState(() => { try { return localStorage.getItem("earnings_gap_season_v1") || ""; } catch { return ""; } });
+  const setSeasonKey = v => { setSeasonKeyState(v); try { localStorage.setItem("earnings_gap_season_v1", v); } catch { /* ignore */ } };
+  const [f, setFState] = React.useState(() => {
+    try { const v = JSON.parse(localStorage.getItem("earnings_gap_filters_v1")); if (v && ["gap", "dv", "adr"].every(k => Number.isFinite(v[k]))) return v; } catch { /* ignore */ }
+    return EARN_GAP_DEFAULTS;
+  });
+  const setF = (k, v) => setFState(prev => { const n = { ...prev, [k]: Number.isFinite(v) && v >= 0 ? v : 0 }; try { localStorage.setItem("earnings_gap_filters_v1", JSON.stringify(n)); } catch { /* ignore */ } return n; });
+  const [search, setSearch] = React.useState("");
+  const [copied, setCopied] = React.useState(false);
+  const [kind, setKindState] = React.useState(() => { try { const v = localStorage.getItem("earnings_gap_kind_v1"); return v === "e" || v === "o" ? v : "all"; } catch { return "all"; } });
+  const setKind = v => { setKindState(v); try { localStorage.setItem("earnings_gap_kind_v1", v); } catch { /* ignore */ } };
+  const nelF = useNelFilter("earnings_gap_nel_v1");
+  const season = React.useMemo(() => data?.seasons?.find(x => x.key === seasonKey) || data?.seasons?.[0] || null, [data, seasonKey]);
+  const all = React.useMemo(() => (season?.events || []).map(e => {
+    const c = cur?.[e.t] || null;
+    return {
+      ticker: e.t, name: e.n || c?.n || "", industry: c?.industry || "", kind: e.k || "e", ed: e.ed, tod: e.tod, rd: e.d, gap: e.g, day: e.day, rv: e.rv, sur: e.sur, cat: e.cat, src: e.src,
+      since: c?.p != null && e.c ? (c.p / e.c - 1) * 100 : null,
+      adr: c?.adr ?? null, dv: c?.dv ?? null, cap: c?.cap ?? null, extension: c?.ext ?? null, intra: c?.i ?? null, d1: c?.d ?? null, w1: c?.w ?? null, m1: c?.m ?? null, m3: c?.m3 ?? null,
+      adrDv: adrDollarVol(c?.adr, c?.dv),
+    };
+  }), [season, cur]);
+  const rows = React.useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return all.filter(r => (kind === "all" || r.kind === kind) && r.gap >= f.gap && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6)) && (f.adr <= 0 || (r.adr ?? 0) >= f.adr) && nelF.passes(r)
+      && (!q || r.ticker.toLowerCase().includes(q) || r.industry.toLowerCase().includes(q) || r.name.toLowerCase().includes(q) || (r.cat || "").toLowerCase().includes(q)));
+  }, [all, f, kind, search, nelF.passes]); // eslint-disable-line react-hooks/exhaustive-deps
+  const sort = useTableSort(rows, "gap", "desc");
+  const pc = v => v == null ? <span className="text-zinc-700">—</span> : <span className={v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-400"}>{v > 0 ? "+" : ""}{v.toFixed(1)}%</span>;
+  const money = v => v == null ? "—" : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${(v / 1e6).toFixed(0)}M`;
+  const num = (v, key, step = 1) => (
+    <input type="number" min="0" step={step} value={v} onChange={e => setF(key, parseFloat(e.target.value))}
+      className="w-14 px-1.5 py-0.5 text-[12px] font-mono bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50 text-right" />
+  );
+  const copy = () => { (navigator.clipboard?.writeText(sort.rows.map(r => r.ticker).join(",")) || Promise.reject()).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {}); };
+  const exportCsv = () => {
+    const head = ["Symbol", "Industry", "Gap day", "Type", "Gap %", "Day %", "Gap-day RVOL", "EPS surprise %", "Since gap %", "ADR x Avg$Vol", "ADR %", "Extension", "Avg $ Vol", "Mkt Cap", "Catalyst summary"];
+    const lines = [head, ...sort.rows.map(r => [r.ticker, r.industry, r.rd, r.kind === "e" ? `earnings${r.tod === "b" ? " (before open)" : r.tod === "a" ? " (after close)" : ""}` : "no earnings", r.gap, r.day, r.rv ?? "", r.sur ?? "", r.since == null ? "" : r.since.toFixed(1), r.adrDv ?? "", r.adr ?? "", r.extension ?? "", r.dv ?? "", r.cap ?? "", r.cat || ""])];
+    const csv = lines.map(l => l.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = `earnings-gaps-${season?.key || "list"}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+  if (data === undefined) return <p className="text-xs text-zinc-600 italic py-6">Loading earnings gaps…</p>;
+  if (!data) return <p className="text-sm text-zinc-500 italic py-8 text-center">No earnings-gap data yet — run <code className="text-zinc-400">python earnings_gap_builder.py</code> to generate public/earnings_gaps.json.</p>;
+  const isDefault = Object.keys(EARN_GAP_DEFAULTS).every(k => f[k] === EARN_GAP_DEFAULTS[k]);
+  return (
+    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4 space-y-3">
+      <div className="flex items-center gap-2 flex-wrap">
+        <h3 className="text-sm font-semibold text-zinc-100">Gap-Ups</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rows.length}{rows.length !== all.length ? ` of ${all.length}` : ""}</span>
+        <span className="text-[11px] text-zinc-600">gap = open vs previous close · liquid, high-ADR stocks only (Theme Leaderboard rules) · data {data.generated_at}</span>
+      </div>
+      <div className="flex flex-wrap items-center gap-1.5">
+        {data.seasons.map(sn => (
+          <button key={sn.key} onClick={() => setSeasonKey(sn.key)} title={`${sn.start} → ${sn.end}`}
+            className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors whitespace-nowrap ${season?.key === sn.key ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>
+            {sn.label}{sn.in_progress && <span className="ml-1 text-emerald-400">● live</span>}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-1.5">
+        {[["all", "All"], ["e", "Earnings"], ["o", "No earnings"]].map(([k, l]) => {
+          const n = all.filter(r => (k === "all" || r.kind === k) && r.gap >= f.gap && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6)) && (f.adr <= 0 || (r.adr ?? 0) >= f.adr) && nelF.passes(r)).length;
+          return (
+            <button key={k} onClick={() => setKind(k)} title={k === "e" ? "Gapped on an earnings report (before-open report: that day; after-close report: the next day)" : k === "o" ? "Gapped with no earnings report that day: upgrade, FDA, contract, M&A, sector move ..." : "Every gap-up"}
+              className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors whitespace-nowrap ${kind === k ? "bg-violet-500/20 border-violet-500/40 text-violet-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>
+              {l}<span className="ml-1 font-mono text-[10px] opacity-60">{n}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex items-center gap-4 flex-wrap">
+        <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">Gap ≥ {num(f.gap, "gap", 0.5)}<span className="text-zinc-600">%</span></label>
+        <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">Avg $ Vol ≥ {num(f.dv, "dv", 10)}<span className="text-zinc-600">M</span></label>
+        <label className="flex items-center gap-1.5 text-[11px] text-zinc-400">ADR ≥ {num(f.adr, "adr", 0.5)}<span className="text-zinc-600">%</span></label>
+        <NelButton nel={nelF} />
+        {!isDefault && <button onClick={() => { setFState(EARN_GAP_DEFAULTS); try { localStorage.setItem("earnings_gap_filters_v1", JSON.stringify(EARN_GAP_DEFAULTS)); } catch { /* ignore */ } }} className="text-[11px] text-blue-400 hover:text-blue-300">Reset</button>}
+        <div className="ml-auto flex items-center gap-2">
+          <div className="relative">
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter ticker / industry / catalyst…"
+              className="pl-6 pr-3 py-1 text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 w-56" />
+            <span className="absolute left-2 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]">⌕</span>
+          </div>
+          <button onClick={copy} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">{copied ? "Copied ✓" : "Copy"}</button>
+          <button onClick={exportCsv} className="text-[11px] px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">Export</button>
+          {onMiniCharts && rows.length > 0 && (
+            <button onClick={() => onMiniCharts(sort.rows.map(r => ({ ticker: r.ticker, category: r.industry })), `Earnings gaps · ${season?.key}`)}
+              className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">▦ Mini Charts</button>
+          )}
+        </div>
+      </div>
+      {rows.length === 0 ? <p className="text-xs text-zinc-600 italic py-4">No stocks clear these filters in {season?.label}.</p> : (
+        <div className="overflow-x-auto rounded-lg border border-zinc-800">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                <th className="px-2 py-2 text-center">#</th>
+                <SortTh sort={sort} col="ticker" label="Ticker" textual align="left" className="px-2 py-2" />
+                <SortTh sort={sort} col="industry" label="Industry" textual align="left" className="px-2 py-2" />
+                <SortTh sort={sort} col="rd" label="Gap Day" textual className="px-2 py-2" />
+                <SortTh sort={sort} col="kind" label="Type" textual title="Earnings report (BMO = before open, AMC = after close) or no earnings that day" className="px-2 py-2" />
+                <SortTh sort={sort} col="gap" label="Gap" title="Open of the reaction day vs the previous close" className="px-2 py-2" />
+                <SortTh sort={sort} col="day" label="Day" title="Close of the reaction day vs the previous close" className="px-2 py-2" />
+                <SortTh sort={sort} col="rv" label="RVOL" title="Reaction-day volume ÷ the 50-day average" className="px-2 py-2" />
+                <SortTh sort={sort} col="sur" label="EPS Surp" title="EPS surprise vs consensus" className="px-2 py-2" />
+                <SortTh sort={sort} col="since" label="Since" title="Today's price vs the close of the reaction day" className="px-2 py-2" />
+                <SortTh sort={sort} col="adrDv" label={ADR_DVOL_LABEL} title={ADR_DVOL_TIP} className="px-2 py-2" />
+                <SortTh sort={sort} col="adr" label="ADR%" className="px-2 py-2" />
+                <SortTh sort={sort} col="extension" label="Extension" title={EXTENSION_TIP} className="px-2 py-2" />
+                <SortTh sort={sort} col="dv" label="Avg $ Vol" className="px-2 py-2" />
+                <SortTh sort={sort} col="cap" label="Mkt Cap" className="px-2 py-2" />
+                <SortTh sort={sort} col="intra" label="Intra" className="px-2 py-2" />
+                <SortTh sort={sort} col="d1" label="1D" className="px-2 py-2" />
+                <SortTh sort={sort} col="w1" label="1W" className="px-2 py-2" />
+                <SortTh sort={sort} col="m1" label="1M" className="px-2 py-2" />
+                <SortTh sort={sort} col="m3" label="3M" className="px-2 py-2" />
+              </tr>
+            </thead>
+            <tbody>
+              {sort.rows.map((r, i) => (
+                <React.Fragment key={r.ticker + r.ed}>
+                  <tr className="border-t border-zinc-800/70 hover:bg-zinc-800/30">
+                    <td className="px-2 pt-1.5 text-center text-zinc-600 font-mono">{i + 1}</td>
+                    <td className="px-2 pt-1.5 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
+                    <td className="px-2 pt-1.5 text-zinc-400 max-w-[170px] truncate" title={r.name}>{r.industry || "—"}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono text-zinc-400 whitespace-nowrap">{r.rd.slice(5)}</td>
+                    <td className="px-2 pt-1.5 text-right whitespace-nowrap">{r.kind === "e"
+                      ? <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-300">Earnings{r.tod === "b" ? " · BMO" : r.tod === "a" ? " · AMC" : ""}</span>
+                      : <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300">News</span>}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono font-bold text-emerald-400">+{r.gap.toFixed(1)}%</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.day)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono text-zinc-300">{r.rv != null ? `${r.rv.toFixed(1)}×` : "—"}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.sur)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.since)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono font-semibold text-zinc-300">{fmtAdrDollarVol(r.adrDv)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono font-bold text-amber-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
+                    <td className={`px-2 pt-1.5 text-right font-mono ${extensionCls(r.extension)}`}>{fmtExtension(r.extension)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono text-zinc-300">{money(r.dv)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono text-zinc-400">{money(r.cap)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.intra)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.d1)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.w1)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.m1)}</td>
+                    <td className="px-2 pt-1.5 text-right font-mono">{pc(r.m3)}</td>
+                  </tr>
+                  <tr className="hover:bg-zinc-800/30">
+                    <td />
+                    <td colSpan={19} className="px-2 pb-1.5 pt-0.5 text-[11px] leading-snug text-zinc-400">
+                      <span className="mr-1.5 text-[9px] font-semibold uppercase tracking-wide text-zinc-600" title={r.src === "ai" ? "Summary written by Gemini from the dated news headlines around the report" : "Data-only line (no AI summary available)"}>Catalyst{r.src === "ai" ? "" : " ·data"}</span>{r.cat}
+                    </td>
+                  </tr>
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
@@ -18702,6 +18883,7 @@ const appScreenerMap = useMemo(() => {
                 { label: "Liquid Leaders", tab: "watchlist", mode: "leadership", view: "stocks" },
                 { label: "Super Liquid Leaders", tab: "watchlist", mode: "leadership", view: "super" },
                 { label: "Pullback Watchlist", tab: "watchlist", mode: "pullback" },
+                { label: "Gap-Ups", tab: "watchlist", mode: "earningsGap" },
               ] },
               { key: "themes", label: "Themes", items: [
                 { label: "Theme Tracker", tab: "watchlist", mode: "etf" },
