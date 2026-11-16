@@ -82,6 +82,11 @@ def seasons_for(today: date) -> list[dict]:
     return sorted(out, key=lambda x: x["start"], reverse=True)[:N_SEASONS]
 
 
+def ekey(e: dict) -> str:
+    """Identity of one gap event: stock + gap day + kind (an earnings gap and a news gap can share a report date)."""
+    return f"{e['t']}|{e['d']}|{e.get('k', 'e')}"
+
+
 def load_json(path: Path):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -226,7 +231,7 @@ def gemini_summaries(batch: list[dict], heads: dict[str, list[str]]) -> dict[str
     from google.genai import types as gt
     lines = []
     for i, ev in enumerate(batch):
-        hs = heads.get(ev["t"] + "|" + ev["ed"]) or []
+        hs = heads.get(ekey(ev)) or []
         kind = "earnings report" if ev["k"] == "e" else "NO earnings report"
         sur_txt = "; EPS surprise %+.1f%%" % ev["sur"] if ev.get("sur") is not None else ""
         lines.append(f"[{i}] {ev['t']} ({ev['n'] or 'n/a'}) — {kind}, {ev['d']}; gapped {ev['g']:+.1f}% at the open, closed {ev['day']:+.1f}% on the day{sur_txt}\n"
@@ -251,7 +256,7 @@ def gemini_summaries(batch: list[dict], heads: dict[str, list[str]]) -> dict[str
             ev = batch[int(x["i"])]
             s = str(x["summary"]).strip()
             if s:
-                out[ev["t"] + "|" + ev["ed"]] = s
+                out[ekey(ev)] = s
         except Exception:           # noqa: BLE001
             continue
     return out
@@ -266,7 +271,7 @@ def add_catalysts(events: list[dict], use_ai: bool) -> None:
     if use_ai:
         def work(e):
             time.sleep(0.2)
-            return e["t"] + "|" + e["ed"], headlines(e["t"], e["ed"], e["k"] == "e")
+            return ekey(e), headlines(e["t"], e["ed"], e["k"] == "e")
         with ThreadPoolExecutor(max_workers=5) as ex:
             for k, h in ex.map(work, need):
                 heads[k] = h
@@ -276,7 +281,7 @@ def add_catalysts(events: list[dict], use_ai: bool) -> None:
             done.update(gemini_summaries(need[i:i + BATCH_AI], heads))
             time.sleep(0.5)
     for e in need:
-        k = e["t"] + "|" + e["ed"]
+        k = ekey(e)
         if k in done:
             e["cat"], e["src"] = done[k], "ai"
         elif not e.get("cat"):
@@ -308,13 +313,18 @@ def main() -> None:
         logger.info("gap-up days >= %.0f%% in the seasons: %d (%d tickers)", MIN_GAP, len(cands), len({c[0] for c in cands}))
         recs = earnings_records(sorted({c[0] for c in cands}))
         # an AI summary already written for the same stock + day (from any earlier file, earnings or not) is kept
-        prev_events = {e["t"] + "|" + e["ed"]: e for s in prev.get("seasons", []) for e in s.get("events", [])}
+        prev_events = {ekey(e): e for s in prev.get("seasons", []) for e in s.get("events", [])}
         n_e = n_o = 0
-        for t, d, gap, day, rv, close in cands:
+        used: set[tuple] = set()         # one report = one earnings event; a second gap day matching the same report is a "no earnings" (follow-through) gap
+        for t, d, gap, day, rv, close in sorted(cands, key=lambda c: (c[0], c[1])):
             m = match_earnings(t, d, recs.get(t, []), frames) if t in recs else None
+            if m and (t, m[0]) in used:
+                m = None
+            if m:
+                used.add((t, m[0]))
             ev = {"k": "e" if m else "o", "t": t, "n": uni[t]["n"], "ed": m[0] if m else d.isoformat(), "tod": m[1] if m else "", "d": d.isoformat(),
                   "g": gap, "day": day, "rv": rv, "sur": m[2] if m else None, "c": close}
-            old = prev_events.get(ev["t"] + "|" + ev["ed"])
+            old = prev_events.get(ekey(ev))
             if old and old.get("cat") and old.get("src") == "ai" and old.get("k", "e") == ev["k"]:
                 ev["cat"], ev["src"] = old["cat"], "ai"
             for s in redo:

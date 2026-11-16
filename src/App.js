@@ -16151,7 +16151,7 @@ const EarningsGapScreen = ({ onMiniCharts = null }) => {
             </thead>
             <tbody>
               {sort.rows.map((r, i) => (
-                <React.Fragment key={r.ticker + r.ed}>
+                <React.Fragment key={r.ticker + r.rd + r.kind}>
                   <tr className="border-t border-zinc-800/70 hover:bg-zinc-800/30">
                     <td className="px-2 pt-1.5 text-center text-zinc-600 font-mono">{i + 1}</td>
                     <td className="px-2 pt-1.5 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
