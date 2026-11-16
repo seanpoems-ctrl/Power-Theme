@@ -18060,6 +18060,9 @@ export default function App() {
   const [watchMode, setWatchMode] = useState("long");
   const [leadView, setLeadView]   = useState("stocks");
   const lastNavItem = React.useRef({});
+  // Menu items flagged `hidden: true` in NAV (parked pages) stay out of the sub-menu until this is switched on by the small "Hidden (n)" button at the end of the sub-menu row.
+  const [showHiddenNav, setShowHiddenNavState] = React.useState(() => { try { return localStorage.getItem("nav_show_hidden_v1") === "1"; } catch { return false; } });
+  const setShowHiddenNav = v => { setShowHiddenNavState(v); try { localStorage.setItem("nav_show_hidden_v1", v ? "1" : "0"); } catch { /* ignore */ } };
   const [pendingTheme, setPendingTheme] = useState(null); // theme to auto-open in ThemeHeatmap
   const [data, setData] = useState(null);
   const [appScreenerStocks, setAppScreenerStocks] = useState([]);
@@ -18509,7 +18512,9 @@ const appScreenerMap = useMemo(() => {
               ] },
               { key: "themes", label: "Themes", items: [
                 { label: "Theme Tracker", tab: "watchlist", mode: "etf" },
-                { label: "Group ETF", tab: "watchlist", mode: "universe" },
+                // Group ETF page (mode "universe": ETF RS table + Daily Stock Universe) hidden 2026-11-16 — Theme Tracker / Theme Leaders cover it. Parked, not deleted:
+                // the "Hidden (n)" button at the end of this sub-menu row shows it again (remove `hidden: true` to make it a normal item).
+                { label: "Group ETF + Daily Universe", tab: "watchlist", mode: "universe", hidden: true },
                 { label: "Theme Leaders", tab: "watchlist", mode: "leadership", view: "themes" },
               ] },
               { key: "sectors", label: "Sectors", items: [
@@ -18536,9 +18541,12 @@ const appScreenerMap = useMemo(() => {
               if (it.view) setLeadView(it.view);
             };
             const section = NAV.find(sec => sec.items.some(isActive)) || NAV[0];
+            const visibleItems = sec => sec.items.filter(it => !it.hidden || showHiddenNav || isActive(it));
+            const hiddenCount = sec => sec.items.filter(it => it.hidden).length;
             const openSection = sec => {
               const last = lastNavItem.current[sec.key];
-              go(sec, sec.items.find(it => it.label + "|" + (it.mode || "") + "|" + (it.view || "") === last) || sec.items[0]);
+              const vis = visibleItems(sec);
+              go(sec, vis.find(it => it.label + "|" + (it.mode || "") + "|" + (it.view || "") === last) || vis[0]);
             };
             return (
               <>
@@ -18572,14 +18580,22 @@ const appScreenerMap = useMemo(() => {
                     )}
                   </div>
                 </div>
-                {section.items.length > 1 && (
+                {(visibleItems(section).length > 1 || hiddenCount(section) > 0) && (
                   <div className="flex flex-wrap items-center gap-1 py-1.5">
-                    {section.items.map(it => (
+                    {visibleItems(section).map(it => (
                       <button key={it.label + (it.mode || "") + (it.view || "")} onClick={() => go(section, it)}
-                        className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${isActive(it) ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : "border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60"}`}>
+                        title={it.hidden ? "Hidden page — currently shown" : undefined}
+                        className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${isActive(it) ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : it.hidden ? "border-dashed border-zinc-700 text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60" : "border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60"}`}>
                         {it.label}
                       </button>
                     ))}
+                    {hiddenCount(section) > 0 && (
+                      <button onClick={() => setShowHiddenNav(!showHiddenNav)}
+                        title={showHiddenNav ? "Hide the parked pages again" : "Show the parked pages (hidden from the menu)"}
+                        className="ml-2 px-2 py-1 text-[11px] rounded-md text-zinc-600 hover:text-zinc-300 transition-colors whitespace-nowrap">
+                        {showHiddenNav ? "▾ Hide parked" : `▸ Hidden (${hiddenCount(section)})`}
+                      </button>
+                    )}
                   </div>
                 )}
               </>
