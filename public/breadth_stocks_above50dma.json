@@ -2,40 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 2,
+  "count": 3,
   "stocks": [
+    {
+      "ticker": "HZN",
+      "company": "BRIGHT HORIZON ENERGY CORPORATION",
+      "industry": "Electric Utilities",
+      "price": 85.42,
+      "change_pct": 4753.41,
+      "adr_pct": 7.3,
+      "dollar_volume": "$38.7M",
+      "market_cap_b": 6.537,
+      "rs_ibd": 99,
+      "above50dma_pct": 2900.5
+    },
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 16.66,
-      "change_pct": 0.06,
-      "adr_pct": 4.5,
-      "dollar_volume": "$80.7M",
-      "market_cap_b": 3.044,
-      "rs_ibd": 95,
-      "above50dma_pct": 60.1
+      "price": 16.7,
+      "change_pct": 0.24,
+      "adr_pct": 4.4,
+      "dollar_volume": "$81.5M",
+      "market_cap_b": 3.051,
+      "rs_ibd": 94,
+      "above50dma_pct": 58.0
     },
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 26.95,
-      "change_pct": 1.39,
+      "price": 26.79,
+      "change_pct": -0.59,
       "adr_pct": 2.7,
-      "dollar_volume": "$160.3M",
-      "market_cap_b": 3.527,
+      "dollar_volume": "$154.5M",
+      "market_cap_b": 3.506,
       "rs_ibd": 92,
-      "above50dma_pct": 55.8
+      "above50dma_pct": 52.7
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.4,
-    "spx_1m": -1.28,
-    "spx_3m": -1.69,
-    "spx_34d": -1.42,
-    "spx_qtd": -1.37,
-    "spx_mtd": -0.24
+    "spx_1d": -1.92,
+    "spx_1m": -3.56,
+    "spx_3m": -3.78,
+    "spx_34d": -3.07,
+    "spx_qtd": -3.26,
+    "spx_mtd": -2.16
   },
-  "fetched_at_utc": "2026-11-15T02:26:20+00:00"
+  "fetched_at_utc": "2026-11-16T23:01:53+00:00"
 }

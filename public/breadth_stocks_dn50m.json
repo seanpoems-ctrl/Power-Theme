@@ -3,16 +3,33 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 0,
-  "stocks": [],
+  "count": 1,
+  "stocks": [
+    {
+      "ticker": "XP",
+      "company": "XP Inc.",
+      "industry": "Investment Banks/Brokers",
+      "market_cap_b": 7.667,
+      "price": 14.83,
+      "change_pct": -4.26,
+      "dollar_volume": "$141.1M",
+      "adr_pct": 8.9,
+      "perf_1m": -51.08,
+      "perf_3m": -5.54,
+      "perf_34d": null,
+      "perf_qtd": -5.54,
+      "perf_mtd": -51.08,
+      "rs_ibd": 22
+    }
+  ],
   "spx_benchmarks": {
-    "spx_1d": -0.4,
-    "spx_1m": -1.28,
-    "spx_3m": -1.69,
-    "spx_34d": -1.42,
-    "spx_qtd": -1.37,
-    "spx_mtd": -0.24
+    "spx_1d": -1.92,
+    "spx_1m": -3.56,
+    "spx_3m": -3.78,
+    "spx_34d": -3.07,
+    "spx_qtd": -3.26,
+    "spx_mtd": -2.16
   },
-  "fetched_at_utc": "2026-11-15T02:26:31+00:00",
+  "fetched_at_utc": "2026-11-16T23:02:06+00:00",
   "source": "tv_fallback"
 }

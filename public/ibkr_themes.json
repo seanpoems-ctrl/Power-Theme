@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-11-15T02:26:14.099823+00:00",
+  "generated_at": "2026-11-16T23:01:48.303148+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 96.0,
+      "perf_1d": 5.06,
+      "leaders": [
+        {
+          "ticker": "MMED",
+          "price": 18.65,
+          "rs_52w": 96,
+          "adr_pct": 5.15,
+          "vol_surge": 1.34,
+          "mkt_cap": 5247176105,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
