@@ -1,52 +1,61 @@
 {
-  "scan_time": "2026-11-16 07:55 ET",
+  "scan_time": "2026-11-17 07:56 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "TU",
-      "price": 10.55,
-      "gap_pct": 23.68,
-      "pm_volume": 1168023,
-      "avg_vol_10d": 7077752,
-      "avg_dollar_vol": 74670284,
-      "mkt_cap": 13579760384,
-      "rvol": 0.62,
-      "adr_pct": 2.43,
+      "ticker": "COHR",
+      "price": 225.3,
+      "gap_pct": 10.75,
+      "pm_volume": 325310,
+      "avg_vol_10d": 11363433,
+      "avg_dollar_vol": 2560181455,
+      "mkt_cap": 40067302667,
+      "rvol": 0.61,
+      "adr_pct": 8.9,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "TU: TELUS confirms receipt of unsolicited proposal from Québecor, continues review of strategi",
+      "reasoning": "COHR: Institutional Flow in Coherent (COHR): 52% of the Options Money Is in Puts - Moomoo",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
-      "grade": "C",
+      "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: TELUS confirms receipt of unsolicited proposal from Québecor, continues review of strategic alternatives - Yahoo Finance | Engineer earning 6 million VND/month achieves financial freedom after 8 years of stock market investing. - Vietnam.vn",
+        "catalyst": "Headlines: Institutional Flow in Coherent (COHR): 52% of the Options Money Is in Puts - Moomoo",
         "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: TELUS confirms receipt of unsolicited proposal from Québecor, continues review of strategic alternatives - Yahoo Finance | Engineer earning 6 million VND/month achieves financial freedom after 8 years of stock market investing. - Vietnam.vn\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "analysis_details": "• **What Happened**\nHeadlines: Institutional Flow in Coherent (COHR): 52% of the Options Money Is in Puts - Moomoo\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "AXTI",
+        "LITE",
+        "GLW"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
       "headlines": [
         {
-          "title": "TELUS confirms receipt of unsolicited proposal from Québecor, continues review of strategic alternatives - Yahoo Finance",
+          "title": "Institutional Flow in Coherent (COHR): 52% of the Options Money Is in Puts - Moomoo",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQWFR6LVdEeHZNX3RHbEVQUU5LSnM3Y0R3UGNxcVhPLUJZNWV1d0pfZDhRakhlcUl4UnNQSEktTlBOaTZpbTZ6R29wN3JodWRDajVERFNxM1dFSlJmbTVUc0dISlRhRGUzakthTkxYS29hUmZxZE1jRFdKRk5sRUsteEd2NWlXSFhVcHA2anpvVFk2TFlGcWJ1alhFdHZQNHM4bzBwak0xVEwtN05r?oc=5"
-        },
-        {
-          "title": "Engineer earning 6 million VND/month achieves financial freedom after 8 years of stock market investing. - Vietnam.vn",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQOW1jdTlRaDVaRVFaNzJJQkxaZjBZMG1FT2Vmc1RaQWNTQnRFakpEMGdPRFBuNlJuQUpkeEpiVmNVRE1fQ09CX1R1eVBMR0lsT1VOazRrREZKUDFGbWdwdWJ3VjdqcEkxZ3VuZkhORnZZQzJnNUk1bEN3SXFNXzZtMVNzdDZkN0dTd1NJbmhleFJsLTFORGk0ZnBNTU55UTZMV240?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQWTlrS2t6Tm5WbGJ0eEU1TzZWcHdhUTdlOVdJN1pVRk8yVG1PUzZUY25GME02UlRVUGZyR2d4U2dETzVXRjNMZDV2TVV0NzlYNk1ENjRabGJlMF9pMDRra2ZuTFM0M2Z6UUg2SzRCT05MX3RHekEwc1Fwd2Q1OVFMYVZERTQ5YmYwUDFwNGt0Y1NHeHI2ZXJpU0RldnJBdlB4dkh0RXdST0VnWVBla0xyaDJKWQ?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "1.59B",
-      "short_float": null,
-      "daily_pct": 0.12,
-      "prev_close": 8.53,
+      "float_shares": "188.18M",
+      "short_float": "5.10%",
+      "daily_pct": -6.75,
+      "prev_close": 203.43,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $75M < $100M, ADR 2.4% < 4%)",
+      "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -54,7 +63,217 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "TU: TELUS confirms receipt of unsolicited proposal from Québecor, continues review of strategi",
+        "primary_claim": "COHR: Institutional Flow in Coherent (COHR): 52% of the Options Money Is in Puts - Moomoo",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AAOI",
+      "price": 49.65,
+      "gap_pct": 9.94,
+      "pm_volume": 739056,
+      "avg_vol_10d": 15537100,
+      "avg_dollar_vol": 771417015,
+      "mkt_cap": 4099206454,
+      "rvol": 0.66,
+      "adr_pct": 10.47,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "86.09M",
+      "short_float": "20.75%",
+      "daily_pct": -9.48,
+      "prev_close": 45.16,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "LITE",
+      "price": 590.0,
+      "gap_pct": 8.06,
+      "pm_volume": 117164,
+      "avg_vol_10d": 6222094,
+      "avg_dollar_vol": 3671035460,
+      "mkt_cap": 49522198334,
+      "rvol": 0.66,
+      "adr_pct": 8.91,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "LITE: Lumentum (LITE) Got a Takeover Offer. What Does It Mean for Holders? ( - Yahoo Finance",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Lumentum (LITE) Got a Takeover Offer. What Does It Mean for Holders? ( - Yahoo Finance | S&P 500 Tumbles 1.9%. It's Not Just AI.",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Lumentum (LITE) Got a Takeover Offer. What Does It Mean for Holders? ( - Yahoo Finance | S&P 500 Tumbles 1.9%. It's Not Just AI.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "COHR",
+        "AXTI",
+        "GLW"
+      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Lumentum (LITE) Got a Takeover Offer. What Does It Mean for Holders? ( - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPVC1UMjVfcm5iYVRBU3NISG1wZHhTWF82elBmQ1ZHUmY3TUg5am5YN0MzUGdUX2VyTl9SWlBEMTl0ek5PRmhPZXpBYUczV0tJbm44WUpHTU9GdVdCVmUtQXUxTWpKSVVYZ1BDbDg3OVU5YkQ3bmNsUk1rblFMUkRKUGRTTFFJN3Z2eW0zZThSaFM3eVZxRFAyd04zU3pNdw?oc=5"
+        },
+        {
+          "title": "S&P 500 Tumbles 1.9%. It's Not Just AI.",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/livecoverage/stock-market-news-today-111626/card/s-p-500-tumbles-1-9-it-s-not-just-ai--FDvmQloAfOi6OQeFoldW?mod=bar_FV"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "89.20M",
+      "short_float": "8.97%",
+      "daily_pct": -8.48,
+      "prev_close": 546.0,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "LITE: Lumentum (LITE) Got a Takeover Offer. What Does It Mean for Holders? ( - Yahoo Finance",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "SLS",
+      "price": 8.0,
+      "gap_pct": 7.1,
+      "pm_volume": 64398,
+      "avg_vol_10d": 6498328,
+      "avg_dollar_vol": 51986624,
+      "mkt_cap": 1522827893,
+      "rvol": 0.92,
+      "adr_pct": 10.89,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "SLS gapping on earnings: SLS Stock Jumps After-Hours: Retail Eyes Lillys Cancer Deal for Valuation Clues  2 Big Inv",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: SLS Stock Jumps After-Hours: Retail Eyes Lillys Cancer Deal for Valuation Clues  2 Big Investors Grab Shares | SLS, IBRX And IOVA Join Merck And Lilly On BlackRocks Q3 Buy List  A Vanguard Unit Adds All Of Them Too | Incorrect alert on Sellas Life Sciences shares withdrawn - marketscreener.com",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
+      },
+      "analysis_details": "• **The Results**\nHeadlines: SLS Stock Jumps After-Hours: Retail Eyes Lillys Cancer Deal for Valuation Clues  2 Big Investors Grab Shares | SLS, IBRX And IOVA Join Merck And Lilly On BlackRocks Q3 Buy List  A Vanguard Unit Adds All Of Them Too | Incorrect alert on Sellas Life Sciences shares withdrawn - marketscreener.com\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "SLS Stock Jumps After-Hours: Retail Eyes Lillys Cancer Deal for Valuation Clues  2 Big Investors Grab Shares",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/sls-stock-jumps-hours-retail-015411970.html"
+        },
+        {
+          "title": "SLS, IBRX And IOVA Join Merck And Lilly On BlackRocks Q3 Buy List  A Vanguard Unit Adds All Of Them Too",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/healthcare/articles/sls-ibrx-iova-join-merck-073133407.html"
+        },
+        {
+          "title": "Incorrect alert on Sellas Life Sciences shares withdrawn - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQZDM0UjNJZ0lhRUZOSlRmRmtMLThwT2otM1FYdHg2VFBodTNBU1U1ajVUbVZxLUJ1TFBLcjM1el9VYzZJZ21mRzZGRlBVSGkyakJOLTdwWl9MS2U1U1ZWdDJIUjRNY0Nid1R0dzFmaUJ0S3VxSUpERXQ4QzhFN2F1SzJFdzNWQm1wZXNqZFFGM0IxM0Zuc0lzTzJRTE1ZVWxSaW10MkZiWllBQUwxMEE?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-17",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1390478/000110465926128825/tm2629947d1_8k.htm"
+      },
+      "float_shares": "201.59M",
+      "short_float": "28.18%",
+      "daily_pct": -4.96,
+      "prev_close": 7.47,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $52M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SLS gapping on earnings: SLS Stock Jumps After-Hours: Retail Eyes Lillys Cancer Deal for Valuation Clues  2 Big Inv",
         "discrepancy_note": ""
       },
       "gates_passed": 2,
@@ -62,58 +281,82 @@
         "gate_rs": true,
         "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_mkt_cap": false,
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
     },
     {
-      "ticker": "DRTS",
-      "price": 14.85,
-      "gap_pct": 11.0,
-      "pm_volume": 122040,
-      "avg_vol_10d": 565717,
-      "avg_dollar_vol": 8400897,
-      "mkt_cap": 1237357752,
-      "rvol": 0.71,
-      "adr_pct": 4.81,
-      "category": "FDA",
-      "theme": "FDA",
-      "reasoning": "DRTS FDA/regulatory event: All eight patients were alive at Alpha Tau Medical (DRTS)'s interim brain cancer trial cut",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "ticker": "MRVL",
+      "price": 154.53,
+      "gap_pct": 6.31,
+      "pm_volume": 533124,
+      "avg_vol_10d": 34732713,
+      "avg_dollar_vol": 5367246140,
+      "mkt_cap": 127466188084,
+      "rvol": 0.55,
+      "adr_pct": 7.31,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "MRVL gapping on earnings: Marvell Technology (MRVL) director’s 687-unit stock grant vests at the next annual meeting",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
-      "grade": "C",
+      "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: All eight patients were alive at Alpha Tau Medical (DRTS)'s interim brain cancer trial cutoff. - Stock Titan | Nvidia Slides Again Before Its First Results Since Jensen Huang Resigned - Stock Titan",
-        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
+        "catalyst": "Headlines: Marvell Technology (MRVL) director’s 687-unit stock grant vests at the next annual meeting. - Stock Titan | Marvell Technology Inc Stock (MRVL) Closed Down by 7.27% on Nov 16: Facts Behind the Movement - TradingKey | Marvell Technology (MRVL) Adds Three Directors After AI Memory Reveal At SC26 - Yahoo! Finance Canada",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **The Event**\nHeadlines: All eight patients were alive at Alpha Tau Medical (DRTS)'s interim brain cancer trial cutoff. - Stock Titan | Nvidia Slides Again Before Its First Results Since Jensen Huang Resigned - Stock Titan\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
+      "analysis_details": "• **The Results**\nHeadlines: Marvell Technology (MRVL) director’s 687-unit stock grant vests at the next annual meeting. - Stock Titan | Marvell Technology Inc Stock (MRVL) Closed Down by 7.27% on Nov 16: Facts Behind the Movement - TradingKey | Marvell Technology (MRVL) Adds Three Directors After AI Memory Reveal At SC26 - Yahoo! Finance Canada\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [
+        "AVGO",
+        "QCOM",
+        "NVDA"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "MRVU",
+          "mult": "2x"
+        }
+      ],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "All eight patients were alive at Alpha Tau Medical (DRTS)'s interim brain cancer trial cutoff. - Stock Titan",
+          "title": "Marvell Technology (MRVL) director’s 687-unit stock grant vests at the next annual meeting. - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNZ3JfWng0bkxsQlFrS3lBVFdndm1sUkRLa1ViaDFDWmN3czBOdXZZTGpYeExYT09hbHh5YUx1TmppbDJhZzJLNE94VzJlLXlJSXh3Q0l3OGd1TVhMeENVMWpOR0x1eE9sVjVDb003NVBfNlFMLTlkM0JQd2F6WG9LTXlSQ3JCUFZ0QjNMZEFWMC0yeEVwNWs5SkdxMnVqNE54ZlFYYW5jbER6MWw0d29aekRNV0JETDBi?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNbjVLQlNyMlQtaVYzRlF2LWM4OHpSaTNYajNteVgyNUh6cTNJd05sMzdONVBXZERCX3dhYVJRX3VCbEJsbmo0YVBYUHRmanBraXBYSC1vbjdhSnhjTFlRamhhVFRhUk1xal9qSENLYlZRU3ktbVl3QlNtQlhEaklkc0Eya1BuOTJzY3FlX2o5cG9lVklSX1lpcVdGaXhRb0hNa0M2NllNbUZ5bTcyQWstTTRTaHdnTlk?oc=5"
         },
         {
-          "title": "Nvidia Slides Again Before Its First Results Since Jensen Huang Resigned - Stock Titan",
+          "title": "Marvell Technology Inc Stock (MRVL) Closed Down by 7.27% on Nov 16: Facts Behind the Movement - TradingKey",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSnlCYXVYWXlJbjFqVUR0VjEydTN3YkhrSTZNeDNIcnBBcVNtWkV2cDRGclY3REtJdjVKdGJnd25FU1hjRVZCaGoyay0yWHppUDlqblY2SkozNVpUVlZabEFKclhJY21TbXYzYk0wYTJuQnFOMGVFZkR0UDBiSzZnWG1B?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOMGowMTctZlpUQVJ5VFFpdTZhdmFBdE1uOXVpZEVHb0thN2ZvSUpSbjV6dmI2cmV0aWQ4V3A4MV9XS1FJUFc3eWh4dm8yTDZUanVvd243eXR6UVRSZExsMV9qS21XaGdqd0FGeVZhTzVtTTRwOUMzWnlMLUJGVjZpbllNYW5CbHRfMkhN?oc=5"
+        },
+        {
+          "title": "Marvell Technology (MRVL) Adds Three Directors After AI Memory Reveal At SC26 - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOSkQzdlVYUlJPRlZmZkVBS3o4RWc3WFZRZEpldk13Ym5oY1NnenFBY1dCOV9oRTdvWWp6dzROakNQOHZuWXFzNVM0TUhjZHFaaWFrTVZJZXVmRUN6UXlJTlZ4QzF5cFlPazhIOEowWGVHa2FQcnQwcm9lNjQ2TG1NY1otQklyVi0tVmFj?oc=5"
+        },
+        {
+          "title": "Micron, AMD and other AI stocks fall as the chip sector's selloff intensifies",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/story/micron-amd-and-other-ai-stocks-fall-as-the-chip-sectors-selloff-intensifies-48e38bdf?mod=mw_FV"
+        },
+        {
+          "title": "U.S. chip stocks slide as traders unwind Nvidia rival bets before earnings",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/u-chip-stocks-slide-traders-160656991.html"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "74.16M",
-      "short_float": "6.10%",
-      "daily_pct": 0.15,
-      "prev_close": 13.38,
+      "float_shares": null,
+      "short_float": "3.48%",
+      "daily_pct": -7.27,
+      "prev_close": 145.36,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $8M < $100M)",
+      "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -121,29 +364,224 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "DRTS FDA/regulatory event: All eight patients were alive at Alpha Tau Medical (DRTS)'s interim brain cancer trial cut",
+        "primary_claim": "MRVL gapping on earnings: Marvell Technology (MRVL) director’s 687-unit stock grant vests at the next annual meeting",
         "discrepancy_note": ""
       },
-      "gates_passed": 3,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "meets_all_gates": true,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "TEM",
+      "price": 68.7,
+      "gap_pct": 6.08,
+      "pm_volume": 67707,
+      "avg_vol_10d": 6113002,
+      "avg_dollar_vol": 419963237,
+      "mkt_cap": 11812330474,
+      "rvol": 0.63,
+      "adr_pct": 8.68,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "TEM: Tempus AI (TEM) Stock Price Prediction: Pullback tests support as momentum cools and selle",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Tempus AI (TEM) Stock Price Prediction: Pullback tests support as momentum cools and sellers press the tape - Blockchain News | Applied Digital (APLD) Stock Price Prediction: Morgan Stanley cuts target as APLD trades below key trend levels - Blockchain News",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Tempus AI (TEM) Stock Price Prediction: Pullback tests support as momentum cools and sellers press the tape - Blockchain News | Applied Digital (APLD) Stock Price Prediction: Morgan Stanley cuts target as APLD trades below key trend levels - Blockchain News\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "TEMT",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Tempus AI (TEM) Stock Price Prediction: Pullback tests support as momentum cools and sellers press the tape - Blockchain News",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYW5BVlFGNk12MDFSaHp2SXRjR1BFZ0pxS0VIRlktYnByU2xPN0ZwMzJZYnNCMXVhREZFX3FueVJzWDZHd1FlWEM0eWk3Y1l2SGo3Sld6LUM5M2N6VEFjX196Ni1zRE15SlNkamRHTHE3dHZLRUx0alk2a0J5enY4VlhFMVEtSDZFajRvVDdHcDRrcjRjQzUwbmJqbHhyWDJo?oc=5"
+        },
+        {
+          "title": "Applied Digital (APLD) Stock Price Prediction: Morgan Stanley cuts target as APLD trades below key trend levels - Blockchain News",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWWQyaDNwRGJwUVF4RzZHMU1xbkNNVUwzeEZsRmNMVmRIM0NObWVZVDNyS2lMU0xONWtnWUpsZGxpdlVZN1luOUEwN3VnUXJFT09kUXhaU3oxRDl0OElPNl9BSGtlSzdtZUVXckQyR2JGM0dQTFpCd2dLZmlfWGpjWFZURVV3SHBSNTBtbDJpajdoTW1JcW1OX2ozUjBWaDMyNml3?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "109.41M",
+      "short_float": "24.09%",
+      "daily_pct": -9.55,
+      "prev_close": 64.76,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "TEM: Tempus AI (TEM) Stock Price Prediction: Pullback tests support as momentum cools and selle",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CRDO",
+      "price": 127.52,
+      "gap_pct": 5.64,
+      "pm_volume": 90319,
+      "avg_vol_10d": 8545363,
+      "avg_dollar_vol": 1089704690,
+      "mkt_cap": 22687676037,
+      "rvol": 0.74,
+      "adr_pct": 8.99,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "CRDO gapping on earnings: Credo Technology (CRDO) Stock Price Prediction: Bears still control the trend, but derivat",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Credo Technology (CRDO) Stock Price Prediction: Bears still control the trend, but derivatives show dip buyers stepping in - Blockchain News | Credo Technology Group stock falls over 7% as heavy selling pressure persists despite revenue surge - Traders Union",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
+      },
+      "analysis_details": "• **The Results**\nHeadlines: Credo Technology (CRDO) Stock Price Prediction: Bears still control the trend, but derivatives show dip buyers stepping in - Blockchain News | Credo Technology Group stock falls over 7% as heavy selling pressure persists despite revenue surge - Traders Union\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Credo Technology (CRDO) Stock Price Prediction: Bears still control the trend, but derivatives show dip buyers stepping in - Blockchain News",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOc05ISjlucFc3NzNFNXlENl81a1p3clB0SG9WcjlLaUJ4djRqMFNXYUIwUjFDN0Jwa2RUVXM0cGtTa0Y5cnV1YTlPVXd5RFE5cnJiajNWQ2tfMnV6SkpidXAxM0J1QVNhWW9oM0ZOTmgyZ2VHY05iZzQ5bVp1NGxoR0FlUW9QNmNxdF9oWkpWTFB5S1hXOERTbw?oc=5"
+        },
+        {
+          "title": "Credo Technology Group stock falls over 7% as heavy selling pressure persists despite revenue surge - Traders Union",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNWTlveEZHMmhnY2E2WjZpMUVJZmlVTkVhNWYyTGxSWWpneURjR3loX2RVMXhLQ1E5MWJ6Wm9XdzVVOEFlcWlITEV3M3pZYzFCS3llaWl5Y2FvWXNpcGJheHV6MlRNekUycGdSUnB1QWRyRHRfUjFXOUYzN0xRX0JiMHRjMk5EeFhaYlBhRTJ1QWNqbTVwQVE?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "169.38M",
+      "short_float": "5.87%",
+      "daily_pct": -8.21,
+      "prev_close": 120.71,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "CRDO gapping on earnings: Credo Technology (CRDO) Stock Price Prediction: Bears still control the trend, but derivat",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "ALAB",
+      "price": 213.48,
+      "gap_pct": 5.51,
+      "pm_volume": 63935,
+      "avg_vol_10d": 6056718,
+      "avg_dollar_vol": 1292988159,
+      "mkt_cap": 35365404208,
+      "rvol": 0.8,
+      "adr_pct": 8.77,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "143.81M",
+      "short_float": "5.96%",
+      "daily_pct": -8.79,
+      "prev_close": 202.34,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 1,
-    "large_gaps": 1,
-    "total_headlines": 4,
+    "small_gaps": 8,
+    "large_gaps": 0,
+    "total_headlines": 15,
     "monthly_cost_usd": 0.01
   }
 }
