@@ -1,127 +1,7 @@
 {
-  "generated_at": "2026-11-16T23:00:34.886608+00:00",
+  "generated_at": "2026-11-17T05:00:14.780438+00:00",
   "data_source": "tradingview",
   "events": [
-    {
-      "date": "2026-10-19",
-      "time_et": "10:00",
-      "event": "NAHB Housing Market Index",
-      "impact": "Low",
-      "actual": "29",
-      "forecast": "31",
-      "previous": "32",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:00",
-      "event": "USDA Corn Export Inspections",
-      "impact": "Low",
-      "actual": "692.234",
-      "forecast": null,
-      "previous": "1313.733",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:00",
-      "event": "USDA Soybean Export Inspections",
-      "impact": "Low",
-      "actual": "2068.086",
-      "forecast": null,
-      "previous": "1109.385",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:00",
-      "event": "USDA Wheat Export Inspections",
-      "impact": "Low",
-      "actual": "254.915",
-      "forecast": null,
-      "previous": "307.025",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "3-Month Bill Auction Allotted at High",
-      "impact": "Low",
-      "actual": "29.44",
-      "forecast": null,
-      "previous": "36.71",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "3-Month Bill Auction Bid-to-Cover",
-      "impact": "Low",
-      "actual": "2.77",
-      "forecast": null,
-      "previous": "2.68",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "3-Month Bill Auction",
-      "impact": "Low",
-      "actual": "4.095",
-      "forecast": null,
-      "previous": "4.085",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "3-Month Bill Auction Total Accepted",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "6-Month Bill Auction Allotted at High",
-      "impact": "Low",
-      "actual": "86.09",
-      "forecast": null,
-      "previous": "78.17",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "6-Month Bill Auction Bid-to-Cover",
-      "impact": "Low",
-      "actual": "2.84",
-      "forecast": null,
-      "previous": "2.76",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "6-Month Bill Auction",
-      "impact": "Low",
-      "actual": "4.22",
-      "forecast": null,
-      "previous": "4.2",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-10-19",
-      "time_et": "11:30",
-      "event": "6-Month Bill Auction Total Accepted",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
     {
       "date": "2026-10-20",
       "time_et": "07:15",
@@ -4017,7 +3897,7 @@
       "time_et": "11:00",
       "event": "USDA Corn Export Inspections",
       "impact": "Low",
-      "actual": "905.267",
+      "actual": "908.378",
       "forecast": null,
       "previous": "898.391",
       "currency": "USD"
@@ -4027,7 +3907,7 @@
       "time_et": "11:00",
       "event": "USDA Soybean Export Inspections",
       "impact": "Low",
-      "actual": "1896.151",
+      "actual": "1914.145",
       "forecast": null,
       "previous": "2511.973",
       "currency": "USD"
@@ -4037,7 +3917,7 @@
       "time_et": "11:00",
       "event": "USDA Wheat Export Inspections",
       "impact": "Low",
-      "actual": "248.536",
+      "actual": "275.036",
       "forecast": null,
       "previous": "100.075",
       "currency": "USD"
@@ -8416,6 +8296,216 @@
       "date": "2026-11-30",
       "time_et": "11:30",
       "event": "6-Month Bill Auction Total Accepted",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "08:55",
+      "event": "Redbook YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "09:45",
+      "event": "S&P Global Manufacturing PMI Final",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "Construction Spending MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-1.9",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "ISM Manufacturing Employment",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "52.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "ISM Manufacturing New Orders",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "55.5",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "ISM Manufacturing Prices",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "75.2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "ISM Manufacturing PMI",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "55.5",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "JOLTs Job Openings",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "7.523",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "Truck Sales",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "13.09",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "Car Sales",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "2.45",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:00",
+      "event": "JOLTs Job Quits",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.365",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:30",
+      "event": "Dallas Fed Services Revenues Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "4.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "10:30",
+      "event": "Dallas Fed Services Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Cushing Number",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Crude Oil Stock Change",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Distillate Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Gasoline Stocks",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Heating Oil",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Crude Imports",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Product Imports",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-12-01",
+      "time_et": "16:30",
+      "event": "API Crude Runs",
       "impact": "Low",
       "actual": null,
       "forecast": null,
