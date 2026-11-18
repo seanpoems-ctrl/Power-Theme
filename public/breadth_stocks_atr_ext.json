@@ -2,47 +2,58 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 2,
+  "count": 3,
   "stocks": [
     {
       "ticker": "SGRY",
       "company": "Surgery Partners, Inc.",
       "industry": "Hospital/Nursing Management",
-      "price": 26.85,
-      "change_pct": 0.22,
-      "adr_pct": 2.5,
-      "dollar_volume": "$153.9M",
-      "market_cap_b": 3.514,
-      "rs_ibd": 93,
-      "atr_ext_val": 20.2
+      "price": 26.96,
+      "change_pct": 0.41,
+      "adr_pct": 2.4,
+      "dollar_volume": "$133.4M",
+      "market_cap_b": 3.529,
+      "rs_ibd": 92,
+      "atr_ext_val": 20.55
     },
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 16.8,
-      "change_pct": 0.6,
-      "adr_pct": 4.3,
-      "dollar_volume": "$80.9M",
-      "market_cap_b": 3.069,
+      "price": 16.99,
+      "change_pct": 1.13,
+      "adr_pct": 4.2,
+      "dollar_volume": "$81.2M",
+      "market_cap_b": 3.104,
       "rs_ibd": 94,
-      "atr_ext_val": 13.21
+      "atr_ext_val": 13.35
+    },
+    {
+      "ticker": "PLBL",
+      "company": "Polibeli Group Ltd",
+      "industry": "Electronics/Appliance Stores",
+      "price": 8.88,
+      "change_pct": 16.84,
+      "adr_pct": 5.4,
+      "dollar_volume": "$2.3M",
+      "market_cap_b": 3.254,
+      "rs_ibd": 57,
+      "atr_ext_val": 10.04
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -1.03,
-    "spx_1m": -4.82,
-    "spx_3m": -3.93,
-    "spx_34d": -4.25,
-    "spx_qtd": -4.25,
-    "spx_mtd": -3.16
+    "spx_1d": -0.23,
+    "spx_1m": -5.59,
+    "spx_3m": -4.57,
+    "spx_34d": -5.17,
+    "spx_qtd": -4.47,
+    "spx_mtd": -3.38
   },
-  "fetched_at_utc": "2026-11-18T04:06:58+00:00",
+  "fetched_at_utc": "2026-11-18T23:02:11+00:00",
   "pending_deals_hidden": [
     "ADT",
     "BRZE",
     "OPCH",
-    "PCRX",
     "PTC",
     "SLN"
   ]

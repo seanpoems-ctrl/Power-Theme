@@ -1,33 +1,6 @@
 {
-  "generated_at": "2026-11-18T04:06:54.395339+00:00",
+  "generated_at": "2026-11-18T23:02:06.625837+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 98.0,
-      "perf_1d": 221.29,
-      "leaders": [
-        {
-          "ticker": "SLS",
-          "price": 19.15,
-          "rs_52w": 98,
-          "adr_pct": 11.23,
-          "vol_surge": 17.31,
-          "mkt_cap": 3903902663,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
