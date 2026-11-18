@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17 21:35 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-11-18 06:06 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -29,51 +29,51 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 25.46,
-      "open": 23.11,
-      "high": 27.73,
-      "low": 22.36,
-      "close": 25.46,
-      "prev_open": 20.0,
-      "prev_close": 22.91,
+      "price": 23.59,
+      "open": 24.22,
+      "high": 24.26,
+      "low": 23.47,
+      "close": 23.59,
+      "prev_open": 23.11,
+      "prev_close": 25.46,
       "volume": 0,
-      "change_pct": 11.13
+      "change_pct": -7.34
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 85.05,
+      "price": 83.38,
       "open": 85.75,
-      "high": 85.95,
-      "low": 85.01,
-      "close": 85.05,
-      "prev_open": 88.65,
-      "prev_close": 85.72,
-      "volume": 2246,
-      "change_pct": -0.78
+      "high": 84.77,
+      "low": 82.39,
+      "close": 83.38,
+      "prev_open": 85.16,
+      "prev_close": 86.01,
+      "volume": 44930,
+      "change_pct": -3.06
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 58442.22,
+      "price": 59024.28,
       "open": 59007.4,
       "high": 59630.95,
       "low": 58279.26,
-      "close": 58442.22,
+      "close": 59024.28,
       "prev_open": 59295.8,
       "prev_close": 58860.43,
       "volume": 0,
-      "change_pct": -0.71
+      "change_pct": 0.28
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26045.37,
-      "open": 26387.44,
-      "high": 26440.61,
-      "low": 26024.21,
-      "close": 26045.37,
-      "prev_open": 26772.11,
-      "prev_close": 26598.64,
-      "volume": 57402300,
-      "change_pct": -2.08
+      "price": 26102.68,
+      "open": 26082.63,
+      "high": 26139.16,
+      "low": 26043.97,
+      "close": 26102.68,
+      "prev_open": 26387.44,
+      "prev_close": 26045.37,
+      "volume": 0,
+      "change_pct": 0.22
     }
   },
   "fred": {
@@ -83,7 +83,7 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 53.2,
+    "s5fi": 53.4,
     "mmth": 56.8
   },
   "regime": {
