@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-20 14:01 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 701.08,
+    "spy_change_pct": -2.07,
+    "vix": 31.9,
+    "hy_oas": 3.52,
+    "yield_curve": 0.28,
+    "credit_status": "Yellow Flag",
+    "s5fi": 44.1,
+    "mmth": 48.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-20 06:06 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1757,44 +1775,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continued institutional rotation into AI beneficiaries sustained momentum for NVIDIA, despite broader market weakness."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-30 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Volatility Surging",
-    "spy_price": 769.36,
-    "spy_change_pct": -0.38,
-    "vix": 18.59,
-    "hy_oas": 3.14,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 63.9,
-    "mmth": 65.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a groundbreaking new quantum computing breakthrough, positioning it for long-term dominance in the AI and high-performance computing sectors."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Secured an exclusive multi-year partnership with a leading global automotive manufacturer for its next-generation autonomous driving platforms."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "CVNA",
-          "company": "Carvana Co.",
-          "reason": "Experiencing renewed speculative interest from retail traders, driving short-term technical volatility without any fresh fundamental news catalyst."
         }
       ]
     }
