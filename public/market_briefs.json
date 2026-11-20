@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-20 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 693.45,
+    "spy_change_pct": -3.13,
+    "vix": 36.38,
+    "hy_oas": 3.52,
+    "yield_curve": 0.28,
+    "credit_status": "Yellow Flag",
+    "s5fi": 41.6,
+    "mmth": 46.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-20 14:01 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1737,44 +1755,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Continues to see speculative interest based on technical bounce attempts, but no fresh fundamental catalyst drives conviction today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-30 12:59 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Volatile Risk-Off Session",
-    "spy_price": 756.41,
-    "spy_change_pct": -1.68,
-    "vix": 20.0,
-    "hy_oas": 3.26,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 60.5,
-    "mmth": 61.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Analyst upgrade citing strong cloud growth outlook and robust holiday shopping season projections drives fresh buying interest."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Significant new offshore discovery announced today, boosting future production estimates and attracting capital amid rising crude oil prices."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued institutional rotation into AI beneficiaries sustained momentum for NVIDIA, despite broader market weakness."
         }
       ]
     }
