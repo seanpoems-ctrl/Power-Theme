@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-20 20:44 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 715.87,
+    "spy_change_pct": -1.96,
+    "vix": 35.89,
+    "hy_oas": 3.52,
+    "yield_curve": 0.29,
+    "credit_status": "Yellow Flag",
+    "s5fi": 39.7,
+    "mmth": 45.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-20 15:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1717,44 +1735,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc",
           "reason": "Apple experienced increased selling pressure today, largely driven by broader tech sector weakness and position unwinding rather than specific fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-10-30 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk Aversion Spikes / Equity Sell-Off",
-    "spy_price": 755.72,
-    "spy_change_pct": -1.77,
-    "vix": 19.42,
-    "hy_oas": 3.26,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 59.5,
-    "mmth": 61.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Reports indicate Tesla is accelerating production ramp-up for its next-generation vehicle, defying broader market weakness with strong delivery projections."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Inc.",
-          "reason": "Analyst upgrades following strong quarterly subscriber growth and positive forward guidance, positioning UNH as a defensive play in a volatile market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Continues to see speculative interest based on technical bounce attempts, but no fresh fundamental catalyst drives conviction today."
         }
       ]
     }
