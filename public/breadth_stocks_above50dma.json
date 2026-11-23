@@ -2,52 +2,40 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 2,
   "stocks": [
-    {
-      "ticker": "PLBL",
-      "company": "Polibeli Group Ltd",
-      "industry": "Electronics/Appliance Stores",
-      "price": 9.74,
-      "change_pct": 3.62,
-      "adr_pct": 5.7,
-      "dollar_volume": "$2.6M",
-      "market_cap_b": 3.569,
-      "rs_ibd": 69,
-      "above50dma_pct": 64.6
-    },
     {
       "ticker": "BRBR",
       "company": "BellRing Brands, Inc.",
       "industry": "Beverages: Non-Alcoholic",
-      "price": 14.57,
-      "change_pct": -3.57,
-      "adr_pct": 6.1,
-      "dollar_volume": "$89.0M",
-      "market_cap_b": 1.696,
-      "rs_ibd": 23,
-      "above50dma_pct": 56.1
+      "price": 15.22,
+      "change_pct": 4.46,
+      "adr_pct": 6.0,
+      "dollar_volume": "$96.6M",
+      "market_cap_b": 1.771,
+      "rs_ibd": 22,
+      "above50dma_pct": 60.9
     },
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 16.97,
-      "change_pct": 2.11,
-      "adr_pct": 4.1,
-      "dollar_volume": "$55.5M",
-      "market_cap_b": 3.1,
-      "rs_ibd": 95,
-      "above50dma_pct": 50.3
+      "price": 17.52,
+      "change_pct": 3.24,
+      "adr_pct": 4.0,
+      "dollar_volume": "$54.2M",
+      "market_cap_b": 3.201,
+      "rs_ibd": 94,
+      "above50dma_pct": 52.5
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -3.7,
-    "spx_1m": -9.36,
-    "spx_3m": -9.99,
-    "spx_34d": -11.62,
-    "spx_qtd": -9.86,
-    "spx_mtd": -8.83
+    "spx_1d": 4.73,
+    "spx_1m": -5.73,
+    "spx_3m": -5.71,
+    "spx_34d": -7.24,
+    "spx_qtd": -5.6,
+    "spx_mtd": -4.52
   },
-  "fetched_at_utc": "2026-11-23T03:24:15+00:00"
+  "fetched_at_utc": "2026-11-23T23:05:28+00:00"
 }
