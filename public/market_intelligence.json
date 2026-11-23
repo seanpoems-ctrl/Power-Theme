@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-11-23 15:46 ET",
+  "generated_at": "2026-11-23 17:31 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 724.37,
+      "price": 722.29,
       "open": 724.33,
       "high": 727.97,
       "low": 713.54,
-      "close": 724.37,
+      "close": 722.29,
       "prev_open": 713.56,
       "prev_close": 689.81,
-      "volume": 65531636,
-      "change_pct": 5.01
+      "volume": 87055065,
+      "change_pct": 4.71
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 653.2,
+      "price": 651.03,
       "open": 655.98,
       "high": 657.5,
       "low": 641.95,
-      "close": 653.2,
+      "close": 651.03,
       "prev_open": 638.84,
       "prev_close": 608.45,
-      "volume": 73115585,
-      "change_pct": 7.35
+      "volume": 83460835,
+      "change_pct": 7.0
     },
     "^VIX": {
       "label": "VIX",
-      "price": 26.72,
+      "price": 26.62,
       "open": 31.38,
       "high": 35.08,
       "low": 15.39,
-      "close": 26.72,
+      "close": 26.62,
       "prev_open": 28.63,
       "prev_close": 35.89,
       "volume": 0,
-      "change_pct": -25.55
+      "change_pct": -25.83
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 80.11,
+      "price": 80.25,
       "open": 83.67,
       "high": 83.95,
       "low": 79.87,
-      "close": 80.11,
+      "close": 80.25,
       "prev_open": 83.68,
       "prev_close": 83.98,
-      "volume": 224337,
-      "change_pct": -4.61
+      "volume": 229240,
+      "change_pct": -4.44
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -83,8 +83,8 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 49.7,
-    "mmth": 52.2
+    "s5fi": 49.3,
+    "mmth": 52.0
   },
   "regime": {
     "credit_status": "Yellow Flag",
