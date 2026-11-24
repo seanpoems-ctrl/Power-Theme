@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-24 15:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 717.04,
+    "spy_change_pct": -0.73,
+    "vix": 27.04,
+    "hy_oas": 3.63,
+    "yield_curve": 0.29,
+    "credit_status": "Yellow Flag",
+    "s5fi": 50.7,
+    "mmth": 52.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-24 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1597,44 +1615,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Continues to benefit from broad market strength and consistent cloud demand, but today's price action lacked a fresh, specific fundamental catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-11-03 06:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Fragile Sentiment",
-    "spy_price": 752.1,
-    "spy_change_pct": -0.48,
-    "vix": 21.26,
-    "hy_oas": 3.44,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 63.1,
-    "mmth": 63.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon is poised for attention as analysts highlight robust holiday shopping projections, potentially offsetting broader market concerns."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil gains as crude oil prices surge above $97 per barrel, boosting sentiment for energy sector profitability and dividends."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla remains a focus due to ongoing production ramp-up narratives and competitive pressure in the EV market, without a fresh catalyst."
         }
       ]
     }
