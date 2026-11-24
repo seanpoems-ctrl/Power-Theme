@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-23 23:58 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-11-24 06:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -29,35 +29,35 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 26.62,
-      "open": 31.38,
-      "high": 35.08,
-      "low": 15.39,
-      "close": 26.62,
-      "prev_open": 28.63,
-      "prev_close": 35.89,
+      "price": 28.88,
+      "open": 26.52,
+      "high": 28.9,
+      "low": 26.26,
+      "close": 28.88,
+      "prev_open": 31.38,
+      "prev_close": 26.62,
       "volume": 0,
-      "change_pct": -25.83
+      "change_pct": 8.49
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 79.61,
+      "price": 79.95,
       "open": 80.36,
       "high": 80.61,
-      "low": 79.59,
-      "close": 79.61,
-      "prev_open": 83.68,
-      "prev_close": 83.98,
-      "volume": 12413,
-      "change_pct": -5.2
+      "low": 79.07,
+      "close": 79.95,
+      "prev_open": 83.67,
+      "prev_close": 80.17,
+      "volume": 43356,
+      "change_pct": -0.27
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 58646.11,
+      "price": 58644.63,
       "open": 57009.99,
       "high": 59262.57,
       "low": 57009.99,
-      "close": 58646.11,
+      "close": 58644.63,
       "prev_open": 58551.56,
       "prev_close": 56436.65,
       "volume": 0,
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25337.27,
-      "open": 24907.19,
-      "high": 25386.82,
-      "low": 24873.34,
-      "close": 25337.27,
-      "prev_open": 25187.51,
-      "prev_close": 24802.78,
-      "volume": 62690400,
-      "change_pct": 2.15
+      "price": 25113.82,
+      "open": 25308.31,
+      "high": 25330.32,
+      "low": 25112.64,
+      "close": 25113.82,
+      "prev_open": 24907.19,
+      "prev_close": 25337.27,
+      "volume": 0,
+      "change_pct": -0.88
     }
   },
   "fred": {
@@ -83,8 +83,8 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 49.3,
-    "mmth": 52.0
+    "s5fi": 49.4,
+    "mmth": 52.1
   },
   "regime": {
     "credit_status": "Yellow Flag",

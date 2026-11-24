@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-24 06:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "",
+    "spy_price": 722.29,
+    "spy_change_pct": 4.71,
+    "vix": 28.88,
+    "hy_oas": 3.76,
+    "yield_curve": 0.29,
+    "credit_status": "Yellow Flag",
+    "s5fi": 49.4,
+    "mmth": 52.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-23 23:58 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1617,44 +1635,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla remains a focus due to ongoing production ramp-up narratives and competitive pressure in the EV market, without a fresh catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-11-02 21:38 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk Aversion Heightens, Oil Plunges",
-    "spy_price": 752.1,
-    "spy_change_pct": -0.48,
-    "vix": 21.15,
-    "hy_oas": 3.44,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 63.1,
-    "mmth": 63.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "Reports indicate a major new contract win for Intel's foundry services with a leading AI chip designer, signaling a potential resurgence in its manufacturing division."
-        },
-        {
-          "ticker": "TSM",
-          "company": "Taiwan Semiconductor Manufacturing Company",
-          "reason": "Announced plans for accelerated expansion of its advanced packaging capabilities, addressing a critical bottleneck in the high-demand AI chip market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Continues to see strong cloud adoption, but today's broader tech sector weakness led to profit-taking without fresh significant news."
         }
       ]
     }
