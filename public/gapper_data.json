@@ -1,56 +1,66 @@
 {
-  "scan_time": "2026-11-23 07:56 ET",
+  "scan_time": "2026-11-24 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "KYMR",
-      "price": 149.0,
-      "gap_pct": 29.22,
-      "pm_volume": 164661,
-      "avg_vol_10d": 875614,
-      "avg_dollar_vol": 130466486,
-      "mkt_cap": 9844175802,
-      "rvol": 1.67,
-      "adr_pct": 5.79,
-      "category": "Government Policy",
-      "theme": "Government Policy",
-      "reasoning": "KYMR government policy catalyst: KYMR: Kymera Therapeutics Inc. filed SEC Form 8-K: Regulation FD... - Quantisnow",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "ticker": "DKS",
+      "price": 158.0,
+      "gap_pct": 18.2,
+      "pm_volume": 107700,
+      "avg_vol_10d": 1758280,
+      "avg_dollar_vol": 277808240,
+      "mkt_cap": 11886861084,
+      "rvol": 2.99,
+      "adr_pct": 4.07,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "DKS gapping on earnings: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: KYMR: Kymera Therapeutics Inc. filed SEC Form 8-K: Regulation FD... - Quantisnow",
-        "impact": "Policy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP."
+        "catalyst": "Headlines: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow | DKS Stock News Today: Latest Updates & Live Price | MEXC - MEXC | Dick's Sporting Goods Announces $1.25 Quarterly Dividend and Releases Q3 FY2026 Earnings - Kalkine Media",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **The Policy**\nHeadlines: KYMR: Kymera Therapeutics Inc. filed SEC Form 8-K: Regulation FD... - Quantisnow\n\n• **Trade Implication**\nPolicy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP.",
+      "analysis_details": "• **The Results**\nHeadlines: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow | DKS Stock News Today: Latest Updates & Live Price | MEXC - MEXC | Dick's Sporting Goods Announces $1.25 Quarterly Dividend and Releases Q3 FY2026 Earnings - Kalkine Media\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "KYMR: Kymera Therapeutics Inc. filed SEC Form 8-K: Regulation FD... - Quantisnow",
+          "title": "DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQWF9HN2l2VTUwX0VNaUVqNjhWajRieFRrRUs1dUNNSXFDUHdmVjU4NUtEMGN5TmFNMU1kanhFbVhwSlg5OFZHS1ZLZmNzb3pEcFFUYm1fZkNSdFRwZ3lEb29JaTVFekZoSkRhRERkWk1ELW9lLVFVUVdnOHNIMWp6Q0h2aDBoOFdZSmpGVFRQbzUyejY4c1JxdjdTZ3R1R0k0SmVDcG1nZjhJOHBsdTFn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOMkFtSlhqZU5kVlBxOHlTYlFpSWk3WGt0NzNUekp5Vlo0TnNWZ2gxbXFwVW0wUTJTZF83MFYyaldfRXJfeHNpN1NaNjFHUFNmT3AxSVB6UVNwU1RLZDJkeV8xRGxuc1U1ZEU1c3R2YlEtb1g3aXdHaEtCeXZSc2pTM0VEaWU5d1dWRXNpX2dCeFQ1NElHQWRjU0ZWWlVZdw?oc=5"
+        },
+        {
+          "title": "DKS Stock News Today: Latest Updates & Live Price | MEXC - MEXC",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9MbDB4d0ZFQlE1UW9ZU2ZyTktkZVhEZmJpdkpWOU5GR2E1LVd6b0Y0Sktma0o0VXVyZ2piUjdDbjAzLUpzWUFaUFdhSVI?oc=5"
+        },
+        {
+          "title": "Dick's Sporting Goods Announces $1.25 Quarterly Dividend and Releases Q3 FY2026 Earnings - Kalkine Media",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOODRoTzBPZkRiMWp0ejhxbzZUb0J3d1ZZWmF6dGxYZTh1VzlLckdUR1ZBMmJHc2U5MzM0dElTYk5KRFVURGpuV05kbUtrbmJNa1VRVGZrdFpBN1Y4cFJVS3E2RWNEbEVWbDZFS0I3Zm1Td1FFMTBrUUdkNWpkdnlBY3N2QzZ3aTh3cVB4TEhLVVlaQTY2ZURiaHhTeDNOMmVoeU5sNUlSMHR2djZtSVZCdUFueC02OHNfV29uTGE1RzJwZDQ5a0VLQXFoWlI?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-11-23",
+        "filing_date": "2026-11-24",
         "form": "8-K",
         "items": [
-          "7.01",
+          "2.02",
           "8.01",
           "9.01"
         ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1815442/000119312526470926/d188151d8k.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1089063/000108906326000039/dks-20261123.htm"
       },
-      "float_shares": "76.68M",
-      "short_float": "12.57%",
-      "daily_pct": -3.42,
-      "prev_close": 115.31,
+      "float_shares": null,
+      "short_float": "22.98%",
+      "daily_pct": 1.07,
+      "prev_close": 133.67,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -60,7 +70,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "KYMR government policy catalyst: KYMR: Kymera Therapeutics Inc. filed SEC Form 8-K: Regulation FD... - Quantisnow",
+        "primary_claim": "DKS gapping on earnings: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -72,45 +82,45 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "ZS",
-      "price": 230.41,
-      "gap_pct": 18.27,
-      "pm_volume": 288673,
-      "avg_vol_10d": 2347370,
-      "avg_dollar_vol": 540857522,
-      "mkt_cap": 31766318386,
-      "rvol": 1.05,
-      "adr_pct": 5.84,
+      "ticker": "FLNC",
+      "price": 4.4,
+      "gap_pct": 15.79,
+      "pm_volume": 1178234,
+      "avg_vol_10d": 7343352,
+      "avg_dollar_vol": 32310749,
+      "mkt_cap": 701466199,
+      "rvol": 1.49,
+      "adr_pct": 8.6,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "ZS: CrowdStrike agrees to buy Zscaler, with a payout that moves with CrowdStrike stock - Stock",
+      "reasoning": "FLNC: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Disc",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
-      "grade": "B",
+      "grade": "C",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: CrowdStrike agrees to buy Zscaler, with a payout that moves with CrowdStrike stock - Stock Titan | Markets & Stocks - FinancialContent",
+        "catalyst": "Headlines: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Discuss Your Rights - FLNC | Fluence Energy, Inc. Reports 2026 Financial Results",
         "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: CrowdStrike agrees to buy Zscaler, with a payout that moves with CrowdStrike stock - Stock Titan | Markets & Stocks - FinancialContent\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **What Happened**\nHeadlines: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Discuss Your Rights - FLNC | Fluence Energy, Inc. Reports 2026 Financial Results\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "CrowdStrike agrees to buy Zscaler, with a payout that moves with CrowdStrike stock - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxObElaUm9ibXdycDB0Q2VvY1FBeFNzMndHTXVlYkd5Q3ZKaEhKSXdZVUNRaWRrRHRKLVZ3THN2aVNtUFRNUzA0anR6dWlpUXAzMDRMaVoxYk1OQWhJWmd4WDRBM0o4SEhvMkRBX1Zyd1dza1dTbzZtODk1MW9RT3BreXI4ZF9NMDA?oc=5"
+          "title": "Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Discuss Your Rights - FLNC",
+          "source": "Finviz",
+          "url": "/news/425956/fluence-energy-inc-sued-for-securities-law-violations-contact-the-djs-law-group-to-discuss-your-rights-flnc"
         },
         {
-          "title": "Markets & Stocks - FinancialContent",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxNSzZic1BQMXFEUWdXYzhpNEFTcnh3TU9rUGZqMWRWZ1BvcEJFTHFRdExJMlRIa0VRNGxmNERnVllmdDAwWmxnMU41aEhXNFU0SVBEQnZyWDlJVU5YbGZ0OTBIbHZvNWQ2clM3cEtFS1pybnlpVFVLclNHanJIcXhWMjNsNXVULVlJdUlrSDZJLTF4OVlvbjNMSk5tSjFCakJjQkhnTEJYa29obS15R05sREFWU01ITzVUbWxmRUpsbDRNQmNzS0VqY3pHRU80ZGRWSENDcnZkdi0xMzNrUW5ES1llX2wtc2VJTjVFYldSaFpqWWo3ODJkYUlhY3FYai0yWTItTkF2dnpfWl9kUG0wNmt3?oc=5"
+          "title": "Fluence Energy, Inc. Reports 2026 Financial Results",
+          "source": "Finviz",
+          "url": "/news/426436/fluence-energy-inc-reports-2026-financial-results"
         }
       ],
       "edgar_filing": {
@@ -122,1142 +132,14 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1713683/000119312526470942/d255961d8k.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1868941/000186894126000056/flnc-20261123.htm"
       },
-      "float_shares": "106.16M",
-      "short_float": "5.52%",
-      "daily_pct": -5.29,
-      "prev_close": 194.82,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ZS: CrowdStrike agrees to buy Zscaler, with a payout that moves with CrowdStrike stock - Stock",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "UMC",
-      "price": 13.44,
-      "gap_pct": 11.63,
-      "pm_volume": 454212,
-      "avg_vol_10d": 14394124,
-      "avg_dollar_vol": 193457027,
-      "mkt_cap": 30486289292,
-      "rvol": 2.49,
-      "adr_pct": 4.6,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "2.51B",
-      "short_float": "1.44%",
-      "daily_pct": -10.15,
-      "prev_close": 12.04,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "ASX",
-      "price": 29.0,
-      "gap_pct": 10.39,
-      "pm_volume": 123760,
-      "avg_vol_10d": 12133289,
-      "avg_dollar_vol": 351865381,
-      "mkt_cap": 61092605270,
-      "rvol": 2.45,
-      "adr_pct": 6.18,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "ASX gapping on earnings: Three ASX Technology Stocks Put Earnings and Dividends in Focus - Kalkine",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Three ASX Technology Stocks Put Earnings and Dividends in Focus - Kalkine | ASX Midday Sector Update: Materials Stocks Rise, Financials Slide - Yahoo Finance Australia | Australian shares sink for eighth straight session - CommBank",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Three ASX Technology Stocks Put Earnings and Dividends in Focus - Kalkine | ASX Midday Sector Update: Materials Stocks Rise, Financials Slide - Yahoo Finance Australia | Australian shares sink for eighth straight session - CommBank\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Three ASX Technology Stocks Put Earnings and Dividends in Focus - Kalkine",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxONjVJSzVoU0MxdDNpRFljZHNrdy11ZndYNTktX1Z1cDBiNWZ1RFQ2NzVfc0lQS05ORHhIanVlTkVMR0x0NDQxRjFQcGJrMUZFTUNlWFBJMzVUNEZqSFRoQVFXUG5INUlwVTRLSGk4YkFnRlZMS0tlUWk2a0ludENKT0FSZXVwRkUxUGFZaEtqOUViSC1mSWxZZnlLelVRbzNzOXVJMUhjZk9nS2c?oc=5"
-        },
-        {
-          "title": "ASX Midday Sector Update: Materials Stocks Rise, Financials Slide - Yahoo Finance Australia",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPWnE0dU41OWFiaVNZOGxGUURmZGc5VFM4a08yeDQwSjFGTnFvRlN2dTF1WHYwZWhMc0ZOYkt1QXR1YWtkS3Z5alR1dmFzVTdodXM3NkFHSVhtWHYyZ242TlVMTVBUdXhpWUdFc0kwUjF3VEZqb1UyblRCSXltWnNoY2k1bVBIdmlRVEt3?oc=5"
-        },
-        {
-          "title": "Australian shares sink for eighth straight session - CommBank",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNX1R4engyMk9GYXkwb3JKZzRtQTBmajk3ODVST2sxaGtEUnYxMmk5cHVXWXNWMDYtam1Md3JJVHh4d1FuR21vclJSR0RYRDQxWDZzWmNYZWliQ1FTbEEwTi1vdjFhQmk4cl9lSVRFRzBLRENxTERRU3JZOHZGOTlFQndicTV6ZE5sOERicWo0SVQzaXhNWTFDTzhyclUwUTVNMHU5TE9kVGZfMU03VXc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "2.21B",
-      "short_float": "0.67%",
-      "daily_pct": -13.84,
-      "prev_close": 26.27,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ASX gapping on earnings: Three ASX Technology Stocks Put Earnings and Dividends in Focus - Kalkine",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "VNET",
-      "price": 2.4,
-      "gap_pct": 10.09,
-      "pm_volume": 147954,
-      "avg_vol_10d": 7138416,
-      "avg_dollar_vol": 17132198,
-      "mkt_cap": 620627801,
-      "rvol": 1.47,
-      "adr_pct": 11.4,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "VNET gapping on earnings: VNET Group (NASDAQ:VNET) Posts Narrower-Than-Expected Q3 2026 Loss as Revenue Lands Roughl",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: VNET Group (NASDAQ:VNET) Posts Narrower-Than-Expected Q3 2026 Loss as Revenue Lands Roughly In Line - ChartMill | VNET Group, Inc. authorizes a Buyback Plan. - marketscreener.com | VNET Reports Unaudited Third Quarter 2026 Financial Results - Quantisnow",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: VNET Group (NASDAQ:VNET) Posts Narrower-Than-Expected Q3 2026 Loss as Revenue Lands Roughly In Line - ChartMill | VNET Group, Inc. authorizes a Buyback Plan. - marketscreener.com | VNET Reports Unaudited Third Quarter 2026 Financial Results - Quantisnow\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "VNET Group (NASDAQ:VNET) Posts Narrower-Than-Expected Q3 2026 Loss as Revenue Lands Roughly In Line - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOWEVXWVFMSmd6Mkw2bnVBeFhycmVjNFNScmdHTXBnckRFT1NNeEFKc1ZHeFJQM1hqclBWZnI5MzFiN3kxSFBEQ19oZ0pabUlXQnhRNzBORkk4b0dhYm9BVGdaRHh6X2xPQUhCbFctUW5WbkY2anZULWdCbndNdmJSdUFONUxhOXI3cW1UN1ozQlN3clRBQTFpNUx3UEMxQ1pGVF9reU5qMkFFZ1ZQb0hqbUtteXFBeHNKSU10QU50a3paNWFEdTlWdll5ZFRGTHBkSngxTHRtazlhbVp6ZkRYNkR3?oc=5"
-        },
-        {
-          "title": "VNET Group, Inc. authorizes a Buyback Plan. - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPMHJSYUJnaVdRcFRxN3o0d1hPTExNTkZiOC02bEdkTnZGU3o0b2gzcnhWWGNuREI1VkZxazNnOVE2VGpTWTVmc2lhdHBDVnBEX1pSZDVqTUhkRWtlWFdGU29rcnB0MW9zY2NpQmg0WmRoQTh4Yi1NUjRMTlBpOWwxVUprbnJqaGpqSDB2My16eW9iSVgwQ0lKbw?oc=5"
-        },
-        {
-          "title": "VNET Reports Unaudited Third Quarter 2026 Financial Results - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNamZZdmJPUHhJcmttX2tvamd2ZGZlYUI3VTJZdExBc2hYWUd3eGkwMjl3eERtR2VOZTVhdEphMWxMX0doeDg4NDhIZ2FBNFZUR3RXSm1NM0JqRXdqZHZPQWxzVm50RG9LZlhDV21vd3NGUEVYak5McjJBdHZLdjdWY2hsQWZsTzFtdmdTQy1KSHc4MnZFVUEzM0EzeTZBUnM?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "269.35M",
-      "short_float": "28.89%",
-      "daily_pct": -0.46,
-      "prev_close": 2.18,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $17M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "VNET gapping on earnings: VNET Group (NASDAQ:VNET) Posts Narrower-Than-Expected Q3 2026 Loss as Revenue Lands Roughl",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ASST",
-      "price": 15.93,
-      "gap_pct": 9.79,
-      "pm_volume": 141993,
-      "avg_vol_10d": 7126655,
-      "avg_dollar_vol": 113527614,
-      "mkt_cap": 1847841553,
-      "rvol": 2.53,
-      "adr_pct": 8.84,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "115.66M",
-      "short_float": "14.93%",
-      "daily_pct": -12.64,
-      "prev_close": 14.51,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BMNR",
-      "price": 14.17,
-      "gap_pct": 9.17,
-      "pm_volume": 715295,
-      "avg_vol_10d": 32379922,
-      "avg_dollar_vol": 458823495,
-      "mkt_cap": 8131333547,
-      "rvol": 2.03,
-      "adr_pct": 7.28,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "623.28M",
-      "short_float": "6.27%",
-      "daily_pct": -13.87,
-      "prev_close": 12.98,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "UUUU",
-      "price": 5.39,
-      "gap_pct": 8.66,
-      "pm_volume": 97812,
-      "avg_vol_10d": 9444210,
-      "avg_dollar_vol": 50904292,
-      "mkt_cap": 1313546602,
-      "rvol": 1.35,
-      "adr_pct": 7.34,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "260.87M",
-      "short_float": "22.03%",
-      "daily_pct": -9.49,
-      "prev_close": 4.96,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $51M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SBET",
-      "price": 4.86,
-      "gap_pct": 8.48,
-      "pm_volume": 132931,
-      "avg_vol_10d": 9404433,
-      "avg_dollar_vol": 45705544,
-      "mkt_cap": 973711009,
-      "rvol": 1.71,
-      "adr_pct": 6.17,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "SBET: how InvestingPro spotted SharpLink overvalued before 53% decline By Investing.com - Invest",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: how InvestingPro spotted SharpLink overvalued before 53% decline By Investing.com - Investing.com India",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: how InvestingPro spotted SharpLink overvalued before 53% decline By Investing.com - Investing.com India\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "how InvestingPro spotted SharpLink overvalued before 53% decline By Investing.com - Investing.com India",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNZFFvWHVZQVVhLVBvQkt3Q1k5dzdBLWswRWJMUXo1TWJrS0F4dFlISlJFaUM3SG00V0dtSzJlb2tuUmh0TzBTMHQxbUNGV1l1cHFCQmNabmFVYzhBdFF4ZWs0MnZGbTJlYXR2SjU2Q1N0Y1dxTWNCMmhOZ0oxVktSUWpESm4yRVdXUE9vNmNHeEl5Z21ZODVOWmZTOG8xOHAzTkNaRXNkbFhUWmt1QTRWVS1sVTBjS2JJWnhzUEdWNjBEZw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "202.90M",
-      "short_float": "18.17%",
-      "daily_pct": -9.13,
-      "prev_close": 4.48,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $46M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SBET: how InvestingPro spotted SharpLink overvalued before 53% decline By Investing.com - Invest",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BTDR",
-      "price": 3.2,
-      "gap_pct": 8.29,
-      "pm_volume": 253975,
-      "avg_vol_10d": 17369033,
-      "avg_dollar_vol": 55580906,
-      "mkt_cap": 816155651,
-      "rvol": 1.3,
-      "adr_pct": 13.03,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "158.75M",
-      "short_float": "31.85%",
-      "daily_pct": -13.34,
-      "prev_close": 2.96,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $56M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "VZLA",
-      "price": 2.63,
-      "gap_pct": 8.26,
-      "pm_volume": 68646,
-      "avg_vol_10d": 8871901,
-      "avg_dollar_vol": 23333100,
-      "mkt_cap": 862788256,
-      "rvol": 2.23,
-      "adr_pct": 6.16,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "270.56M",
-      "short_float": "11.34%",
-      "daily_pct": -13.83,
-      "prev_close": 2.43,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $23M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "MSTR",
-      "price": 84.22,
-      "gap_pct": 8.25,
-      "pm_volume": 655425,
-      "avg_vol_10d": 21349746,
-      "avg_dollar_vol": 1798075608,
-      "mkt_cap": 32859170144,
-      "rvol": 1.81,
-      "adr_pct": 6.31,
-      "category": "Government Policy",
-      "theme": "Government Policy",
-      "reasoning": "MSTR government policy catalyst: MSTR Stock Jumps In Premarket As Bitcoin Reclaims $61K After Brutal Nasdaq Sell-Off - Yaho",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: MSTR Stock Jumps In Premarket As Bitcoin Reclaims $61K After Brutal Nasdaq Sell-Off - Yahoo Finance | Index Ejection And Analyst Downgrade Pile Fresh Pressure On Strategy (NASDAQ: MSTR) After 23% Weekly Collapse - Foreign Policy Journal | Strategy's Bitcoin Stack Is 22% Underwater. Peter Schiff Says It's ‘About to Blow Up' - BeInCrypto",
-        "impact": "Policy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP."
-      },
-      "analysis_details": "• **The Policy**\nHeadlines: MSTR Stock Jumps In Premarket As Bitcoin Reclaims $61K After Brutal Nasdaq Sell-Off - Yahoo Finance | Index Ejection And Analyst Downgrade Pile Fresh Pressure On Strategy (NASDAQ: MSTR) After 23% Weekly Collapse - Foreign Policy Journal | Strategy's Bitcoin Stack Is 22% Underwater. Peter Schiff Says It's ‘About to Blow Up' - BeInCrypto\n\n• **Trade Implication**\nPolicy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "MSTU",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SMST",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "MSTR Stock Jumps In Premarket As Bitcoin Reclaims $61K After Brutal Nasdaq Sell-Off - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQNmtyQTg4U2ZLdy1nTktJMHo4MDk2eFVEdVEyX01yekhqeTQ3ZVZJOUFfclZzM1Ryemp6UDQtbS12c3ZUaklPeDZNV0ZyZlVhelVCTzJFV09adGNXQWVoRk84QlA3Znp4SF9VRFhtdW15U0dBTElIQ0lWMWVQSGpEX0tKblViSnpIeDhzQk5RNnVBSzV6MV9RYVNmU2M0RnFY?oc=5"
-        },
-        {
-          "title": "Index Ejection And Analyst Downgrade Pile Fresh Pressure On Strategy (NASDAQ: MSTR) After 23% Weekly Collapse - Foreign Policy Journal",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQbkdCZGJLSkhGdHV5bUVhbVlNSTFJUTlWWTJkZXFhZHpqZGRhd2VQQ2pzZWFZaU84RWVLdm11UENiekJlQmZjTG51MWhud1V0OHF1YTdCN0VSU2FuSm1ieGs0c3dIZldBai04SmYxTHVjR1B1VFNjSVdTajE2VGJQR1JscHo3SFNNNHJsaXNwRmJOVVVYRTlZNVFrck5mdWRhMnZnaTllLTZjQkdsUk9lT2p5XzZHaUNicGctaFdNMC1zb2tXVE5LTTV0M1FtZ05iX0NBeG14Z21LQVY0T3BJTGRmTlU4MDJUUnc?oc=5"
-        },
-        {
-          "title": "Strategy's Bitcoin Stack Is 22% Underwater. Peter Schiff Says It's ‘About to Blow Up' - BeInCrypto",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5pYXlXS29LWTJTbEZEb0U4MzlleWsyamY5cmVieU9aOHVKRHp3OGxETDBIVTVudTE0bF84T1lGVkVvZ3pXaUM3SW00WHMyTURLQXpTRGFoaTlMT1ZJV1UyY05YRU0zX05uUXZ5OUM1NWM?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "401.61M",
-      "short_float": "6.67%",
-      "daily_pct": -9.67,
-      "prev_close": 77.8,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "MSTR government policy catalyst: MSTR Stock Jumps In Premarket As Bitcoin Reclaims $61K After Brutal Nasdaq Sell-Off - Yaho",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "GLXY",
-      "price": 12.13,
-      "gap_pct": 8.11,
-      "pm_volume": 114567,
-      "avg_vol_10d": 8995636,
-      "avg_dollar_vol": 109117065,
-      "mkt_cap": 4327968415,
-      "rvol": 1.63,
-      "adr_pct": 10.46,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "186.01M",
-      "short_float": "19.81%",
-      "daily_pct": -8.93,
-      "prev_close": 11.22,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "NUAI",
-      "price": 4.08,
-      "gap_pct": 7.94,
-      "pm_volume": 410318,
-      "avg_vol_10d": 15864771,
-      "avg_dollar_vol": 64728266,
-      "mkt_cap": 531352605,
-      "rvol": 1.36,
-      "adr_pct": 15.95,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "112.63M",
-      "short_float": "24.03%",
-      "daily_pct": -11.68,
-      "prev_close": 3.78,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $65M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ARM",
-      "price": 164.26,
-      "gap_pct": 7.92,
-      "pm_volume": 150573,
-      "avg_vol_10d": 5704258,
-      "avg_dollar_vol": 936981419,
-      "mkt_cap": 161949213086,
-      "rvol": 1.88,
-      "adr_pct": 6.58,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "ARM deal announcement: Arm Holdings' Haas extends contract to lead chip firm through 2033 - Reuters",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Arm Holdings' Haas extends contract to lead chip firm through 2033 - Reuters | Trending Industry Today: Arm Holdings Leads Losses In CPU Concept Stocks - Moomoo | Arm Stock Jumps With AI CPU Demand Rising - Can ARM Break Above $266.53? - TradingKey",
-        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
-      },
-      "analysis_details": "• **The Announcement**\nHeadlines: Arm Holdings' Haas extends contract to lead chip firm through 2033 - Reuters | Trending Industry Today: Arm Holdings Leads Losses In CPU Concept Stocks - Moomoo | Arm Stock Jumps With AI CPU Demand Rising - Can ARM Break Above $266.53? - TradingKey\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Arm Holdings' Haas extends contract to lead chip firm through 2033 - Reuters",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQTEVKTTZyVDYxTGdWYlI3bzFQSU9zSGhiaXpERE5MWHRYSVhZcDhZRDBpekhuODdWYlZCTFJmU1NDYWVzRlpMR2JWZ21xcUMzSmhkX2RoYnhPSmtJRDdqMGRyczN5UElOQV9BdUt5NDItbzlEb29RNmR0eFRWd1V5bkcwUXQ0NG5lWjRkUkw0Y0VRaUV0UXF6V1V4ZkRhdS02X1UtWkRpejVlT2M?oc=5"
-        },
-        {
-          "title": "Trending Industry Today: Arm Holdings Leads Losses In CPU Concept Stocks - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQY1RZTXZhdWpZbmtnQ1FvOWdNOHc2djgwRERTMm9KMDh6SlVFYm9VRkN2eF8wNE9Fa2picU5FS2xRLVdMdExKcUtDTlZ2dTFQYUgwT3h6bDZjckR1cTVLQlBzbWhOdGE3TGdKYkRsdUh1eFhqcFBzVkZzdXE5SFRkSmJmUGdqS0ROcm5zeXZJRUo4d25QdXdwTVFjc2pZV3hTcnNGTEs3N2M3NU1F?oc=5"
-        },
-        {
-          "title": "Arm Stock Jumps With AI CPU Demand Rising - Can ARM Break Above $266.53? - TradingKey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOVlgxUVoydFU2THZuVzFWNUh4Qy00Y1pWUlpXTFppdG0ySG8yMDFsWWsxdEZIdm1fblJGbGJSMmh5eDVTMm5laFFsZ2Y2MmpoQ2ZjVzVfT3pKbTNVaEtETi0tRVpLTHRVSzE1ci11N1ViWWxqX2tGWXFhbTZZSkl2QjdEa1J4WUs1VDdRZjlGeWZTUG5BTnR3NGtacUluUzZaM2dRMXZwdW9lVHdDX3dNMg?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "1.07B",
-      "short_float": "10.71%",
-      "daily_pct": -14.09,
-      "prev_close": 152.2,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ARM deal announcement: Arm Holdings' Haas extends contract to lead chip firm through 2033 - Reuters",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "XPEV",
-      "price": 8.7,
-      "gap_pct": 7.7,
-      "pm_volume": 289018,
-      "avg_vol_10d": 9120735,
-      "avg_dollar_vol": 79350394,
-      "mkt_cap": 8949656528,
-      "rvol": 2.4,
-      "adr_pct": 3.77,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "XPEV: ARIDGE A868 Flying Car Completes Full-Scale, Full-Tiltrotor Transition Flight - Quantisnow",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: ARIDGE A868 Flying Car Completes Full-Scale, Full-Tiltrotor Transition Flight - Quantisnow | A first for Chinese automakers: XPENG offers public driver-assistance rides at a European store. - Stock Titan | XPENG Launches Public Advanced ADAS Test Rides at Its Paris Store, Becoming the First Chinese Automaker to Offer the Experience Overseas",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: ARIDGE A868 Flying Car Completes Full-Scale, Full-Tiltrotor Transition Flight - Quantisnow | A first for Chinese automakers: XPENG offers public driver-assistance rides at a European store. - Stock Titan | XPENG Launches Public Advanced ADAS Test Rides at Its Paris Store, Becoming the First Chinese Automaker to Offer the Experience Overseas\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [
-        "LI",
-        "NIO",
-        "TSLA"
-      ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "ARIDGE A868 Flying Car Completes Full-Scale, Full-Tiltrotor Transition Flight - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNV1RFOXQxQlNjY2k5WWlJYjNUNHE2MW9TdmVTakJPak5zRWxIa2E4SHZSUm5YNklTcU5NeFdiWXQxZHlQcm5sUG1LeEhKV2FEeXZtVDZocnpNVXRFQTk4NE1MQnI5bElhWEtMYWkzdV9vTG0tUUdpODgzMVY2X2Y4OHNfNDItSXBSa1ZBcTJkUzFJQ1pFRTlROVNPVW9DV3I3R1ZleW5BMHhaSmJlTHhzVlRRcG9GUQ?oc=5"
-        },
-        {
-          "title": "A first for Chinese automakers: XPENG offers public driver-assistance rides at a European store. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPajNxMDdobkkzQlMtWXpKcDRIdTluS3JBR0JYb3YyWTltQkNsVlBneGNhc2MzT2p4NlNnRW1HTWdVU2xVbmtjQjZLSlZYM3FRWERSM3Rha2c1VDROUUJ4Z0tFZ1JTRXlWdlFWZFVIRzZsb3AtUEVFZ0twQV9BN3Q1S1dWa29VYWVuY3VhMHM5bTdPZWVjamtBQUtfWmFiUjZxN2VBcThieDlnMGdxNGRlRlQxWlpnVEdfS1FQMQ?oc=5"
-        },
-        {
-          "title": "XPENG Launches Public Advanced ADAS Test Rides at Its Paris Store, Becoming the First Chinese Automaker to Offer the Experience Overseas",
-          "source": "Finviz",
-          "url": "/news/425942/xpeng-launches-public-advanced-adas-test-rides-at-its-paris-store-becoming-the-first-chinese-automaker-to-offer-the-experience-overseas"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "779.73M",
-      "short_float": "6.04%",
-      "daily_pct": -13.86,
-      "prev_close": 8.08,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $79M < $100M, ADR 3.8% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "XPEV: ARIDGE A868 Flying Car Completes Full-Scale, Full-Tiltrotor Transition Flight - Quantisnow",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "NVTS",
-      "price": 6.55,
-      "gap_pct": 7.66,
-      "pm_volume": 283212,
-      "avg_vol_10d": 13480346,
-      "avg_dollar_vol": 88296266,
-      "mkt_cap": 1638605809,
-      "rvol": 1.41,
-      "adr_pct": 9.0,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [
-        "ON",
-        "STM",
-        "WOLF"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "233.02M",
-      "short_float": "21.33%",
-      "daily_pct": -15.2,
-      "prev_close": 6.08,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $88M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "HMY",
-      "price": 13.8,
-      "gap_pct": 7.64,
-      "pm_volume": 113535,
-      "avg_vol_10d": 3617862,
-      "avg_dollar_vol": 49926496,
-      "mkt_cap": 8383484683,
-      "rvol": 1.5,
-      "adr_pct": 3.63,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "627.03M",
-      "short_float": "1.95%",
-      "daily_pct": -4.97,
-      "prev_close": 12.82,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $50M < $100M, ADR 3.6% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BORR",
-      "price": 3.67,
-      "gap_pct": 7.62,
-      "pm_volume": 60923,
-      "avg_vol_10d": 10722818,
-      "avg_dollar_vol": 39352742,
-      "mkt_cap": 1052028526,
-      "rvol": 3.83,
-      "adr_pct": 6.89,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "BORR: Morgan Stanley initiates Borr Drilling stock coverage at Equalweight By Investing.com - In",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Morgan Stanley initiates Borr Drilling stock coverage at Equalweight By Investing.com - Investing.com Canada",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Morgan Stanley initiates Borr Drilling stock coverage at Equalweight By Investing.com - Investing.com Canada\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Morgan Stanley initiates Borr Drilling stock coverage at Equalweight By Investing.com - Investing.com Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxObXYwa2ZpSnlJT0J2al93eERCdVhabE1FWDhKV1g2bC1fbm4tOTZCNE1GMmxNMzRLbEQxWExWS09IVVBTSHhlYzJISTg4dTd3c2dqY2lwZWJCVGVCbW9nR2tMeUlZMUFYUUVyZEZ0WFdCQWh6c2lieGxYX3pzZE12OFI3WXB4S2x6b1NTR0Yxa2cxcGFWaHZWVGpISDg1bFJ3TnZRUXFoNEx2TUxJTUtGY1B4NWsxUEZiMi1fNkMzU0JVbjBxN3pTXw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "254.09M",
-      "short_float": "14.92%",
-      "daily_pct": 4.28,
-      "prev_close": 3.41,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $39M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "BORR: Morgan Stanley initiates Borr Drilling stock coverage at Equalweight By Investing.com - In",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "FLNC",
-      "price": 3.72,
-      "gap_pct": 7.5,
-      "pm_volume": 118138,
-      "avg_vol_10d": 6778553,
-      "avg_dollar_vol": 25216217,
-      "mkt_cap": 638703449,
-      "rvol": 2.26,
-      "adr_pct": 8.45,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
       "float_shares": "110.70M",
       "short_float": "49.11%",
-      "daily_pct": -9.66,
-      "prev_close": 3.46,
+      "daily_pct": 9.83,
+      "prev_close": 3.8,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $25M < $100M)",
+      "technical_status": "Fail (Avg $Vol $32M < $100M)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -1265,7 +147,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "primary_claim": "FLNC: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Disc",
         "discrepancy_note": ""
       },
       "gates_passed": 2,
@@ -1281,37 +163,69 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "CRDO",
-      "price": 107.33,
-      "gap_pct": 7.48,
-      "pm_volume": 118762,
-      "avg_vol_10d": 7244410,
-      "avg_dollar_vol": 777542525,
-      "mkt_cap": 18768878802,
-      "rvol": 1.91,
-      "adr_pct": 9.56,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
+      "ticker": "INSM",
+      "price": 170.9,
+      "gap_pct": 14.63,
+      "pm_volume": 2612975,
+      "avg_vol_10d": 4060381,
+      "avg_dollar_vol": 693919113,
+      "mkt_cap": 32707409623,
+      "rvol": 1.28,
+      "adr_pct": 5.45,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "INSM FDA/regulatory event: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
+      "grade": "B",
       "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Headlines: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance | What happens to Insmed stock in the Sanofi deal? $175 a share in cash if it closes - Nacionale | Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years - CNBC",
+        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **The Event**\nHeadlines: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance | What happens to Insmed stock in the Sanofi deal? $175 a share in cash if it closes - Nacionale | Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years - CNBC\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "169.38M",
-      "short_float": "5.87%",
-      "daily_pct": -15.2,
-      "prev_close": 99.86,
+      "headlines": [
+        {
+          "title": "Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPR3Q2c0xVYjJidGE4V2lmWHp2OGpud0plS0tHNlpIYkxTTnVEbXRPNExtRkpoeFpXWU9ES3R4d1I2bzREWjQ5Wlh2RVRjWnRvX3VybEVCWlAtazd4LUFRMUxfSlFUV0dodVFIQ0d6TnU0OWl3Q0U5dld5TG9wNVo4Zm9CZHRteGhyRGRoZXRERTYzWlNJ?oc=5"
+        },
+        {
+          "title": "What happens to Insmed stock in the Sanofi deal? $175 a share in cash if it closes - Nacionale",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQeHpUZ1RJV2JyMW9sVEFlUkhLYVJkYVV0dGFKdGxBOXNiUXhxQ3U1YnlNeUdBOG11QlFSbHE4d2diMVdxa0xHQ1l5MUJMMWFsQnhiYi0tU3l2VmNjUzQ0TXRUZVo1TU9YVmdIdnhFNGFXT2dzbHlKT3pnQjBNMTNNVXpHalpaSlJpMzFFRXJLODlNSlJfbHMxcF8xWkNXdw?oc=5"
+        },
+        {
+          "title": "Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years - CNBC",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5mSVdLNmxnYXl4a2VvR1BfV202ZXZBckFZWVI5WWtGNkFxQ3d0NDRLd0JNdjJUMWJQVzV4NVNGVWNhZ0I2Rml2NWZXTlNFcDhfaE9kUnVpZkxWWEh1RDk5YV9fTWhqcUZyUzVjLWo5ZnlKN0pkM3Rr0gF8QVVfeXFMT2ZKcnhlaEFlTUtDQ3NnYnlrd1g3d3dZTms3YnM4Yk40ZlJ1eG10N3MzSFZiVUFCQ3lkQUtSYzBNTUx0dks4SkF6azhjaVFpb3p2UTFxYnV4d1RNZFJDZ2hxV1hOTHlSMHNPeHNBQTEyVnBsRnpKRVdxTE1wZA?oc=5"
+        },
+        {
+          "title": "symbol__ Stock Quote Price and Forecast - CNN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBUN1lmU0ZZWnZhMFBmaTJQWkU5Zk1IcXZBMEYwYWZFSVZxVlgxU0tRbmhZSE1kYUFFU01sWnAxT1JNYnBYVUMxQ1dvOGU2Qmtn?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "7.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1104506/000114036126045364/ef20086426_8-k.htm"
+      },
+      "float_shares": "216.14M",
+      "short_float": "7.23%",
+      "daily_pct": 5.49,
+      "prev_close": 149.09,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -1321,7 +235,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "primary_claim": "INSM FDA/regulatory event: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -1337,45 +251,62 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "LUNR",
-      "price": 9.43,
-      "gap_pct": 7.46,
-      "pm_volume": 157309,
-      "avg_vol_10d": 12543813,
-      "avg_dollar_vol": 118288157,
-      "mkt_cap": 2003055145,
-      "rvol": 0.92,
-      "adr_pct": 10.15,
+      "ticker": "KSS",
+      "price": 23.02,
+      "gap_pct": 8.58,
+      "pm_volume": 129141,
+      "avg_vol_10d": 3904253,
+      "avg_dollar_vol": 89875904,
+      "mkt_cap": 2403580656,
+      "rvol": 2.84,
+      "adr_pct": 5.09,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "LUNR: Intuitive Machines shows strong growth potentia... - Pluang",
+      "reasoning": "KSS: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
-      "grade": "B",
+      "grade": "C",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Intuitive Machines shows strong growth potentia... - Pluang",
+        "catalyst": "Headlines: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow | A $137 million tax benefit helped lift Kohl’s quarterly net income to $254 million - Stock Titan",
         "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: Intuitive Machines shows strong growth potentia... - Pluang\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **What Happened**\nHeadlines: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow | A $137 million tax benefit helped lift Kohl’s quarterly net income to $254 million - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Intuitive Machines shows strong growth potentia... - Pluang",
+          "title": "KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQaUNyUGpLUWpVaWFUOGtfd19fMHFBRS0yUVJOSFBGanlGeTFKN01XMTBESUI1cUVoTWh3b0lDVzNUOVhrTDh2cU1uTGNzdVdVZTU3OG1jbllRRTFqb09fN2xDcXJpZHl5RUZLWG5wWEtwbEVkSldIZkpWcE1ONndqLUJYSVdMTlV1SGt2RmJ5bGI5R3RTZHBOX2trTzBEZ0lycTF5aExUQW1udw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOVlJhS19OdFJiaW5kdHZBNE9yaU9XN1VkZF9IVlg1eU51VlhqN3R0TXFYRmZxWWdFVVBzS29jc1VvaW9JY0VpNS1nQk5EU283THM3cUx0RWVCQkJ3Yzc4ZXZocXU2S3k0TWd5LTJ6ak0yWTlmU1lzeTZEc2VnY2pJLURjSC1MYzJHV0w0NFBibGsweGd5V3hQZEZVa2tubm9GZDFF?oc=5"
+        },
+        {
+          "title": "A $137 million tax benefit helped lift Kohl’s quarterly net income to $254 million - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNdUlxSEVxdVFHYzVPSDd1b3NieEdxbjljRXVOSDRfWktXWWhhckoxU0lRVWgyNzlzR182dnZ5SHh1ZzBvZElOc2I5NWlxUXA0N2lrd0dCMEk0aGJvRE51bkpRSXQ2djFVYk02eTRhZzB5dzBRZ1NZSGhSN3dmcEJtQVBZV05Da1F3ZnlFd0UtczRaUk12N2ZDZVR2bWdQTmo2cTJ4WXVQRQ?oc=5"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "152.73M",
-      "short_float": "24.42%",
-      "daily_pct": -10.28,
-      "prev_close": 8.78,
+      "edgar_filing": {
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/885639/000119312526473133/d168523d8k.htm"
+      },
+      "float_shares": "108.20M",
+      "short_float": "35.10%",
+      "daily_pct": -4.72,
+      "prev_close": 21.2,
       "industry": "—",
-      "technical_status": "Pass",
+      "technical_status": "Fail (Avg $Vol $90M < $100M)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -1383,70 +314,14 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LUNR: Intuitive Machines shows strong growth potentia... - Pluang",
+        "primary_claim": "KSS: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "PURR",
-      "price": 8.03,
-      "gap_pct": 7.35,
-      "pm_volume": 501400,
-      "avg_vol_10d": 13776118,
-      "avg_dollar_vol": 110622228,
-      "mkt_cap": 2072025290,
-      "rvol": 1.6,
-      "adr_pct": 8.25,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "251.76M",
-      "short_float": "9.04%",
-      "daily_pct": -10.95,
-      "prev_close": 7.48,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
@@ -1455,43 +330,58 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "AAOI",
-      "price": 35.35,
-      "gap_pct": 7.35,
-      "pm_volume": 281522,
-      "avg_vol_10d": 14468768,
-      "avg_dollar_vol": 511470949,
-      "mkt_cap": 2989080387,
-      "rvol": 1.35,
-      "adr_pct": 11.45,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "AAOI: Applied Optoelectronics (AAOI) Stock Price Prediction: Bears Still Control the Tape as AAO",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "ticker": "ANF",
+      "price": 151.11,
+      "gap_pct": 7.59,
+      "pm_volume": 70068,
+      "avg_vol_10d": 1100386,
+      "avg_dollar_vol": 166279328,
+      "mkt_cap": 5959908482,
+      "rvol": 2.82,
+      "adr_pct": 4.71,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "ANF gapping on earnings: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Applied Optoelectronics (AAOI) Stock Price Prediction: Bears Still Control the Tape as AAOI Tests Lower Support - Blockchain News",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+        "catalyst": "Headlines: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of growth. - Stock Titan | 5 Retail and Tech Earnings Charts to Watch This Week",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: Applied Optoelectronics (AAOI) Stock Price Prediction: Bears Still Control the Tape as AAOI Tests Lower Support - Blockchain News\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **The Results**\nHeadlines: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of growth. - Stock Titan | 5 Retail and Tech Earnings Charts to Watch This Week\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Applied Optoelectronics (AAOI) Stock Price Prediction: Bears Still Control the Tape as AAOI Tests Lower Support - Blockchain News",
+          "title": "Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of growth. - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNMWsyYmZxSTROMkoycThBU2pfT2xoWldVemFfU05iLTFjWkxreGxxQ2lQc203Y3c3YTE1UERDRENrekQ4Q1B6cDZCSkFVTTQ2TFN0UGlyY2JhR2JvUlZ0UE1ZNTRZbGhxLU56Q3pXUHF6cnJTZVIyb1ZGbEFCQWVjS2ZBZEYtMnh4dWhBY1E4YXdWQU44VlE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdk5rQUxjcElZTjRLX2VyeVRBXzFyN3I5VFQ2elJIUzR2T3ZvZmpJb0E0bVhNY3NHR05NUXJ5a1lrZHM3NGJwXzhlTlpXUDBKckpQMnFGLVdxWkdoRlcxeGhqZ05ScXluX1N0aThOUlBzRXVnQVlDV3BwaXh3b1UwMWs5SjNoMUprUUdFM1hCbUd5OV9lMFY3TkZEZWZsTzQ1Qk9KUXQ3OVAxMTlq?oc=5"
+        },
+        {
+          "title": "5 Retail and Tech Earnings Charts to Watch This Week",
+          "source": "Finviz",
+          "url": "/news/426547/5-retail-and-tech-earnings-charts-to-watch-this-week"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "86.09M",
-      "short_float": "20.75%",
-      "daily_pct": -16.55,
-      "prev_close": 32.93,
+      "edgar_filing": {
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1018840/000101884026000052/anf-20261124.htm"
+      },
+      "float_shares": "41.48M",
+      "short_float": "15.45%",
+      "daily_pct": 1.83,
+      "prev_close": 140.45,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -1501,7 +391,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "AAOI: Applied Optoelectronics (AAOI) Stock Price Prediction: Bears Still Control the Tape as AAO",
+        "primary_claim": "ANF gapping on earnings: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -1513,57 +403,65 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "AXTI",
-      "price": 32.81,
-      "gap_pct": 7.33,
-      "pm_volume": 302671,
-      "avg_vol_10d": 11399322,
-      "avg_dollar_vol": 374011755,
-      "mkt_cap": 2009132252,
-      "rvol": 1.16,
-      "adr_pct": 12.6,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
+      "ticker": "DLTR",
+      "price": 149.57,
+      "gap_pct": 7.53,
+      "pm_volume": 74196,
+      "avg_vol_10d": 2150953,
+      "avg_dollar_vol": 321718040,
+      "mkt_cap": 26099375152,
+      "rvol": 2.2,
+      "adr_pct": 3.85,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "DLTR gapping on earnings: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
       "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Headlines: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill | DLTR: Dollar Tree repurchased $500.0M of stock in June via block trade - Quantisnow",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [
-        "COHR",
-        "LITE",
-        "MRVL"
-      ],
-      "leverage_etfs": [
+      "analysis_details": "• **The Results**\nHeadlines: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill | DLTR: Dollar Tree repurchased $500.0M of stock in June via block trade - Quantisnow\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
         {
-          "ticker": "SOXL",
-          "mult": "3x"
+          "title": "Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPUTZzVTBhRGkyWkN6VFA3V29fcFczRWc5MXRoaUIzU1gteWwzczRqQlFQMVAwVHNvVWxRS2JKbThyenoybEp4UzdEM1dralhVQzV2a0F2MHlpd05Fbk0tczN3aUhPTkZYT0ZmUUZkQkdoZFZOSTFWVlFxMldsdnVZVlFKdm9xeGhpdXdTR3Etem0tR1lnYmpEbDdqMFVLeXFxQWloUTlJOUxtNllKTUZyTzhSM2ZPUDJKc0dnd0QxZmZVUXhL?oc=5"
+        },
+        {
+          "title": "DLTR: Dollar Tree repurchased $500.0M of stock in June via block trade - Quantisnow",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcnRaSjVPR21PNk1ObnVmYm8xWjYyanFRMVQtN192RjI0VWJscERZN3ZyRTdFS3ZfR3NCRFF6S3o1REVGdXJBWDFYZWtjX1FXMFEySm5CVjlNcVItUllndTBsNjV0MnJSU21acXdkZTBOUU0xeEp1TkxYTm1OWXhHbnZsTlBGS0pH?oc=5"
         }
       ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "62.99M",
-      "short_float": "21.35%",
-      "daily_pct": -12.26,
-      "prev_close": 30.57,
+      "edgar_filing": {
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/935703/000093570326000136/dltr-20261124.htm"
+      },
+      "float_shares": "187.29M",
+      "short_float": "6.68%",
+      "daily_pct": 0.83,
+      "prev_close": 139.1,
       "industry": "—",
-      "technical_status": "Pass",
+      "technical_status": "Fail (ADR 3.9% < 4%)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -1571,29 +469,270 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "primary_claim": "DLTR gapping on earnings: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill",
         "discrepancy_note": ""
       },
-      "gates_passed": 5,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": true
+        "gate_adr": false
       },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "BBY",
+      "price": 103.84,
+      "gap_pct": 7.05,
+      "pm_volume": 86186,
+      "avg_vol_10d": 2974127,
+      "avg_dollar_vol": 308833348,
+      "mkt_cap": 20343587570,
+      "rvol": 3.52,
+      "adr_pct": 3.64,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "BBY gapping on earnings: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow | 5 Retail and Tech Earnings Charts to Watch This Week | Week ahead: Wall Street looks for Thanksgiving lift as Nvidia rebound puts AI trade back in focus",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
+      },
+      "analysis_details": "• **The Results**\nHeadlines: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow | 5 Retail and Tech Earnings Charts to Watch This Week | Week ahead: Wall Street looks for Thanksgiving lift as Nvidia rebound puts AI trade back in focus\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPTjFid3VtSmFQd1FqRUtJVDczZDBIeUgzNnA3RXlkNlNvMkR3NDJEcTBoWHBUeHVyM2xQZVlqX0VfcHhOWm1XZDJScElCZlpwUEpka25DRmNMVGt6UVM5d3N1YjdLOV9Xb25HRExEanJwNXFrWUJET2UxeEp4WUlnaEN3azMyT0MtWmZEczFzUzdCZw?oc=5"
+        },
+        {
+          "title": "5 Retail and Tech Earnings Charts to Watch This Week",
+          "source": "Finviz",
+          "url": "/news/426547/5-retail-and-tech-earnings-charts-to-watch-this-week"
+        },
+        {
+          "title": "Week ahead: Wall Street looks for Thanksgiving lift as Nvidia rebound puts AI trade back in focus",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/week-ahead-wall-street-looks-163000773.html"
+        },
+        {
+          "title": "Best Buy taps AI platform for supplier insights",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/best-buy-taps-ai-platform-160559238.html"
+        },
+        {
+          "title": "MARKETS LIVE: Wall Street surges as Huang's return sparks broad rebound",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/markets-live-wall-street-surges-120300516.html"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/764478/000076447826000045/bby-20261124.htm"
+      },
+      "float_shares": "197.17M",
+      "short_float": "8.22%",
+      "daily_pct": -0.97,
+      "prev_close": 97.0,
+      "industry": "—",
+      "technical_status": "Fail (ADR 3.6% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BBY gapping on earnings: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "BURL",
+      "price": 250.0,
+      "gap_pct": 6.31,
+      "pm_volume": 151154,
+      "avg_vol_10d": 1425591,
+      "avg_dollar_vol": 356397750,
+      "mkt_cap": 14771621954,
+      "rvol": 3.98,
+      "adr_pct": 3.86,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "BURL gapping on earnings: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow | Burlington Stores shares rise despite earnings miss By Investing.com - Investing.com South Africa",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
+      },
+      "analysis_details": "• **The Results**\nHeadlines: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow | Burlington Stores shares rise despite earnings miss By Investing.com - Investing.com South Africa\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORWFiQ0F0UUl6TzJxOGpwX2hMSFc0YUVpN1ZxR0I4ejFRMTdTYVU5U0E3Y2NZRHhpeG80cEo0WktkcHZvTnlLLWNMbm5mbDV6ZHVuTzhGcF9GTmluZFU3NXM5ZmhoZFRVd2hRSGlYcnp6N3R6YTBldDRVT1JwVTMyUmJFc2lIOVd6SEg0M19CVkFGNkNTU09oU3BxUTNET3JzbTA2X1dWS0E?oc=5"
+        },
+        {
+          "title": "Burlington Stores shares rise despite earnings miss By Investing.com - Investing.com South Africa",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQTzAxWHZlQ0E0OFFFMGh6eTNLUE1VMkZhbGZvMVVDV09kUElNcTk0QlRJZjBBYkpOc2JRYmZKdWhlYjlIOWZ0Q3ZIZFhQaDlNSDdqVXNyNER2dEFtczhLcVlicWZHYnp0NTBMYjNXbUxIT2xuREZZMXFiMUhhZC0xOVBMNG5MSDJnNnFUM0wzeUVvRzIxMGppcWRXbUxadEU?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-11-24",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1579298/000119312526473122/burl-20261124.htm"
+      },
+      "float_shares": "62.40M",
+      "short_float": "8.53%",
+      "daily_pct": -4.15,
+      "prev_close": 235.16,
+      "industry": "—",
+      "technical_status": "Fail (ADR 3.9% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BURL gapping on earnings: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "SNY",
+      "price": 49.67,
+      "gap_pct": 6.2,
+      "pm_volume": 1597931,
+      "avg_vol_10d": 3030875,
+      "avg_dollar_vol": 150543561,
+      "mkt_cap": 111473737448,
+      "rvol": 0.88,
+      "adr_pct": 1.87,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "SNY FDA/regulatory event: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada | Seawolf Therapeutics and Sanofi agree $1.2bn drug deal | Kymera eczema pill meets goals in mid-stage trial",
+        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
+      },
+      "analysis_details": "• **The Event**\nHeadlines: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada | Seawolf Therapeutics and Sanofi agree $1.2bn drug deal | Kymera eczema pill meets goals in mid-stage trial\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNYk9RSXI3WjhjLXhNd1NYRlhjMFlYQ3FreFZ6eE5UTXlxWkNYeW9jdW1Idm1uQmNvTnVYZFcwbVhTWnA2OFM3Ml9lUkNvYVVmMU5vYXZKRkxjc0h3VlB2LUItOXZwMTNyaU5BWlBHaDVzVGpIR3RiLVRUWEY5SUV6aUl3U0w5a19mVTNPQWZQOWQ?oc=5"
+        },
+        {
+          "title": "Seawolf Therapeutics and Sanofi agree $1.2bn drug deal",
+          "source": "Finviz",
+          "url": "https://www.pharmaceutical-business-review.com/news/seawolf-sanofi-agree-drug-deal/"
+        },
+        {
+          "title": "Kymera eczema pill meets goals in mid-stage trial",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/healthcare/articles/kymera-eczema-pill-meets-goals-145355585.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "2.38B",
+      "short_float": "0.58%",
+      "daily_pct": 0.54,
+      "prev_close": 46.77,
+      "industry": "—",
+      "technical_status": "Fail (ADR 1.9% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SNY FDA/regulatory event: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 23,
+    "small_gaps": 7,
     "large_gaps": 2,
-    "total_headlines": 22,
+    "total_headlines": 25,
     "monthly_cost_usd": 0.01
   }
 }
