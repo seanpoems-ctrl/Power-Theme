@@ -2,40 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 2,
+  "count": 3,
   "stocks": [
     {
       "ticker": "BRBR",
       "company": "BellRing Brands, Inc.",
       "industry": "Beverages: Non-Alcoholic",
-      "price": 15.22,
-      "change_pct": 4.46,
+      "price": 15.11,
+      "change_pct": -0.72,
       "adr_pct": 6.0,
-      "dollar_volume": "$96.6M",
-      "market_cap_b": 1.771,
-      "rs_ibd": 22,
-      "above50dma_pct": 60.9
+      "dollar_volume": "$98.7M",
+      "market_cap_b": 1.759,
+      "rs_ibd": 24,
+      "above50dma_pct": 57.8
     },
     {
       "ticker": "XERS",
       "company": "Xeris Biopharma Holdings, Inc.",
       "industry": "Biotechnology",
-      "price": 17.52,
-      "change_pct": 3.24,
-      "adr_pct": 4.0,
-      "dollar_volume": "$54.2M",
-      "market_cap_b": 3.201,
-      "rs_ibd": 94,
-      "above50dma_pct": 52.5
+      "price": 17.69,
+      "change_pct": 0.97,
+      "adr_pct": 3.9,
+      "dollar_volume": "$52.6M",
+      "market_cap_b": 3.232,
+      "rs_ibd": 95,
+      "above50dma_pct": 51.3
+    },
+    {
+      "ticker": "INSM",
+      "company": "Insmed Incorporated",
+      "industry": "Pharmaceuticals: Major",
+      "price": 170.15,
+      "change_pct": 14.13,
+      "adr_pct": 4.7,
+      "dollar_volume": "$1.98B",
+      "market_cap_b": 37.328,
+      "rs_ibd": 41,
+      "above50dma_pct": 51.1
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 4.73,
-    "spx_1m": -5.73,
-    "spx_3m": -5.71,
-    "spx_34d": -7.24,
-    "spx_qtd": -5.6,
-    "spx_mtd": -4.52
+    "spx_1d": -0.5,
+    "spx_1m": -6.75,
+    "spx_3m": -6.85,
+    "spx_34d": -7.27,
+    "spx_qtd": -6.07,
+    "spx_mtd": -5.0
   },
-  "fetched_at_utc": "2026-11-24T06:46:23+00:00"
+  "fetched_at_utc": "2026-11-24T22:58:38+00:00"
 }

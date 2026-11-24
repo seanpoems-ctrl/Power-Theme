@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-11-24T06:41:35.240995+00:00",
+  "generated_at": "2026-11-24T22:58:35.046555+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Other",
-      "theme_rs": 98.0,
-      "perf_1d": 19.68,
+      "theme_rs": 97.0,
+      "perf_1d": 11.19,
       "leaders": [
         {
-          "ticker": "KYMR",
-          "price": 150.37,
+          "ticker": "ANF",
+          "price": 168.1,
           "rs_52w": 98,
-          "adr_pct": 6.18,
-          "vol_surge": 9.3,
-          "mkt_cap": 12837296550,
+          "adr_pct": 5.62,
+          "vol_surge": 2.97,
+          "mkt_cap": 7133219032,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -25,6 +25,44 @@
           "primary_theme": "Other",
           "secondary_themes": [],
           "setup_label": "Flag"
+        },
+        {
+          "ticker": "KYMR",
+          "price": 173.92,
+          "rs_52w": 98,
+          "adr_pct": 6.18,
+          "vol_surge": 6.79,
+          "mkt_cap": 14847793209,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "INSM",
+          "price": 170.15,
+          "rs_52w": 95,
+          "adr_pct": 4.67,
+          "vol_surge": 25.38,
+          "mkt_cap": 37327558237,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
         }
       ]
     }
