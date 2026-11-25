@@ -12274,6 +12274,10 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
   const [nel, setNelState] = React.useState(() => { try { return localStorage.getItem("theme_adr_nel_v1") === "1"; } catch { return false; } });
   const setNel = v => { setNelState(v); try { localStorage.setItem("theme_adr_nel_v1", v ? "1" : "0"); } catch { /* ignore */ } };
   const nelMax = React.useMemo(() => { try { const v = JSON.parse(localStorage.getItem(LEADERSHIP_LS_KEY) || "null"); if (v && Number.isFinite(v.maxExt)) return v.maxExt; } catch { /* ignore */ } return LEADERSHIP_DEFAULTS.maxExt; }, []);
+  // "+ ETF holdings": also list stocks the theme's ETFs hold whose OWN industry belongs to another theme (e.g. XHB's MOD / JCI / WSM under Real Estate & REITs,
+  // or CRWD / ZS under Cybersecurity). Off by default: every stock is listed under the theme of its own industry and the In ETFs column names the ETFs holding it.
+  const [etfOther, setEtfOtherState] = React.useState(() => { try { return localStorage.getItem("theme_adr_etf_other_v1") === "1"; } catch { return false; } });
+  const setEtfOther = v => { setEtfOtherState(v); try { localStorage.setItem("theme_adr_etf_other_v1", v ? "1" : "0"); } catch { /* ignore */ } };
   React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); loadSpdrHoldings().then(x => { if (!dead) setSpdr(x); }); return () => { dead = true; }; }, []);
   const setFilter = (k, v) => setF(prev => {
     const n = { ...prev, [k]: v };
@@ -12289,8 +12293,12 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     const holdingsOf = etf => spdr?.[etf]
       ? spdr[etf].map(r => ({ ticker: r.t, name: r.n, adr_pct: r.adr, dollar_volume: r.dv, mkt_cap: r.cap, perf_intraday: r.i, perf_1d: r.d, perf_1w: r.w, perf_1m: r.m, perf_3m: r.m3, perf_6m: r.m6, perf_ytd: r.ytd, perf_1y: r.y, ext: r.ext, industry: r.ind }))
       : (etfHoldings?.[etf] || []);
+    // Every ETF that holds a stock (any theme), so a stock shown under its own theme still says which ETFs it is in.
     const heldBy = {};
-    for (const etf of etfTickers) for (const h of holdingsOf(etf)) (heldBy[h.ticker] ||= []).push(etf);
+    for (const etf of new Set([...Object.keys(etfHoldings || {}), ...Object.keys(spdr || {})])) for (const h of holdingsOf(etf)) {
+      const a = (heldBy[h.ticker] ||= []);
+      if (!a.includes(etf)) a.push(etf);
+    }
     const seen = new Set();
     const out = [];
     const fromIndustry = (r, ind) => ({ ticker: r.t, name: r.n, industry: ind, etfs: heldBy[r.t] || [], adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, m3: r.m3, m6: r.m6, ytd: r.ytd, y1: r.y, ext: r.ext });
@@ -12298,7 +12306,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
       if (UNIVERSE_EXCLUDE?.has?.(r.t) || seen.has(r.t)) continue;
       seen.add(r.t); out.push(fromIndustry(r, ind));
     }
-    for (const etf of etfTickers) for (const h of holdingsOf(etf)) {
+    for (const etf of (etfOther ? etfTickers : [])) for (const h of holdingsOf(etf)) {
       if (UNIVERSE_EXCLUDE?.has?.(h.ticker) || seen.has(h.ticker)) continue;
       seen.add(h.ticker);
       const r = file.byTicker?.[h.ticker];
@@ -12306,9 +12314,13 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
       out.push({ ticker: h.ticker, name: h.name, industry: h.industry || null, etfs: heldBy[h.ticker] || [], adr: h.adr_pct, dv: h.dollar_volume, cap: h.mkt_cap,
         intra: h.perf_intraday, d1: h.perf_1d, w1: h.perf_1w, m1: h.perf_1m, m3: h.perf_3m, m6: h.perf_6m, ytd: h.perf_ytd, y1: h.perf_1y, ext: h.ext ?? null });
     }
-    for (const o of out) o.adrDv = adrDollarVol(o.adr, o.dv);
+    const own = new Set(etfTickers);
+    for (const o of out) {
+      o.adrDv = adrDollarVol(o.adr, o.dv);
+      o.etfs = [...o.etfs].sort((x, y) => (own.has(y) - own.has(x)) || x.localeCompare(y));      // this theme's own ETFs first
+    }
     return out;
-  }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings]);
+  }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings, etfOther]);
   const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6)) && (!nel || (r.ext != null && r.ext < nelMax))), [all, f, nel, nelMax]);
   const sort = useTableSort(rows, "adr", "desc");
   const [showAll, setShowAll] = React.useState(false);
@@ -12328,6 +12340,9 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min $ Vol {num(f.dv, v => setFilter("dv", v))} M</label>
         <button onClick={() => setNel(!nel)} title={`NEL = non-extended: only stocks with Extension < ${nelMax}× (ATR multiple from the 50-day MA — the Leadership page's NEL cut-off). Stocks with no Extension value are hidden while it is on.`}
           className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${nel ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>NEL &lt; {nelMax}×</button>
+        <button onClick={() => setEtfOther(!etfOther)}
+          title="Off: only stocks whose own industry belongs to this theme (the In ETFs column still names every ETF holding them). On: also add the stocks this theme's ETFs hold whose industry belongs to another theme."
+          className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${etfOther ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>+ ETF holdings</button>
         <span className="text-[10px] text-zinc-600">{rows.length} of {all.length} stocks{rows.length > shown.length ? ` · top ${shown.length} shown` : ""}</span>
         {rows.length > 25 && (
           <button onClick={() => setShowAll(v => !v)} className="text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-sky-400 hover:bg-zinc-800">{showAll ? "Show top 25" : `Show all ${rows.length}`}</button>
@@ -12338,13 +12353,13 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
         )}
       </div>
       {!file ? <div className="text-[11px] text-zinc-600">Loading…</div> : rows.length === 0 ? (
-        <div className="text-[11px] text-zinc-600">No stocks in this theme clear ADR ≥ {f.adr}% and ${f.dv}M/day{nel ? ` with Extension < ${nelMax}×` : ""} — lower the cut-offs{nel ? " or switch NEL off" : ""}.</div>
+        <div className="text-[11px] text-zinc-600">No stocks in this theme clear ADR ≥ {f.adr}% and ${f.dv}M/day{nel ? ` with Extension < ${nelMax}×` : ""} — lower the cut-offs{nel ? " or switch NEL off" : ""}{!etfOther ? "; \"+ ETF holdings\" adds the stocks its ETFs hold from other themes" : ""}.</div>
       ) : (
         <table className="w-full text-xs border-collapse">
           <thead><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
             <SortTh sort={sort} col="ticker" label="Ticker" textual align="left" className="px-2 py-1" />
             <SortTh sort={sort} col="industry" label="Industry" textual align="left" className="px-2 py-1" />
-            <SortTh sort={sort} col="etfCount" label="In ETFs" title="Which of this theme's ETFs hold the stock (stored top holdings only)" className="px-2 py-1" />
+            <SortTh sort={sort} col="etfCount" label="In ETFs" title="Every ETF that holds the stock (blue = one of this theme's own ETFs; stored top ~10 holdings, or the full list for SPDR funds)" className="px-2 py-1" />
             <SortTh sort={sort} col="adrDv" label="ADR× Avg$Vol" title="ADR% × Avg Daily $ Vol (same as the Stock Screener)" className="px-2 py-1" />
             <SortTh sort={sort} col="adr" label="ADR%" className="px-2 py-1" />
             <SortTh sort={sort} col="dv" label="$ Vol" className="px-2 py-1" />
@@ -12364,7 +12379,9 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
               <tr key={r.ticker} className="hover:bg-zinc-800/30 border-t border-zinc-900">
                 <td className="px-2 py-1 whitespace-nowrap"><StockCell ticker={r.ticker} /></td>
                 <td className="px-2 py-1 text-zinc-500 truncate max-w-[180px]" title={r.name}>{r.industry || "—"}</td>
-                <td className="px-2 py-1 text-right font-mono text-[10px] text-sky-400 whitespace-nowrap" title={r.etfs.length ? `Held by ${r.etfs.join(", ")}` : "Not in any of the stored top holdings"}>{r.etfs.length ? r.etfs.join(" ") : <span className="text-zinc-700">—</span>}</td>
+                <td className="px-2 py-1 text-right font-mono text-[10px] whitespace-nowrap max-w-[150px] truncate" title={r.etfs.length ? `Held by ${r.etfs.join(", ")}` : "Not in any of the stored top holdings"}>{r.etfs.length
+                  ? r.etfs.map(e => <span key={e} className={`ml-1 ${etfTickers.includes(e) ? "text-sky-400" : "text-zinc-500"}`}>{e}</span>)
+                  : <span className="text-zinc-700">—</span>}</td>
                 <td className="px-2 py-1 text-right font-mono font-semibold text-zinc-300">{r.adrDv != null ? (r.adrDv >= 1e9 ? `${(r.adrDv / 1e9).toFixed(2)}B` : r.adrDv >= 1e6 ? `${(r.adrDv / 1e6).toFixed(1)}M` : `${(r.adrDv / 1e3).toFixed(0)}K`) : "—"}</td>
                 <td className="px-2 py-1 text-right font-mono font-bold text-amber-300">{r.adr != null ? `${r.adr.toFixed(1)}%` : "—"}</td>
                 <td className="px-2 py-1 text-right font-mono text-zinc-300">{money(r.dv)}</td>
