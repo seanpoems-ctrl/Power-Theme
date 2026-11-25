@@ -217,8 +217,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Pull first so we're on top of any Dashboard_Pusher commits made since checkout
-          git pull --rebase --autostash
+          # 2026-11-25: this step used to `git pull --rebase --autostash` FIRST. When a data commit pushed from the local PC had touched the same file
+          # (thematic_data.json) during the run, popping the autostash conflicted and the CONFLICT MARKERS were committed and deployed - the live site served
+          # invalid JSON. Now the run's own files are staged + committed first, validated, and only then rebased onto upstream (-X theirs = this run's fresh
+          # data wins a conflict).
           echo "=== Git status before add ==="
           git status --short public/
           git add -u public/
@@ -230,16 +232,29 @@ jobs:
           # Daily universe snapshots (RS Δ / "new ETF" diffs need yesterday's file). Never committed before, so every
           # run started from an empty history and the Daily Stock Universe's RS Δ column was blank for all stocks.
           git add -f public/universe_history/*.json 2>/dev/null || true
+          # Never commit a broken data file: unstage + restore any staged .json that is not valid JSON (conflict markers, truncated write ...).
+          python - <<'PYEOF'
+          import json, subprocess
+          staged = subprocess.run(["git", "diff", "--staged", "--name-only"], capture_output=True, text=True).stdout.split()
+          for f in staged:
+              if not f.endswith(".json"):
+                  continue
+              try:
+                  json.load(open(f, encoding="utf-8"))
+              except Exception as exc:
+                  print(f"::warning::{f} is not valid JSON ({str(exc)[:80]}) - not committing it, keeping the last committed version")
+                  subprocess.run(["git", "restore", "--staged", "--worktree", "--", f], check=False)
+          PYEOF
           echo "=== Staged files ==="
           git diff --staged --stat
           git diff --staged --quiet || git commit -m "data: thematic_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
-          # Retry push — Dashboard_Pusher may push again between our pull and push
+          # Rebase onto whatever Dashboard_Pusher / the local PC pushed since checkout, then push (retry: it may push again in between)
           pushed=false
           for i in 1 2 3 4 5; do
+            git pull --rebase -X theirs || { git rebase --abort 2>/dev/null; sleep 15; continue; }
             if git push; then pushed=true; break; fi
-            echo "Push attempt $i failed — pulling and retrying in 15s..."
+            echo "Push attempt $i failed — retrying in 15s..."
             sleep 15
-            git pull --rebase --autostash
           done
           if [ "$pushed" = "false" ]; then
             echo "ERROR: failed to push thematic data after 5 attempts"
