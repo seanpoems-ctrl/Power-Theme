@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-25 15:26 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 715.8,
+    "spy_change_pct": -0.41,
+    "vix": 27.97,
+    "hy_oas": 3.72,
+    "yield_curve": 0.28,
+    "credit_status": "Yellow Flag",
+    "s5fi": 54.7,
+    "mmth": 55.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-25 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1517,44 +1535,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft Corp. (MSFT) advanced today as broader market enthusiasm lifted technology giants, with no specific fresh catalyst beyond general market flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-11-04 06:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "VIX Retreat, Tech Leads Charge",
-    "spy_price": 754.35,
-    "spy_change_pct": 0.3,
-    "vix": 18.31,
-    "hy_oas": 3.43,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 63.0,
-    "mmth": 62.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a new strategic partnership with a major automotive manufacturer for its Azure AI platform in autonomous driving initiatives, signaling expanding enterprise adoption."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon is rumored to be exploring a significant expansion into prescription drug delivery in Europe, potentially disrupting the pharmaceutical supply chain."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla's recent price action appears primarily driven by short-term options flow and technical momentum, with no fresh fundamental catalysts reported this morning."
         }
       ]
     }
