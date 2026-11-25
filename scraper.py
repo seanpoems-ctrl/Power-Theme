@@ -3469,6 +3469,13 @@ def build_etf_signals(unique_etfs: list) -> list:
 
 def main():
     output = build_data()
+    # Never publish an empty scan.  Between ~2026-10-16 and 2026-11-25 the screener pages came back without stock rows (Finviz re-platform) and this script
+    # still "succeeded" with 0 themes / 0 stocks, so the committed thematic_data.json silently lost every theme drill-down for weeks.  Fail instead: the
+    # workflow then retries on a fresh runner, the previous good file stays in place and the failure issue fires.
+    _n_stocks = sum(len(sub.get("stocks", [])) for t in output.get("themes", []) for sub in t.get("subthemes", []))
+    if len(output.get("themes", [])) < 3 or _n_stocks < 20:
+        logger.error(f"Scan came back empty ({len(output.get('themes', []))} themes, {_n_stocks} stocks) - refusing to write thematic_data.json")
+        sys.exit(1)
     sp500_prices = output.pop("_sp500_prices", {})
 
     # Load manual holdings overrides (for ETFs using swaps/derivatives yfinance can't see)
