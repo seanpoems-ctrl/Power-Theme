@@ -13119,7 +13119,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
       {onMiniCharts && (
         <div className="flex justify-end">
           <button onClick={() => onMiniCharts(
-              sections.flatMap(({ name, rows }) => rows.map(e => ({ ticker: e.ticker, category: name }))),
+              sections.flatMap(({ name, rows }) => rows.map(e => ({ ticker: e.ticker, category: name, name: e.label ?? e.theme }))),
               "Index / Sector Benchmarks"
             )}
             className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
@@ -13679,7 +13679,7 @@ const ChartStatsStrip = ({ st }) => {
   );
 };
 
-const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = null, showStats = false, selected = false, onToggle = null }) => {
+const MiniChartCard = ({ ticker, category, name = null, timeframe, height = 260, onExpand = null, showStats = false, selected = false, onToggle = null }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
@@ -13933,10 +13933,18 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
               <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} aria-label={`Select ${ticker}`} className="w-2.5 h-2.5 cursor-pointer accent-blue-500" />
             </label>
           )}
-          {companyName && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={companyName}>{companyName}</span>}
-          {category && <span className="text-[15px] text-zinc-500 font-sans font-normal truncate min-w-0" title={category}>{category}</span>}
-          <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-            className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
+          {name ? (<>
+            {/* Index / Sector Benchmarks (and any list that passes a `name`): ticker on the left, then the fund's name, then its group (Index / Segment ...) */}
+            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+              className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0">{ticker}</a>
+            <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={name}>{name}</span>
+            {category && <span className="text-[12px] text-zinc-500 font-sans font-normal truncate min-w-0 ml-auto pl-1" title={category}>{category}</span>}
+          </>) : (<>
+            {companyName && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={companyName}>{companyName}</span>}
+            {category && <span className="text-[15px] text-zinc-500 font-sans font-normal truncate min-w-0" title={category}>{category}</span>}
+            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+              className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
+          </>)}
         </div>
         <div className={`flex flex-wrap items-baseline gap-x-1.5 text-[13px] font-mono leading-[18px] min-h-[18px] ${onToggle ? "pl-[30px]" : ""}`}>
           {legend && status === "ready" && (<>
@@ -14132,7 +14140,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {items.map((item, i) => (
               <LazyMiniChart key={`${item.ticker}::${item.category || ""}::${i}`} rootRef={scrollRef}>
-                <MiniChartCard ticker={item.ticker} category={item.category} timeframe={timeframe}
+                <MiniChartCard ticker={item.ticker} category={item.category} name={item.name} timeframe={timeframe}
                   onExpand={() => setEnlargedIdx(i)} selected={sel.has(item.ticker)} onToggle={toggleSel}/>
               </LazyMiniChart>
             ))}
@@ -14158,7 +14166,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                 className="text-zinc-400 hover:text-zinc-100 transition-colors p-1"><X size={20}/></button>
             </div>
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
-              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height={_isPhone() ? "min(840px, 50vh)" : "min(840px, 75vh)"} showStats
+              ticker={enlargedItem.ticker} category={enlargedItem.category} name={enlargedItem.name} timeframe={timeframe} height={_isPhone() ? "min(840px, 50vh)" : "min(840px, 75vh)"} showStats
               selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}/>
             {/* Previous / next sit BELOW the chart (not on top of it, where they covered candles and the price scale) */}
             <div className="flex items-center justify-center gap-4 mt-2 text-[15px] text-zinc-500">
