@@ -13933,18 +13933,14 @@ const MiniChartCard = ({ ticker, category, name = null, timeframe, height = 260,
               <input type="checkbox" checked={selected} onChange={() => onToggle(ticker)} aria-label={`Select ${ticker}`} className="w-2.5 h-2.5 cursor-pointer accent-blue-500" />
             </label>
           )}
-          {name ? (<>
-            {/* Index / Sector Benchmarks (and any list that passes a `name`): ticker on the left, then the fund's name, then its group (Index / Segment ...) */}
-            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-              className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0">{ticker}</a>
-            <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={name}>{name}</span>
-            {category && <span className="text-[12px] text-zinc-500 font-sans font-normal truncate min-w-0 ml-auto pl-1" title={category}>{category}</span>}
-          </>) : (<>
-            {companyName && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={companyName}>{companyName}</span>}
-            {category && <span className="text-[15px] text-zinc-500 font-sans font-normal truncate min-w-0" title={category}>{category}</span>}
-            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-              className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 ml-auto flex-shrink-0">{ticker}</a>
-          </>)}
+          {/* Ticker first on EVERY mini chart: TICKER, then the name (company / fund) when there is one, then the group / industry (right-aligned and small beside a name,
+              or straight after the ticker when it is the only descriptor). Long text truncates, the ticker never does. */}
+          <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+            className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0">{ticker}</a>
+          {(name || companyName) && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={name || companyName}>{name || companyName}</span>}
+          {category && ((name || companyName)
+            ? <span className="text-[12px] text-zinc-500 font-sans font-normal truncate min-w-0 ml-auto pl-1" title={category}>{category}</span>
+            : <span className="text-[15px] text-zinc-500 font-sans font-normal truncate min-w-0" title={category}>{category}</span>)}
         </div>
         <div className={`flex flex-wrap items-baseline gap-x-1.5 text-[13px] font-mono leading-[18px] min-h-[18px] ${onToggle ? "pl-[30px]" : ""}`}>
           {legend && status === "ready" && (<>
