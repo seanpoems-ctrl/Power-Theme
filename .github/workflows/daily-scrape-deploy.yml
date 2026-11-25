@@ -6,7 +6,12 @@
 name: Daily scrape & deploy
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      attempt:
+        description: "Retry counter - 0 = a normal run. A run whose scraper fails starts attempt+1 by itself (max 2 retries) on a fresh GitHub runner."
+        required: false
+        default: "0"
   schedule:
     - cron: "45 22 * * *"   # 6:45 AM Malaysia (10:45 PM UTC) — every day incl. weekends
 
@@ -17,20 +22,24 @@ concurrency:
   # runs piled up in the shared pages-deploy queue). Normal scrapes finish in
   # ~27 min, far inside the 24h gap, so this only ever cancels a hung run. The
   # github-pages environment still serialises the actual deployment.
-  group: daily-scrape-deploy
+  # One group per attempt number (2026-11-25): a retry run must not cancel the run that started it (the failed run is still finishing its deploy
+  # when it dispatches the retry), while a new night's run (attempt 0) still cancels a hung attempt-0 run.
+  group: daily-scrape-deploy-${{ github.event.inputs.attempt || '0' }}
   cancel-in-progress: true
 
 jobs:
   scrape-build-deploy:
     runs-on: ubuntu-24.04
-    timeout-minutes: 70      # was 55; the scraper's retry now waits up to 8 min between attempts (Finviz 403s)
+    timeout-minutes: 90      # was 55; in-job scraper retries wait up to 10 min, and a retry run first waits 20 min
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+      ATTEMPT: ${{ github.event.inputs.attempt || '0' }}
     permissions:
       contents: write
       pages: write
       id-token: write
       issues: write
+      actions: write         # lets the job start its own retry run (gh workflow run)
     environment:
       name: github-pages
       url: ${{ steps.deploy3.outputs.page_url || steps.deploy2.outputs.page_url || steps.deploy1.outputs.page_url }}
@@ -92,6 +101,14 @@ jobs:
       # screener.ashx; 3 attempts inside 5 minutes never got through). Everything after this step that does NOT need Finviz (screener / leadership /
       # stage / breadth / COT / ETF builders, the build and the deploy) used to be skipped along with it, so one blocked scrape froze the whole site.
       # Now those steps run on yesterday's thematic_data.json, and "Fail the run if the scraper failed" (after the deploy) keeps the run red + opens the issue.
+      # A retry run (attempt 1 or 2, started by a failed run below) waits 20 minutes first: it already has a different runner / IP than the run that
+      # was refused, and the wait gives Finviz's block time to clear.
+      - name: Wait before a retry run
+        if: steps.trading_day.outputs.is_trading_day == 'true' && env.ATTEMPT != '0'
+        run: |
+          echo "Retry run, attempt ${ATTEMPT} - waiting 20 minutes before scraping"
+          sleep 1200
+
       - name: Run scraper (retry on failure)
         id: scraper
         if: steps.trading_day.outputs.is_trading_day == 'true'
@@ -116,8 +133,9 @@ jobs:
           echo "Scraper failed after 3 attempts"
           exit 1
 
+      # In a retry run the supplementary builders only matter when the scrape finally worked (several read thematic_data.json); the first run already ran them.
       - name: Run supplementary data scripts
-        if: steps.trading_day.outputs.is_trading_day == 'true'
+        if: steps.trading_day.outputs.is_trading_day == 'true' && (env.ATTEMPT == '0' || steps.scraper.outcome == 'success')
         continue-on-error: true
         env:
           CI: true
@@ -315,10 +333,21 @@ jobs:
         if: steps.trading_day.outputs.is_trading_day == 'true' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v5
 
-      - name: Fail the run if the scraper failed
-        if: always() && steps.scraper.outcome == 'failure'
+      # The scrape failed in THIS run: start a retry run (a new GitHub runner, 20 min later) unless this already was the last one.
+      - name: Start a retry run
+        if: always() && steps.scraper.outcome == 'failure' && fromJSON(env.ATTEMPT) < 2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "::error::scraper.py failed after 3 attempts (Finviz blocked?). The other data refreshed and the site was deployed, but thematic_data.json is still the previous run's."
+          NEXT=$((ATTEMPT + 1))
+          echo "::warning::scraper.py failed (attempt ${ATTEMPT}); starting retry run ${NEXT} on a fresh runner. The rest of this run still refreshed and deployed."
+          gh workflow run daily-scrape-deploy.yml --ref "${GITHUB_REF_NAME}" -f attempt="${NEXT}"
+
+      # Only the LAST attempt turns the run red (and opens the failure issue) - earlier ones would spam three issues for one bad night.
+      - name: Fail the run if the scraper failed
+        if: always() && steps.scraper.outcome == 'failure' && fromJSON(env.ATTEMPT) >= 2
+        run: |
+          echo "::error::scraper.py failed in all 3 runs (Finviz blocked?). The other data refreshed and the site was deployed, but thematic_data.json is still the previous run's."
           exit 1
 
       - name: Notify on failure

@@ -757,20 +757,86 @@ def fetch_industry_performance() -> list[dict]:
     return []
 
 
-def discover_industry_codes() -> dict[str, str]:
-    """Return {display_name: filter_code} for all Finviz industries from screener dropdown."""
-    url = "https://finviz.com/screener.ashx?v=141"
-    r = requests.get(url, headers=HEADERS, timeout=15)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "html.parser")
-    sel = soup.find("select", {"data-filter": "ind"})
-    codes = {}
-    if sel:
-        for opt in sel.find_all("option"):
-            v = opt.get("value", "")
-            if v:
-                codes[opt.get_text(strip=True)] = v
-    logger.info(f"  Discovered {len(codes)} industry filter codes")
+# ── Finviz screener: new site (2026-11) + legacy fallback ─────────────────────────────────────────────────────────────────────────────
+# Finviz re-platformed its SCREENER: screener.ashx now 301-redirects to /screener/stocks, a different page (div "fv-table" grid instead of a <table>,
+# no <select data-filter="ind"> list).  From GitHub's runners the legacy URL answers HTTP 403 for stretches (nightly runs of 11-14 / 11-16 / 11-18 / 11-24 died
+# in discover_industry_codes).  Every screener call now asks the NEW URL first and falls back to the legacy one, and parses either layout.
+FINVIZ_SCREENER_URLS = ("https://finviz.com/screener/stocks", "https://finviz.com/screener.ashx")
+
+
+def _finviz_screener_get(query: str, timeout: int = 15, want_rows: bool = False):
+    """GET the screener with `query` (e.g. "v=141&f=ind_biotechnology&r=21"); new URL first, legacy second.  want_rows=True also requires the page to
+    contain stock rows (a block / challenge page answers 200 without any).  Returns the first usable response; raises the last error when none is."""
+    last: Exception | None = None
+    for base in FINVIZ_SCREENER_URLS:
+        try:
+            r = requests.get(f"{base}?{query}", headers=HEADERS, timeout=timeout)
+            r.raise_for_status()
+            if want_rows and not _parse_screener_table(BeautifulSoup(r.text, "html.parser")):
+                last = ValueError(f"no stock rows from {base}")
+                continue
+            return r
+        except Exception as exc:        # noqa: BLE001
+            last = exc
+            logger.warning(f"    Finviz screener {base.split('/')[-1]} failed: {exc}")
+    raise last if last else RuntimeError("no Finviz screener URL")
+
+
+def _industry_filter_code(name: str) -> str:
+    """Finviz's filter value for an industry: lowercase letters/digits only ("Software - Application" -> "softwareapplication").
+    Checked 2026-11-25 against the new screener for all 144 industries (every one returned stocks)."""
+    return re.sub(r"[^a-z0-9]", "", name.lower())
+
+
+def _parse_screener_grid(soup) -> list[dict]:
+    """The new screener (v=141, "Performance" view): rows are <div role="row"> with <div role="gridcell" data-column-id="...">; the real ticker is on the row
+    (data-row-key) - the ticker cell's text has a logo letter prepended."""
+    stocks = []
+    for row in soup.find_all(attrs={"role": "row"}):
+        cells = {c.get("data-column-id"): c.get_text(strip=True) for c in row.find_all(attrs={"role": "gridcell"})}
+        if not cells or "ticker" not in cells:
+            continue
+        ticker = (row.get("data-row-key") or "").upper()
+        if not ticker:
+            link = row.find("a", href=True)
+            m = re.search(r"[?&]t=([A-Za-z.\-]+)", link["href"]) if link else None
+            ticker = m.group(1).upper() if m else cells["ticker"]
+        stocks.append({
+            "ticker": ticker,
+            "perf_1w": parse_pct(cells.get("perf1w", "")),
+            "perf_1m": parse_pct(cells.get("perf4w", "")),
+            "perf_3m": parse_pct(cells.get("perf13w", "")),
+            "perf_6m": parse_pct(cells.get("perf26w", "")),
+            "perf_ytd": parse_pct(cells.get("perfYtd", "")),
+            "avg_volume": parse_vol(cells.get("averageVolume", "")),
+            "price": float((cells.get("price") or "0").replace(",", "").replace("-", "0") or "0"),
+            "change_pct": parse_pct(cells.get("change", "")) or 0,
+            "volume": parse_vol(cells.get("volume", "")),
+        })
+    return stocks
+
+
+def discover_industry_codes(names: list[str] | None = None) -> dict[str, str]:
+    """Return {display_name: filter_code} for all Finviz industries.  The legacy screener page listed them in a <select>; the new page does not, so
+    when the page can't be read (403, new layout) the codes are derived from `names` (the industry names from the groups page) - no request needed."""
+    codes: dict[str, str] = {}
+    try:
+        r = requests.get("https://finviz.com/screener.ashx?v=141", headers=HEADERS, timeout=15)
+        r.raise_for_status()
+        sel = BeautifulSoup(r.text, "html.parser").find("select", {"data-filter": "ind"})
+        if sel:
+            for opt in sel.find_all("option"):
+                v = opt.get("value", "")
+                if v:
+                    codes[opt.get_text(strip=True)] = v
+    except Exception as exc:        # noqa: BLE001
+        logger.warning(f"  Industry code page unavailable ({exc}) - deriving codes from the industry names")
+    if codes:
+        logger.info(f"  Discovered {len(codes)} industry filter codes (legacy page)")
+        return codes
+    if names:
+        codes = {n: _industry_filter_code(n) for n in names}
+        logger.info(f"  Derived {len(codes)} industry filter codes from the groups page")
     return codes
 
 
@@ -920,18 +986,16 @@ def _parse_screener_table(soup) -> list[dict]:
                 "volume": parse_vol(cells[17]),
             })
         return stocks
-    return []
+    return _parse_screener_grid(soup)
 
 
 def fetch_screener_stocks(filter_key: str, filter_val: str, max_pages: int = 10) -> list[dict]:
     all_stocks: list[dict] = []
     for page in range(1, max_pages + 1):
         offset = (page - 1) * 20 + 1
-        url = f"https://finviz.com/screener.ashx?v=141&f={filter_key}_{filter_val}&r={offset}"
         try:
-            r = requests.get(url, headers=HEADERS, timeout=15)
-            r.raise_for_status()
-        except requests.RequestException as e:
+            r = _finviz_screener_get(f"v=141&f={filter_key}_{filter_val}&r={offset}", want_rows=(page == 1))
+        except Exception as e:       # noqa: BLE001
             logger.warning(f"    Screener fail: {e}")
             break
         page_stocks = _parse_screener_table(BeautifulSoup(r.text, "html.parser"))
@@ -1686,8 +1750,7 @@ def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | Non
     def _get_count(filt: str) -> int | None:
         try:
             combined = f"{BASE},{filt}" if filt else BASE
-            url = f"https://finviz.com/screener.ashx?v=111&f={combined}"
-            r = requests.get(url, headers=HEADERS, timeout=15)
+            r = _finviz_screener_get(f"v=111&f={combined}")
             m = _re.search(r"(\d[\d,]+)\s+Total", r.text)
             return int(m.group(1).replace(",", "")) if m else None
         except Exception as e:
@@ -1984,7 +2047,7 @@ def build_data() -> dict:
 
     # ── Step 1b: Discover industry filter codes for stock fetching ──
     logger.info("Step 1b: Discovering industry filter codes...")
-    ind_codes = discover_industry_codes()
+    ind_codes = discover_industry_codes([i["name"] for i in industries])
     _sleep()
 
     # ── Step 2: Aggregate into parent themes ──
