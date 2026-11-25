@@ -1,145 +1,71 @@
 {
-  "scan_time": "2026-11-24 07:55 ET",
+  "scan_time": "2026-11-25 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "DKS",
-      "price": 158.0,
-      "gap_pct": 18.2,
-      "pm_volume": 107700,
-      "avg_vol_10d": 1758280,
-      "avg_dollar_vol": 277808240,
-      "mkt_cap": 11886861084,
-      "rvol": 2.99,
-      "adr_pct": 4.07,
+      "ticker": "LI",
+      "price": 11.45,
+      "gap_pct": 7.01,
+      "pm_volume": 260530,
+      "avg_vol_10d": 2826943,
+      "avg_dollar_vol": 32368497,
+      "mkt_cap": 10824830350,
+      "rvol": 1.29,
+      "adr_pct": 2.71,
       "category": "Earnings",
       "theme": "Earnings",
-      "reasoning": "DKS gapping on earnings: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow",
+      "reasoning": "LI gapping on earnings: Li Auto Shares Rise More Than 4% as Third-Quarter Loss Narrows and Vehicle Margins Recover",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow | DKS Stock News Today: Latest Updates & Live Price | MEXC - MEXC | Dick's Sporting Goods Announces $1.25 Quarterly Dividend and Releases Q3 FY2026 Earnings - Kalkine Media",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow | DKS Stock News Today: Latest Updates & Live Price | MEXC - MEXC | Dick's Sporting Goods Announces $1.25 Quarterly Dividend and Releases Q3 FY2026 Earnings - Kalkine Media\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOMkFtSlhqZU5kVlBxOHlTYlFpSWk3WGt0NzNUekp5Vlo0TnNWZ2gxbXFwVW0wUTJTZF83MFYyaldfRXJfeHNpN1NaNjFHUFNmT3AxSVB6UVNwU1RLZDJkeV8xRGxuc1U1ZEU1c3R2YlEtb1g3aXdHaEtCeXZSc2pTM0VEaWU5d1dWRXNpX2dCeFQ1NElHQWRjU0ZWWlVZdw?oc=5"
-        },
-        {
-          "title": "DKS Stock News Today: Latest Updates & Live Price | MEXC - MEXC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9MbDB4d0ZFQlE1UW9ZU2ZyTktkZVhEZmJpdkpWOU5GR2E1LVd6b0Y0Sktma0o0VXVyZ2piUjdDbjAzLUpzWUFaUFdhSVI?oc=5"
-        },
-        {
-          "title": "Dick's Sporting Goods Announces $1.25 Quarterly Dividend and Releases Q3 FY2026 Earnings - Kalkine Media",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOODRoTzBPZkRiMWp0ejhxbzZUb0J3d1ZZWmF6dGxYZTh1VzlLckdUR1ZBMmJHc2U5MzM0dElTYk5KRFVURGpuV05kbUtrbmJNa1VRVGZrdFpBN1Y4cFJVS3E2RWNEbEVWbDZFS0I3Zm1Td1FFMTBrUUdkNWpkdnlBY3N2QzZ3aTh3cVB4TEhLVVlaQTY2ZURiaHhTeDNOMmVoeU5sNUlSMHR2djZtSVZCdUFueC02OHNfV29uTGE1RzJwZDQ5a0VLQXFoWlI?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1089063/000108906326000039/dks-20261123.htm"
-      },
-      "float_shares": null,
-      "short_float": "22.98%",
-      "daily_pct": 1.07,
-      "prev_close": 133.67,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "DKS gapping on earnings: DKS: Dick's Sporting Goods Inc filed SEC Form 8-K: Results of... - Quantisnow",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "FLNC",
-      "price": 4.4,
-      "gap_pct": 15.79,
-      "pm_volume": 1178234,
-      "avg_vol_10d": 7343352,
-      "avg_dollar_vol": 32310749,
-      "mkt_cap": 701466199,
-      "rvol": 1.49,
-      "adr_pct": 8.6,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "FLNC: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Disc",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Discuss Your Rights - FLNC | Fluence Energy, Inc. Reports 2026 Financial Results",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+        "catalyst": "Headlines: Li Auto Shares Rise More Than 4% as Third-Quarter Loss Narrows and Vehicle Margins Recover - Yahoo Finance | Operations generated cash at Li Auto (LI) in Q3 2026 after using RMB7.4B a year earlier. - Stock Titan | Billionaire Charlie Munger's Protege Li Lu Has 45 Percent of His US Stock Filing in Alphabet. It Is About 8 Percent of His Firm - CEOWORLD magazine",
+        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Discuss Your Rights - FLNC | Fluence Energy, Inc. Reports 2026 Financial Results\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
+      "analysis_details": "• **The Results**\nHeadlines: Li Auto Shares Rise More Than 4% as Third-Quarter Loss Narrows and Vehicle Margins Recover - Yahoo Finance | Operations generated cash at Li Auto (LI) in Q3 2026 after using RMB7.4B a year earlier. - Stock Titan | Billionaire Charlie Munger's Protege Li Lu Has 45 Percent of His US Stock Filing in Alphabet. It Is About 8 Percent of His Firm - CEOWORLD magazine\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "peer_tickers": [
+        "NIO",
+        "XPEV",
+        "TSLA"
+      ],
+      "leverage_etfs": [
         {
-          "title": "Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Discuss Your Rights - FLNC",
-          "source": "Finviz",
-          "url": "/news/425956/fluence-energy-inc-sued-for-securities-law-violations-contact-the-djs-law-group-to-discuss-your-rights-flnc"
-        },
-        {
-          "title": "Fluence Energy, Inc. Reports 2026 Financial Results",
-          "source": "Finviz",
-          "url": "/news/426436/fluence-energy-inc-reports-2026-financial-results"
+          "ticker": "TSLL",
+          "mult": "2x"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-11-23",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1868941/000186894126000056/flnc-20261123.htm"
-      },
-      "float_shares": "110.70M",
-      "short_float": "49.11%",
-      "daily_pct": 9.83,
-      "prev_close": 3.8,
+      "inverse_etfs": [
+        {
+          "ticker": "TSLS",
+          "mult": "1x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Li Auto Shares Rise More Than 4% as Third-Quarter Loss Narrows and Vehicle Margins Recover - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZzl6ck1WeVdvR2dYRjlfZkd4bTZlemI0MWJqbG5SOGtSLTEyNE84a0xJNi1uQTlnakoxYXRjX2xTclQ2bXYyQk9YV25nd3ZFWWtsQ0hCN1lMY1VjVmhXUVhTUEctWDFKa3EtZGpPRm9nNV9DT1p0OEJjNDRjNU5mTVlqUlJlUF9UdWZpMjF6TUZsRjg?oc=5"
+        },
+        {
+          "title": "Operations generated cash at Li Auto (LI) in Q3 2026 after using RMB7.4B a year earlier. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOUWN0UDF0SkNDTGRpbTJ0T3lkRDNHdWkyOTdLaWtnSlViNHhYMEItTWwzSzNxMjVGYmxOUmxzZE9ackhEOEJDLXdVeXByWUJMa1pOeW5PMm5jV2dtY1ZmeWdYMzh6UDlTVTRxbGw3Q3VKZ2Y2SXpPOXp2VkRIbjBDeHVtMndCbF9HVy12WHRYOERkMDd6VXJGSzF5XzJfRXNZM1FQLXZRZ1c?oc=5"
+        },
+        {
+          "title": "Billionaire Charlie Munger's Protege Li Lu Has 45 Percent of His US Stock Filing in Alphabet. It Is About 8 Percent of His Firm - CEOWORLD magazine",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPQmxzRjk4ZGxNa01WZEtleXA1UUJ0VFBNSmZJQ01Cc0F1ZXpOZmxSRkNHd0tmcVRPSW43Umo0ZFpEeFM5ZE52UmRMcVBpS2FFY3lmODl6eXlQdDEwZzZiX3J5MlR4SjIxLUF0QkNnTTNzWUI5VDhQbGFmRTNPZVF0Vno0WkZtaTZrVHdIU3U5MjdGdXhVVTE2V2ZiYmJQYkhQb2pvWHc2WWc1RGhjS2loNmFXeHJwTkpMRVdyLXFXSGdtT2x5ejlqZ1h6VE1sLUdDNVZLaXdOQXg0Rm55WHVqaUtSYUthU1B1SW91SU1QMA?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "847.94M",
+      "short_float": "5.40%",
+      "daily_pct": 0.0,
+      "prev_close": 10.7,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $32M < $100M)",
+      "technical_status": "Fail (Avg $Vol $32M < $100M, ADR 2.7% < 4%)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -147,7 +73,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "FLNC: Fluence Energy, Inc Sued for Securities Law Violations - Contact the DJS Law Group to Disc",
+        "primary_claim": "LI gapping on earnings: Li Auto Shares Rise More Than 4% as Third-Quarter Loss Narrows and Vehicle Margins Recover",
         "discrepancy_note": ""
       },
       "gates_passed": 2,
@@ -155,569 +81,6 @@
         "gate_rs": true,
         "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "INSM",
-      "price": 170.9,
-      "gap_pct": 14.63,
-      "pm_volume": 2612975,
-      "avg_vol_10d": 4060381,
-      "avg_dollar_vol": 693919113,
-      "mkt_cap": 32707409623,
-      "rvol": 1.28,
-      "adr_pct": 5.45,
-      "category": "FDA",
-      "theme": "FDA",
-      "reasoning": "INSM FDA/regulatory event: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance | What happens to Insmed stock in the Sanofi deal? $175 a share in cash if it closes - Nacionale | Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years - CNBC",
-        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
-      },
-      "analysis_details": "• **The Event**\nHeadlines: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance | What happens to Insmed stock in the Sanofi deal? $175 a share in cash if it closes - Nacionale | Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years - CNBC\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPR3Q2c0xVYjJidGE4V2lmWHp2OGpud0plS0tHNlpIYkxTTnVEbXRPNExtRkpoeFpXWU9ES3R4d1I2bzREWjQ5Wlh2RVRjWnRvX3VybEVCWlAtazd4LUFRMUxfSlFUV0dodVFIQ0d6TnU0OWl3Q0U5dld5TG9wNVo4Zm9CZHRteGhyRGRoZXRERTYzWlNJ?oc=5"
-        },
-        {
-          "title": "What happens to Insmed stock in the Sanofi deal? $175 a share in cash if it closes - Nacionale",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQeHpUZ1RJV2JyMW9sVEFlUkhLYVJkYVV0dGFKdGxBOXNiUXhxQ3U1YnlNeUdBOG11QlFSbHE4d2diMVdxa0xHQ1l5MUJMMWFsQnhiYi0tU3l2VmNjUzQ0TXRUZVo1TU9YVmdIdnhFNGFXT2dzbHlKT3pnQjBNMTNNVXpHalpaSlJpMzFFRXJLODlNSlJfbHMxcF8xWkNXdw?oc=5"
-        },
-        {
-          "title": "Drugmaker Insmed shares rally 14% after Sanofi agrees to buy it in pharma’s biggest deal in three years - CNBC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5mSVdLNmxnYXl4a2VvR1BfV202ZXZBckFZWVI5WWtGNkFxQ3d0NDRLd0JNdjJUMWJQVzV4NVNGVWNhZ0I2Rml2NWZXTlNFcDhfaE9kUnVpZkxWWEh1RDk5YV9fTWhqcUZyUzVjLWo5ZnlKN0pkM3Rr0gF8QVVfeXFMT2ZKcnhlaEFlTUtDQ3NnYnlrd1g3d3dZTms3YnM4Yk40ZlJ1eG10N3MzSFZiVUFCQ3lkQUtSYzBNTUx0dks4SkF6azhjaVFpb3p2UTFxYnV4d1RNZFJDZ2hxV1hOTHlSMHNPeHNBQTEyVnBsRnpKRVdxTE1wZA?oc=5"
-        },
-        {
-          "title": "symbol__ Stock Quote Price and Forecast - CNN",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBUN1lmU0ZZWnZhMFBmaTJQWkU5Zk1IcXZBMEYwYWZFSVZxVlgxU0tRbmhZSE1kYUFFU01sWnAxT1JNYnBYVUMxQ1dvOGU2Qmtn?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "7.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1104506/000114036126045364/ef20086426_8-k.htm"
-      },
-      "float_shares": "216.14M",
-      "short_float": "7.23%",
-      "daily_pct": 5.49,
-      "prev_close": 149.09,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "INSM FDA/regulatory event: Sanofi to buy US biopharma group Insmed for $41 bn in cash - Yahoo Finance",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "KSS",
-      "price": 23.02,
-      "gap_pct": 8.58,
-      "pm_volume": 129141,
-      "avg_vol_10d": 3904253,
-      "avg_dollar_vol": 89875904,
-      "mkt_cap": 2403580656,
-      "rvol": 2.84,
-      "adr_pct": 5.09,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "KSS: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow | A $137 million tax benefit helped lift Kohl’s quarterly net income to $254 million - Stock Titan",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow | A $137 million tax benefit helped lift Kohl’s quarterly net income to $254 million - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOVlJhS19OdFJiaW5kdHZBNE9yaU9XN1VkZF9IVlg1eU51VlhqN3R0TXFYRmZxWWdFVVBzS29jc1VvaW9JY0VpNS1nQk5EU283THM3cUx0RWVCQkJ3Yzc4ZXZocXU2S3k0TWd5LTJ6ak0yWTlmU1lzeTZEc2VnY2pJLURjSC1MYzJHV0w0NFBibGsweGd5V3hQZEZVa2tubm9GZDFF?oc=5"
-        },
-        {
-          "title": "A $137 million tax benefit helped lift Kohl’s quarterly net income to $254 million - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNdUlxSEVxdVFHYzVPSDd1b3NieEdxbjljRXVOSDRfWktXWWhhckoxU0lRVWgyNzlzR182dnZ5SHh1ZzBvZElOc2I5NWlxUXA0N2lrd0dCMEk0aGJvRE51bkpRSXQ2djFVYk02eTRhZzB5dzBRZ1NZSGhSN3dmcEJtQVBZV05Da1F3ZnlFd0UtczRaUk12N2ZDZVR2bWdQTmo2cTJ4WXVQRQ?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/885639/000119312526473133/d168523d8k.htm"
-      },
-      "float_shares": "108.20M",
-      "short_float": "35.10%",
-      "daily_pct": -4.72,
-      "prev_close": 21.2,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $90M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "KSS: KSS: Kohl's Corporation filed SEC Form 8-K: Results of Operations... - Quantisnow",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ANF",
-      "price": 151.11,
-      "gap_pct": 7.59,
-      "pm_volume": 70068,
-      "avg_vol_10d": 1100386,
-      "avg_dollar_vol": 166279328,
-      "mkt_cap": 5959908482,
-      "rvol": 2.82,
-      "adr_pct": 4.71,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "ANF gapping on earnings: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of growth. - Stock Titan | 5 Retail and Tech Earnings Charts to Watch This Week",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of growth. - Stock Titan | 5 Retail and Tech Earnings Charts to Watch This Week\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of growth. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdk5rQUxjcElZTjRLX2VyeVRBXzFyN3I5VFQ2elJIUzR2T3ZvZmpJb0E0bVhNY3NHR05NUXJ5a1lrZHM3NGJwXzhlTlpXUDBKckpQMnFGLVdxWkdoRlcxeGhqZ05ScXluX1N0aThOUlBzRXVnQVlDV3BwaXh3b1UwMWs5SjNoMUprUUdFM1hCbUd5OV9lMFY3TkZEZWZsTzQ1Qk9KUXQ3OVAxMTlq?oc=5"
-        },
-        {
-          "title": "5 Retail and Tech Earnings Charts to Watch This Week",
-          "source": "Finviz",
-          "url": "/news/426547/5-retail-and-tech-earnings-charts-to-watch-this-week"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1018840/000101884026000052/anf-20261124.htm"
-      },
-      "float_shares": "41.48M",
-      "short_float": "15.45%",
-      "daily_pct": 1.83,
-      "prev_close": 140.45,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ANF gapping on earnings: Abercrombie posts record third-quarter sales of $1.4 billion, its 16th straight quarter of",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "DLTR",
-      "price": 149.57,
-      "gap_pct": 7.53,
-      "pm_volume": 74196,
-      "avg_vol_10d": 2150953,
-      "avg_dollar_vol": 321718040,
-      "mkt_cap": 26099375152,
-      "rvol": 2.2,
-      "adr_pct": 3.85,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "DLTR gapping on earnings: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill | DLTR: Dollar Tree repurchased $500.0M of stock in June via block trade - Quantisnow",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill | DLTR: Dollar Tree repurchased $500.0M of stock in June via block trade - Quantisnow\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPUTZzVTBhRGkyWkN6VFA3V29fcFczRWc5MXRoaUIzU1gteWwzczRqQlFQMVAwVHNvVWxRS2JKbThyenoybEp4UzdEM1dralhVQzV2a0F2MHlpd05Fbk0tczN3aUhPTkZYT0ZmUUZkQkdoZFZOSTFWVlFxMldsdnVZVlFKdm9xeGhpdXdTR3Etem0tR1lnYmpEbDdqMFVLeXFxQWloUTlJOUxtNllKTUZyTzhSM2ZPUDJKc0dnd0QxZmZVUXhL?oc=5"
-        },
-        {
-          "title": "DLTR: Dollar Tree repurchased $500.0M of stock in June via block trade - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcnRaSjVPR21PNk1ObnVmYm8xWjYyanFRMVQtN192RjI0VWJscERZN3ZyRTdFS3ZfR3NCRFF6S3o1REVGdXJBWDFYZWtjX1FXMFEySm5CVjlNcVItUllndTBsNjV0MnJSU21acXdkZTBOUU0xeEp1TkxYTm1OWXhHbnZsTlBGS0pH?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/935703/000093570326000136/dltr-20261124.htm"
-      },
-      "float_shares": "187.29M",
-      "short_float": "6.68%",
-      "daily_pct": 0.83,
-      "prev_close": 139.1,
-      "industry": "—",
-      "technical_status": "Fail (ADR 3.9% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "DLTR gapping on earnings: Dollar Tree (NASDAQ:DLTR) Shares Jump on Q3 EPS Beat and Traffic Acceleration - ChartMill",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "BBY",
-      "price": 103.84,
-      "gap_pct": 7.05,
-      "pm_volume": 86186,
-      "avg_vol_10d": 2974127,
-      "avg_dollar_vol": 308833348,
-      "mkt_cap": 20343587570,
-      "rvol": 3.52,
-      "adr_pct": 3.64,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "BBY gapping on earnings: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow | 5 Retail and Tech Earnings Charts to Watch This Week | Week ahead: Wall Street looks for Thanksgiving lift as Nvidia rebound puts AI trade back in focus",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow | 5 Retail and Tech Earnings Charts to Watch This Week | Week ahead: Wall Street looks for Thanksgiving lift as Nvidia rebound puts AI trade back in focus\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPTjFid3VtSmFQd1FqRUtJVDczZDBIeUgzNnA3RXlkNlNvMkR3NDJEcTBoWHBUeHVyM2xQZVlqX0VfcHhOWm1XZDJScElCZlpwUEpka25DRmNMVGt6UVM5d3N1YjdLOV9Xb25HRExEanJwNXFrWUJET2UxeEp4WUlnaEN3azMyT0MtWmZEczFzUzdCZw?oc=5"
-        },
-        {
-          "title": "5 Retail and Tech Earnings Charts to Watch This Week",
-          "source": "Finviz",
-          "url": "/news/426547/5-retail-and-tech-earnings-charts-to-watch-this-week"
-        },
-        {
-          "title": "Week ahead: Wall Street looks for Thanksgiving lift as Nvidia rebound puts AI trade back in focus",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/week-ahead-wall-street-looks-163000773.html"
-        },
-        {
-          "title": "Best Buy taps AI platform for supplier insights",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/best-buy-taps-ai-platform-160559238.html"
-        },
-        {
-          "title": "MARKETS LIVE: Wall Street surges as Huang's return sparks broad rebound",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/markets-live-wall-street-surges-120300516.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/764478/000076447826000045/bby-20261124.htm"
-      },
-      "float_shares": "197.17M",
-      "short_float": "8.22%",
-      "daily_pct": -0.97,
-      "prev_close": 97.0,
-      "industry": "—",
-      "technical_status": "Fail (ADR 3.6% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "BBY gapping on earnings: BBY: Best Buy Co. Inc. filed SEC Form 8-K: Results of Operations... - Quantisnow",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "BURL",
-      "price": 250.0,
-      "gap_pct": 6.31,
-      "pm_volume": 151154,
-      "avg_vol_10d": 1425591,
-      "avg_dollar_vol": 356397750,
-      "mkt_cap": 14771621954,
-      "rvol": 3.98,
-      "adr_pct": 3.86,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "BURL gapping on earnings: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow | Burlington Stores shares rise despite earnings miss By Investing.com - Investing.com South Africa",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
-      },
-      "analysis_details": "• **The Results**\nHeadlines: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow | Burlington Stores shares rise despite earnings miss By Investing.com - Investing.com South Africa\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORWFiQ0F0UUl6TzJxOGpwX2hMSFc0YUVpN1ZxR0I4ejFRMTdTYVU5U0E3Y2NZRHhpeG80cEo0WktkcHZvTnlLLWNMbm5mbDV6ZHVuTzhGcF9GTmluZFU3NXM5ZmhoZFRVd2hRSGlYcnp6N3R6YTBldDRVT1JwVTMyUmJFc2lIOVd6SEg0M19CVkFGNkNTU09oU3BxUTNET3JzbTA2X1dWS0E?oc=5"
-        },
-        {
-          "title": "Burlington Stores shares rise despite earnings miss By Investing.com - Investing.com South Africa",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQTzAxWHZlQ0E0OFFFMGh6eTNLUE1VMkZhbGZvMVVDV09kUElNcTk0QlRJZjBBYkpOc2JRYmZKdWhlYjlIOWZ0Q3ZIZFhQaDlNSDdqVXNyNER2dEFtczhLcVlicWZHYnp0NTBMYjNXbUxIT2xuREZZMXFiMUhhZC0xOVBMNG5MSDJnNnFUM0wzeUVvRzIxMGppcWRXbUxadEU?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1579298/000119312526473122/burl-20261124.htm"
-      },
-      "float_shares": "62.40M",
-      "short_float": "8.53%",
-      "daily_pct": -4.15,
-      "prev_close": 235.16,
-      "industry": "—",
-      "technical_status": "Fail (ADR 3.9% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "BURL gapping on earnings: BURL: Burlington Stores Inc. filed SEC Form 8-K: Results of... - Quantisnow",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "SNY",
-      "price": 49.67,
-      "gap_pct": 6.2,
-      "pm_volume": 1597931,
-      "avg_vol_10d": 3030875,
-      "avg_dollar_vol": 150543561,
-      "mkt_cap": 111473737448,
-      "rvol": 0.88,
-      "adr_pct": 1.87,
-      "category": "FDA",
-      "theme": "FDA",
-      "reasoning": "SNY FDA/regulatory event: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada | Seawolf Therapeutics and Sanofi agree $1.2bn drug deal | Kymera eczema pill meets goals in mid-stage trial",
-        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
-      },
-      "analysis_details": "• **The Event**\nHeadlines: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada | Seawolf Therapeutics and Sanofi agree $1.2bn drug deal | Kymera eczema pill meets goals in mid-stage trial\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNYk9RSXI3WjhjLXhNd1NYRlhjMFlYQ3FreFZ6eE5UTXlxWkNYeW9jdW1Idm1uQmNvTnVYZFcwbVhTWnA2OFM3Ml9lUkNvYVVmMU5vYXZKRkxjc0h3VlB2LUItOXZwMTNyaU5BWlBHaDVzVGpIR3RiLVRUWEY5SUV6aUl3U0w5a19mVTNPQWZQOWQ?oc=5"
-        },
-        {
-          "title": "Seawolf Therapeutics and Sanofi agree $1.2bn drug deal",
-          "source": "Finviz",
-          "url": "https://www.pharmaceutical-business-review.com/news/seawolf-sanofi-agree-drug-deal/"
-        },
-        {
-          "title": "Kymera eczema pill meets goals in mid-stage trial",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/healthcare/articles/kymera-eczema-pill-meets-goals-145355585.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "2.38B",
-      "short_float": "0.58%",
-      "daily_pct": 0.54,
-      "prev_close": 46.77,
-      "industry": "—",
-      "technical_status": "Fail (ADR 1.9% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SNY FDA/regulatory event: Sanofi (SNY) Stock Forecasts - Yahoo! Finance Canada",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": false
       },
@@ -730,9 +93,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 7,
-    "large_gaps": 2,
-    "total_headlines": 25,
+    "small_gaps": 1,
+    "large_gaps": 0,
+    "total_headlines": 3,
     "monthly_cost_usd": 0.01
   }
 }

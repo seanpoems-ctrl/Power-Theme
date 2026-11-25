@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-25T05:23:08.480461+00:00",
-  "data_source": "tradingview",
+  "generated_at": "2026-11-25T12:57:21.967068+00:00",
+  "data_source": "tradingview+yfinance",
   "earnings": [
     {
       "date": "2026-11-25",
@@ -9,8 +9,8 @@
       "time_of_day": "BMO",
       "mkt_cap": 5573822645.0,
       "eps_estimate": 2.24,
-      "eps_act": null,
-      "eps_surp_pct": null,
+      "eps_act": 2.34,
+      "eps_surp_pct": 21.13,
       "rev_est": 2439797550.0,
       "rev_act": null,
       "rev_surp_pct": null,
@@ -23,7 +23,7 @@
       "date": "2026-11-25",
       "ticker": "DE",
       "company": "Deere & Company",
-      "time_of_day": "BMO",
+      "time_of_day": "",
       "mkt_cap": 165485295502.0,
       "eps_estimate": 4.01,
       "eps_act": 5.1,
@@ -35,23 +35,6 @@
       "avg_volume": 1245893,
       "adr_pct": 3.1,
       "dollar_volume": 764679288.0
-    },
-    {
-      "date": "2026-11-25",
-      "ticker": "GDS",
-      "company": "GDS Holdings Limited",
-      "time_of_day": "BMO",
-      "mkt_cap": 2763207276.0,
-      "eps_estimate": -1.28,
-      "eps_act": null,
-      "eps_surp_pct": null,
-      "rev_est": 3178719680.0,
-      "rev_act": null,
-      "rev_surp_pct": null,
-      "price": 13.79,
-      "avg_volume": 2494538,
-      "adr_pct": 8.6,
-      "dollar_volume": 34399679.0
     },
     {
       "date": "2026-11-25",
@@ -86,23 +69,6 @@
       "avg_volume": 1138580,
       "adr_pct": 4.0,
       "dollar_volume": 26244269.0
-    },
-    {
-      "date": "2026-11-25",
-      "ticker": "LI",
-      "company": "Li Auto Inc.",
-      "time_of_day": "BMO",
-      "mkt_cap": 10456836675.0,
-      "eps_estimate": -0.84,
-      "eps_act": null,
-      "eps_surp_pct": null,
-      "rev_est": 27450049880.0,
-      "rev_act": null,
-      "rev_surp_pct": null,
-      "price": 10.7,
-      "avg_volume": 2960041,
-      "adr_pct": 3.0,
-      "dollar_volume": 31672439.0
     },
     {
       "date": "2026-11-30",
