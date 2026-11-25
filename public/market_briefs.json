@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-24 22:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 718.78,
+    "spy_change_pct": -0.49,
+    "vix": 26.36,
+    "hy_oas": 3.63,
+    "yield_curve": 0.28,
+    "credit_status": "Yellow Flag",
+    "s5fi": 51.4,
+    "mmth": 53.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-24 16:04 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1557,44 +1575,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Amazon is a recycled ticker with no new fundamental catalyst today, maintaining its prior trend primarily driven by broader market sentiment or technical flows."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-11-03 15:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Domestic Risk-On Continues",
-    "spy_price": 754.47,
-    "spy_change_pct": 0.32,
-    "vix": 20.81,
-    "hy_oas": 3.43,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 63.9,
-    "mmth": 63.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AEHR",
-          "company": "Aehr Test Systems",
-          "reason": "Reported a significant earnings beat and raised full-year guidance, fueling strong investor conviction."
-        },
-        {
-          "ticker": "LSCC",
-          "company": "Lattice Semiconductor Corporation",
-          "reason": "Delivered a strong Q3 beat and provided an encouraging multi-year outlook, driving renewed interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Benefited from general tech sector strength and institutional flow without specific fresh news today."
         }
       ]
     }
