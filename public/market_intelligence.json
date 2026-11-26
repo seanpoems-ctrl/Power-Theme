@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-26 06:05 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-11-26 15:04 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -12,7 +12,7 @@
       "close": 716.7,
       "prev_open": 715.15,
       "prev_close": 718.78,
-      "volume": 72919200,
+      "volume": 73112800,
       "change_pct": -0.29
     },
     "QQQ": {
@@ -24,56 +24,56 @@
       "close": 633.93,
       "prev_open": 640.04,
       "prev_close": 638.1,
-      "volume": 81600300,
+      "volume": 81996700,
       "change_pct": -0.65
     },
     "^VIX": {
       "label": "VIX",
-      "price": 27.48,
+      "price": 26.8,
       "open": 27.18,
-      "high": 27.51,
-      "low": 26.59,
-      "close": 27.48,
+      "high": 27.54,
+      "low": 26.57,
+      "close": 26.8,
       "prev_open": 28.16,
       "prev_close": 28.29,
       "volume": 0,
-      "change_pct": -2.86
+      "change_pct": -5.27
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 84.46,
+      "price": 84.91,
       "open": 84.09,
       "high": 85.21,
       "low": 83.16,
-      "close": 84.46,
+      "close": 84.91,
       "prev_open": 81.68,
       "prev_close": 83.68,
-      "volume": 45033,
-      "change_pct": 0.93
+      "volume": 91029,
+      "change_pct": 1.47
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 57499.16,
-      "open": 57429.54,
-      "high": 58251.93,
-      "low": 57288.1,
-      "close": 57499.16,
-      "prev_open": 58383.49,
-      "prev_close": 57011.62,
-      "volume": 0,
-      "change_pct": 0.86
+      "price": 57011.62,
+      "open": 58383.49,
+      "high": 58472.56,
+      "low": 56502.97,
+      "close": 57011.62,
+      "prev_open": 57009.99,
+      "prev_close": 58644.63,
+      "volume": 199100000,
+      "change_pct": -2.78
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25163.79,
+      "price": 25215.52,
       "open": 25153.11,
-      "high": 25256.47,
+      "high": 25300.88,
       "low": 25114.25,
-      "close": 25163.79,
+      "close": 25215.52,
       "prev_open": 25083.98,
       "prev_close": 24702.13,
       "volume": 0,
-      "change_pct": 1.87
+      "change_pct": 2.08
     }
   },
   "fred": {

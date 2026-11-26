@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-26 15:04 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "",
+    "spy_price": 716.7,
+    "spy_change_pct": -0.29,
+    "vix": 26.8,
+    "hy_oas": 3.72,
+    "yield_curve": 0.24,
+    "credit_status": "Yellow Flag",
+    "s5fi": 54.2,
+    "mmth": 54.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-26 06:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1437,44 +1455,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Microsoft saw general market pressure, with no new fundamental catalyst today but instead reflecting recycled sentiment and technical flow from the broad market downturn."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-11-05 06:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On Momentum",
-    "spy_price": 766.81,
-    "spy_change_pct": 1.65,
-    "vix": 16.86,
-    "hy_oas": 3.4,
-    "yield_curve": 0.32,
-    "credit_status": "Complacent",
-    "s5fi": 67.5,
-    "mmth": 66.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple (AAPL) surges after announcing a groundbreaking AI integration into its iOS ecosystem, expected to boost iPhone sales and services revenue."
-        },
-        {
-          "ticker": "JNJ",
-          "company": "Johnson & Johnson",
-          "reason": "Johnson & Johnson (JNJ) shares climb on positive Phase 3 trial results for its new oncology drug, with analysts raising price targets."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) sees continued flow interest following yesterday's broad tech rally, lacking a fresh catalyst but maintaining positive momentum."
         }
       ]
     }
