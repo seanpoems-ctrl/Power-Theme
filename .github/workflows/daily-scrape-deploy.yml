@@ -239,12 +239,15 @@ jobs:
           # Never commit a broken data file: unstage + restore any staged .json that is not valid JSON (conflict markers, truncated write ...).
           python - <<'PYEOF'
           import json, subprocess
-          staged = subprocess.run(["git", "diff", "--staged", "--name-only"], capture_output=True, text=True).stdout.split()
+          # --diff-filter=ACMR: only added / copied / modified / renamed files. DELETIONS must stay deleted (universe_builder prunes old
+          # universe_history snapshots; the first version of this check read a deleted file, called it "invalid JSON" and restored it).
+          staged = subprocess.run(["git", "diff", "--staged", "--name-only", "--diff-filter=ACMR"], capture_output=True, text=True).stdout.split()
           for f in staged:
               if not f.endswith(".json"):
                   continue
               try:
-                  json.load(open(f, encoding="utf-8"))
+                  with open(f, encoding="utf-8") as fh:
+                      json.load(fh)
               except Exception as exc:
                   print(f"::warning::{f} is not valid JSON ({str(exc)[:80]}) - not committing it, keeping the last committed version")
                   subprocess.run(["git", "restore", "--staged", "--worktree", "--", f], check=False)
