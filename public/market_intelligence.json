@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-25 22:05 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-11-26 06:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -29,51 +29,51 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 28.29,
-      "open": 28.16,
-      "high": 34.95,
-      "low": 27.49,
-      "close": 28.29,
-      "prev_open": 26.52,
-      "prev_close": 26.36,
+      "price": 27.48,
+      "open": 27.18,
+      "high": 27.51,
+      "low": 26.59,
+      "close": 27.48,
+      "prev_open": 28.16,
+      "prev_close": 28.29,
       "volume": 0,
-      "change_pct": 7.32
+      "change_pct": -2.86
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 83.93,
+      "price": 84.46,
       "open": 84.09,
-      "high": 84.48,
-      "low": 83.8,
-      "close": 83.93,
-      "prev_open": 80.36,
-      "prev_close": 82.05,
-      "volume": 7602,
-      "change_pct": 2.29
+      "high": 85.21,
+      "low": 83.16,
+      "close": 84.46,
+      "prev_open": 81.68,
+      "prev_close": 83.68,
+      "volume": 45033,
+      "change_pct": 0.93
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 57886.95,
+      "price": 57499.16,
       "open": 57429.54,
       "high": 58251.93,
-      "low": 57429.54,
-      "close": 57886.95,
+      "low": 57288.1,
+      "close": 57499.16,
       "prev_open": 58383.49,
       "prev_close": 57011.62,
       "volume": 0,
-      "change_pct": 1.54
+      "change_pct": 0.86
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24702.13,
-      "open": 25083.98,
-      "high": 25151.42,
-      "low": 24698.22,
-      "close": 24702.13,
-      "prev_open": 25308.31,
-      "prev_close": 25017.81,
-      "volume": 64184400,
-      "change_pct": -1.26
+      "price": 25163.79,
+      "open": 25153.11,
+      "high": 25256.47,
+      "low": 25114.25,
+      "close": 25163.79,
+      "prev_open": 25083.98,
+      "prev_close": 24702.13,
+      "volume": 0,
+      "change_pct": 1.87
     }
   },
   "fred": {
