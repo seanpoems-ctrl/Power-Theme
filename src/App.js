@@ -12263,11 +12263,14 @@ const EtfCandidatesPanel = () => {
 // Highest-ADR stocks inside one Theme Leaderboard theme (added 2026-11-11). ETF holdings only list each fund's top ~10 by weight, which are the
 // biggest, slowest names; this lists the theme's own stocks from public/industry_stocks.json (every US stock >= $500M, largest 30 per industry),
 // grouped through each industry's fine_theme, ranked by ADR. Cut-offs are editable and remembered (localStorage theme_adr_filters_v1).
-const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etfHoldings = {}, onMiniCharts = null }) => {
+// `onlyEtf` = ETF mode (ticker click on an ETF mini chart): only that fund's holdings (SPDR: every holding; other funds: the stored top ~10), its own
+// remembered cut-offs (default 0 / 0 so nothing is hidden — an insurance ETF's top ten can all be low-ADR), same columns / NEL / Mini Charts.
+const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etfHoldings = {}, onMiniCharts = null, onlyEtf = null }) => {
   const [file, setFile] = React.useState(null);
+  const filterKey = onlyEtf ? "etf_adr_filters_v1" : "theme_adr_filters_v1";
   const [f, setF] = React.useState(() => {
-    try { const v = JSON.parse(localStorage.getItem("theme_adr_filters_v1")); if (v && Number.isFinite(v.adr) && Number.isFinite(v.dv)) return v; } catch { /* ignore */ }
-    return { adr: 4, dv: 20 };
+    try { const v = JSON.parse(localStorage.getItem(filterKey)); if (v && Number.isFinite(v.adr) && Number.isFinite(v.dv)) return v; } catch { /* ignore */ }
+    return onlyEtf ? { adr: 0, dv: 0 } : { adr: 4, dv: 20 };
   });
   const [spdr, setSpdr] = React.useState(null);
   // NEL button: only non-extended stocks (Extension < the Leadership page's NEL cut-off, 4x by default - the same number, read from leadership_criteria_v1). Remembered.
@@ -12281,7 +12284,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
   React.useEffect(() => { let dead = false; loadIndustryStocks().then(x => { if (!dead) setFile(x); }); loadSpdrHoldings().then(x => { if (!dead) setSpdr(x); }); return () => { dead = true; }; }, []);
   const setFilter = (k, v) => setF(prev => {
     const n = { ...prev, [k]: v };
-    try { localStorage.setItem("theme_adr_filters_v1", JSON.stringify(n)); } catch { /* ignore */ }
+    try { localStorage.setItem(filterKey, JSON.stringify(n)); } catch { /* ignore */ }
     return n;
   });
   const all = React.useMemo(() => {
@@ -12302,11 +12305,11 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
     const seen = new Set();
     const out = [];
     const fromIndustry = (r, ind) => ({ ticker: r.t, name: r.n, industry: ind, etfs: heldBy[r.t] || [], adr: r.adr, dv: r.dv, cap: r.cap, intra: r.i, d1: r.d, w1: r.w, m1: r.m, m3: r.m3, m6: r.m6, ytd: r.ytd, y1: r.y, ext: r.ext });
-    for (const ind of inds) for (const r of file.byIndustry[ind] || []) {
+    for (const ind of (onlyEtf ? [] : inds)) for (const r of file.byIndustry[ind] || []) {
       if (UNIVERSE_EXCLUDE?.has?.(r.t) || seen.has(r.t)) continue;
       seen.add(r.t); out.push(fromIndustry(r, ind));
     }
-    for (const etf of (etfOther ? etfTickers : [])) for (const h of holdingsOf(etf)) {
+    for (const etf of (onlyEtf ? [onlyEtf] : etfOther ? etfTickers : [])) for (const h of holdingsOf(etf)) {
       if (UNIVERSE_EXCLUDE?.has?.(h.ticker) || seen.has(h.ticker)) continue;
       seen.add(h.ticker);
       const r = file.byTicker?.[h.ticker];
@@ -12320,7 +12323,7 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
       o.etfs = [...o.etfs].sort((x, y) => (own.has(y) - own.has(x)) || x.localeCompare(y));      // this theme's own ETFs first
     }
     return out;
-  }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings, etfOther]);
+  }, [file, spdr, industryRankings, theme, etfTickers, etfHoldings, etfOther, onlyEtf]);
   const rows = React.useMemo(() => all.map(r => ({ ...r, etfCount: r.etfs.length })).filter(r => (r.adr ?? 0) >= f.adr && (f.dv <= 0 || (r.dv != null && r.dv >= f.dv * 1e6)) && (!nel || (r.ext != null && r.ext < nelMax))), [all, f, nel, nelMax]);
   const sort = useTableSort(rows, "adr", "desc");
   const [showAll, setShowAll] = React.useState(false);
@@ -12335,25 +12338,28 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
   return (
     <div className="mt-3 pt-2.5 border-t border-zinc-800/70" onClick={e => e.stopPropagation()}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
-        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">Highest-ADR stocks in {theme}</span>
+        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">Highest-ADR stocks in {onlyEtf || theme}</span>
+        {onlyEtf && <span className="text-[10px] text-zinc-600">{spdr?.[onlyEtf] ? "full fund holdings (State Street)" : "stored top holdings only"}</span>}
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min ADR% {num(f.adr, v => setFilter("adr", v))}</label>
         <label className="text-[10px] text-zinc-500 flex items-center gap-1">Min $ Vol {num(f.dv, v => setFilter("dv", v))} M</label>
         <button onClick={() => setNel(!nel)} title={`NEL = non-extended: only stocks with Extension < ${nelMax}× (ATR multiple from the 50-day MA — the Leadership page's NEL cut-off). Stocks with no Extension value are hidden while it is on.`}
           className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${nel ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>NEL &lt; {nelMax}×</button>
-        <button onClick={() => setEtfOther(!etfOther)}
+        {!onlyEtf && <button onClick={() => setEtfOther(!etfOther)}
           title="Off: only stocks whose own industry belongs to this theme (the In ETFs column still names every ETF holding them). On: also add the stocks this theme's ETFs hold whose industry belongs to another theme."
-          className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${etfOther ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>+ ETF holdings</button>
+          className={`text-[10px] font-medium px-2 py-0.5 rounded border transition-colors ${etfOther ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>+ ETF holdings</button>}
         <span className="text-[10px] text-zinc-600">{rows.length} of {all.length} stocks{rows.length > shown.length ? ` · top ${shown.length} shown` : ""}</span>
         {rows.length > 25 && (
           <button onClick={() => setShowAll(v => !v)} className="text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-sky-400 hover:bg-zinc-800">{showAll ? "Show top 25" : `Show all ${rows.length}`}</button>
         )}
         {onMiniCharts && rows.length > 0 && (
-          <button onClick={() => onMiniCharts(sort.rows.map(r => r.ticker), `${theme} — highest ADR`)}
+          <button onClick={() => onMiniCharts(sort.rows.map(r => r.ticker), `${onlyEtf || theme} — highest ADR`)}
             className="ml-auto text-[10px] px-2 py-0.5 rounded border border-zinc-700 text-zinc-300 hover:bg-zinc-800">▦ Mini Charts</button>
         )}
       </div>
-      {!file ? <div className="text-[11px] text-zinc-600">Loading…</div> : rows.length === 0 ? (
-        <div className="text-[11px] text-zinc-600">No stocks in this theme clear ADR ≥ {f.adr}% and ${f.dv}M/day{nel ? ` with Extension < ${nelMax}×` : ""} — lower the cut-offs{nel ? " or switch NEL off" : ""}{!etfOther ? "; \"+ ETF holdings\" adds the stocks its ETFs hold from other themes" : ""}.</div>
+      {!file ? <div className="text-[11px] text-zinc-600">Loading…</div> : onlyEtf && all.length === 0 ? (
+        <div className="text-[11px] text-zinc-600">No stock holdings are stored for {onlyEtf} (bond, commodity, crypto and foreign-listed funds have none).</div>
+      ) : rows.length === 0 ? (
+        <div className="text-[11px] text-zinc-600">No stocks {onlyEtf ? "in this ETF" : "in this theme"} clear ADR ≥ {f.adr}% and ${f.dv}M/day{nel ? ` with Extension < ${nelMax}×` : ""} — lower the cut-offs{nel ? " or switch NEL off" : ""}{!etfOther && !onlyEtf ? "; \"+ ETF holdings\" adds the stocks its ETFs hold from other themes" : ""}.</div>
       ) : (
         <table className="w-full text-xs border-collapse">
           <thead><tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
@@ -12399,6 +12405,57 @@ const ThemeHighAdrStocks = ({ theme, industryRankings = [], etfTickers = [], etf
             ))}
           </tbody>
         </table>
+      )}
+    </div>
+  );
+};
+
+// Popup opened by clicking an ETF ticker on a mini chart (Theme Leaderboard / RS Flip Scanner / Index & Sector Benchmarks grids and the enlarged chart):
+// the Highest-ADR table scoped to that ETF's holdings. Rendered inside MiniChartGridModal above the grid (the stock panel still opens above this).
+// A second button shows the WHOLE theme the fund belongs to (its fine_theme on the Theme Leaderboard) - the same table as that theme's row. Broad-market
+// benchmark funds (SPY, QQQ, sector SPDRs ...) have no theme, so only the fund view is offered.
+const EtfStocksModal = ({ etf, name = null, etfHoldings = {}, etfRsData = null, industryRankings = [], onClose }) => {
+  const [view, setView] = React.useState("etf");            // "etf" = this fund's holdings (always the starting view) | "theme" = every stock in its theme
+  const { theme, themeEtfs } = React.useMemo(() => {
+    const all = (etfRsData?.etfs || []).filter(e => !e.benchmark);
+    const me = all.find(e => e.ticker === etf);
+    const t = me ? (me.fine_theme || me.category || null) : null;
+    return { theme: t, themeEtfs: t ? all.filter(e => (e.fine_theme || e.category) === t).map(e => e.ticker) : [] };
+  }, [etfRsData, etf]);
+  const [mini, setMini] = React.useState(null);             // { title, tickers } - a Mini Charts grid opened from inside this popup
+  React.useEffect(() => {
+    const h = e => { if (e.key === "Escape" && !mini) onClose(); };       // with a nested grid open, Escape belongs to that grid
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose, mini]);
+  return (
+    <div className="fixed inset-0 flex items-center justify-center p-1.5 lg:p-4" style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
+      onClick={e => { e.stopPropagation(); onClose(); }}>
+      <PhoneViewportGuard />
+      <div className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-full max-w-[1180px] max-h-[88%] flex flex-col" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center gap-2 flex-wrap px-4 py-3 border-b border-zinc-800">
+          <a href={`https://www.tradingview.com/chart/?symbol=${etf}`} target="_blank" rel="noreferrer" className="font-mono text-sm font-bold text-cyan-400 hover:underline">{etf}</a>
+          {name && <span className="text-sm font-semibold text-zinc-100">{name}</span>}
+          {theme && (
+            <div className="flex items-center gap-2 ml-3">
+              {[["etf", `Stocks in ${etf}`], ["theme", `All ${theme} stocks`]].map(([k, l]) => (
+                <button key={k} onClick={() => setView(k)}
+                  className={`text-[11px] font-medium px-2.5 py-1 rounded border transition-colors ${view === k ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"}`}>{l}</button>
+              ))}
+            </div>
+          )}
+          <button onClick={onClose} className="ml-auto text-zinc-500 hover:text-zinc-200 transition-colors p-1"><X size={16} /></button>
+        </div>
+        <div className="overflow-y-auto overflow-x-auto flex-1 px-4 pb-4">
+          {view === "theme" && theme
+            ? <ThemeHighAdrStocks key="theme" theme={theme} industryRankings={industryRankings} etfTickers={themeEtfs} etfHoldings={etfHoldings} onMiniCharts={(tickers, title) => setMini({ tickers, title })} />
+            : <ThemeHighAdrStocks key="etf" theme={etf} onlyEtf={etf} etfTickers={[etf]} etfHoldings={etfHoldings} onMiniCharts={(tickers, title) => setMini({ tickers, title })} />}
+        </div>
+      </div>
+      {mini && (
+        <div className="relative z-10" onClick={e => e.stopPropagation()}>
+          <MiniChartGridModal title={mini.title} tickers={mini.tickers} onClose={() => setMini(null)} />
+        </div>
       )}
     </div>
   );
@@ -12566,7 +12623,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
             const memberSortCol = etfs[0] && etfs[0][sortCol] !== undefined ? sortCol : "perf_1w";
             const items = categories.flatMap(c => [...c.members]
               .sort((a, b) => (b[memberSortCol] ?? -Infinity) - (a[memberSortCol] ?? -Infinity))
-              .map(m => ({ ticker: m.ticker, category: c.cat })));
+              .map(m => ({ ticker: m.ticker, category: c.cat, etf: true, name: m.label ?? m.theme })));
             onMiniCharts(items);
           }}
             className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
@@ -12865,7 +12922,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniC
           </span>
         )}
         {onMiniCharts && flips.length > 0 && (
-          <button onClick={() => onMiniCharts(flips.map(e => ({ ticker: e.ticker, category: e.category })))}
+          <button onClick={() => onMiniCharts(flips.map(e => ({ ticker: e.ticker, category: e.category, etf: true, name: e.label ?? e.theme })))}
             className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
             ▦ Mini Charts
           </button>
@@ -13136,7 +13193,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
       {onMiniCharts && (
         <div className="flex justify-end">
           <button onClick={() => onMiniCharts(
-              sections.flatMap(({ name, rows }) => rows.map(e => ({ ticker: e.ticker, category: name, name: e.label ?? e.theme }))),
+              sections.flatMap(({ name, rows }) => rows.map(e => ({ ticker: e.ticker, category: name, name: e.label ?? e.theme, etf: true }))),
               "Index / Sector Benchmarks"
             )}
             className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
@@ -13696,7 +13753,7 @@ const ChartStatsStrip = ({ st }) => {
   );
 };
 
-const MiniChartCard = ({ ticker, category, name = null, timeframe, height = 260, onExpand = null, showStats = false, selected = false, onToggle = null }) => {
+const MiniChartCard = ({ ticker, category, name = null, timeframe, height = 260, onExpand = null, showStats = false, selected = false, onToggle = null, onTickerClick = null }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
@@ -13953,7 +14010,9 @@ const MiniChartCard = ({ ticker, category, name = null, timeframe, height = 260,
           {/* Ticker first on EVERY mini chart: TICKER, then the name (company / fund) when there is one, then the group / industry (right-aligned and small beside a name,
               or straight after the ticker when it is the only descriptor). Long text truncates, the ticker never does. */}
           <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-            className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0">{ticker}</a>
+            title={onTickerClick ? `Show the stocks in ${ticker} (Ctrl/⌘-click: TradingView)` : undefined}
+            onClick={onTickerClick ? e => { if (e.ctrlKey || e.metaKey || e.shiftKey) return; e.preventDefault(); e.stopPropagation(); onTickerClick(ticker); } : undefined}
+            className={`text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0 ${onTickerClick ? "underline decoration-dotted decoration-cyan-600 underline-offset-4 cursor-pointer" : ""}`}>{ticker}</a>
           {(name || companyName) && <span className="text-[15px] text-zinc-200 font-sans font-semibold truncate min-w-0" title={name || companyName}>{name || companyName}</span>}
           {category && ((name || companyName)
             ? <span className="text-[12px] text-zinc-500 font-sans font-normal truncate min-w-0 ml-auto pl-1" title={category}>{category}</span>
@@ -14067,7 +14126,8 @@ const CopyTickersButton = ({ tickers, selected = [], fileName = "tickers" }) => 
   );
 };
 
-const MiniChartGridModal = ({ title, tickers, onClose }) => {
+const MiniChartGridModal = ({ title, tickers, onClose, etfHoldings = {}, etfRsData = null, industryRankings = [] }) => {
+  const [etfFor, setEtfFor] = React.useState(null);          // an ETF chart's ticker was clicked: { ticker, name } -> EtfStocksModal
   usePhoneViewport();
   const scrollRef = React.useRef(null);
   const [timeframe, setTimeframe] = React.useState("D");
@@ -14083,6 +14143,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
 
   React.useEffect(() => {
     const handler = e => {
+      if (etfFor) return;                                      // the ETF stocks popup on top owns the keyboard
       if (e.key === "Escape") {
         // First Escape backs out of the enlarged chart to the grid; only a
         // second Escape (grid already showing) closes the whole modal.
@@ -14096,7 +14157,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose, enlargedIdx, items.length]);
+  }, [onClose, enlargedIdx, items.length, etfFor]);
 
   const enlargedItem = enlargedIdx != null ? items[enlargedIdx] : null;
 
@@ -14154,12 +14215,19 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             {items.map((item, i) => (
               <LazyMiniChart key={`${item.ticker}::${item.category || ""}::${i}`} rootRef={scrollRef}>
                 <MiniChartCard ticker={item.ticker} category={item.category} name={item.name} timeframe={timeframe}
-                  onExpand={() => setEnlargedIdx(i)} selected={sel.has(item.ticker)} onToggle={toggleSel}/>
+                  onExpand={() => setEnlargedIdx(i)} selected={sel.has(item.ticker)} onToggle={toggleSel}
+                  onTickerClick={item.etf ? () => setEtfFor({ ticker: item.ticker, name: item.name || item.category }) : null}/>
               </LazyMiniChart>
             ))}
           </div>
         </div>
       </div>
+
+      {etfFor && (
+        <div className="relative z-[65]" onClick={e => e.stopPropagation()}>
+          <EtfStocksModal key={etfFor.ticker} etf={etfFor.ticker} name={etfFor.name} etfHoldings={etfHoldings} etfRsData={etfRsData} industryRankings={industryRankings} onClose={() => setEtfFor(null)} />
+        </div>
+      )}
 
       {enlargedItem && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-10 overflow-y-auto"
@@ -14180,7 +14248,8 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             </div>
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
               ticker={enlargedItem.ticker} category={enlargedItem.category} name={enlargedItem.name} timeframe={timeframe} height={_isPhone() ? "min(840px, 50vh)" : "min(840px, 75vh)"} showStats
-              selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}/>
+              selected={sel.has(enlargedItem.ticker)} onToggle={toggleSel}
+              onTickerClick={enlargedItem.etf ? () => setEtfFor({ ticker: enlargedItem.ticker, name: enlargedItem.name || enlargedItem.category }) : null}/>
             {/* Previous / next sit BELOW the chart (not on top of it, where they covered candles and the price scale) */}
             <div className="flex items-center justify-center gap-4 mt-2 text-[15px] text-zinc-500">
               <button onClick={() => setEnlargedIdx(i => Math.max(0, i - 1))} disabled={enlargedIdx <= 0} title="Previous chart (←)" aria-label="Previous chart"
@@ -15291,6 +15360,9 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null, 
       <MiniChartGridModal
         title={miniChartsFor.title}
         tickers={miniChartsFor.tickers}
+        etfHoldings={data?.etf_holdings || {}}
+        etfRsData={etfRsData}
+        industryRankings={data?.industry_rankings || []}
         onClose={() => setMiniChartsFor(null)}
       />
     )}
