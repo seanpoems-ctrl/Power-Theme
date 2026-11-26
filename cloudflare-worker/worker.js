@@ -20,6 +20,12 @@
  * resolution follows TradingView's convention: "1","5","15","30","60","D",
  * "W","M" (minutes, or D/W/M).
  *
+ * FINVIZ SCREENER RELAY (added 2026-11-26): GitHub's runners are refused (HTTP 403) by finviz.com's SCREENER pages for hours at a time, which stopped the
+ * nightly scrape (scraper.py) from reading any stock lists. This Worker fetches the same page from Cloudflare's network and hands it back:
+ *   GET /finviz/screener/stocks?v=141&f=industry_biotechnology&r=1   ->  the HTML of https://finviz.com/screener/stocks?<same query>
+ * ONLY that one path is relayed (nothing else on finviz.com, no other host), nothing is cached, and if the Worker has a RELAY_KEY secret set
+ * (`wrangler secret put RELAY_KEY`) the caller must send it in an `x-relay-key` header. scraper.py asks this relay first when TV_PROXY_URL is set.
+ *
  * BLANK LATEST DAILY CANDLE (patched 2026-10-13): for some tickers Yahoo returns
  * the newest daily row with null open/high/low/close for hours after the close
  * (the session isn't consolidated yet — seen on ABCL and LITE for Oct 12 while MSTR
@@ -45,6 +51,7 @@ export default {
     if (request.method === "OPTIONS") return withCors(new Response(null, { status: 204 }));
 
     const url = new URL(request.url);
+    if (url.pathname === "/finviz/screener/stocks") return handleFinvizScreener(request, url, env);
     if (url.pathname !== "/bars") return withCors(json({ error: "not found" }, 404));
 
     const symbol = url.searchParams.get("symbol");
@@ -133,6 +140,28 @@ export default {
   },
 };
 
+// Finviz screener relay: one allow-listed path, GET only, same query string, HTML passed through with Finviz's own status code (scraper.py decides what a
+// 403 / 404 means). `x-finviz-relay: 1` marks a response that really came through the relay (vs a generic 404 from a Worker without this route).
+async function handleFinvizScreener(request, url, env) {
+  if (request.method !== "GET") return withCors(json({ error: "GET only" }, 405));
+  if (env.RELAY_KEY && request.headers.get("x-relay-key") !== env.RELAY_KEY) return withCors(json({ error: "forbidden" }, 403));
+  let res;
+  try {
+    res = await fetch("https://finviz.com/screener/stocks" + url.search, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml",
+        "Accept-Language": "en-US,en;q=0.9",
+      },
+      redirect: "follow",
+    });
+  } catch (e) {
+    return withCors(json({ error: `upstream fetch failed: ${e.message}` }, 502));
+  }
+  const body = await res.text();
+  return withCors(new Response(body, { status: res.status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "x-finviz-relay": "1" } }));
+}
+
 // One session's OHLCV from Yahoo's 5-minute bars. `dayStartSec` is the daily candle's timestamp (the session open). Returns null when there
 // are no regular-session bars for that day (e.g. before the open, a holiday, or a symbol Yahoo has no intraday data for).
 async function dayFromIntraday(symbol, dayStartSec) {
@@ -169,6 +198,6 @@ function withCors(res) {
   const headers = new Headers(res.headers);
   headers.set("Access-Control-Allow-Origin", "*"); // public read-only price data, no auth/secrets involved
   headers.set("Access-Control-Allow-Methods", "GET, OPTIONS");
-  headers.set("Access-Control-Allow-Headers", "Content-Type");
+  headers.set("Access-Control-Allow-Headers", "Content-Type, x-relay-key");
   return new Response(res.body, { status: res.status, headers });
 }

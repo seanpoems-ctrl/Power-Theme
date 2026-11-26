@@ -115,6 +115,10 @@ jobs:
         continue-on-error: true
         env:
           CI: true
+          # Finviz's SCREENER answers GitHub's runners with HTTP 403 for hours (runs 11-14 ... 11-25). With these set, scraper.py asks the Cloudflare Worker's
+          # /finviz/screener/stocks relay FIRST (cloudflare-worker/worker.js; the Worker must be redeployed once). Unset / unreachable = it falls back to direct calls.
+          TV_PROXY_URL: ${{ secrets.TV_PROXY_URL }}
+          FINVIZ_RELAY_KEY: ${{ secrets.FINVIZ_RELAY_KEY }}
         run: |
           for attempt in 1 2 3; do
             echo "=== Scraper attempt $attempt / 3 ==="

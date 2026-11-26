@@ -54,3 +54,22 @@ Should return `{"bars":[{"time":...,"open":...,"high":...,"low":...,"close":...,
 Cloudflare Workers' free tier is 100,000 requests/day — this proxy is only
 called when you open a trade's chart in the journal, so you will not get
 close to that limit.
+
+
+## Finviz screener relay (added 2026-11-26) — needs a one-time redeploy
+
+`scraper.py` reads stock lists from finviz.com's screener, which answers GitHub's runners with HTTP 403 for hours at a time. This Worker now also relays
+that one page from Cloudflare's network:
+
+```
+GET https://<your-worker>/finviz/screener/stocks?v=141&f=industry_biotechnology&r=1   ->  https://finviz.com/screener/stocks?v=141&f=industry_biotechnology&r=1
+```
+
+Only `/finviz/screener/stocks` is relayed (GET only, nothing cached, no other host or path). To switch it on:
+
+1. Redeploy the Worker so it has the new route (from this directory): `wrangler deploy`
+2. Test it: `curl -i "https://<your-worker>/finviz/screener/stocks?v=141&f=industry_biotechnology"` should print `x-finviz-relay: 1` and HTML containing `fv-table`.
+   An HTTP 403 with the same header means Finviz refused Cloudflare's network too (the relay then does not help; the scraper falls back to direct calls).
+3. Nothing else to configure: `daily-scrape-deploy.yml` already passes the existing `TV_PROXY_URL` secret to the scraper, which asks the relay first.
+4. Optional lock: `wrangler secret put RELAY_KEY`, then add the same value as a GitHub Actions secret named `FINVIZ_RELAY_KEY`. Without it anyone who knows the
+   Worker URL can fetch Finviz screener pages through it.

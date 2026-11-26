@@ -764,21 +764,39 @@ def fetch_industry_performance() -> list[dict]:
 FINVIZ_SCREENER_URLS = ("https://finviz.com/screener/stocks", "https://finviz.com/screener.ashx")
 
 
+def _finviz_relay() -> tuple[str, dict] | None:
+    """The Cloudflare Worker relay for the screener (cloudflare-worker/worker.js, route /finviz/screener/stocks), when a Worker URL is configured
+    (FINVIZ_PROXY_URL, else the TV_PROXY_URL secret the chart proxy already uses).  GitHub's runners get HTTP 403 on finviz.com's screener for hours at a
+    time (runs 2026-11-14 ... 11-25, incl. three retry runs in a row); Cloudflare's network is not blocked, so the relay is asked FIRST when configured.
+    Returns (url prefix, extra headers) or None."""
+    base = (os.environ.get("FINVIZ_PROXY_URL") or os.environ.get("TV_PROXY_URL") or "").strip().rstrip("/")
+    if not base.startswith("http"):
+        return None
+    key = os.environ.get("FINVIZ_RELAY_KEY", "").strip()
+    return f"{base}/finviz/screener/stocks", ({"x-relay-key": key} if key else {})
+
+
 def _finviz_screener_get(query: str, timeout: int = 15, want_rows: bool = False):
     """GET the screener with `query` (e.g. "v=141&f=ind_biotechnology&r=21"); new URL first, legacy second.  want_rows=True also requires the page to
     contain stock rows (a block / challenge page answers 200 without any).  Returns the first usable response; raises the last error when none is."""
     last: Exception | None = None
-    for base in FINVIZ_SCREENER_URLS:
+    relay = _finviz_relay()
+    attempts = ([(relay[0], relay[1])] if relay else []) + [(b, {}) for b in FINVIZ_SCREENER_URLS]
+    for base, extra in attempts:
+        # 2026-11-26: the new site renamed the industry filter key ind_ -> industry_ (f=ind_x answers 302 -> f=industry_x); ask for it directly, no extra hop.
+        q = query.replace("f=ind_", "f=industry_") if "/screener/stocks" in base else query
         try:
-            r = requests.get(f"{base}?{query}", headers=HEADERS, timeout=timeout)
+            r = requests.get(f"{base}?{q}", headers={**HEADERS, **extra}, timeout=timeout + (15 if extra or base.endswith("/finviz/screener/stocks") else 0))
             r.raise_for_status()
             if want_rows and not _parse_screener_table(BeautifulSoup(r.text, "html.parser")):
-                last = ValueError(f"no stock rows from {base}")
+                _t = re.search(r"<title>(.*?)</title>", r.text, re.S)
+                last = ValueError(f"no stock rows from {base} (HTTP {r.status_code}, {len(r.text)} bytes, title={(_t.group(1).strip()[:80] if _t else None)!r}, final={r.url[:90]})")
+                logger.warning(f"    Finviz screener {base.split('/')[-1]}: {last}")
                 continue
             return r
         except Exception as exc:        # noqa: BLE001
             last = exc
-            logger.warning(f"    Finviz screener {base.split('/')[-1]} failed: {exc}")
+            logger.warning(f"    Finviz screener {'relay' if base.endswith('/finviz/screener/stocks') and 'finviz.com' not in base else base.split('/')[-1]} failed: {exc}")
     raise last if last else RuntimeError("no Finviz screener URL")
 
 
