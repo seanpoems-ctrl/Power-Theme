@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-11-26T02:51:18.828041+00:00",
+  "generated_at": "2026-11-26T23:11:08.619529+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 86.0,
+      "perf_1d": 7.02,
+      "leaders": [
+        {
+          "ticker": "HPQ",
+          "price": 31.15,
+          "rs_52w": 86,
+          "adr_pct": 4.62,
+          "vol_surge": 2.66,
+          "mkt_cap": 28090788340,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
