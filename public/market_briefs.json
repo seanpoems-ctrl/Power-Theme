@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-11-27 06:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "",
+    "spy_price": 716.7,
+    "spy_change_pct": -0.29,
+    "vix": 24.6,
+    "hy_oas": 3.72,
+    "yield_curve": 0.24,
+    "credit_status": "Yellow Flag",
+    "s5fi": 54.2,
+    "mmth": 54.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-11-26 22:15 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1380,43 +1398,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-11-05 20:07 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Turbulent / Divergent Flows",
-    "spy_price": 766.81,
-    "spy_change_pct": 1.65,
-    "vix": 28.18,
-    "hy_oas": 3.32,
-    "yield_curve": 0.38,
-    "credit_status": "Complacent",
-    "s5fi": 57.4,
-    "mmth": 58.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "EPAM",
-          "company": "EPAM Systems, Inc.",
-          "reason": "EPAM rallied significantly today following a Q3 2026 earnings beat, demonstrating strong fundamental performance in the technology services sector."
-        },
-        {
-          "ticker": "U",
-          "company": "Unity Software Inc.",
-          "reason": "Unity Software experienced strong upward momentum today after reporting robust earnings, indicating renewed investor confidence in its growth trajectory."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) saw continued flow today, benefiting from broader tech strength and its consistent market position, without a specific fresh news catalyst."
-        }
-      ]
-    }
   }
 ]
