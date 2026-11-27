@@ -1,76 +1,52 @@
 {
-  "scan_time": "2026-11-26 07:56 ET",
+  "scan_time": "2026-11-27 07:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "LI",
-      "price": 11.55,
-      "gap_pct": 7.94,
-      "pm_volume": 507821,
-      "avg_vol_10d": 3645828,
-      "avg_dollar_vol": 42109313,
-      "mkt_cap": 11093398088,
-      "rvol": 3.76,
-      "adr_pct": 3.22,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "LI gapping on earnings: Li Auto earnings analysis: questions answered and next catalysts",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "ticker": "BBD",
+      "price": 2.91,
+      "gap_pct": 19.71,
+      "pm_volume": 1832845,
+      "avg_vol_10d": 45017542,
+      "avg_dollar_vol": 131001047,
+      "mkt_cap": 29560848749,
+      "rvol": 1.44,
+      "adr_pct": 3.43,
+      "category": "Government Policy",
+      "theme": "Government Policy",
+      "reasoning": "BBD government policy catalyst: The chair of Banco Bradesco (BBD) accepted President Lula’s invitation to serve in governm",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 50,
-      "grade": "C",
+      "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Li Auto earnings analysis: questions answered and next catalysts | Li Auto's Margin Recovery Is Real, But It Is Coming From Mix And Price While Volume Growth Fades | Li Auto CEO Says MACH M100 Chip, Lianshan Battery Are Reinforcing Competitive Moat  EV Maker Sees Up To 15% Revenue Growth In Q4",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
+        "catalyst": "Headlines: The chair of Banco Bradesco (BBD) accepted President Lula’s invitation to serve in government starting in 2027. - Stock Titan | Brazil's Lula appoints private banker as finance minister",
+        "impact": "Policy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP."
       },
-      "analysis_details": "• **The Results**\nHeadlines: Li Auto earnings analysis: questions answered and next catalysts | Li Auto's Margin Recovery Is Real, But It Is Coming From Mix And Price While Volume Growth Fades | Li Auto CEO Says MACH M100 Chip, Lianshan Battery Are Reinforcing Competitive Moat  EV Maker Sees Up To 15% Revenue Growth In Q4\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
-      "peer_tickers": [
-        "NIO",
-        "XPEV",
-        "TSLA"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "TSLL",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "TSLS",
-          "mult": "1x"
-        }
-      ],
+      "analysis_details": "• **The Policy**\nHeadlines: The chair of Banco Bradesco (BBD) accepted President Lula’s invitation to serve in government starting in 2027. - Stock Titan | Brazil's Lula appoints private banker as finance minister\n\n• **Trade Implication**\nPolicy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Li Auto earnings analysis: questions answered and next catalysts",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/li-auto-earnings-analysis-questions-204432913.html"
+          "title": "The chair of Banco Bradesco (BBD) accepted President Lula’s invitation to serve in government starting in 2027. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPdVRxUkhQZUE1TDByWlF0N0hSTy1yd1Znai1kSGljV3NtTzNSZVd4bjljRWdrLVJ0LXRvdm5fT05yQlRHM3dYeXB4ODJ3ZldmZjdFaUtzY1hwM0F0bTNjZ0VFd2pKOG5qU3BvNmN2Z19oWnZZUW90WmFlVnhEV3NwbGxBelhKWExaMWVCWkp2dmpOZHhvTVFnazAtQ0tsMmswNmV5ZVlxSFNBZFRQ?oc=5"
         },
         {
-          "title": "Li Auto's Margin Recovery Is Real, But It Is Coming From Mix And Price While Volume Growth Fades",
+          "title": "Brazil's Lula appoints private banker as finance minister",
           "source": "Finviz",
-          "url": "/news/427354/li-autos-margin-recovery-is-real-but-it-is-coming-from-mix-and-price-while-volume-growth-fades"
-        },
-        {
-          "title": "Li Auto CEO Says MACH M100 Chip, Lianshan Battery Are Reinforcing Competitive Moat  EV Maker Sees Up To 15% Revenue Growth In Q4",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/li-auto-ceo-says-mach-130350447.html"
-        },
-        {
-          "title": "Chinese Auto Stock Pops After Surprise Revenue Win",
-          "source": "Finviz",
-          "url": "/news/427391/chinese-auto-stock-pops-after-surprise-revenue-win"
+          "url": "https://finance.yahoo.com/economy/policy/articles/brazils-lula-appoints-private-banker-042410392.html"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "809.97M",
-      "short_float": "5.40%",
-      "daily_pct": 11.03,
-      "prev_close": 11.88,
+      "float_shares": "5.58B",
+      "short_float": "0.92%",
+      "daily_pct": 6.11,
+      "prev_close": 2.43,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $42M < $100M, ADR 3.2% < 4%)",
+      "technical_status": "Fail (ADR 3.4% < 4%)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 50,
@@ -78,80 +54,59 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LI gapping on earnings: Li Auto earnings analysis: questions answered and next catalysts",
+        "primary_claim": "BBD government policy catalyst: The chair of Banco Bradesco (BBD) accepted President Lula’s invitation to serve in governm",
         "discrepancy_note": ""
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": false,
-        "gate_dollar_vol": false,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "HPQ",
-      "price": 29.9,
-      "gap_pct": 7.02,
-      "pm_volume": 401424,
-      "avg_vol_10d": 15947167,
-      "avg_dollar_vol": 476820293,
-      "mkt_cap": 28090789793,
-      "rvol": 3.8,
-      "adr_pct": 4.37,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "HPQ gapping on earnings: HPQ earnings analysis: questions answered and next catalysts",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "ticker": "XP",
+      "price": 16.94,
+      "gap_pct": 17.72,
+      "pm_volume": 983883,
+      "avg_vol_10d": 9231355,
+      "avg_dollar_vol": 156379154,
+      "mkt_cap": 8518619640,
+      "rvol": 1.15,
+      "adr_pct": 4.6,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "XP: XP Nov 2026 13.500 call (XP261127C00013500) Interactive Stock Chart - Yahoo Finance - Yaho",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: HPQ earnings analysis: questions answered and next catalysts | HP's stock is a standout gainer in the tech rout, as an earnings beat still matters | Oracle's stock sinks toward a 3-year low as the AI trade continues to unravel",
-        "impact": "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
+        "catalyst": "Headlines: XP Nov 2026 13.500 call (XP261127C00013500) Interactive Stock Chart - Yahoo Finance - Yahoo! Finance Canada",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
       },
-      "analysis_details": "• **The Results**\nHeadlines: HPQ earnings analysis: questions answered and next catalysts | HP's stock is a standout gainer in the tech rout, as an earnings beat still matters | Oracle's stock sinks toward a 3-year low as the AI trade continues to unravel\n\n• **Trade Implication**\nStrong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high.",
+      "analysis_details": "• **What Happened**\nHeadlines: XP Nov 2026 13.500 call (XP261127C00013500) Interactive Stock Chart - Yahoo Finance - Yahoo! Finance Canada\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "HPQ earnings analysis: questions answered and next catalysts",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/hpq-earnings-analysis-questions-answered-205027854.html"
-        },
-        {
-          "title": "HP's stock is a standout gainer in the tech rout, as an earnings beat still matters",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/hps-stock-is-a-standout-gainer-in-the-tech-rout-as-an-earnings-beat-still-matters-8f6c76ad?mod=mw_FV"
-        },
-        {
-          "title": "Oracle's stock sinks toward a 3-year low as the AI trade continues to unravel",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/oracles-stock-sinks-toward-a-3-year-low-as-the-ai-trade-continues-to-unravel-d4698d77?mod=mw_FV"
+          "title": "XP Nov 2026 13.500 call (XP261127C00013500) Interactive Stock Chart - Yahoo Finance - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1pdFZxTlJzTkd0WWVBbmlsc1lYYWdwcERDOVkyMld6Rjc3RVlBSWk5eTJTVHZGYXdBWk83RmRzSlIwOEotTkhLNHRhS2JFcmlpaURFVTYycnFwRUQtUElrVXhTZGU3Sjc3ajFj?oc=5"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-11-24",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/47217/000004721726000054/hpq-20261124.htm"
-      },
-      "float_shares": "899.41M",
-      "short_float": "10.79%",
-      "daily_pct": 11.49,
-      "prev_close": 31.15,
+      "edgar_filing": null,
+      "float_shares": "386.43M",
+      "short_float": "5.21%",
+      "daily_pct": 5.19,
+      "prev_close": 14.39,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -161,7 +116,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "HPQ gapping on earnings: HPQ earnings analysis: questions answered and next catalysts",
+        "primary_claim": "XP: XP Nov 2026 13.500 call (XP261127C00013500) Interactive Stock Chart - Yahoo Finance - Yaho",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -173,19 +128,143 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "BZ",
-      "price": 13.45,
-      "gap_pct": 5.57,
-      "pm_volume": 79031,
-      "avg_vol_10d": 9026831,
-      "avg_dollar_vol": 121410877,
-      "mkt_cap": 5881460025,
-      "rvol": 1.12,
-      "adr_pct": 4.66,
+      "ticker": "ITUB",
+      "price": 7.93,
+      "gap_pct": 15.26,
+      "pm_volume": 310113,
+      "avg_vol_10d": 25003639,
+      "avg_dollar_vol": 198278857,
+      "mkt_cap": 86298055533,
+      "rvol": 1.4,
+      "adr_pct": 2.78,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ITUB: Discipline and Rules-Based Execution in ITUB Response - Stock Traders Daily",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Discipline and Rules-Based Execution in ITUB Response - Stock Traders Daily",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Discipline and Rules-Based Execution in ITUB Response - Stock Traders Daily\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Discipline and Rules-Based Execution in ITUB Response - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQYzVrUXVYcjMwLUMyS1FGUTUyZWRIUy13WUlhdnZqdjhIaFNnYVA1VnJuUk9KcWhYbDdfcG00enRudkZVNF93eU1oekxTeG5zTlc1UFdSeGhxcXRQczNQbFlfRTVycHRtaFNxNmNvNHhQUWlmcEUxTHpwQk9FOHFtYUZtZUhvZ3BpZ0xPanh3LUZ5b080c1pValpMYXNpVy1YMTRBaFZjYTRDR0NDWjdURVlENzM5TFd3OUh6bl9oRjEtakpNQU9IZDd6bjFxUQ?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "5.40B",
+      "short_float": "1.01%",
+      "daily_pct": 2.38,
+      "prev_close": 6.88,
+      "industry": "—",
+      "technical_status": "Fail (ADR 2.8% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "ITUB: Discipline and Rules-Based Execution in ITUB Response - Stock Traders Daily",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "INTR",
+      "price": 4.59,
+      "gap_pct": 14.59,
+      "pm_volume": 186004,
+      "avg_vol_10d": 7298432,
+      "avg_dollar_vol": 33499803,
+      "mkt_cap": 1764421159,
+      "rvol": 0.89,
+      "adr_pct": 5.26,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "INTR: TFI International stock: TSX approves 7.63 million-share buyback - ad-hoc-news.de",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: TFI International stock: TSX approves 7.63 million-share buyback - ad-hoc-news.de",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: TFI International stock: TSX approves 7.63 million-share buyback - ad-hoc-news.de\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "TFI International stock: TSX approves 7.63 million-share buyback - ad-hoc-news.de",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPTWtFQmt1MFRBUzBqYWhWZWJ2TldHeFEwVF9vSU5QRVpSRXRPTFlrMDZWak03NEFjM1MyZzNBRU0xQWtONndBa2ZBajI0SUJ5SDZrN3N4Ry1ncF9MQmRackFNV3NJUkRwZzFwR2EyeEN6WGtYb0NsWFpSN2lvMV9pZlNiS2xPUlBZNzhrcFpTNzJBSXBsVGRZV09tMFlMa0dxZllxcU9QRHZPWWFvNGM1RWFtQWVpUTAya1JhaEJpUQ?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "240.42M",
+      "short_float": "6.31%",
+      "daily_pct": 5.25,
+      "prev_close": 4.01,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $33M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "INTR: TFI International stock: TSX approves 7.63 million-share buyback - ad-hoc-news.de",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "STNE",
+      "price": 8.74,
+      "gap_pct": 13.21,
+      "pm_volume": 313668,
+      "avg_vol_10d": 6678097,
+      "avg_dollar_vol": 58366568,
+      "mkt_cap": 1877721860,
+      "rvol": 0.68,
+      "adr_pct": 4.39,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
@@ -204,10 +283,326 @@
       "inverse_etfs": [],
       "headlines": [],
       "edgar_filing": null,
-      "float_shares": "373.70M",
-      "short_float": "7.38%",
-      "daily_pct": 12.56,
-      "prev_close": 14.34,
+      "float_shares": "220.29M",
+      "short_float": "8.14%",
+      "daily_pct": 3.21,
+      "prev_close": 7.72,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $58M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "VNET",
+      "price": 2.31,
+      "gap_pct": 12.14,
+      "pm_volume": 73140,
+      "avg_vol_10d": 9196350,
+      "avg_dollar_vol": 21243568,
+      "mkt_cap": 597315085,
+      "rvol": 0.75,
+      "adr_pct": 13.3,
+      "category": "Upgrade",
+      "theme": "Upgrade",
+      "reasoning": "VNET analyst action: VNET Group downgraded by Macquarie with a new price target - Quantisnow",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: VNET Group downgraded by Macquarie with a new price target - Quantisnow",
+        "impact": "Analyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP."
+      },
+      "analysis_details": "• **The Analyst Action**\nHeadlines: VNET Group downgraded by Macquarie with a new price target - Quantisnow\n\n• **Trade Implication**\nAnalyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "VNET Group downgraded by Macquarie with a new price target - Quantisnow",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxORFowRnpFMldOSTRZWUZzdVUxSklvNGpBYnZhcWtDZVdwSjJKbTkxSlM3bXF5TXJuWE1QUXRTU2FEY3czTkttN3hGWGFieGRBWFc5SUxSZUc2V2xjaXJmRWIybGRnV0g4Zmk2Q3UwZURXbEdDVzE2TWRpZFZJOFZ1bWJQM1p2cUxQOURmZXV2RXhWbTU1cXd6NDNHZ041dDgtQlY0?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "274.42M",
+      "short_float": "26.27%",
+      "daily_pct": 4.57,
+      "prev_close": 2.06,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $21M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "VNET analyst action: VNET Group downgraded by Macquarie with a new price target - Quantisnow",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PBR.A",
+      "price": 15.78,
+      "gap_pct": 11.21,
+      "pm_volume": 270373,
+      "avg_vol_10d": 10418030,
+      "avg_dollar_vol": 164396513,
+      "mkt_cap": 105029763046,
+      "rvol": 1.17,
+      "adr_pct": null,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "2.72B",
+      "short_float": null,
+      "daily_pct": 3.35,
+      "prev_close": 14.19,
+      "industry": "—",
+      "technical_status": "Fail (ADR 0.0% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PAGS",
+      "price": 8.56,
+      "gap_pct": 11.17,
+      "pm_volume": 63569,
+      "avg_vol_10d": 4957734,
+      "avg_dollar_vol": 42438203,
+      "mkt_cap": 2115477818,
+      "rvol": 0.7,
+      "adr_pct": 4.02,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "147.33M",
+      "short_float": "16.49%",
+      "daily_pct": 2.39,
+      "prev_close": 7.7,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $42M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PBR",
+      "price": 17.84,
+      "gap_pct": 11.15,
+      "pm_volume": 665828,
+      "avg_vol_10d": 22090026,
+      "avg_dollar_vol": 394086064,
+      "mkt_cap": 105029763046,
+      "rvol": 1.07,
+      "adr_pct": 3.48,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "3.72B",
+      "short_float": "2.13%",
+      "daily_pct": 2.43,
+      "prev_close": 16.05,
+      "industry": "—",
+      "technical_status": "Fail (ADR 3.5% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SNDK",
+      "price": 81.41,
+      "gap_pct": 10.6,
+      "pm_volume": 5462630,
+      "avg_vol_10d": 112114592,
+      "avg_dollar_vol": 9127248935,
+      "mkt_cap": 83791354546,
+      "rvol": 1.16,
+      "adr_pct": 8.93,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "SNDK: Kazakhstan Stock Exchange : From November 30, trading in common shares US80004C2008 (SNDK ",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Kazakhstan Stock Exchange : From November 30, trading in common shares US80004C2008 (SNDK KZ) of Sandisk Corporation will be resumed on KASE - www.marketscreener.com | Sandisk Stock $73.61: Half Session After a 75% Slide - FinanceFeeds | Western Digital Just Slid 21% in a Month. Can WDC Stock Hit $800 in 2027? - 24/7 Wall St.",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Kazakhstan Stock Exchange : From November 30, trading in common shares US80004C2008 (SNDK KZ) of Sandisk Corporation will be resumed on KASE - www.marketscreener.com | Sandisk Stock $73.61: Half Session After a 75% Slide - FinanceFeeds | Western Digital Just Slid 21% in a Month. Can WDC Stock Hit $800 in 2027? - 24/7 Wall St.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "STX",
+        "WDC",
+        "SMCI"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Kazakhstan Stock Exchange : From November 30, trading in common shares US80004C2008 (SNDK KZ) of Sandisk Corporation will be resumed on KASE - www.marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNT3FaUTd6MVliaTlZRlE5dU10cHBrTzBaYkk2UlJYaVFocklxX0lhTXFINTZyS0hIcElPTTU2UzlRd1BkTGV6ZHBreFVvNTVoeExuNTFPV0JQSk9wN1A4aTlUR1dUY1hLZU1veFJrZDkxMTV3Ml9tLW5qeGNfeFNoNVJFU19CUkFhUGpHWF8yZ2tZaFh5ZHlZTXNtYkRqeTh2OE1QdDlCeXVpRTVKR3ZLMF9CT1FVb2hXZk14UWJyOU1zblQ5MVNicm44MkpSUXBBSTE4bXB2elZFYS1MelhkajBR?oc=5"
+        },
+        {
+          "title": "Sandisk Stock $73.61: Half Session After a 75% Slide - FinanceFeeds",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOcmhUVFk4RnRLb3ZCd0lVUWxNUGNydzY4bnBmSmE1Y2xnWTJtVWVaaXBtU3RadE4zY3FBaG5qMWprT2RXRmlHOGpLUG5jVjNZVkk3ZDVaNktBbWZjNXZIazFpc1FFUUF6Z2hfM1NuQ3JndXlKSlNZeGVtMTBXRERnemJQRURRT3JfTFI2Z2xjLTQ5VFJrM2RzSEhtWkp1VmdPYnZwZHBjaDRQUThSVEN3?oc=5"
+        },
+        {
+          "title": "Western Digital Just Slid 21% in a Month. Can WDC Stock Hit $800 in 2027? - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPbFFsSHp6NnF5eVpBbWRJZTV6QjBTX1R3YW1IMWh3MGtYVXNWeGVWcUtITlUzbTRlOHZlaGJZck8zMGVGOGV3c2ZTRW5LQkpCYWtaMnVGRjdNMjkxZC1yd21aRHVWQnVZeld2Y3JjV3NtMVFubFZkVS0wUl9RRGh3WmNhRERfaWJIdVUtMHJaQVlHM0YwaUJvNWFzNUZYalAzMTJiQWdLTWlFeEUzMVhTX0VUdw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "1.12B",
+      "short_float": "3.75%",
+      "daily_pct": -5.57,
+      "prev_close": 73.61,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -217,7 +612,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "primary_claim": "SNDK: Kazakhstan Stock Exchange : From November 30, trading in common shares US80004C2008 (SNDK ",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -231,15 +626,962 @@
       "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AGLT",
+      "price": 7.16,
+      "gap_pct": 10.32,
+      "pm_volume": 80820,
+      "avg_vol_10d": 2803890,
+      "avg_dollar_vol": 20075852,
+      "mkt_cap": 1571163229,
+      "rvol": 1.29,
+      "adr_pct": 15.66,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": 20.41,
+      "prev_close": 6.49,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $20M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BTDR",
+      "price": 3.35,
+      "gap_pct": 9.84,
+      "pm_volume": 138445,
+      "avg_vol_10d": 21598141,
+      "avg_dollar_vol": 72353772,
+      "mkt_cap": 842394168,
+      "rvol": 1.48,
+      "adr_pct": 14.37,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "BTDR: Tether Buys $10 Million of Bitdeer Shares During Selloff - TheEnergyMag",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Tether Buys $10 Million of Bitdeer Shares During Selloff - TheEnergyMag",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Tether Buys $10 Million of Bitdeer Shares During Selloff - TheEnergyMag\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Tether Buys $10 Million of Bitdeer Shares During Selloff - TheEnergyMag",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE10ekttUkxadlplMS1mUmhkejBiQ1ZVMF8wdXY2WDRDZlMyZm54Q3NhS1UzY2dZR0R3SXo4QS1EN3paXzAxTDdLVWNzYm9UQVMwWTEwTmxkaUc0T3lwSmxkRHNkR2pYN3BHZThNMzJVcVl4eWhVSUhhdVhkeUc?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "158.75M",
+      "short_float": "30.02%",
+      "daily_pct": 9.71,
+      "prev_close": 3.05,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $72M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BTDR: Tether Buys $10 Million of Bitdeer Shares During Selloff - TheEnergyMag",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "HYMC",
+      "price": 14.98,
+      "gap_pct": 9.22,
+      "pm_volume": 80991,
+      "avg_vol_10d": 3519692,
+      "avg_dollar_vol": 52724986,
+      "mkt_cap": 1278478407,
+      "rvol": 1.47,
+      "adr_pct": 9.46,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "48.81M",
+      "short_float": "25.81%",
+      "daily_pct": 6.6,
+      "prev_close": 13.72,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $53M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "AXTI",
+      "price": 34.85,
+      "gap_pct": 8.97,
+      "pm_volume": 399423,
+      "avg_vol_10d": 11772622,
+      "avg_dollar_vol": 410275877,
+      "mkt_cap": 2101800756,
+      "rvol": 1.05,
+      "adr_pct": 13.4,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "AXTI: The Technical Signals Behind (AXTI) That Institutions Follow - Stock Traders Daily",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: The Technical Signals Behind (AXTI) That Institutions Follow - Stock Traders Daily",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: The Technical Signals Behind (AXTI) That Institutions Follow - Stock Traders Daily\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "COHR",
+        "LITE",
+        "MRVL"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "The Technical Signals Behind (AXTI) That Institutions Follow - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOdkdGbFFSNlRuOHhTbFhNSnM2Njc4M2NMalI2QTZZM0NubVhfNUszMlVQanZMVFVNYjB3Rmk1VmR5QTdaTFFCZjVldkVVMjVTSDN2VGt6MDJVck9aM2JEaFVKbHNVSnpYQTZOaUc1NFJKdkRWNmZETXRnaC1uZmVjdENEVGxyV3d5V19PUWhCZ3hkd0E2U0w0Z2ZyZDB6NlUyWDJRT3NVMW1yeVoxSzF4SG1IR3ZiWEluNUd4N1JrQWhwOFRBQjlLQ1FjaWRRcWFBWlVZRg?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "62.99M",
+      "short_float": "22.96%",
+      "daily_pct": 1.27,
+      "prev_close": 31.98,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AXTI: The Technical Signals Behind (AXTI) That Institutions Follow - Stock Traders Daily",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AAOI",
+      "price": 40.3,
+      "gap_pct": 8.86,
+      "pm_volume": 253210,
+      "avg_vol_10d": 14421640,
+      "avg_dollar_vol": 581192092,
+      "mkt_cap": 3360332714,
+      "rvol": 0.94,
+      "adr_pct": 11.89,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "AAOI: Applied Optoelectronics (AAOI) Stock Price Prediction: Rebound attempt runs into overhead ",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Applied Optoelectronics (AAOI) Stock Price Prediction: Rebound attempt runs into overhead supply as volume stays thin - Blockchain News",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Applied Optoelectronics (AAOI) Stock Price Prediction: Rebound attempt runs into overhead supply as volume stays thin - Blockchain News\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Applied Optoelectronics (AAOI) Stock Price Prediction: Rebound attempt runs into overhead supply as volume stays thin - Blockchain News",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPVGNIWUNsc2J3akptRl9FNWRQWXl5MWxjS3Y2emZxd0YxMVhIaktwamMwRUowdFRhdmp0TVQ2R29wdVY1NXRCTWE2bUtHeUtoVmdPSjBrQURoTXRNaWJmVlVxUnMyZTlMNFFoRnpsVXotWVZqQmRVbEVhS0NCLVdDVW1CMWJoM3ZCTFpXNkU0YUM0aldkOWZrUk8xQk00dDNZTWRB?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "86.09M",
+      "short_float": "21.97%",
+      "daily_pct": -3.59,
+      "prev_close": 37.02,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AAOI: Applied Optoelectronics (AAOI) Stock Price Prediction: Rebound attempt runs into overhead ",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ASM",
+      "price": 4.02,
+      "gap_pct": 8.86,
+      "pm_volume": 63247,
+      "avg_vol_10d": 5398470,
+      "avg_dollar_vol": 21701849,
+      "mkt_cap": 624970106,
+      "rvol": 1.46,
+      "adr_pct": 5.86,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ASM: Avino Silver & Gold Mines Ltd. (ASM): Assessing the Investment Risk Behind Its High-Beta M",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Avino Silver & Gold Mines Ltd. (ASM): Assessing the Investment Risk Behind Its High-Beta Market Behaviour - kalkine.ca",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Avino Silver & Gold Mines Ltd. (ASM): Assessing the Investment Risk Behind Its High-Beta Market Behaviour - kalkine.ca\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Avino Silver & Gold Mines Ltd. (ASM): Assessing the Investment Risk Behind Its High-Beta Market Behaviour - kalkine.ca",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQMTlSMEVNSkdrQU9IMkM2UDRGb0gwWlo4Um5qX1diMDhDTnlzYmFsWHE4T3ZoeXBmaUpISjk0d3BRV1ZMSFVaWm1nQ01JVThWT2hpLTl1TGN4cjBEX3o0V3lTekkxVjRNaGxZdWljcWx4TmhGaXpxeUFXTDJUQmJIeWwwaUZzNlpoc25EQ2l6cVhRczVDaTAwa0JjTi1IWjVNY29XQnJIcHk5dF9NRFFxLWtveUVUTkJxUzFvdHVZYTItZkJEN0hobmZ3?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "157.88M",
+      "short_float": "6.58%",
+      "daily_pct": 6.34,
+      "prev_close": 3.69,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $22M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "ASM: Avino Silver & Gold Mines Ltd. (ASM): Assessing the Investment Risk Behind Its High-Beta M",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "EXK",
+      "price": 6.68,
+      "gap_pct": 8.79,
+      "pm_volume": 130708,
+      "avg_vol_10d": 11083668,
+      "avg_dollar_vol": 74038902,
+      "mkt_cap": 1818835310,
+      "rvol": 0.93,
+      "adr_pct": 6.1,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "EXK: Understanding Momentum Shifts in (EXK) - Stock Traders Daily",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Understanding Momentum Shifts in (EXK) - Stock Traders Daily",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Understanding Momentum Shifts in (EXK) - Stock Traders Daily\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Understanding Momentum Shifts in (EXK) - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQT2pISXJuejI0czhYMjdlU2o2TDIzQTdmaDJVSVRZZ1E3QXo0RnUxTnBieDdHcm02ckFnSnY1OHNDYXdoTnZiY1k1cmMyejRBbmxuS3VuWXhJZ2JobWEwT3hVMkFVLURqNnBTN21BNloyOWdpdlFvbHYtSTBXNmlKbXJrZVg0b2MyWkd6amF2MUdSUGF6dXNFUGpjOG5ndzFELUZYWkt0LW1ySW9ucGw0QlF3ZG45LTdV?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "295.58M",
+      "short_float": null,
+      "daily_pct": 6.23,
+      "prev_close": 6.14,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $74M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "EXK: Understanding Momentum Shifts in (EXK) - Stock Traders Daily",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "ABEV",
+      "price": 2.92,
+      "gap_pct": 8.55,
+      "pm_volume": 152830,
+      "avg_vol_10d": 17406346,
+      "avg_dollar_vol": 50826530,
+      "mkt_cap": 44916868815,
+      "rvol": 1.22,
+      "adr_pct": 2.2,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "15.42B",
+      "short_float": null,
+      "daily_pct": 0.0,
+      "prev_close": 2.69,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $51M < $100M, ADR 2.2% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PURR",
+      "price": 8.04,
+      "gap_pct": 8.5,
+      "pm_volume": 185770,
+      "avg_vol_10d": 14430564,
+      "avg_dollar_vol": 116021735,
+      "mkt_cap": 2052634631,
+      "rvol": 1.13,
+      "adr_pct": 8.54,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "251.76M",
+      "short_float": "9.56%",
+      "daily_pct": -4.26,
+      "prev_close": 7.41,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "NU",
+      "price": 13.38,
+      "gap_pct": 8.25,
+      "pm_volume": 864041,
+      "avg_vol_10d": 66853404,
+      "avg_dollar_vol": 894498546,
+      "mkt_cap": 59804282184,
+      "rvol": 0.8,
+      "adr_pct": 4.26,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "NU: Nu Tokenized Stock (Robinhood) Price (NU/USD) Today | Live Price, Market Cap & Chart - Bin",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Nu Tokenized Stock (Robinhood) Price (NU/USD) Today | Live Price, Market Cap & Chart - Binance",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Nu Tokenized Stock (Robinhood) Price (NU/USD) Today | Live Price, Market Cap & Chart - Binance\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Nu Tokenized Stock (Robinhood) Price (NU/USD) Today | Live Price, Market Cap & Chart - Binance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9hd0E1N0dEQjN6b2taWndiUTROcWxoM3ZOOGN3aEJ3NDZfbElHenZTY2Iyd1NGTFZ4cXpiRjBLbU9OXzUxckl1ZEh0REEwZnRKbFdtNXJkU212a0tGMVFzbjFOZTREbEs3MW4waE5R?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "3.61B",
+      "short_float": "4.16%",
+      "daily_pct": 4.22,
+      "prev_close": 12.36,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "NU: Nu Tokenized Stock (Robinhood) Price (NU/USD) Today | Live Price, Market Cap & Chart - Bin",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CRML",
+      "price": 3.07,
+      "gap_pct": 8.1,
+      "pm_volume": 149446,
+      "avg_vol_10d": 9050067,
+      "avg_dollar_vol": 27783706,
+      "mkt_cap": 551583703,
+      "rvol": 1.38,
+      "adr_pct": 10.79,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "109.23M",
+      "short_float": "20.96%",
+      "daily_pct": -11.8,
+      "prev_close": 2.84,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $28M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "VALE",
+      "price": 10.6,
+      "gap_pct": 8.05,
+      "pm_volume": 375150,
+      "avg_vol_10d": 35129468,
+      "avg_dollar_vol": 372372361,
+      "mkt_cap": 41336833861,
+      "rvol": 1.45,
+      "adr_pct": 3.03,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "4.07B",
+      "short_float": "0.99%",
+      "daily_pct": 4.7,
+      "prev_close": 9.81,
+      "industry": "—",
+      "technical_status": "Fail (ADR 3.0% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "IREN",
+      "price": 13.88,
+      "gap_pct": 8.02,
+      "pm_volume": 2345587,
+      "avg_vol_10d": 94212184,
+      "avg_dollar_vol": 1307665114,
+      "mkt_cap": 5452992274,
+      "rvol": 0.93,
+      "adr_pct": 11.57,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "IREN: IREN vs. Core Scientific: Which AI Stock Is the Better Investment Now? - Zacks Investment ",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: IREN vs. Core Scientific: Which AI Stock Is the Better Investment Now? - Zacks Investment Research | IREN Stock Premarket: Shares Jump 9% To $14.05 Ahead Of Black Friday Session - Coinpedia | Applied Digital Just Tumbled 33% in a Month. Can APLD Stock Get Back to $20 in 2027? - 24/7 Wall St.",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: IREN vs. Core Scientific: Which AI Stock Is the Better Investment Now? - Zacks Investment Research | IREN Stock Premarket: Shares Jump 9% To $14.05 Ahead Of Black Friday Session - Coinpedia | Applied Digital Just Tumbled 33% in a Month. Can APLD Stock Get Back to $20 in 2027? - 24/7 Wall St.\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "IREX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "IREN vs. Core Scientific: Which AI Stock Is the Better Investment Now? - Zacks Investment Research",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQX3VVdnYteVVMc1U1S05yY19RTWVOS2NZNU9laklsWmVidGJOY2tJbWFnTGcxYzRTdGZfb1ZfV0RiSVpPRmpmY1d2V0ZzME5mbHBnczlYTHZFd3JJcTloenhpT2g2dmRkbGdSaHV2RzFZUXpCY3czRmQ0OFFZTjlieTNyUU02ZmhIbjlUZ3hBUFktc2FZWXhoQ0ExUHUyeGVMYks0cV9DZE85TDNt?oc=5"
+        },
+        {
+          "title": "IREN Stock Premarket: Shares Jump 9% To $14.05 Ahead Of Black Friday Session - Coinpedia",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUFR2d0pOSUktcGlfeE5lNnNETFBHU1B5Q2N3MHB0ZzZqNmVsV1RMOW9FanFHM2dYT1VfQ1RQeUwxVy1BZjdaaksyYjFvNXdDRDNSLUh2YThfM3BEcFRDMTJZNXZtSWw5andGSUc3QVYyeUdOT2M1ZHpDZS1kRDd6Um1WSFhFRnI2R3J1dGpQbGhmMFp3U0dIaGtKenVvalRlWndQUWZNVGxrd25iZkRUTGl3MNIBuAFBVV95cUxQLVJNWi1wSzR4cmlEMlBiZFJVVFBzUndKQlhDVlZEdkpTTF9LeVNKam1iMFdsWTh5V3ZIdVpEVWJFWTBNZzlyc01QOUpid3VUb1Mtbk5PMnhpM3VwWEhzdk8zS0d3TjUtR0RPUUVXbDRaUXQ0NWhnMm8zelU4a1F6d2pGZWJObG5xYUk2VDlhWlE1NTN6N0dtX2VkNXdlWlcwaXFVLTkzdl9zY2dQcFZmMGZSQjA0MUdX?oc=5"
+        },
+        {
+          "title": "Applied Digital Just Tumbled 33% in a Month. Can APLD Stock Get Back to $20 in 2027? - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQUkpfYXhLbE9iTXpSVEpLSUVCOXZiZFdVY2pQU09hMlBBcVhRWnNrb1ZSZFZEQjllQnh0NFZWMmo4bHVZUm9IM01zal9yanp6RmdBdmQyQ3Q5d1BFcWhKVnNIaWo3WHdWby05ZWxWUjlydS1Cc05mZkZLVWpqSXdRQUdvYjhKeGFWbDc3emZFRTBHM0tFN3pPaUxyNXlHZ3g2d2xUeTBKMGNNS1V0SlVtYVcydkM4eDNIVjhGVE55RS1JQQ?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "372.32M",
+      "short_float": "28.27%",
+      "daily_pct": -0.77,
+      "prev_close": 12.85,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "IREN: IREN vs. Core Scientific: Which AI Stock Is the Better Investment Now? - Zacks Investment ",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "COHR",
+      "price": 211.7,
+      "gap_pct": 7.91,
+      "pm_volume": 146202,
+      "avg_vol_10d": 9709705,
+      "avg_dollar_vol": 2055544548,
+      "mkt_cap": 38641323753,
+      "rvol": 0.95,
+      "adr_pct": 10.45,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "COHR: COHR Nov 2026 182.500 call (COHR261127C00182500) stock historical prices and data - Yahoo ",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: COHR Nov 2026 182.500 call (COHR261127C00182500) stock historical prices and data - Yahoo Finance UK | Coherent’s Director Has Now Bought $50 Million of COHR Stock in 3 Trading Days - 24/7 Wall St. | Coherent Targets $250 Million in Quarterly PhotonLink Sales. Can Capacity Keep Up? - Yahoo Finance",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: COHR Nov 2026 182.500 call (COHR261127C00182500) stock historical prices and data - Yahoo Finance UK | Coherent’s Director Has Now Bought $50 Million of COHR Stock in 3 Trading Days - 24/7 Wall St. | Coherent Targets $250 Million in Quarterly PhotonLink Sales. Can Capacity Keep Up? - Yahoo Finance\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "AXTI",
+        "LITE",
+        "GLW"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "COHR Nov 2026 182.500 call (COHR261127C00182500) stock historical prices and data - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFA2R0RsUGQ3SmJKcEVpM2RDUFVUeUV4dTl5ZnZWZFkzRG15ZzJsNnBZWGJKWWI3VlV4ZTVVRHN1MWFCMjI0dTBYZGowZTBVNlRxRTV5alJ1R25oSnVmNUtEVkdHUUNXU1NjakcyWW0za3E?oc=5"
+        },
+        {
+          "title": "Coherent’s Director Has Now Bought $50 Million of COHR Stock in 3 Trading Days - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNOGI2LV9iOHJRd3JyWTJ2VUFGWjlpSlVOMnh5alZpTmlXYzROTFRsV3MtNVEwYVZxZUMzMGtuaHM5TjVTWVY3RllQY01RZUx5Tk5JNzAwT2NxWUxuTEE0VWR3SXRnQW9zMVhXY1lXb296eWVMY2xiNEwwcC1OMGpPeV9LSzNQYndPdlItVS1rNDFVZWdxRW1MRWlTcUZpNWJLbUZMT0p3WThvRXp1VURQRVEtczVzUW4yUzhIdA?oc=5"
+        },
+        {
+          "title": "Coherent Targets $250 Million in Quarterly PhotonLink Sales. Can Capacity Keep Up? - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQU1lDdTFYNWktZVUyR1BaOWc5Vy00a0x5cDlJMngySTJRVEVoVkhPcURHaUl1dUJaYXNkZFlZSUstcGhMWXVCT3kzMVNyMFdnMHM3UFRFNjl4WjFHYnhmSGtjQjl5NVJhTnozM2R1VkRWU2dkeGVYb254NHYwLUpkWTZBVTBYVHBXMnBZQWp6T201NmlYV25mNWp3cERnZE5Q?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "188.18M",
+      "short_float": "6.01%",
+      "daily_pct": -0.03,
+      "prev_close": 196.19,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "COHR: COHR Nov 2026 182.500 call (COHR261127C00182500) stock historical prices and data - Yahoo ",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "UUUU",
+      "price": 5.62,
+      "gap_pct": 7.87,
+      "pm_volume": 223422,
+      "avg_vol_10d": 9813107,
+      "avg_dollar_vol": 55149661,
+      "mkt_cap": 1379753587,
+      "rvol": 1.05,
+      "adr_pct": 7.83,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "UUUU: Energy Fuels vs. Centrus Energy: Which Uranium Stock Has The Edge Now? - Zacks Investment ",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Energy Fuels vs. Centrus Energy: Which Uranium Stock Has The Edge Now? - Zacks Investment Research",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Energy Fuels vs. Centrus Energy: Which Uranium Stock Has The Edge Now? - Zacks Investment Research\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Energy Fuels vs. Centrus Energy: Which Uranium Stock Has The Edge Now? - Zacks Investment Research",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOWm9hV3F6a2gtMWEzWjhNRVF3T2txNWczak5rYVg0T2g3TThubG96bFpYN2VENWdTZXJmdG0xYVRIMFNHdlcwajZpVklPdm9Lbi0xUDJLZVdYaDQ2RTBtWWdtTkNaTTM1NVBITVRwLUdZSENSSXVRa2RFQ0UzXzYzcWtfcmhsa21Ic2FPMFV5R3RQT3h6UElGUDVrR1hzaWFaWWxBejMyX0dRekRk?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "260.87M",
+      "short_float": "22.68%",
+      "daily_pct": 1.56,
+      "prev_close": 5.21,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $55M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "UUUU: Energy Fuels vs. Centrus Energy: Which Uranium Stock Has The Edge Now? - Zacks Investment ",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 3,
-    "large_gaps": 0,
-    "total_headlines": 7,
+    "small_gaps": 22,
+    "large_gaps": 3,
+    "total_headlines": 22,
     "monthly_cost_usd": 0.01
   }
 }
