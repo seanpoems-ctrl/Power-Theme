@@ -2,52 +2,40 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 2,
   "stocks": [
     {
       "ticker": "BRBR",
       "company": "BellRing Brands, Inc.",
       "industry": "Beverages: Non-Alcoholic",
-      "price": 15.66,
-      "change_pct": 3.64,
-      "adr_pct": 5.9,
-      "dollar_volume": "$105.8M",
-      "market_cap_b": 1.823,
-      "rs_ibd": 29,
-      "above50dma_pct": 61.3
+      "price": 16.08,
+      "change_pct": 2.68,
+      "adr_pct": 5.7,
+      "dollar_volume": "$106.5M",
+      "market_cap_b": 1.872,
+      "rs_ibd": 35,
+      "above50dma_pct": 63.3
     },
     {
       "ticker": "VRDN",
       "company": "Viridian Therapeutics, Inc.",
       "industry": "Pharmaceuticals: Major",
-      "price": 37.91,
-      "change_pct": 6.19,
-      "adr_pct": 4.6,
-      "dollar_volume": "$90.2M",
-      "market_cap_b": 4.305,
-      "rs_ibd": 76,
-      "above50dma_pct": 56.0
-    },
-    {
-      "ticker": "INSM",
-      "company": "Insmed Incorporated",
-      "industry": "Pharmaceuticals: Major",
-      "price": 170.31,
-      "change_pct": 0.09,
+      "price": 38.82,
+      "change_pct": 2.4,
       "adr_pct": 4.4,
-      "dollar_volume": "$2.49B",
-      "market_cap_b": 37.363,
-      "rs_ibd": 38,
-      "above50dma_pct": 50.0
+      "dollar_volume": "$90.8M",
+      "market_cap_b": 4.408,
+      "rs_ibd": 81,
+      "above50dma_pct": 57.5
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.25,
-    "spx_1m": -7.25,
-    "spx_3m": -6.86,
-    "spx_34d": -8.05,
-    "spx_qtd": -6.31,
-    "spx_mtd": -5.24
+    "spx_1d": 1.6,
+    "spx_1m": -5.48,
+    "spx_3m": -5.06,
+    "spx_34d": -6.53,
+    "spx_qtd": -4.81,
+    "spx_mtd": -3.73
   },
-  "fetched_at_utc": "2026-11-27T04:54:53+00:00"
+  "fetched_at_utc": "2026-11-27T23:09:19+00:00"
 }
