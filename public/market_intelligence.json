@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27 15:45 ET",
+  "generated_at": "2026-11-27 21:57 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -8,11 +8,11 @@
       "price": 728.32,
       "open": 725.86,
       "high": 729.15,
-      "low": 719.62,
+      "low": 719.61,
       "close": 728.32,
       "prev_open": 703.2,
       "prev_close": 716.7,
-      "volume": 38759705,
+      "volume": 40442200,
       "change_pct": 1.62
     },
     "QQQ": {
@@ -24,7 +24,7 @@
       "close": 650.99,
       "prev_open": 617.1,
       "prev_close": 633.93,
-      "volume": 34995978,
+      "volume": 35503700,
       "change_pct": 2.69
     },
     "^VIX": {
@@ -53,15 +53,15 @@
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 57499.16,
-      "open": 57429.54,
-      "high": 58251.93,
-      "low": 57288.1,
-      "close": 57499.16,
-      "prev_open": 58383.49,
-      "prev_close": 57011.62,
-      "volume": 165100000,
-      "change_pct": 0.86
+      "price": 58711.11,
+      "open": 57669.79,
+      "high": 58738.02,
+      "low": 57447.16,
+      "close": 58711.11,
+      "prev_open": 57429.54,
+      "prev_close": 57499.16,
+      "volume": 173900000,
+      "change_pct": 2.11
     },
     "^GDAXI": {
       "label": "DAX",
@@ -72,13 +72,13 @@
       "close": 25441.24,
       "prev_open": 25153.11,
       "prev_close": 25215.52,
-      "volume": 0,
+      "volume": 47956500,
       "change_pct": 0.9
     }
   },
   "fred": {
     "hy_oas": 3.77,
-    "yield_curve": 0.24,
+    "yield_curve": 0.25,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
